@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SADV41 - Misión Digital</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212; /* Fondo oscuro estilo cripto */
+            color: white;
+            text-align: center;
+            padding: 50px;
+        }
+        h1 { color: #3399ff; }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>SADV41</h1>
+        <p>Bienvenido al Atrio Digital.</p>
+        <p>Conecta tu billetera para continuar.</p>
+        
+        <w3m-button></w3m-button>
+    </div>
+
+    <script type="module">
+        import { createWeb3Modal, defaultWagmiConfig } from 'https://esm.sh/@web3modal/wagmi?bundle'
+        import { mainnet, arbitrum } from 'https://esm.sh/viem/chains?bundle'
+
+        // Tu ID de Proyecto (No borrar)
+        const projectId = '2329befe80aa9e63f4aa218366bf7947'
+
+        const metadata = {
+            name: 'SADV41 Mission',
+            description: 'Unión Digital Steven Dior',
+            url: 'https://sadv41.netlify.app',
+            icons: ['https://avatars.githubusercontent.com/u/37784886']
+        }
+
+        const chains = [mainnet, arbitrum]
+        const config = defaultWagmiConfig({ chains, projectId, metadata })
+
+        createWeb3Modal({ wagmiConfig: config, projectId, chains })
+    </script>
+
+</body>
+</html>
