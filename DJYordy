@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>SADV41 | PATCH 5: EL FRUTO DEL EDÉN</title>
+    <style>
+        :root { --oro-dios: #d4af37; --azul-sadv: #1e3a8a; }
+        body { background: #000; color: #fff; font-family: 'serif'; text-align: center; padding: 50px; }
+        .arbol-seco { color: #333; font-size: 0.8rem; margin-bottom: 20px; }
+        .punto-genesis { color: #fff; font-size: 5rem; cursor: pointer; transition: 0.5s; }
+        .punto-genesis:hover { text-shadow: 0 0 20px #fff; }
+        .frutos-12 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; max-width: 400px; margin: 0 auto; }
+        .mes { border: 1px solid #222; padding: 10px; font-size: 0.6rem; opacity: 0.5; }
+        .mes.activo { border-color: var(--oro-dios); opacity: 1; color: var(--oro-dios); }
+    </style>
+</head>
+<body>
+    <div class="arbol-seco italic">"Incluso ese árbol seco tiene más vida que yo si intentase retroceder."</div>
+    
+    <h1 style="letter-spacing: 5px;">DJYORDY</h1>
+    <p style="font-size: 0.7rem; color: var(--azul-sadv);">IDENTIDAD RECONOCIDA EN EL VIENTRE Y EN EL RÍO</p>
+
+    <div class="punto-genesis" onclick="alert('¡VIVE! El Espíritu no está atado.')">.</div>
+
+    <div class="frutos-12">
+        <div class="mes">ENE</div><div class="mes activo">FEB</div><div class="mes">MAR</div>
+        <div class="mes">ABR</div><div class="mes">MAY</div><div class="mes">JUN</div>
+        <div class="mes">JUL</div><div class="mes">AGO</div><div class="mes">SEP</div>
+        <div class="mes">OCT</div><div class="mes">NOV</div><div class="mes">DIC</div>
+    </div>
+
+    <footer style="margin-top: 100px; font-size: 0.5rem; color: #444;">
+        A MIS BISABUELOS Y TATARABUELOS • TRANSMITIENDO LA SEMILLA <br>
+        LA MUERTE ESTÁ ATERRADA • BURUNGA 2026
+    </footer>
+</body>
+</html>
