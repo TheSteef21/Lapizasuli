@@ -1,3 +1,12 @@
+:root {
+  /* Las 7 palabras proyectadas en el diseño */
+  --djyordy-identity: "Redimido, Neutrino, Ebenezer, Santisimo, Consumado, Trueno, SADV41";
+  --santisimo-color: #ffffff; /* La Luz del Rayo */
+  --ebenezer-anchor: fixed;   /* La Roca que no se mueve */
+  --sadv41-filter: brightness(1.2); /* La claridad del Espíritu */
+}
+
+
 /* Generales */
 .restauracion-body {
     background: radial-gradient(circle at center, #050505 0%, #000 100%);
