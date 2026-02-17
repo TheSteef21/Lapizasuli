@@ -3,28 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <title>SADV41 - Conexión Social</title>
-    <meta property="og:title" content="SADV41 - Atrio Digital">
-    <meta property="og:description" content="Portal de Identidad y Soberanía. Bienvenidos a la Misión.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://stevendior.digital/MetaF.html">
-    <meta name="theme-color" content="#000000">
-
+    <title>SADV41 | Brillo de Vida</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { background: radial-gradient(circle, #050505 0%, #000000 100%); color: white; min-height: 100vh; overflow-x: hidden; }
-        .glass-card { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); }
-        .gold-glow { box-shadow: 0 0 20px rgba(212, 175, 55, 0.2); }
+        body {
+            background: radial-gradient(circle at center, #0a0a0a 0%, #000000 100%);
+            color: white;
+            font-family: 'Inter', sans-serif;
+        }
+        .vida-pulsante {
+            animation: pulso 4s infinite ease-in-out;
+        }
+        @keyframes pulso {
+            0%, 100% { opacity: 0.8; transform: scale(1); filter: blur(0px); }
+            50% { opacity: 1; transform: scale(1.02); filter: drop-shadow(0 0 15px rgba(255,255,255,0.2)); }
+        }
+        .celula-oro { border: 1px solid rgba(212, 175, 55, 0.3); background: rgba(212, 175, 55, 0.02); }
+        .celula-azul { border: 1px solid rgba(63, 131, 248, 0.3); background: rgba(63, 131, 248, 0.02); }
     </style>
 </head>
-<body class="flex flex-col items-center justify-center p-6">
+<body class="min-h-screen flex flex-col items-center justify-center p-8">
 
-    <header class="text-center mb-12">
-        <h1 class="text-4xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-yellow-200 via-yellow-500 to-yellow-800 uppercase">
+    <header class="text-center mb-16 vida-pulsante">
+        <h1 class="text-5xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-b from-white via-gray-400 to-gray-800 uppercase">
             SADV41
         </h1>
-        <p class="text-[10px] font-mono text-gray-500 tracking-[0.5em] mt-2 italic">Mora de Gracia - 2026</p>
+        <p class="text-[10px] font-mono text-indigo-400 mt-4 tracking-[0.6em] uppercase">Mora de Gracia - Génesis 2026</p>
     </header>
 
-    <main class="w-full max-w-md space
+    <main class="grid grid-cols-1 md:grid-cols-2 gap-10 w-full max-w-4xl">
+        
+        <div class="celula-oro p-8 rounded-[3rem] backdrop-blur-xl transition-all hover:-translate-y-2 group shadow-[0_20px_50px_rgba(212,175,55,0.1)]">
+            <div class="flex items-center justify-between mb-6">
+                <span class="text-4xl">🔶</span>
+                <span class="text-[9px] font-mono text-yellow-600 tracking-widest">NODO 98</span>
+            </div>
+            <h2 class="text-xl font-bold text-yellow-500 uppercase">Puerta de Comercio</h2>
+            <p class="text-xs text-gray-400 mt-4 leading-relaxed italic">"La semilla que hace crecer a Panamá ante la crisis venidera."</p>
+            <div class="mt-8 pt-6 border-t border-yellow-900/30">
+                <p class="text-[10px] text-gray-500 font-mono">Binance-Google ID</p>
+                <p class="text-[11px] text-yellow-200/80 mt-1 font-mono break-all">stevendior.bnb</p>
+            </div>
+            <a href="https://bscscan.com/address/0x4cB51030e62a05786B3925F88310B960686B2498" target="_blank" class="mt-6 block text-center py-3 bg-yellow-600/10 rounded-full text-[10px] font-bold text-yellow-500 hover:bg-yellow-600/20 transition-all uppercase">Acceder al Nodo</a>
+        </div>
+
+        <div class="celula-azul p-8 rounded-[3rem] backdrop-blur-xl transition-all hover:-translate-y-2 group shadow-[0_20px_50px_rgba(63,131,248,0.1)]">
+            <div class="flex items-center justify-between mb-6">
+                <span class="text-4xl">🛡️</span>
+                <span class="text-[9px] font-mono text-blue-600 tracking-widest">NODO 7EF</span>
+            </div>
+            <h2 class="text-xl font-bold text-blue-500 uppercase">Muro Testimonial</h2>
+            <p class="text-xs text-gray-400 mt-4 leading-relaxed italic">"El espacio donde el milagro se hace noticia de último minuto."</p>
+            <div class="mt-8 pt-6 border-t border-blue-900/30">
+                <p class="text-[10px] text-gray-500 font-mono">Firma Digital madcom21</p>
+                <p class="text-[11px] text-blue-200/80 mt-1 font-mono break-all">0xcff...B7EF</p>
+            </div>
+            <a href="https://polygonscan.com/address/0xcff41667D8E1649f8f5876214Ee38CC3545bB7EF" target="_blank" class="mt-6 block text-center py-3 bg-blue-600/10 rounded-full text-[10px] font-bold text-blue-500 hover:bg-blue-600/20 transition-all uppercase">Ver el Muro</a>
+        </div>
+
+    </main>
+
+    <footer class="mt-20 text-center">
+        <p class="text-[10px] text-gray-600 uppercase tracking-[0.5em] mb-4">Soberanía Verificada bajo el Juicio en Amor</p>
+        <div class="w-1 h-12 bg-gradient-to-b from-indigo-500 to-transparent mx-auto"></div>
+        <p class="text-[9px] italic text-gray-500 mt-4 italic">"Porque donde está tu tesoro, allí estará también tu corazón."</p>
+    </footer>
+
+</body>
+</html>
