@@ -1,6 +1,34 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <style>
+  /* Contenedor del video de fondo */
+  #video-bg {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -100; /* Lo envía al fondo de todo */
+    transform: translate(-50%, -50%) scale(1.1); /* Centra y evita bordes blancos por el blur */
+    filter: blur(20px) brightness(0.5); /* El efecto más borroso posible y oscuro para legibilidad */
+    object-fit: cover;
+  }
+
+  /* Capa opcional para asegurar que el texto resalte */
+  .overlay-sadv41 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4); /* Sombra suave sobre el video */
+    z-index: -99;
+  }
+</style>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SADV41 - Misión Digital</title>
@@ -21,6 +49,14 @@
 </head>
 <body>
 
+<video autoplay muted loop playsinline id="video-bg">
+  <source src="nombre-de-tu-archivo.mp4" type="video/mp4">
+  Tu navegador no soporta video de fondo.
+</video>
+
+<div class="overlay-sadv41"></div>
+
+    
 <style>
   /* Contenedor del video */
   #video-background {
