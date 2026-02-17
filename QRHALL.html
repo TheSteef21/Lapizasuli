@@ -1,0 +1,57 @@
+<style>
+  .qr-hall-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Cuadrícula de 3 columnas */
+    gap: 10px;
+    padding: 15px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .qr-card {
+    aspect-ratio: 1 / 1; /* Mantiene el formato cuadrado de Instagram */
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+  }
+
+  .qr-card:hover {
+    transform: scale(1.05);
+    border-color: #007bff; /* Azul SADV41 */
+  }
+
+  .qr-card img {
+    width: 80%;
+    height: auto;
+    filter: brightness(1.1);
+  }
+
+  .qr-label {
+    font-size: 10px;
+    color: #fff;
+    margin-top: 5px;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+</style>
+
+<div class="qr-hall-container">
+  <div class="qr-card">
+    <img src="QR_TIKTOK.png" alt="TikTok SADV41">
+    <span class="qr-label">TikTok 💎</span>
+  </div>
+  <div class="qr-card">
+    <img src="QR_SPOTIFY.png" alt="Spotify Steven">
+    <span class="qr-label">Artist 🎧</span>
+  </div>
+  <div class="qr-card">
+    <img src="QR_FACEBOOK.png" alt="Facebook">
+    <span class="qr-label">Santo ✝️</span>
+  </div>
+</div>
