@@ -13,4 +13,53 @@
             font-family: 'Inter', sans-serif;
         }
         .btn-flow {
-            background: rgba(255,
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        .btn-flow:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: scale(1.02);
+            border-color: #3b82f6;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center p-6 pb-20">
+
+    <header class="flex flex-col items-center my-12 text-center">
+        <h1 class="text-2xl font-black tracking-tighter uppercase italic text-white">Steven Dior</h1>
+        <p class="text-[9px] text-blue-400 font-mono mt-2 tracking-[0.4em] uppercase">SADV41 Flow Time</p>
+    </header>
+
+    <main class="w-full max-w-sm space-y-4">
+        <a href="/metaf" class="btn-flow w-full py-5 rounded-3xl flex flex-col items-center justify-center">
+            <span class="text-[11px] font-black uppercase tracking-widest text-white">🏛️ Terminal MetaF</span>
+            <span class="text-[8px] text-gray-500 mt-1 uppercase italic">Nodos 98 & 7EF</span>
+        </a>
+
+        <a href="https://linktr.ee/stevendior" target="_blank" class="btn-flow w-full py-5 rounded-3xl flex flex-col items-center justify-center border-dashed border-blue-500/50">
+            <span class="text-[11px] font-black uppercase tracking-widest text-blue-400">🔗 Linktree Original</span>
+            <span class="text-[8px] text-gray-500 mt-1 uppercase">Atrio Externo Espejo</span>
+        </a>
+
+        <a href="https://polygonscan.com/address/0xcff41667D8E1649f8f5876214Ee38CC3545bB7EF" target="_blank" class="btn-flow w-full py-5 rounded-3xl flex flex-col items-center justify-center">
+            <span class="text-[11px] font-black uppercase tracking-widest text-indigo-400">🛡️ Muro de Gracia</span>
+            <span class="text-[8px] text-gray-500 mt-1 uppercase italic">Firma Digital madcom21</span>
+        </a>
+
+        <div class="btn-flow w-full p-6 rounded-[2.5rem] border-purple-500/30 text-center">
+            <p class="text-[10px] text-purple-400 font-bold uppercase tracking-widest mb-2">Yahoo Intelligence</p>
+            <p class="text-[11px] text-gray-400 italic leading-tight">
+                Recabando noticias de último minuto para el beneficio de Panamá...
+            </p>
+        </div>
+    </main>
+
+    <footer class="mt-auto pt-10 text-center">
+        <p class="text-[8px] text-gray-700 font-mono tracking-widest uppercase">madcom21@gmail.com</p>
+        <p class="text-[10px] text-blue-900 font-black mt-2 tracking-tighter">BURUNGA • 2026</p>
+    </footer>
+
+</body>
+</html>
