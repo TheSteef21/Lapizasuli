@@ -21,6 +21,70 @@
 </head>
 <body>
 
+<style>
+  /* Contenedor del video */
+  #video-background {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    filter: blur(15px); /* Aquí controlas qué tan borroso se ve */
+    z-index: -1;
+    transform: scale(1.1); /* Evita bordes blancos por el blur */
+    object-fit: cover;
+  }
+
+  /* Capa oscura para legibilidad */
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: -1;
+  }
+
+  /* Estilo de los nuevos botones */
+  .btn-atrio {
+    display: block;
+    width: 85%;
+    max-width: 400px;
+    margin: 12px auto;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    backdrop-filter: blur(5px);
+    transition: 0.3s;
+    font-weight: 500;
+  }
+
+  .btn-atrio:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: #007bff; /* Color azul SADV41 */
+  }
+</style>
+
+<video autoplay muted loop id="video-background">
+  <source src="TU_VIDEO.mp4" type="video/mp4">
+</video>
+<div class="overlay"></div>
+
+<div style="text-align:center; padding-top: 50px;">
+  <h1 style="color: #007bff;">SADV41</h1>
+  <p>Bienvenido al Atrio Digital</p>
+  
+  <a href="#" class="btn-atrio">CRISTO TE ESPERA! 📜</a>
+  <a href="#" class="btn-atrio">SADV41 🪜</a>
+  <a href="#" class="btn-atrio">Spotify de Artista 🎧</a>
+  </div>
+
+    
     <div class="container">
         <h1>SADV41</h1>
         <p>Bienvenido al Atrio Digital.</p>
