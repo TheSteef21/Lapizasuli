@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Steven Dior | Flow Time</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background-color: #000;
+            background-image: linear-gradient(180deg, #000000 0%, #0a0a2e 100%);
+            color: white;
+            font-family: 'Inter', sans-serif;
+        }
+        .flow-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        .flow-card:hover {
+            transform: translateY(-5px);
+            border-color: #3b82f6;
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.15);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center p-6">
+
+    <header class="text-center my-10">
+        <h1 class="text-3xl font-black tracking-tighter uppercase italic text-white">Steven Dior</h1>
+        <p class="text-[9px] text-blue-400 font-mono mt-2 tracking-[0.5em] uppercase">SADV41 Satellite Flow</p>
+    </header>
+
+    <main class="w-full max-w-md space-y-4">
+        
+        <a href="https://take.app/stevendior" target="_blank" class="flow-card w-full p-6 rounded-[2.5rem] flex items-center gap-5">
+            <div class="text-3xl">🛍️</div>
+            <div class="text-left">
+                <p class="text-[11px] font-black uppercase tracking-widest text-blue-400">Catálogo de Servicios</p>
+                <p class="text-[9px] text-gray-500 uppercase">Misiones y Oportunidades</p>
+            </div>
+        </a>
+
+        <a href="/metaf" class="flow-card w-full p-6 rounded-[2.5rem] flex items-center gap-5 border-indigo-900/50">
+            <div class="text-3xl">🏛️</div>
+            <div class="text-left">
+                <p class="text-[11px] font-black uppercase tracking-widest text-indigo-400">Terminal MetaF</p>
+                <p class="text-[9px] text-gray-500 uppercase italic">Nodos 98 & 7EF</p>
+            </div>
+        </a>
+
+        <a href="https://linktr.ee/stevendior" target="_blank" class="flow-card w-full p-4 rounded-3xl flex justify-center border-dashed border-gray-800">
+            <span class="text-[9px] font-bold text-gray-600 uppercase tracking-widest italic">Acceder al Linktree Espejo</span>
+        </a>
+
+        <div class="flow-card w-full p-6 rounded-[2.5rem] border-purple-900/30">
+            <p class="text-[9px] text-purple-500 font-black uppercase tracking-widest mb-2">Yahoo Intelligence Feed</p>
+            <p class="text-[10px] text-gray-400 italic">Sincronizando noticias de último minuto para Panamá...</p>
+        </div>
+
+    </main>
+
+    <footer class="mt-auto pt-10 text-center">
+        <p class="text-[8px] text-gray-700 font-mono tracking-widest uppercase">madcom21@gmail.com | 0xcff...B7EF</p>
+        <p class="text-[10px] text-blue-900 font-black mt-2 tracking-tighter uppercase italic">Burunga • 2026</p>
+    </footer>
+
+</body>
+</html>
