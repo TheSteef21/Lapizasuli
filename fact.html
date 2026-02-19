@@ -3,39 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Factura Digital SADV41 | LlanteroBurunga</title>
+    <title>Factura SADV41</title>
     <style>
-        :root {
-            --gold: #d4af37;
-            --dark-bg: #0a0a0a;
-            --glass: rgba(255, 255, 255, 0.1);
-        }
-        body {
-            background-color: var(--dark-bg);
-            color: white;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            display: flex;
-            justify-content: center;
-            padding: 20px;
-        }
-        .factura-container {
-            width: 100%;
-            max-width: 500px;
-            border: 1px solid var(--gold);
+        :root { --gold: #d4af37; }
+        body { background: #000; color: white; font-family: sans-serif; display: flex; justify-content: center; padding: 20px; }
+        
+        .factura-wrapper {
+            width: 100%; max-width: 400px;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
             padding: 25px;
             position: relative;
-            background: rgba(0, 0, 0, 0.8);
-            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
             overflow: hidden;
         }
-        /* Fondo con 10% de visibilidad */
-        .background-overlay {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-image: url('TU_FOTO_DE_FONDO_AQUI.jpg');
-            background-size: cover;
+
+        /* Fondo 10% visibilidad - Imagen IPFS ...wu2e */
+        .bg-factura {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: url('https://jade-tricky-pig-245.mypinata.cloud/ipfs/bafybeigrkjkbxxpevoq7wlnbssnb3ncfqzilm2hqxo5hk5xnndkzpdwu2e') center/cover;
             opacity: 0.1;
             z-index: -1;
         }
+
         .header { text-align: center; margin-bottom: 20px; }
-        .logo-llanteria { width: 100px; border-radius: 50%; border
+        /* Logo IPFS ...u3gq */
+        .logo-img { width: 80px; height: 80px; border-radius: 50%; border: 2px solid var(--gold); object-fit: cover; }
+
+        .details { font-size: 0.8em; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; margin-bottom: 15px; }
+        .table { width: 100%; font-size: 0.9em; margin-bottom: 20px; }
+        .table td { padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .total { text-align: right; color: var(--gold); font-weight: bold; font-size: 1.2em; }
+        
+        .qr-dgi { background: white; width: 120px; height: 120px; margin: 20px auto; border-radius: 8px; display: block; }
+        .footer { text-align: center; font-size: 0.7em; opacity: 0.5; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="factura-wrapper">
+        <div class="bg-factura"></div>
+        <div class="header">
+            <img src="https://jade-tricky-pig-245.mypinata.cloud/ipfs/bafkreiegcj4sh72rnmurxcvlgovahlgosvjsnflbiwgpmtaqvyvudox3gq" class="logo-img">
+            <h3 style="margin: 10px 0 0 0; letter-spacing: 2px;">SADV41</h3>
+        </div>
+
+        <div class="details">
+            <strong>Razón Social:</strong> 8-901-2251-DV83<br>
+            <strong>ID:</strong> @LlanteroBurunga<br>
+            <strong>Afiliado:</strong> @Llanteria_TurboTire<br>
+            <strong>Tel:</strong> 6936-2166
+        </div>
+
+        <table class="table">
+            <tr><td>Llantas / Rines</td><td style="text-align:right;">$0.00</td></tr>
+            <tr><td>Descuentos</td><td style="text-align:right;">-$0.00</td></tr>
+        </table>
+
+        <div class="total">TOTAL: $0.00</div>
+
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=DGI_SADV41_VERIFIED" class="qr-dgi" alt="QR DGI">
+
+        <div class="footer">
+            Atrio Digital Unificado - Burunga 🎚
+        </div>
+    </div>
+</body>
+</html>
