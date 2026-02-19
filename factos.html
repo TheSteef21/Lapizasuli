@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SADV41 | Unificación Maestra</title>
+    
+    <link rel="stylesheet" href="https://ipfs.io/ipfs/bafybeigzdnnl7wbzlvdseqlzzz77hh2u63pr2ioyf3ufld2tci72ypwq4i">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background-color: #050505; color: #ffffff; font-family: system-ui, sans-serif; overflow-x: hidden; }
+        
+        /* Efectos Retro 144p */
+        #video-bg {
+            position: fixed; top: 50%; left: 50%; min-width: 100%; min-height: 100%;
+            z-index: -100; transform: translate(-50%, -50%) scale(1.1);
+            object-fit: cover;
+            filter: blur(4px) contrast(1.2) saturate(0.9); /* Simulación baja calidad */
+            image-rendering: pixelated; 
+        }
+
+        /* Capa Dinámica Día/Noche */
+        #time-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -99; transition: background-color 3s ease;
+        }
+
+        /* Sistema de Pestañas */
+        .tab-btn { transition: all 0.3s; border-bottom: 2px solid transparent; opacity: 0.6; }
+        .tab-btn.active { border-color: #007bff; opacity: 1; color: #007bff; font-weight: bold; }
+        .tab-content { display: none; animation: fadeIn 0.4s ease; }
+        .tab-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .glass-card { background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .magenta-glow { text-shadow: 0 0 15px #FF00FF; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <video autoplay muted loop playsinline id="video-bg">
+        <source src="https://ipfs.io/ipfs/bafybeia6dpgwlpnjrhvhdx756yrlwmfke352mpl367dxgwmaefreyzuhxu" type="video/mp4">
+    </video>
+    <div id="time-overlay"></div>
+
+    <header class="relative h-48 md:h-64 overflow-hidden border-b border-white/10">
+        <img src="https://ipfs.io/ipfs/bafybeiyrheuo434tsxbulzxipjqpjxd3hmlyd6ssfxn7blg3ufvfmnqeayrheu" 
+             class="w-full h-full object-cover" alt="SADV41 Header">
+        <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent"></div>
+        <div class="absolute bottom-6 left-8">
+            <h1 class="text-4xl md:text-6xl font-black italic magenta-glow">SADV41</h1>
+        </div>
+    </header>
+
+    <nav class="sticky top-0 z-50 bg-black/80 backdrop-blur-md border-b border-white/10">
+        <div class="p-4 flex justify-between items-center px-8">
+            <a href="https://www.google.com/search?q=stevendior.digital" target="_blank" class="font-bold text-sm tracking-widest uppercase">stevendior.oficial</a>
+            <w3m-button></w3m-button>
+        </div>
+        <div class="flex justify-around border-t border-white/5">
+            <button onclick="openTab('inicio')" id="btn-inicio" class="tab-btn active py-4 text-xs uppercase tracking-widest">Atrio</button>
+            <button onclick="openTab('arcas')" id="btn-arcas" class="tab-btn py-4 text-xs uppercase tracking-widest">Tesorería</button>
+            <button onclick="openTab('hashes')" id="btn-hashes" class="tab-btn py-4 text-xs uppercase tracking-widest">Hashes</button>
+            <button onclick="openTab('djyordy')" id="btn-djyordy" class="tab-btn py-4 text-xs uppercase tracking-widest">DJYordy</button>
+        </div>
+    </nav>
+
+    <main class="relative z-10 flex-grow container mx-auto p-6">
+        
+        <section id="tab-inicio" class="tab-content active text-center py-10">
+            <h2 class="text-2xl font-bold mb-6">Misión Digital SADV41</h2>
+            <div class="space-y-4 max-w-sm mx-auto">
+                <a href="https://ipfs.io/ipfs/bafkreibfatnqxocbbkta2hlz5qq4adkfxvmgoknmrgvwu4jhgly7domyga" class="block p-4 glass-card rounded-xl hover:border-[#007bff] transition-all">CRISTO TE ESPERA! 📜</a>
+                <a href="https://sadv41.netlify.app" target="_blank" class="block p-4 glass-card rounded-xl hover:border-[#007bff] transition-all">SADV41 🪜</a>
+                <a href="https://open.spotify.com/search/Steven" target="_blank" class="block p-4 glass-card rounded-xl hover:border-[#007bff] transition-all">Spotify for Artist 🎧</a>
+            </div>
+        </section>
+
+        <section id="tab-arcas" class="tab-content space-y-6">
+            <div class="glass-card p-6 rounded-2xl text-center border-l-4 border-[#f3ba2f]">
+                <p class="text-[#f3ba2f] font-bold text-sm mb-2">StevenDior.bnb (0x4cBf...2498)</p>
+                <p class="text-[10px] opacity-60">LA 98 UNIVERSAL</p>
+            </div>
+            <div class="glass-card p-6 rounded-2xl text-center border-l-4 border-[#4285F4]">
+                <p class="text-[#4285F4] font-bold text-sm mb-2">Steven Verified on Google Inc.</p>
+                <p class="text-[10px] opacity-60">0xcff41667D8E1649f8f5876214Ee38CC3545bB7EF</p>
+            </div>
+        </section>
+
+        <section id="tab-hashes" class="tab-content">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                <a href="https://ipfs.io/ipfs/bafkreiannc5q3iargwwzgzfpf2lf6tzwmztiomrvvata2fsf3m4kgqw4se" class="p-3 glass-card rounded-lg text-[9px] truncate">unificacion.html</a>
+                <a href="https://ipfs.io/ipfs/bafkreihodl7tn3n3m32dvpx3ycvnt6gk6w4r3tr3izi7giwkh3hd25sut4" class="p-3 glass-card rounded-lg text-[9px] truncate">certificados.html</a>
+                <a href="https://ipfs.io/ipfs/bafkreibh6mkwei6du3vjssszclcndyyzrx5ekmsma4iwz636sa2ndo7oru" class="p-3 glass-card rounded-lg text-[9px] truncate">Carta_a_luis.html</a>
+                <a href="https://ipfs.io/ipfs/bafkreiefjudlj4d4k6ry2mogp5o3fji6r7fm7oao6fixk4osazzje7v3fe" class="p-3 glass-card rounded-lg text-[9px] truncate">PLENIPOTENCIA.html</a>
+            </div>
+        </section>
+
+        <section id="tab-djyordy" class="tab-content text-center py-10">
+            <div class="flex justify-center gap-6 mb-8">
+                <a href="https://instagram.com/StevenDiorOficial" target="_blank" class="text-xs text-gray-400">@StevenDiorOficial</a>
+                <a href="https://instagram.com/StevenTeSirve" target="_blank" class="text-xs text-gray-400">@StevenTeSirve</a>
+            </div>
+            <a href="https://instagram.com/StevenTeSirve" target="_blank" class="block group">
+                <h2 class="text-6xl md:text-9xl font-black transition-all group-hover:text-[#FF00FF]">DJYORDY</h2>
+            </a>
+            <p class="mt-8 text-[9px] opacity-40 uppercase tracking-widest">SADV41 - Steven Gómez Serrano</p>
+        </section>
+
+    </main>
+
+    <script>
+        // 1. Lógica de Pestañas
+        function openTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById('tab-' + tabName).classList.add('active');
+            document.getElementById('btn-' + tabName).classList.add('active');
+        }
+
+        // 2. Lógica Día/Noche (Burunga Time)
+        function adjustBrightness() {
+            const hour = new Date().getHours();
+            const overlay = document.getElementById('time-overlay');
+            if (hour >= 6 && hour < 18) {
+                overlay.style.backgroundColor = 'rgba(0,0,0,0.3)'; // Día
+            } else {
+                overlay.style.backgroundColor = 'rgba(0,0,0,0.8)'; // Noche
+            }
+        }
+        adjustBrightness();
+    </script>
+
+    <script type="module">
+        import { createWeb3Modal, defaultConfig } from 'https://esm.sh/@web3modal/ethers5@3.6.2?bundle'
+        const projectId = '2329befe80aa9e63f4aa218366bf7947'
+        const mainnet = { chainId: 1, name: 'Ethereum', currency: 'ETH', explorerUrl: 'https://etherscan.io', rpcUrl: 'https://cloudflare-eth.com' }
+        const metadata = { name: 'SADV41', description: 'Atrio Digital', url: 'https://stevendior.digital', icons: ['https://ipfs.io/ipfs/bafybeiyrheuo434tsxbulzxipjqpjxd3hmlyd6ssfxn7blg3ufvfmnqeayrheu'] }
+        const ethersConfig = defaultConfig({ metadata })
+        createWeb3Modal({ ethersConfig, chains: [mainnet], projectId, themeMode: 'dark', themeVariables: { '--w3m-accent': '#007bff' } })
+    </script>
+</body>
+</html>
