@@ -3,37 +3,182 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SADV41 | Unificación Maestra</title>
+    <title>StevenDior.digital - Portal Maestro SADV41</title>
     
-    <link rel="stylesheet" href="https://ipfs.io/ipfs/bafybeigzdnnl7wbzlvdseqlzzz77hh2u63pr2ioyf3ufld2tci72ypwq4i">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://jade-tricky-pig-245.mypinata.cloud/ipfs/bafybeigzdnnl7wbzlvdseqlzzz77hh2u63pr2ioyf3ufld2tci72ypwq4i">
+    
     <style>
-        body { background-color: #050505; color: #ffffff; font-family: system-ui, -apple-system, sans-serif; overflow-x: hidden; }
+        :root {
+            --primary: #000000;
+            --secondary: #333333;
+            --accent: #0056b3;
+            --bg: #f8f9fa;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: var(--bg);
+            color: var(--primary);
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+        h1, h2, h3 { color: var(--primary); }
+        h1 { text-align: center; border-bottom: 2px solid #eee; padding-bottom: 10px; }
         
-        /* Efectos de Luz */
-        .magenta-glow { text-shadow: 0 0 15px #FF00FF, 0 0 30px #FF00FF; }
-        .blue-glow { text-shadow: 0 0 15px #007bff, 0 0 30px #007bff; }
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            background: #fafafa;
+        }
         
-        /* Paneles de Cristal */
-        .glass-panel { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.3s ease; }
-        .glass-panel:hover { border-color: #007bff; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,123,255,0.2); }
-        .link-card { display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 1rem; border-radius: 0.75rem; text-decoration: none; color: inherit; }
+        .wallet-address {
+            display: block;
+            font-family: monospace;
+            background: #e9ecef;
+            padding: 10px;
+            border-radius: 6px;
+            word-break: break-all;
+            margin-top: 5px;
+            color: var(--accent);
+            font-weight: bold;
+        }
 
-        /* Estilos de Pestañas (Tabs) */
-        .tab-btn { transition: all 0.3s ease; border-bottom: 2px solid transparent; }
-        .tab-btn.active { border-color: #007bff; color: #007bff; font-weight: bold; background: rgba(0, 123, 255, 0.1); }
-        .tab-content { display: none; animation: fadeIn 0.5s ease-in-out; }
-        .tab-content.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .btn-connect {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: var(--accent);
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 8px;
+            border: none;
+            font-size: 1.1em;
+            cursor: pointer;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        .btn-connect:hover { background: #004494; }
 
-        /* Video Retro 144p de Fondo */
-        #video-bg {
-            position: fixed; top: 50%; left: 50%; min-width: 100%; min-height: 100%; width: auto; height: auto;
-            z-index: -100; transform: translate(-50%, -50%) scale(1.1);
-            object-fit: cover;
-            /* Efecto retro 144p */
-            filter: blur(3px) contrast(1.3) saturate(0.8);
-            image-rendering: pixelated; 
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 10px;
+        }
+        .links-grid a {
+            display: block;
+            padding: 10px;
+            background: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            text-decoration: none;
+            color: var(--secondary);
+            font-size: 0.9em;
+            word-break: break-all;
+        }
+        .links-grid a:hover {
+            background: #eef2f5;
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+        
+        .social-links a {
+            display: inline-block;
+            margin-right: 15px;
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .social-links a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Steven de la misión social SADV41</h1>
+    <p style="text-align: center;"><a href="https://www.google.com/search?q=stevendior.digital" target="_blank">stevendior.digital</a></p>
+
+    <div class="section">
+        <h2>🌐 Conexión Web3</h2>
+        
+        <button class="btn-connect" id="btnWalletConnect">Conectar con Wallet Connect</button>
+
+        <h3>Identidades y Contratos Oficiales</h3>
+        <p>
+            <strong>98 Universal (StevenDior.bnb):</strong>
+            <span class="wallet-address">0x4cBf2DB3838341BeCB185892C3af576Dc04e2498</span>
+        </p>
+        <p>
+            <strong>Steven Verified on Google Inc.:</strong>
+            <span class="wallet-address">0xcff41667D8E1649f8f5876214Ee38CC3545bB7EF</span>
+        </p>
+    </div>
+
+    <div class="section">
+        <h2>📱 Redes y Contacto Oficial</h2>
+        <div class="social-links">
+            <a href="https://instagram.com/StevenDiorOficial" target="_blank">@StevenDiorOficial</a>
+            <a href="https://instagram.com/StevenTeSirve" target="_blank">@StevenTeSirve</a>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>🗂️ Directorio Maestro IPFS</h2>
+        <div class="links-grid">
+            <a href="https://jade-tricky-pig-245.mypinata.cloud/ipfs/bafkreigas5eozl77xshc3zir4csrc2cuon4plx2kijczfug63ohfky26qq" target="_blank">Carta_a_luis.md</a>
+            <a href="https://jade-tricky-pig-245.mypinata.cloud/ipfs/bafkreibh6mkwei6du3vjssszclcndyyzrx5ekmsma4iwz636sa2ndo7oru" target="_blank">Carta_a_luis.html</a>
+            <a href="https://jade-tricky-pig-245.mypinata.cloud/ipfs/bafkreiegxrffvjfivr642xmnxvf4kuhdhqx2xlsgrgwc76awjaoueyp3ki" target="_blank">_app.js</a>
+            <a href="https://jade-tricky-pig-245.mypinata.cloud/ipfs/bafkreih5nfz5ikizb3ihm25wd3mq3qbjqfa2gbto5svl2gpcgtpyayq2vy" target="_blank">certificados.tsx</a>
+            <a href="https://jade-tricky-pig-245.mypinata.cloud/ipfs/bafkreihodl7tn3n3m32dvpx3ycvnt6gk6w4r3tr3izi7giwkh3hd25sut4" target="_blank">certificados.html</a>
+            <a href="https://jade-tricky-pig-245.mypinata.cloud/ipfs/bafkreihp42lckqai5twcionxxinwhbcfcwzcuxx47auf2eb4ezny7zykmm" target="_blank">crear-certificado.html</a>
+            <a href="https://jade-tricky-pig-245.mypinata.cloud/ipfs/bafkreicsexj7kxiqipvs5e5gazsfj2dgqx5xjz6hs5yiesgr6r6f4mibzi" target="_blank">csharp</a>
+            <a href="https://jade-tricky-pig-245.mypinata.cloud/ipfs/bafkreia7ycaegfeym2jq27pabrwrlxxiyh46otc42z6b7j2ohw4chbqn5i" target="_blank">Cueva.json</a>
+            <a href="https://jade-tricky-pig-245.mypinata.cloud/ipfs/bafkreiay7pz6z3sqbh3tpe5igd6fdpvyh546dtby5bpve3lvnraqnxhl7e" target="_blank">DJYordy</a>
+            <a href="https://jade-tricky-pig-245.mypinata.cloud/ipfs/bafkreie2ljqnrvrv6kyjw5dbaibnry4xlnbk7aa2aoakwk34mywi3lldfi" target="_blank">DJYordy.html</a>
+            <a href="https://jade-tricky-pig-245.mypinata.cloud/ipfs/bafkreietqig4rexlth6mwehkaf27sh5sgtsnyrhyjkamt5weuuryi3xlau" target="_blank">MetaF.html</a>
+            <a href="https://jade-tricky-pig-245.mypinata.cloud/ipfs/bafkreigiohcqyg7ug3ygwp3qxyaimwcl7sv5ejlyzm7vcjsyb27obhb75y" target="_blank">next.config.js</a>
+            <a href="https://jade-tricky-pig-245.mypinata.cloud/ipfs/bafkreicfn5bb6blr4ht3encfzz3cbemdxzi7jaqogaihumfartpoxyixgu" target="_blank">package.json</a>
+            <a href="https://jade-tricky-pig-245.mypinata.cloud/ipfs/bafkreiho62afnmvseya3z4zrudqbw4ucmsx7zvkpvumn6gfejnicd5p7ya" target="_blank">PagoUniversal.html</a>
+            <a href="https://jade-tricky-pig-245.mypinata.cloud/ipfs/bafkreig54456qm2rc25rwr3mpoawgeurp2w54s67odmdiniysn7dpnffke" target="_blank">Palabra.html</a>
+            <a href="https://jade-tricky-pig-245.mypinata.cloud/ipfs/bafkreiefjudlj4d4k6ry2mogp5o3fji6r7fm7oao6fixk4osazzje7v3fe" target="_blank">PLENIPOTENCIA_SADV41.html</a>
+            <a href="https://jade-tricky-pig-245.mypinata.cloud/ipfs/bafkreicwwx4m3lc6lekpc3hjz4lqyajdmxukfp3ij3mzkeav2t5rr5v3d4" target="_blank">PLENIPOTENCIA_SADV41.md</a>
+            <a href="https://jade-tricky-pig-245.mypinata.cloud/ipfs/bafkreie67r5agqxekagsuzg6vwspsjcdcspsjf6v7xe34kfkckrljzq5ey" target="_blank">QRHALL.html</a>
+            <a href="https://jade-tricky-pig-245.mypinata.cloud/ipfs/bafkreicsaud4tiwo6k3i6msqkuo564j4yeevmjq7ldvze4jyyv6yoibz4a" target="_blank">restauracion.css</a>
+            <a href="https://jade-tricky-pig-245.mypinata.cloud/ipfs/bafkreiaydvkq43wpxyuqg6ndpsta2gvovf3nibswb2zzejivp6s3w7j4wm" target="_blank">restauracion.html</a>
+            <a href="https://jade-tricky-pig-245.mypinata.cloud/ipfs/bafkreibfatnqxocbbkta2hlz5qq4adkfxvmgoknmrgvwu4jhgly7domyga" target="_blank">santo.html</a>
+            <a href="https://jade-tricky-pig-245.mypinata.cloud/ipfs/bafkreibu3swcr7gjmk6pjnmdvr2shdbx5ht2wcmdduuyzwmwxpofvrzjma" target="_blank">StevenDiorFlowTime.html</a>
+            <a href="https://jade-tricky-pig-245.mypinata.cloud/ipfs/bafkreifcehihtpgnnzxg2w2gnghcp6zsycvvrtp46nr4dxkluoigh3jl6a" target="_blank">tezos.html</a>
+            <a href="https://jade-tricky-pig-245.mypinata.cloud/ipfs/bafkreiannc5q3iargwwzgzfpf2lf6tzwmztiomrvvata2fsf3m4kgqw4se" target="_blank">unificacion.html</a>
+            <a href="https://jade-tricky-pig-245.mypinata.cloud/ipfs/bafkreih6byra7uhn3hod4rxn3ug4u4l4zkmt24nds74ja2koktuk74mh2a" target="_blank">Vision SADV41</a>
+            <a href="https://jade-tricky-pig-245.mypinata.cloud/ipfs/bafybeigrkjkbxxpevoq7wlnbssnb3ncfqzilm2hqxo5hk5xnndkzpdwu2e" target="_blank">fact.html</a>
+            <a href="https://jade-tricky-pig-245.mypinata.cloud/ipfs/bafkreiegcj4sh72rnmurxcvlgovahlgosvjsnflbiwgpmtaqvyvudox3gq" target="_blank">InShot_20260109_211345714.jpg</a>
+        </div>
+    </div>
+</div>
+
+<script type="module">
+    // Parámetros de Configuración provistos
+    const WALLET_CONNECT_PROJECT_ID = '2329befe80aa9e63f4aa218366bf7947';
+
+    document.getElementById('btnWalletConnect').addEventListener('click', async () => {
+        console.log("Inicializando WalletConnect con Key:", WALLET_CONNECT_PROJECT_ID);
+        alert('Se ha invocado el servicio de WalletConnect con la llave ' + WALLET_CONNECT_PROJECT_ID + '. Asegúrate de tener la librería de Web3Modal inyectada en tu entorno (ej: _app.js) para renderizar el modal.');
+        
+        // Aquí se dispara el hook open() de Web3Modal que debes tener configurado en tu entorno Next.js / React
+    });
+</script>
+
+</body>
+</html>
         }
 
         /* Capa Día/Noche */
