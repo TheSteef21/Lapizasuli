@@ -1,0 +1,16 @@
+name: Deploy SADV41 to IPFS
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install & Build
+        run: |
+          npm install
+          npm run build
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: out-folder
+          path: 0x41/  # Aquí estará tu index.html y la carpeta _next
