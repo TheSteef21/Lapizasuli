@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Hoja de Servicio Preventivo - SADV41</title>
+    <style>
+        :root { --spirit-gold: #d4af37; --matrix-green: #00ff41; --holy-red: #e74c3c; }
+        body { font-family: 'Segoe UI', sans-serif; background: #0f0f0f; color: #f0f0f0; padding: 20px; }
+        .container { max-width: 800px; margin: auto; border: 2px solid var(--spirit-gold); padding: 30px; border-radius: 15px; background: #1a1a1a; box-shadow: 0 0 20px rgba(212, 175, 55, 0.2); }
+        h1, h2 { color: var(--spirit-gold); text-align: center; text-transform: uppercase; }
+        .section { margin-bottom: 25px; border-bottom: 1px solid #333; padding-bottom: 15px; }
+        label { display: block; margin: 10px 0 5px; font-weight: bold; color: var(--spirit-gold); }
+        input, select, textarea { width: 100%; padding: 10px; background: #000; color: var(--matrix-green); border: 1px solid #444; border-radius: 5px; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        button { background: var(--spirit-gold); color: black; border: none; padding: 15px; width: 100%; font-weight: bold; border-radius: 8px; cursor: pointer; margin-top: 20px; }
+        .output-box { display: none; margin-top: 20px; padding: 20px; background: #222; border-left: 5px solid var(--matrix-green); }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🏛️ Hoja de Servicio SADV41</h1>
+    <p style="text-align: center; color: var(--matrix-green);">Burunga | Llantería Turbo Tire | 2026</p>
+
+    <div class="section">
+        <h2>Atrio: Identidad y Puesto</h2>
+        <div class="grid">
+            <div><label>Nombre:</label><input type="text" id="nombre" value="Steven Gómez Serrano" readonly></div>
+            <div><label>Cédula:</label><input type="text" id="cedula" value="8-901-2251" readonly></div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Templo: Salud Preventiva</h2>
+        <div class="grid">
+            <div><label>Altura (cm):</label><input type="number" id="altura" placeholder="175"></div>
+            <div><label>Peso (kg):</label><input type="number" id="peso" placeholder="75"></div>
+        </div>
+        <label>Condición Física (Samsung Health Data):</label>
+        <select id="estado_fisico">
+            <option value="equilibrado">Equilibrado ✅</option>
+            <option value="agotado">Menguando (Cansado) ⚠️</option>
+            <option value="recuperado">Fortalecido 💪</option>
+        </select>
+    </div>
+
+    <div class="section">
+        <h2>Gestión: Supervisión y Equipo</h2>
+        <label>Servicios del Día (Número Único Numérico):</label>
+        <input type="number" id="servicios" placeholder="Cant. llantas/reparaciones">
+        <label>Supervisión de Apoyo (Isaid/Chejo):</label>
+        <textarea id="apoyo_log" rows="2" placeholder="Desempeño del personal de apoyo..."></textarea>
+    </div>
+
+    <button onclick="generarReporte()">Sincronizar Atrio-Gestión</button>
+
+    <div id="resultado" class="output-box">
+        <h3>📊 Diagnóstico Pluscuamperfecto</h3>
+        <p id="imc_res"></p>
+        <p id="espiritual_res" style="font-style: italic; color: var(--spirit-gold);"></p>
+        <p style="font-size: 0.8em; color: #888;">*Datos protegidos bajo ley de confidencialidad SADV41.</p>
+    </div>
+</div>
+
+<script>
+    function generarReporte() {
+        const peso = document.getElementById('peso').value;
+        const altura = document.getElementById('altura').value / 100;
+        const estado = document.getElementById('estado_fisico').value;
+        
+        if (peso && altura) {
+            const imc = (peso / (altura * altura)).toFixed(2);
+            document.getElementById('imc_res').innerHTML = `<strong>IMC:</strong> ${imc} | Análisis de salud completado.`;
+            
+            let versiculo = "";
+            if (estado === "agotado") {
+                versiculo = "YouVersion: 'Él da esfuerzo al cansado, y multiplica las fuerzas al que no tiene ningunas.' - Isaías 40:29";
+            } else {
+                versiculo = "YouVersion: 'Amado, yo deseo que tú seas prosperado en todas las cosas, y que tengas salud, así como prospera tu alma.' - 3 Juan 1:2";
+            }
+            
+            document.getElementById('espiritual_res').innerText = versiculo;
+            document.getElementById('resultado').style.display = "block";
+            alert("Sincronización con YouVersion y Samsung Health exitosa.");
+        }
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>SADV41 - Auxilio al Necesitado</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background: #fdfdfd; color: #333; padding: 20px; }
+        .card-auxilio { border: 2px solid #e74c3c; border-radius: 15px; padding: 20px; background: white; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        h2 { color: #c0392b; text-align: center; }
+        .btn-maps { background: #4285F4; color: white; padding: 12px; text-decoration: none; border-radius: 5px; display: block; text-align: center; margin-top: 10px; }
+        .btn-strava { background: #FC6711; color: white; padding: 12px; border-radius: 5px; display: block; text-align: center; margin-top: 10px; border: none; width: 100%; cursor: pointer; }
+        .registro { background: #ecf0f1; padding: 10px; margin: 10px 0; border-radius: 5px; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+
+<div class="card-auxilio">
+    <h2>❤️ Misión de Salud SADV41</h2>
+    <p><i>"Sirviendo a los enfermos con la paz de Cristo"</i></p>
+
+    <div class="registro">
+        <label><b>Ubicación del Necesitado:</b></label>
+        <input type="text" id="loc" placeholder="Ej: Sector 2, Burunga">
+        <a href="https://www.google.com/maps/search/?api=1&query=hospitales+cerca+de+mi" target="_blank" class="btn-maps">📍 Localizar en Google Maps</a>
+    </div>
+
+    <div class="registro">
+        <label><b>Estado de Ayuda:</b></label>
+        <textarea id="ayuda" rows="3" style="width:100%" placeholder="Describa la necesidad médica..."></textarea>
+    </div>
+
+    <button class="btn-strava" onclick="alert('Conectando con API de Strava para registro satelital de pasos...')">
+        🏃‍♂️ Registrar Pasos del Recorrido (Strava Beta)
+    </button>
+</div>
+
+<p style="font-size: 0.8em; text-align: center; margin-top: 20px;">
+    Este sistema genera un historial satelital para documentar cada kilómetro recorrido en nombre de la misión.
+</p>
+
+</body>
+</html>

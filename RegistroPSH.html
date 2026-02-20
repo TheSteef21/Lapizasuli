@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>SADV41 - Registro de Paz y Salvo Histórico</title>
+    <style>
+        :root { --gold: #d4af37; --red: #e74c3c; --green: #27ae60; --dark: #0a0a0a; }
+        body { font-family: 'Segoe UI', sans-serif; background: var(--dark); color: #eee; padding: 20px; }
+        .master-hub { max-width: 900px; margin: auto; border: 2px solid var(--gold); border-radius: 15px; background: #151515; padding: 25px; }
+        header { text-align: center; border-bottom: 2px solid var(--gold); padding-bottom: 15px; margin-bottom: 20px; }
+        .grid-justice { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .box { background: #222; padding: 15px; border-radius: 10px; border-left: 5px solid var(--gold); }
+        .negativo { color: var(--red); font-weight: bold; font-size: 1.2em; }
+        .positivo { color: var(--green); font-weight: bold; font-size: 1.2em; }
+        .total-box { margin-top: 30px; padding: 20px; background: #000; text-align: center; border: 2px dashed var(--matrix-green); }
+        input { width: 100%; background: #111; border: 1px solid #444; color: var(--gold); padding: 8px; border-radius: 5px; margin-top: 5px; }
+        button { background: var(--gold); color: black; border: none; padding: 15px; width: 100%; font-weight: bold; border-radius: 8px; cursor: pointer; margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+<div class="master-hub">
+    <header>
+        <h1>🏛️ Convergencia de Justicia SADV41</h1>
+        <p>Historial Ago 2022 - 15 Feb 2026 | Burunga, Panamá</p>
+    </header>
+
+    <div class="grid-justice">
+        <div class="box" style="border-left-color: var(--red);">
+            <h3>📉 Registro de Pasivo (CSS)</h3>
+            <label>Cuotas Obreros-Patronales (42 meses aprox.):</label>
+            <input type="number" id="deuda_css" value="3800.00" oninput="calcularPaz()">
+            <p><small>Estimación de cuotas no pagadas desde Agosto 2022.</small></p>
+            <span class="negativo">- B/. <span id="css_val">3800.00</span></span>
+        </div>
+
+        <div class="box" style="border-left-color: var(--green);">
+            <h3>📈 Registro de Activo (Derechos)</h3>
+            <label>Prestaciones Irrenunciables (Vac/Xmo/Antigüedad):</label>
+            <input type="number" id="derechos_val" value="4500.00" oninput="calcularPaz()">
+            <p><small>Derechos acumulados por 4 años de labor constante.</small></p>
+            <span class="positivo">+ B/. <span id="rights_val">4500.00</span></span>
+        </div>
+    </div>
+
+    <div class="total-box">
+        <h2>⚖️ Estado de Paz y Salvo Actual</h2>
+        <div id="countdown" style="font-size: 1.5em; margin: 10px 0;">Calculando...</div>
+        <p id="mensaje_paz"></p>
+        <div id="bar-container" style="background: #333; height: 20px; border-radius: 10px; overflow: hidden; margin-top: 10px;">
+            <div id="bar-fill" style="background: var(--gold); height: 100%; width: 50%;"></div>
+        </div>
+    </div>
+
+    <button onclick="window.print()">🖨️ Generar Reporte Federal para Google Sheets</button>
+</div>
+
+<script>
+    function calcularPaz() {
+        let css = parseFloat(document.getElementById('deuda_css').value) || 0;
+        let derechos = parseFloat(document.getElementById('derechos_val').value) || 0;
+        let convergencia = derechos - css;
+        
+        document.getElementById('css_val').innerText = css.toFixed(2);
+        document.getElementById('rights_val').innerText = derechos.toFixed(2);
+        
+        let display = document.getElementById('countdown');
+        let msg = document.getElementById('mensaje_paz');
+        let fill = document.getElementById('bar-fill');
+
+        if (convergencia > 0) {
+            display.innerText = "CRÉDITO DE JUSTICIA: B/. " + convergencia.toFixed(2);
+            display.style.color = "#27ae60";
+            msg.innerText = "Tus derechos superan la deuda histórica. Paz y Salvo activo hacia el 16/Feb.";
+            fill.style.width = "100%";
+        } else {
+            display.innerText = "ACUMULATIVO NEGATIVO: B/. " + convergencia.toFixed(2);
+            display.style.color = "#e74c3c";
+            msg.innerText = "En decadencia hacia el 0. La legalidad actual sanea el pasado.";
+            let percent = (1 - (Math.abs(convergencia) / css)) * 100;
+            fill.style.width = percent + "%";
+        }
+    }
+    // Inicializar
+    calcularPaz();
+</script>
+
+</body>
+</html>

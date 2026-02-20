@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SADV41 - Sistema Estadístico Comparativo</title>
+    <style>
+        :root { --gold: #d4af37; --blue: #2980b9; --green: #27ae60; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #1a1a1a; color: white; padding: 20px; }
+        .card { background: #2c3e50; border-radius: 15px; padding: 20px; margin-bottom: 20px; border-left: 5px solid var(--gold); }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .stat-box { background: #34495e; padding: 15px; border-radius: 10px; text-align: center; }
+        .valor { font-size: 24px; font-weight: bold; display: block; margin-top: 10px; }
+        .progress-bar { background: #444; height: 20px; border-radius: 10px; margin-top: 10px; overflow: hidden; }
+        .progress-fill { background: var(--green); height: 100%; width: 0%; transition: width 1s; }
+        button { background: var(--gold); border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-weight: bold; width: 100%; margin-top: 10px; }
+    </style>
+</head>
+<body>
+
+    <h2>🏛️ Sistema de Justicia y Potencial SADV41</h2>
+    <p>Comparativa: Pasado Informal vs. Presente Legal vs. Futuro Cripto-Espiritual</p>
+
+    <div class="grid">
+        <div class="stat-box">
+            <label>Pasado (Informal)</label>
+            <span class="valor" style="color: #bdc3c7;">B/. 600.00</span>
+            <small>Basado en 4 años de labor</small>
+        </div>
+
+        <div class="stat-box">
+            <label>Presente (Legal - Atrio)</label>
+            <span class="valor" style="color: var(--blue);">B/. 410.80</span>
+            <small>Respaldo CSS/MITRADEL</small>
+        </div>
+
+        <div class="stat-box" style="border: 1px solid var(--gold);">
+            <label>Potencial Cripto (Santísimo)</label>
+            <span id="potencialCripto" class="valor" style="color: var(--gold);">B/. 0.00</span>
+            <small>Confianza + Inversión Espiritual</small>
+        </div>
+    </div>
+
+    <div class="card">
+        <h3>🌱 Registro de Acción Espiritual (Multiplicador)</h3>
+        <label>Nivel de Paz y Salvo (0-100%):</label>
+        <input type="range" id="feRange" min="0" max="100" value="50" oninput="calcular()">
+        
+        <div class="progress-bar">
+            <div id="bar" class="progress-fill"></div>
+        </div>
+        
+        <p id="mensaje">La fe crea confianza de inversión.</p>
+        <button onclick="alert('Registro Guardado en la Nube SADV41')">Sincronizar con Registro Diario</button>
+    </div>
+
+    <script>
+        function calcular() {
+            let fe = document.getElementById('feRange').value;
+            let baseLegal = 410.80;
+            let bar = document.getElementById('bar');
+            let potencial = document.getElementById('potencialCripto');
+            
+            // Lógica: La fe y la legalidad potencian la creación criptográfica
+            // Multiplicamos la base legal por un factor de crecimiento basado en tu "Paz y Salvo"
+            let calculo = baseLegal * (1 + (fe / 50)); 
+            
+            bar.style.width = fe + "%";
+            potencial.innerText = "B/. " + calculo.toFixed(2);
+            
+            if(fe > 80) {
+                document.getElementById('mensaje').innerText = "Estado de Santísimo: Máxima Confianza de Inversión.";
+            } else {
+                document.getElementById('mensaje').innerText = "Creciendo en confianza y legalidad...";
+            }
+        }
+        // Inicializar
+        calcular();
+    </script>
+</body>
+</html>

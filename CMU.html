@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SADV41 - Centro de Mando Unificado</title>
+    <style>
+        :root { --spirit-gold: #d4af37; --matrix-green: #00ff41; --blood-red: #e74c3c; --navy: #2c3e50; }
+        body { font-family: 'Segoe UI', sans-serif; background: #0a0a0a; color: #eee; margin: 0; padding: 20px; }
+        .container { max-width: 1000px; margin: auto; border: 2px solid var(--spirit-gold); border-radius: 20px; background: #151515; overflow: hidden; }
+        header { background: var(--navy); padding: 20px; text-align: center; border-bottom: 2px solid var(--spirit-gold); }
+        .section { padding: 20px; border-bottom: 1px solid #333; }
+        h2 { color: var(--spirit-gold); border-left: 5px solid var(--spirit-gold); padding-left: 10px; font-size: 1.2em; text-transform: uppercase; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .card { background: #222; padding: 15px; border-radius: 10px; border: 1px solid #444; }
+        label { display: block; margin: 10px 0 5px; font-weight: bold; color: var(--spirit-gold); }
+        input, select, textarea { width: 100%; padding: 10px; background: #000; color: var(--matrix-green); border: 1px solid #555; border-radius: 5px; box-sizing: border-box; }
+        .btn-sync { background: var(--spirit-gold); color: black; border: none; padding: 15px; width: 100%; font-weight: bold; cursor: pointer; border-radius: 8px; margin-top: 20px; }
+        .stat-display { font-size: 1.5em; text-align: center; color: var(--matrix-green); margin: 20px 0; background: #000; padding: 15px; border-radius: 10px; border: 1px dashed var(--spirit-gold); }
+        .bible-box { font-style: italic; color: #aaa; text-align: center; padding: 10px; background: #1a1a1a; border-radius: 10px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>🏛️ Sistema Supervisional SADV41</h1>
+        <p>Confidencialidad Federal • Justicia Salarial • Salud Preventiva</p>
+        <p style="font-size: 0.8em;">Burunga, Arraiján | Cédula: 8-901-2251</p>
+    </header>
+
+    <div class="section">
+        <h2>📊 Inyector de Crecimiento Salarial</h2>
+        <div class="grid">
+            <div class="card">
+                <label>Base Legal (Atrio):</label>
+                <input type="text" value="B/. 410.80" readonly>
+                <label>Base Histórica (Santo):</label>
+                <input type="text" value="B/. 600.00" readonly>
+                <label>Nivel de Confidencialidad (0-100%):</label>
+                <input type="range" id="conf_level" min="0" max="100" value="100" oninput="calcularTodo()">
+            </div>
+            <div class="card">
+                <label>Rendimiento Equipo (Isaid/Chejo):</label>
+                <input type="number" id="rend_equipo" min="0" max="10" value="8" oninput="calcularTodo()">
+                <label>Servicios Realizados hoy:</label>
+                <input type="number" id="servicios" value="5" oninput="calcularTodo()">
+            </div>
+        </div>
+        <div class="stat-display">
+            POTENCIAL ACTUAL: <span id="potencial_salario">B/. 0.00</span>
+            <br><small style="font-size: 0.5em; color: var(--spirit-gold);">Paz y Salvo Cripto-Espiritual Activo</small>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>⚖️ Balanza Salud vs. Demanda</h2>
+        <div class="grid">
+            <div class="card">
+                <label>Peso (kg):</label>
+                <input type="number" id="peso" value="75" oninput="calcularTodo()">
+                <label>Altura (cm):</label>
+                <input type="number" id="altura" value="175" oninput="calcularTodo()">
+            </div>
+            <div class="card">
+                <label>Horas de Sueño (Regla 11 PM):</label>
+                <input type="number" id="sueno" value="8" oninput="calcularTodo()">
+                <label>Fatiga (Samsung Health):</label>
+                <select id="fatiga" onchange="calcularTodo()">
+                    <option value="1">Baja - Listo para producir</option>
+                    <option value="3">Alta - Necesito descansar</option>
+                </select>
+            </div>
+        </div>
+        <div id="veredicto" style="text-align: center; padding: 10px; margin-top: 10px; border-radius: 5px; font-weight: bold;"></div>
+    </div>
+
+    <div class="section">
+        <h2>🙏 Guianza del Espíritu Santo</h2>
+        <div class="bible-box" id="verso_dia">
+            "Sincronizando con YouVersion..."
+        </div>
+        <button class="btn-sync" onclick="alert('Datos sincronizados federalmente. Registrando paso en Google Maps y Strava...')">
+            SINCRONIZAR TODO EL SISTEMA
+        </button>
+    </div>
+
+    <footer style="text-align: center; font-size: 0.7em; padding: 10px; color: #555;">
+        Este documento unificado es propiedad de Steven Gómez Serrano. 
+        Reservado Federalmente bajo la Misión SADV41.
+    </footer>
+</div>
+
+<script>
+    function calcularTodo() {
+        // Cálculo Salarial
+        let baseLegal = 410.80;
+        let conf = document.getElementById('conf_level').value / 100;
+        let rend = document.getElementById('rend_equipo').value / 10;
+        let serv = document.getElementById('servicios').value * 5; // B/. 5 por servicio extra
+        
+        let total = baseLegal + (conf * 100) + (rend * 50) + serv;
+        document.getElementById('potencial_salario').innerText = "B/. " + total.toFixed(2);
+
+        // Cálculo Salud
+        let peso = document.getElementById('peso').value;
+        let altura = document.getElementById('altura').value / 100;
+        let imc = (peso / (altura * altura)).toFixed(1);
+        let sueno = document.getElementById('sueno').value;
+        let fatiga = document.getElementById('fatiga').value;
+        
+        let veredictoBox = document.getElementById('veredicto');
+        let versoBox = document.getElementById('verso_dia');
+
+        if (sueno < 6 || fatiga == 3) {
+            veredictoBox.innerText = "SISTEMA SUGIERE: DESCANSO PARA EL TEMPLO (IMC: " + imc + ")";
+            veredictoBox.style.background = "#c0392b22";
+            veredictoBox.style.color = "#e74c3c";
+            versoBox.innerText = "'Él da esfuerzo al cansado, y multiplica las fuerzas al que no tiene ningunas.' - Isaías 40:29";
+        } else {
+            veredictoBox.innerText = "SISTEMA SUGIERE: PRODUCCIÓN ACTIVA (IMC: " + imc + ")";
+            veredictoBox.style.background = "#27ae6022";
+            veredictoBox.style.color = "#00ff41";
+            versoBox.innerText = "'Amado, yo deseo que tú seas prosperado en todas las cosas, y que tengas salud, así como prospera tu alma.' - 3 Juan 1:2";
+        }
+    }
+    // Inicializar
+    calcularTodo();
+</script>
+
+</body>
+</html>

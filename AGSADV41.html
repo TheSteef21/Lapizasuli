@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atrio-Gestión SADV41 - Control Pluscuamperfecto</title>
+    <style>
+        :root { --gold: #d4af37; --matrix-green: #00ff41; --blood-red: #e74c3c; --sky-blue: #3498db; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0a0a0a; color: #eee; margin: 0; padding: 20px; }
+        .container { max-width: 900px; margin: auto; border: 1px solid var(--gold); padding: 20px; border-radius: 10px; background: rgba(20, 20, 20, 0.9); }
+        h1, h2 { color: var(--gold); text-align: center; text-transform: uppercase; letter-spacing: 2px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .panel { background: #1a1a1a; padding: 15px; border-radius: 8px; border: 1px solid #333; }
+        .panel h3 { border-bottom: 1px solid var(--matrix-green); color: var(--matrix-green); padding-bottom: 5px; }
+        label { display: block; margin: 10px 0 5px; font-weight: bold; font-size: 0.9em; }
+        input, select, textarea { width: 100%; background: #000; color: var(--matrix-green); border: 1px solid #444; padding: 8px; border-radius: 4px; box-sizing: border-box; }
+        .stats-display { margin-top: 15px; padding: 10px; background: #222; border-left: 4px solid var(--sky-blue); font-size: 1.1em; }
+        button { background: var(--gold); color: black; border: none; padding: 12px; width: 100%; font-weight: bold; border-radius: 5px; cursor: pointer; margin-top: 10px; transition: 0.3s; }
+        button:hover { background: white; }
+        .badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 0.7em; background: var(--sky-blue); color: white; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🎚️ Atrio-Gestión SADV41</h1>
+    <p style="text-align: center; color: var(--gold);">Sistema de Registro Único Numérico y Supervisional</p>
+
+    <div class="grid">
+        <div class="panel">
+            <span class="badge">EJE ALFA</span>
+            <h3>Liderazgo & Inversión</h3>
+            <label>Jefe: Alexander Gonzalez</label>
+            <label>Sugerencia Pluscuamperfecta:</label>
+            <textarea id="sug_alex" rows="2" placeholder="Idea para potenciar ganancia..."></textarea>
+            <label>Estado de Inversión:</label>
+            <select id="inv_status">
+                <option value="410.80">Base Legal (B/. 410.80)</option>
+                <option value="600.00">Potencial (B/. 600.00)</option>
+            </select>
+        </div>
+
+        <div class="panel">
+            <span class="badge" style="background: var(--matrix-green);">EJE BETA</span>
+            <h3>Rendimiento del Atrio</h3>
+            <label>Trabajador de Apoyo:</label>
+            <select id="apoyo">
+                <option value="Isaid">Isaid</option>
+                <option value="Chejo">Chejo</option>
+            </select>
+            <label>Rendimiento Numérico (1-10):</label>
+            <input type="number" id="rend_num" min="1" max="10" value="7">
+            <label>Confidencialidad (Cláusula 8):</label>
+            <select id="confid">
+                <option value="1">Cumple ✅</option>
+                <option value="0">Alerta ⚠️</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="panel" style="margin-top: 20px; border-color: var(--gold);">
+        <span class="badge" style="background: var(--gold); color: black;">EJE OMEGA</span>
+        <h3>Crecimiento Cripto-Espiritual (Steven)</h3>
+        <label>Paz y Salvo Espiritual (Confianza 0-100%):</label>
+        <input type="range" id="paz_salvo" min="0" max="100" value="50" oninput="updateStats()">
+        
+        <div id="display" class="stats-display">
+            Potencial Cripto: B/. <span id="cripto_val">0.00</span>
+        </div>
+        
+        <button onclick="saveRecord()">Sincronizar con Registro Satelital</button>
+    </div>
+
+    <p style="font-size: 0.8em; text-align: center; margin-top: 15px; color: #666;">
+        Burunga, Arraiján | Registrado ante MITRADEL y CSS según contrato del 16/Feb/2026.
+    </p>
+</div>
+
+<script>
+    function updateStats() {
+        let base = parseFloat(document.getElementById('inv_status').value);
+        let fe = document.getElementById('paz_salvo').value;
+        let rend = document.getElementById('rend_num').value;
+        
+        // Algoritmo SADV41: La base legal se potencia por la fe y el rendimiento del equipo
+        let multiplicador = (fe / 100) + (rend / 10);
+        let resultado = base * (1 + multiplicador);
+        
+        document.getElementById('cripto_val').innerText = resultado.toFixed(2);
+    }
+
+    function saveRecord() {
+        alert("¡Registro Pluscuamperfecto! Datos guardados para cálculo de bonos e integración Strava.");
+    }
+
+    // Inicializar al cargar
+    updateStats();
+</script>
+
+</body>
+</html>

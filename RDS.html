@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro Diario SADV41 - Turbo Tire</title>
+    <style>
+        body { font-family: sans-serif; margin: 20px; background-color: #f4f4f4; }
+        .container { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        h2 { color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
+        .field { margin-bottom: 15px; }
+        label { display: block; font-weight: bold; margin-bottom: 5px; }
+        input, select, textarea { width: 100%; padding: 8px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; }
+        button { background-color: #27ae60; color: white; padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer; width: 100%; font-size: 16px; }
+        button:hover { background-color: #219150; }
+        .footer-note { font-size: 0.8em; color: #7f8c8d; margin-top: 20px; text-align: center; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>📊 Registro de Producción Diaria</h2>
+    <form id="registroLaboral">
+        <div class="field">
+            <label for="fecha">Fecha:</label>
+            <input type="date" id="fecha" name="fecha" required>
+        </div>
+
+        <div class="field">
+            <label for="servicios">Servicios Realizados (Cantidad/Tipo):</label>
+            <textarea id="servicios" name="servicios" rows="3" placeholder="Ej: 10 cambios de llanta, 2 balanceos..."></textarea>
+        </div>
+
+        <div class="field">
+            <label for="apoyo">Personal de Apoyo (Isaid / Chejo):</label>
+            <select id="apoyo" name="apoyo">
+                <option value="ninguno">Solo Steven (Responsable)</option>
+                <option value="isaid">Isaid</option>
+                <option value="chejo">Chejo</option>
+                <option value="ambos">Ambos</option>
+            </select>
+        </div>
+
+        <div class="field">
+            <label for="herramientas">Estado de Herramientas (Cláusula 9ª):</label>
+            <select id="herramientas" name="herramientas">
+                <option value="optimo">Óptimo ✅</option>
+                <option value="desgaste">Desgaste Normal ⚠️</option>
+                <option value="danado">Requiere Reparación ❌</option>
+            </select>
+        </div>
+
+        <div class="field">
+            <label for="notas">Observaciones de Confidencialidad:</label>
+            <textarea id="notas" name="notas" rows="2" placeholder="Cualquier novedad relevante para Alexander..."></textarea>
+        </div>
+
+        <button type="button" onclick="alert('Datos guardados localmente para reporte de bonos')">Guardar Registro</button>
+    </form>
+    
+    <div class="footer-note">
+        Propiedad de Steven Gómez Serrano - Misión SADV41 <br>
+        En cumplimiento con el Contrato del 16 de Feb 2026.
+    </div>
+</div>
+
+</body>
+</html>

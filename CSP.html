@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>SADV41 - Control Supervisional Pluscuamperfecto</title>
+    <style>
+        body { font-family: 'Courier New', monospace; background: #0d0d0d; color: #00ff41; padding: 20px; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .panel { border: 1px solid #00ff41; padding: 15px; background: rgba(0, 255, 65, 0.05); }
+        h2 { border-bottom: 2px solid #00ff41; text-transform: uppercase; }
+        input, select, textarea { background: #000; color: #00ff41; border: 1px solid #00ff41; width: 100%; margin: 5px 0; }
+        .stats { color: #ffd700; font-weight: bold; }
+        button { background: #00ff41; color: #000; font-weight: bold; padding: 10px; width: 100%; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+<h2>🎚️ Control Supervisional SADV41 - Burunga 2026</h2>
+
+<div class="grid">
+    <div class="panel">
+        <h3>Liderazgo: Alexander Gonzalez</h3>
+        <p>Estatus Legal: MITRADEL/CSS Activo</p>
+        <label>Sugerencia Pluscuamperfecta:</label>
+        <textarea id="sugAlex" placeholder="Escribe la idea para optimizar el taller..."></textarea>
+        <div class="stats">Inversión Base: B/. 410.80</div>
+    </div>
+
+    <div class="panel">
+        <h3>Equipo: Isaid / Chejo</h3>
+        <label>Trabajador:</label>
+        <select id="worker">
+            <option value="isaid">Isaid</option>
+            <option value="chejo">Chejo</option>
+        </select>
+        <label>Rendimiento Numérico (0-10):</label>
+        <input type="number" id="numRend" min="0" max="10">
+        <label>Cumplimiento Confidencialidad (Cláusula 8):</label>
+        <select id="confid">
+            <option value="1">100% Protegido</option>
+            <option value="0">Fuga de información</option>
+        </select>
+    </div>
+</div>
+
+<div class="panel" style="margin-top:20px;">
+    <h3>📈 Algoritmo de Crecimiento Cripto-Espiritual (Steven)</h3>
+    <p>Comparativa Salarial: B/. 600 (Informal) vs B/. 410.80 (Formal)</p>
+    <button onclick="procesar()">Sincronizar Registros Únicos</button>
+    <div id="resultado" style="margin-top:10px; font-size: 1.2em;"></div>
+</div>
+
+<script>
+    function procesar() {
+        let rend = document.getElementById('numRend').value;
+        let baseFormal = 410.80;
+        // El factor de creación criptográfica crece con la paz mental de la legalidad
+        let potencial = baseFormal * (1 + (rend / 10));
+        document.getElementById('resultado').innerText = "POTENCIAL CRIPTO-VALOR: B/. " + potencial.toFixed(2) + " | PAZ Y SALVO ACTIVO";
+    }
+</script>
+
+</body>
+</html>

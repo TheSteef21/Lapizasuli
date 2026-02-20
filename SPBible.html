@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>SADV41 - Salud Preventiva & YouVersion</title>
+    <style>
+        :root { --holy-red: #e74c3c; --spirit-gold: #d4af37; --deep-dark: #121212; }
+        body { font-family: 'Segoe UI', sans-serif; background: var(--deep-dark); color: #e0e0e0; padding: 20px; }
+        .hub-container { max-width: 600px; margin: auto; border: 2px solid var(--spirit-gold); padding: 25px; border-radius: 20px; background: #1c1c1c; }
+        h1 { color: var(--spirit-gold); text-align: center; font-size: 1.5em; }
+        .input-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-size: 0.9em; color: var(--spirit-gold); }
+        input, select { width: 100%; padding: 10px; background: #2a2a2a; border: 1px solid #444; color: white; border-radius: 8px; box-sizing: border-box; }
+        .result-box { margin-top: 20px; padding: 15px; background: #252525; border-left: 5px solid var(--holy-red); display: none; }
+        button { background: var(--spirit-gold); color: black; border: none; padding: 15px; width: 100%; font-weight: bold; border-radius: 10px; cursor: pointer; margin-top: 10px; }
+        .bible-verse { font-style: italic; color: #aaa; margin-top: 10px; border-top: 1px solid #444; padding-top: 10px; }
+    </style>
+</head>
+<body>
+
+<div class="hub-container">
+    <h1>🌱 Salud Preventiva SADV41</h1>
+    <p style="text-align: center; font-size: 0.8em;">Integración Descentralizada: Cuerpo y Espíritu</p>
+
+    <div class="input-group">
+        <label>Nombre y Apellido:</label>
+        <input type="text" id="nombre" value="Steven Gómez Serrano">
+    </div>
+
+    <div style="display: flex; gap: 10px;">
+        <div class="input-group">
+            <label>Altura (cm):</label>
+            <input type="number" id="altura" placeholder="Ej: 175">
+        </div>
+        <div class="input-group">
+            <label>Peso (kg):</label>
+            <input type="number" id="peso" placeholder="Ej: 75">
+        </div>
+    </div>
+
+    <div class="input-group">
+        <label>Condición Física Actual:</label>
+        <select id="condicion">
+            <option value="sedentario">Menguando físicamente (Sedentario)</option>
+            <option value="activo">Activo en el Atrio (Llantero)</option>
+            <option value="agotado">Agotamiento del Siervo (Cansancio)</option>
+        </select>
+    </div>
+
+    <button onclick="calcularSalud()">Sincronizar Salud y Palabra</button>
+
+    <div id="resultado" class="result-box">
+        <div id="metricas"></div>
+        <div id="youversion" class="bible-verse"></div>
+    </div>
+</div>
+
+<script>
+    function calcularSalud() {
+        const peso = document.getElementById('peso').value;
+        const altura = document.getElementById('altura').value / 100;
+        const nombre = document.getElementById('nombre').value;
+        const condicion = document.getElementById('condicion').value;
+        
+        if (peso && altura) {
+            const imc = (peso / (altura * altura)).toFixed(2);
+            let recomendacion = "";
+            let versiculo = "";
+
+            if (imc < 18.5) recomendacion = "Fortalecimiento necesario.";
+            else if (imc < 25) recomendacion = "Templo en equilibrio.";
+            else recomendacion = "Disciplina y mengua física requerida.";
+
+            // Lógica YouVersion descentralizada basada en condición
+            if (condicion === "agotado") {
+                versiculo = "'Venid a mí todos los que estáis trabajados y cargados, y yo os haré descansar.' - Mateo 11:28";
+            } else if (condicion === "sedentario") {
+                versiculo = "'Todo lo que te viniere a la mano para hacer, hazlo según tus fuerzas.' - Eclesiastés 9:10";
+            } else {
+                versiculo = "'¿No sabéis que vuestro cuerpo es templo del Espíritu Santo?' - 1 Corintios 6:19";
+            }
+
+            document.getElementById('metricas').innerHTML = `
+                <strong>Analítica para ${nombre}:</strong><br>
+                IMC: ${imc} (${recomendacion})
+            `;
+            document.getElementById('youversion').innerText = versiculo;
+            document.getElementById('resultado').style.display = "block";
+        }
+    }
+</script>
+
+</body>
+</html>

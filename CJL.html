@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>SADV41 - Calculadora de Justicia Laboral</title>
+    <style>
+        :root { --gold: #d4af37; --matrix: #00ff41; --bg: #0a0a0a; }
+        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: #ddd; padding: 20px; }
+        .calc-container { max-width: 900px; margin: auto; border: 2px solid var(--gold); border-radius: 20px; background: #151515; padding: 30px; box-shadow: 0 0 30px rgba(212, 175, 55, 0.1); }
+        h1 { color: var(--gold); text-align: center; text-transform: uppercase; border-bottom: 2px solid var(--gold); padding-bottom: 15px; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        label { display: block; margin: 15px 0 5px; color: var(--gold); font-weight: bold; }
+        input { width: 100%; padding: 12px; background: #000; border: 1px solid #444; color: var(--matrix); border-radius: 8px; box-sizing: border-box; }
+        .result-panel { margin-top: 30px; padding: 20px; background: #000; border: 1px dashed var(--gold); border-radius: 10px; }
+        .total-highlight { font-size: 2em; color: var(--matrix); text-align: center; margin: 10px 0; }
+        button { background: var(--gold); color: black; border: none; padding: 18px; width: 100%; font-weight: bold; border-radius: 10px; cursor: pointer; margin-top: 20px; font-size: 1.1em; }
+        .legal-note { font-size: 0.8em; color: #777; margin-top: 20px; font-style: italic; }
+    </style>
+</head>
+<body>
+
+<div class="calc-container">
+    <h1>🏛️ Calculadora de Justicia Universal</h1>
+    <p style="text-align: center;">Misión SADV41 | Basado en el Código de Trabajo de Panamá</p>
+
+    <div class="grid">
+        <div>
+            <label>Fecha de Inicio (Antigüedad Real):</label>
+            <input type="date" id="fecha_inicio" value="2022-08-01">
+            <label>Salario Mensual (Base Legal):</label>
+            <input type="number" id="salario" value="410.80">
+        </div>
+        <div>
+            <label>Fecha de Salida (O proyectada):</label>
+            <input type="date" id="fecha_fin" value="2026-02-16">
+            <label>Tipo de Salida:</label>
+            <select id="tipo_salida" style="width:100%; padding:12px; background:#000; color:var(--matrix); border:1px solid #444; border-radius:8px;">
+                <option value="despido">Despido Injustificado (Máxima)</option>
+                <option value="mutuo">Mutuo Acuerdo (Con Incentivo)</option>
+                <option value="renuncia">Renuncia Voluntaria</option>
+            </select>
+        </div>
+    </div>
+
+    <button onclick="calcularIndemnizacion()">EJECUTAR CÁLCULO DE PAZ Y SALVO</button>
+
+    <div id="resultado" class="result-panel" style="display:none;">
+        <h3>📊 Detalle de Liquidación</h3>
+        <div id="detalles" style="line-height: 1.6;"></div>
+        <div class="total-highlight">TOTAL A RECIBIR: B/. <span id="total_fin">0.00</span></div>
+        <p style="text-align:center; color:var(--gold);">"El obrero es digno de su salario" - Lucas 10:7</p>
+    </div>
+
+    <div class="legal-note">
+        * Esta calculadora es una herramienta de orientación para el pueblo nacional e internacional. Los cálculos definitivos deben ser validados ante el MITRADEL. 
+        Protegido federalmente bajo la ley SADV41.
+    </div>
+</div>
+
+<script>
+    function calcularIndemnizacion() {
+        const salario = parseFloat(document.getElementById('salario').value);
+        const inicio = new Date(document.getElementById('fecha_inicio').value);
+        const fin = new Date(document.getElementById('fecha_fin').value);
+        const tipo = document.getElementById('tipo_salida').value;
+
+        const tiempoMS = fin - inicio;
+        const anos = tiempoMS / (1000 * 60 * 60 * 24 * 365.25);
+        
+        // Prima de Antigüedad: 1 semana por año (1.92% del salario acumulado)
+        let primaAntiguedad = (salario * 12 * anos) * 0.0192;
+        
+        // Vacaciones y Décimo (Estimados proporcionales)
+        let proporcionales = (salario * 0.0833 * 2); // Aprox un mes extra acumulado
+        
+        // Indemnización (Cálculo simplificado Art 225)
+        let indemnizacion = 0;
+        if (tipo === 'despido') {
+            indemnizacion = (salario * 3.4) * anos; // Estimado legal
+        } else if (tipo === 'mutuo') {
+            indemnizacion = (salario * 2) * anos;
+        }
+
+        let total = primaAntiguedad + proporcionales + indemnizacion;
+
+        document.getElementById('detalles').innerHTML = `
+            • Prima de Antigüedad: B/. ${primaAntiguedad.toFixed(2)}<br>
+            • Proporcionales (Vacaciones/Décimo): B/. ${proporcionales.toFixed(2)}<br>
+            • Indemnización por ${tipo}: B/. ${indemnizacion.toFixed(2)}
+        `;
+        document.getElementById('total_fin').innerText = total.toLocaleString('en-US', {minimumFractionDigits: 2});
+        document.getElementById('resultado').style.display = "block";
+    }
+</script>
+
+</body>
+</html>

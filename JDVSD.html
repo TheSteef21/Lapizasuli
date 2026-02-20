@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>SADV41 - Justificación Demanda vs Descanso</title>
+    <style>
+        :root { --holy-gold: #d4af37; --deep-red: #c0392b; --tech-blue: #2980b9; }
+        body { font-family: 'Segoe UI', sans-serif; background: #0a0a0a; color: #f4f4f4; padding: 20px; }
+        .dashboard { max-width: 700px; margin: auto; border: 2px solid var(--holy-gold); border-radius: 15px; padding: 25px; background: #151515; }
+        h2 { color: var(--holy-gold); text-align: center; border-bottom: 1px solid #333; padding-bottom: 10px; }
+        .metric-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; }
+        label { display: block; margin-bottom: 8px; font-weight: bold; color: var(--tech-blue); }
+        input, select { width: 100%; padding: 12px; background: #000; border: 1px solid #444; color: #00ff41; border-radius: 8px; box-sizing: border-box; }
+        .decision-box { margin-top: 30px; padding: 20px; border-radius: 10px; text-align: center; font-size: 1.2em; display: none; }
+        .btn-calc { background: var(--holy-gold); color: black; border: none; padding: 15px; width: 100%; font-weight: bold; border-radius: 10px; cursor: pointer; margin-top: 20px; }
+        .bible-context { font-style: italic; margin-top: 15px; color: #aaa; border-top: 1px dashed #555; padding-top: 15px; }
+    </style>
+</head>
+<body>
+
+<div class="dashboard">
+    <h2>⚖️ Balanza de Justicia Laboral SADV41</h2>
+    
+    <div class="metric-grid">
+        <div>
+            <label>Llantas/Servicios Pendientes:</label>
+            <input type="number" id="demanda" placeholder="Cant. de trabajo">
+            
+            <label>Bono Proyectado (B/.):</label>
+            <input type="number" id="bono" placeholder="Ganancia extra">
+        </div>
+        
+        <div>
+            <label>Horas de Sueño Anoche:</label>
+            <input type="number" id="sueno" placeholder="Ej: 6">
+            
+            <label>Nivel de Fatiga (Samsung Health):</label>
+            <select id="fatiga">
+                <option value="1">Bajo (Energía Full)</option>
+                <option value="2">Moderado (Atrio Activo)</option>
+                <option value="3">Alto (Necesita Menguar)</option>
+            </select>
+        </div>
+    </div>
+
+    <button class="btn-calc" onclick="evaluarJusticia()">Medir Prioridad Tripartita</button>
+
+    <div id="decision" class="decision-box">
+        <strong id="veredicto"></strong>
+        <p id="explicacion" style="font-size: 0.9em; margin-top: 10px;"></p>
+        <div class="bible-context" id="verso"></div>
+    </div>
+</div>
+
+<script>
+    function evaluarJusticia() {
+        const demanda = parseInt(document.getElementById('demanda').value) || 0;
+        const sueno = parseInt(document.getElementById('sueno').value) || 0;
+        const fatiga = parseInt(document.getElementById('fatiga').value);
+        const box = document.getElementById('decision');
+        
+        // Algoritmo de Prioridad: (Demanda vs Salud)
+        // Si el sueño es bajo y la fatiga es alta, el descanso es IRRENUNCIABLE.
+        let puntajeDescanso = (8 - sueno) * fatiga;
+        let puntajeProduccion = demanda * 1.5;
+
+        let veredicto = "";
+        let color = "";
+        let verso = "";
+
+        if (puntajeDescanso > puntajeProduccion || sueno < 5) {
+            veredicto = "🚨 PRIORIDAD: DESCANSO INMEDIATO";
+            color = "#c0392b"; // Rojo Sangre
+            verso = "YouVersion: 'En vano os levantáis de madrugada... pues que a su amado dará Dios el sueño.' - Salmos 127:2";
+            document.getElementById('explicacion').innerText = "Tu salud es el activo de la misión. Producir más hoy causará una deuda física mañana.";
+        } else {
+            veredicto = "⛓️ PRIORIDAD: PRODUCCIÓN (SERVICIO)";
+            color = "#27ae60"; // Verde Matrix
+            verso = "YouVersion: 'La mano de los diligentes señoreará; mas la negligencia será tributaria.' - Proverbios 12:24";
+            document.getElementById('explicacion').innerText = "Tu cuerpo está apto para potenciar el bono de B/. 600 y honrar la sociedad con Alexander.";
+        }
+
+        box.style.display = "block";
+        box.style.backgroundColor = color + "22"; // Transparencia
+        box.style.border = "2px solid " + color;
+        document.getElementById('veredicto').innerText = veredicto;
+        document.getElementById('veredicto').style.color = color;
+        document.getElementById('verso').innerText = verso;
+    }
+</script>
+
+</body>
+</html>
