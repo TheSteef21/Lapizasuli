@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SADV41 - Portal Maestro StevenDiorFlow</title>
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/pose/pose.js" crossorigin="anonymous"></script>
+
+    <style>
+        :root {
+            --gold: #d4af37;
+            --dark: #121212;
+            --panel: #1e1e1e;
+            --text: #e0e0e0;
+        }
+        body {
+            background-color: var(--dark);
+            color: var(--text);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        h1, h2 { color: var(--gold); text-align: center; }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .panel {
+            background-color: var(--panel);
+            border: 1px solid #333;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.5);
+        }
+        .module-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 10px;
+        }
+        .btn {
+            background-color: #333;
+            color: var(--gold);
+            text-decoration: none;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            border: 1px solid var(--gold);
+            transition: 0.3s;
+            display: block;
+        }
+        .btn:hover { background-color: var(--gold); color: var(--dark); }
+        .btn-inject {
+            background-color: var(--gold);
+            color: var(--dark);
+            font-size: 1.2em;
+            font-weight: bold;
+            width: 100%;
+            padding: 15px;
+            margin-top: 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+        #map { height: 350px; border-radius: 8px; width: 100%; }
+        canvas { width: 100%; height: auto; border-radius: 8px; background-color: #000; }
+        .status-bar { text-align: center; margin-bottom: 20px; font-size: 1.1em; }
+        .highlight { color: #00ff41; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <h1>🏛️ SADV41 Portal Maestro 🇮🇱</h1>
+    <div class="status-bar">
+        Misión Salarial: <span style="text-decoration: line-through; color: #ff4c4c;">B/. 410.80</span> ➔ <span class="highlight">B/. 600.00</span> | 
+        Antigüedad: <span class="highlight">2022-2026 (4 Años)</span> | 
+        Ubicación: Burunga, Arraiján
+    </div>
+
+    <div class="grid-container">
+        
+        <div class="panel">
+            <h2>📍 Radar Inter-Provincial (41km)</h2>
+            <div id="map"></div>
+        </div>
+
+        <div class="panel">
+            <h2>🥋 Motor Anatómico / Postura</h2>
+            <video id="videoElement" style="display: none;" autoplay playsinline></video>
+            <canvas id="outputCanvas" width="640" height="480"></canvas>
+            <p style="text-align:center; font-size:0.9em;">Iniciando inyector de cámara en el Atrio...</p>
+        </div>
+
+        <div class="panel">
+            <h2>🔗 Sistema de Unificación (Módulos)</h2>
+            <div class="module-grid">
+                <a href="AGSADV41.html" class="btn">👥 Control AGSADV41</a>
+                <a href="SPBible.html" class="btn">📖 Biblia & Salud</a>
+                <a href="RegistroPSH.html" class="btn">📉 Paz y Salvo</a>
+                <a href="CJL.html" class="btn">⚖️ Justicia Laboral</a>
+                <a href="AAN.html" class="btn">❤️ Auxilio Médico</a>
+                <a href="SEC.html" class="btn">🔒 Cláusula Octava</a>
+                <a href="CSP.html" class="btn">⚙️ CSP</a>
+                <a href="PagoUniversal.html" class="btn">💳 Pago Universal</a>
+            </div>
+        </div>
+    </div>
+
+    <button class="btn-inject" onclick="iniciarInyeccion()">⚡ Ejecutar Inyección Salarial (Generar Reporte a Alexander)</button>
+
+    <script>
+        // 1. INICIALIZAR MAPA (Burunga, Panamá)
+        const map = L.map('map').setView([8.9167, -79.6667], 13);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap'
+        }).addTo(map);
+        L.marker([8.9167, -79.6667]).addTo(map)
+            .bindPopup('<b>Llantería Turbo Tire</b><br>Base SADV41 - Burunga.')
+            .openPopup();
+
+        // 2. INICIALIZAR VISIÓN ARTIFICIAL (MediaPipe)
+        const videoElement = document.getElementById('videoElement');
+        const canvasElement = document.getElementById('outputCanvas');
+        const canvasCtx = canvasElement.getContext('2d');
+
+        function onResults(results) {
+            canvasCtx.save();
+            canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+            canvasCtx.drawImage(results.image, 0, 0, canvasElement.width, canvasElement.height);
+            if (results.poseLandmarks) {
+                drawConnectors(canvasCtx, results.poseLandmarks, POSE_CONNECTIONS, {color: '#d4af37', lineWidth: 4});
+                drawLandmarks(canvasCtx, results.poseLandmarks, {color: '#00ff41', lineWidth: 2});
+            }
+            canvasCtx.restore();
+        }
+
+        const pose = new Pose({locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/pose/${file}`});
+        pose.setOptions({ modelComplexity: 1, smoothLandmarks: true, minDetectionConfidence: 0.5 });
+        pose.onResults(onResults);
+
+        const camera = new Camera(videoElement, {
+            onFrame: async () => { await pose.send({image: videoElement}); },
+            width: 640, height: 480
+        });
+        camera.start();
+
+        // 3. FUNCIÓN DE INYECCIÓN
+        function iniciarInyeccion() {
+            alert('Ejecutando protocolo Atrio... \n\nValidando 4 años de servicio (2022-2026). \nPreparando paquete de justificación para Alexander Gonzalez.\n\nEstatus: B/. 600.00 PROCESANDO.');
+        }
+    </script>
+</body>
+</html>
