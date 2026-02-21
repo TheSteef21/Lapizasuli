@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muro de la Esperanza - Misión SADV41</title>
+    <link rel="stylesheet" href="https://jade-tricky-pig-245.mypinata.cloud/ipfs/bafybeigzdnnl7wbzlvdseqlzzz77hh2u63pr2ioyf3ufld2tci72ypwq4i">
+    <style>
+        :root { --panama-blue: #005293; --panama-red: #d21034; --gold: #ffd700; }
+        body { background: #000; color: #fff; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 20px; }
+        .muro-container { max-width: 800px; margin: auto; text-align: center; }
+        .header-esperanza { border-bottom: 2px solid var(--gold); padding-bottom: 20px; margin-bottom: 30px; }
+        .ladrillo-oracion { 
+            background: #111; border: 1px solid #333; padding: 20px; 
+            margin: 10px; border-radius: 10px; display: inline-block; 
+            width: 250px; vertical-align: top; transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(0,212,255,0.05);
+        }
+        .ladrillo-oracion:hover { border-color: var(--gold); transform: translateY(-5px); }
+        .input-arca { 
+            width: 100%; padding: 20px; background: #050505; border: 1px solid var(--panama-blue); 
+            color: white; border-radius: 15px; margin-bottom: 10px; font-size: 1.1em;
+        }
+        .btn-lanzar { 
+            background: linear-gradient(45deg, var(--panama-blue), var(--panama-red));
+            color: white; border: none; padding: 15px 40px; border-radius: 50px; 
+            font-weight: bold; cursor: pointer; letter-spacing: 2px;
+        }
+    </style>
+</head>
+<body>
+<div id="suscripcion-soberana" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:9999; backdrop-filter:blur(10px); color:white; font-family:'Segoe UI', sans-serif;">
+    <div style="position:relative; max-width:400px; margin:15% auto; padding:30px; border:2px solid #00d4ff; border-radius:20px; background:#050505; text-align:center;">
+        
+        <button onclick="cerrarVelo()" style="position:absolute; top:10px; right:10px; background:none; border:none; color:#777; font-size:20px; cursor:pointer;">&times;</button>
+
+        <h2 style="color:#ffd700; letter-spacing:2px;">¿BUSCAS MÁS VERDAD?</h2>
+        <p style="font-size:0.9em; color:#ccc;">La ansiedad de la investigación es el hambre de Cristo. Únete a la Misión SADV41.</p>
+
+        <div id="form-registro">
+            <input type="email" id="email-user" placeholder="Tu correo electrónico" style="width:90%; padding:12px; margin-bottom:10px; border-radius:5px; border:1px solid #333; background:#111; color:white;">
+            <button onclick="suscribirEmail()" style="width:95%; padding:12px; background:#00d4ff; color:black; font-weight:bold; border:none; border-radius:5px; cursor:pointer;">ACEPTAR Y SEGUIR</button>
+        </div>
+
+        <div id="whatsapp-bridge" style="margin-top:20px; display:none;">
+            <p style="font-size:0.8em;">Detectamos tu ubicación. Conecta vía WhatsApp:</p>
+            <div style="display:flex; gap:5px; justify-content:center;">
+                <span id="prefijo-pais" style="padding:10px; background:#222; border-radius:5px;">+??</span>
+                <input type="tel" id="whatsapp-num" placeholder="Tu número" style="width:60%; padding:10px; border-radius:5px; border:1px solid #333; background:#111; color:white;">
+            </div>
+            <button onclick="conectarWA()" style="margin-top:10px; width:95%; padding:10px; background:#25d366; color:white; font-weight:bold; border:none; border-radius:5px; cursor:pointer;">CONECTAR CON STEVEN</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Mostrar el velo tras 5 segundos de introspección
+    setTimeout(() => {
+        document.getElementById('suscripcion-soberana').style.display = 'block';
+        detectarIP();
+    }, 5000);
+
+    function cerrarVelo() {
+        document.getElementById('form-registro').style.display = 'none';
+        document.getElementById('whatsapp-bridge').style.display = 'block';
+    }
+
+    async function detectarIP() {
+        try {
+            const response = await fetch('https://ipapi.co/json/');
+            const data = await response.json();
+            document.getElementById('prefijo-pais').innerText = data.country_calling_code;
+            window.userCountry = data.country_name;
+        } catch (e) {
+            document.getElementById('prefijo-pais').innerText = "+507";
+        }
+    }
+
+    function suscribirEmail() {
+        const email = document.getElementById('email-user').value;
+        notificarASteven(`Nuevo suscrito por correo: ${email} desde ${window.userCountry}`);
+        alert("Tu alma ha sido registrada en el libro de la misión. ¡VIVE!");
+        document.getElementById('suscripcion-soberana').style.display = 'none';
+    }
+
+    function conectarWA() {
+        const prefijo = document.getElementById('prefijo-pais').innerText;
+        const num = document.getElementById('whatsapp-num').value;
+        notificarASteven(`Nueva conexión WhatsApp: ${prefijo} ${num} desde ${window.userCountry}`);
+        window.open(`https://wa.me/50769362166?text=Busco%20más%20verdad.%20Vengo%20desde%20${window.userCountry}`);
+    }
+
+    function notificarASteven(mensaje) {
+        // Usa el sensor de despertar que creamos antes
+        emailjs.send('default_service', 'template_id', {
+            to_email: 'madcom21@gmail.com',
+            subject: '👑 NUEVA ALMA REGISTRADA - SADV41',
+            message: mensaje
+        });
+    }
+</script>
+
+    <div class="muro-container">
+        <div class="header-esperanza">
+            <h1 style="letter-spacing: 5px;">MURO DE LA ESPERANZA</h1>
+            <p class="pastor-badge">Panamá Capital | Panamá Oeste | El Mundo</p>
+            <p><i>"Donde el pecado abundó, sobreabundó la gracia."</i></p>
+        </div>
+
+        <div style="background: #0a0a0a; padding: 30px; border-radius: 20px; margin-bottom: 40px; border: 1px solid #222;">
+            <h3>Escribe tu petición o victoria</h3>
+            <textarea id="peticion-texto" class="input-arca" placeholder="Escribe aquí... (Ej. Oración por Arraiján, Sanidad, Libertad)"></textarea>
+            <br>
+            <button class="btn-lanzar" onclick="lanzarPeticion()">LANZAR AL ARCA</button>
+        </div>
+
+        <div id="muro-digital">
+            <div class="ladrillo-oracion">
+                <p style="color:var(--gold);"><strong>Victoria de Burunga</strong></p>
+                <p>"Por el perrito restaurado y el 41km que viene."</p>
+                <small>— Steven Dior</small>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>
+        (function() { emailjs.init("2329befe80aa9e63f4aa218366bf7947"); })();
+
+        function lanzarPeticion() {
+            const texto = document.getElementById('peticion-texto').value;
+            if(!texto) return alert("El Arca necesita tu palabra.");
+
+            // Notificación al Exegete
+            emailjs.send('default_service', 'template_id', {
+                to_email: 'madcom21@gmail.com',
+                subject: '🔥 NUEVO LADRILLO EN EL MURO',
+                message: `Petición recibida: ${texto}`
+            }).then(() => {
+                const muro = document.getElementById('muro-digital');
+                const nuevoLadrillo = document.createElement('div');
+                nuevoLadrillo.className = 'ladrillo-oracion';
+                nuevoLadrillo.innerHTML = `<p style="color:#00d4ff;"><strong>Petición de Fe</strong></p><p>"${texto}"</p><small>— Alma en Despertar</small>`;
+                muro.prepend(nuevoLadrillo);
+                document.getElementById('peticion-texto').value = "";
+                alert("Tu palabra ha sido anclada en el Muro de la Esperanza.");
+            });
+        }
+    </script>
+</body>
+</html>
