@@ -147,5 +147,54 @@
             });
         }
     </script>
+
+<script>
+async function lanzarAlArca() {
+    // 1. Captura de la Palabra
+    const peticion = document.getElementById('peticion-texto').value;
+    if (!peticion) return alert("El Arca espera tu palabra.");
+
+    // 2. Identificación del Origen (Solapamiento y Geografía)
+    const pais = window.userCountry || "Panamá";
+    const fecha = new Date().toLocaleString();
+
+    // 3. Envío al Escriba Digital (Tu Excel de Google Drive)
+    // Reemplaza ESTA_URL con la que obtuviste al implementar el App Script
+    const urlExcel = "TU_URL_DE_APPS_SCRIPT_AQUI"; 
+
+    try {
+        await fetch(urlExcel, {
+            method: "POST",
+            mode: "no-cors",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                "peticion": peticion,
+                "pais": pais,
+                "fecha": fecha
+            })
+        });
+
+        // 4. Notificación Solapada al Atrio
+        enviarAlertaSolapada(peticion, pais);
+
+        alert("¡VIVE! Tu petición ha sido anclada en el Libro de la Misión.");
+        document.getElementById('peticion-texto').value = ""; // Limpia el muro para el siguiente
+
+    } catch (error) {
+        console.log("Error en la conexión espiritual:", error);
+    }
+}
+
+function enviarAlertaSolapada(mensaje, ubicacion) {
+    emailjs.send('default_service', 'template_id', {
+        to_email: 'madcom21@gmail.com', // Destino final
+        from_name: 'steven507oficial@duck.com', // El Velo protector
+        subject: `🔥 CLAMOR DESDE ${ubicacion}`,
+        message: `Steven, una nueva petición ha entrado al Muro: ${mensaje}`
+    });
+}
+</script>
+
+   
 </body>
 </html>
