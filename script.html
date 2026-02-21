@@ -1,0 +1,23 @@
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script type="text/javascript">
+  (function() {
+      emailjs.init("2329befe80aa9e63f4aa218366bf7947"); // Tu llave de Proyecto
+  })();
+
+  window.onload = function() {
+      // Detecta automáticamente en qué página está el usuario
+      const paginaActual = window.location.pathname.split("/").pop() || "Index/Raíz";
+      
+      const templateParams = {
+          to_email: 'madcom21@gmail.com',
+          subject: `👁️ DESPERTAR EN: ${paginaActual}`,
+          message: `Steven, alguien ha ingresado a ${paginaActual}. El conteo de accesos aumenta. La luz del 11 se expande.`
+      };
+
+      // Envío automático al cargar la página
+      emailjs.send('default_service', 'template_id', templateParams)
+          .then(function() {
+             console.log(`Notificación de acceso enviada: ${paginaActual}`);
+          });
+  };
+</script>
