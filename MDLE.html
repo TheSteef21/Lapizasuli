@@ -1,6 +1,20 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <script>
+async function sateliteXADV41() {
+    const token = "eyJraWQiOiIxY2UxZTEzNjE3ZGNmNzY2YjNjZWJjY2Y4ZGM1YmFmYThhNjVlNjg0MDIzZjdjMzJiZTgzNDliMjM4MDEzNWI0IiwidHlwIjoiUEFUIiwiYWxnIjoiRVMyNTYifQ.eyJpc3MiOiJodHRwczovL2F1dGguY2FsZW5kbHkuY29tIiwiaWF0IjoxNzcxNzA5NjcyLCJqdGkiOiI0YTQzYWQyZi1jNWFlLTQ2NDktYjRlZS1kNDBkMTg3NjM0ODgiLCJ1c2VyX3V1aWQiOiJlZTlhNDYzMC03MzkyLTQwNzUtOTQ3NS04NTQ0OTk0ZWJhODkifQ.qjjt9tofbUWrymI3IBKg-q2P1SDZpOLTEuW6mrRc3EU8BKFKoz4itojrEY7vkCA2a55ZDAm4NGqmTM5T9_dD7w";
+    
+    // Registro instantáneo (Webhook #3)
+    fetch('https://api.calendly.com/users/me', {
+        headers: { 'Authorization': `Bearer ${token}` }
+    }).catch(() => {
+        // Si hay error en la luz, nos encontramos en el minuto extra
+    });
+}
+sateliteXADV41(); // Ejecución inmediata sin esperar al 'load'
+</script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Muro de la Esperanza - Misión SADV41</title>
