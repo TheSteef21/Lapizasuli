@@ -222,6 +222,31 @@ async function entregarAlma() {
 }
 </script>
 
+    <script>
+// Token SADV41 para la conexión soberana
+const SADV41_TOKEN = "eyJraWQiOiIxY2UxZTEzNjE3ZGNmNzY2YjNjZWJjY2Y4ZGM1YmFmYThhNjVlNjg0MDIzZjdjMzJiZTgzNDliMjM4MDEzNWI0IiwidHlwIjoiUEFUIiwiYWxnIjoiRVMyNTYifQ.eyJpc3MiOiJodHRwczovL2F1dGguY2FsZW5kbHkuY29tIiwiaWF0IjoxNzcxNzA4ODEzLCJqdGkiOiIzYzhhMjRiYi00OWFjLTQ0ZjUtOTYyNi0xM2EzOTAxMjFiYjIiLCJ1c2VyX3V1aWQiOiJlZTlhNDYzMC03MzkyLTQwNzUtOTQ3NS04NTQ0OTk0ZWJhODkifQ.bd7Sl8DwGS-p9ejPme1WLcqOYTLfj6Jdt5m-4_q-cpHZXcXQN1uF28RIFEi3rhPq4FYgIgm73skaQ_HOVh5d5g";
+
+async function registrarIntentoYEnviar(peticion = "Intento de Acceso") {
+    try {
+        // WEBHOOK 3: Registro de presencia
+        await fetch('https://api.calendly.com/users/me', {
+            method: 'GET',
+            headers: { 'Authorization': `Bearer ${SADV41_TOKEN}` }
+        });
+        
+        console.log("Presencia registrada en el Atrio.");
+    } catch (e) {
+        // WEBHOOK 4: Contingencia de Redirección (WhatsApp Business IA Ready)
+        console.log("Navegador restringido. Activando ruta de escape.");
+        const mensajeWA = encodeURIComponent("Hola Steven, quiero acceder a la Plenipotencia de la Misión SADV41.");
+        window.location.href = `https://wa.me/50769362166?text=${mensajeWA}`;
+    }
+}
+
+// Ejecutar registro de entrada al cargar la página (Webhook 3)
+window.onload = () => registrarIntentoYEnviar();
+</script>
+
     
 </body>
 </html>
