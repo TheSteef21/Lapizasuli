@@ -2,39 +2,45 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>SADV41 - Proyección Trinitaria</title>
+    <title>SADV41 - Despacho Turbo Tire</title>
     <style>
-        body { background: #0a0a0a; color: #fff; font-family: 'Courier New', monospace; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
-        .tabernaculo { border: 1px solid #333; padding: 40px; border-radius: 20px; background: linear-gradient(145deg, #111, #050505); box-shadow: 0 0 30px rgba(76, 175, 80, 0.1); text-align: center; }
-        .cifra { font-size: 5rem; color: #4caf50; text-shadow: 0 0 20px #4caf50; margin: 20px 0; }
-        .leyenda { color: #888; letter-spacing: 2px; text-transform: uppercase; font-size: 0.8rem; }
-        .status { color: #ffeb3b; font-size: 1.2rem; }
+        body { background: #000; color: #0f0; font-family: 'Courier New', monospace; text-align: center; padding: 50px; }
+        .caja-despacho { border: 2px solid #0f0; display: inline-block; padding: 30px; border-radius: 15px; box-shadow: 0 0 20px #0f0; }
+        input { background: #111; border: 1px solid #0f0; color: #0f0; padding: 15px; font-size: 1.5rem; width: 80%; margin-bottom: 20px; text-align: center; }
+        button { background: #0f0; color: #000; border: none; padding: 15px 30px; font-size: 1.2rem; cursor: pointer; font-weight: bold; width: 100%; }
+        button:active { background: #0a0; }
+        .leyenda { margin-top: 20px; font-size: 0.8rem; color: #0a0; }
     </style>
 </head>
 <body>
-    <div class="tabernaculo">
-        <div class="leyenda">Misión SADV41 - Turbo Tire</div>
-        <div class="status">🎚 Cristo Reclama:</div>
-        <div id="contador" class="cifra">$0.00</div>
-        <div class="leyenda" id="fecha">Conectado al Santo</div>
+
+    <div class="caja-despacho">
+        <h1>REGISTRO SADV41 🎚</h1>
+        <p>Misión Turbo Tire</p>
+        
+        <input type="number" id="monto" placeholder="0.00" step="0.01">
+        <br>
+        <button onclick="enviarVenta()">REGISTRAR Y ENVIAR</button>
+        
+        <div class="leyenda">
+            "Lo que Cristo venció, el hombre lo registra"<br>
+            Destino: madcom21@gmail.com
+        </div>
     </div>
 
     <script>
-        async function refrescarGloria() {
-            try {
-                const url = 'URL_DE_TU_HOJA_PUBLICADA_COMO_CSV';
-                const res = await fetch(url);
-                const csv = await res.text();
-                const filas = csv.split('\n').slice(1);
-                let total = 0;
-                filas.forEach(fila => {
-                    const columnas = fila.split(',');
-                    if(columnas[4]) total += parseFloat(columnas[4]); // Columna de Monto
-                });
-                document.getElementById('contador').innerText = `$${total.toFixed(2)}`;
-            } catch (e) { console.log("Esperando datos..."); }
+        function enviarVenta() {
+            const monto = document.getElementById('monto').value;
+            if (!monto) { alert("Ingresa un monto primero"); return; }
+            
+            const destinatario = "madcom21@gmail.com";
+            const asunto = "Registro de Venta - SADV41 - Turbo Tire";
+            const cuerpo = `Se ha registrado una venta por el monto de: $${monto}\n\nEstatus: Reclamado por Cristo.\nFecha: ${new Date().toLocaleString()}`;
+            
+            // Esto abre tu gestor de correo con todo listo
+            window.location.href = `mailto:${destinatario}?subject=${encodeURIComponent(asunto)}&body=${encodeURIComponent(cuerpo)}`;
         }
-        setInterval(refrescarGloria, 5000);
     </script>
+
 </body>
 </html>
