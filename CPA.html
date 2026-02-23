@@ -2,45 +2,51 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>SADV41 - Despacho Turbo Tire</title>
+    <title>SADV41 - Victoria Consolidada</title>
     <style>
-        body { background: #000; color: #0f0; font-family: 'Courier New', monospace; text-align: center; padding: 50px; }
-        .caja-despacho { border: 2px solid #0f0; display: inline-block; padding: 30px; border-radius: 15px; box-shadow: 0 0 20px #0f0; }
-        input { background: #111; border: 1px solid #0f0; color: #0f0; padding: 15px; font-size: 1.5rem; width: 80%; margin-bottom: 20px; text-align: center; }
-        button { background: #0f0; color: #000; border: none; padding: 15px 30px; font-size: 1.2rem; cursor: pointer; font-weight: bold; width: 100%; }
-        button:active { background: #0a0; }
-        .leyenda { margin-top: 20px; font-size: 0.8rem; color: #0a0; }
+        body { background: #000; color: #fff; font-family: 'Segoe UI', sans-serif; padding: 20px; }
+        .tabernaculo { border: 2px solid #4caf50; border-radius: 15px; padding: 25px; background: #0a0a0a; max-width: 900px; margin: auto; box-shadow: 0 0 20px rgba(74, 175, 80, 0.2); }
+        h1 { color: #4caf50; text-align: center; letter-spacing: 4px; margin-bottom: 5px; }
+        .lema { text-align: center; color: #888; font-style: italic; margin-bottom: 25px; font-size: 0.9rem; }
+        table { width: 100%; border-collapse: collapse; }
+        th { background: #4caf50; color: #000; padding: 12px; text-transform: uppercase; font-size: 0.8rem; }
+        td { border-bottom: 1px solid #222; padding: 15px; text-align: center; }
+        .monto-trans { color: #81d4fa; font-weight: bold; }
+        .monto-efec { color: #a5d6a7; font-weight: bold; }
+        .ref { color: #555; font-size: 0.7rem; display: block; }
+        .total-row { background: #111; color: #4caf50; font-size: 1.8rem; font-weight: bold; }
     </style>
 </head>
 <body>
-
-    <div class="caja-despacho">
-        <h1>REGISTRO SADV41 🎚</h1>
-        <p>Misión Turbo Tire</p>
+    <div class="tabernaculo">
+        <h1>SADV41 🎚 TURBO TIRE</h1>
+        <div class="lema">"Fruto de la llantería: Reclamado por Cristo"</div>
         
-        <input type="number" id="monto" placeholder="0.00" step="0.01">
-        <br>
-        <button onclick="enviarVenta()">REGISTRAR Y ENVIAR</button>
-        
-        <div class="leyenda">
-            "Lo que Cristo venció, el hombre lo registra"<br>
-            Destino: madcom21@gmail.com
-        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Origen</th>
+                    <th>Detalle / Referencia</th>
+                    <th>Monto ($)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Bancario</td><td>Transf. Alexander <span class="ref">#728942012</span></td><td class="monto-trans">140.00</td></tr>
+                <tr><td>Bancario</td><td>Transf. Alexander <span class="ref">#728940623</span></td><td class="monto-trans">400.00</td></tr>
+                <tr><td>Bancario</td><td>4 Llantas 265/75/16 <span class="ref">#729241306</span></td><td class="monto-trans">160.00</td></tr>
+                <tr><td>Bancario</td><td>Llantas/Rines Alexander <span class="ref">#729876989</span></td><td class="monto-trans">800.00</td></tr>
+                <tr><td>Bancario</td><td>Transf. Alexander <span class="ref">#730562526</span></td><td class="monto-trans">460.00</td></tr>
+                <tr><td>Bancario</td><td>Transf. Alexander <span class="ref">#730824753</span></td><td class="monto-trans">36.00</td></tr>
+                <tr><td>Bancario</td><td>M. Samudio (Rin 17/Llantas) <span class="ref">#731574548</span></td><td class="monto-trans">1,085.00</td></tr>
+                
+                <tr><td>Físico</td><td>Venta Local (Efectivo) <span class="ref">Registro Manual</span></td><td class="monto-efec">120.00</td></tr>
+                
+                <tr class="total-row">
+                    <td colspan="2">TOTAL AL CORTE</td>
+                    <td>$3,201.00</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
-
-    <script>
-        function enviarVenta() {
-            const monto = document.getElementById('monto').value;
-            if (!monto) { alert("Ingresa un monto primero"); return; }
-            
-            const destinatario = "madcom21@gmail.com";
-            const asunto = "Registro de Venta - SADV41 - Turbo Tire";
-            const cuerpo = `Se ha registrado una venta por el monto de: $${monto}\n\nEstatus: Reclamado por Cristo.\nFecha: ${new Date().toLocaleString()}`;
-            
-            // Esto abre tu gestor de correo con todo listo
-            window.location.href = `mailto:${destinatario}?subject=${encodeURIComponent(asunto)}&body=${encodeURIComponent(cuerpo)}`;
-        }
-    </script>
-
 </body>
 </html>
