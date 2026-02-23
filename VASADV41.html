@@ -2,38 +2,62 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>SADV41 - Valor del Servidor</title>
+    <title>SADV41 - Calendario de Victoria</title>
     <style>
         body { background: #000; color: #fff; font-family: 'Segoe UI', sans-serif; padding: 20px; }
-        .tabernaculo { border: 2px solid #ffeb3b; border-radius: 15px; padding: 25px; background: #0a0a0a; max-width: 900px; margin: auto; box-shadow: 0 0 30px rgba(255, 235, 59, 0.2); }
-        h1 { color: #ffeb3b; text-align: center; letter-spacing: 4px; border-bottom: 1px solid #333; padding-bottom: 10px; }
-        .perfil { display: flex; justify-content: space-around; background: #111; padding: 20px; border-radius: 10px; margin-bottom: 20px; border-left: 5px solid #ffeb3b; }
-        .dato { text-align: center; }
-        .dato span { display: block; color: #888; font-size: 0.8rem; text-transform: uppercase; }
-        .dato b { font-size: 1.1rem; color: #fff; }
-        .seccion { background: #1a1a1a; padding: 20px; border-radius: 10px; margin-top: 20px; }
-        table { width: 100%; border-collapse: collapse; }
-        th { background: #4caf50; color: #000; padding: 10px; font-size: 0.8rem; }
-        td { border-bottom: 1px solid #222; padding: 12px; text-align: center; font-size: 0.9rem; }
-        .total-dia { background: #111; color: #ffeb3b; font-size: 1.8rem; font-weight: bold; }
-        .bono { color: #4caf50; font-size: 1.2rem; text-align: center; display: block; margin-top: 15px; font-weight: bold; }
+        .tabernaculo { border: 2px solid #ffeb3b; border-radius: 15px; padding: 25px; background: #0a0a0a; max-width: 900px; margin: auto; box-shadow: 0 0 20px rgba(255, 235, 59, 0.2); }
+        h1 { color: #ffeb3b; text-align: center; letter-spacing: 4px; text-transform: uppercase; }
+        .lema { text-align: center; color: #888; font-style: italic; margin-bottom: 30px; }
+        
+        .calendario-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 20px; }
+        .dia-caja { background: #1a1a1a; border: 1px solid #333; border-radius: 10px; padding: 20px; text-align: center; transition: 0.3s; }
+        .dia-caja:hover { border-color: #ffeb3b; }
+        
+        .fecha { display: block; color: #888; font-size: 0.8rem; margin-bottom: 10px; text-transform: uppercase; }
+        .monto { display: block; font-size: 1.8rem; font-weight: bold; margin-bottom: 10px; }
+        .monto.ayer { color: #4caf50; }
+        .monto.hoy { color: #ffeb3b; }
+        
+        .detalle-mini { font-size: 0.75rem; color: #aaa; border-top: 1px solid #333; pt-10: 10px; padding-top: 10px; text-align: left; }
+        .tag-servicio { color: #81d4fa; font-weight: bold; }
+        
+        .nota-pie { margin-top: 30px; padding: 15px; background: #002b36; border-radius: 8px; font-size: 0.85rem; border-left: 4px solid #268bd2; }
     </style>
 </head>
 <body>
     <div class="tabernaculo">
-        <h1>VALOR DEL TRABAJADOR 🎚</h1>
-        
-        <div class="perfil">
-            <div class="dato"><span>Técnico Especialista</span><b>Steven Dior</b></div>
-            <div class="dato"><span>Antigüedad</span><b>Desde Agosto 2022</b></div>
-            <div class="dato"><span>Ubicación</span><b>Burunga, Turbo Tire</b></div>
+        <h1>SADV41 🎚 Misión de Servicio</h1>
+        <div class="lema">"Secuencia de Fe y Trabajo Honrado"</div>
+
+        <div class="calendario-grid">
+            <div class="dia-caja">
+                <span class="fecha">Domingo 22 Feb</span>
+                <span class="monto ayer">$3,201.00</span>
+                <div class="detalle-mini">
+                    • Producción Consolidada<br>
+                    • Efectivo: $120.00<br>
+                    • Transferencias Alexander G.
+                </div>
+            </div>
+
+            <div class="dia-caja" style="border-color: #ffeb3b;">
+                <span class="fecha">Lunes 23 Feb (Hoy)</span>
+                <span class="monto hoy">$160.50</span>
+                <div class="detalle-mini">
+                    • <span class="tag-servicio">Técnico Jefe:</span> Steven G.<br>
+                    • Llantas 2da (Toño): $30.00<br>
+                    • Transferencias: $98.00<br>
+                    • Reparación SUV + Otros
+                </div>
+            </div>
         </div>
 
-        <div class="seccion">
-            <h3 style="color: #ffeb3b;">Producción Consolidada: 22 de Febrero</h3>
-            <table>
-                <thead>
-                    <tr>
+        <div class="nota-pie">
+            <strong>ACTO DE GRACIA DEL DÍA:</strong> Se brindó apoyo al conductor accidentado (Bonifacio Barrios) con cable de carga y atención inmediata. La instalación y válvulas del cliente de ayer se entregaron como cortesía de la misión.
+        </div>
+    </div>
+</body>
+</html>
                         <th>Origen</th>
                         <th>Detalle / Referencia</th>
                         <th>Monto ($)</th>
