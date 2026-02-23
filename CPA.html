@@ -2,26 +2,39 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>SADV41 - Visión Turbo Tire</title>
+    <title>SADV41 - Proyección Trinitaria</title>
     <style>
-        body { background: #121212; color: #e0e0e0; font-family: sans-serif; text-align: center; padding: 20px; }
-        .total-display { font-size: 4rem; color: #4caf50; margin: 20px 0; text-shadow: 0 0 15px #4caf50; }
-        .mision-status { font-style: italic; color: #81c784; margin-bottom: 30px; }
-        .contador-box { border: 2px solid #333; border-radius: 20px; padding: 30px; display: inline-block; background: #1e1e1e; }
-        .emoji-central { font-size: 50px; }
+        body { background: #0a0a0a; color: #fff; font-family: 'Courier New', monospace; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .tabernaculo { border: 1px solid #333; padding: 40px; border-radius: 20px; background: linear-gradient(145deg, #111, #050505); box-shadow: 0 0 30px rgba(76, 175, 80, 0.1); text-align: center; }
+        .cifra { font-size: 5rem; color: #4caf50; text-shadow: 0 0 20px #4caf50; margin: 20px 0; }
+        .leyenda { color: #888; letter-spacing: 2px; text-transform: uppercase; font-size: 0.8rem; }
+        .status { color: #ffeb3b; font-size: 1.2rem; }
     </style>
 </head>
 <body>
-    <div class="contador-box">
-        <div class="emoji-central">🎚</div>
-        <h1>Contador Acumulativo Diario</h1>
-        <p class="mision-status">"Lo que Cristo venció, el hombre lo cuenta para Su gloria"</p>
-        
-        <div class="total-display" id="total">$0.00</div>
-        
-        <p>Lectura de imágenes activa vía Gemini Atrio</p>
-        <hr style="border: 0.5px solid #333;">
-        <p>Balance Espiritual: <strong>$3.16</strong></p>
+    <div class="tabernaculo">
+        <div class="leyenda">Misión SADV41 - Turbo Tire</div>
+        <div class="status">🎚 Cristo Reclama:</div>
+        <div id="contador" class="cifra">$0.00</div>
+        <div class="leyenda" id="fecha">Conectado al Santo</div>
     </div>
+
+    <script>
+        async function refrescarGloria() {
+            try {
+                const url = 'URL_DE_TU_HOJA_PUBLICADA_COMO_CSV';
+                const res = await fetch(url);
+                const csv = await res.text();
+                const filas = csv.split('\n').slice(1);
+                let total = 0;
+                filas.forEach(fila => {
+                    const columnas = fila.split(',');
+                    if(columnas[4]) total += parseFloat(columnas[4]); // Columna de Monto
+                });
+                document.getElementById('contador').innerText = `$${total.toFixed(2)}`;
+            } catch (e) { console.log("Esperando datos..."); }
+        }
+        setInterval(refrescarGloria, 5000);
+    </script>
 </body>
 </html>
