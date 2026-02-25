@@ -3,6 +3,126 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SADV41 - Calendario de Provisión V3</title>
+    <title>SADV41 - Registro de Provisión V3</title>
     <style>
-        body { font-family: 'Segoe UI', sans-serif; background: #000 url('https://raw.githubusercontent.com/TheSteef21/Lapizasuli/main/1771445538463.png') no-repeat center center fixed; background-size: cover; color: #fff; margin: 0; padding: 20px; }
+        body { 
+            font-family: 'Segoe UI', sans-serif; 
+            background: #000 url('https://raw.githubusercontent.com/TheSteef21/Lapizasuli/main/1771445538463.png') no-repeat center center fixed; 
+            background-size: cover; 
+            color: #fff; 
+            margin: 0; 
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+        
+        .atrio { 
+            width: 90%;
+            max-width: 500px; 
+            margin: 40px auto; 
+            border: 1px solid rgba(255, 204, 0, 0.3); 
+            border-radius: 15px; 
+            padding: 20px; 
+            background: rgba(0, 0, 0, 0.9); /* Más opaco para resaltar sobre el fondo */
+            backdrop-filter: blur(10px); 
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            position: relative;
+            z-index: 10;
+        }
+
+        .header { border-bottom: 1px solid #333; padding-bottom: 10px; margin-bottom: 15px; text-align: center; color: #ffcc00; font-size: 1.2em; font-weight: bold; }
+        
+        .dia-fila { display: flex; justify-content: space-between; padding: 15px; border-bottom: 1px solid #222; cursor: pointer; transition: 0.3s; }
+        .dia-fila:hover { background: rgba(255, 255, 255, 0.1); }
+        .monto-verde { color: #4CAF50; font-weight: bold; }
+        
+        .detalle-transacciones { display: none; background: #0a0a0a; padding: 12px; font-size: 0.9em; border-left: 3px solid #ffcc00; margin: 5px 0; }
+        .tx-item { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #1a1a1a; }
+        
+        button { background: #111; color: #ffcc00; border: 1px solid #ffcc00; padding: 14px; border-radius: 50px; cursor: pointer; width: 100%; margin-bottom: 20px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
+        button:hover { background: #ffcc00; color: #000; }
+
+        .estado { color: #ffcc00; margin-top: 25px; font-weight: bold; text-align: center; text-shadow: 0 0 8px rgba(255, 204, 0, 0.5); }
+    </style>
+</head>
+<body>
+
+    <div class="atrio">
+        <div class="header">🎚 SADV41<br>Registro de Provisión Diaria</div>
+
+        <button onclick="conectarWallet()">🔗 VINCULAR WALLET (CAPO)</button>
+
+        <div onclick="toggleDetalle('d22')" class="dia-fila">
+            <span>22 de Febrero 2026</span>
+            <span class="monto-verde">$3,201.00</span>
+        </div>
+        <div id="d22" class="detalle-transacciones">
+            <div class="tx-item"><span>Transf. Alexander Gonzalez</span><span>$3,081.00</span></div>
+            <div class="tx-item"><span>Efectivo (6 billetes de $20)</span><span>$120.00</span></div>
+            <div class="tx-item"><span>Venta Rin 17 (Mario Samudio)</span><span>Registrado</span></div>
+        </div>
+
+        <div onclick="toggleDetalle('d23')" class="dia-fila">
+            <span>23 de Febrero 2026</span>
+            <span class="monto-verde">$160.50</span>
+        </div>
+        <div id="d23" class="detalle-transacciones">
+            <div class="tx-item"><span>Cierre de Caja Operativo</span><span>$160.50</span></div>
+            <div class="tx-item"><span>Venta de Llantas (36)</span><span>Registrado</span></div>
+        </div>
+
+        <div onclick="toggleDetalle('d24')" class="dia-fila">
+            <span>24 de Febrero 2026</span>
+            <span class="monto-verde">$227.75</span>
+        </div>
+        <div id="d24" class="detalle-transacciones">
+            <div class="tx-item"><span>Fondo Inicial Mañana</span><span>$65.25</span></div>
+            <div class="tx-item"><span>Venta 4 Llantas 195/65R15</span><span>+$168.00</span></div>
+            <div class="tx-item" style="color:#ff6b6b;"><span>Transf. Alexander G.</span><span>-$1.00</span></div>
+            <div class="tx-item" style="color:#ff6b6b;"><span>Apoyos Varios</span><span>-$4.50</span></div>
+            <div class="tx-item" style="border-top: 1px solid #4CAF50; padding-top: 5px;"><strong>BALANCE FINAL</strong><strong>$227.75</strong></div>
+        </div>
+
+        <div onclick="toggleDetalle('d25')" class="dia-fila">
+            <span>25 de Febrero 2026</span>
+            <span class="monto-verde">$36.00</span>
+        </div>
+        <div id="d25" class="detalle-transacciones">
+            <div class="tx-item"><span>Venta 185/60R15 Dovroad</span><span>+$36.00</span></div>
+            <div class="tx-item"><span>Servicio Aire (Policía Nacional)</span><span>Cortesía</span></div>
+            <div class="tx-item" style="color:#ffcc00;"><span>Cotización Tourador 265/65R17</span><span>($385.00)</span></div>
+            <div class="tx-item" style="border-top: 1px solid #4CAF50; padding-top: 5px;"><strong>PROVISIÓN ACTUAL</strong><strong>$36.00</strong></div>
+        </div>
+
+        <div class="estado">Estado: ¡VIVE!</div>
+    </div>
+
+    <script src="https://unpkg.com/@walletconnect/modal@2.6.2/dist/index.js"></script>
+    <script>
+        function toggleDetalle(id) {
+            const x = document.getElementById(id);
+            const isVisible = x.style.display === "block";
+            
+            // Cerrar todos
+            document.querySelectorAll('.detalle-transacciones').forEach(el => el.style.display = "none");
+            
+            // Abrir si estaba cerrado
+            if (!isVisible) {
+                x.style.display = "block";
+            }
+        }
+
+        window.conectarWallet = async () => {
+            const modal = new window.WalletConnectModal.WalletConnectModal({
+                projectId: 'ceb11307ca32cd9d4118b14ab54b542b',
+                themeMode: 'dark',
+                chains: ['eip155:1']
+            });
+            await modal.openModal();
+        };
+    </script>
+</body>
+</html>
