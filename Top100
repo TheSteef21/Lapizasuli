@@ -1,0 +1,33 @@
+<div class="header" style="margin-top: 30px; background: #111; border: 1px solid #ffcc00;">
+    👑 TOP INFLUENCIA GLOBAL (Rolling Stone Style)
+</div>
+
+<div onclick="toggleDetalle('art1')" class="dia-fila">
+    <span>#1. The Beatles (Reino Unido)</span>
+    <span style="color: #ffcc00;">★ SGT. PEPPER'S</span>
+</div>
+<div id="art1" class="detalle-transacciones">
+    <div class="tx-item"><span>Álbum Maestro:</span><span>Sgt. Pepper's Lonely Hearts Club Band</span></div>
+    <div class="tx-item"><span>Impacto:</span><span>Revolución Cultural y Sonora</span></div>
+    <div class="tx-item" style="color: #4db8ff;"><span>Concierto Clave:</span><span>Rooftop Concert (1969)</span></div>
+</div>
+
+<div onclick="toggleDetalle('art2')" class="dia-fila">
+    <span>#2. Bob Dylan (EE.UU.)</span>
+    <span style="color: #ffcc00;">★ HIGHWAY 61</span>
+</div>
+<div id="art2" class="detalle-transacciones">
+    <div class="tx-item"><span>Álbum Maestro:</span><span>Highway 61 Revisited</span></div>
+    <div class="tx-item"><span>Impacto:</span><span>Poesía Profética y Rock Eléctrico</span></div>
+    <div class="tx-item" style="color: #4db8ff;"><span>Concierto Clave:</span><span>Newport Folk Festival (1965)</span></div>
+</div>
+
+<div onclick="toggleDetalle('artGM')" class="dia-fila" style="border-left: 2px solid #ffcc00;">
+    <span>George Michael (Reino Unido)</span>
+    <span style="color: #ffcc00;">★ FAITH</span>
+</div>
+<div id="artGM" class="detalle-transacciones">
+    <div class="tx-item"><span>Álbum Maestro:</span><span>Faith (1987)</span></div>
+    <div class="tx-item"><span>Impacto:</span><span>Icono de Libertad y Soberanía Vocal</span></div>
+    <div class="tx-item" style="color: #4db8ff;"><span>Concierto Clave:</span><span>Live in London (Wembley)</span></div>
+</div>
