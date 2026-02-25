@@ -5,15 +5,76 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SADV41 - TOP 100 Influencia</title>
     <style>
-        body { background: #000; color: #fff; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 15px; }
-        .atrio-influencia { max-width: 550px; margin: auto; border: 1px solid #333; border-radius: 20px; padding: 20px; background: #050505; box-shadow: 0 0 20px rgba(255, 204, 0, 0.1); }
+        body { background: #000; color: #fff; font-family: sans-serif; margin: 0; padding: 15px; min-height: 100vh; }
+        .atrio-influencia { max-width: 500px; margin: auto; border: 1px solid #333; border-radius: 20px; padding: 20px; background: #050505; }
         .header-top { text-align: center; color: #ffcc00; border-bottom: 2px solid #ffcc00; padding-bottom: 15px; margin-bottom: 25px; }
-        .header-top h1 { margin: 0; font-size: 1.5em; letter-spacing: 2px; }
+        .btn-wallet { background: #111; color: #ffcc00; border: 1px solid #ffcc00; padding: 12px; border-radius: 50px; cursor: pointer; width: 100%; font-weight: bold; margin-bottom: 25px; text-transform: uppercase; }
         
-        .btn-wallet { background: #111; color: #ffcc00; border: 1px solid #ffcc00; padding: 12px; border-radius: 50px; cursor: pointer; width: 100%; font-weight: bold; margin-bottom: 25px; text-transform: uppercase; transition: 0.3s; }
-        .btn-wallet:hover { background: #ffcc00; color: #000; }
+        /* Acordeón */
+        .artista-fila { background: #111; padding: 15px; border-radius: 10px; margin-bottom: 12px; cursor: pointer; display: flex; justify-content: space-between; border: 1px solid #222; }
+        .info-desplegable { display: none; padding: 15px; background: #080808; border: 1px solid #222; border-radius: 0 0 10px 10px; margin-top: -12px; margin-bottom: 15px; }
 
-        /* Estilo Cascada/Acordeón */
-        .artista-fila { background: #111; padding: 15px; border-radius: 10px; margin-bottom: 12px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; border: 1px solid #222; transition: 0.3s; }
-        .artista-fila:hover { border-color: #ffcc00; }
-        .info-desplegable { display: none; padding: 20px; background: #080808; border: 1px solid #222; border-top: none; border-radius: 0 0
+        /* Carrusel de Productos Reales */
+        .carrusel-merch { display: flex; overflow-x: auto; gap: 15px; padding: 10px 0; scroll-snap-type: x mandatory; }
+        .carrusel-item { flex: 0 0 140px; scroll-snap-align: start; text-align: center; background: #111; padding: 10px; border-radius: 10px; border: 1px solid #333; }
+        .carrusel-item img { width: 100%; border-radius: 5px; margin-bottom: 8px; }
+        .carrusel-merch::-webkit-scrollbar { height: 4px; }
+        .carrusel-merch::-webkit-scrollbar-thumb { background: #ffcc00; border-radius: 10px; }
+    </style>
+</head>
+<body>
+
+<div class="atrio-influencia">
+    <div class="header-top">
+        <h1>🎚 TOP 100 INFLUENCIA</h1>
+        <small style="color: #666;">Misión SADV41 - Steven Dior Oficial</small>
+    </div>
+
+    <button class="btn-wallet" onclick="conectarWallet()">🔗 VINCULAR WALLET (CAPO)</button>
+
+    <div class="artista-fila" onclick="toggle('artGM')" style="border-left: 4px solid #ffcc00;">
+        <div><strong>George Michael</strong></div>
+        <span style="color: #ffcc00;">▼</span>
+    </div>
+    <div id="artGM" class="info-desplegable" style="display:block;">
+        <p style="font-size: 0.9em; color: #aaa;">Catálogo: Faith Era</p>
+        <div class="carrusel-merch">
+            <div class="carrusel-item">
+                <img src="https://raw.githubusercontent.com/TheSteef21/Lapizasuli/main/160472.png" alt="Faith Tee">
+                <p style="font-size: 0.6em;">Vintage Faith Tee</p>
+            </div>
+            <div class="carrusel-item">
+                <img src="https://raw.githubusercontent.com/TheSteef21/Lapizasuli/main/160474.png" alt="Faith Hoodie">
+                <p style="font-size: 0.6em;">Faith Hoodie</p>
+            </div>
+            <div class="carrusel-item">
+                <img src="https://raw.githubusercontent.com/TheSteef21/Lapizasuli/main/160481.png" alt="Grey Tee">
+                <p style="font-size: 0.6em;">Grey Edition</p>
+            </div>
+            <div class="carrusel-item">
+                <img src="https://raw.githubusercontent.com/TheSteef21/Lapizasuli/main/160477.png" alt="Faith Mugs">
+                <p style="font-size: 0.65em;">Tour Mugs</p>
+            </div>
+        </div>
+        <p style="text-align: center; color: #ffcc00; font-size: 0.7em;">← Desliza el Catálogo de Influencia →</p>
+    </div>
+</div>
+
+<script src="https://unpkg.com/@walletconnect/modal@2.6.2/dist/index.js"></script>
+<script>
+    function toggle(id) {
+        var x = document.getElementById(id);
+        x.style.display = (x.style.display === "block") ? "none" : "block";
+    }
+    window.conectarWallet = async () => {
+        const modal = new window.WalletConnectModal.WalletConnectModal({
+            projectId: 'ceb11307ca32cd9d4118b14ab54b542b',
+            themeMode: 'dark',
+            chains: ['eip155:1']
+        });
+        await modal.openModal();
+    };
+</script>
+
+</body>
+</html>
