@@ -25,34 +25,46 @@
         
         .estado { color: #ffcc00; margin-top: 20px; font-weight: bold; }
     </style>
-</head>
+    </head>
+<body style="background: #000; color: #fff; margin: 0; padding: 20px;">
+
     <script src="https://unpkg.com/@walletconnect/modal@2.6.2/dist/index.js"></script>
-
-<script>
-  // Esperar a que la librería cargue en el Atrio
-  window.onload = function() {
-    const modal = new window.WalletConnectModal.WalletConnectModal({
-      projectId: 'ceb11307ca32cd9d4118b14ab54b542b',
-      themeMode: 'dark',
-      chains: ['eip155:1']
-    });
-
-    window.conectarWallet = async () => {
-      try {
+    <script>
+      window.conectarWallet = async () => {
+        const modal = new window.WalletConnectModal.WalletConnectModal({
+          projectId: 'ceb11307ca32cd9d4118b14ab54b542b',
+          themeMode: 'dark',
+          chains: ['eip155:1']
+        });
         await modal.openModal();
-        console.log("Capo, Conexión Web3 Establecida.");
-      } catch (error) {
-        alert("Error de conexión: Revisa tu señal satelital.");
-      }
-    };
-  };
-</script>
+      };
+    </script>
 
-    <button onclick="conectarWallet()" style="background: #111; color: #ffcc00; border: 1px solid #ffcc00; padding: 10px 20px; border-radius: 50px; cursor: pointer; width: 100%; margin-top: 20px;">
-    🔗 VINCULAR WALLET (SADV41)
-</button>
+    <div class="atrio">
+        <div class="header">🎚 SADV41<br>Registro de Provisión Diaria</div>
 
-<body>
+        <button onclick="conectarWallet()" style="background: #111; color: #ffcc00; border: 1px solid #ffcc00; padding: 12px; border-radius: 50px; cursor: pointer; width: 100%; margin-bottom: 20px; font-weight: bold;">
+            🔗 VINCULAR WALLET (CAPO)
+        </button>
+        <div onclick="toggleDetalle('d22')" class="dia-fila">
+            <span>22 de Febrero 2026</span>
+            <span class="monto-verde">$3,201.00</span>
+        </div>
+        <div id="d22" class="detalle-transacciones">
+            <div class="tx-item"><span>Transf. Alexander Gonzalez</span><span>$3,081.00</span></div>
+            <div class="tx-item"><span>Efectivo (6 billetes de $20)</span><span>$120.00</span></div>
+        </div>
+
+        </div> <script>
+        // Función indispensable para que el acordeón abra
+        function toggleDetalle(id) {
+            var x = document.getElementById(id);
+            x.style.display = (x.style.display === "block") ? "none" : "block";
+        }
+    </script>
+</body>
+</html>
+
     <div class="atrio">
         <div class="header">🎚 SADV41<br>Registro de Provisión Diaria</div>
 
