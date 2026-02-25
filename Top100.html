@@ -3,22 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SADV41 - Main Atrio</title>
+    <title>SADV41 - Atrio</title>
     <style>
         body {
             margin: 0;
             padding: 0;
-            /* Usamos la imagen principal como fondo en el main */
             background: #000 url('Screenshot_20260224_223053_Google.jpg') no-repeat center center fixed;
             background-size: cover;
-            font-family: 'Segoe UI', sans-serif;
+            font-family: sans-serif;
             color: white;
             display: flex;
-            flex-direction: column;
+            justify-content: center;
             align-items: center;
-            min-height: 100vh;
+            height: 100vh;
         }
 
-        /* #41 Dorado en la esquina - Símbolo de la unión */
         .mision-badge {
             position: fixed;
+            top: 20px;
+            right: 30px;
+            font-size: 5rem;
+            font-weight: 900;
+            color: #D4AF37;
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.8), 2px 2px 5px #000;
+        }
+
+        .atrio-box {
+            background: rgba(10, 10, 10, 0.9);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid #D4AF37;
+            text-align: center;
+            max-width: 400px;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-pagar {
+            display: block;
+            background: #ffcc00;
+            color: #000;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 15px;
+            border-radius: 50px;
+            text-transform: uppercase;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="mision-badge">#41</div>
+
+    <div class="atrio-box">
+        <p style="color: #666; font-size: 0.8em;">TERMINAL DE PAGOS AUTORIZADA</p>
+        <a href="https://take.app/stevendior/pay?ref=SADV41" target="_blank" class="btn-pagar">
+            💳 PAGAR / COMPRAR AHORA
+        </a>
+        <p style="color: #ffcc00; font-size: 0.7em;">Soberano y Perfecto SÓLO DIOS</p>
+    </div>
+
+</body>
+</html>
