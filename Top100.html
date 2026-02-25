@@ -1,55 +1,19 @@
-<div class="header" style="margin-top: 30px; background: #111; border: 1px solid #ffcc00;">
-    👑 TOP INFLUENCIA GLOBAL (Rolling Stone Style)
-</div>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SADV41 - TOP 100 Influencia</title>
+    <style>
+        body { background: #000; color: #fff; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 15px; }
+        .atrio-influencia { max-width: 550px; margin: auto; border: 1px solid #333; border-radius: 20px; padding: 20px; background: #050505; box-shadow: 0 0 20px rgba(255, 204, 0, 0.1); }
+        .header-top { text-align: center; color: #ffcc00; border-bottom: 2px solid #ffcc00; padding-bottom: 15px; margin-bottom: 25px; }
+        .header-top h1 { margin: 0; font-size: 1.5em; letter-spacing: 2px; }
+        
+        .btn-wallet { background: #111; color: #ffcc00; border: 1px solid #ffcc00; padding: 12px; border-radius: 50px; cursor: pointer; width: 100%; font-weight: bold; margin-bottom: 25px; text-transform: uppercase; transition: 0.3s; }
+        .btn-wallet:hover { background: #ffcc00; color: #000; }
 
-<div onclick="toggleDetalle('art1')" class="dia-fila">
-    <span>#1. The Beatles (Reino Unido)</span>
-    <span style="color: #ffcc00;">★ SGT. PEPPER'S</span>
-</div>
-<div id="art1" class="detalle-transacciones">
-    <div class="tx-item"><span>Álbum Maestro:</span><span>Sgt. Pepper's Lonely Hearts Club Band</span></div>
-    <div class="tx-item"><span>Impacto:</span><span>Revolución Cultural y Sonora</span></div>
-    <div class="tx-item" style="color: #4db8ff;"><span>Concierto Clave:</span><span>Rooftop Concert (1969)</span></div>
-</div>
-
-<div onclick="toggleDetalle('art2')" class="dia-fila">
-    <span>#2. Bob Dylan (EE.UU.)</span>
-    <span style="color: #ffcc00;">★ HIGHWAY 61</span>
-</div>
-<div id="art2" class="detalle-transacciones">
-    <div class="tx-item"><span>Álbum Maestro:</span><span>Highway 61 Revisited</span></div>
-    <div class="tx-item"><span>Impacto:</span><span>Poesía Profética y Rock Eléctrico</span></div>
-    <div class="tx-item" style="color: #4db8ff;"><span>Concierto Clave:</span><span>Newport Folk Festival (1965)</span></div>
-</div>
-
-<div onclick="toggleDetalle('<div class="carrusel-contenedor" style="display: flex; overflow-x: auto; gap: 15px; padding: 15px; background: #0a0a0a; border-radius: 10px; border: 1px solid #333; scroll-snap-type: x mandatory;">
-    
-    <div style="flex: 0 0 200px; scroll-snap-align: center; text-align: center;">
-        <img src="https://store.georgemichael.com/cdn/shop/files/IMG_2993.png" style="width: 100%; border-radius: 5px; border: 1px solid #ffcc00;">
-        <p style="color: #fff; font-size: 0.8em; margin-top: 5px;">Faith T-Shirt (Black)</p>
-    </div>
-
-    <div style="flex: 0 0 200px; scroll-snap-align: center; text-align: center;">
-        <img src="https://store.georgemichael.com/cdn/shop/files/IMG_2002.png" style="width: 100%; border-radius: 5px; border: 1px solid #ffcc00;">
-        <p style="color: #fff; font-size: 0.8em; margin-top: 5px;">Faith T-Shirt (Pink)</p>
-    </div>
-
-    <div style="flex: 0 0 200px; scroll-snap-align: center; text-align: center;">
-        <img src="https://store.georgemichael.com/cdn/shop/files/Faith_Contact_Sheet.png" style="width: 100%; border-radius: 5px; border: 1px solid #ffcc00;">
-        <p style="color: #fff; font-size: 0.8em; margin-top: 5px;">Contact Sheet Edition</p>
-    </div>
-
-</div>
-<p style="text-align: center; color: #ffcc00; font-size: 0.7em; margin-top: 5px;">← Desliza para ver la colección →</p>
- - Propiedad de la Misión SADV41
-    </p>
-</div>
-')" class="dia-fila" style="border-left: 2px solid #ffcc00;">
-    <span>George Michael (Reino Unido)</span>
-    <span style="color: #ffcc00;">★ FAITH</span>
-</div>
-<div id="artGM" class="detalle-transacciones">
-    <div class="tx-item"><span>Álbum Maestro:</span><span>Faith (1987)</span></div>
-    <div class="tx-item"><span>Impacto:</span><span>Icono de Libertad y Soberanía Vocal</span></div>
-    <div class="tx-item" style="color: #4db8ff;"><span>Concierto Clave:</span><span>Live in London (Wembley)</span></div>
-</div>
+        /* Estilo Cascada/Acordeón */
+        .artista-fila { background: #111; padding: 15px; border-radius: 10px; margin-bottom: 12px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; border: 1px solid #222; transition: 0.3s; }
+        .artista-fila:hover { border-color: #ffcc00; }
+        .info-desplegable { display: none; padding: 20px; background: #080808; border: 1px solid #222; border-top: none; border-radius: 0 0
