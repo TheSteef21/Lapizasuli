@@ -26,29 +26,31 @@
         .estado { color: #ffcc00; margin-top: 20px; font-weight: bold; }
     </style>
 </head>
+    <script src="https://unpkg.com/@walletconnect/modal@2.6.2/dist/index.js"></script>
+
+<script>
+  // Esperar a que la librería cargue en el Atrio
+  window.onload = function() {
+    const modal = new window.WalletConnectModal.WalletConnectModal({
+      projectId: 'ceb11307ca32cd9d4118b14ab54b542b',
+      themeMode: 'dark',
+      chains: ['eip155:1']
+    });
+
+    window.conectarWallet = async () => {
+      try {
+        await modal.openModal();
+        console.log("Capo, Conexión Web3 Establecida.");
+      } catch (error) {
+        alert("Error de conexión: Revisa tu señal satelital.");
+      }
+    };
+  };
+</script>
+
     <button onclick="conectarWallet()" style="background: #111; color: #ffcc00; border: 1px solid #ffcc00; padding: 10px 20px; border-radius: 50px; cursor: pointer; width: 100%; margin-top: 20px;">
     🔗 VINCULAR WALLET (SADV41)
 </button>
-
-    <script type="module">
-  import { WalletConnectModal } from 'https://unpkg.com/@walletconnect/modal';
-
-  // Configuración con tu Project ID: ceb11307ca32cd9d4118b14ab54b542b
-  const modal = new WalletConnectModal({
-    projectId: 'ceb11307ca32cd9d4118b14ab54b542b',
-    themeMode: 'dark',
-    themeVariables: {
-      '--wcm-accent-color': '#ffcc00', // Color Oro SADV41
-      '--wcm-background-color': '#000000'
-    },
-    chains: ['eip155:1'] // Conexión a Ethereum Mainnet (o la red que prefieras)
-  });
-
-  window.conectarWallet = async () => {
-    const session = await modal.openModal();
-    console.log("Capo, Conexión Web3 Establecida.");
-  };
-</script>
 
 <body>
     <div class="atrio">
