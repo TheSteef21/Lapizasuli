@@ -6,6 +6,7 @@
     <title>SADV41 - CPA Turbo Tire</title>
     <style>
         body { 
+            /* IMAGEN DE FONDO SOBERANA */
             background: #000 url('https://raw.githubusercontent.com/TheSteef21/Lapizasuli/main/1771445538463.png') no-repeat center center fixed; 
             background-size: cover;
             color: #fff; 
@@ -34,6 +35,53 @@
         .monto-efec { color: #a5d6a7; }
         .total-dia { background: #111; color: #4caf50; font-size: 1.3rem; font-weight: bold; }
         .calendario-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 15px; }
+        .dia-caja { border: 1px solid #333; padding: 10px; border-radius: 8px; background: #111; text-align: center; }
+        .dia-numero { font-size: 0.6rem; color: #888; display: block; }
+        .dia-monto { color: #4caf50; font-weight: bold; font-size: 0.8rem; }
+        .hoy { border-color: #ffcc00; box-shadow: inset 0 0 5px rgba(255, 204, 0, 0.2); }
+    </style>
+</head>
+<body>
+    <div class="tabernaculo">
+        <h1>SADV41 🎚 TURBO TIRE</h1>
+        
+        <div class="seccion-titulo">Producción: 24 de Febrero 2026</div>
+        <table>
+            <tr>
+                <td>Llantas</td>
+                <td>4 Unidades 195/65R15</td>
+                <td class="monto-efec">+$168.00</td>
+            </tr>
+            <tr>
+                <td>Logística</td>
+                <td>Transferencia Alexander</td>
+                <td class="monto-trans">-$1.00</td>
+            </tr>
+            <tr>
+                <td>Fraternidad</td>
+                <td>Préstamos Sidia/Felipe</td>
+                <td style="color:#ff6b6b;">-$4.50</td>
+            </tr>
+            <tr class="total-dia">
+                <td colspan="2">BALANCE FINAL</td>
+                <td>$227.75</td>
+            </tr>
+        </table>
+
+        <div class="seccion-titulo">Bitácora de Febrero</div>
+        <div class="calendario-grid">
+            <div class="dia-caja"><span class="dia-numero">22</span><span class="dia-monto">$3,201.00</span></div>
+            <div class="dia-caja"><span class="dia-numero">23</span><span class="dia-monto">$160.50</span></div>
+            <div class="dia-caja hoy"><span class="dia-numero">24</span><span class="dia-monto">$227.75</span></div>
+            <div class="dia-caja"><span class="dia-numero">25</span><span class="dia-monto">---</span></div>
+        </div>
+        
+        <p style="text-align:center; margin-top:20px; font-style:italic; color:#4caf50; font-size:0.7rem;">
+            "La constancia en el servicio es la base de la perfección" 🎚️
+        </p>
+    </div>
+</body>
+</html>
         .dia-caja { border: 1px solid #333; padding: 10px; border-radius: 8px; background: #111; text-align: center; }
         .dia-numero { font-size: 0.6rem; color: #888; display: block; }
         .dia-monto { color: #4caf50; font-weight: bold; font-size: 0.8rem; }
