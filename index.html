@@ -45,6 +45,26 @@
         }
     </style>
 </head>
+    <script type="module">
+  import { WalletConnectModal } from 'https://unpkg.com/@walletconnect/modal';
+
+  // Configuración con tu Project ID: ceb11307ca32cd9d4118b14ab54b542b
+  const modal = new WalletConnectModal({
+    projectId: 'ceb11307ca32cd9d4118b14ab54b542b',
+    themeMode: 'dark',
+    themeVariables: {
+      '--wcm-accent-color': '#ffcc00', // Color Oro SADV41
+      '--wcm-background-color': '#000000'
+    },
+    chains: ['eip155:1'] // Conexión a Ethereum Mainnet (o la red que prefieras)
+  });
+
+  window.conectarWallet = async () => {
+    const session = await modal.openModal();
+    console.log("Capo, Conexión Web3 Establecida.");
+  };
+</script>
+
 <body class="min-h-screen flex flex-col selection:bg-[#007bff] selection:text-white">
 
     <video autoplay muted loop playsinline id="video-bg">
