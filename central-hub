@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SADV41 | Unificación Maestra</title>
+    
+    <link rel="stylesheet" href="https://ipfs.io/ipfs/bafybeigzdnnl7wbzlvdseqlzzz77hh2u63pr2ioyf3ufld2tci72ypwq4i">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background-color: #050505; color: #ffffff; font-family: system-ui, -apple-system, sans-serif; overflow-x: hidden; }
+        
+        /* Efectos de Luz */
+        .magenta-glow { text-shadow: 0 0 15px #FF00FF, 0 0 30px #FF00FF; }
+        .blue-glow { text-shadow: 0 0 15px #007bff, 0 0 30px #007bff; }
+        
+        /* Paneles de Cristal */
+        .glass-panel { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.3s ease; }
+        .glass-panel:hover { border-color: #007bff; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,123,255,0.2); }
+        .link-card { display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 1.5rem; border-radius: 0.75rem; text-decoration: none; color: inherit; }
+
+        /* Estilos de Pestañas (Tabs) */
+        .tab-btn { transition: all 0.3s ease; border-bottom: 2px solid transparent; cursor: pointer; }
+        .tab-btn.active { border-color: #007bff; color: #3b82f6; font-weight: bold; background: rgba(0, 123, 255, 0.1); }
+        .tab-content { display: none; animation: fadeIn 0.5s ease-in-out; }
+        .tab-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Video Retro 144p de Fondo */
+        #video-bg {
+            position: fixed; top: 50%; left: 50%; min-width: 100%; min-height: 100%; width: auto; height: auto;
+            z-index: -100; transform: translate(-50%, -50%) scale(1.1);
+            object-fit: cover;
+            filter: blur(3px) contrast(1.3) saturate(0.8);
+            image-rendering: pixelated; 
+        }
+
+        /* Capa Día/Noche */
+        #time-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -99; transition: background-color 2s ease;
+            background-color: rgba(0, 0, 0, 0.85); 
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center p-6">
+
+    <video id="video-bg" autoplay loop muted>
+        <source src=""
