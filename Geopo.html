@@ -3,13 +3,129 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SADV41 | World Monitor V2</title>
+    <title>SADV41 | Radar Geopolítico (Geopo.html)</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body { 
-            background-color: #0f172a; 
-            background-image: radial-gradient(circle at 50% -20%, #1e293b 0%, #050505 100%);
+            background-color: #050a14; 
+            background-image: radial-gradient(circle at 50% 50%, #0b132b 0%, #02040a 100%);
             color: #ffffff; 
-            font-family: system-ui, -apple-system, sans-serif; 
-            min-height: 100
+            font-family: 'Courier New', Courier, monospace; 
+            min-height: 100vh;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        /* Paneles de Cristal Encriptados */
+        .glass-panel { 
+            background: rgba(16, 25, 43, 0.6); 
+            backdrop-filter: blur(8px); 
+            border: 1px solid rgba(59, 130, 246, 0.2); 
+            border-radius: 0.5rem;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease; 
+        }
+        .glass-panel:hover { 
+            border-color: rgba(59, 130, 246, 0.6); 
+            box-shadow: inset 0 0 10px rgba(59, 130, 246, 0.2); 
+        }
+
+        /* Animación de Radar Geopolítico */
+        .radar-container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 2px solid rgba(59, 130, 246, 0.3);
+            background: repeating-radial-gradient(
+                rgba(0, 0, 0, 0) 0,
+                rgba(0, 0, 0, 0) 20px,
+                rgba(59, 130, 246, 0.1) 21px,
+                rgba(59, 130, 246, 0.1) 22px
+            );
+            overflow: hidden;
+            margin: 0 auto;
+        }
+        .radar-sweep {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(45deg, rgba(59, 130, 246, 0.8) 0%, rgba(0, 0, 0, 0) 100%);
+            transform-origin: 0 0;
+            animation: sweep 4s infinite linear;
+        }
+        @keyframes sweep {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Texto Glitch para desencriptación */
+        .glitch-text {
+            color: #60a5fa;
+            text-shadow: 0 0 5px #60a5fa;
+            animation: blink 2s infinite;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+            75% { opacity: 0.9; }
+        }
+    </style>
+</head>
+<body class="w-full max-w-5xl mx-auto p-4">
+
+    <header class="w-full text-center mb-8 border-b border-blue-900 pb-4">
+        <h1 class="text-3xl font-bold text-blue-500 tracking-widest uppercase mb-2">Monitor Geopo</h1>
+        <p class="text-sm text-blue-300 glitch-text">Estatus: Desencriptado | Operador: StevenDiorFlow</p>
+        <a href="https://thesteef21.github.io/Lapizasuli/index.html" class="inline-block mt-4 text-xs border border-blue-700 px-4 py-1 rounded hover:bg-blue-900/50 transition">
+            [ Retornar al Atrio ]
+        </a>
+    </header>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
+        
+        <div class="glass-panel p-6 flex flex-col items-center justify-center">
+            <h2 class="text-blue-400 font-bold mb-4 text-center">Escáner Logístico Interoceánico</h2>
+            <div class="radar-container mb-4">
+                <div class="radar-sweep"></div>
+            </div>
+            <p class="text-xs text-blue-200 text-center">Buscando anomalías en zona de influencia: Burunga / Canal de Panamá...</p>
+        </div>
+
+        <div class="glass-panel p-6 md:col-span-2 flex flex-col justify-between">
+            <div>
+                <h2 class="text-blue-400 font-bold mb-4 border-b border-blue-800 pb-2">Reporte de Ejes Geopolíticos</h2>
+                
+                <div class="space-y-4">
+                    <div class="bg-black/40 p-3 border-l-2 border-blue-500">
+                        <span class="text-xs text-blue-300 font-bold">ALERTA MACROECONÓMICA</span>
+                        <p class="text-sm text-gray-300 mt-1">Impacto de políticas monetarias globales en la inflación de mercados emergentes. Tensión en las cadenas de suministro de neumáticos e insumos automotrices.</p>
+                    </div>
+                    
+                    <div class="bg-black/40 p-3 border-l-2 border-yellow-500">
+                        <span class="text-xs text-yellow-500 font-bold">MOVIMIENTO CRIPTO WEB3</span>
+                        <p class="text-sm text-gray-300 mt-1">Nodos de blockchain (BTC/ETH) reaccionando a las regulaciones legislativas en occidente. Se recomienda mantener las billeteras bajo protocolos SEC.html.</p>
+                    </div>
+
+                    <div class="bg-black/40 p-3 border-l-2 border-green-500">
+                        <span class="text-xs text-green-500 font-bold">ZONA INTERNA (PANAMÁ)</span>
+                        <p class="text-sm text-gray-300 mt-1">Estabilidad en la ruta logística de Arraiján. Operaciones en Turbo Tire reportan flujo constante. Proyección de inyección de productividad hacia la meta salarial base.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-4 pt-4 border-t border-blue-900 text-right">
+                <span class="text-xs text-blue-500 animate-pulse">Sincronizado con SADV41 Federal...</span>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
