@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SADV41 - La Ley y la Gracia</title>
+    <style>
+        * { box-sizing: border-box; }
+        body { 
+            background: #000 url('https://raw.githubusercontent.com/TheSteef21/Lapizasuli/main/1771445538463.png') no-repeat center center fixed; 
+            background-size: cover;
+            color: #fff; 
+            font-family: 'Segoe UI', sans-serif; 
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+        .tabernaculo-ley { 
+            background: rgba(10, 10, 10, 0.95); 
+            border: 2px solid #ffcc00; 
+            border-radius: 20px; 
+            padding: 25px; 
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 0 30px rgba(255, 204, 0, 0.2);
+            backdrop-filter: blur(10px);
+        }
+        h1 { color: #ffcc00; text-align: center; font-size: 1.3rem; letter-spacing: 3px; margin-bottom: 5px; }
+        .sub { text-align: center; font-size: 0.7rem; color: #888; margin-bottom: 25px; text-transform: uppercase; }
+        
+        .categoria { margin-bottom: 15px; }
+        .titulo-acordeon { 
+            background: #1a1a1a; 
+            padding: 12px; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            display: flex; 
+            justify-content: space-between;
+            border-left: 4px solid #4caf50;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+        .negativo { border-left-color: #ff4444; }
+        
+        .contenido-versos { 
+            display: none; 
+            background: rgba(255, 255, 255, 0.05); 
+            padding: 15px; 
+            border-radius: 0 0 8px 8px; 
+            font-size: 0.8rem;
+            line-height: 1.5;
+        }
+        .verso-antiguo { color: #ffcc00; margin-bottom: 10px; border-bottom: 1px solid #333; padding-bottom: 5px; }
+        .conexion-cristo { color: #81d4fa; font-style: italic; padding-left: 10px; border-left: 2px solid #81d4fa; }
+        
+        .tag-ley { background: #1b5e20; color: #fff; padding: 2px 6px; border-radius: 4px; font-size: 0.6rem; margin-right: 5px; }
+    </style>
+</head>
+<body>
+    <div class="tabernaculo-ley">
+        <h1>SADV41 🎚 PENTATEUCO</h1>
+        <div class="sub">Lo que agrada y desagrada al Altísimo</div>
+
+        <div style="color: #4caf50; font-size: 0.7rem; font-weight: bold; margin-bottom: 10px;">LO QUE AGRADA A DIOS</div>
+        
+        <div class="categoria">
+            <div class="titulo-acordeon" onclick="toggle('a1')"><span>1. La Obediencia y la Fe</span><span>✚</span></div>
+            <div id="a1" class="contenido-versos">
+                <div class="verso-antiguo"><strong>Génesis 15:6:</strong> "Y creyó a Jehová, y le fue contado por justicia."</div>
+                <div class="conexion-cristo"><strong>Gálatas 3:6:</strong> "Así Abraham creyó a Dios, y le fue contado por justicia." (Cristo es el fin de la fe).</div>
+            </div>
+        </div>
+
+        <div class="categoria">
+            <div class="titulo-acordeon" onclick="toggle('a2')"><span>2. El Amor al Prójimo</span><span>✚</span></div>
+            <div id="a2" class="contenido-versos">
+                <div class="verso-antiguo"><strong>Levítico 19:18:</strong> "No te vengarás... sino amarás a tu prójimo como a ti mismo."</div>
+                <div class="conexion-cristo"><strong>Mateo 22:39:</strong> "Amarás a tu prójimo como a ti mismo." (Cristo resume la ley en amor).</div>
+            </div>
+        </div>
+
+        <div style="color: #ff4444; font-size: 0.7rem; font-weight: bold; margin: 20px 0 10px 0;">LO QUE NO AGRADA A DIOS</div>
+
+        <div class="categoria">
+            <div class="titulo-acordeon negativo" onclick="toggle('d1')"><span>1. La Idolatría</span><span>✖</span></div>
+            <div id="d1" class="contenido-versos">
+                <div class="verso-antiguo"><strong>Éxodo 20:3:</strong> "No tendrás dioses ajenos delante de mí."</div>
+                <div class="conexion-cristo"><strong>1 Juan 5:21:</strong> "Hijitos, guardaos de los ídolos." (Cristo es el único camino al Padre).</div>
+            </div>
+        </div>
+
+        <div class="categoria">
+            <div class="titulo-acordeon negativo" onclick="toggle('d2')"><span>2. El Injusto Trato al Pobre</span><span>✖</span></div>
+            <div id="d2" class="contenido-versos">
+                <div class="verso-antiguo"><strong>Deuteronomio 24:14:</strong> "No oprimirás al jornalero pobre y menesteroso."</div>
+                <div class="conexion-cristo"><strong>Mateo 25:40:</strong> "En cuanto lo hicisteis a uno de estos mis hermanos más pequeños, a mí lo hicisteis."</div>
+            </div>
+        </div>
+
+        <p style="text-align:center; margin-top:30px; font-style:italic; color:#ffcc00; font-size:0.65rem;">
+            "Soberano y Perfecto SÓLO DIOS" 🎚️
+        </p>
+    </div>
+
+    <script>
+        function toggle(id) {
+            var x = document.getElementById(id);
+            if (x.style.display === "block") {
+                x.style.display = "none";
+            } else {
+                x.style.display = "block";
+            }
+        }
+    </script>
+</body>
+</html>
