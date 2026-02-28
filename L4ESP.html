@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SADV41 - Los 4 en Espíritu</title>
+    <style>
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background: #000; font-family: 'Courier New', monospace; color: white; }
+        
+        .video-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
+
+        /* Ajuste para que el video cubra toda la pantalla sin deformarse */
+        #video-bg { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.4) contrast(1.2); }
+
+        .palabra-snfisrks {
+            position: absolute; color: rgba(255, 255, 255, 0.8); white-space: nowrap;
+            pointer-events: none; font-weight: bold; text-shadow: 0 0 15px rgba(255,255,255,0.7);
+            animation: fluir linear forwards; z-index: 10;
+        }
+
+        @keyframes fluir {
+            from { transform: translateX(105vw); opacity: 0; }
+            15% { opacity: 1; } 85% { opacity: 1; }
+            to { transform: translateX(-180%); opacity: 0; }
+        }
+
+        #sello-mision {
+            position: fixed; bottom: 30px; width: 100%; text-align: center;
+            color: #FFD700; font-size: 18px; letter-spacing: 8px; z-index: 20;
+            font-weight: bold; text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="video-container">
+        <video autoplay muted loop playsinline id="video-bg">
+            <source src="gemini_generated_video_5c308b4a.mp4" type="video/mp4">
+            <p>Caminando en el Espíritu...</p>
+        </video>
+    </div>
+
+    <div id="contenedor-espiritu"></div>
+    <div id="sello-mision">VIVE! 🏛️🇮🇱❣️⚡☦️👑</div>
+
+    <script>
+        const snfisrks = [
+            "S: PACIENCIA (ESPÍRITU)", "N: KWIN NÜKÄ (NGÄBE)", "F: PATIENCE (MILAGRO)", 
+            "I: PATIENCE (POTENCIAS)", "S: PACIENCIA (AQUÍ ESTOY)", "R: ТЕРПЕНИЕ (DOCTRINA)", 
+            "K: 인내 (NORTE)", "NF: DÄNKI-PATIENCE (MONTAÑA)", "APOCALIPSIS 14:12", 
+            "SUFRIR PARA VENCER", "CRISTO VENCE A LA MUERTE", "S: 42 REGLAS"
+        ];
+        
+        function manifestarPalabra() {
+            const span = document.createElement('span');
+            span.className = 'palabra-snfisrks';
+            span.innerText = snfisrks[Math.floor(Math.random() * snfisrks.length)];
+            span.style.top = (Math.random() * 95) + 'vh';
+            span.style.fontSize = (Math.random() * 18 + 14) + 'px';
+            const duration = Math.random() * 12 + 10;
+            span.style.animationDuration = duration + 's';
+            document.getElementById('contenedor-espiritu').appendChild(span);
+            setTimeout(() => span.remove(), duration * 1000);
+        }
+
+        setInterval(manifestarPalabra, 2500);
+        window.onload = () => { manifestarPalabra(); };
+    </script>
+</body>
+</html>
