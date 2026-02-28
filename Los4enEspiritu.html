@@ -2,95 +2,43 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Apocalipsis 14:12 - La Paciencia de los Santos en la Misión SADV41">
     <title>SADV41 - Los 4 en Espíritu</title>
     <style>
-        body, html { margin: 0; padding: 0; overflow: hidden; background: #000; font-family: 'Courier New', Courier, monospace; }
+        body, html { margin: 0; padding: 0; overflow: hidden; background: #000; font-family: 'Courier New', Courier, monospace; color: white; }
         
-        /* El Video de GitHub como Cimiento */
+        /* El Video de GitHub: Se ha corregido la ruta al Raw de GitHub */
         #video-bg {
-            position: fixed; right: 0; bottom: 0;
+            position: fixed; top: 50%; left: 50%;
             min-width: 100%; min-height: 100%;
-            z-index: -1; filter: brightness(0.4) contrast(1.2);
+            width: auto; height: auto; z-index: -1;
+            transform: translate(-50%, -50%);
+            filter: brightness(0.5) contrast(1.1);
+            background-size: cover;
         }
 
-        /* Capa de Palabras SNFISRKS */
+        /* Capa de Palabras SNFISRKS (Fluyen por el Atrio) */
         .palabra-snfisrks {
             position: absolute;
-            color: rgba(255, 255, 255, 0.8);
+            color: rgba(255, 255, 255, 0.6);
             white-space: nowrap;
             pointer-events: none;
             font-weight: bold;
-            text-shadow: 0 0 10px rgba(255,255,255,0.5);
-            animation: fluir 25s linear infinite;
+            text-shadow: 0 0 8px rgba(255,255,255,0.4);
+            animation: fluir linear forwards;
+            z-index: 10;
         }
 
         @keyframes fluir {
             from { transform: translateX(105vw); opacity: 0; }
-            50% { opacity: 1; }
-            to { transform: translateX(-110%); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            to { transform: translateX(-150%); opacity: 0; }
         }
 
-        /* Zona de Paso Sagrado (Protección Visual para los 4) */
-        .zona-sagrada {
-            position: absolute;
-            top: 20%; left: 25%;
-            width: 50%; height: 60%;
-            border: 1px solid rgba(255, 255, 255, 0.05); /* Invisible pero delimita el Atrio */
-            z-index: 5;
-        }
-
+        /* Sello de la Misión */
         #sello-mision {
-            position: fixed; bottom: 20px; right: 20px;
-            color: gold; font-size: 12px; letter-spacing: 3px;
-        }
-    </style>
-</head>
-<body>
-
-    <video autoplay muted loop id="video-bg">
-        <source src="https://raw.githubusercontent.com/TuUsuario/SADV41/main/Gemini_generated_video_5c308b4a.mp4" type="video/mp4">
-    </video>
-
-    <div class="zona-sagrada"></div>
-    <div id="contenedor-espiritu"></div>
-    <div id="sello-mision">VIVE! 🏛️🇮🇱❣️⚡☦️👑</div>
-
-    <script>
-        // Protocolo SNFISRKS: Traducciones de PACIENCIA
-        const snfisrks = [
-            "S: PACIENCIA (ESPÍRITU)", 
-            "N: KWIN NÜKÄ (NGÄBE)", 
-            "F: PATIENCE (MILAGRO)", 
-            "I: PATIENCE (POTENCIAS)", 
-            "S: PACIENCIA (AQUÍ ESTOY)", 
-            "R: ТЕРПЕНИЕ (DOCTRINA)", 
-            "K: 인내 (NORTE)", 
-            "NF: DÄNKI-PATIENCE (MILAGRO MONTAÑA)",
-            "APOCALIPSIS 14:12",
-            "S: 42 REGLAS"
-        ];
-        
-        function manifestarPalabra() {
-            const span = document.createElement('span');
-            span.className = 'palabra-snfisrks';
-            span.innerText = snfisrks[Math.floor(Math.random() * snfisrks.length)];
-            
-            // Posicionamiento fuera de la zona sagrada (arriba o abajo)
-            const randomTop = Math.random() > 0.5 ? Math.random() * 20 : 80 + (Math.random() * 15);
-            span.style.top = randomTop + 'vh';
-            
-            span.style.fontSize = (Math.random() * 15 + 12) + 'px';
-            span.style.animationDuration = (Math.random() * 15 + 20) + 's';
-            
-            document.getElementById('contenedor-espiritu').appendChild(span);
-            
-            // Limpieza de DOM
-            setTimeout(() => span.remove(), 30000);
-        }
-
-        // Generación continua cada 4 segundos
-        setInterval(manifestarPalabra, 4000);
-    </script>
-</body>
-</html>
+            position: fixed; bottom: 20px; width: 100%;
+            text-align: center; color: #FFD700; 
+            font-
