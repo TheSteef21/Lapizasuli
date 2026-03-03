@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SADV41 - Matriz Divina: Emberá & Hindi</title>
+    <title>SADV41 - Matriz de Intercesión Divina</title>
     <style>
         body, html { 
             margin: 0; padding: 0; width: 100%; height: 100%; 
@@ -49,7 +49,7 @@
 
     <div class="video-container">
         <video id="video-bg" autoplay muted loop playsinline>
-            <source src="tu-video-submarino.mp4" type="video/mp4">
+            <source src="https://raw.githubusercontent.com/TheSteef21/Lapizasuli/main/tu-video-submarino.mp4" type="video/mp4">
         </video>
     </div>
 
@@ -63,59 +63,4 @@
             "DAYIRA ACUBU (Él nos cuida) - 🎚 Da-yi-ra A-cu-bu",
             "TATZITZETZE JAURE (Espíritu Santo) - 🎚 Tat-si-tse-tse Jau-re",
             "EMBERA (Ser Humano) - 🎚 Em-be-ra",
-            "NEKHÃRÃ (Paz de Dios) - 🎚 Ne-ka-ra",
-            "परमेश्वर ने मनुष्य को बनाया (Dios hizo al hombre) - 🎚",
-            "ADÁN Y EVA: दिव्य प्रकृति (Naturaleza Divina) - 🎚",
-            "PAVITRA ATMA (पवित्र आत्मा) - Espíritu Santo",
-            "SHANTI (शांति) - La Paz de Dios",
-            "भारत के लिए भविष्यवाणी (Profecía para la India) - SADV41",
-            "हे प्रभु, सब जातियां झुकेंगी (Todas las naciones se inclinarán)",
-            "SADV41: SANTÍSIMO - 🎚",
-            "1 CORINTIOS 2:4-5 - EL PODER DE DIOS",
-            "MISION SADV41: INTERCESIÓN TOTAL"
-        ];
-
-        function crearPalabra() {
-            const contenedor = document.getElementById("contenedor-letras");
-            if (!contenedor) return;
-
-            const div = document.createElement("div");
-            div.className = "palabra-snfisrks";
-            
-            const textoRandom = palabras[Math.floor(Math.random() * palabras.length)];
-            
-            // Lógica para resaltar el Hindi
-            if (/[\u0900-\u097F]/.test(textoRandom)) {
-                div.innerHTML = `<span class="hindi-text">${textoRandom}</span>`;
-            } else {
-                div.innerText = textoRandom;
-            }
-            
-            // Distribución y animación
-            div.style.top = Math.random() * 85 + 5 + "vh";
-            const duracion = Math.random() * 10 + 10; 
-            div.style.animationDuration = duracion + "s";
-            div.style.fontSize = Math.random() * (22 - 16) + 16 + "px";
-
-            contenedor.appendChild(div);
-
-            // Limpieza de memoria
-            setTimeout(() => { 
-                if (div.parentNode) div.remove(); 
-            }, duracion * 1000);
-        }
-
-        // Ejecución inmediata y bucle constante
-        function iniciarMatriz() {
-            // Lanza las primeras 8 palabras de golpe para llenar la pantalla
-            for(let i=0; i<8; i++) {
-                setTimeout(crearPalabra, i * 500);
-            }
-            // Mantiene el flujo cada 2 segundos
-            setInterval(crearPalabra, 2000);
-        }
-
-        window.onload = iniciarMatriz;
-    </script>
-</body>
-</html>
+            "NEKH
