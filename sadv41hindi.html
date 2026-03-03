@@ -5,22 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SADV41 - Matriz Divina: Emberá & Hindi</title>
     <style>
-        body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background: #000; font-family: 'Courier New', monospace; color: white; }
+        body, html { 
+            margin: 0; padding: 0; width: 100%; height: 100%; 
+            overflow: hidden; background: #000; 
+            font-family: 'Courier New', monospace; color: white; 
+        }
         
-        .video-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
+        .video-container { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            z-index: -1; background: radial-gradient(circle, #1a1a1a 0%, #000 100%);
+        }
 
-        /* Fondo optimizado para resaltar el flujo de palabras */
-        #video-bg { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.3) contrast(1.2) grayscale(0.5); }
+        #video-bg { 
+            width: 100%; height: 100%; object-fit: cover; 
+            filter: brightness(0.3) contrast(1.2) grayscale(0.5); 
+        }
 
         .palabra-snfisrks {
-            position: absolute; color: rgba(255, 255, 255, 0.9); white-space: nowrap;
-            pointer-events: none; font-weight: bold; text-shadow: 0 0 15px rgba(255,255,255,0.7);
+            position: absolute; color: rgba(255, 255, 255, 0.9); 
+            white-space: nowrap; pointer-events: none; font-weight: bold; 
+            text-shadow: 0 0 15px rgba(255,255,255,0.7);
             animation: fluir linear forwards; z-index: 10;
         }
 
         @keyframes fluir {
             from { transform: translateX(105vw); opacity: 0; }
-            15% { opacity: 1; } 85% { opacity: 1; }
+            15% { opacity: 1; } 
+            85% { opacity: 1; }
             to { transform: translateX(-180%); opacity: 0; }
         }
 
@@ -31,7 +42,6 @@
             text-shadow: 2px 2px 4px #000;
         }
         
-        /* Resaltado para términos sagrados en Hindi */
         .hindi-text { color: #a5d6a7; }
     </style>
 </head>
@@ -49,30 +59,63 @@
 
     <script>
         const palabras = [
-            // ESTRUCTURA EMBERÁ (Dayira Acubu)
             "TATZITZETZE (Dios Padre) - 🎚 Tat-si-tse-tse",
             "DAYIRA ACUBU (Él nos cuida) - 🎚 Da-yi-ra A-cu-bu",
             "TATZITZETZE JAURE (Espíritu Santo) - 🎚 Tat-si-tse-tse Jau-re",
             "EMBERA (Ser Humano) - 🎚 Em-be-ra",
             "NEKHÃRÃ (Paz de Dios) - 🎚 Ne-ka-ra",
-            
-            // ESTRUCTURA HINDI (Profecía y Naturaleza Divina)
             "परमेश्वर ने मनुष्य को बनाया (Dios hizo al hombre) - 🎚",
             "ADÁN Y EVA: दिव्य प्रकृति (Naturaleza Divina) - 🎚",
             "PAVITRA ATMA (पवित्र आत्मा) - Espíritu Santo",
             "SHANTI (शांति) - La Paz de Dios",
             "भारत के लिए भविष्यवाणी (Profecía para la India) - SADV41",
             "हे प्रभु, सब जातियां झुकेंगी (Todas las naciones se inclinarán)",
-            
-            // SELLOS DE LA MISIÓN SADV41
             "SADV41: SANTÍSIMO - 🎚",
-            "1 CORINTIOS 2:5 - EL PODER DE DIOS",
+            "1 CORINTIOS 2:4-5 - EL PODER DE DIOS",
             "MISION SADV41: INTERCESIÓN TOTAL"
         ];
 
         function crearPalabra() {
+            const contenedor = document.getElementById("contenedor-letras");
+            if (!contenedor) return;
+
             const div = document.createElement("div");
             div.className = "palabra-snfisrks";
+            
             const textoRandom = palabras[Math.floor(Math.random() * palabras.length)];
             
-            // Detectar si el texto tiene caracteres Hindi
+            // Lógica para resaltar el Hindi
+            if (/[\u0900-\u097F]/.test(textoRandom)) {
+                div.innerHTML = `<span class="hindi-text">${textoRandom}</span>`;
+            } else {
+                div.innerText = textoRandom;
+            }
+            
+            // Distribución y animación
+            div.style.top = Math.random() * 85 + 5 + "vh";
+            const duracion = Math.random() * 10 + 10; 
+            div.style.animationDuration = duracion + "s";
+            div.style.fontSize = Math.random() * (22 - 16) + 16 + "px";
+
+            contenedor.appendChild(div);
+
+            // Limpieza de memoria
+            setTimeout(() => { 
+                if (div.parentNode) div.remove(); 
+            }, duracion * 1000);
+        }
+
+        // Ejecución inmediata y bucle constante
+        function iniciarMatriz() {
+            // Lanza las primeras 8 palabras de golpe para llenar la pantalla
+            for(let i=0; i<8; i++) {
+                setTimeout(crearPalabra, i * 500);
+            }
+            // Mantiene el flujo cada 2 segundos
+            setInterval(crearPalabra, 2000);
+        }
+
+        window.onload = iniciarMatriz;
+    </script>
+</body>
+</html>
