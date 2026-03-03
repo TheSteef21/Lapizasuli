@@ -9,24 +9,13 @@
         body { 
             background: #000 url('https://raw.githubusercontent.com/TheSteef21/Lapizasuli/main/1771445538463.png') no-repeat center center fixed; 
             background-size: cover;
-            color: #fff; 
-            font-family: 'Segoe UI', sans-serif; 
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 10px;
+            color: #fff; font-family: 'Segoe UI', sans-serif; margin: 0;
+            display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 10px;
         }
         .tabernaculo { 
-            border: 2px solid #4caf50; 
-            border-radius: 15px; 
-            padding: 15px; 
-            background: rgba(10, 10, 10, 0.92); 
-            max-width: 450px; 
-            width: 100%;
-            box-shadow: 0 0 20px rgba(74, 175, 80, 0.3);
-            backdrop-filter: blur(8px);
+            border: 2px solid #4caf50; border-radius: 15px; padding: 15px; 
+            background: rgba(10, 10, 10, 0.92); max-width: 450px; width: 100%;
+            box-shadow: 0 0 20px rgba(74, 175, 80, 0.3); backdrop-filter: blur(8px);
         }
         h1 { color: #4caf50; text-align: center; letter-spacing: 2px; margin: 0 0 10px 0; font-size: 1.1rem; }
         .seccion-titulo { background: rgba(27, 94, 32, 0.9); color: #fff; padding: 6px; margin-top: 15px; border-radius: 5px; text-transform: uppercase; font-size: 0.65rem; letter-spacing: 1px; text-align: center; cursor: pointer; border: none; width: 100%; display: block; }
@@ -37,8 +26,10 @@
         table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 0.7rem; }
         th { border-bottom: 2px solid #4caf50; padding: 5px; color: #888; text-transform: uppercase; font-size: 0.6rem; }
         td { border-bottom: 1px solid #222; padding: 6px 4px; text-align: center; }
+        
         .monto-trans { color: #81d4fa; }
         .monto-efec { color: #a5d6a7; }
+        .monto-artista { color: #f48fb1; font-weight: bold; }
         .total-dia { background: #111; color: #4caf50; font-size: 1rem; font-weight: bold; }
         
         .calendario-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-top: 10px; }
@@ -53,43 +44,48 @@
     <div class="tabernaculo">
         <h1>SADV41 🎚 TURBO TIRE</h1>
         
-        <div class="seccion-titulo">CPA - PRODUCCIÓN 1 DE MARZO 2026</div>
+        <div class="seccion-titulo">CPA - LOGÍSTICA DE SEGURIDAD 02/03/2026</div>
         <table>
-            <thead>
-                <tr>
-                    <th>Cant</th>
-                    <th>Concepto / Servicio</th>
-                    <th>Monto</th>
-                    <th>Pago</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr><td>1</td><td>Chequeo inicial</td><td class="monto-efec">$2.00</td><td>Efe</td></tr>
-                <tr><td>4</td><td>Balanceos ($6.25 c/u)</td><td class="monto-efec">$25.00</td><td>Efe</td></tr>
-                <tr><td>1</td><td>Reparación 4x4 (Desc)</td><td class="monto-efec">$3.00</td><td>Efe</td></tr>
-                <tr><td>1</td><td>Reparación técnica</td><td class="monto-efec">$5.00</td><td>Efe</td></tr>
-                <tr><td>2</td><td>265/75R16 Tourador AT2</td><td class="monto-efec">$220.00</td><td>Efe</td></tr>
-                <tr><td>2</td><td>Balanceos ($6.00 c/u)</td><td class="monto-efec">$12.00</td><td>Efe</td></tr>
-                <tr><td>2</td><td>175/70R14 Tourador</td><td class="monto-efec">$65.00</td><td>Efe</td></tr>
-                <tr><td>2</td><td>Balanceos ($4.00 c/u)</td><td class="monto-efec">$8.00</td><td>Efe</td></tr>
-                <tr><td>2</td><td>Rotaciones ($1.50 c/u)</td><td class="monto-efec">$3.00</td><td>Efe</td></tr>
-                <tr><td>1</td><td>205/45R17 Minerva</td><td class="monto-efec">$45.50</td><td>Efe</td></tr>
-                <tr><td>2</td><td>205/40R17 Centara ($44 c/u)</td><td class="monto-trans">$88.00</td><td>Trf</td></tr>
-                <tr class="total-dia">
-                    <td colspan="2">TOTAL BRUTO HOY</td>
-                    <td colspan="2">$476.50</td>
-                </tr>
-            </tbody>
+            <tr>
+                <td>Entrada Yappy</td>
+                <td>Cuenta Steven Dior</td>
+                <td class="monto-artista">+$620.00</td>
+            </tr>
+            <tr>
+                <td>Salida ACH</td>
+                <td>A: Alexander G. (Exento)</td>
+                <td style="color:#ff6b6b;">-$620.00</td>
+            </tr>
+            <tr class="total-dia">
+                <td colspan="2">PRODUCCIÓN TÉCNICA (EFE)</td>
+                <td class="monto-efec">+$222.50</td>
+            </tr>
         </table>
 
-        <button class="seccion-titulo" onclick="toggleAcordeon()">▼ Bitácora de Febrero (Apuntes)</button>
+        <button class="seccion-titulo" onclick="toggleAcordeon('bitacoraMarzo')">▼ Historial de Marzo</button>
+        <div id="bitacoraMarzo" class="acordeon-contenido">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Cant</th>
+                        <th>Concepto / Servicio</th>
+                        <th>Monto</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>01/03</td><td>CPA Producción Bruta</td><td class="monto-efec">$476.50</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <button class="seccion-titulo" onclick="toggleAcordeon('bitacoraFeb')">▼ Bitácora de Febrero (Apuntes)</button>
         <div id="bitacoraFeb" class="acordeon-contenido">
             <table>
                 <tr><td>22/02</td><td>Consolidado Alexander</td><td>$3,201.00</td></tr>
-                <tr><td>23/02</td><td>Cierre Operativo (38 Llantas)</td><td>$180.50</td></tr>
+                <tr><td>23/02</td><td>Cierre (38 Llantas)</td><td>$180.50</td></tr>
                 <tr><td>24/02</td><td>Producción 185/60R15</td><td>$227.75</td></tr>
                 <tr><td>25/02</td><td>Venta DC-V ROAD</td><td>$35.00</td></tr>
-                <tr><td>26/02</td><td>4 Llantas AT2 + Balanceo</td><td>$385.00</td></tr>
+                <tr><td>26/02</td><td>4 Llantas AT2 + Bal.</td><td>$385.00</td></tr>
             </table>
         </div>
 
@@ -97,79 +93,18 @@
         <div class="grid calendario-grid">
             <div class="dia-caja"><span class="dia-numero">25/02</span><span class="dia-monto">$35</span></div>
             <div class="dia-caja"><span class="dia-numero">26/02</span><span class="dia-monto">$385</span></div>
-            <div class="dia-caja hoy"><span class="dia-numero">01/03</span><span class="dia-monto">$476.50</span></div>
-            <div class="dia-caja"><span class="dia-numero">02/03</span><span class="dia-monto">🎚</span></div>
+            <div class="dia-caja"><span class="dia-numero">01/03</span><span class="dia-monto">$476.50</span></div>
+            <div class="dia-caja hoy"><span class="dia-numero">02/03</span><span class="dia-monto">$222.50</span></div>
         </div>
         
-        <p class="cita">"Y ni mi palabra ni mi predicación fue con palabras persuasivas de humana sabiduría..." (1 Cor. 2:4)</p>
+        <p class="cita">"La fe no está fundada en sabiduría de hombres, sino en el poder de Dios" (1 Cor. 2:5)</p>
     </div>
 
     <script>
-        function toggleAcordeon() {
-            const contenido = document.getElementById('bitacoraFeb');
+        function toggleAcordeon(id) {
+            const contenido = document.getElementById(id);
             contenido.classList.toggle('visible');
         }
     </script>
 </body>
 </html>
-        .visible { max-height: 500px; padding: 5px; border: 1px solid #1b5e20; }
-
-        table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 0.75rem; }
-        td { border-bottom: 1px solid #222; padding: 8px 4px; text-align: center; }
-        .monto-trans { color: #81d4fa; }
-        .monto-efec { color: #a5d6a7; }
-        .total-dia { background: #111; color: #4caf50; font-size: 1.1rem; font-weight: bold; }
-        
-        .calendario-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-top: 10px; }
-        .dia-caja { border: 1px solid #333; padding: 6px 2px; border-radius: 8px; background: #111; text-align: center; }
-        .dia-numero { font-size: 0.55rem; color: #888; display: block; }
-        .dia-monto { color: #4caf50; font-weight: bold; font-size: 0.7rem; }
-        .hoy { border-color: #ffcc00; box-shadow: inset 0 0 5px rgba(255, 204, 0, 0.2); }
-        p.cita { text-align: center; margin-top: 15px; font-style: italic; color: #4caf50; font-size: 0.6rem; }
-    </style>
-</head>
-<body>
-    <div class="tabernaculo">
-        <h1>SADV41 🎚 TURBO TIRE</h1>
-        
-        <div class="seccion-titulo">Producción: 1 de Marzo 2026</div>
-        <table>
-            <tr>
-                <td>Llantas</td>
-                <td>Tourador / Centara / Minerva</td>
-                <td class="monto-efec">+$418.50</td>
-            </tr>
-            <tr>
-                <td>Servicios</td>
-                <td>Balanceo / Rotación / Rep.</td>
-                <td class="monto-efec">+$58.00</td>
-            </tr>
-            <tr class="total-dia">
-                <td colspan="2">BALANCE ACTUAL</td>
-                <td>$476.50</td>
-            </tr>
-        </table>
-
-        <button class="seccion-titulo" onclick="toggleAcordeon()">▼ Bitácora de Febrero (Apuntes)</button>
-        <div id="bitacoraFeb" class="acordeon-contenido">
-            <table>
-                <thead>
-                    <tr style="color: #888; font-size: 0.6rem;">
-                        <td>Día</td>
-                        <td>Concepto Clave</td>
-                        <td>Monto</td>
-                    </tr>
-                </thead>
-                <tr><td>22</td><td>Consolidado Alexander</td><td>$3,201.00</td></tr>
-                <tr><td>23</td><td>Cierre Operativo (38 Llantas)</td><td>$180.50</td></tr>
-                <tr><td>24</td><td>Producción 185/60R15</td><td>$227.75</td></tr>
-                <tr><td>25</td><td>Venta DC-V ROAD</td><td>$35.00</td></tr>
-                <tr><td>26</td><td>4 Llantas AT2 + Balanceo</td><td>$385.00</td></tr>
-            </table>
-        </div>
-
-        <div class="seccion-titulo">Vista Rápida de Ciclo</div>
-        <div class="grid calendario-grid">
-            <div class="dia-caja"><span class="dia-numero">25/02</span><span class="dia-monto">$35</span></div>
-            <div class="dia-caja"><span class="dia-numero">26/02</span><span class="dia-monto">$385</span></div>
-            <div class
