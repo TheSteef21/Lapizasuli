@@ -30,7 +30,7 @@
         .monto-trans { color: #81d4fa; }
         .monto-efec { color: #a5d6a7; }
         .monto-artista { color: #f48fb1; font-weight: bold; }
-        .total-dia { background: #111; color: #4caf50; font-size: 1rem; font-weight: bold; }
+        .total-dia { background: #111; color: #4caf50; font-size: 0.9rem; font-weight: bold; }
         
         .calendario-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-top: 10px; }
         .dia-caja { border: 1px solid #333; padding: 6px 2px; border-radius: 8px; background: #111; text-align: center; }
@@ -44,37 +44,40 @@
     <div class="tabernaculo">
         <h1>SADV41 🎚 TURBO TIRE</h1>
         
-        <div class="seccion-titulo">CPA - LOGÍSTICA DE SEGURIDAD 02/03/2026</div>
+        <div class="seccion-titulo">CPA - PRODUCCIÓN COMPLETA 02/03/2026</div>
         <table>
-            <tr>
-                <td>Entrada Yappy</td>
-                <td>Cuenta Steven Dior</td>
-                <td class="monto-artista">+$620.00</td>
-            </tr>
-            <tr>
-                <td>Salida ACH</td>
-                <td>A: Alexander G. (Exento)</td>
-                <td style="color:#ff6b6b;">-$620.00</td>
-            </tr>
-            <tr class="total-dia">
-                <td colspan="2">PRODUCCIÓN TÉCNICA (EFE)</td>
-                <td class="monto-efec">+$222.50</td>
-            </tr>
+            <thead>
+                <tr>
+                    <th>Cant</th>
+                    <th>Concepto / Servicio</th>
+                    <th>Monto</th>
+                    <th>Pago</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>1</td><td>185/65R15 Grenlander</td><td class="monto-efec">$37.00</td><td>Efe</td></tr>
+                <tr><td>1</td><td>Reparación (Sedán)</td><td class="monto-efec">$3.00</td><td>Efe</td></tr>
+                <tr><td>2</td><td>175/70R14 + Bal + Rot</td><td class="monto-efec">$81.00</td><td>Efe</td></tr>
+                <tr><td>1</td><td>215/45R17 + Parche (+2%)</td><td class="monto-efec">$51.00</td><td>Yap</td></tr>
+                <tr><td>2</td><td>Llantas 165/65R13</td><td class="monto-efec">$48.00</td><td>Efe</td></tr>
+                <tr><td>1</td><td>Reparación Técnica</td><td class="monto-efec">$2.50</td><td>Efe</td></tr>
+                <tr><td>1</td><td>Entrada Intercesión Artist</td><td class="monto-artista">+$620.00</td><td>Yap</td></tr>
+                <tr><td>1</td><td>Salida Alexander (Exento)</td><td style="color:#ff6b6b;">-$620.00</td><td>ACH</td></tr>
+                <tr class="total-dia">
+                    <td colspan="2">TOTAL FLUJO BRUTO</td>
+                    <td colspan="2">$842.50</td>
+                </tr>
+                <tr class="total-dia" style="background: #1b5e20;">
+                    <td colspan="2">PRODUCCIÓN NETA (CPA)</td>
+                    <td colspan="2">$222.50</td>
+                </tr>
+            </tbody>
         </table>
 
         <button class="seccion-titulo" onclick="toggleAcordeon('bitacoraMarzo')">▼ Historial de Marzo</button>
         <div id="bitacoraMarzo" class="acordeon-contenido">
             <table>
-                <thead>
-                    <tr>
-                        <th>Cant</th>
-                        <th>Concepto / Servicio</th>
-                        <th>Monto</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>01/03</td><td>CPA Producción Bruta</td><td class="monto-efec">$476.50</td></tr>
-                </tbody>
+                <tr><td>01/03</td><td>CPA Producción Bruta</td><td class="monto-efec">$476.50</td></tr>
             </table>
         </div>
 
@@ -91,10 +94,10 @@
 
         <div class="seccion-titulo">Vista de Ciclo</div>
         <div class="grid calendario-grid">
-            <div class="dia-caja"><span class="dia-numero">25/02</span><span class="dia-monto">$35</span></div>
             <div class="dia-caja"><span class="dia-numero">26/02</span><span class="dia-monto">$385</span></div>
             <div class="dia-caja"><span class="dia-numero">01/03</span><span class="dia-monto">$476.50</span></div>
             <div class="dia-caja hoy"><span class="dia-numero">02/03</span><span class="dia-monto">$222.50</span></div>
+            <div class="dia-caja"><span class="dia-numero">03/03</span><span class="dia-monto">🎚</span></div>
         </div>
         
         <p class="cita">"La fe no está fundada en sabiduría de hombres, sino en el poder de Dios" (1 Cor. 2:5)</p>
