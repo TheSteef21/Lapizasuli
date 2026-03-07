@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabernáculo Digital :: Hub Principal SADV41</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+        :root {
+            --bg-deep: #050a15;
+            --bg-panel: rgba(11, 22, 44, 0.85);
+            --cyber-blue: #4fa8ff;
+            --cyber-gold: #d4b572;
+            --cyber-green: #00ff66;
+            --text-main: #a9c2d9;
+            --border-tech: 1px solid rgba(79, 168, 255, 0.3);
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            font-family: 'Share Tech Mono', monospace;
+            overflow-x: hidden;
+        }
+
+        /* Fondo de red neuronal / circuitos */
+        .cyber-background {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background-image: 
+                linear-gradient(rgba(5, 10, 21, 0.9), rgba(5, 10, 21, 0.9)),
+                repeating-linear-gradient(0deg, transparent, transparent 49px, rgba(79, 168, 255, 0.05) 50px),
+                repeating-linear-gradient(90deg, transparent, transparent 49px, rgba(79, 168, 255, 0.05) 50px);
+            z-index: -1;
+        }
+
+        .scanlines {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.1));
+            background-size: 100% 4px;
+            z-index: 1000;
+            pointer-events: none;
+        }
+
+        header {
+            background: rgba(5, 10, 21, 0.95);
+            border-bottom: var(--border-tech);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .header-title { color: var(--cyber-gold); font-size: 1.5rem; letter-spacing: 2px; text-transform: uppercase;}
+        .header-url { color: var(--text-main); opacity: 0.6; font-size: 0.9rem; }
+
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .panel-group {
+            background: var(--bg-panel);
+            border: var(--border-tech);
+            border-radius: 5px;
+            padding: 30px;
+            margin-bottom: 30px;
+            position: relative;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5), inset 0 0 10px rgba(79, 168, 255, 0.05);
+        }
+
+        h2 { 
+            color: var(--cyber-blue); 
+            border-bottom: 1px dashed var(--cyber-blue); 
+            padding-bottom: 10px; 
+            margin-top: 0; 
+            letter-spacing: 1px;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+        }
+        h2::before { content: '>'; margin-right: 10px; color: var(--cyber-green); }
+
+        /* Grid para los botones */
+        .btn-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .cyber-btn {
+            background: rgba(0, 35, 68, 0.5);
+            color: var(--text-main);
+            border: 1px solid rgba(79, 168, 255, 0.4);
+            padding: 12px 15px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            text-align: left;
+            border-radius: 3px;
+            transition: all 0.2s ease-in-out;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .cyber-btn::after {
+            content: '.html';
+            opacity: 0.3;
+            font-size: 0.7rem;
+        }
+
+        .cyber-btn:hover {
+            background: var(--cyber-blue);
+            color: #000;
+            border-color: var(--cyber-blue);
+            box-shadow: 0 0 15px rgba(79, 168, 255, 0.6);
+            transform: translateY(-2px);
+        }
+
+        /* Colores especiales por categoría */
+        .btn-mision { border-left: 3px solid var(--cyber-gold); }
+        .btn-estudio { border-left: 3px solid var(--cyber-green); }
+        .btn-herramienta { border-left: 3px solid #ff4f4f; }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--cyber-green);
+            font-size: 0.9rem;
+            border-top: var(--border-tech);
+            background: rgba(5, 10, 21, 0.95);
+            margin-top: 50px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="cyber-background"></div>
+    <div class="scanlines"></div>
+
+    <header>
+        <div class="header-title">ÍNDICE MAESTRO :: ATRIO</div>
+        <div class="header-url">SADV41 | Lapizasuli GitHub Repository 🎚️</div>
+    </header>
+
+    <div class="container">
+
+        <div class="panel-group">
+            <h2>NÚCLEO ESTRATÉGICO (MISIONES Y ESTRUCTURA)</h2>
+            <div class="btn-grid">
+                <a href="service.html" class="cyber-btn btn-mision">service</a>
+                <a href="central-hub.html" class="cyber-btn btn-mision">central-hub</a>
+                <a href="unificacion.html" class="cyber-btn btn-mision">unificacion</a>
+                <a href="xadv41.html" class="cyber-btn btn-mision">xadv41</a>
+                <a href="AGSADV41.html" class="cyber-btn btn-mision">AGSADV41</a>
+                <a href="GFSADV41.html" class="cyber-btn btn-mision">GFSADV41</a>
+                <a href="VASADV41.html" class="cyber-btn btn-mision">VASADV41</a>
+                <a href="Vision.html" class="cyber-btn btn-mision">Vision</a>
+                <a href="sadv41hindi.html" class="cyber-btn btn-mision">sadv41hindi</a>
+            </div>
+        </div>
+
+        <div class="panel-group">
+            <h2>SISTEMAS DE ESTUDIO (ESPIRITUAL)</h2>
+            <div class="btn-grid">
+                <a href="SPBible.html" class="cyber-btn btn-estudio">SPBible</a>
+                <a href="Pentateuco.html" class="cyber-btn btn-estudio">Pentateuco</a>
+                <a href="Palabra.html" class="cyber-btn btn-estudio">Palabra</a>
+                <a href="Los4enEspiritu.html" class="cyber-btn btn-estudio">Los4enEspiritu</a>
+                <a href="honores.html" class="cyber-btn btn-estudio">honores</a>
+                <a href="Geopo.html" class="cyber-btn btn-estudio">Geopo</a>
+            </div>
+        </div>
+
+        <div class="panel-group">
+            <h2>INTERFACES Y HERRAMIENTAS GLOBALES</h2>
+            <div class="btn-grid">
+                <a href="Calendario.html" class="cyber-btn btn-herramienta">Calendario</a>
+                <a href="calendario1.html" class="cyber-btn btn-herramienta">calendario1</a>
+                <a href="calendario2.html" class="cyber-btn btn-herramienta">calendario2</a>
+                <a href="calendario3.html" class="cyber-btn btn-herramienta">calendario3</a>
+                <a href="QRHALL.html" class="cyber-btn btn-herramienta">QRHALL</a>
+                <a href="certificados.html" class="cyber-btn btn-herramienta">certificados</a>
+                <a href="crear-certificado.html" class="cyber-btn btn-herramienta">crear-certificado</a>
+                <a href="StevenDiorFlowTime.html" class="cyber-btn btn-herramienta">StevenDiorFlowTime</a>
+                <a href="PagoUniversal.html" class="cyber-btn btn-herramienta">PagoUniversal</a>
+                <a href="Ruleta.html" class="cyber-btn btn-herramienta">Ruleta</a>
+                <a href="ruleta1.html" class="cyber-btn btn-herramienta">ruleta1</a>
+                <a href="RegistroPSH.html" class="cyber-btn btn-herramienta">RegistroPSH</a>
+                <a href="fact.html" class="cyber-btn btn-herramienta">fact</a>
+                <a href="factos.html" class="cyber-btn btn-herramienta">factos</a>
+            </div>
+        </div>
+
+        <div class="panel-group">
+            <h2>PROTOCOLOS SECUNDARIOS Y REGISTROS</h2>
+            <div class="btn-grid">
+                <a href="AAN.html" class="cyber-btn">AAN</a>
+                <a href="AMF.html" class="cyber-btn">AMF</a>
+                <a href="CJL.html" class="cyber-btn">CJL</a>
+                <a href="CMU.html" class="cyber-btn">CMU</a>
+                <a href="CPA.html" class="cyber-btn">CPA</a>
+                <a href="CPA1.html" class="cyber-btn">CPA1</a>
+                <a href="CPA0326.html" class="cyber-btn">CPA0326</a>
+                <a href="CSP.html" class="cyber-btn">CSP</a>
+                <a href="JDVSD.html" class="cyber-btn">JDVSD</a>
+                <a href="L4ES.html" class="cyber-btn">L4ES</a>
+                <a href="L4ESP.html" class="cyber-btn">L4ESP</a>
+                <a href="MDLE.html" class="cyber-btn">MDLE</a>
+                <a href="MHTT.html" class="cyber-btn">MHTT</a>
+                <a href="MetaF.html" class="cyber-btn">MetaF</a>
+                <a href="RDS.html" class="cyber-btn">RDS</a>
+                <a href="SEC.html" class="cyber-btn">SEC</a>
+                <a href="SPS.html" class="cyber-btn">SPS</a>
+                <a href="Top100.html" class="cyber-btn">Top100</a>
+                <a href="Tsat.html" class="cyber-btn">Tsat</a>
+                <a href="cémaco.html" class="cyber-btn">cémaco</a>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        [ ESTADO DE RED: ONLINE ] &nbsp;|&nbsp; 🗿 🇵🇦 🇺🇸 &nbsp;|&nbsp; SISTEMA SADV41
+    </footer>
+
+</body>
+</html>
