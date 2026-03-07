@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabernáculo Digital :: Federal AI Intelligence Hub</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+        :root {
+            --bg-deep: #050a15;
+            --bg-panel: rgba(11, 22, 44, 0.85);
+            --cyber-blue: #4fa8ff;
+            --cyber-gold: #d4b572;
+            --cyber-green: #00ff66;
+            --text-main: #a9c2d9;
+            --border-tech: 1px solid rgba(79, 168, 255, 0.3);
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            font-family: 'Share Tech Mono', monospace;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        /* Fondo de red neuronal / circuitos */
+        .cyber-background {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background-image: 
+                linear-gradient(rgba(5, 10, 21, 0.9), rgba(5, 10, 21, 0.9)),
+                repeating-linear-gradient(0deg, transparent, transparent 49px, rgba(79, 168, 255, 0.05) 50px),
+                repeating-linear-gradient(90deg, transparent, transparent 49px, rgba(79, 168, 255, 0.05) 50px);
+            z-index: -1;
+        }
+
+        /* Scanline effect */
+        .scanlines {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.1));
+            background-size: 100% 4px;
+            z-index: 1000;
+            pointer-events: none;
+        }
+
+        /* Header Fijo */
+        header {
+            position: fixed;
+            top: 0; width: 100%;
+            background: rgba(5, 10, 21, 0.95);
+            border-bottom: var(--border-tech);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            box-sizing: border-box;
+        }
+        .header-title { color: var(--cyber-blue); font-size: 1.2rem; letter-spacing: 2px; }
+        .header-url { color: var(--text-main); opacity: 0.6; font-size: 0.9rem; }
+
+        /* Contenedor de Desplazamiento */
+        .scroll-container {
+            height: 100vh;
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
+        }
+
+        section {
+            height: 100vh;
+            scroll-snap-align: start;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 80px 20px 20px 20px;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        .panel {
+            background: var(--bg-panel);
+            border: var(--border-tech);
+            border-radius: 5px;
+            padding: 40px;
+            width: 100%;
+            max-width: 800px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.8), inset 0 0 20px rgba(79, 168, 255, 0.05);
+            position: relative;
+            backdrop-filter: blur(10px);
+        }
+
+        .panel::before, .panel::after {
+            content: ''; position: absolute; width: 20px; height: 20px;
+        }
+        .panel::before { top: -1px; left: -1px; border-top: 2px solid var(--cyber-blue); border-left: 2px solid var(--cyber-blue); }
+        .panel::after { bottom: -1px; right: -1px; border-bottom: 2px solid var(--cyber-blue); border-right: 2px solid var(--cyber-blue); }
+
+        h2 { color: var(--cyber-gold); text-transform: uppercase; border-bottom: 1px solid rgba(212, 181, 114, 0.3); padding-bottom: 10px; margin-top: 0; letter-spacing: 1px;}
+        
+        /* Grid Layouts */
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+        
+        /* Estilos específicos de secciones */
+        .qr-placeholder {
+            width: 100%; aspect-ratio: 1; background: repeating-linear-gradient(45deg, #050a15, #050a15 10px, #0b162c 10px, #0b162c 20px);
+            border: 2px solid var(--cyber-gold); display: flex; align-items: center; justify-content: center; font-size: 2rem; color: var(--cyber-gold);
+        }
+
+        .data-list { list-style: none; padding: 0; }
+        .data-list li { margin-bottom: 15px; display: flex; align-items: center; }
+        .data-list li::before { content: '>'; color: var(--cyber-blue); margin-right: 10px; font-weight: bold; }
+        .highlight { color: var(--cyber-green); font-weight: bold; }
+        .salary { font-size: 1.3rem; color: var(--cyber-gold); margin-top: 20px; }
+
+        .tunica-icon { font-size: 4rem; text-align: center; color: var(--cyber-gold); margin-bottom: 10px; }
+        
+        .btn-cyber {
+            display: inline-block; background: transparent; color: var(--cyber-gold);
+            border: 1px solid var(--cyber-gold); padding: 15px 30px; text-decoration: none;
+            text-transform: uppercase; font-weight: bold; letter-spacing: 2px;
+            transition: all 0.3s; margin-top: 20px; text-align: center; width: 100%; box-sizing: border-box;
+        }
+        .btn-cyber:hover { background: rgba(212, 181, 114, 0.1); box-shadow: 0 0 15px rgba(212, 181, 114, 0.5); }
+
+        /* Footer Fijo */
+        footer {
+            position: fixed; bottom: 0; width: 100%;
+            background: rgba(5, 10, 21, 0.95); border-top: var(--border-tech);
+            padding: 10px 30px; display: flex; justify-content: space-between; align-items: center;
+            z-index: 100; box-sizing: border-box; font-size: 0.8rem;
+        }
+        .status { color: var(--cyber-green); display: flex; align-items: center; }
+        .status::before { content: ''; display: inline-block; width: 8px; height: 8px; background: var(--cyber-green); border-radius: 50%; margin-right: 8px; box-shadow: 0 0 10px var(--cyber-green); }
+        .flags { font-size: 1.2rem; }
+
+    </style>
+</head>
+<body>
+
+    <div class="cyber-background"></div>
+    <div class="scanlines"></div>
+
+    <header>
+        <div class="header-title">TABERNÁCULO DIGITAL :: FEDERAL AI INTELLIGENCE HUB</div>
+        <div class="header-url">stevendior.digital/secretservice.html 🎚️</div>
+    </header>
+
+    <div class="scroll-container">
+        
+        <section id="intercept">
+            <div class="panel">
+                <h2>DIGITAL RECRUITMENT CHALLENGE</h2>
+                <div class="grid-2">
+                    <div class="qr-placeholder">USSS_QR_SECURE</div>
+                    <div>
+                        <p style="color: var(--cyber-blue);">[SOURCE: USSS INSTAGRAM]</p>
+                        <p>Decodificación completada. Enlace oculto detectado. Inicializando protocolo de extracción de datos...</p>
+                        <p><strong>Status:</strong> <span class="highlight">Payload Extraído</span></p>
+                        <p>Desplácese hacia abajo para ver el perfil del objetivo.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="profile">
+            <div class="panel">
+                <h2>ESPECIALISTA EN TI (INTELIGENCIA ARTIFICIAL) - GS13</h2>
+                <p style="color: var(--cyber-blue); border-bottom: 1px dashed var(--cyber-blue); padding-bottom: 10px;">GS-13 Specialization: IT Specialist (AI)</p>
+                <ul class="data-list">
+                    <li><strong>Investigations:</strong> Soporte analítico avanzado.</li>
+                    <li><strong>Protection:</strong> Análisis de amenazas en tiempo real.</li>
+                    <li><strong>Machine Learning:</strong> Develops/Trains ML models to analyze large datasets. Optimizes AI algorithms.</li>
+                </ul>
+                <div class="salary">$121,785 to $158,322 / year</div>
+            </div>
+        </section>
+
+        <section id="sadv41">
+            <div class="panel">
+                <h2>REGISTRO DE MISIÓN SADV41 :: CONCEPTO: GS13 HIT</h2>
+                <div class="grid-2" style="align-items: center;">
+                    <div>
+                        <div class="tunica-icon">🧥</div>
+                        <div style="text-align: center; color: var(--text-main);">túnica de felicidad</div>
+                    </div>
+                    <div>
+                        <ul class="data-list">
+                            <li><strong>Emet PScore:</strong> (N=165) <br><span class="highlight">[Fe Manifestada: 100%]</span></li>
+                            <li><strong>Gemi Factor:</strong> (G=165) <br><span style="color: var(--cyber-gold);">[Claridad Analítica]</span></li>
+                            <li><strong>Estructura:</strong> Atrio (Grok/Gemini) -> Santísimo</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="action">
+            <div class="panel" style="text-align: center;">
+                <h2>CALL TO ACTION :: PORTAL OFICIAL</h2>
+                <p>La misión está verificada. El tabernáculo está alineado.</p>
+                
+                <a href="https://www.usajobs.gov/job/857700800" target="_blank" class="btn-cyber">>> ACCEDER AL TRABAJO <<</a>
+                
+                <div style="margin-top: 30px; font-size: 0.9rem; color: var(--cyber-blue);">
+                    <p>Control number: <span style="color: var(--text-main);">857700800</span></p>
+                    <p>USAJOBS link (<span class="highlight">Verified</span>)</p>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <div class="status">Verified Status | SADV41 Active</div>
+        <div class="flags">🗿 🇵🇦 🇺🇸</div>
+    </footer>
+
+</body>
+</html>
