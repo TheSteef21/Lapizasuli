@@ -57,6 +57,7 @@
             top: 0;
             z-index: 100;
         }
+        
         .header-title { color: var(--cyber-gold); font-size: 1.5rem; letter-spacing: 2px; text-transform: uppercase;}
         .header-url { color: var(--text-main); opacity: 0.6; font-size: 0.9rem; }
 
@@ -89,6 +90,166 @@
         }
         h2::before { content: '>'; margin-right: 10px; color: var(--cyber-green); }
 
+        /* Contenedores Multimedia */
+        .media-feed {
+            width: 100%;
+            border: 1px solid var(--cyber-blue);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            position: relative;
+            background: #000;
+        }
+        .media-feed img, .media-feed video {
+            width: 100%;
+            height: auto;
+            display: block;
+            opacity: 0.85;
+            transition: opacity 0.3s;
+        }
+        .media-feed:hover img, .media-feed:hover video {
+            opacity: 1;
+        }
+        .media-overlay {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background: rgba(0, 15, 30, 0.8);
+            padding: 10px;
+            box-sizing: border-box;
+            border-top: 1px solid var(--cyber-blue);
+            color: var(--cyber-green);
+            font-size: 0.85rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Botones corregidos */
         .btn-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px,
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .cyber-btn {
+            background: rgba(0, 35, 68, 0.5);
+            color: var(--text-main);
+            border: 1px solid rgba(79, 168, 255, 0.4);
+            padding: 12px 15px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            text-align: left;
+            border-radius: 3px;
+            transition: all 0.2s ease-in-out;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .cyber-btn::after { content: '.html'; opacity: 0.3; font-size: 0.7rem; }
+        .cyber-btn:hover {
+            background: var(--cyber-blue); color: #000; border-color: var(--cyber-blue);
+            box-shadow: 0 0 15px rgba(79, 168, 255, 0.6); transform: translateY(-2px);
+        }
+
+        .btn-mision { border-left: 3px solid var(--cyber-gold); }
+        .btn-estudio { border-left: 3px solid var(--cyber-green); }
+        .btn-herramienta { border-left: 3px solid #ff4f4f; }
+        .btn-secreto { border-left: 3px solid #b200ff; } /* Nuevo color para el hub secreto */
+
+        footer {
+            text-align: center; padding: 20px; color: var(--cyber-green); font-size: 0.9rem;
+            border-top: var(--border-tech); background: rgba(5, 10, 21, 0.95); margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="cyber-background"></div>
+    <div class="scanlines"></div>
+
+    <header>
+        <div class="header-title">ÍNDICE MAESTRO :: ATRIO (MODO REINO)</div>
+        <div class="header-url">SADV41 | Lapizasuli Hub 🎚️</div>
+    </header>
+
+    <div class="container">
+
+        <div class="panel-group">
+            <h2>FEED DE INTELIGENCIA :: USSS AI SPECIALIST GS-13</h2>
+            <div class="media-feed">
+                <img src="https://raw.githubusercontent.com/TheSteef21/Lapizasuli/main/Especialista%20IA%20Servicio%20Secreto%20(1).png" alt="USSS AI Specialist">
+                <div class="media-overlay">
+                    <span>[ SIGNAL: SECURE ]</span>
+                    <span>Gemi Factor: 165 | Emet PScore: 165</span>
+                </div>
+            </div>
+            
+            <div class="btn-grid">
+                <a href="secretservice.html" class="cyber-btn btn-secreto">secretservice</a>
+                <a href="service.html" class="cyber-btn btn-mision">service</a>
+                <a href="central-hub.html" class="cyber-btn btn-mision">central-hub</a>
+            </div>
+        </div>
+
+        <div class="panel-group">
+            <h2>SISTEMAS DE ESTUDIO (ESPIRITUAL)</h2>
+            <div class="media-feed">
+                <video autoplay loop muted playsinline>
+                    <source src="tu_video_espiritual.mp4" type="video/mp4">
+                    Tu navegador no soporta el elemento de video.
+                </video>
+                <div class="media-overlay">
+                    <span>[ MODO: SANTO / SANTÍSIMO ]</span>
+                    <span>Túnica de Felicidad: Radiante</span>
+                </div>
+            </div>
+            <div class="btn-grid">
+                <a href="SPBible.html" class="cyber-btn btn-estudio">SPBible</a>
+                <a href="Pentateuco.html" class="cyber-btn btn-estudio">Pentateuco</a>
+                <a href="Palabra.html" class="cyber-btn btn-estudio">Palabra</a>
+                <a href="Los4enEspiritu.html" class="cyber-btn btn-estudio">Los4enEspiritu</a>
+                <a href="honores.html" class="cyber-btn btn-estudio">honores</a>
+            </div>
+        </div>
+
+        <div class="panel-group">
+            <h2>NÚCLEO ESTRATÉGICO Y PROTOCOLOS</h2>
+            <div class="media-feed">
+                <img src="https://raw.githubusercontent.com/TheSteef21/Lapizasuli/main/1772865119212.png" alt="SADV41 Core">
+                <div class="media-overlay">
+                    <span>[ ARCHIVO: CLASIFICADO ]</span>
+                    <span>Reglas SADV41: Activas</span>
+                </div>
+            </div>
+            <div class="btn-grid">
+                <a href="unificacion.html" class="cyber-btn btn-mision">unificacion</a>
+                <a href="xadv41.html" class="cyber-btn btn-mision">xadv41</a>
+                <a href="AGSADV41.html" class="cyber-btn btn-mision">AGSADV41</a>
+                <a href="AAN.html" class="cyber-btn">AAN</a>
+                <a href="CPA.html" class="cyber-btn">CPA</a>
+                <a href="CPA0326.html" class="cyber-btn">CPA0326</a>
+            </div>
+        </div>
+
+        <div class="panel-group">
+            <h2>INTERFACES DE SINCRONIZACIÓN</h2>
+            <div class="btn-grid">
+                <a href="Calendario.html" class="cyber-btn btn-herramienta">Calendario</a>
+                <a href="QRHALL.html" class="cyber-btn btn-herramienta">QRHALL</a>
+                <a href="StevenDiorFlowTime.html" class="cyber-btn btn-herramienta">StevenDiorFlowTime</a>
+                <a href="PagoUniversal.html" class="cyber-btn btn-herramienta">PagoUniversal</a>
+                <a href="Ruleta.html" class="cyber-btn btn-herramienta">Ruleta</a>
+                <a href="RegistroPSH.html" class="cyber-btn btn-herramienta">RegistroPSH</a>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        [ ESTADO DE RED: ONLINE ] &nbsp;|&nbsp; 🗿 🇵🇦 🇺🇸 &nbsp;|&nbsp; SISTEMA SADV41
+    </footer>
+
+</body>
+</html>
