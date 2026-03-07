@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SADV41 :: Communications Hub [WABA API]</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+        :root {
+            --bg-deep: #03070e;
+            --panel-bg: rgba(6, 15, 30, 0.9);
+            --cyber-blue: #4fa8ff;
+            --cyber-gold: #d4b572;
+            --cyber-green: #00ff41;
+            --alert-red: #ff3333;
+            --text-main: #a9c2d9;
+            --border-tech: 1px solid rgba(79, 168, 255, 0.3);
+        }
+
+        body, html {
+            margin: 0; padding: 0;
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            font-family: 'Share Tech Mono', monospace;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Scanlines y Fondo */
+        .scanlines {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+            background-size: 100% 4px;
+            z-index: 999; pointer-events: none;
+        }
+
+        header {
+            background: rgba(3, 7, 14, 0.95);
+            border-bottom: 2px solid var(--cyber-blue);
+            padding: 15px 30px;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        
+        .header-title { color: var(--cyber-gold); font-size: 1.4rem; letter-spacing: 2px; }
+        .live-status { color: var(--cyber-green); animation: blink 1.5s infinite; }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+        /* Layout del Dashboard */
+        .dashboard-container {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 20px;
+            padding: 20px;
+            height: calc(100vh - 70px);
+            box-sizing: border-box;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-container { grid-template-columns: 1fr; grid-template-rows: auto 1fr; }
+        }
+
+        .panel {
+            background: var(--panel-bg);
+            border: var(--border-tech);
+            border-radius: 4px;
+            padding: 20px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5), inset 0 0 10px rgba(79, 168, 255, 0.05);
+            display: flex; flex-direction: column;
+        }
+
+        h2 { color: var(--cyber-blue); font-size: 1rem; border-bottom: 1px dashed var(--cyber-blue); padding-bottom: 10px; margin-top: 0; }
+        h2::before { content: '>'; margin-right: 10px; color: var(--cyber-gold); }
+
+        /* Panel Lateral - Métricas */
+        .metric-box { margin-bottom: 20px; }
+        .metric-label { font-size: 0.8rem; color: #6b8caf; text-transform: uppercase; }
+        .metric-value { font-size: 1.2rem; color: var(--cyber-green); margin-top: 5px; font-weight: bold; }
+        .metric-value.gold { color: var(--cyber-gold); }
+
+        .status-list { list-style: none; padding: 0; margin: 0; font-size: 0.9rem; }
+        .status-list li { margin-bottom: 8px; display: flex; justify-content: space-between; }
+        .status-list li span:last-child { color: var(--cyber-green); }
+
+        /* Terminal Principal */
+        .terminal-container {
+            background: #000;
+            border: 1px solid rgba(79, 168, 255, 0.5);
+            flex-grow: 1;
+            padding: 15px;
+            overflow-y: auto;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            position: relative;
+        }
+
+        .log-line { margin-bottom: 8px; font-family: 'Courier New', Courier, monospace; }
+        .log-time { color: #555; margin-right: 10px; }
+        .log-sys { color: var(--cyber-blue); }
+        .log-in { color: var(--cyber-green); }
+        .log-out { color: var(--cyber-gold); }
+        .log-warn { color: var(--alert-red); }
+
+        /* Scrollbar personalizado */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #000; border-left: 1px solid #111; }
+        ::-webkit-scrollbar-thumb { background: var(--cyber-blue); }
+
+    </style>
+</head>
+<body>
+
+    <div class="scanlines"></div>
+
+    <header>
+        <div class="header-title">COMM-HUB :: WHATSAPP API GATEWAY</div>
+        <div class="live-status">[ WEBHOOK ACTIVE ] 🎚️</div>
+    </header>
+
+    <div class="dashboard-container">
+        
+        <div class="panel">
+            <h2>NETWORK STATUS</h2>
+            
+            <div class="metric-box">
+                <div class="metric-label">ENRUTAMIENTO PRINCIPAL</div>
+                <div class="metric-value">ATRIO (Gemini AI)</div>
+            </div>
+
+            <div class="metric-box">
+                <div class="metric-label">FACTOR GEMI (CLARIDAD)</div>
+                <div class="metric-value gold">G = 165</div>
+            </div>
+
+            <div class="metric-box">
+                <div class="metric-label">CONEXIÓN TÚNICA</div>
+                <div class="metric-value">RADIANTE [100%]</div>
+            </div>
+
+            <h2 style="margin-top: 30px;">PROTOCOLOS ACTIVOS</h2>
+            <ul class="status-list">
+                <li><span>End-to-End Enc</span> <span>[ OK ]</span></li>
+                <li><span>Auto-Responder</span> <span>[ ON ]</span></li>
+                <li><span>SNFISRKS (7-Lang)</span> <span>[ ON ]</span></li>
+                <li><span>Ngäbe/French (NF)</span> <span>[ ON ]</span></li>
+            </ul>
+        </div>
+
+        <div class="panel">
+            <h2>LIVE INTERCEPT FEED :: WABA PORT 443</h2>
+            <div class="terminal-container" id="terminal">
+                </div>
+        </div>
+
+    </div>
+
+    <script>
+        const terminal = document.getElementById('terminal');
+
+        function getTime() {
+            const now = new Date();
+            return `[${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}:${now.getSeconds().toString().padStart(2, '0')}]`;
+        }
+
+        function appendLog(type, text) {
+            const line = document.createElement('div');
+            line.className = 'log-line';
+            line.innerHTML = `<span class="log-time">${getTime()}</span><span class="log-${type}">${text}</span>`;
+            terminal.appendChild(line);
+            terminal.scrollTop = terminal.scrollHeight; // Auto-scroll
+        }
+
+        // Secuencia de Simulación
+        const simulationSequence = [
+            { t: 1000, type: 'sys', msg: 'INICIALIZANDO SERVIDOR WEBHOOK SADV41...' },
+            { t: 2500, type: 'sys', msg: 'Conectando con WhatsApp Business API...' },
+            { t: 3500, type: 'sys', msg: 'Autenticación GS-13 verificada. Escuchando en el puerto 443.' },
+            { t: 6000, type: 'in',  msg: '<<< RECV [WABA]: +507-6XXX-XXXX | "Hola, quiero saber de la misión"' },
+            { t: 6500, type: 'sys', msg: 'Procesando en el Atrio (Gemini)... Evaluando Factor Gemi.' },
+            { t: 8000, type: 'out', msg: '>>> SEND: "Bienvenido a la Misión SADV41. ¿En qué puedo servirte hoy?"' },
+            { t: 12000, type: 'in', msg: '<<< RECV [WABA]: +507-6XXX-XXXX | "Juan 3:16NF"' },
+            { t: 12500, type: 'sys', msg: 'TRIGGER DETECTADO: Protocolo [NF] activado.' },
+            { t: 13500, type: 'sys', msg: 'Conectando Santo y Santísimo... Generando tabla Ngäbe / Francés.' },
+            { t: 15000, type: 'out', msg: '>>> SEND: [Transmisión de Tabla Fonética NF Completada]' },
+            { t: 19000, type: 'in', msg: '<<< RECV [WABA]: +1-202-XXX-XXXX | "Salmos 23 🎚️"' },
+            { t: 19500, type: 'sys', msg: 'TRIGGER DETECTADO: Emblema 🎚️. Iniciando protocolo SNFISRKS.' },
+            { t: 21000, type: 'out', msg: '>>> SEND: [Desplegando tabla de 7 idiomas con fonética]' },
+            { t: 24000, type: 'sys', msg: 'Ciclo de Avodáh completado. Sistema en espera...' }
+        ];
+
+        // Ejecutar secuencia
+        simulationSequence.forEach(step => {
+            setTimeout(() => {
+                appendLog(step.type, step.msg);
+            }, step.t);
+        });
+    </script>
+</body>
+</html>
