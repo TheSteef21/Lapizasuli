@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SADV41 - Content Bridge Test</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #1e1e1e;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 15px 0;
+            border-radius: 8px;
+            border: 1px solid #333;
+            background: #2d2d2d;
+            color: white;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-bottom: 10px;
+            transition: transform 0.2s;
+        }
+        .btn-6936 { background-color: #25D366; color: white; }
+        .btn-6164 { background-color: #34B7F1; color: white; }
+        button:active { transform: scale(0.98); }
+        .logo { font-size: 24px; margin-bottom: 10px; color: #ff3e3e; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="logo">SADV41 🎚</div>
+    <p>Pegue el link de YouTube para enviar la descarga:</p>
+    
+    <input type="text" id="ytUrl" placeholder="https://www.youtube.com/watch?v=...">
+    
+    <button class="btn-6936" onclick="sendToWA('50769362166')">
+        Enviar a 6936-2166
+    </button>
+    
+    <button class="btn-6164" onclick="sendToWA('50761644317')">
+        Enviar a 6164-4317
+    </button>
+</div>
+
+<script>
+    function sendToWA(phone) {
+        const url = document.getElementById('ytUrl').value;
+        if (!url) {
+            alert("Por favor, pegue un link primero.");
+            return;
+        }
+
+        // Aquí simulamos el enlace de descarga. 
+        // En una versión final, aquí llamarías a tu extractor.
+        const downloadLink = "https://www.ssyoutube.com/watch?v=" + extractID(url);
+        
+        const message = encodeURIComponent("SADV41 Bridge: Aquí tienes tu link de descarga para Brave:\n\n" + downloadLink);
+        
+        // Abre WhatsApp con el mensaje pre-cargado
+        window.open(`https://wa.me/${phone}?text=${message}`, '_blank');
+    }
+
+    function extractID(url) {
+        const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+        const match = url.match(regExp);
+        return (match && match[2].length === 11) ? match[2] : url;
+    }
+</script>
+
+</body>
+</html>
