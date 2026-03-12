@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SADV41 - Llantería Turbo Tire</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background: #080808; color: #fff; font-family: 'Inter', sans-serif; }
+        .glass-card { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); }
+        .accent-border { border-left: 4px solid #f3ba2f; }
+        input, select { background: #121212 !important; border: 1px solid #333 !important; color: white !important; }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+    <header class="max-w-6xl mx-auto mb-10 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div class="accent-border pl-4">
+            <h1 class="text-3xl font-black tracking-tighter uppercase">Llantería Turbo Tire</h1>
+            <p class="text-yellow-500 text-xs tracking-[0.3em] font-mono">STEVEN DIOR • SERVICIO TÉCNICO SADV41</p>
+        </div>
+        <div class="text-right">
+            <span class="text-[10px] text-gray-500 uppercase block">Ubicación</span>
+            <span class="text-sm font-bold">Burunga, Arraiján 🇵🇦</span>
+        </div>
+    </header>
+
+    <section class="max-w-6xl mx-auto glass-card rounded-3xl p-6 mb-8">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div>
+                <label class="block text-[10px] uppercase text-gray-500 mb-2">Medida (Rin)</label>
+                <select id="filterRin" class="w-full p-3 rounded-xl text-sm" onchange="filtrarInventario()">
+                    <option value="all">Todos los Rines</option>
+                    <option value="13">Rin 13</option>
+                    <option value="14">Rin 14</option>
+                    <option value="15">Rin 15</option>
+                    <option value="16">Rin 16</option>
+                    <option value="17">Rin 17</option>
+                </select>
+            </div>
+            <div>
+                <label class="block text-[10px] uppercase text-gray-500 mb-2">Precio Máximo</label>
+                <input type="number" id="filterPrice" placeholder="Ej: 80" class="w-full p-3 rounded-xl text-sm" oninput="filtrarInventario()">
+            </div>
+            <div>
+                <label class="block text-[10px] uppercase text-gray-500 mb-2">Tipo de Llanta</label>
+                <select id="filterType" class="w-full p-
