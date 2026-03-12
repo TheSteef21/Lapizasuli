@@ -1,0 +1,27 @@
+<div id="status-sadv41">
+    <h2>Canal de Declaración SADV41</h2>
+    <div id="datos">Conectando con el Atrio...</div>
+</div>
+
+<script>
+    async function cargarBalance() {
+        try {
+            const res = await fetch('/.netlify/functions/balance');
+            const data = await res.json();
+            
+            // Aquí filtramos solo lo que tiene saldo
+            const activos = data.balances.filter(b => parseFloat(b.free) > 0);
+            
+            let html = '<ul>';
+            activos.forEach(a => {
+                html += `<li><strong>${a.asset}:</strong> ${a.free}</li>`;
+            });
+            html += '</ul>';
+            
+            document.getElementById('datos').innerHTML = html;
+        } catch (e) {
+            document.getElementById('datos').innerHTML = "Esperando señal del Espíritu Santo...";
+        }
+    }
+    cargarBalance();
+</script>
