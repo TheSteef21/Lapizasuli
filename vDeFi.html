@@ -1,0 +1,27 @@
+<div style="background: #121212; color: #00ff00; padding: 20px; border-radius: 10px; font-family: monospace;">
+    <h2 style="color: #ffffff; border-bottom: 1px solid #333;">🎚 Declaración Financiera SADV41</h2>
+    <div id="pantalla-binance">Sincronizando con el Atrio...</div>
+    <p style="font-size: 0.8em; color: #888; margin-top: 15px;">ID: 8-901-2251 | Versión 2026.1</p>
+</div>
+
+<script>
+    async function actualizarFinanzas() {
+        try {
+            const respuesta = await fetch('/.netlify/functions/balance');
+            const data = await respuesta.json();
+            
+            // Filtramos activos con saldo real
+            const activos = data.balances.filter(coin => parseFloat(coin.free) > 0);
+            
+            let contenido = "";
+            activos.forEach(coin => {
+                contenido += `<p><strong>${coin.asset}:</strong> ${parseFloat(coin.free).toFixed(8)}</p>`;
+            });
+            
+            document.getElementById('pantalla-binance').innerHTML = contenido || "Sin saldos pendientes.";
+        } catch (error) {
+            document.getElementById('pantalla-binance').innerHTML = "Error de conexión: Verifica las llaves en Netlify.";
+        }
+    }
+    actualizarFinanzas();
+</script>
