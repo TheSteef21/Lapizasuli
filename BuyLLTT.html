@@ -45,3 +45,51 @@
             <div>
                 <label class="block text-[10px] uppercase text-gray-500 mb-2">Tipo de Llanta</label>
                 <select id="filterType" class="w-full p-
+<div class="w-full max-w-sm mt-8 p-6 atrio-card border-yellow-600/30">
+    <h3 class="text-xs font-bold tracking-widest text-yellow-500 mb-6 uppercase text-center">Numeraciones y Precios Actuales</h3>
+
+    <div class="overflow-hidden rounded-xl border border-white/10 bg-black/40">
+        <table class="w-full text-left text-[11px]">
+            <thead class="bg-white/5 text-gray-400 uppercase">
+                <tr>
+                    <th class="p-3">Medida</th>
+                    <th class="p-3">Estado</th>
+                    <th class="p-3 text-right">Precio</th>
+                </tr>
+            </thead>
+            <tbody id="tabla-llantas" class="divide-y divide-white/5 font-mono">
+                </tbody>
+        </table>
+    </div>
+
+    <p class="mt-6 text-[10px] text-gray-500 text-center leading-relaxed">
+        Precios sujetos a disponibilidad en <br> 
+        <span class="text-white font-bold">Burunga, Arraiján 🇵🇦</span>
+    </p>
+</div>
+
+<script>
+    // Datos registrados (puedes editarlos aquí o conectarlos a una base de datos)
+    const inventario = [
+        { rin: "13", medida: "175/70 R13", estado: "Nueva", precio: 35.00 },
+        { rin: "14", medida: "185/65 R14", estado: "Nueva", precio: 38.50 },
+        { rin: "15", medida: "195/65 R15", estado: "Nueva", precio: 40.00 },
+        { rin: "15", medida: "195/55 R15", estado: "Semi", precio: 25.00 },
+        { rin: "16", medida: "205/55 R16", estado: "Nueva", precio: 45.00 },
+        { rin: "17", medida: "225/45 R17", estado: "Nueva", precio: 55.00 }
+    ];
+
+    function cargarTabla() {
+        const tbody = document.getElementById('tabla-llantas');
+        tbody.innerHTML = inventario.map(item => `
+            <tr class="hover:bg-white/5 transition-colors">
+                <td class="p-3 text-white">${item.medida}</td>
+                <td class="p-3 text-gray-400">${item.estado}</td>
+                <td class="p-3 text-right text-yellow-500 font-bold">$${item.precio.toFixed(2)}</td>
+            </tr>
+        `).join('');
+    }
+
+    // Ejecutar al cargar la página
+    cargarTabla();
+</script>
