@@ -8,156 +8,141 @@
     <style>
         body { background: #080808; color: #fff; font-family: 'Inter', sans-serif; }
         .glass-card { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); }
+        .atrio-card { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 20px; }
         .accent-border { border-left: 4px solid #f3ba2f; }
-        input, select { background: #121212 !important; border: 1px solid #333 !important; color: white !important; }
+        input, select { background: #121212 !important; border: 1px solid #333 !important; color: white !important; outline: none; }
+        input:focus, select:focus { border-color: #f3ba2f !important; }
+        .animate-fade-in { animation: fadeIn 0.4s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body class="p-4 md:p-8">
 
-    <header class="max-w-6xl mx-auto mb-10 flex flex-col md:flex-row justify-between items-center gap-4">
+    <header class="max-w-4xl mx-auto mb-10 flex flex-col md:flex-row justify-between items-center gap-4">
         <div class="accent-border pl-4">
             <h1 class="text-3xl font-black tracking-tighter uppercase">Llantería Turbo Tire</h1>
             <p class="text-yellow-500 text-xs tracking-[0.3em] font-mono">STEVEN DIOR • SERVICIO TÉCNICO SADV41</p>
         </div>
-        <div class="text-right">
-            <span class="text-[10px] text-gray-500 uppercase block">Ubicación</span>
+        <div class="text-center md:text-right">
+            <span class="text-[10px] text-gray-500 uppercase block tracking-widest">Ubicación</span>
             <span class="text-sm font-bold">Burunga, Arraiján 🇵🇦</span>
         </div>
     </header>
 
-    <section class="max-w-6xl mx-auto glass-card rounded-3xl p-6 mb-8">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-            <div>
-                <label class="block text-[10px] uppercase text-gray-500 mb-2">Medida (Rin)</label>
-                <select id="filterRin" class="w-full p-3 rounded-xl text-sm" onchange="filtrarInventario()">
-                    <option value="all">Todos los Rines</option>
-                    <option value="13">Rin 13</option>
-                    <option value="14">Rin 14</option>
-                    <option value="15">Rin 15</option>
-                    <option value="16">Rin 16</option>
-                    <option value="17">Rin 17</option>
-                </select>
-            </div>
-            <div>
-                <label class="block text-[10px] uppercase text-gray-500 mb-2">Precio Máximo</label>
-                <input type="number" id="filterPrice" placeholder="Ej: 80" class="w-full p-3 rounded-xl text-sm" oninput="filtrarInventario()">
-            </div>
-            <div>
-                <label class="block text-[10px] uppercase text-gray-500 mb-2">Tipo de Llanta</label>
-                <select id="filterType" class="w-full p-
-<div class="w-full max-w-sm mt-8 p-6 atrio-card border-yellow-600/30">
-    <h3 class="text-xs font-bold tracking-widest text-yellow-500 mb-6 uppercase text-center">Numeraciones y Precios Actuales</h3>
-
-    <div class="overflow-hidden rounded-xl border border-white/10 bg-black/40">
-        <table class="w-full text-left text-[11px]">
-            <thead class="bg-white/5 text-gray-400 uppercase">
-                <tr>
-                    <th class="p-3">Medida</th>
-                    <th class="p-3">Estado</th>
-                    <th class="p-3 text-right">Precio</th>
-                </tr>
-            </thead>
-            <tbody id="tabla-llantas" class="divide-y divide-white/5 font-mono">
-                </tbody>
-        </table>
-    </div>
-
-    <p class="mt-6 text-[10px] text-gray-500 text-center leading-relaxed">
-        Precios sujetos a disponibilidad en <br> 
-        <span class="text-white font-bold">Burunga, Arraiján 🇵🇦</span>
-    </p>
-</div>
-
-<div class="w-full max-w-sm mx-auto p-6 atrio-card border-white/10 bg-black/20">
-    
-    <label class="text-[10px] text-gray-500 uppercase tracking-widest mb-2 block">Medida (Rin)</label>
-    <select id="select-rin" class="w-full bg-black border border-white/20 rounded-xl p-3 text-white mb-6 focus:border-yellow-500 outline-none">
-        <option value="all">Todos los Rines</option>
-        <option value="13">Rin 13</option>
-        <option value="14">Rin 14</option>
-        <option value="15">Rin 15</option>
-        <option value="16">Rin 16</option>
-    </select>
-
-    <label class="text-[10px] text-gray-500 uppercase tracking-widest mb-2 block">Precio Máximo ($)</label>
-    <input type="number" id="input-precio" placeholder="Ej: 80" class="w-full bg-black border border-white/20 rounded-xl p-3 text-white mb-6 focus:border-yellow-500 outline-none">
-
-    <div id="resultados-contenedor" class="space-y-4 mt-4">
-        <p class="text-center text-gray-600 text-xs">Selecciona un Rin para ver opciones...</p>
-    </div>
-</div>
-
-<script>
-    // Inventario Real de Llantería Turbo Tire
-    const inventario = [
-        { rin: "13", medida: "175/70 R13", tipo: "Nueva", precio: 35 },
-        { rin: "13", medida: "155/80 R13", tipo: "Nueva", precio: 32 },
-        { rin: "14", medida: "185/65 R14", tipo: "Nueva", precio: 38 },
-        { rin: "15", medida: "195/65 R15", tipo: "Nueva", precio: 40 },
-        { rin: "15", medida: "195/55 R15", tipo: "Semi", precio: 25 },
-        { rin: "16", medida: "205/55 R16", tipo: "Nueva", precio: 48 }
-    ];
-
-    const selectRin = document.getElementById('select-rin');
-    const inputPrecio = document.getElementById('input-precio');
-    const contenedor = document.getElementById('resultados-contenedor');
-
-    function filtrarLlantas() {
-        const rinSeleccionado = selectRin.value;
-        const precioMax = parseFloat(inputPrecio.value) || 999;
-
-        const filtradas = inventario.filter(llanta => {
-            const coincideRin = rinSeleccionado === "all" || llanta.rin === rinSeleccionado;
-            const coincidePrecio = llanta.precio <= precioMax;
-            return coincideRin && coincidePrecio;
-        });
-
-        if (filtradas.length > 0) {
-            contenedor.innerHTML = filtradas.map(llanta => `
-                <div class="p-4 rounded-xl border border-yellow-500/20 bg-yellow-500/5 flex justify-between items-center animate-fade-in">
-                    <div>
-                        <span class="block text-white font-bold text-sm">${llanta.medida}</span>
-                        <span class="text-[10px] text-gray-500 uppercase">${llanta.tipo}</span>
-                    </div>
-                    <div class="text-right">
-                        <span class="block text-yellow-500 font-bold">$${llanta.precio}</span>
-                        <button class="text-[9px] bg-white/10 px-2 py-1 rounded mt-1 uppercase">Pedir</button>
-                    </div>
+    <main class="max-w-4xl mx-auto space-y-8">
+        
+        <section class="glass-card rounded-3xl p-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label class="block text-[10px] uppercase text-gray-500 mb-2 tracking-widest">Medida (Rin)</label>
+                    <select id="select-rin" class="w-full p-3 rounded-xl text-sm">
+                        <option value="all">Todos los Rines</option>
+                        <option value="13">Rin 13</option>
+                        <option value="14">Rin 14</option>
+                        <option value="15">Rin 15</option>
+                        <option value="16">Rin 16</option>
+                        <option value="17">Rin 17</option>
+                    </select>
                 </div>
+                <div>
+                    <label class="block text-[10px] uppercase text-gray-500 mb-2 tracking-widest">Precio Máximo ($)</label>
+                    <input type="number" id="input-precio" placeholder="Ej: 80" class="w-full p-3 rounded-xl text-sm">
+                </div>
+            </div>
+        </section>
+
+        <section id="resultados-contenedor" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            </section>
+
+        <section class="atrio-card p-6 border-yellow-600/20">
+            <h3 class="text-xs font-bold tracking-widest text-yellow-500 mb-6 uppercase text-center">Inventario Completo</h3>
+            <div class="overflow-x-auto rounded-xl border border-white/10 bg-black/40">
+                <table class="w-full text-left text-[11px]">
+                    <thead class="bg-white/5 text-gray-400 uppercase">
+                        <tr>
+                            <th class="p-3">Medida</th>
+                            <th class="p-3">Estado</th>
+                            <th class="p-3 text-right">Precio</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-llantas" class="divide-y divide-white/5 font-mono">
+                        </tbody>
+                </table>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="mt-12 text-center text-gray-600 text-[10px] tracking-[0.4em] uppercase">
+        Origen 0 • Resistencia Espiritual • SADV41
+    </footer>
+
+    <script>
+        // ÚNICA FUENTE DE VERDAD: El Inventario
+        const inventario = [
+            { rin: "13", medida: "175/70 R13", estado: "Nueva", precio: 35 },
+            { rin: "13", medida: "155/80 R13", estado: "Nueva", precio: 32 },
+            { rin: "14", medida: "185/65 R14", estado: "Nueva", precio: 38 },
+            { rin: "15", medida: "195/65 R15", estado: "Nueva", precio: 40 },
+            { rin: "15", medida: "195/55 R15", estado: "Semi", precio: 25 },
+            { rin: "16", medida: "205/55 R16", estado: "Nueva", precio: 45 },
+            { rin: "17", medida: "225/45 R17", estado: "Nueva", precio: 55 }
+        ];
+
+        const selectRin = document.getElementById('select-rin');
+        const inputPrecio = document.getElementById('input-precio');
+        const contenedor = document.getElementById('resultados-contenedor');
+        const tablaBody = document.getElementById('tabla-llantas');
+
+        function actualizarVista() {
+            const rinSel = selectRin.value;
+            const precioMax = parseFloat(inputPrecio.value) || 999;
+
+            // Filtrar
+            const filtradas = inventario.filter(item => {
+                const matchRin = rinSel === "all" || item.rin === rinSel;
+                const matchPrecio = item.precio <= precioMax;
+                return matchRin && matchPrecio;
+            });
+
+            // Renderizar Tarjetas
+            if (filtradas.length > 0) {
+                contenedor.innerHTML = filtradas.map(item => `
+                    <div class="p-5 rounded-2xl glass-card border-yellow-500/20 flex justify-between items-center animate-fade-in">
+                        <div>
+                            <span class="block text-white font-black text-lg">${item.medida}</span>
+                            <span class="text-[10px] text-yellow-500 uppercase tracking-widest">${item.estado}</span>
+                        </div>
+                        <div class="text-right">
+                            <span class="block text-2xl font-black text-white">$${item.precio}</span>
+                            <a href="https://wa.me/50769362166?text=Hola%20Steven,%20me%20interesa%20la%20llanta%20${item.medida}" 
+                               target="_blank" 
+                               class="inline-block text-[9px] bg-yellow-500 text-black font-bold px-3 py-1 rounded-full mt-2 uppercase hover:bg-white transition-colors">
+                                Pedir
+                            </a>
+                        </div>
+                    </div>
+                `).join('');
+            } else {
+                contenedor.innerHTML = `<p class="col-span-full text-center text-gray-600 text-xs py-10">No hay llantas que coincidan con tu búsqueda.</p>`;
+            }
+
+            // Renderizar Tabla (Completa siempre)
+            tablaBody.innerHTML = inventario.map(item => `
+                <tr class="hover:bg-white/5 transition-colors">
+                    <td class="p-3 text-white font-bold">${item.medida}</td>
+                    <td class="p-3 text-gray-500">${item.estado}</td>
+                    <td class="p-3 text-right text-yellow-500 font-bold">$${item.precio.toFixed(2)}</td>
+                </tr>
             `).join('');
-        } else {
-            contenedor.innerHTML = `<p class="text-center text-gray-600 text-xs">No hay llantas con esas características.</p>`;
         }
-    }
 
-    // Escuchar cambios en los inputs
-    selectRin.addEventListener('change', filtrarLlantas);
-    inputPrecio.addEventListener('input', filtrarLlantas);
-</script>
+        // Eventos
+        selectRin.addEventListener('change', actualizarVista);
+        inputPrecio.addEventListener('input', actualizarVista);
 
-            
-<script>
-    // Datos registrados (puedes editarlos aquí o conectarlos a una base de datos)
-    const inventario = [
-        { rin: "13", medida: "175/70 R13", estado: "Nueva", precio: 35.00 },
-        { rin: "14", medida: "185/65 R14", estado: "Nueva", precio: 38.50 },
-        { rin: "15", medida: "195/65 R15", estado: "Nueva", precio: 40.00 },
-        { rin: "15", medida: "195/55 R15", estado: "Semi", precio: 25.00 },
-        { rin: "16", medida: "205/55 R16", estado: "Nueva", precio: 45.00 },
-        { rin: "17", medida: "225/45 R17", estado: "Nueva", precio: 55.00 }
-    ];
-
-    function cargarTabla() {
-        const tbody = document.getElementById('tabla-llantas');
-        tbody.innerHTML = inventario.map(item => `
-            <tr class="hover:bg-white/5 transition-colors">
-                <td class="p-3 text-white">${item.medida}</td>
-                <td class="p-3 text-gray-400">${item.estado}</td>
-                <td class="p-3 text-right text-yellow-500 font-bold">$${item.precio.toFixed(2)}</td>
-            </tr>
-        `).join('');
-    }
-
-    // Ejecutar al cargar la página
-    cargarTabla();
-</script>
+        // Carga inicial
+        actualizarVista();
+    </script>
+</body>
+</html>
