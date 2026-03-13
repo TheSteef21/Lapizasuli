@@ -3,109 +3,123 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SADV41 - Rastreo Espiritual</title>
-    
+    <title>SADV41 - Patrullaje Espiritual</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
     <style>
-        body { 
-            font-family: 'Segoe UI', sans-serif; 
-            background: #1a1a1a; 
-            color: white; 
-            text-align: center; 
-            margin: 0; 
-            padding: 20px; 
-        }
-        #map-container { 
-            height: 400px; 
-            width: 100%; 
-            border: 2px solid #555; 
-            margin-top: 20px;
-            border-radius: 10px;
-        }
-        .verse-box { 
-            background: #333; 
-            padding: 20px; 
-            border-radius: 10px; 
-            margin: 20px 10px; 
-            font-style: italic;
-            border-left: 5px solid #4CAF50;
-        }
-        button { 
-            background: #4CAF50; 
-            color: white; 
-            padding: 15px 30px; 
-            border: none; 
-            border-radius: 5px; 
-            font-size: 1.1em; 
-            cursor: pointer;
-            font-weight: bold;
-        }
-        button:active { transform: scale(0.98); }
+        body { font-family: 'Segoe UI', sans-serif; background: #000; color: white; text-align: center; margin: 0; padding: 15px; }
+        #map { height: 350px; width: 100%; border-radius: 15px; border: 2px solid #555; margin-bottom: 15px; }
+        .stats { display: flex; justify-content: space-around; background: #222; padding: 10px; border-radius: 10px; margin-bottom: 15px; }
+        .verse-box { background: #1a1a1a; padding: 15px; border-radius: 10px; border-left: 4px solid #fff; margin: 15px 0; font-style: italic; font-size: 0.9em; }
+        .controls { display: flex; gap: 10px; justify-content: center; }
+        button { padding: 15px 20px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; flex: 1; }
+        #btnStart { background: #0056b3; color: white; } /* Azul Panamá */
+        #btnEnd { background: #d32f2f; color: white; display: none; } /* Rojo Panamá */
+        #qr-code { margin-top: 15px; background: white; padding: 10px; display: none; inline-block; }
     </style>
 </head>
 <body>
 
-    <h1>Misión SADV41: Victoria sobre la Carne</h1>
-    <div id="status">Patrullaje espiritual activo...</div>
+    <h2>Misión SADV41: Victoria sobre la Carne</h2>
     
-    <div id="map-container"></div>
+    <div id="map"></div>
 
-    <div class="verse-box" id="verse">
-        "Caminad en el Espíritu, y no satisfagáis los deseos de la carne." - Gálatas 5:16
+    <div class="stats">
+        <div>Vel: <span id="speed">0</span> km/h</div>
+        <div>Dist: <span id="dist">0</span> m</div>
     </div>
 
-    <button onclick="enviarVictoria()">Enviar Reporte a WhatsApp</button>
+    <div class="verse-box" id="verse">"Caminad en el Espíritu..."</div>
+
+    <div class="controls">
+        <button id="btnStart" onclick="startPatrol()">EMPEZAR PATRULLAJE</button>
+        <button id="btnEnd" onclick="endPatrol()">FINALIZAR Y REPORTAR</button>
+    </div>
+
+    <div id="qr-result" style="margin-top:20px;"></div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
     <script>
-        // 1. Configuración del Mapa
-        let map = L.map('map-container').setView([8.9482, -79.6554], 15); 
+        let map, pathLine, userMarker;
+        let watchId, startTime, startCoords;
+        let points = [];
+        let totalDist = 0;
 
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: 'SADV41 🎚'
-        }).addTo(map);
-
-        let marker = L.marker([8.9482, -79.6554]).addTo(map);
-
-        // Actualizar ubicación real
-        if (navigator.geolocation) {
-            navigator.geolocation.watchPosition(position => {
-                const { latitude, longitude } = position.coords;
-                const newPos = [latitude, longitude];
-                map.setView(newPos, 16);
-                marker.setLatLng(newPos);
-            });
-        }
-
-        // 2. Lógica de Versículos de Batalla
-        const versiculosGuerra = [
-            "Porque no tenemos lucha contra sangre y carne, sino contra principados... - Efesios 6:12",
-            "Someteos, pues, a Dios; resistid al diablo, y huirá de vosotros. - Santiago 4:7",
-            "El espíritu a la verdad está dispuesto, pero la carne es débil. - Mateo 26:41",
-            "No seas vencido de lo malo, sino vence con el bien el mal. - Romanos 12:21",
-            "Caminad en el Espíritu, y no satisfagáis los deseos de la carne. - Gálatas 5:16"
+        const versiculos = [
+            "No tenemos lucha contra sangre y carne... - Efesios 6:12",
+            "Someteos a Dios; resistid al diablo... - Santiago 4:7",
+            "Vence con el bien el mal. - Romanos 12:21"
         ];
 
-        // Seleccionar uno al azar al cargar
-        window.onload = () => {
-            const index = Math.floor(Math.random() * versiculosGuerra.length);
-            document.getElementById('verse').innerText = versiculosGuerra[index];
-        };
+        // Inicializar Mapa
+        map = L.map('map').setView([8.948, -79.655], 15);
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png').addTo(map);
 
-        // 3. Función Enviar Victoria (WhatsApp API)
-        function enviarVictoria() {
-            const verso = document.getElementById('verse').innerText;
-            const numero = "50769362166"; 
+        function startPatrol() {
+            startTime = new Date();
+            document.getElementById('btnStart').style.display = 'none';
+            document.getElementById('btnEnd').style.display = 'block';
+            document.getElementById('verse').innerText = versiculos[Math.floor(Math.random()*versiculos.length)];
             
-            const mensaje = `*SADV41 - Reporte de Victoria*\n\n` +
-                            `📍 Ubicación: Arraiján (Patrullaje Espiritual)\n` +
-                            `📖 Verso: ${verso}\n\n` +
-                            `*Los ángeles acampan alrededor.* 🎚`;
+            if (navigator.geolocation) {
+                watchId = navigator.geolocation.watchPosition(updatePosition, null, {enableHighAccuracy: true});
+            }
+        }
+
+        function updatePosition(position) {
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+            const speed = (position.coords.speed || 0) * 3.6; // conv a km/h
+            const currentPos = [lat, lon];
+
+            if(!startCoords) startCoords = currentPos;
             
-            const whatsappUrl = `https://api.whatsapp.com/send?phone=${numero}&text=${encodeURIComponent(mensaje)}`;
+            document.getElementById('speed').innerText = speed.toFixed(1);
             
-            window.open(whatsappUrl, '_blank');
+            // Lógica de colores (Panamá) y borde blanco (Paz)
+            let color = speed > 5 ? "#d32f2f" : "#0056b3"; // Rojo si corre, Azul si camina
+            
+            if (points.length > 0) {
+                let lastPos = points[points.length - 1];
+                let d = map.distance(lastPos, currentPos);
+                totalDist += d;
+                document.getElementById('dist').innerText = totalDist.toFixed(0);
+
+                L.polyline([lastPos, currentPos], {
+                    color: "white", weight: 8, opacity: 0.5 // El borde de PAZ
+                }).addTo(map);
+
+                L.polyline([lastPos, currentPos], {
+                    color: color, weight: 4 // El rastro de PANAMÁ
+                }).addTo(map);
+            }
+
+            points.push(currentPos);
+            if(userMarker) map.removeLayer(userMarker);
+            userMarker = L.marker(currentPos).addTo(map);
+            map.panTo(currentPos);
+        }
+
+        function endPatrol() {
+            navigator.geolocation.clearWatch(watchId);
+            const endTime = new Date();
+            const duration = Math.round((endTime - startTime) / 60000);
+            const endCoords = points[points.length - 1];
+
+            const registro = `*SADV41 REPORT*\nInicio: ${startCoords}\nFin: ${endCoords}\nDist: ${totalDist.toFixed(0)}m\nTiempo: ${duration}min\nVerso: ${document.getElementById('verse').innerText}`;
+
+            // Generar QR para escaneo manual o PDF
+            document.getElementById('qr-result').innerHTML = "<b>QR DE REGISTRO INMORTAL:</b><br><div id='qrcode' style='display:inline-block; background:white; padding:10px;'></div>";
+            new QRCode(document.getElementById("qrcode"), { text: registro, width: 128, height: 128 });
+
+            // Enviar a WhatsApp
+            const url = `https://api.whatsapp.com/send?phone=50769362166&text=${encodeURIComponent(mensajeWhatsApp(registro))}`;
+            window.open(url, '_blank');
+        }
+
+        function mensajeWhatsApp(reg) {
+            return `*REGISTRO DE PATRULLAJE ESPIRITUAL*\n\n${reg}\n\n_La victoria es del Espíritu sobre la carne._ 🎚`;
         }
     </script>
 </body>
