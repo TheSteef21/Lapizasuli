@@ -29,7 +29,7 @@
         .verse-box { background: #1a1a1a; padding: 15px; border-radius: 10px; border-left: 4px solid #fff; margin: 15px 0; font-style: italic; font-size: 0.85em; }
         
         .controls { display: flex; flex-direction: column; gap: 10px; }
-        #wa-input { padding: 12px; border-radius: 8px; border: none; background: #222; color: #fff; text-align: center; font-size: 1em; }
+        #wa-input { padding: 12px; border-radius: 8px; border: none; background: #222; color: #fff; text-align: center; font-size: 1.1em; }
         
         button { padding: 15px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.3s; font-size: 1em; }
         #btnStart { background: #fff; color: #000; } 
@@ -60,10 +60,10 @@
         <div>Inc <span id="grade">0</span>%</div>
     </div>
 
-    <div class="verse-box" id="verse">Activa la brújula o gira el mapa con dos dedos. Al finalizar, el reporte se enviará a WhatsApp.</div>
+    <div class="verse-box" id="verse">Activa la brújula o gira el mapa. Al finalizar, se enviará el testimonio al 6936-2166.</div>
 
     <div class="controls">
-        <input type="tel" id="wa-input" placeholder="WhatsApp" value="50769362166">
+        <input type="tel" id="wa-input" placeholder="Tu número de identificación" value="50769362166">
         <button id="btnStart" onclick="startPatrol()">RECIBIR PIEDRITA BLANCA (INICIAR)</button>
         <button id="btnEnd" onclick="endPatrol()">ENTREGAR TESTIMONIO (FINALIZAR)</button>
     </div>
@@ -125,7 +125,7 @@
             const speed = (pos.coords.speed || 0) * 3.6;
             const currentPos = [lat, lon];
 
-            if (accuracy > 30) return;
+            if (accuracy > 35) return;
             if (!startCoords) startCoords = currentPos;
 
             if (points.length > 0) {
@@ -160,7 +160,7 @@
             document.getElementById('wa-input').style.display = 'none';
             document.getElementById('btnEnd').style.display = 'block';
             document.getElementById('qr-result').style.display = 'none';
-            document.getElementById('verse').innerText = "Patrullaje iniciado. El camino está siendo grabado.";
+            document.getElementById('verse').innerText = "Grabando testimonio...";
 
             if (navigator.geolocation) {
                 watchId = navigator.geolocation.watchPosition(updatePosition, null, { enableHighAccuracy: true });
@@ -169,27 +169,33 @@
 
         function endPatrol() {
             navigator.geolocation.clearWatch(watchId);
-            let phone = document.getElementById('wa-input').value;
+            
+            // Forzamos el envío al número de la misión SADV41
+            const numeroDestino = "50769362166"; 
             const duration = Math.round((new Date() - startTime) / 60000);
             const endPos = points[points.length - 1] || startCoords;
             
-            // URL de Google Maps corregida para mostrar la ruta desde el inicio al fin
+            // Enlace de Google Maps corregido
             const mapaUrl = `https://www.google.com/maps/dir/${startCoords[0]},${startCoords[1]}/${endPos[0]},${endPos[1]}`;
 
-            const registro = `*SADV41 - REPORTE DE VICTORIA*\n` +
-                             `ID: ${phone}\n` +
+            const registro = `*SADV41 - TESTIMONIO DE VICTORIA*\n` +
                              `📏 Distancia: ${totalDist.toFixed(0)}m\n` +
                              `🔥 Calorías: ${totalCalories.toFixed(2)}\n` +
                              `⏱ Tiempo: ${duration}min\n` +
-                             `🗺️ Recorrido: ${mapaUrl}`;
+                             `🗺️ Ruta: ${mapaUrl}`;
 
+            // Generar QR visual
             document.getElementById('qr-result').style.display = 'block';
             document.getElementById('qrcode').innerHTML = "";
             new QRCode(document.getElementById("qrcode"), { text: registro, width: 150, height: 150 });
 
-            // Generar enlace de WhatsApp y abrir
-            const waUrl = `https://wa.me/${phone}?text=${encodeURIComponent(registro + "\n\n_He vencido y el camino ha sido enderezado._ 🎚")}`;
-            window.location.href = waUrl; 
+            // ENLACE DIRECTO A WHATSAPP API
+            const finalWA = `https://api.whatsapp.com/send?phone=${numeroDestino}&text=${encodeURIComponent(registro + "\n\n_He vencido y el camino ha sido enderezado._ 🎚")}`;
+            
+            // Pequeño retardo para asegurar que el DOM se actualice antes del salto
+            setTimeout(() => {
+                window.location.href = finalWA;
+            }, 500);
         }
     </script>
 </body>
