@@ -18,25 +18,20 @@
             position: absolute; top: 10px; right: 10px; width: 50px; height: 50px; 
             background: rgba(0,0,0,0.8); border-radius: 50%; border: 2px solid #fff; 
             z-index: 1000; display: flex; align-items: center; justify-content: center; 
-            cursor: pointer; transition: 0.3s;
+            cursor: pointer;
         }
         #compass.active { border-color: #4CAF50; box-shadow: 0 0 10px #4CAF50; }
-        #compass-arrow { transition: transform 0.1s linear; color: #d32f2f; font-size: 1.5em; font-weight: bold; }
+        #compass-arrow { color: #d32f2f; font-size: 1.5em; font-weight: bold; }
 
         .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; background: #111; padding: 15px; border-radius: 10px; margin-bottom: 15px; border: 1px solid #333; }
-        .stats span { font-weight: bold; font-size: 1.1em; color: #4CAF50; display: block; }
+        .stats div { font-size: 0.8em; color: #888; }
+        .stats span { font-weight: bold; font-size: 1.2em; color: #4CAF50; display: block; }
         
         .verse-box { background: #1a1a1a; padding: 15px; border-radius: 10px; border-left: 4px solid #fff; margin: 15px 0; font-style: italic; font-size: 0.85em; }
         
-        .controls { display: flex; flex-direction: column; gap: 10px; }
-        #wa-input { padding: 12px; border-radius: 8px; border: none; background: #222; color: #fff; text-align: center; font-size: 1.1em; }
-        
-        button { padding: 15px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.3s; font-size: 1em; }
+        button { width: 100%; padding: 20px; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; font-size: 1.1em; transition: 0.2s; }
         #btnStart { background: #fff; color: #000; } 
         #btnEnd { background: #d32f2f; color: white; display: none; }
-        
-        #qr-result { margin-top: 15px; background: #fff; color: #000; padding: 15px; border-radius: 10px; display: none; }
-        #qrcode { margin-top: 10px; display: flex; justify-content: center; }
     </style>
 </head>
 <body>
@@ -60,46 +55,25 @@
         <div>Inc <span id="grade">0</span>%</div>
     </div>
 
-    <div class="verse-box" id="verse">Activa la brújula o gira el mapa. Al finalizar, se enviará el testimonio al 6936-2166.</div>
+    <div class="verse-box" id="verse">"Caminad en el Espíritu, y no satisfagáis los deseos de la carne." - Gálatas 5:16</div>
 
-    <div class="controls">
-        <input type="tel" id="wa-input" placeholder="Tu número de identificación" value="50769362166">
-        <button id="btnStart" onclick="startPatrol()">RECIBIR PIEDRITA BLANCA (INICIAR)</button>
-        <button id="btnEnd" onclick="endPatrol()">ENTREGAR TESTIMONIO (FINALIZAR)</button>
-    </div>
-
-    <div id="qr-result">
-        <div id="qr-header"><b>TU NOMBRE NUEVO (REGISTRO)</b></div>
-        <div id="qrcode"></div>
-    </div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <button id="btnStart" onclick="startPatrol()">RECIBIR PIEDRITA BLANCA (INICIAR)</button>
+    <button id="btnEnd" onclick="endPatrol()">ENTREGAR TESTIMONIO (FINALIZAR)</button>
 
     <script>
         let map, userMarker, watchId, startTime, startCoords;
         let points = [], totalDist = 0, lastAlt = null, totalCalories = 0;
         let isAutoRotating = false;
 
-        map = L.map('map', {
-            rotate: true,
-            touchRotate: true,
-            rotateControl: false
-        }).setView([8.948, -79.655], 18);
-
+        map = L.map('map', { rotate: true, touchRotate: true, rotateControl: false }).setView([8.948, -79.655], 18);
         L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png').addTo(map);
 
         function toggleAutoRotate() {
             if (typeof DeviceOrientationEvent.requestPermission === 'function') {
                 DeviceOrientationEvent.requestPermission().then(state => {
-                    if(state === 'granted') {
-                        isAutoRotating = !isAutoRotating;
-                        updateCompassUI();
-                    }
+                    if(state === 'granted') { isAutoRotating = !isAutoRotating; updateCompassUI(); }
                 });
-            } else {
-                isAutoRotating = !isAutoRotating;
-                updateCompassUI();
-            }
+            } else { isAutoRotating = !isAutoRotating; updateCompassUI(); }
         }
 
         function updateCompassUI() {
@@ -122,9 +96,7 @@
 
         function updatePosition(pos) {
             const { latitude: lat, longitude: lon, altitude: alt, accuracy } = pos.coords;
-            const speed = (pos.coords.speed || 0) * 3.6;
             const currentPos = [lat, lon];
-
             if (accuracy > 35) return;
             if (!startCoords) startCoords = currentPos;
 
@@ -133,16 +105,15 @@
                 let dH = map.distance(lastPos, currentPos);
                 let grade = (lastAlt !== null && alt !== null && dH > 2) ? ((alt - lastAlt) / dH) * 100 : 0;
                 let color = grade > 2 ? "#d32f2f" : "#0056b3";
-
-                L.polyline([lastPos, currentPos], { color: "white", weight: 8, opacity: 0.3 }).addTo(map);
-                L.polyline([lastPos, currentPos], { color: color, weight: 4 }).addTo(map);
+                
+                L.polyline([lastPos, currentPos], { color: color, weight: 5 }).addTo(map);
                 
                 totalDist += dH;
-                document.getElementById('speed').innerText = speed.toFixed(1);
+                document.getElementById('speed').innerText = ((pos.coords.speed || 0) * 3.6).toFixed(1);
                 document.getElementById('dist').innerText = totalDist.toFixed(0) + "m";
                 document.getElementById('alt').innerText = alt ? alt.toFixed(1) + "m" : "---";
-                document.getElementById('bpm').innerText = Math.round(70 + (speed * 3) + (grade > 0 ? grade * 4 : 0));
-                document.getElementById('cal').innerText = (totalCalories += (0.012 * (speed/3.6))).toFixed(2);
+                document.getElementById('bpm').innerText = Math.round(70 + ((pos.coords.speed || 0) * 10));
+                document.getElementById('cal').innerText = (totalCalories += (0.012 * (pos.coords.speed || 0))).toFixed(2);
                 document.getElementById('grade').innerText = grade.toFixed(1);
             }
 
@@ -157,11 +128,8 @@
             startTime = new Date();
             points = []; totalDist = 0; totalCalories = 0;
             document.getElementById('btnStart').style.display = 'none';
-            document.getElementById('wa-input').style.display = 'none';
             document.getElementById('btnEnd').style.display = 'block';
-            document.getElementById('qr-result').style.display = 'none';
-            document.getElementById('verse').innerText = "Grabando testimonio...";
-
+            document.getElementById('verse').innerText = "Grabando testimonio en tiempo real...";
             if (navigator.geolocation) {
                 watchId = navigator.geolocation.watchPosition(updatePosition, null, { enableHighAccuracy: true });
             }
@@ -169,33 +137,22 @@
 
         function endPatrol() {
             navigator.geolocation.clearWatch(watchId);
-            
-            // Forzamos el envío al número de la misión SADV41
             const numeroDestino = "50769362166"; 
             const duration = Math.round((new Date() - startTime) / 60000);
-            const endPos = points[points.length - 1] || startCoords;
+            const endPos = points.length > 0 ? points[points.length - 1] : startCoords;
             
-            // Enlace de Google Maps corregido
+            // Generación de URL de Google Maps Directa
             const mapaUrl = `https://www.google.com/maps/dir/${startCoords[0]},${startCoords[1]}/${endPos[0]},${endPos[1]}`;
 
-            const registro = `*SADV41 - TESTIMONIO DE VICTORIA*\n` +
+            const registro = `*SADV41 - INFORME DE VICTORIA*\n` +
                              `📏 Distancia: ${totalDist.toFixed(0)}m\n` +
                              `🔥 Calorías: ${totalCalories.toFixed(2)}\n` +
                              `⏱ Tiempo: ${duration}min\n` +
-                             `🗺️ Ruta: ${mapaUrl}`;
+                             `🗺️ Mapa: ${mapaUrl}\n\n` +
+                             `_He vencido y el rastro de la carne ha sido borrado._ 🎚`;
 
-            // Generar QR visual
-            document.getElementById('qr-result').style.display = 'block';
-            document.getElementById('qrcode').innerHTML = "";
-            new QRCode(document.getElementById("qrcode"), { text: registro, width: 150, height: 150 });
-
-            // ENLACE DIRECTO A WHATSAPP API
-            const finalWA = `https://api.whatsapp.com/send?phone=${numeroDestino}&text=${encodeURIComponent(registro + "\n\n_He vencido y el camino ha sido enderezado._ 🎚")}`;
-            
-            // Pequeño retardo para asegurar que el DOM se actualice antes del salto
-            setTimeout(() => {
-                window.location.href = finalWA;
-            }, 500);
+            // Redirección inmediata
+            window.location.href = `https://api.whatsapp.com/send?phone=${numeroDestino}&text=${encodeURIComponent(registro)}`;
         }
     </script>
 </body>
