@@ -3,156 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SADV41 - Apocalipsis 2:17</title>
-    
+    <title>SADV41 - Corona Incorruptible</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://unpkg.com/leaflet-rotate@0.2.8/dist/leaflet-rotate.js"></script>
-    
     <style>
         body { font-family: 'Segoe UI', sans-serif; background: #000; color: white; text-align: center; margin: 0; padding: 15px; overflow-x: hidden; }
-        #map-container { position: relative; width: 100%; height: 320px; border-radius: 15px; border: 2px solid #555; margin-bottom: 15px; overflow: hidden; }
+        #map-container { position: relative; width: 100%; height: 320px; border-radius: 15px; border: 2px solid #333; margin-bottom: 15px; overflow: hidden; }
         #map { height: 100%; width: 100%; }
-        
-        #compass { 
-            position: absolute; top: 10px; right: 10px; width: 50px; height: 50px; 
-            background: rgba(0,0,0,0.8); border-radius: 50%; border: 2px solid #fff; 
-            z-index: 1000; display: flex; align-items: center; justify-content: center; 
-            cursor: pointer;
-        }
-        #compass.active { border-color: #4CAF50; box-shadow: 0 0 10px #4CAF50; }
+        #compass { position: absolute; top: 10px; right: 10px; width: 45px; height: 45px; background: rgba(0,0,0,0.8); border-radius: 50%; border: 2px solid #fff; z-index: 1000; display: flex; align-items: center; justify-content: center; cursor: pointer; }
         #compass-arrow { color: #d32f2f; font-size: 1.5em; font-weight: bold; }
-
         .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; background: #111; padding: 15px; border-radius: 10px; margin-bottom: 15px; border: 1px solid #333; }
-        .stats div { font-size: 0.8em; color: #888; }
-        .stats span { font-weight: bold; font-size: 1.2em; color: #4CAF50; display: block; }
-        
-        .verse-box { background: #1a1a1a; padding: 15px; border-radius: 10px; border-left: 4px solid #fff; margin: 15px 0; font-style: italic; font-size: 0.85em; }
-        
-        button { width: 100%; padding: 20px; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; font-size: 1.1em; transition: 0.2s; }
-        #btnStart { background: #fff; color: #000; } 
+        .stats div { font-size: 0.75em; color: #888; }
+        .stats span { font-weight: bold; font-size: 1.1em; color: #4CAF50; display: block; }
+        .identity-box { background: #1a1a1a; padding: 15px; border-radius: 10px; margin-bottom: 15px; border: 1px solid #444; }
+        .input-group { display: flex; gap: 5px; justify-content: center; margin-top: 10px; }
+        input, select { padding: 10px; border-radius: 5px; border: none; background: #222; color: #fff; text-align: center; }
+        #user-id-display { font-family: monospace; font-size: 1.2em; color: #fff; letter-spacing: 2px; display: none; }
+        button { width: 100%; padding: 20px; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; font-size: 1.1em; transition: 0.3s; }
+        #btnStart { background: #fff; color: #000; }
         #btnEnd { background: #d32f2f; color: white; display: none; }
     </style>
 </head>
 <body>
 
     <h2 style="margin-bottom:5px;">Misión SADV41</h2>
-    <p style="font-size:0.8em; color:#888; margin-bottom:15px;">"Al que venciere... le daré una piedrita blanca" - Ap. 2:17</p>
+    <p style="font-size:0.7em; color:#666; margin-bottom:15px;">"Al que venciere... le daré una piedrita blanca" 🎚</p>
     
     <div id="map-container">
-        <div id="compass" onclick="toggleAutoRotate()">
-            <span id="compass-arrow">↑</span>
-        </div>
+        <div id="compass" onclick="toggleAutoRotate()"><span id="compass-arrow">↑</span></div>
         <div id="map"></div>
     </div>
 
     <div class="stats">
         <div>Vel <span id="speed">0</span></div>
         <div>Dist <span id="dist">0</span></div>
-        <div>Alt <span id="alt">0</span></div>
-        <div>BPM <span id="bpm">70</span></div>
-        <div>Cal <span id="cal">0</span></div>
         <div>Inc <span id="grade">0</span>%</div>
     </div>
 
-    <div class="verse-box" id="verse">"Caminad en el Espíritu, y no satisfagáis los deseos de la carne." - Gálatas 5:16</div>
+    <div class="identity-box">
+        <div id="id-selector">
+            <div class="input-group">
+                <select id="country-code">
+                    <option value="507">🇵🇦 +507</option>
+                    <option value="1">🇺🇸 +1</option>
+                    <option value="57">🇨🇴 +57</option>
+                    <option value="506">🇨🇷 +506</option>
+                    <option value="34">🇪🇸 +34</option>
+                    <option value="52">🇲🇽 +52</option>
+                </select>
+                <input type="tel" id="phone-input" placeholder="Tu WhatsApp" value="69362166">
+            </div>
+        </div>
+        <div id="user-id-display"></div>
+    </div>
 
     <button id="btnStart" onclick="startPatrol()">RECIBIR PIEDRITA BLANCA (INICIAR)</button>
     <button id="btnEnd" onclick="endPatrol()">ENTREGAR TESTIMONIO (FINALIZAR)</button>
 
     <script>
-        let map, userMarker, watchId, startTime, startCoords;
-        let points = [], totalDist = 0, lastAlt = null, totalCalories = 0;
-        let isAutoRotating = false;
+        let map, userMarker, watchId, startTime, startCoords, points = [], totalDist = 0, lastAlt = null, isAutoRotating = false;
+        let fullPhone = "";
 
         map = L.map('map', { rotate: true, touchRotate: true, rotateControl: false }).setView([8.948, -79.655], 18);
         L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png').addTo(map);
 
         function toggleAutoRotate() {
             if (typeof DeviceOrientationEvent.requestPermission === 'function') {
-                DeviceOrientationEvent.requestPermission().then(state => {
-                    if(state === 'granted') { isAutoRotating = !isAutoRotating; updateCompassUI(); }
-                });
+                DeviceOrientationEvent.requestPermission().then(s => { if(s === 'granted') { isAutoRotating = !isAutoRotating; updateCompassUI(); } });
             } else { isAutoRotating = !isAutoRotating; updateCompassUI(); }
         }
 
         function updateCompassUI() {
-            const el = document.getElementById('compass');
-            el.classList.toggle('active', isAutoRotating);
-            if (!isAutoRotating) {
-                document.getElementById('compass-arrow').style.transform = `rotate(0deg)`;
-                map.setBearing(0); 
-            }
+            document.getElementById('compass').style.borderColor = isAutoRotating ? "#4CAF50" : "#fff";
+            if (!isAutoRotating) { map.setBearing(0); document.getElementById('compass-arrow').style.transform = `rotate(0deg)`; }
         }
 
         window.addEventListener('deviceorientationabsolute', (e) => {
             if (!isAutoRotating) return;
             let alpha = e.webkitCompassHeading || e.alpha;
-            if (alpha !== null) {
-                document.getElementById('compass-arrow').style.transform = `rotate(${alpha}deg)`;
-                map.setBearing(alpha); 
-            }
+            if (alpha !== null) { document.getElementById('compass-arrow').style.transform = `rotate(${alpha}deg)`; map.setBearing(alpha); }
         }, true);
 
         function updatePosition(pos) {
-            const { latitude: lat, longitude: lon, altitude: alt, accuracy } = pos.coords;
+            const { latitude: lat, longitude: lon, altitude: alt, speed } = pos.coords;
             const currentPos = [lat, lon];
-            if (accuracy > 35) return;
             if (!startCoords) startCoords = currentPos;
-
             if (points.length > 0) {
                 let lastPos = points[points.length - 1];
                 let dH = map.distance(lastPos, currentPos);
                 let grade = (lastAlt !== null && alt !== null && dH > 2) ? ((alt - lastAlt) / dH) * 100 : 0;
-                let color = grade > 2 ? "#d32f2f" : "#0056b3";
-                
-                L.polyline([lastPos, currentPos], { color: color, weight: 5 }).addTo(map);
-                
+                L.polyline([lastPos, currentPos], { color: grade > 2 ? "#d32f2f" : "#0056b3", weight: 5 }).addTo(map);
                 totalDist += dH;
-                document.getElementById('speed').innerText = ((pos.coords.speed || 0) * 3.6).toFixed(1);
+                document.getElementById('speed').innerText = ((speed || 0) * 3.6).toFixed(1);
                 document.getElementById('dist').innerText = totalDist.toFixed(0) + "m";
-                document.getElementById('alt').innerText = alt ? alt.toFixed(1) + "m" : "---";
-                document.getElementById('bpm').innerText = Math.round(70 + ((pos.coords.speed || 0) * 10));
-                document.getElementById('cal').innerText = (totalCalories += (0.012 * (pos.coords.speed || 0))).toFixed(2);
                 document.getElementById('grade').innerText = grade.toFixed(1);
             }
-
-            lastAlt = alt;
-            points.push(currentPos);
+            lastAlt = alt; points.push(currentPos);
             if (userMarker) map.removeLayer(userMarker);
             userMarker = L.circleMarker(currentPos, { radius: 6, color: '#fff', fillColor: '#0056b3', fillOpacity: 1 }).addTo(map);
             map.panTo(currentPos);
         }
 
         function startPatrol() {
-            startTime = new Date();
-            points = []; totalDist = 0; totalCalories = 0;
+            const code = document.getElementById('country-code').value;
+            const num = document.getElementById('phone-input').value;
+            if (num.length < 7) { alert("Ingresa un número válido"); return; }
+            
+            fullPhone = code + num;
+            const hiddenId = "****" + num.slice(-4);
+            
+            document.getElementById('id-selector').style.display = 'none';
+            document.getElementById('user-id-display').innerText = "ID: " + hiddenId;
+            document.getElementById('user-id-display').style.display = 'block';
+            
+            startTime = new Date(); points = []; totalDist = 0;
             document.getElementById('btnStart').style.display = 'none';
             document.getElementById('btnEnd').style.display = 'block';
-            document.getElementById('verse').innerText = "Grabando testimonio en tiempo real...";
-            if (navigator.geolocation) {
-                watchId = navigator.geolocation.watchPosition(updatePosition, null, { enableHighAccuracy: true });
-            }
+            
+            if (navigator.geolocation) watchId = navigator.geolocation.watchPosition(updatePosition, null, { enableHighAccuracy: true });
         }
 
         function endPatrol() {
             navigator.geolocation.clearWatch(watchId);
-            const numeroDestino = "50769362166"; 
-            const duration = Math.round((new Date() - startTime) / 60000);
             const endPos = points.length > 0 ? points[points.length - 1] : startCoords;
-            
-            // Generación de URL de Google Maps Directa
             const mapaUrl = `https://www.google.com/maps/dir/${startCoords[0]},${startCoords[1]}/${endPos[0]},${endPos[1]}`;
+            
+            const msg = `*SADV41 - REGISTRO CONMEMORATIVO*\n👤 ID: ****${fullPhone.slice(-4)}\n📏 Distancia: ${totalDist.toFixed(0)}m\n🗺️ Mapa: ${mapaUrl}\n\n_Victoria sellada en el Espíritu._ 🎚`;
 
-            const registro = `*SADV41 - INFORME DE VICTORIA*\n` +
-                             `📏 Distancia: ${totalDist.toFixed(0)}m\n` +
-                             `🔥 Calorías: ${totalCalories.toFixed(2)}\n` +
-                             `⏱ Tiempo: ${duration}min\n` +
-                             `🗺️ Mapa: ${mapaUrl}\n\n` +
-                             `_He vencido y el rastro de la carne ha sido borrado._ 🎚`;
-
-            // Redirección inmediata
-            window.location.href = `https://api.whatsapp.com/send?phone=${numeroDestino}&text=${encodeURIComponent(registro)}`;
+            // Salto directo a WhatsApp con el número completo oculto pero funcional
+            window.location.href = `https://api.whatsapp.com/send?phone=${fullPhone}&text=${encodeURIComponent(msg)}`;
         }
     </script>
 </body>
