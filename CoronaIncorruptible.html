@@ -2,57 +2,111 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SADV41 - Rastreo Espiritual</title>
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
     <style>
-        body { font-family: 'Segoe UI', sans-serif; background: #1a1a1a; color: white; text-align: center; }
-        #map-container { margin: 20px auto; width: 90%; height: 300px; border: 2px solid #🎚; }
-        .verse-box { background: #333; padding: 20px; border-radius: 10px; margin: 10px; font-style: italic; }
-        button { background: #4CAF50; color: white; padding: 15px 30px; border: none; border-radius: 5px; font-size: 1.1em; }
+        body { 
+            font-family: 'Segoe UI', sans-serif; 
+            background: #1a1a1a; 
+            color: white; 
+            text-align: center; 
+            margin: 0; 
+            padding: 20px; 
+        }
+        #map-container { 
+            height: 400px; 
+            width: 100%; 
+            border: 2px solid #555; 
+            margin-top: 20px;
+            border-radius: 10px;
+        }
+        .verse-box { 
+            background: #333; 
+            padding: 20px; 
+            border-radius: 10px; 
+            margin: 20px 10px; 
+            font-style: italic;
+            border-left: 5px solid #4CAF50;
+        }
+        button { 
+            background: #4CAF50; 
+            color: white; 
+            padding: 15px 30px; 
+            border: none; 
+            border-radius: 5px; 
+            font-size: 1.1em; 
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button:active { transform: scale(0.98); }
     </style>
 </head>
 <body>
+
     <h1>Misión SADV41: Victoria sobre la Carne</h1>
-    <div id="status">Presiona para iniciar el patrullaje espiritual...</div>
-    <div id="map-container">
-        <img id="map-img" src="" alt="Mapa de la Batalla" style="display:none; width:100%;">
+    <div id="status">Patrullaje espiritual activo...</div>
+    
+    <div id="map-container"></div>
+
+    <div class="verse-box" id="verse">
+        "Caminad en el Espíritu, y no satisfagáis los deseos de la carne." - Gálatas 5:16
     </div>
-    <div class="verse-box" id="verse">"Caminad en el Espíritu, y no satisfagáis los deseos de la carne." - Gálatas 5:16</div>
+
     <button onclick="enviarVictoria()">Enviar Reporte a WhatsApp</button>
 
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        // 1. Configuración del Mapa
+        let map = L.map('map-container').setView([8.9482, -79.6554], 15); 
 
-<style>
-    #map-container { 
-        height: 400px; 
-        width: 100%; 
-        border: 2px solid #555; 
-        margin-top: 20px;
-    }
-</style>
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: 'SADV41 🎚'
+        }).addTo(map);
 
-<script>
-    let map = L.map('map-container').setView([8.94, -79.66], 13); // Centrado cerca de Arraiján
+        let marker = L.marker([8.9482, -79.6554]).addTo(map);
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: 'SADV41 - Patrullaje Espiritual'
-    }).addTo(map);
-
-    function iniciarRastreo() {
+        // Actualizar ubicación real
         if (navigator.geolocation) {
             navigator.geolocation.watchPosition(position => {
                 const { latitude, longitude } = position.coords;
-                map.setView([latitude, longitude], 16);
-                L.marker([latitude, longitude]).addTo(map)
-                    .bindPopup('Punto de Oración').openPopup();
+                const newPos = [latitude, longitude];
+                map.setView(newPos, 16);
+                marker.setLatLng(newPos);
             });
-        } else {
-            alert("El GPS no está activo en este dispositivo.");
         }
-    }
-    
-    // Iniciar automáticamente al cargar
-    window.onload = iniciarRastreo;
-</script>
+
+        // 2. Lógica de Versículos de Batalla
+        const versiculosGuerra = [
+            "Porque no tenemos lucha contra sangre y carne, sino contra principados... - Efesios 6:12",
+            "Someteos, pues, a Dios; resistid al diablo, y huirá de vosotros. - Santiago 4:7",
+            "El espíritu a la verdad está dispuesto, pero la carne es débil. - Mateo 26:41",
+            "No seas vencido de lo malo, sino vence con el bien el mal. - Romanos 12:21",
+            "Caminad en el Espíritu, y no satisfagáis los deseos de la carne. - Gálatas 5:16"
+        ];
+
+        // Seleccionar uno al azar al cargar
+        window.onload = () => {
+            const index = Math.floor(Math.random() * versiculosGuerra.length);
+            document.getElementById('verse').innerText = versiculosGuerra[index];
+        };
+
+        // 3. Función Enviar Victoria (WhatsApp API)
+        function enviarVictoria() {
+            const verso = document.getElementById('verse').innerText;
+            const numero = "50769362166"; 
+            
+            const mensaje = `*SADV41 - Reporte de Victoria*\n\n` +
+                            `📍 Ubicación: Arraiján (Patrullaje Espiritual)\n` +
+                            `📖 Verso: ${verso}\n\n` +
+                            `*Los ángeles acampan alrededor.* 🎚`;
+            
+            const whatsappUrl = `https://api.whatsapp.com/send?phone=${numero}&text=${encodeURIComponent(mensaje)}`;
+            
+            window.open(whatsappUrl, '_blank');
+        }
+    </script>
 </body>
 </html>
