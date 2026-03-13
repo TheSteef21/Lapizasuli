@@ -8,13 +8,16 @@
     <style>
         body { font-family: 'Segoe UI', sans-serif; background: #000; color: white; text-align: center; margin: 0; padding: 15px; }
         #map { height: 350px; width: 100%; border-radius: 15px; border: 2px solid #555; margin-bottom: 15px; }
-        .stats { display: flex; justify-content: space-around; background: #222; padding: 10px; border-radius: 10px; margin-bottom: 15px; }
-        .verse-box { background: #1a1a1a; padding: 15px; border-radius: 10px; border-left: 4px solid #fff; margin: 15px 0; font-style: italic; font-size: 0.9em; }
+        .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; background: #222; padding: 15px; border-radius: 10px; margin-bottom: 15px; font-size: 0.85em; }
+        .stats div { display: flex; flex-direction: column; }
+        .stats span { font-weight: bold; font-size: 1.2em; color: #4CAF50; }
+        .verse-box { background: #1a1a1a; padding: 15px; border-radius: 10px; border-left: 4px solid #fff; margin: 15px 0; font-style: italic; font-size: 0.9em; min-height: 40px; }
         .controls { display: flex; gap: 10px; justify-content: center; }
-        button { padding: 15px 20px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; flex: 1; }
+        button { padding: 15px 20px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; flex: 1; transition: 0.3s; }
         #btnStart { background: #0056b3; color: white; } /* Azul Panamá */
         #btnEnd { background: #d32f2f; color: white; display: none; } /* Rojo Panamá */
-        #qr-code { margin-top: 15px; background: white; padding: 10px; display: none; inline-block; }
+        #qr-result { margin-top: 15px; }
+        #qrcode { display: inline-block; background: white; padding: 10px; border-radius: 5px; }
     </style>
 </head>
 <body>
@@ -24,79 +27,122 @@
     <div id="map"></div>
 
     <div class="stats">
-        <div>Vel: <span id="speed">0</span> km/h</div>
-        <div>Dist: <span id="dist">0</span> m</div>
+        <div>Vel <span><span id="speed">0</span> <small>km/h</small></span></div>
+        <div>Dist <span><span id="dist">0</span> <small>m</small></span></div>
+        <div>Alt <span><span id="alt">0</span> <small>m</small></span></div>
+        <div>BPM <span><span id="bpm">70</span></span></div>
+        <div>Cal <span><span id="cal">0</span></span></div>
+        <div>Inclin. <span><span id="grade">0</span>%</span></div>
     </div>
 
-    <div class="verse-box" id="verse">"Caminad en el Espíritu..."</div>
+    <div class="verse-box" id="verse">"Presiona Iniciar para recibir la guianza..."</div>
 
     <div class="controls">
         <button id="btnStart" onclick="startPatrol()">EMPEZAR PATRULLAJE</button>
         <button id="btnEnd" onclick="endPatrol()">FINALIZAR Y REPORTAR</button>
     </div>
 
-    <div id="qr-result" style="margin-top:20px;"></div>
+    <div id="qr-result"></div>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
     <script>
-        let map, pathLine, userMarker;
+        let map, userMarker;
         let watchId, startTime, startCoords;
         let points = [];
         let totalDist = 0;
+        let lastAlt = null;
+        let totalCalories = 0;
 
         const versiculos = [
             "No tenemos lucha contra sangre y carne... - Efesios 6:12",
             "Someteos a Dios; resistid al diablo... - Santiago 4:7",
-            "Vence con el bien el mal. - Romanos 12:21"
+            "Vence con el bien el mal. - Romanos 12:21",
+            "Caminad en el Espíritu, y no satisfagáis los deseos de la carne. - Gálatas 5:16",
+            "Todo lo puedo en Cristo que me fortalece. - Filipenses 4:13"
         ];
 
-        // Inicializar Mapa
+        // Inicializar Mapa centrado en Arraiján
         map = L.map('map').setView([8.948, -79.655], 15);
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png').addTo(map);
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+            attribution: 'SADV41 🎚'
+        }).addTo(map);
 
         function startPatrol() {
             startTime = new Date();
+            points = [];
+            totalDist = 0;
+            totalCalories = 0;
             document.getElementById('btnStart').style.display = 'none';
             document.getElementById('btnEnd').style.display = 'block';
-            document.getElementById('verse').innerText = versiculos[Math.floor(Math.random()*versiculos.length)];
+            document.getElementById('qr-result').innerHTML = "";
+            document.getElementById('verse').innerText = versiculos[Math.floor(Math.random() * versiculos.length)];
             
             if (navigator.geolocation) {
-                watchId = navigator.geolocation.watchPosition(updatePosition, null, {enableHighAccuracy: true});
+                watchId = navigator.geolocation.watchPosition(updatePosition, handleError, {
+                    enableHighAccuracy: true,
+                    maximumAge: 0
+                });
+            } else {
+                alert("GPS no soportado en este dispositivo.");
             }
         }
 
         function updatePosition(position) {
             const lat = position.coords.latitude;
             const lon = position.coords.longitude;
-            const speed = (position.coords.speed || 0) * 3.6; // conv a km/h
+            const alt = position.coords.altitude; 
+            const speed = (position.coords.speed || 0) * 3.6; 
             const currentPos = [lat, lon];
 
-            if(!startCoords) startCoords = currentPos;
+            if (!startCoords) startCoords = currentPos;
             
+            // 1. CÁLCULO DE PENDIENTE E INCLINACIÓN
+            let grade = 0;
+            if (points.length > 0 && lastAlt !== null && alt !== null) {
+                let distH = map.distance(points[points.length - 1], currentPos);
+                if (distH > 1) { // Evitar ruido de GPS
+                    grade = ((alt - lastAlt) / distH) * 100;
+                    totalDist += distH;
+                }
+            }
+            lastAlt = alt;
+
+            // 2. PREDICCIÓN DE ESFUERZO (BPM y Calorías)
+            let predictedBPM = 70 + (speed * 4) + (grade > 0 ? grade * 8 : 0);
+            if (predictedBPM > 190) predictedBPM = 190;
+
+            let calPerSec = (0.01 * speed) + (grade > 0 ? 0.05 * grade : 0.005);
+            totalCalories += calPerSec;
+
+            // Actualizar Interfaz
             document.getElementById('speed').innerText = speed.toFixed(1);
-            
-            // Lógica de colores (Panamá) y borde blanco (Paz)
-            let color = speed > 5 ? "#d32f2f" : "#0056b3"; // Rojo si corre, Azul si camina
-            
+            document.getElementById('dist').innerText = totalDist.toFixed(0);
+            document.getElementById('alt').innerText = alt ? alt.toFixed(1) : "---";
+            document.getElementById('bpm').innerText = Math.round(predictedBPM);
+            document.getElementById('cal').innerText = totalCalories.toFixed(2);
+            document.getElementById('grade').innerText = grade.toFixed(1);
+
+            // 3. LÓGICA DE COLORES (Panamá) Y PAZ (Borde Blanco)
+            let color = grade > 2 ? "#d32f2f" : "#0056b3"; 
+
             if (points.length > 0) {
                 let lastPos = points[points.length - 1];
-                let d = map.distance(lastPos, currentPos);
-                totalDist += d;
-                document.getElementById('dist').innerText = totalDist.toFixed(0);
-
+                
+                // Borde Blanco - Paz del Espíritu Santo
                 L.polyline([lastPos, currentPos], {
-                    color: "white", weight: 8, opacity: 0.5 // El borde de PAZ
+                    color: "white", weight: 10, opacity: 0.3
                 }).addTo(map);
 
+                // Línea Central - Identidad Panameña/Esfuerzo
                 L.polyline([lastPos, currentPos], {
-                    color: color, weight: 4 // El rastro de PANAMÁ
+                    color: color, weight: 5
                 }).addTo(map);
             }
 
             points.push(currentPos);
-            if(userMarker) map.removeLayer(userMarker);
+            if (userMarker) map.removeLayer(userMarker);
             userMarker = L.marker(currentPos).addTo(map);
             map.panTo(currentPos);
         }
@@ -105,21 +151,35 @@
             navigator.geolocation.clearWatch(watchId);
             const endTime = new Date();
             const duration = Math.round((endTime - startTime) / 60000);
-            const endCoords = points[points.length - 1];
+            const endCoords = points.length > 0 ? points[points.length - 1] : startCoords;
 
-            const registro = `*SADV41 REPORT*\nInicio: ${startCoords}\nFin: ${endCoords}\nDist: ${totalDist.toFixed(0)}m\nTiempo: ${duration}min\nVerso: ${document.getElementById('verse').innerText}`;
+            const registro = `*SADV41 REPORT*\n` +
+                             `📍 Ini: ${startCoords}\n` +
+                             `📍 Fin: ${endCoords}\n` +
+                             `📏 Dist: ${totalDist.toFixed(0)}m\n` +
+                             `⛰ Alt Final: ${lastAlt ? lastAlt.toFixed(1) : 'N/A'}m\n` +
+                             `🔥 Cal: ${totalCalories.toFixed(2)}\n` +
+                             `⏱ Tiempo: ${duration}min\n` +
+                             `📖 Verso: ${document.getElementById('verse').innerText}`;
 
-            // Generar QR para escaneo manual o PDF
-            document.getElementById('qr-result').innerHTML = "<b>QR DE REGISTRO INMORTAL:</b><br><div id='qrcode' style='display:inline-block; background:white; padding:10px;'></div>";
+            // Generar QR
+            document.getElementById('qr-result').innerHTML = "<b>REGISTRO INMORTAL (QR):</b><br><div id='qrcode'></div>";
             new QRCode(document.getElementById("qrcode"), { text: registro, width: 128, height: 128 });
 
             // Enviar a WhatsApp
             const url = `https://api.whatsapp.com/send?phone=50769362166&text=${encodeURIComponent(mensajeWhatsApp(registro))}`;
             window.open(url, '_blank');
+            
+            document.getElementById('btnStart').style.display = 'block';
+            document.getElementById('btnEnd').style.display = 'none';
         }
 
         function mensajeWhatsApp(reg) {
             return `*REGISTRO DE PATRULLAJE ESPIRITUAL*\n\n${reg}\n\n_La victoria es del Espíritu sobre la carne._ 🎚`;
+        }
+
+        function handleError(error) {
+            console.warn(`ERROR(${error.code}): ${error.message}`);
         }
     </script>
 </body>
