@@ -4,31 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SADV41 - Corona Incorruptible</title>
+    
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://unpkg.com/leaflet-rotate@0.2.8/dist/leaflet-rotate.js"></script>
+    
     <style>
         body { font-family: 'Segoe UI', sans-serif; background: #000; color: white; text-align: center; margin: 0; padding: 15px; overflow-x: hidden; }
-        #map-container { position: relative; width: 100%; height: 300px; border-radius: 15px; border: 2px solid #333; margin-bottom: 10px; overflow: hidden; }
+        #map-container { position: relative; width: 100%; height: 320px; border-radius: 15px; border: 2px solid #333; margin-bottom: 10px; overflow: hidden; }
         #map { height: 100%; width: 100%; }
-        #compass { position: absolute; top: 10px; right: 10px; width: 40px; height: 40px; background: rgba(0,0,0,0.8); border-radius: 50%; border: 2px solid #fff; z-index: 1000; display: flex; align-items: center; justify-content: center; cursor: pointer; }
-        #compass-arrow { color: #d32f2f; font-size: 1.2em; font-weight: bold; }
-        .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; background: #111; padding: 12px; border-radius: 10px; margin-bottom: 10px; border: 1px solid #333; font-size: 0.75em; }
-        .stats div { color: #888; }
+        
+        #compass { position: absolute; top: 10px; right: 10px; width: 45px; height: 45px; background: rgba(0,0,0,0.8); border-radius: 50%; border: 2px solid #fff; z-index: 1000; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+        #compass-arrow { transition: transform 0.1s linear; color: #d32f2f; font-size: 1.5em; font-weight: bold; }
+
+        .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; background: #111; padding: 15px; border-radius: 10px; margin-bottom: 15px; border: 1px solid #333; }
+        .stats div { font-size: 0.75em; color: #888; }
         .stats span { font-weight: bold; font-size: 1.1em; color: #4CAF50; display: block; }
-        .identity-box { background: #1a1a1a; padding: 10px; border-radius: 10px; margin-bottom: 10px; }
-        .input-group { display: flex; gap: 5px; justify-content: center; }
-        input, select { padding: 8px; border-radius: 5px; border: none; background: #222; color: #fff; text-align: center; font-size: 0.9em; }
-        #verse-display { background: #1a1a1a; padding: 12px; border-radius: 10px; border-left: 4px solid #fff; margin: 10px 0; font-style: italic; font-size: 0.85em; min-height: 40px; transition: 0.5s; }
-        button { width: 100%; padding: 18px; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; font-size: 1em; }
-        #btnStart { background: #fff; color: #000; }
+        
+        .verse-box { background: #1a1a1a; padding: 15px; border-radius: 10px; border-left: 4px solid #fff; margin: 15px 0; font-style: italic; font-size: 0.85em; min-height: 40px; }
+        
+        .identity-box { background: #1a1a1a; padding: 15px; border-radius: 10px; margin-bottom: 15px; border: 1px solid #444; }
+        .input-group { display: flex; gap: 5px; justify-content: center; margin-top: 10px; }
+        input, select { padding: 12px; border-radius: 8px; border: none; background: #222; color: #fff; text-align: center; font-size: 1em; }
+        
+        button { width: 100%; padding: 20px; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; font-size: 1.1em; transition: 0.3s; }
+        #btnStart { background: #fff; color: #000; } 
         #btnEnd { background: #d32f2f; color: white; display: none; }
+        
+        #user-id-display { font-family: monospace; font-size: 1.2em; color: #fff; letter-spacing: 2px; display: none; padding: 10px; }
     </style>
 </head>
 <body>
 
-    <h2 style="margin:0 0 5px 0;">Misión SADV41</h2>
-    <p style="font-size:0.7em; color:#666; margin-bottom:10px;">"Al que venciere... le daré una piedrita blanca" 🎚</p>
+    <h2 style="margin-bottom:5px;">Misión SADV41</h2>
+    <p style="font-size:0.8em; color:#888; margin-bottom:15px;">"Al que venciere... le daré una piedrita blanca" 🎚</p>
     
     <div id="map-container">
         <div id="compass" onclick="toggleAutoRotate()"><span id="compass-arrow">↑</span></div>
@@ -40,35 +49,34 @@
         <div>Dist <span id="dist">0</span></div>
         <div>Inc <span id="grade">0</span>%</div>
         <div>Cal <span id="cal">0</span></div>
-        <div>Etapas <span id="stages">0</span></div>
+        <div>Etapa <span id="stages">0</span></div>
         <div>Vueltas <span id="laps">0</span></div>
     </div>
 
-    <div id="verse-display">El Espíritu Santo guiará tu rastro.</div>
+    <div class="verse-box" id="verse-display">El Espíritu Santo guiará tu rastro.</div>
 
-    <div class="identity-box">
-        <div id="id-selector">
-            <div class="input-group">
-                <select id="country-code"><option value="507">🇵🇦 +507</option><option value="1">🇺🇸 +1</option><option value="506">🇨🇷 +506</option></select>
-                <input type="tel" id="phone-input" placeholder="Tu WhatsApp" value="69362166">
-            </div>
+    <div class="identity-box" id="id-box">
+        <div class="input-group">
+            <select id="country-code"><option value="507">🇵🇦 +507</option><option value="1">🇺🇸 +1</option></select>
+            <input type="tel" id="phone-input" placeholder="Tu WhatsApp" value="69362166">
         </div>
-        <div id="user-id-display" style="display:none; font-family: monospace;"></div>
     </div>
+    <div id="user-id-display"></div>
 
-    <button id="btnStart" onclick="startPatrol()">RECIBIR PIEDRITA BLANCA</button>
-    <button id="btnEnd" onclick="endPatrol()">ENTREGAR TESTIMONIO</button>
+    <button id="btnStart" onclick="startPatrol()">RECIBIR PIEDRITA BLANCA (INICIAR)</button>
+    <button id="btnEnd" onclick="endPatrol()">ENTREGAR TESTIMONIO (FINALIZAR)</button>
 
     <script>
         let map, userMarker, watchId, startTime, startCoords, points = [], totalDist = 0, lastAlt = null, isAutoRotating = false;
-        let fullPhone = "", totalCal = 0, stageCount = 0, lapCount = 0, isStopped = false;
+        let fullPhone = "", totalCal = 0, stageCount = 1, lapCount = 0, isStopped = false;
 
         const versiculos = {
-            avance: ["Caminad en el Espíritu. - Gálatas 5:16", "Todo lo puedo en Cristo. - Fil 4:13", "Lámpara es a mis pies tu palabra. - Sal 119:105"],
-            recuperacion: ["Venid a mí los cargados, y yo os haré descansar. - Mat 11:28", "En lugares de delicados pastos me hará descansar. - Sal 23:2", "Estad quietos, y conoced que yo soy Dios. - Sal 46:10"],
-            vuelta: ["Porque dondequiera que fueres, iré yo. - Rut 1:16", "He guardado la fe, he acabado la carrera. - 2 Tim 4:7"]
+            avance: ["Caminad en el Espíritu. - Gál 5:16", "Lámpara es a mis pies tu palabra. - Sal 119:105"],
+            recuperacion: ["Venid a mí y yo os haré descansar. - Mat 11:28", "Estad quietos y conoced que soy Dios. - Sal 46:10"],
+            vuelta: ["He guardado la fe, he acabado la carrera. - 2 Tim 4:7"]
         };
 
+        // 1. INICIALIZAR MAPA (RECUPERAR)
         map = L.map('map', { rotate: true, touchRotate: true, rotateControl: false }).setView([8.948, -79.655], 18);
         L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png').addTo(map);
 
@@ -89,26 +97,26 @@
             if (alpha !== null) { document.getElementById('compass-arrow').style.transform = `rotate(${alpha}deg)`; map.setBearing(alpha); }
         }, true);
 
+        // 2. PROVISIONAR MÉTRICAS Y RASTRO
         function updatePosition(pos) {
-            const { latitude: lat, longitude: lon, altitude: alt, speed } = pos.coords;
+            const { latitude: lat, longitude: lon, altitude: alt, speed, accuracy } = pos.coords;
             const currentPos = [lat, lon];
             const currentSpeedKmh = (speed || 0) * 3.6;
 
+            if (accuracy > 35) return;
             if (!startCoords) startCoords = currentPos;
             
-            // Lógica de Calorías (Metabolismo Basal + Actividad)
-            totalCal += (currentSpeedKmh > 1) ? (0.05 * currentSpeedKmh) : 0.01;
+            // Lógica de Calorías
+            totalCal += (currentSpeedKmh > 1) ? (0.015 * currentSpeedKmh) : 0.005;
             document.getElementById('cal').innerText = totalCal.toFixed(1);
 
-            // Lógica de Etapas (Parones de recuperación)
+            // Lógica de Etapas (Recuperación)
             if (currentSpeedKmh < 0.5 && !isStopped && points.length > 5) {
-                isStopped = true;
-                stageCount++;
+                isStopped = true; stageCount++;
                 document.getElementById('stages').innerText = stageCount;
                 cambiarVersiculo("recuperacion");
             } else if (currentSpeedKmh > 2 && isStopped) {
-                isStopped = false;
-                cambiarVersiculo("avance");
+                isStopped = false; cambiarVersiculo("avance");
             }
 
             if (points.length > 0) {
@@ -116,14 +124,12 @@
                 let dH = map.distance(lastPos, currentPos);
                 let grade = (lastAlt !== null && alt !== null && dH > 2) ? ((alt - lastAlt) / dH) * 100 : 0;
                 
-                // Lógica de Vueltas (Detección de cruce por proximidad a puntos anteriores)
-                if (points.length > 50) {
-                    for (let i = 0; i < points.length - 40; i += 10) {
+                // Detección de Vueltas
+                if (points.length > 40) {
+                    for (let i = 0; i < points.length - 30; i += 10) {
                         if (map.distance(points[i], currentPos) < 15) {
-                            lapCount++;
-                            document.getElementById('laps').innerText = lapCount;
-                            cambiarVersiculo("vuelta");
-                            break;
+                            lapCount++; document.getElementById('laps').innerText = lapCount;
+                            cambiarVersiculo("vuelta"); break;
                         }
                     }
                 }
@@ -143,34 +149,35 @@
 
         function cambiarVersiculo(tipo) {
             const lista = versiculos[tipo];
-            const random = lista[Math.floor(Math.random() * lista.length)];
-            const display = document.getElementById('verse-display');
-            display.style.opacity = 0;
-            setTimeout(() => {
-                display.innerText = random;
-                display.style.opacity = 1;
-            }, 500);
+            document.getElementById('verse-display').innerText = lista[Math.floor(Math.random() * lista.length)];
         }
 
+        // 3. UNIFICAR INICIO Y FIN
         function startPatrol() {
             const num = document.getElementById('phone-input').value;
+            if (num.length < 7) { alert("Ingresa un ID válido"); return; }
+            
             fullPhone = document.getElementById('country-code').value + num;
-            document.getElementById('id-selector').style.display = 'none';
+            document.getElementById('id-box').style.display = 'none';
             document.getElementById('user-id-display').innerText = "ID: ****" + num.slice(-4);
             document.getElementById('user-id-display').style.display = 'block';
+            
             startTime = new Date(); points = []; totalDist = 0; totalCal = 0;
             document.getElementById('btnStart').style.display = 'none';
             document.getElementById('btnEnd').style.display = 'block';
-            cambiarVersiculo("avance");
-            if (navigator.geolocation) watchId = navigator.geolocation.watchPosition(updatePosition, null, { enableHighAccuracy: true });
+            document.getElementById('stages').innerText = "1";
+            
+            if (navigator.geolocation) {
+                watchId = navigator.geolocation.watchPosition(updatePosition, null, { enableHighAccuracy: true });
+            }
         }
 
         function endPatrol() {
             navigator.geolocation.clearWatch(watchId);
             const endPos = points[points.length - 1] || startCoords;
-            const mapaUrl = `http://maps.google.com/maps?q=${endPos[0]},${endPos[1]}`;
-            const msg = `*SADV41 - TESTIMONIO FINAL*\n👤 ID: ****${fullPhone.slice(-4)}\n📏 Dist: ${totalDist.toFixed(0)}m\n🔥 Cal: ${totalCal.toFixed(1)}\n🏁 Etapas: ${stageCount}\n🔄 Vueltas: ${lapCount}\n🗺️ Mapa: ${mapaUrl}`;
-            window.location.href = `https://api.whatsapp.com/send?phone=${fullPhone}&text=${encodeURIComponent(msg)}`;
+            const mapaUrl = `https://www.google.com/maps/dir/${startCoords[0]},${startCoords[1]}/${endPos[0]},${endPos[1]}`;
+            const msg = `*SADV41 - TESTIMONIO FINAL*\n👤 ID: ****${fullPhone.slice(-4)}\n📏 Dist: ${totalDist.toFixed(0)}m\n🔥 Cal: ${totalCal.toFixed(1)}\n🏁 Etapas: ${stageCount}\n🔄 Vueltas: ${lapCount}\n🗺️ Ruta: ${mapaUrl}`;
+            window.location.href = `https://api.whatsapp.com/send?phone=${fullPhone}&text=${encodeURIComponent(msg + "\n\n_He vencido._ 🎚")}`;
         }
     </script>
 </body>
