@@ -10,7 +10,6 @@
         #map-container { position: relative; width: 100%; height: 320px; border-radius: 15px; border: 2px solid #555; margin-bottom: 15px; }
         #map { height: 100%; width: 100%; border-radius: 15px; }
         
-        /* Brújula */
         #compass { position: absolute; top: 10px; right: 10px; width: 45px; height: 45px; background: rgba(0,0,0,0.7); border-radius: 50%; border: 2px solid #fff; z-index: 1000; display: flex; align-items: center; justify-content: center; }
         #compass-arrow { transition: transform 0.2s; color: #d32f2f; font-size: 1.2em; }
 
@@ -19,16 +18,15 @@
         
         .verse-box { background: #1a1a1a; padding: 15px; border-radius: 10px; border-left: 4px solid #fff; margin: 15px 0; font-style: italic; font-size: 0.85em; }
         
-        /* Botones de Identidad */
         .controls { display: flex; flex-direction: column; gap: 10px; }
         #wa-input { padding: 12px; border-radius: 8px; border: none; background: #222; color: #fff; text-align: center; font-size: 1em; }
         
         button { padding: 15px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.3s; font-size: 1em; }
-        #btnStart { background: #fff; color: #000; } /* La Piedra Blanca */
+        #btnStart { background: #fff; color: #000; } 
         #btnEnd { background: #d32f2f; color: white; display: none; }
         
         #qr-result { margin-top: 15px; background: #fff; color: #000; padding: 15px; border-radius: 10px; display: none; }
-        #qrcode { margin-top: 10px; }
+        #qrcode { margin-top: 10px; display: flex; justify-content: center; }
     </style>
 </head>
 <body>
@@ -69,6 +67,7 @@
     <script>
         let map, userMarker, watchId, startTime, startCoords;
         let points = [], totalDist = 0, lastAlt = null, totalCalories = 0;
+        let snapToRoads = true;
 
         map = L.map('map', { rotate: true }).setView([8.948, -79.655], 17);
         L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png').addTo(map);
@@ -106,29 +105,48 @@
 
         function updatePosition(pos) {
             const lat = pos.coords.latitude, lon = pos.coords.longitude, alt = pos.coords.altitude;
+            const accuracy = pos.coords.accuracy;
             const speed = (pos.coords.speed || 0) * 3.6;
             const currentPos = [lat, lon];
+
+            if (accuracy > 30) return; // Filtrar mala señal para evitar saltos locos
+
             if (!startCoords) startCoords = currentPos;
 
-            let grade = 0;
-            if (points.length > 0 && lastAlt !== null && alt !== null) {
-                let dH = map.distance(points[points.length - 1], currentPos);
-                if (dH > 1) { grade = ((alt - lastAlt) / dH) * 100; totalDist += dH; }
-            }
-            lastAlt = alt;
-
-            document.getElementById('speed').innerText = speed.toFixed(1);
-            document.getElementById('dist').innerText = totalDist.toFixed(0) + "m";
-            document.getElementById('alt').innerText = alt ? alt.toFixed(1) + "m" : "---";
-            document.getElementById('bpm').innerText = Math.round(70 + (speed * 4) + (grade > 0 ? grade * 5 : 0));
-            document.getElementById('cal').innerText = (totalCalories += (0.01 * speed)).toFixed(2);
-            document.getElementById('grade').innerText = grade.toFixed(1);
-
             if (points.length > 0) {
+                let lastPos = points[points.length - 1];
+                let dH = map.distance(lastPos, currentPos);
+
+                let grade = (lastAlt !== null && alt !== null && dH > 2) ? ((alt - lastAlt) / dH) * 100 : 0;
                 let color = grade > 2 ? "#d32f2f" : "#0056b3";
-                L.polyline([points[points.length - 1], currentPos], { color: "white", weight: 10, opacity: 0.3 }).addTo(map);
-                L.polyline([points[points.length - 1], currentPos], { color: color, weight: 5 }).addTo(map);
+
+                // Lógica de "Snap to Roads" si el salto es grande (>50m) por reconexión
+                if (dH > 50 && snapToRoads) {
+                    fetch(`https://router.project-osrm.org/route/v1/driving/${lastPos[1]},${lastPos[0]};${lon},${lat}?overview=full&geometries=geojson`)
+                        .then(r => r.json())
+                        .then(data => {
+                            if (data.routes && data.routes[0]) {
+                                L.geoJSON(data.routes[0].geometry, { style: { color: "white", weight: 10, opacity: 0.3 } }).addTo(map);
+                                L.geoJSON(data.routes[0].geometry, { style: { color: color, weight: 5 } }).addTo(map);
+                            }
+                        });
+                } else {
+                    L.polyline([lastPos, currentPos], { color: "white", weight: 10, opacity: 0.3 }).addTo(map);
+                    L.polyline([lastPos, currentPos], { color: color, weight: 5 }).addTo(map);
+                }
+                
+                totalDist += dH;
+                
+                // Actualizar UI
+                document.getElementById('speed').innerText = speed.toFixed(1);
+                document.getElementById('dist').innerText = totalDist.toFixed(0) + "m";
+                document.getElementById('alt').innerText = alt ? alt.toFixed(1) + "m" : "---";
+                document.getElementById('bpm').innerText = Math.round(70 + (speed * 4) + (grade > 0 ? grade * 5 : 0));
+                document.getElementById('cal').innerText = (totalCalories += (0.01 * (speed/3.6))).toFixed(2);
+                document.getElementById('grade').innerText = grade.toFixed(1);
             }
+
+            lastAlt = alt;
             points.push(currentPos);
             if (userMarker) map.removeLayer(userMarker);
             userMarker = L.marker(currentPos).addTo(map);
