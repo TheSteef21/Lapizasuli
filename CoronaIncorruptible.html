@@ -19,25 +19,40 @@
     <div class="verse-box" id="verse">"Caminad en el Espíritu, y no satisfagáis los deseos de la carne." - Gálatas 5:16</div>
     <button onclick="enviarVictoria()">Enviar Reporte a WhatsApp</button>
 
-    <script>
-        // Lógica para medir distancia y generar el versículo de batalla
-        const versiculosGuerra = [
-            "Porque no tenemos lucha contra sangre y carne, sino contra principados... - Efesios 6:12",
-            "Someteos, pues, a Dios; resistid al diablo, y huirá de vosotros. - Santiago 4:7",
-            "El espíritu a la verdad está dispuesto, pero la carne es débil. - Mateo 26:41"
-        ];
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-        function generarVerso() {
-            const index = Math.floor(Math.random() * versiculosGuerra.length);
-            document.getElementById('verse').innerText = versiculosGuerra[index];
-        }
+<style>
+    #map-container { 
+        height: 400px; 
+        width: 100%; 
+        border: 2px solid #555; 
+        margin-top: 20px;
+    }
+</style>
 
-        function enviarVictoria() {
-            const verso = document.getElementById('verse').innerText;
-            const msg = encodeURIComponent(`*SADV41 - Reporte de Victoria*\n\n📍 Ubicación: Arraiján\n📖 Verso: ${verso}\n\nLos ángeles acampan alrededor. 🎚`);
-            // Link para WhatsApp API
-            window.open(`https://api.whatsapp.com/send?phone=TU_NUMERO&text=${msg}`);
+<script>
+    let map = L.map('map-container').setView([8.94, -79.66], 13); // Centrado cerca de Arraiján
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: 'SADV41 - Patrullaje Espiritual'
+    }).addTo(map);
+
+    function iniciarRastreo() {
+        if (navigator.geolocation) {
+            navigator.geolocation.watchPosition(position => {
+                const { latitude, longitude } = position.coords;
+                map.setView([latitude, longitude], 16);
+                L.marker([latitude, longitude]).addTo(map)
+                    .bindPopup('Punto de Oración').openPopup();
+            });
+        } else {
+            alert("El GPS no está activo en este dispositivo.");
         }
-    </script>
+    }
+    
+    // Iniciar automáticamente al cargar
+    window.onload = iniciarRastreo;
+</script>
 </body>
 </html>
