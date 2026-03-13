@@ -14,7 +14,6 @@
         #map-container { position: relative; width: 100%; height: 320px; border-radius: 15px; border: 2px solid #555; margin-bottom: 15px; overflow: hidden; }
         #map { height: 100%; width: 100%; }
         
-        /* Brújula Interactiva */
         #compass { 
             position: absolute; top: 10px; right: 10px; width: 50px; height: 50px; 
             background: rgba(0,0,0,0.8); border-radius: 50%; border: 2px solid #fff; 
@@ -61,7 +60,7 @@
         <div>Inc <span id="grade">0</span>%</div>
     </div>
 
-    <div class="verse-box" id="verse">Toca la brújula para activar giro automático o gira el mapa manualmente con dos dedos.</div>
+    <div class="verse-box" id="verse">Toca la brújula para activar giro automático o gira el mapa manualmente.</div>
 
     <div class="controls">
         <input type="tel" id="wa-input" placeholder="WhatsApp" value="50769362166">
@@ -81,10 +80,9 @@
         let points = [], totalDist = 0, lastAlt = null, totalCalories = 0;
         let isAutoRotating = false;
 
-        // Inicializar mapa con rotación habilitada (Manual y Automática)
         map = L.map('map', {
             rotate: true,
-            touchRotate: true, // Permite rotar con dos dedos
+            touchRotate: true,
             rotateControl: false
         }).setView([8.948, -79.655], 18);
 
@@ -185,13 +183,24 @@
             navigator.geolocation.clearWatch(watchId);
             let phone = document.getElementById('wa-input').value;
             const duration = Math.round((new Date() - startTime) / 60000);
-            const registro = `*SADV41 - VICTORIA*\nID: ${phone}\nDistancia: ${totalDist.toFixed(0)}m\nCalorías: ${totalCalories.toFixed(2)}\nTiempo: ${duration}min`;
+            
+            // Link de Google Maps que une el inicio con el punto final
+            const endPos = points[points.length-1];
+            const mapaUrl = `https://www.google.com/maps/dir/${startCoords[0]},${startCoords[1]}/${endPos[0]},${endPos[1]}`;
+
+            const registro = `*SADV41 - REPORTE DE VICTORIA*\n` +
+                             `ID: ${phone}\n` +
+                             `📏 Distancia: ${totalDist.toFixed(0)}m\n` +
+                             `🔥 Calorías: ${totalCalories.toFixed(2)}\n` +
+                             `⏱ Tiempo: ${duration}min\n` +
+                             `🗺️ RECORRIDO: ${mapaUrl}`;
 
             document.getElementById('qr-result').style.display = 'block';
             document.getElementById('qrcode').innerHTML = "";
             new QRCode(document.getElementById("qrcode"), { text: registro, width: 150, height: 150 });
 
-            window.open(`https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(registro + "\n\n_He vencido._ 🎚")}`, '_blank');
+            window.open(`https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(registro + "\n\n_He vencido y el camino ha sido enderezado._ 🎚")}`, '_blank');
+            
             document.getElementById('btnStart').style.display = 'block';
             document.getElementById('wa-input').style.display = 'block';
             document.getElementById('btnEnd').style.display = 'none';
