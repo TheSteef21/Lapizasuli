@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>SADV41 - Rastreo Espiritual</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background: #1a1a1a; color: white; text-align: center; }
+        #map-container { margin: 20px auto; width: 90%; height: 300px; border: 2px solid #🎚; }
+        .verse-box { background: #333; padding: 20px; border-radius: 10px; margin: 10px; font-style: italic; }
+        button { background: #4CAF50; color: white; padding: 15px 30px; border: none; border-radius: 5px; font-size: 1.1em; }
+    </style>
+</head>
+<body>
+    <h1>Misión SADV41: Victoria sobre la Carne</h1>
+    <div id="status">Presiona para iniciar el patrullaje espiritual...</div>
+    <div id="map-container">
+        <img id="map-img" src="" alt="Mapa de la Batalla" style="display:none; width:100%;">
+    </div>
+    <div class="verse-box" id="verse">"Caminad en el Espíritu, y no satisfagáis los deseos de la carne." - Gálatas 5:16</div>
+    <button onclick="enviarVictoria()">Enviar Reporte a WhatsApp</button>
+
+    <script>
+        // Lógica para medir distancia y generar el versículo de batalla
+        const versiculosGuerra = [
+            "Porque no tenemos lucha contra sangre y carne, sino contra principados... - Efesios 6:12",
+            "Someteos, pues, a Dios; resistid al diablo, y huirá de vosotros. - Santiago 4:7",
+            "El espíritu a la verdad está dispuesto, pero la carne es débil. - Mateo 26:41"
+        ];
+
+        function generarVerso() {
+            const index = Math.floor(Math.random() * versiculosGuerra.length);
+            document.getElementById('verse').innerText = versiculosGuerra[index];
+        }
+
+        function enviarVictoria() {
+            const verso = document.getElementById('verse').innerText;
+            const msg = encodeURIComponent(`*SADV41 - Reporte de Victoria*\n\n📍 Ubicación: Arraiján\n📖 Verso: ${verso}\n\nLos ángeles acampan alrededor. 🎚`);
+            // Link para WhatsApp API
+            window.open(`https://api.whatsapp.com/send?phone=TU_NUMERO&text=${msg}`);
+        }
+    </script>
+</body>
+</html>
