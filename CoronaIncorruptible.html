@@ -3,194 +3,141 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SADV41 - Apocalipsis 2:17</title>
+    <title>SADV41 - Brújula Activa</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet-rotate@0.2.8/dist/leaflet-rotate.js"></script>
     <style>
-        body { font-family: 'Segoe UI', sans-serif; background: #000; color: white; text-align: center; margin: 0; padding: 15px; overflow-x: hidden; }
-        #map-container { position: relative; width: 100%; height: 320px; border-radius: 15px; border: 2px solid #555; margin-bottom: 15px; overflow: hidden; }
+        body { font-family: 'Segoe UI', sans-serif; background: #000; color: white; text-align: center; margin: 0; padding: 15px; }
+        #map-container { position: relative; width: 100%; height: 350px; border-radius: 15px; border: 2px solid #555; margin-bottom: 15px; overflow: hidden; }
         #map { height: 100%; width: 100%; }
         
-        #compass { position: absolute; top: 10px; right: 10px; width: 45px; height: 45px; background: rgba(0,0,0,0.8); border-radius: 50%; border: 2px solid #fff; z-index: 1000; display: flex; align-items: center; justify-content: center; pointer-events: none; }
-        #compass-arrow { transition: transform 0.1s linear; color: #d32f2f; font-size: 1.5em; font-weight: bold; }
+        /* Brújula interactiva */
+        #compass { 
+            position: absolute; top: 15px; right: 15px; width: 60px; height: 60px; 
+            background: rgba(0,0,0,0.8); border-radius: 50%; border: 3px solid #fff; 
+            z-index: 1000; display: flex; align-items: center; justify-content: center; 
+            cursor: pointer; transition: all 0.3s;
+        }
+        #compass.active { border-color: #4CAF50; box-shadow: 0 0 15px #4CAF50; }
+        #compass-arrow { transition: transform 0.1s linear; color: #d32f2f; font-size: 1.8em; font-weight: bold; }
 
         .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; background: #111; padding: 15px; border-radius: 10px; margin-bottom: 15px; border: 1px solid #333; }
         .stats span { font-weight: bold; font-size: 1.1em; color: #4CAF50; display: block; }
-        
-        .verse-box { background: #1a1a1a; padding: 15px; border-radius: 10px; border-left: 4px solid #fff; margin: 15px 0; font-style: italic; font-size: 0.85em; }
-        
         .controls { display: flex; flex-direction: column; gap: 10px; }
-        #wa-input { padding: 12px; border-radius: 8px; border: none; background: #222; color: #fff; text-align: center; font-size: 1em; }
-        
-        button { padding: 15px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.3s; font-size: 1em; }
-        #btnStart { background: #fff; color: #000; } 
+        button { padding: 15px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 1em; }
+        #btnStart { background: #fff; color: #000; }
         #btnEnd { background: #d32f2f; color: white; display: none; }
-        
-        #qr-result { margin-top: 15px; background: #fff; color: #000; padding: 15px; border-radius: 10px; display: none; }
-        #qrcode { margin-top: 10px; display: flex; justify-content: center; }
     </style>
 </head>
 <body>
 
     <h2 style="margin-bottom:5px;">Misión SADV41</h2>
-    <p style="font-size:0.8em; color:#888; margin-bottom:15px;">"Al que venciere... le daré una piedrita blanca" - Ap. 2:17</p>
+    <p style="font-size:0.8em; color:#888; margin-bottom:15px;">Toca la brújula para activar el giro por acelerómetro</p>
     
     <div id="map-container">
-        <div id="compass"><span id="compass-arrow">↑</span></div>
+        <div id="compass" onclick="toggleCompass()">
+            <span id="compass-arrow">↑</span>
+        </div>
         <div id="map"></div>
     </div>
 
     <div class="stats">
         <div>Vel <span id="speed">0</span></div>
         <div>Dist <span id="dist">0</span></div>
-        <div>Alt <span id="alt">0</span></div>
-        <div>BPM <span id="bpm">70</span></div>
-        <div>Cal <span id="cal">0</span></div>
         <div>Inc <span id="grade">0</span>%</div>
     </div>
 
-    <div class="verse-box" id="verse">El mapa girará según tu orientación física.</div>
-
     <div class="controls">
-        <input type="tel" id="wa-input" placeholder="WhatsApp para Reporte" value="50769362166">
-        <button id="btnStart" onclick="startPatrol()">RECIBIR PIEDRITA BLANCA (INICIAR)</button>
-        <button id="btnEnd" onclick="endPatrol()">ENTREGAR TESTIMONIO (FINALIZAR)</button>
-    </div>
-
-    <div id="qr-result">
-        <div id="qr-header"><b>REGISTRO DE VICTORIA</b></div>
-        <div id="qrcode"></div>
+        <input type="tel" id="wa-input" style="padding:10px; margin-bottom:10px; text-align:center;" value="50769362166">
+        <button id="btnStart" onclick="startPatrol()">INICIAR PATRULLAJE</button>
+        <button id="btnEnd" onclick="endPatrol()">FINALIZAR</button>
     </div>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
     <script>
-        let map, userMarker, watchId, startTime, startCoords;
-        let points = [], totalDist = 0, lastAlt = null, totalCalories = 0;
+        let map, userMarker, watchId;
+        let points = [], totalDist = 0;
+        let isTrackingHeading = false; // El interruptor del acelerómetro
 
-        // Inicializar mapa con capacidad de rotación nativa
-        map = L.map('map', {
-            rotate: true,
-            rotateControl: false,
-            touchRotate: true
-        }).setView([8.948, -79.655], 18);
-
+        // Inicializar mapa con rotación
+        map = L.map('map', { rotate: true, rotateControl: false }).setView([8.948, -79.655], 18);
         L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png').addTo(map);
 
-        // FUNCIÓN CRÍTICA: Sincronizar Giroscopio con el Mapa
-        function initCompass() {
-            if (window.DeviceOrientationEvent) {
-                // Para iOS 13+ se requiere permiso explícito
-                if (typeof DeviceOrientationEvent.requestPermission === 'function') {
-                    DeviceOrientationEvent.requestPermission();
-                }
-
-                window.addEventListener('deviceorientationabsolute', (e) => {
-                    let alpha = e.webkitCompassHeading || e.alpha;
-                    if (alpha !== null) {
-                        // El ángulo de rotación (Giro del mapa)
-                        let heading = 360 - alpha; 
-                        
-                        // Girar la flecha de la brújula visual
-                        document.getElementById('compass-arrow').style.transform = `rotate(${alpha}deg)`;
-                        
-                        // GIRAR EL MAPA: La dirección a la que apuntas siempre queda "Arriba"
-                        map.setBearing(alpha); 
-                    }
-                }, true);
+        // Activar/Desactivar el modo acelerómetro al tocar la flecha
+        function toggleCompass() {
+            // Solicitar permisos de sensores en dispositivos modernos
+            if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+                DeviceOrientationEvent.requestPermission()
+                    .then(permissionState => {
+                        if (permissionState === 'granted') {
+                            isTrackingHeading = !isTrackingHeading;
+                            updateCompassUI();
+                        }
+                    });
+            } else {
+                isTrackingHeading = !isTrackingHeading;
+                updateCompassUI();
             }
         }
 
+        function updateCompassUI() {
+            const el = document.getElementById('compass');
+            if (isTrackingHeading) {
+                el.classList.add('active');
+                alert("Modo Acelerómetro: El mapa girará con el celular");
+            } else {
+                el.classList.remove('active');
+                map.setBearing(0); // Volver al Norte
+                document.getElementById('compass-arrow').style.transform = `rotate(0deg)`;
+            }
+        }
+
+        // Listener del Acelerómetro / Brújula
+        window.addEventListener('deviceorientationabsolute', (e) => {
+            let heading = e.webkitCompassHeading || e.alpha;
+            if (heading !== null && isTrackingHeading) {
+                // Girar la flecha visual
+                document.getElementById('compass-arrow').style.transform = `rotate(${heading}deg)`;
+                // Girar el mapa físicamente
+                map.setBearing(heading); 
+            }
+        }, true);
+
         function updatePosition(pos) {
-            const { latitude: lat, longitude: lon, altitude: alt, accuracy } = pos.coords;
-            const speed = (pos.coords.speed || 0) * 3.6;
+            const { latitude: lat, longitude: lon, speed } = pos.coords;
             const currentPos = [lat, lon];
-
-            if (accuracy > 25) return; // Ignorar lecturas erráticas
-
-            if (!startCoords) startCoords = currentPos;
 
             if (points.length > 0) {
                 let lastPos = points[points.length - 1];
                 let dH = map.distance(lastPos, currentPos);
-
-                let grade = (lastAlt !== null && alt !== null && dH > 2) ? ((alt - lastAlt) / dH) * 100 : 0;
-                let color = grade > 2 ? "#d32f2f" : "#0056b3";
-
-                // Snap to Roads (Ajuste a calles reales de Arraiján)
-                if (dH > 40) {
-                    fetch(`https://router.project-osrm.org/route/v1/driving/${lastPos[1]},${lastPos[0]};${lon},${lat}?overview=full&geometries=geojson`)
-                        .then(r => r.json())
-                        .then(data => {
-                            if (data.routes && data.routes[0]) {
-                                L.geoJSON(data.routes[0].geometry, { style: { color: "white", weight: 8, opacity: 0.3 } }).addTo(map);
-                                L.geoJSON(data.routes[0].geometry, { style: { color: color, weight: 4 } }).addTo(map);
-                            }
-                        });
-                } else {
-                    L.polyline([lastPos, currentPos], { color: "white", weight: 8, opacity: 0.3 }).addTo(map);
-                    L.polyline([lastPos, currentPos], { color: color, weight: 4 }).addTo(map);
-                }
+                
+                // Dibujar senda
+                L.polyline([lastPos, currentPos], { color: "white", weight: 8, opacity: 0.3 }).addTo(map);
+                L.polyline([lastPos, currentPos], { color: "#0056b3", weight: 4 }).addTo(map);
                 
                 totalDist += dH;
-                
-                document.getElementById('speed').innerText = speed.toFixed(1);
+                document.getElementById('speed').innerText = ((speed || 0) * 3.6).toFixed(1);
                 document.getElementById('dist').innerText = totalDist.toFixed(0) + "m";
-                document.getElementById('alt').innerText = alt ? alt.toFixed(1) + "m" : "---";
-                document.getElementById('bpm').innerText = Math.round(70 + (speed * 3) + (grade > 0 ? grade * 4 : 0));
-                document.getElementById('cal').innerText = (totalCalories += (0.012 * (speed/3.6))).toFixed(2);
-                document.getElementById('grade').innerText = grade.toFixed(1);
             }
 
-            lastAlt = alt;
             points.push(currentPos);
-            
             if (userMarker) map.removeLayer(userMarker);
-            // Marcador personalizado (Punto de luz)
-            userMarker = L.circleMarker(currentPos, { radius: 6, color: '#fff', fillColor: '#0056b3', fillOpacity: 1 }).addTo(map);
-            
-            // Mantener el centro pero permitir que la rotación haga el resto
+            userMarker = L.circleMarker(currentPos, { radius: 6, color: '#fff', fillColor: '#d32f2f', fillOpacity: 1 }).addTo(map);
             map.panTo(currentPos);
         }
 
         function startPatrol() {
-            initCompass();
-            startTime = new Date();
-            points = []; totalDist = 0; totalCalories = 0;
             document.getElementById('btnStart').style.display = 'none';
-            document.getElementById('wa-input').style.display = 'none';
             document.getElementById('btnEnd').style.display = 'block';
-            document.getElementById('qr-result').style.display = 'none';
-
             if (navigator.geolocation) {
-                watchId = navigator.geolocation.watchPosition(updatePosition, null, { 
-                    enableHighAccuracy: true,
-                    maximumAge: 0 
-                });
+                watchId = navigator.geolocation.watchPosition(updatePosition, null, { enableHighAccuracy: true });
             }
         }
 
         function endPatrol() {
             navigator.geolocation.clearWatch(watchId);
-            let phone = document.getElementById('wa-input').value;
-            const duration = Math.round((new Date() - startTime) / 60000);
-            
-            const registro = `*SADV41 - REPORTE APOCALIPSIS*\n` +
-                             `ID: ${phone}\n` +
-                             `Victoria: ${totalDist.toFixed(0)}m recorridos\n` +
-                             `Energía: ${totalCalories.toFixed(2)} cal\n` +
-                             `Tiempo: ${duration}min`;
-
-            document.getElementById('qr-result').style.display = 'block';
-            document.getElementById('qrcode').innerHTML = "";
-            new QRCode(document.getElementById("qrcode"), { text: registro, width: 150, height: 150 });
-
-            window.open(`https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(registro + "\n\n_Piedrita blanca recibida._ 🎚")}`, '_blank');
-            
-            document.getElementById('btnStart').style.display = 'block';
-            document.getElementById('wa-input').style.display = 'block';
-            document.getElementById('btnEnd').style.display = 'none';
+            location.reload(); // Reiniciar para nueva misión
         }
     </script>
 </body>
