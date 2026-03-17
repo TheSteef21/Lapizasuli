@@ -3,70 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SADV41 | Arcas</title>
+    <title>SADV41 | StevenDiorOficial</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { background-color: #000; color: #fff; font-family: sans-serif; }
-        .arca-btn {
-            border: 2px solid #f3ba2f;
-            background: rgba(243, 186, 47, 0.05);
-            transition: all 0.2s;
-            cursor: pointer !important;
+        body { background-color: #000; color: #fff; font-family: 'Inter', sans-serif; }
+        .identidad-card {
+            background: linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(0,0,0,1) 100%);
+            border: 1px solid rgba(255,255,255,0.1);
         }
-        .arca-btn:active { transform: scale(0.98); background: rgba(243, 186, 47, 0.2); }
+        .btn-verificado {
+            background: #007bff;
+            box-shadow: 0 0 20px rgba(0,123,255,0.4);
+            transition: all 0.3s ease;
+        }
+        .btn-verificado:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(0,123,255,0.6); }
     </style>
 </head>
-<body class="min-h-screen flex flex-col items-center justify-center p-6">
+<body class="min-h-screen flex items-center justify-center p-6">
 
-    <div class="text-center mb-12">
-        <h1 class="text-5xl font-black mb-2">SADV41</h1>
-        <p class="tracking-[0.3em] text-gray-500 text-xs uppercase">Arcas del Tabernáculo</p>
-    </div>
+    <main class="w-full max-w-md">
+        <div class="identidad-card p-8 rounded-3xl text-center">
+            <div class="mb-6 flex justify-center">
+                <div class="w-20 h-20 rounded-full bg-blue-600 flex items-center justify-center text-3xl font-black">
+                    S
+                </div>
+            </div>
 
-    <button onclick="iniciarPagoSADV41('0.01', 'ETH')" class="arca-btn w-full max-w-md py-6 rounded-2xl text-[#f3ba2f] font-black text-xl mb-10">
-        ✨ CONTRIBUIR A LA MISIÓN (WCPAY)
-    </button>
+            <h1 class="text-3xl font-black tracking-tighter mb-1">STEVEN DIOR</h1>
+            <p class="text-blue-500 text-[10px] font-bold tracking-[0.3em] uppercase mb-8">StevenDiorOficial</p>
 
-    <div class="w-full max-w-md space-y-4 opacity-50">
-        <div class="bg-white/5 p-4 rounded-xl text-center border border-white/10">
-            <p class="text-[#f3ba2f] text-[10px] font-bold uppercase mb-1">STEVENDIOR.BNB</p>
-            <p class="text-[9px] font-mono">0x4cBf2DB3838341BeCB185892C3af576Dc04e2498</p>
+            <div id="atrio-root" class="mb-10">
+                <button onclick="conectarAtrio()" class="btn-verificado w-full py-4 rounded-2xl font-black uppercase text-sm">
+                    Conectar al Atrio Digital
+                </button>
+            </div>
+
+            <div class="space-y-3 text-left">
+                <div class="bg-white/5 p-4 rounded-xl border border-white/10">
+                    <p class="text-[9px] text-gray-500 uppercase font-bold mb-1">Project ID / API</p>
+                    <code class="text-[10px] font-mono block break-all text-blue-300">ceb11307ca32cd9d4118b14ab54b542b</code>
+                </div>
+                <div class="bg-white/5 p-4 rounded-xl border border-white/10">
+                    <p class="text-[9px] text-gray-500 uppercase font-bold mb-1">Misión</p>
+                    <p class="text-[11px]">SADV41 - Unificación Maestra</p>
+                </div>
+            </div>
+
+            <p class="mt-10 text-[9px] opacity-30 uppercase tracking-[0.5em]">Steven Gómez Serrano</p>
         </div>
-        <div class="bg-white/5 p-4 rounded-xl text-center border border-white/10">
-            <p class="text-blue-400 text-[10px] font-bold uppercase mb-1">PROYECTO VERIFICADO</p>
-            <p class="text-[9px] font-mono">ceb11307ca32cd9d4118b14ab54b542b</p>
-        </div>
-    </div>
-
-    <footer class="mt-20 text-[10px] opacity-30 tracking-[0.4em]">
-        STEVEN GÓMEZ SERRANO - SADV41
-    </footer>
+    </main>
 
     <script type="module">
         import { WalletConnectModal } from 'https://unpkg.com/@walletconnect/modal';
 
-        // Configuración Maestra SADV41
         const projectId = 'ceb11307ca32cd9d4118b14ab54b542b';
-        const wcPayId = 'wcp_zwPpK6YAoO85RIyQECX6bWI0etGn4ZC9';
 
         const modal = new WalletConnectModal({
             projectId: projectId,
             themeMode: 'dark',
             themeVariables: {
-                '--wcm-accent-color': '#f3ba2f',
+                '--wcm-accent-color': '#007bff',
                 '--wcm-background-color': '#000000',
-                '--wcm-container-border-radius': '20px'
             }
         });
 
-        window.iniciarPagoSADV41 = async (monto, moneda = 'ETH') => {
+        window.conectarAtrio = async () => {
+            console.log("Iniciando conexión bajo la identidad StevenDiorOficial...");
             try {
-                console.log("Iniciando flujo StevenDiorOficial...");
                 await modal.openModal();
             } catch (err) {
-                console.error("Error:", err);
+                console.error("Error de conexión:", err);
             }
         };
     </script>
+
 </body>
 </html>
