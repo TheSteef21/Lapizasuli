@@ -3,61 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SADV41 | Arcas del Tabernáculo</title>
+    <title>SADV41 | Arcas</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { 
-            background-color: #000000; 
-            color: #ffffff; 
-            font-family: 'Inter', sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-        }
-        .glass-panel { 
-            background: rgba(255, 255, 255, 0.03); 
-            backdrop-filter: blur(15px); 
-            border: 1px solid rgba(255, 255, 255, 0.1); 
-            transition: all 0.3s ease;
-            cursor: pointer !important; /* Fuerza el puntero */
-        }
-        .glass-panel:hover { 
-            border-color: #f3ba2f; 
+        body { background-color: #000; color: #fff; font-family: sans-serif; }
+        .arca-btn {
+            border: 2px solid #f3ba2f;
             background: rgba(243, 186, 47, 0.05);
-            transform: scale(1.02);
+            transition: all 0.2s;
+            cursor: pointer !important;
         }
-        .glow-text { text-shadow: 0 0 15px rgba(243, 186, 47, 0.5); }
+        .arca-btn:active { transform: scale(0.98); background: rgba(243, 186, 47, 0.2); }
     </style>
 </head>
-<body>
+<body class="min-h-screen flex flex-col items-center justify-center p-6">
 
-    <main class="w-full max-w-lg p-6">
-        <section id="tab-arcas" class="text-center">
-            <h1 class="text-4xl font-black mb-2 tracking-tighter">SADV41</h1>
-            <h2 class="font-bold tracking-widest uppercase mb-12 text-sm text-gray-500">Arcas del Tabernáculo</h2>
-            
-            <div class="mb-12">
-                <button onclick="iniciarPagoSADV41('0.01', 'ETH')" class="glass-panel w-full py-6 rounded-3xl font-black text-[#f3ba2f] text-xl glow-text border-2 border-[#f3ba2f]/20">
-                    ✨ CONTRIBUIR A LA MISIÓN (WCPAY)
-                </button>
-            </div>
+    <div class="text-center mb-12">
+        <h1 class="text-5xl font-black mb-2">SADV41</h1>
+        <p class="tracking-[0.3em] text-gray-500 text-xs uppercase">Arcas del Tabernáculo</p>
+    </div>
 
-            <div class="grid grid-cols-1 gap-4">
-                <div class="glass-panel p-6 rounded-2xl text-center">
-                    <p class="text-[#f3ba2f] font-bold tracking-widest uppercase text-xs mb-2">StevenDior.bnb</p>
-                    <code class="text-[11px] font-mono opacity-60 break-all">0x4cBf2DB3838341BeCB185892C3af576Dc04e2498</code>
-                </div>
-                <div class="glass-panel p-6 rounded-2xl text-center">
-                    <p class="text-blue-500 font-bold tracking-widest uppercase text-xs mb-2">Proyecto Verificado</p>
-                    <code class="text-[11px] font-mono opacity-60 break-all">ceb11307ca32cd9d4118b14ab54b542b</code>
-                </div>
-            </div>
+    <button onclick="iniciarPagoSADV41('0.01', 'ETH')" class="arca-btn w-full max-w-md py-6 rounded-2xl text-[#f3ba2f] font-black text-xl mb-10">
+        ✨ CONTRIBUIR A LA MISIÓN (WCPAY)
+    </button>
 
-            <p class="mt-12 text-[10px] tracking-[0.5em] opacity-30 uppercase">Steven Gómez Serrano - SADV41</p>
-        </section>
-    </main>
+    <div class="w-full max-w-md space-y-4 opacity-50">
+        <div class="bg-white/5 p-4 rounded-xl text-center border border-white/10">
+            <p class="text-[#f3ba2f] text-[10px] font-bold uppercase mb-1">STEVENDIOR.BNB</p>
+            <p class="text-[9px] font-mono">0x4cBf2DB3838341BeCB185892C3af576Dc04e2498</p>
+        </div>
+        <div class="bg-white/5 p-4 rounded-xl text-center border border-white/10">
+            <p class="text-blue-400 text-[10px] font-bold uppercase mb-1">PROYECTO VERIFICADO</p>
+            <p class="text-[9px] font-mono">ceb11307ca32cd9d4118b14ab54b542b</p>
+        </div>
+    </div>
+
+    <footer class="mt-20 text-[10px] opacity-30 tracking-[0.4em]">
+        STEVEN GÓMEZ SERRANO - SADV41
+    </footer>
 
     <script type="module">
         import { WalletConnectModal } from 'https://unpkg.com/@walletconnect/modal';
@@ -72,24 +55,18 @@
             themeVariables: {
                 '--wcm-accent-color': '#f3ba2f',
                 '--wcm-background-color': '#000000',
-                '--wcm-container-border-radius': '24px'
+                '--wcm-container-border-radius': '20px'
             }
         });
 
-        // Función Global para el botón
         window.iniciarPagoSADV41 = async (monto, moneda = 'ETH') => {
-            console.log("Invocando flujo SADV41...");
             try {
-                // Abre el modal directamente
+                console.log("Iniciando flujo StevenDiorOficial...");
                 await modal.openModal();
-                
-                // Nota: WalletConnectModal gestiona el resto del flujo visualmente
-                console.log(`Pasarela activa: ${wcPayId}`);
             } catch (err) {
-                console.error("Error en el Atrio:", err);
+                console.error("Error:", err);
             }
         };
     </script>
-
 </body>
 </html>
