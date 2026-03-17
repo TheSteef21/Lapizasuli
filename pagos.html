@@ -93,6 +93,13 @@
 
         <section id="tab-arcas" class="tab-content">
             <h2 class="text-center font-bold tracking-widest uppercase mb-8 text-lg text-gray-400">Arcas del Tabernáculo</h2>
+            
+            <div class="mb-10 flex justify-center">
+                <button onclick="iniciarPagoSADV41('0.01', 'ETH')" class="glass-panel px-10 py-4 rounded-2xl font-black text-[#f3ba2f] border-[#f3ba2f]/30 hover:bg-[#f3ba2f]/10 transition-all">
+                    ✨ CONTRIBUIR A LA MISIÓN (WCPAY)
+                </button>
+            </div>
+
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div class="glass-panel rounded-2xl p-6 text-center border-l-4 border-l-[#f3ba2f]">
                     <p class="text-[#f3ba2f] font-bold tracking-widest uppercase text-sm mb-1">StevenDior.bnb</p>
@@ -174,51 +181,62 @@
 
     <script type="module">
         import { createWeb3Modal, defaultConfig } from 'https://esm.sh/@web3modal/ethers5@3.6.2?bundle'
+        import { WalletConnectModal } from 'https://unpkg.com/@walletconnect/modal';
 
-        // Tu Project ID actualizado de la captura: 2329befe80aa9e63f4aa218366bf7947
-        const projectId = '2329befe80aa9e63f4aa218366bf7947'
-        
+        // IDs Maestros de StevenDiorOficial
+        const projectId = 'ceb11307ca32cd9d4118b14ab54b542b';
+        const wcPayId = 'wcp_zwPpK6YAoO85RIyQECX6bWI0etGn4ZC9';
+
+        // 1. Configuración de WalletConnectModal para Pagos
+        const paymentModal = new WalletConnectModal({
+            projectId: projectId,
+            themeMode: 'dark',
+            themeVariables: {
+                '--wcm-accent-color': '#f3ba2f',
+                '--wcm-background-color': '#000000',
+                '--wcm-container-border-radius': '20px'
+            }
+        });
+
+        window.iniciarPagoSADV41 = async (monto, moneda = 'ETH') => {
+            try {
+                console.log(`Iniciando flujo StevenDiorOficial: ${wcPayId}`);
+                const session = await paymentModal.openModal();
+                if (session) {
+                    alert(`Conexión establecida. Iniciando transacción de ${monto} ${moneda} a las Arcas.`);
+                }
+            } catch (err) {
+                console.error("Fallo en el flujo de pago:", err);
+            }
+        };
+
+        // 2. Configuración de Web3Modal para Conexión de Perfil
         const mainnet = { 
-            chainId: 1, 
-            name: 'Ethereum', 
-            currency: 'ETH', 
-            explorerUrl: 'https://etherscan.io', 
-            rpcUrl: 'https://cloudflare-eth.com' 
-        }
-        
+            chainId: 1, name: 'Ethereum', currency: 'ETH', 
+            explorerUrl: 'https://etherscan.io', rpcUrl: 'https://cloudflare-eth.com' 
+        };
         const bsc = { 
-            chainId: 56, 
-            name: 'BNB Smart Chain', 
-            currency: 'BNB', 
-            explorerUrl: 'https://bscscan.com', 
-            rpcUrl: 'https://bsc-dataseed.binance.org/' 
-        }
+            chainId: 56, name: 'BNB Smart Chain', currency: 'BNB', 
+            explorerUrl: 'https://bscscan.com', rpcUrl: 'https://bsc-dataseed.binance.org/' 
+        };
 
         const metadata = {
             name: 'SADV41 | Unificación Digital',
             description: 'Algoritmo de Pureza v2.26',
             url: 'https://stevendior.digital',
             icons: ['https://ipfs.io/ipfs/bafybeigo434tsxbulzxipjqpjxd3hmlyd6ssfxn7blg3ufvfmnqeayrheu']
-        }
+        };
 
-        const ethersConfig = defaultConfig({ 
-            metadata, 
-            enableEIP6963: true, 
-            enableInjected: true, 
-            enableCoinbase: true 
-        })
+        const ethersConfig = defaultConfig({ metadata, enableEIP6963: true, enableInjected: true, enableCoinbase: true });
 
         createWeb3Modal({
-            ethersConfig, 
-            chains: [mainnet, bsc], 
-            projectId, 
-            themeMode: 'dark',
+            ethersConfig, chains: [mainnet, bsc], projectId, themeMode: 'dark',
             themeVariables: { 
                 '--w3m-accent': '#007bff', 
                 '--w3m-color-mix': '#000000', 
                 '--w3m-border-radius-master': '16px' 
             }
-        })
+        });
     </script>
 
 </body>
