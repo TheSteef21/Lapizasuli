@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SADV41 - Calendario de Operaciones</title>
+    <style>
+        body, html { 
+            margin: 0; padding: 0; width: 100%; height: 100%; 
+            background: #0a0a0a; color: #e0e0e0; 
+            font-family: 'Courier New', monospace; 
+        }
+        
+        /* Contenedor principal con diseño responsivo */
+        .main-container {
+            max-width: 1000px; margin: 40px auto; padding: 20px;
+            background: rgba(16, 16, 16, 0.9); border: 1px solid #333;
+            box-shadow: 0 0 30px rgba(0,0,0,0.7);
+        }
+
+        /* Encabezado con el sello de la misión */
+        .header {
+            text-align: center; border-bottom: 2px solid #555; padding-bottom: 20px;
+        }
+
+        .header h1 {
+            color: #FFD700; text-transform: uppercase; letter-spacing: 5px; margin: 10px 0;
+            text-shadow: 2px 2px 10px #000;
+        }
+
+        .header p { font-size: 14px; color: #a5d6a7; }
+
+        /* Sección del calendario */
+        .calendar-section { margin-top: 30px; text-align: center; }
+
+        #mes-actual { font-size: 20px; font-weight: bold; text-transform: uppercase; margin-bottom: 15px; }
+
+        /* Estilo para la tabla del calendario */
+        .calendar-table {
+            width: 100%; border-collapse: collapse; margin-top: 10px; table-layout: fixed;
+        }
+
+        .calendar-table th, .calendar-table td {
+            border: 1px solid #444; padding: 10px; text-align: center;
+        }
+
+        .calendar-table th { background: #1a1a1a; color: #888; text-transform: uppercase; font-size: 12px; }
+
+        /* Día actual resaltado */
+        .dia-actual { background: rgba(165, 214, 167, 0.2); font-weight: bold; border: 2px solid #a5d6a7; }
+
+        /* Notas y Registro de Operaciones */
+        .registro-notas { margin-top: 40px; border-top: 1px solid #333; padding-top: 20px; }
+
+        .registro-notas h2 { color: #888; font-size: 18px; text-transform: uppercase; margin-bottom: 15px; }
+
+        /* Estilo para las entradas de notas */
+        .nota-entrada {
+            background: #111; border: 1px solid #222; padding: 10px; margin-bottom: 10px; border-left: 3px solid #FFD700;
+        }
+
+        .nota-entrada .fecha-nota { color: #a5d6a7; font-weight: bold; font-size: 12px; }
+
+        .nota-entrada .contenido-nota { font-size: 14px; margin-top: 5px; }
+
+        /* Botón de control */
+        .control-btn {
+            display: inline-block; padding: 10px 20px; background: #FFD700; color: #000;
+            border: none; text-transform: uppercase; cursor: pointer; margin-top: 20px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="main-container">
+        <div class="header">
+            <h1>SADV41</h1>
+            <p>🎚 CALENDARIO DE OPERACIONES Y GESTIÓN 🎚</p>
+        </div>
+
+        <div class="calendar-section">
+            <div id="mes-actual">Marzo 2026</div>
+            <table class="calendar-table">
+                <thead>
+                    <tr><th>Dom</th><th>Lun</th><th>Mar</th><th>Mié</th><th>Jue</th><th>Vie</th><th>Sáb</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>1</td><td>2</td><td>3</td><td>4</td><td class="dia-actual">5</td><td>6</td><td>7</td></tr>
+                    <tr><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td></tr>
+                    <tr><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td><td>21</td></tr>
+                    <tr><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td><td>27</td><td>28</td></tr>
+                    <tr><td>29</td><td>30</td><td>31</td><td></td><td></td><td></td><td></td></tr>
+                </tbody>
+            </table>
+            <button class="control-btn" onclick="imprimirRegistro()">Imprimir Registro Semanal</button>
+        </div>
+
+        <div class="registro-notas">
+            <h2>Registro de Hitos - Marzo 2026</h2>
+            <div id="contenedor-notas">
+                <div class="nota-entrada">
+                    <span class="fecha-nota">05/03/2026 10:12 AM</span>
+                    <div class="contenido-nota">Transferencia $271.02 a Alexander Gonzalez (Hilux 855571 - 3 llantas, 4 balances). Confirmación #813847121.</div>
+                </div>
+                <div class="nota-entrada">
+                    <span class="fecha-nota">04/03/2026 12:00 AM</span>
+                    <div class="contenido-nota">Registro Diario Turbo Tire. Producción Bruta $98.00. Cierre de planilla semanal definido.</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Función para imprimir el registro (puedes expandirla)
+        function imprimirRegistro() {
+            window.print();
+        }
+    </script>
+</body>
+</html>
