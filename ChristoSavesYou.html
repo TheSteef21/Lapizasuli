@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SADV41 - Transiciones Globales</title>
+    <style>
+        :root {
+            --gold: #d4af37;
+            --white: #ffffff;
+            --bg: #0a0a0a;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--white);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            max-width: 800px;
+            padding: 20px;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            letter-spacing: 5px;
+            margin-bottom: 50px;
+            color: var(--gold);
+            font-weight: bold;
+        }
+
+        /* Contenedor de las transiciones */
+        .message-box {
+            height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .phrase {
+            opacity: 0;
+            position: absolute;
+            transition: opacity 1.5s ease-in-out;
+            text-align: center;
+        }
+
+        .phrase.active {
+            opacity: 1;
+        }
+
+        .flag {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .native-text {
+            font-size: 1.8rem;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .romanization {
+            font-style: italic;
+            color: #aaa;
+            font-size: 1.1rem;
+        }
+
+        .emoji-signal {
+            margin-top: 40px;
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="logo">SADV41</div>
+
+    <div class="message-box" id="message-box">
+        </div>
+
+    <div class="emoji-signal">🎚</div>
+</div>
+
+<script>
+    const data = [
+        { flag: "🇮🇱", lang: "Hebreo", text: "המשיח אוהב גם אותך", roman: "HaMashiach ohev gam otkha" },
+        { flag: "🇸🇦", lang: "Árabe", text: "المسيح يحبك أنت أيضاً", roman: "Al-Masih yuhibbuka anta aydan" },
+        { flag: "🇮🇳", lang: "Hindi", text: "मसीह आपसे भी प्यार करता है", roman: "Maseeh aapse bhi pyaar karta hai" },
+        { flag: "🇨🇳", lang: "Chino", text: "基督也爱你", roman: "Jīdū yě ài nǐ" },
+        { flag: "🇯🇵", lang: "Japonés", text: "キリストはあなたも愛しています", roman: "Kirisuto wa anata mo aishiteimasu" },
+        { flag: "🇮🇷", lang: "Persa", text: "مسیح شما را هم دوست دارد", roman: "Masih shoma ra ham dousat darad" },
+        { flag: "🇹🇷", lang: "Turco", text: "Mesih seni de seviyor", roman: "Mesih seni de seviyor" },
+        { flag: "🇹🇭", lang: "Tailandés", text: "พระคริสต์ทรงรักคุณเช่นกัน", roman: "Phra khrit song rak khun chen kan" },
+        { flag: "🇵🇰", lang: "Urdu", text: "مسیح آپ سے भी محبت کرتا ہے", roman: "Masih aap se bhi mohabbat karta hai" },
+        { flag: "🇲🇦", lang: "Bereber", text: "ⵍⵎⴰⵙⵉⵃ ⵉⵃⵎⵍⴽ ⵓⵍⴰ ⴽⵢⵢⵉⵏ", roman: "Lmasih ihmlk ula kyyin" },
+        { flag: "🇮🇩", lang: "Indonesio", text: "Kristus juga mengasihimu", roman: "Kristus juga mengasihimu" },
+        { flag: "🇰🇵", lang: "Coreano", text: "그리스도께서도 당신을 사랑하십니다", roman: "Geurisudokkeseodo dangsineul saranghasimnida" },
+        { flag: "🇻🇳", lang: "Vietnamita", text: "Chúa Kitô cũng yêu bạn", roman: "Chúa Ki-tô cũng yêu bạn" },
+        { flag: "🇷🇺", lang: "Ruso", text: "Христос любит и тебя", roman: "Khristos lyubit i tebya" },
+        { flag: "🇲🇹", lang: "Maltés", text: "Kristu jħobbok ukoll", roman: "Kristu yhobbok ukoll" }
+    ];
+
+    const container = document.getElementById('message-box');
+
+    // Generar elementos HTML
+    data.forEach((item, index) => {
+        const div = document.createElement('div');
+        div.className = `phrase ${index === 0 ? 'active' : ''}`;
+        div.innerHTML = `
+            <div class="flag">${item.flag}</div>
+            <span class="native-text">${item.text}</span>
+            <div class="romanization">${item.roman}</div>
+        `;
+        container.appendChild(div);
+    });
+
+    // Lógica de transición
+    let currentIndex = 0;
+    const phrases = document.querySelectorAll('.phrase');
+
+    setInterval(() => {
+        phrases[currentIndex].classList.remove('active');
+        currentIndex = (currentIndex + 1) % phrases.length;
+        phrases[currentIndex].classList.add('active');
+    }, 4000); // Cambia cada 4 segundos
+</script>
+
+</body>
+</html>
