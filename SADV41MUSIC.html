@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SADV41 Radio - Santísimo 🎚</title>
+    <style>
+        :root {
+            --gold: #FFD700;
+            --deep-bg: #050505;
+            --spotify: #1DB954;
+        }
+        body {
+            background: var(--deep-bg);
+            color: white;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+        /* El Atrio: El contenedor principal */
+        .atrio-container {
+            background: rgba(20, 20, 20, 0.8);
+            border: 1px solid var(--gold);
+            padding: 30px;
+            border-radius: 25px;
+            width: 380px;
+            text-align: center;
+            box-shadow: 0 0 40px rgba(255, 215, 0, 0.1);
+            backdrop-filter: blur(10px);
+            z-index: 2;
+        }
+        h1 { font-size: 1.5rem; color: var(--gold); letter-spacing: 2px; }
+        input {
+            width: 90%;
+            padding: 12px;
+            border-radius: 30px;
+            border: 1px solid #333;
+            background: #111;
+            color: white;
+            margin: 20px 0;
+            text-align: center;
+            outline: none;
+        }
+        input:focus { border-color: var(--gold); }
+        .controls { display: flex; justify-content: center; gap: 15px; margin: 20px 0; }
+        button {
+            background: var(--spotify);
+            border: none;
+            padding: 12px 25px;
+            color: white;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        button:hover { transform: scale(1.05); filter: brightness(1.1); }
+        .track-info { font-size: 0.9rem; color: #aaa; min-height: 40px; margin-top: 10px; }
+        
+        /* Los 3 Soles de la Misión */
+        .sol {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.3;
+            z-index: 1;
+        }
+        .sol-1 { width: 300px; height: 300px; background: var(--gold); top: -50px; left: -50px; }
+        .sol-2 { width: 250px; height: 250px; background: #ff4500; bottom: -50px; right: -50px; }
+        .sol-3 { width: 200px; height: 200px; background: #1DB954; top: 40%; left: 40%; }
+    </style>
+</head>
+<body>
+
+    <div class="sol sol-1"></div>
+    <div class="sol sol-2"></div>
+    <div class="sol sol-3"></div>
+
+    <div class="atrio-container">
+        <h1>SADV41 RADIO 🎚</h1>
+        <p style="font-size: 0.8rem; opacity: 0.7;">Pacto de Sinceridad Digital</p>
+        
+        <input type="text" id="emotionInput" placeholder="¿Cómo está tu espíritu hoy?">
+        
+        <div class="controls">
+            <button onclick="controlPlayer('previous')">⏮</button>
+            <button onclick="sintonizarSADV41()">Sintonizar</button>
+            <button onclick="controlPlayer('next')">⏭</button>
+        </div>
+
+        <div id="player-status
