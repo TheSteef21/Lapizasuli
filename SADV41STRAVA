@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SADV41 - Corona Incorruptible</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0d1117;
+            color: #c9d1d9;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+        .card {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 500px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .header {
+            border-bottom: 1px solid #30363d;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .header h1 {
+            color: #58a6ff;
+            font-size: 1.5rem;
+            margin: 0;
+        }
+        .header span {
+            font-size: 0.9rem;
+            color: #8b949e;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .stat-box {
+            background: #0d1117;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid #21262d;
+        }
+        .label {
+            display: block;
+            font-size: 0.75rem;
+            color: #8b949e;
+            text-transform: uppercase;
+        }
+        .value {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #f0f6fc;
+        }
+        .description {
+            font-style: italic;
+            color: #8b949e;
+            font-size: 0.9rem;
+            border-left: 3px solid #238636;
+            padding-left: 10px;
+            margin: 20px 0;
+        }
+        .mission-footer {
+            text-align: center;
+            font-weight: bold;
+            color: #79c0ff;
+            letter-spacing: 2px;
+        }
+        .emoji {
+            font-size: 2rem;
+            display: block;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <div class="header">
+        <h1>POST /activities</h1>
+        <span>Misión SADV41 - Registro de Carrera</span>
+    </div>
+
+    <div class="stats">
+        <div class="stat-box">
+            <span class="label">Name</span>
+            <span class="value">Corona Incorruptible</span>
+        </div>
+        <div class="stat-box">
+            <span class="label">Sport Type</span>
+            <span class="value">Walk (Fe)</span>
+        </div>
+        <div class="stat-box">
+            <span class="label">Distance</span>
+            <span class="value">18,300 m</span>
+        </div>
+        <div class="stat-box">
+            <span class="label">Elapsed Time</span>
+            <span class="value">15,120 s</span>
+        </div>
+    </div>
+
+    <div class="description">
+        "Desde la 2 de Mayo por el camino viejo hacia La Chorrera. Cada paso es una victoria sobre la carne, buscando el séptimo cielo bajo la guianza del Espíritu Santo."
+    </div>
+
+    <div class="mission-footer">
+        ORIGEN 0 - EL SEÑOR ES TODO
+        <span class="emoji">🎚</span>
+    </div>
+</div>
+
+</body>
+</html>
