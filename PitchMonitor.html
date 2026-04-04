@@ -2,60 +2,111 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>SADV41 - Pitch Monitor & Librería Bíblica</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pitch Monitor SADV41 - En Vivo</title>
     <style>
-        body { font-family: 'Segoe UI', sans-serif; background: #121212; color: white; text-align: center; }
-        .container { padding: 20px; }
-        #pitch-display { font-size: 3em; color: #00d1ff; margin: 20px 0; }
-        #bible-verse { font-style: italic; color: #ffcc00; font-size: 1.5em; min-height: 100px; padding: 20px; }
-        .spotify-player { margin-top: 30px; border-radius: 12px; overflow: hidden; }
-        .tribu-info { color: #888; font-size: 1.1em; }
+        body { font-family: 'Segoe UI', sans-serif; background: #121212; color: white; text-align: center; margin: 0; padding: 20px; }
+        #pitch-display { font-size: 4em; color: #00d1ff; font-weight: bold; margin: 10px 0; }
+        #frequency-display { font-size: 1.5em; color: #888; }
+        #bible-verse { font-style: italic; color: #ffcc00; font-size: 1.4em; margin: 20px auto; max-width: 600px; min-height: 80px; }
+        .tribu-info { font-size: 1.2em; border-top: 1px solid #333; padding-top: 15px; color: #aaa; }
+        button { background: #00d1ff; border: none; padding: 15px 30px; font-size: 1em; border-radius: 30px; cursor: pointer; font-weight: bold; }
+        button:hover { background: #008cb3; }
     </style>
 </head>
 <body>
 
-<div class="container">
     <h1>Pitch Monitor SADV41</h1>
     <p>Sintonizando las 12 Tribus a través de la Frecuencia</p>
 
-    <div id="pitch-display">Esperando audio...</div>
+    <button id="start-btn">Activar Micrófono</button>
+
+    <div id="pitch-display">---</div>
     <div id="frequency-display">0 Hz</div>
     
-    <div id="bible-verse">"Canta al Señor un cántico nuevo..."</div>
+    <div id="bible-verse">Pulsa el botón para iniciar la sintonía espiritual...</div>
     <div class="tribu-info" id="tribu-tag">Tribu: -- | Sentimiento: --</div>
 
-    <div class="spotify-player">
-        <iframe src="https://open.spotify.com/embed/artist/3B9p7J5M6nO6q7X7Xz8vG4" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-    </div>
-</div>
-
 <script>
-// Mapeo de Notas a Tribus y Versículos (Lógica de las 12 notas)
 const mapaEspiritual = {
     "C":  { tribu: "Judá", sentimiento: "Alabanza/Victoria", verso: "Génesis 49:8 - Judá, te alabarán tus hermanos..." },
     "C#": { tribu: "Rubén", sentimiento: "Dignidad/Ímpetu", verso: "Génesis 49:3 - Rubén, tú eres mi primogénito..." },
     "D":  { tribu: "Gad", sentimiento: "Justicia/Tropa", verso: "Génesis 49:19 - Gad, ejército lo acometerá..." },
     "D#": { tribu: "Aser", sentimiento: "Sabrosura/Prosperidad", verso: "Génesis 49:20 - El pan de Aser será sustancioso..." },
     "E":  { tribu: "Neftalí", sentimiento: "Libertad/Agilidad", verso: "Génesis 49:21 - Neftalí, cierva suelta..." },
-    "F":  { tribu: "Manasés", sentimiento: "Olvido del dolor/Fruto", verso: "Génesis 41:51 - Dios me hizo olvidar todo mi trabajo..." },
+    "F":  { tribu: "Manasés", sentimiento: "Olvido del dolor", verso: "Génesis 41:51 - Dios me hizo olvidar todo mi trabajo..." },
     "F#": { tribu: "Efraín", sentimiento: "Multiplicación", verso: "Génesis 41:52 - Dios me hizo fructificar..." },
     "G":  { tribu: "Zabulón", sentimiento: "Refugio/Puertos", verso: "Génesis 49:13 - Zabulón en puertos de mar habitará..." },
-    "G#": { tribu: "Isacar", sentimiento: "Servicio/Reposo", verso: "Génesis 49:14 - Isacar, asno fuerte echado entre los apriscos..." },
+    "G#": { tribu: "Isacar", sentimiento: "Servicio/Reposo", verso: "Génesis 49:14 - Isacar, asno fuerte echado..." },
     "A":  { tribu: "Dan", sentimiento: "Juicio/Sabiduría", verso: "Génesis 49:16 - Dan juzgará a su pueblo..." },
     "A#": { tribu: "José", sentimiento: "Rama Fructífera", verso: "Génesis 49:22 - Rama fructífera es José..." },
     "B":  { tribu: "Benjamín", sentimiento: "Protección/Mañana", verso: "Génesis 49:27 - Benjamín es lobo arrebatador..." }
 };
 
-// Aquí se integraría la librería de detección de frecuencia (ej. PitchDetect.js o la Web Audio API)
-// para actualizar el DOM en tiempo real cuando cantes o improvises.
-function actualizarInterfaz(notaDetectada, frecuencia) {
-    const data = mapaEspiritual[notaDetectada];
-    document.getElementById('pitch-display').innerText = notaDetectada;
+const nombresNotas = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
+let audioContext, analyser, dataArray;
+
+document.getElementById('start-btn').addEventListener('click', async () => {
+    audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    const source = audioContext.createMediaStreamSource(stream);
+    analyser = audioContext.createAnalyser();
+    analyser.fftSize = 2048;
+    source.connect(analyser);
+    dataArray = new Float32Array(analyser.fftSize);
+    
+    document.getElementById('start-btn').style.display = 'none';
+    detectarPitch();
+});
+
+function detectarPitch() {
+    analyser.getFloatTimeDomainData(dataArray);
+    let ac = autoCorrelate(dataArray, audioContext.sampleRate);
+
+    if (ac !== -1) {
+        let nota = frecuenciaANota(ac);
+        actualizarInterfaz(nota, Math.round(ac));
+    }
+    requestAnimationFrame(detectarPitch);
+}
+
+function autoCorrelate(buf, sampleRate) {
+    let SIZE = buf.length;
+    let rms = 0;
+    for (let i=0; i<SIZE; i++) rms += buf[i]*buf[i];
+    rms = Math.sqrt(rms/SIZE);
+    if (rms < 0.01) return -1; // Silencio
+
+    let r1=0, r2=SIZE-1, thres=0.2;
+    for (let i=0; i<SIZE/2; i++) if (Math.abs(buf[i]) < thres) { r1=i; break; }
+    for (let i=1; i<SIZE/2; i++) if (Math.abs(buf[SIZE-i]) < thres) { r2=SIZE-i; break; }
+    buf = buf.slice(r1,r2);
+    SIZE = buf.length;
+
+    let c = new Float32Array(SIZE).fill(0);
+    for (let i=0; i<SIZE; i++)
+        for (let j=0; j<SIZE-i; j++) c[i] += buf[j]*buf[j+i];
+
+    let d=0; while (c[d]>c[d+1]) d++;
+    let maxval=-1, maxpos=-1;
+    for (let i=d; i<SIZE; i++) {
+        if (c[i] > maxval) { maxval = c[i]; maxpos = i; }
+    }
+    return sampleRate/maxpos;
+}
+
+function frecuenciaANota(f) {
+    let n = 12 * (Math.log2(f / 440)) + 69;
+    return nombresNotas[Math.round(n) % 12];
+}
+
+function actualizarInterfaz(nota, frecuencia) {
+    const data = mapaEspiritual[nota];
+    document.getElementById('pitch-display').innerText = nota;
     document.getElementById('frequency-display').innerText = frecuencia + " Hz";
     document.getElementById('bible-verse').innerText = data.verso;
     document.getElementById('tribu-tag').innerText = `Tribu: ${data.tribu} | Sentimiento: ${data.sentimiento}`;
 }
 </script>
-
 </body>
 </html>
