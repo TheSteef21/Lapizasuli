@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>SADV41 - Pitch Monitor & Librería Bíblica</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background: #121212; color: white; text-align: center; }
+        .container { padding: 20px; }
+        #pitch-display { font-size: 3em; color: #00d1ff; margin: 20px 0; }
+        #bible-verse { font-style: italic; color: #ffcc00; font-size: 1.5em; min-height: 100px; padding: 20px; }
+        .spotify-player { margin-top: 30px; border-radius: 12px; overflow: hidden; }
+        .tribu-info { color: #888; font-size: 1.1em; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Pitch Monitor SADV41</h1>
+    <p>Sintonizando las 12 Tribus a través de la Frecuencia</p>
+
+    <div id="pitch-display">Esperando audio...</div>
+    <div id="frequency-display">0 Hz</div>
+    
+    <div id="bible-verse">"Canta al Señor un cántico nuevo..."</div>
+    <div class="tribu-info" id="tribu-tag">Tribu: -- | Sentimiento: --</div>
+
+    <div class="spotify-player">
+        <iframe src="https://open.spotify.com/embed/artist/3B9p7J5M6nO6q7X7Xz8vG4" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    </div>
+</div>
+
+<script>
+// Mapeo de Notas a Tribus y Versículos (Lógica de las 12 notas)
+const mapaEspiritual = {
+    "C":  { tribu: "Judá", sentimiento: "Alabanza/Victoria", verso: "Génesis 49:8 - Judá, te alabarán tus hermanos..." },
+    "C#": { tribu: "Rubén", sentimiento: "Dignidad/Ímpetu", verso: "Génesis 49:3 - Rubén, tú eres mi primogénito..." },
+    "D":  { tribu: "Gad", sentimiento: "Justicia/Tropa", verso: "Génesis 49:19 - Gad, ejército lo acometerá..." },
+    "D#": { tribu: "Aser", sentimiento: "Sabrosura/Prosperidad", verso: "Génesis 49:20 - El pan de Aser será sustancioso..." },
+    "E":  { tribu: "Neftalí", sentimiento: "Libertad/Agilidad", verso: "Génesis 49:21 - Neftalí, cierva suelta..." },
+    "F":  { tribu: "Manasés", sentimiento: "Olvido del dolor/Fruto", verso: "Génesis 41:51 - Dios me hizo olvidar todo mi trabajo..." },
+    "F#": { tribu: "Efraín", sentimiento: "Multiplicación", verso: "Génesis 41:52 - Dios me hizo fructificar..." },
+    "G":  { tribu: "Zabulón", sentimiento: "Refugio/Puertos", verso: "Génesis 49:13 - Zabulón en puertos de mar habitará..." },
+    "G#": { tribu: "Isacar", sentimiento: "Servicio/Reposo", verso: "Génesis 49:14 - Isacar, asno fuerte echado entre los apriscos..." },
+    "A":  { tribu: "Dan", sentimiento: "Juicio/Sabiduría", verso: "Génesis 49:16 - Dan juzgará a su pueblo..." },
+    "A#": { tribu: "José", sentimiento: "Rama Fructífera", verso: "Génesis 49:22 - Rama fructífera es José..." },
+    "B":  { tribu: "Benjamín", sentimiento: "Protección/Mañana", verso: "Génesis 49:27 - Benjamín es lobo arrebatador..." }
+};
+
+// Aquí se integraría la librería de detección de frecuencia (ej. PitchDetect.js o la Web Audio API)
+// para actualizar el DOM en tiempo real cuando cantes o improvises.
+function actualizarInterfaz(notaDetectada, frecuencia) {
+    const data = mapaEspiritual[notaDetectada];
+    document.getElementById('pitch-display').innerText = notaDetectada;
+    document.getElementById('frequency-display').innerText = frecuencia + " Hz";
+    document.getElementById('bible-verse').innerText = data.verso;
+    document.getElementById('tribu-tag').innerText = `Tribu: ${data.tribu} | Sentimiento: ${data.sentimiento}`;
+}
+</script>
+
+</body>
+</html>
