@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Down Below - Steven Dior (Legacy)</title>
+    <style>
+        body {
+            background-color: #1a1a1a;
+            color: #d4af37; /* Dorado para resaltar el valor de la obra */
+            font-family: 'Georgia', serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .header {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://www.transparenttextures.com/patterns/wood-pattern.png');
+            width: 100%;
+            text-align: center;
+            padding: 50px 0;
+            border-bottom: 3px solid #d4af37;
+        }
+        .container {
+            max-width: 900px;
+            padding: 40px;
+            text-align: center;
+        }
+        .tribute-images {
+            display: flex;
+            justify-content: space-around;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+        .artist-card {
+            width: 250px;
+            margin: 10px;
+        }
+        .artist-card img {
+            width: 100%;
+            border-radius: 15px;
+            border: 2px solid #d4af37;
+            filter: sepia(0.5); /* Toque antiguo */
+        }
+        .video-container {
+            margin: 40px 0;
+            border: 5px solid #3e2723; /* Madera oscura */
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+        }
+        .lyrics-concept {
+            font-style: italic;
+            line-height: 1.8;
+            color: #e0e0e0;
+        }
+        h1 { font-size: 3em; margin: 0; }
+        h2 { color: #a1887f; }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>DOWN BELOW</h1>
+        <p>La Precuela a la Isla de la Vida</p>
+    </div>
+
+    <div class="container">
+        <div class="tribute-images">
+            <div class="artist-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6e/Stevie_Wonder_1973.JPG" alt="Stevie Wonder Tribute">
+                <p>Influencia: Stevie Wonder</p>
+            </div>
+            <div class="artist-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a2/Ray_Charles_classic_portrait.JPG" alt="Ray Charles Tribute">
+                <p>Influencia: Ray Charles</p>
+            </div>
+        </div>
+
+        <div class="lyrics-concept">
+            <p>"Nacida en el umbral de la pandemia, esta fue la primera semilla. 
+            Como los maestros que no necesitaron la vista para transformar el mundo, 
+            esta canción busca ver más allá de lo que el sistema intenta encubrir."</p>
+        </div>
+
+        <div class="video-container">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/14kwPAV4HYs" frameborder="0" allowfullscreen></iframe>
+        </div>
+
+        <h2>SADV41 - Steven Dior Legacy</h2>
+    </div>
+
+</body>
+</html>
