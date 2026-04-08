@@ -2,64 +2,61 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Radio SADV41 - New Music Friday 🎚</title>
+    <title>SADV41 Radio - Top Frecuencia 🎚</title>
     <style>
-        :root { --gold: #FFD700; --spot-green: #1DB954; }
-        body { background: #050505; color: white; font-family: 'Segoe UI', sans-serif; text-align: center; padding: 50px; }
-        .sadv-box { border: 2px solid var(--gold); border-radius: 20px; padding: 30px; width: 350px; margin: auto; background: #121212; }
-        input { width: 80%; padding: 10px; border-radius: 20px; border: none; margin: 15px 0; background: #222; color: white; text-align: center; }
-        .btn-play { background: var(--spot-green); border: none; padding: 12px 25px; border-radius: 25px; color: white; font-weight: bold; cursor: pointer; }
-        .status { margin-top: 20px; font-size: 0.9rem; color: var(--gold); }
+        :root { --gold: #FFD700; --deep: #0a0a0a; }
+        body { background: var(--deep); color: white; font-family: sans-serif; text-align: center; padding: 40px; }
+        .atrio { border: 1px solid var(--gold); border-radius: 20px; padding: 25px; max-width: 400px; margin: auto; background: #111; }
+        button { background: #1DB954; color: white; border: none; padding: 10px 20px; border-radius: 20px; cursor: pointer; font-weight: bold; }
+        .track-list { text-align: left; font-size: 0.8rem; margin-top: 20px; color: #ccc; }
     </style>
 </head>
 <body>
 
-    <div class="sadv-box">
+    <div class="atrio">
         <h1>SADV41 IA 🎚</h1>
-        <p>Sintonizando desde New Music Friday</p>
-        
-        <input type="text" id="emotionInput" placeholder="¿Cómo te sientes hoy?">
-        
-        <div class="controls">
-            <button class="btn-play" onclick="sintonizarSADV41()">Sintonizar Espíritu</button>
-        </div>
-        
-        <div id="player-status" class="status">Esperando guianza...</div>
+        <p>Sintonizando tus Top Tracks</p>
+        <button onclick="sintonizarTopSADV41()">Sintonizar Espíritu</button>
+        <div id="status" class="track-list"></div>
     </div>
 
     <script>
-        // Token temporal para la sesión
-        const token = 'BQCj9UG9oaYsd9q4_6Snhm79W_V2CI-FhrMZ7M5PRqeiyV_TJpAznBGu87sqMWX_oxEp2fxkG8zjlW2uzS8eEfZBZBp9nJJt154wmqW5a_j5inirMQdQlBRMrU_QHtMvPvQTX2I_pn5oQRCy78QiU__7yJl767pX4HD0uyrCuLvplP-QL6HydWYLfH_kLlZfgGcYZz523Yn_Apun7f6g50CUXOIDQdZw5YL6qBAC-uO-5MyLNu0f3_P07Vzt_HbLx5yaRxAVjG8shdjOvHIlmc-_T4gBwdhlyEMzLF4dGwRbx1vpHQ';
+        const token = 'TU_TOKEN_AQUÍ'; // El token que obtuviste del Console
 
-        async function fetchWebApi(endpoint, method, body) {
+        async function fetchWebApi(endpoint, method = 'GET', body = null) {
             const res = await fetch(`https://api.spotify.com/${endpoint}`, {
                 headers: { Authorization: `Bearer ${token}` },
                 method,
                 body: body ? JSON.stringify(body) : undefined
             });
-            return res.status === 204 ? null : await res.json();
+            return res.json();
         }
 
-        async function sintonizarSADV41() {
-            const status = document.getElementById('player-status');
-            const input = document.getElementById('emotionInput').value.toLowerCase();
-            status.innerText = "Consultando fuentes del viernes...";
-
-            // Parámetros basados en tus 42 reglas
-            let valence = 0.5; // Positividad
-            let energy = 0.5;  // Intensidad
-
-            if (input.includes("paz") || input.includes("cristo")) {
-                valence = 0.9; energy = 0.2; // Calma del Santísimo
-            } else if (input.includes("gozo") || input.includes("victoria")) {
-                valence = 0.9; energy = 0.8; // Energía del Atrio
-            }
+        async function sintonizarTopSADV41() {
+            const statusDiv = document.getElementById('status');
+            statusDiv.innerText = "Consultando tus afinidades celestiales...";
 
             try {
-                // Buscamos recomendaciones basadas en tus Top Tracks pero filtradas emocionalmente
-                const data = await fetchWebApi(
-                    `v1/recommendations?limit=1&target_valence=${valence}&target_energy=${energy}&seed_genres=gospel,piano,ambient`, 
-                    'GET'
+                // 1. Obtenemos tus 5 canciones top (v1/me/top/tracks)
+                const topData = await fetchWebApi('v1/me/top/tracks?limit=5&time_range=short_term');
+                const tracks = topData.items;
+
+                if (tracks.length > 0) {
+                    // 2. La IA selecciona la primera (puedes añadir lógica de emoción aquí)
+                    const track = tracks[0];
+                    
+                    // 3. Orden de reproducción
+                    await fetchWebApi('v1/me/player/play', 'PUT', { uris: [track.uri] });
+                    
+                    statusDiv.innerHTML = `<strong>Sonando ahora:</strong><br>${track.name} - ${track.artists[0].name}`;
+                }
+            } catch (e) {
+                statusDiv.innerText = "Error: ¿Token expirado o Spotify cerrado?";
+            }
+        }
+    </script>
+</body>
+</html>
                 );
 
                 if (data.tracks && data.tracks.length > 0) {
