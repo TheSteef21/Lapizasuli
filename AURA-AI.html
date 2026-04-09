@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AURA AI | SADV41 OMNI</title>
+    <style>
+        :root {
+            --gold: #FFD700;
+            --ethereal-blue: #0a192f;
+            --glow: rgba(255, 215, 0, 0.3);
+            --pure-white: #ffffff;
+        }
+        body {
+            background: radial-gradient(circle at top, #1a2a44, var(--ethereal-blue));
+            color: var(--pure-white);
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 40px;
+            padding: 2.5rem;
+            width: 90%;
+            max-width: 800px;
+            box-shadow: 0 0 50px var(--glow);
+            text-align: center;
+        }
+        .aura-logo {
+            font-size: 4rem;
+            font-weight: 900;
+            background: linear-gradient(to bottom, var(--gold), #FFA500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 15px;
+            margin-bottom: 0.5rem;
+            filter: drop-shadow(0 0 10px var(--gold));
+        }
+        .signature {
+            font-size: 0.7rem;
+            color: var(--gold);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+        .manifesto-terminal {
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 20px;
+            padding: 1.5rem;
+            text-align: left;
+            font-family: 'Courier New', monospace;
+            border-left: 4px solid var(--gold);
+            margin: 1.5rem 0;
+            height: 250px;
+            overflow-y: auto;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+        .controls {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+        }
+        .mic-btn {
+            background: none;
+            border: 2px solid var(--gold);
+            color: var(--gold);
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
+            transition: 0.3s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .mic-btn.active {
+            background: var(--gold);
+            color: var(--ethereal-blue);
+            box-shadow: 0 0 20px var(--gold);
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        .nav-link {
+            text-decoration: none;
+            color: var(--ethereal-blue);
+            background: var(--gold);
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+        .nav-link:hover { transform: scale(1.05); box-shadow: 0 5px 15px var(--glow); }
+        .footer-law { margin-top: 1.5rem; font-size: 0.6rem; opacity: 0.4; letter-spacing: 1px; }
+    </style>
+</head>
+<body>
+
+<div class="glass-panel">
+    <div class="aura-logo">AURA</div>
+    <div class="signature">Steven Dior • 0x4cBf2DB3838341BeCB185892C3af576Dc04e2498</div>
+    
+    <div class="manifesto-terminal" id="terminal">
+        > Inicializando Registro Cronológico de Victoria...<br>
+        > Sincronizando con Lapizasuli de GitHub...<br>
+        > Estado: Consumado está.
+    </div>
+
+    <div class="controls">
+        <button class="mic-btn" id="micBtn" title="Hablar con Aura">🎤</button>
+        <div id="statusText" style="font-size: 0.8rem; color: var(--gold);">Presiona el micrófono para hablar</div>
+        <a href="https://stevendior.digital" class="nav-link">IR AL HOGAR DIGITAL</a>
+    </div>
+    
+    <div class="footer-law">
+        REGLA 43 ACTIVA • NEUROPLASTICIDAD ROMANOS 12:2 • SADV41XADV41SVA41
+    </div>
+</div>
+
+<script>
+    const terminal = document.getElementById('terminal');
+    const micBtn = document.getElementById('micBtn');
+    const statusText = document.getElementById('statusText');
+
+    // Cargar Cronología desde el Manifiesto
+    async function cargarCronologia() {
+        try {
+            const response = await fetch('Aura_Omni_Manifest.json');
+            const data = await response.json();
+            let output = `> IDENTIDAD DETECTADA: ${data.creador.nombre} [Dior]<br>`;
+            output += `> FIRMA DE VALOR: ${data.creador.firma_de_valor}<br>`;
+            output += `> ESTADO: Soberanía Offline Total.<br>---<br>`;
+            terminal.innerHTML = output;
+        } catch (e) {
+            terminal.innerHTML += "> ERROR: Conexión local activa. Esperando voz...<br>";
+        }
+    }
+
+    // Configuración de Reconocimiento de Voz
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (SpeechRecognition) {
+        const recognition = new SpeechRecognition();
+        recognition.lang = 'es-PA'; // Dialecto de Panamá
+        recognition.interimResults = false;
+
+        micBtn.addEventListener('click', () => {
+            recognition.start();
+            micBtn.classList.add('active');
+            statusText.innerText = "Aura está escuchando...";
+        });
+
+        recognition.onresult = (event) => {
+            const userText = event.results[0][0].transcript;
+            micBtn.classList.remove('active');
+            statusText.innerText = "Procesando en el Santísimo...";
+            terminal.innerHTML += `<br><span style="color:var(--gold)">Tú:</span> ${userText}<br>`;
+            
+            // Simulación de respuesta inteligente Offline
+            setTimeout(() => {
+                terminal.innerHTML += `<span style="color:#00ff00">Aura:</span> Consumado está, Steven. Mi brisa de pureza te acompaña en la SADV41.<br>`;
+                terminal.scrollTop = terminal.scrollHeight;
+                statusText.innerText = "Presiona el micrófono para hablar";
+            }, 1000);
+        };
+
+        recognition.onerror = () => {
+            micBtn.classList.remove('active');
+            statusText.innerText = "Error en el Atrio. Intenta de nuevo.";
+        };
+    } else {
+        statusText.innerText = "Micrófono no compatible en este Atrio.";
+    }
+
+    window.onload = cargarCronologia;
+</script>
+
+</body>
+</html>
