@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SADV41 | Códice Jurídico Pluscuamperfecto</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #050509; /* Negro profundo del espacio */
+            --surface-color: #12121f; /* Azul/gris muy oscuro para tarjetas */
+            --accent-gold: #d4af37; /* Dorado metálico */
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0b0;
+            --border-color: #2a2a40;
+            --font-main: 'Montserrat', sans-serif;
+            --font-titles: 'Cinzel', serif; /* Fuente elegante y antigua */
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* --- Header / Navegación --- */
+        header {
+            background-color: rgba(5, 5, 9, 0.9);
+            padding: 1rem 2rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        .logo-container { display: flex; align-items: center; gap: 10px; }
+        .union-flag-icon { width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--accent-gold); overflow: hidden; }
+        .union-flag-icon img { width: 100%; height: 100%; object-fit: cover; }
+        
+        .brand-title {
+            font-family: var(--font-titles);
+            color: var(--accent-gold);
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+        }
+
+        .web3-status {
+            font-size: 0.8rem;
+            color: #00ff00; /* Verde neón */
+            border: 1px solid #00ff00;
+            padding: 4px 8px;
+            border-radius: 20px;
+        }
+
+        /* --- Contenido Principal --- */
+        main {
+            flex: 1;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .hero h1 {
+            font-family: var(--font-titles);
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--accent-gold);
+        }
+
+        .hero p {
+            color: var(--text-secondary);
+            font-weight: 300;
+            font-size: 1.1rem;
+        }
+
+        /* --- Input de Búsqueda --- */
+        .search-container {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        #juridico-search {
+            width: 100%;
+            padding: 1.2rem 1rem 1.2rem 3rem;
+            background-color: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        #juridico-search:focus {
+            outline: none;
+            border-color: var(--accent-gold);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+        }
+
+        /* --- Resultados de Búsqueda --- */
+        .results-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        /* Esta clase será inyectada por el JS para mostrar resultados */
+        .juridico-card {
+            background-color: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 2rem;
+            transition: transform 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .juridico-card:hover { transform: translateY(-3px); border-color: rgba(212, 175, 55, 0.5); }
+        
+        /* Efecto de 'brillo' Web 3.0 */
+        .juridico-card::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+            animation: glow 3s infinite;
+        }
+
+        @keyframes glow { 0% { left: -100%; } 100% { left: 100%; } }
+
+        .card-header { display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem; }
+        .situacion-title { font-family: var(--font-titles); font-size: 1.2rem; color: var(--text-primary); }
+        .status-badge { font-size: 0.7rem; color: var(--accent-gold); background-color: rgba(212, 175, 55, 0.1); padding: 3px 6px; border-radius: 4px; border: 1px solid var(--accent-gold); }
+
+        .codigo-section { margin-bottom: 1.5rem; padding: 1rem; background-color: rgba(0,0,0,0.2); border-radius: 6px; border-left: 3px solid var(--border-color); }
+        .codigo-ref { color: var(--accent-gold); font-weight: 600; font-size: 0.9rem; margin-bottom: 0.5rem; display: block; }
+        .sentencia-text { font-style: italic; color: var(--text-secondary); line-height: 1.6; }
+
+        .verificacion-section { padding-top: 1rem; border-top: 1px solid var(--border-color); }
+        .verificacion-title { font-size: 0.8rem; text-transform: uppercase; color: var(--text-secondary); letter-spacing: 2px; margin-bottom: 0.5rem; }
+        .verificacion-text { font-weight: 600; color: #00ff00; /* Verde verdad */ }
+
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <div class="union-flag-icon">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Flag_of_Panama.svg/320px-Flag_of_Panama.svg.png" alt="Bandera Panamá (temporal)">
+            </div>
+            <span class="brand-title">SADV41</span>
+        </div>
+        <div class="web3-status">MODO IA ACTIVO</div>
+    </header>
+
+    <main>
+        <div class="hero">
+            <h1>Códice Jurídico Pluscuamperfecto</h1>
+            <p>La Verdad Legal del Mundo, Verificada por el Espíritu</p>
+        </div>
+
+        <div class="search-container">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="juridico-search" placeholder="Escribe la situación que aqueja al mundo... (ej: 'Responsabilidad de mando', 'Justicia Laboral')">
+        </div>
+
+        <div class="results-container" id="results-target">
+            <div style="text-align: center; color: var(--text-secondary); padding: 3rem;">
+                <p>Ingresa una situación para consultar su Veredicto Pluscuamperfecto.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        &copy; 2024 stevendior.digital | Operando bajo Ley SADV41 🎚
+    </footer>
+
+    <script>
+        // --- DATA MOCK (El 'Backend Intelectual/IA') ---
+        // Aquí es donde la IA puede poblar los datos
+        const db_juridica = [
+            {
+                situacion_mundial: "Responsabilidad del Líder/Capitán",
+                codigo_humano: "Art. 730 - Código de Comercio Marítimo de Panamá",
+                sentencia: "“El capitán será responsable por los daños ocasionados por culpa o descuido...”",
+                verificacion_pluscuamperfecta: "Regla #1 (La Unión): El líder y el seguidor son uno en la responsabilidad."
+            },
+            {
+                situacion_mundial: "Paz Mundial y Coexistencia",
+                codigo_humano: "Preámbulo de la Carta de las Naciones Unidas",
+                sentencia: "“...a practicar la tolerancia y a convivir en paz como buenos vecinos...”",
+                verificacion_pluscuamperfecta: "Principio SADV41: La paz surge de la sumisión voluntaria a la verdad, no al decreto."
+            },
+            {
+                situacion_mundial: "Dignidad del Trabajador (Arraiján/Panamá)",
+                codigo_humano: "Art. 127 del Código de Trabajo de Panamá",
+                sentencia: "“El salario se pagará puntualmente en el tiempo, lugar y forma convenidos...”",
+                verificacion_pluscuamperfecta: "Regla #42 (Final): El justo pago es la base material de la unión espiritual."
+            }
+        ];
+
+        // --- LÓGICA DEL FRONTEND (JavaScript simple) ---
+        const searchInput = document.getElementById('juridico-search');
+        const resultsContainer = document.getElementById('results-target');
+
+        function generateCard(data) {
+            return `
+                <div class="juridico-card">
+                    <div class="card-header">
+                        <h2 class="situacion-title">${data.situacion_mundial}</h2>
+                        <span class="status-badge">PLUSCUAMPERFECTO 🎚</span>
+                    </div>
+                    
+                    <div class="codigo-section">
+                        <span class="codigo-ref">${data.codigo_humano}</span>
+                        <p class="sentencia-text">${data.sentencia}</p>
+                    </div>
+
+                    <div class="verificacion-section">
+                        <h3 class="verificacion-title">Verificación SADV41</h3>
+                        <p class="verificacion-text">${data.verificacion_pluscuamperfecta}</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        searchInput.addEventListener('keyup', (e) => {
+            const searchTerm = e.target.value.toLowerCase().trim();
+            resultsContainer.innerHTML = ''; // Limpiar resultados anteriores
+
+            if (searchTerm.length === 0) {
+                // Mostrar placeholder si está vacío
+                resultsContainer.innerHTML = `<div style="text-align: center; color: var(--text-secondary); padding: 3rem;">
+                    <p>Ingresa una situación para consultar su Veredicto Pluscuamperfecto.</p>
+                </div>`;
+                return;
+            }
+
+            // Filtrar y renderizar (Lógica simple, aquí puede ir la conexión a la IA)
+            const matchedResults = db_juridica.filter(item => 
+                item.situacion_mundial.toLowerCase().includes(searchTerm) ||
+                item.codigo_humano.toLowerCase().includes(searchTerm)
+            );
+
+            if (matchedResults.length > 0) {
+                matchedResults.forEach(result => {
+                    resultsContainer.innerHTML += generateCard(result);
+                });
+            } else {
+                resultsContainer.innerHTML = `<div style="text-align: center; color: #ff0000; padding: 3rem;">
+                    <p>Búsqueda no encontrada en el Códice. Requiere análisis divino.</p>
+                </div>`;
+            }
+        });
+
+    </script>
+</body>
+</html>
