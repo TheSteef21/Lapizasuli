@@ -3,61 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SADV41 IA 🎚</title>
+    <title>SADV41 Radio 🎚</title>
     <style>
         body { background: #000; color: #fff; font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
-        .container { border: 1px solid #FFD700; padding: 25px; border-radius: 15px; width: 300px; text-align: center; background: #0a0a0a; }
-        input { width: 85%; padding: 10px; border-radius: 20px; border: none; margin: 15px 0; background: #222; color: white; text-align: center; }
-        button { background: #1DB954; color: white; border: none; padding: 12px 25px; border-radius: 20px; cursor: pointer; font-weight: bold; width: 100%; }
-        .status { font-size: 0.75rem; color: #FFD700; margin-top: 15px; min-height: 40px; }
+        .atrio { border: 1px solid #FFD700; padding: 30px; border-radius: 20px; width: 300px; text-align: center; background: #0a0a0a; box-shadow: 0 0 20px rgba(255,215,0,0.3); }
+        h2 { color: #FFD700; margin-bottom: 5px; }
+        button { background: #1DB954; color: white; border: none; padding: 12px; border-radius: 25px; cursor: pointer; font-weight: bold; width: 100%; margin-top: 15px; }
+        .status { font-size: 0.8rem; color: #FFD700; margin-top: 20px; min-height: 40px; }
     </style>
 </head>
 <body>
 
-    <div class="container">
+    <div class="atrio">
         <h2>SADV41 IA 🎚</h2>
-        <p style="font-size: 0.7rem; opacity: 0.6;">Sintonizando tu New Music Friday</p>
+        <p style="font-size: 0.7rem; opacity: 0.6;">New Music Friday</p>
         
-        <button id="auth-btn" onclick="autorizarMision()">Conectar con el Espíritu</button>
-
-        <div id="radio-controls" style="display:none;">
-            <input type="text" id="feeling" placeholder="¿Cómo te sientes hoy?">
-            <button onclick="sintonizarSADV41()">Sintonizar Espíritu</button>
-            <div id="player-status" class="status">Listo para la misión.</div>
-        </div>
+        <button id="main-btn" onclick="iniciarMision()">Conectar Espíritu</button>
+        <div id="player-status" class="status">Esperando conexión...</div>
     </div>
 
     <script>
-        const clientId = '39c91f0347ec4c8b9f4714652431666e'; 
+        const clientId = '39c91f0347ec4c8b9f4714652431666e';
         const redirectUri = window.location.href.split('#')[0];
-        const hash = window.location.hash.substring(1).split('&').reduce((initial, item) => {
-            if (item) { var parts = item.split('='); initial[parts[0]] = decodeURIComponent(parts[1]); }
-            return initial;
-        }, {});
-
-        let token = hash.access_token;
+        
+        // Capturar el token de la URL después del login
+        const params = new URLSearchParams(window.location.hash.substring(1));
+        const token = params.get('access_token');
 
         if (token) {
-            document.getElementById('auth-btn').style.display = 'none';
-            document.getElementById('radio-controls').style.display = 'block';
-            window.location.hash = ""; // Limpia la URL
+            document.getElementById('main-btn').innerText = "Sintonizar Mi Música 🔯";
+            document.getElementById('main-btn').onclick = sintonizarMusica;
+            document.getElementById('player-status').innerText = "Sincronizado con Steven";
+            window.history.replaceState({}, document.title, redirectUri);
         }
 
-        function autorizarMision() {
+        function iniciarMision() {
             const scopes = 'user-top-read user-modify-playback-state user-read-playback-state';
-            // CAMBIO CLAVE: response_type=token para flujo simplificado
+            // URL corregida para evitar el error "response_type must be code"
             window.location.href = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&redirect_uri=${encodeURIComponent(redirectUri)}&scope=${encodeURIComponent(scopes)}`;
         }
 
-        async function sintonizarSADV41() {
+        async function sintonizarMusica() {
             const status = document.getElementById('player-status');
-            status.innerText = "Consultando el Santísimo...";
+            status.innerText = "Buscando frecuencia en el New Music Friday...";
+            
             try {
-                const res = await fetch('https://api.spotify.com/v1/me/top/tracks?time_range=short_term&limit=5', {
+                const res = await fetch('https://api.spotify.com/v1/me/top/tracks?limit=1&time_range=short_term', {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
                 const data = await res.json();
-                
+
                 if (data.items && data.items.length > 0) {
                     const track = data.items[0];
                     await fetch('https://api.spotify.com/v1/me/player/play', {
@@ -65,23 +60,12 @@
                         headers: { 'Authorization': `Bearer ${token}` },
                         body: JSON.stringify({ uris: [track.uri] })
                     });
-                    status.innerHTML = `Sintonizado: <b>${track.name}</b><br>${track.artists[0].name} 🗿🔯`;
-                } else {
-                    status.innerText = "Abre Spotify en tu móvil primero.";
-                }
-            } catch (e) {
-                status.innerText = "Error: Sesión expirada. Recarga la página.";
-            }
-        }
-    </script>
-</body>
-</html>
                     status.innerHTML = `Sonando: <b>${track.name}</b> 🗿`;
                 } else {
                     status.innerText = "Abre Spotify en tu móvil primero.";
                 }
             } catch (e) {
-                status.innerText = "Error de conexión. Reintenta.";
+                status.innerText = "Sesión expirada. Conecta de nuevo.";
             }
         }
     </script>
