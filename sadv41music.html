@@ -3,51 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SADV41 IA 🎚</title>
+    <title>SADV41 Radio - Misión Steven 🎚</title>
     <style>
         body { background: #000; color: #fff; font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
-        .container { border: 1px solid #FFD700; padding: 25px; border-radius: 15px; width: 300px; text-align: center; background: #0a0a0a; }
-        input { width: 85%; padding: 10px; border-radius: 20px; border: none; margin: 15px 0; background: #222; color: white; text-align: center; }
-        button { background: #1DB954; color: white; border: none; padding: 12px 25px; border-radius: 20px; cursor: pointer; font-weight: bold; width: 100%; }
-        .status { font-size: 0.75rem; color: #FFD700; margin-top: 15px; min-height: 40px; }
+        .container { border: 1px solid #FFD700; padding: 30px; border-radius: 20px; width: 320px; text-align: center; background: #0a0a0a; box-shadow: 0 0 20px rgba(255,215,0,0.2); }
+        h2 { color: #FFD700; margin-bottom: 5px; }
+        .user-id { font-size: 0.7rem; opacity: 0.5; margin-bottom: 20px; }
+        button { background: #1DB954; color: white; border: none; padding: 12px; border-radius: 25px; cursor: pointer; font-weight: bold; width: 100%; margin: 10px 0; }
+        .status { font-size: 0.8rem; color: #FFD700; margin-top: 20px; min-height: 30px; }
     </style>
 </head>
 <body>
 
     <div class="container">
         <h2>SADV41 IA 🎚</h2>
-        <p style="font-size: 0.7rem; opacity: 0.6;">Basado en tu Afinidad Real</p>
-        <input type="text" id="emotionInput" placeholder="Busca tu paz o victoria...">
-        <button onclick="sintonizarSADV41()">Sintonizar Espíritu</button>
-        <div id="player-status" class="status">Listo para la misión.</div>
+        <div class="user-id">ID: thesteef21</div>
+        
+        <button id="login-btn" onclick="loginSpotify()">Conectar con el Espíritu</button>
+        
+        <div id="controls" style="display:none;">
+            <button onclick="sintonizarSteven()">Sintonizar Mi Música 🔯</button>
+            <div id="player-status" class="status">Sincronizado</div>
+        </div>
     </div>
 
     <script>
-        const token = 'TU_NUEVO_TOKEN_AQUÍ'; 
+        const clientId = '39c91f0347ec4c8b9f4714652431666e'; // ID público de la misión
+        const redirectUri = window.location.href.split('#')[0]; // Auto-detecta tu URL de GitHub
+        let accessToken = new URLSearchParams(window.location.hash.substring(1)).get('access_token');
 
-        async function fetchWebApi(endpoint, method = 'GET', body = null) {
-            const res = await fetch(`https://api.spotify.com/${endpoint}`, {
-                headers: { Authorization: `Bearer ${token}` },
-                method,
-                body: body ? JSON.stringify(body) : undefined
-            });
-            return res.status === 204 ? null : await res.json();
+        if (accessToken) {
+            document.getElementById('login-btn').style.display = 'none';
+            document.getElementById('controls').style.display = 'block';
         }
 
-        async function sintonizarSADV41() {
+        function loginSpotify() {
+            const scopes = 'user-top-read user-modify-playback-state user-read-playback-state';
+            window.location.href = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&redirect_uri=${encodeURIComponent(redirectUri)}&scope=${encodeURIComponent(scopes)}`;
+        }
+
+        async function sintonizarSteven() {
             const status = document.getElementById('player-status');
-            status.innerText = "Consultando el Santísimo...";
+            status.innerText = "Buscando frecuencia de Steven...";
+
             try {
-                const data = await fetchWebApi('v1/me/top/tracks?time_range=short_term&limit=5');
-                if (data && data.items && data.items.length > 0) {
-                    const track = data.items[0];
-                    await fetchWebApi('v1/me/player/play', 'PUT', { uris: [track.uri] });
-                    status.innerHTML = `Sintonizado: <b>${track.name}</b><br>${track.artists[0].name} 🗿🔯`;
+                // Buscamos directamente tu música de artista
+                const res = await fetch('https://api.spotify.com/v1/search?q=artist:Steven&type=track&limit=1', {
+                    headers: { 'Authorization': `Bearer ${accessToken}` }
+                });
+                const data = await res.json();
+                
+                if (data.tracks.items.length > 0) {
+                    const track = data.tracks.items[0];
+                    await fetch('https://api.spotify.com/v1/me/player/play', {
+                        method: 'PUT',
+                        headers: { 'Authorization': `Bearer ${accessToken}` },
+                        body: JSON.stringify({ uris: [track.uri] })
+                    });
+                    status.innerHTML = `Sonando: <b>${track.name}</b> 🗿`;
                 } else {
-                    status.innerText = "Error: ¿Spotify está abierto?";
+                    status.innerText = "Abre Spotify en tu móvil primero.";
                 }
             } catch (e) {
-                status.innerText = "Error: Token expirado. Renuévalo.";
+                status.innerText = "Error de conexión. Reintenta.";
             }
         }
     </script>
