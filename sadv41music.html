@@ -1,74 +1,41 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>SADV41 Radio - Top Frecuencia 🎚</title>
-    <style>
-        :root { --gold: #FFD700; --deep: #0a0a0a; }
-        body { background: var(--deep); color: white; font-family: sans-serif; text-align: center; padding: 40px; }
-        .atrio { border: 1px solid var(--gold); border-radius: 20px; padding: 25px; max-width: 400px; margin: auto; background: #111; }
-        button { background: #1DB954; color: white; border: none; padding: 10px 20px; border-radius: 20px; cursor: pointer; font-weight: bold; }
-        .track-list { text-align: left; font-size: 0.8rem; margin-top: 20px; color: #ccc; }
-    </style>
-</head>
-<body>
+// --- CONFIGURACIÓN DE LA MISIÓN ---
+const token = 'TU_TOKEN_SPOTIFY_ACTUAL'; // Genera uno nuevo cada hora en el Console
 
-    <div class="atrio">
-        <h1>SADV41 IA 🎚</h1>
-        <p>Sintonizando tus Top Tracks</p>
-        <button onclick="sintonizarTopSADV41()">Sintonizar Espíritu</button>
-        <div id="status" class="track-list"></div>
-    </div>
+// Función unificada para conectar con el Santísimo (Spotify API)
+async function fetchWebApi(endpoint, method = 'GET', body = null) {
+  const res = await fetch(`https://api.spotify.com/${endpoint}`, {
+    headers: { Authorization: `Bearer ${token}` },
+    method,
+    body: body ? JSON.stringify(body) : undefined
+  });
+  return res.status === 204 ? null : await res.json();
+}
 
-    <script>
-        const token = 'TU_TOKEN_AQUÍ'; // El token que obtuviste del Console
+async function sintonizarSADV41() {
+  const status = document.getElementById('player-status');
+  const inputEmocion = document.getElementById('emotionInput').value.toLowerCase();
+  
+  status.innerText = "Consultando New Music Friday en el Espíritu...";
 
-        async function fetchWebApi(endpoint, method = 'GET', body = null) {
-            const res = await fetch(`https://api.spotify.com/${endpoint}`, {
-                headers: { Authorization: `Bearer ${token}` },
-                method,
-                body: body ? JSON.stringify(body) : undefined
-            });
-            return res.json();
-        }
+  // 1. Obtenemos tus lanzamientos más recientes (Afinidad de corto plazo)
+  // Esto conecta con la esencia de tu cuaderno de los viernes
+  const topTracks = await fetchWebApi('v1/me/top/tracks?time_range=short_term&limit=10');
 
-        async function sintonizarTopSADV41() {
-            const statusDiv = document.getElementById('status');
-            statusDiv.innerText = "Consultando tus afinidades celestiales...";
+  if (topTracks && topTracks.items.length > 0) {
+    // 2. Filtro SADV41IA: Buscamos entre tus novedades la que vibre con tu emoción
+    let trackElegida = topTracks.items[0]; // Por defecto la #1 de tu viernes
 
-            try {
-                // 1. Obtenemos tus 5 canciones top (v1/me/top/tracks)
-                const topData = await fetchWebApi('v1/me/top/tracks?limit=5&time_range=short_term');
-                const tracks = topData.items;
+    if (inputEmocion.includes("paz") || inputEmocion.includes("adoración")) {
+        // Buscamos una con valencia alta y energía baja en tu lista
+        trackElegida = topTracks.items.find(t => t.name.toLowerCase().includes('peace') || t.popularity < 70) || trackElegida;
+    }
 
-                if (tracks.length > 0) {
-                    // 2. La IA selecciona la primera (puedes añadir lógica de emoción aquí)
-                    const track = tracks[0];
-                    
-                    // 3. Orden de reproducción
-                    await fetchWebApi('v1/me/player/play', 'PUT', { uris: [track.uri] });
-                    
-                    statusDiv.innerHTML = `<strong>Sonando ahora:</strong><br>${track.name} - ${track.artists[0].name}`;
-                }
-            } catch (e) {
-                statusDiv.innerText = "Error: ¿Token expirado o Spotify cerrado?";
-            }
-        }
-    </script>
-</body>
-</html>
-                );
-
-                if (data.tracks && data.tracks.length > 0) {
-                    const track = data.tracks[0];
-                    // Mandamos a reproducir en el dispositivo activo
-                    await fetchWebApi('v1/me/player/play', 'PUT', { uris: [track.uri] });
-                    status.innerHTML = `<strong>Reproduciendo:</strong> ${track.name}<br>${track.artists[0].name}`;
-                }
-            } catch (e) {
-                status.innerText = "Error: ¿Spotify está abierto?";
-            }
-        }
-    </script>
-</body>
-</html>
+    // 3. Ejecución de la sintonía
+    try {
+      await fetchWebApi('v1/me/player/play', 'PUT', { uris: [trackElegida.uri] });
+      status.innerHTML = `Sintonizado: <b>${trackElegida.name}</b><br>${trackElegida.artists[0].name} 🗿🔯`;
+    } catch (e) {
+      status.innerText = "Error: ¿Abriste Spotify en tu dispositivo?";
+    }
+  }
+}
