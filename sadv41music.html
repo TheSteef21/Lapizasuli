@@ -3,63 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SADV41 Radio - Misión Steven 🎚</title>
+    <title>SADV41 IA 🎚</title>
     <style>
         body { background: #000; color: #fff; font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
-        .container { border: 1px solid #FFD700; padding: 30px; border-radius: 20px; width: 320px; text-align: center; background: #0a0a0a; box-shadow: 0 0 20px rgba(255,215,0,0.2); }
-        h2 { color: #FFD700; margin-bottom: 5px; }
-        .user-id { font-size: 0.7rem; opacity: 0.5; margin-bottom: 20px; }
-        button { background: #1DB954; color: white; border: none; padding: 12px; border-radius: 25px; cursor: pointer; font-weight: bold; width: 100%; margin: 10px 0; }
-        .status { font-size: 0.8rem; color: #FFD700; margin-top: 20px; min-height: 30px; }
+        .container { border: 1px solid #FFD700; padding: 25px; border-radius: 15px; width: 300px; text-align: center; background: #0a0a0a; }
+        input { width: 85%; padding: 10px; border-radius: 20px; border: none; margin: 15px 0; background: #222; color: white; text-align: center; }
+        button { background: #1DB954; color: white; border: none; padding: 12px 25px; border-radius: 20px; cursor: pointer; font-weight: bold; width: 100%; }
+        .status { font-size: 0.75rem; color: #FFD700; margin-top: 15px; min-height: 40px; }
     </style>
 </head>
 <body>
 
     <div class="container">
         <h2>SADV41 IA 🎚</h2>
-        <div class="user-id">ID: thesteef21</div>
+        <p style="font-size: 0.7rem; opacity: 0.6;">Sintonizando tu New Music Friday</p>
         
-        <button id="login-btn" onclick="loginSpotify()">Conectar con el Espíritu</button>
-        
-        <div id="controls" style="display:none;">
-            <button onclick="sintonizarSteven()">Sintonizar Mi Música 🔯</button>
-            <div id="player-status" class="status">Sincronizado</div>
+        <button id="auth-btn" onclick="autorizarMision()">Conectar con el Espíritu</button>
+
+        <div id="radio-controls" style="display:none;">
+            <input type="text" id="feeling" placeholder="¿Cómo te sientes hoy?">
+            <button onclick="sintonizarSADV41()">Sintonizar Espíritu</button>
+            <div id="player-status" class="status">Listo para la misión.</div>
         </div>
     </div>
 
     <script>
-        const clientId = '39c91f0347ec4c8b9f4714652431666e'; // ID público de la misión
-        const redirectUri = window.location.href.split('#')[0]; // Auto-detecta tu URL de GitHub
-        let accessToken = new URLSearchParams(window.location.hash.substring(1)).get('access_token');
+        const clientId = '39c91f0347ec4c8b9f4714652431666e'; 
+        const redirectUri = window.location.href.split('#')[0];
+        const hash = window.location.hash.substring(1).split('&').reduce((initial, item) => {
+            if (item) { var parts = item.split('='); initial[parts[0]] = decodeURIComponent(parts[1]); }
+            return initial;
+        }, {});
 
-        if (accessToken) {
-            document.getElementById('login-btn').style.display = 'none';
-            document.getElementById('controls').style.display = 'block';
+        let token = hash.access_token;
+
+        if (token) {
+            document.getElementById('auth-btn').style.display = 'none';
+            document.getElementById('radio-controls').style.display = 'block';
+            window.location.hash = ""; // Limpia la URL
         }
 
-        function loginSpotify() {
+        function autorizarMision() {
             const scopes = 'user-top-read user-modify-playback-state user-read-playback-state';
+            // CAMBIO CLAVE: response_type=token para flujo simplificado
             window.location.href = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&redirect_uri=${encodeURIComponent(redirectUri)}&scope=${encodeURIComponent(scopes)}`;
         }
 
-        async function sintonizarSteven() {
+        async function sintonizarSADV41() {
             const status = document.getElementById('player-status');
-            status.innerText = "Buscando frecuencia de Steven...";
-
+            status.innerText = "Consultando el Santísimo...";
             try {
-                // Buscamos directamente tu música de artista
-                const res = await fetch('https://api.spotify.com/v1/search?q=artist:Steven&type=track&limit=1', {
-                    headers: { 'Authorization': `Bearer ${accessToken}` }
+                const res = await fetch('https://api.spotify.com/v1/me/top/tracks?time_range=short_term&limit=5', {
+                    headers: { 'Authorization': `Bearer ${token}` }
                 });
                 const data = await res.json();
                 
-                if (data.tracks.items.length > 0) {
-                    const track = data.tracks.items[0];
+                if (data.items && data.items.length > 0) {
+                    const track = data.items[0];
                     await fetch('https://api.spotify.com/v1/me/player/play', {
                         method: 'PUT',
-                        headers: { 'Authorization': `Bearer ${accessToken}` },
+                        headers: { 'Authorization': `Bearer ${token}` },
                         body: JSON.stringify({ uris: [track.uri] })
                     });
+                    status.innerHTML = `Sintonizado: <b>${track.name}</b><br>${track.artists[0].name} 🗿🔯`;
+                } else {
+                    status.innerText = "Abre Spotify en tu móvil primero.";
+                }
+            } catch (e) {
+                status.innerText = "Error: Sesión expirada. Recarga la página.";
+            }
+        }
+    </script>
+</body>
+</html>
                     status.innerHTML = `Sonando: <b>${track.name}</b> 🗿`;
                 } else {
                     status.innerText = "Abre Spotify en tu móvil primero.";
