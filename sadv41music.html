@@ -1,41 +1,80 @@
-// --- CONFIGURACIÓN DE LA MISIÓN ---
-const token = 'TU_TOKEN_SPOTIFY_ACTUAL'; // Genera uno nuevo cada hora en el Console
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SADV41 IA - New Music Friday 🎚</title>
+    <style>
+        /* La Piel: Diseño del Santuario */
+        body { 
+            background: #000; color: #fff; font-family: sans-serif; 
+            display: flex; justify-content: center; align-items: center; 
+            height: 100vh; margin: 0; 
+        }
+        .container { 
+            border: 1px solid #FFD700; padding: 30px; border-radius: 20px; 
+            width: 350px; text-align: center; background: #0a0a0a;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.1);
+        }
+        h2 { color: #fff; letter-spacing: 2px; }
+        input { 
+            width: 85%; padding: 12px; border-radius: 25px; border: none; 
+            margin: 20px 0; background: #1a1a1a; color: white; text-align: center;
+        }
+        button { 
+            background: #1DB954; color: white; border: none; padding: 12px 30px; 
+            border-radius: 25px; cursor: pointer; font-weight: bold; font-size: 1rem;
+        }
+        .status { font-size: 0.8rem; color: #FFD700; margin-top: 20px; min-height: 40px; }
+    </style>
+</head>
+<body>
 
-// Función unificada para conectar con el Santísimo (Spotify API)
-async function fetchWebApi(endpoint, method = 'GET', body = null) {
-  const res = await fetch(`https://api.spotify.com/${endpoint}`, {
-    headers: { Authorization: `Bearer ${token}` },
-    method,
-    body: body ? JSON.stringify(body) : undefined
-  });
-  return res.status === 204 ? null : await res.json();
-}
+    <div class="container">
+        <h2>SADV41 IA 🎚</h2>
+        <p style="font-size: 0.8rem; opacity: 0.6;">Sintonizando desde New Music Friday</p>
+        
+        <input type="text" id="emotionInput" placeholder="¿Cómo te sientes hoy?">
+        <br>
+        <button onclick="sintonizarSADV41()">Sintonizar Espíritu</button>
+        
+        <div id="player-status" class="status">Consultando fuentes del viernes...</div>
+    </div>
 
-async function sintonizarSADV41() {
-  const status = document.getElementById('player-status');
-  const inputEmocion = document.getElementById('emotionInput').value.toLowerCase();
-  
-  status.innerText = "Consultando New Music Friday en el Espíritu...";
+    <script>
+        /* El Espíritu: Lógica Javascript */
+        const token = 'TU_TOKEN_SPOTIFY_AQUÍ'; // Pega aquí el token de la consola de Spotify
 
-  // 1. Obtenemos tus lanzamientos más recientes (Afinidad de corto plazo)
-  // Esto conecta con la esencia de tu cuaderno de los viernes
-  const topTracks = await fetchWebApi('v1/me/top/tracks?time_range=short_term&limit=10');
+        async function fetchWebApi(endpoint, method = 'GET', body = null) {
+            const res = await fetch(`https://api.spotify.com/${endpoint}`, {
+                headers: { Authorization: `Bearer ${token}` },
+                method,
+                body: body ? JSON.stringify(body) : undefined
+            });
+            return res.status === 204 ? null : await res.json();
+        }
 
-  if (topTracks && topTracks.items.length > 0) {
-    // 2. Filtro SADV41IA: Buscamos entre tus novedades la que vibre con tu emoción
-    let trackElegida = topTracks.items[0]; // Por defecto la #1 de tu viernes
+        async function sintonizarSADV41() {
+            const status = document.getElementById('player-status');
+            const emotion = document.getElementById('emotionInput').value.toLowerCase();
+            status.innerText = "Buscando en tu New Music Friday...";
 
-    if (inputEmocion.includes("paz") || inputEmocion.includes("adoración")) {
-        // Buscamos una con valencia alta y energía baja en tu lista
-        trackElegida = topTracks.items.find(t => t.name.toLowerCase().includes('peace') || t.popularity < 70) || trackElegida;
-    }
-
-    // 3. Ejecución de la sintonía
-    try {
-      await fetchWebApi('v1/me/player/play', 'PUT', { uris: [trackElegida.uri] });
-      status.innerHTML = `Sintonizado: <b>${trackElegida.name}</b><br>${trackElegida.artists[0].name} 🗿🔯`;
-    } catch (e) {
-      status.innerText = "Error: ¿Abriste Spotify en tu dispositivo?";
-    }
-  }
-}
+            try {
+                // Obtiene tus canciones más escuchadas recientemente (Viernes)
+                const data = await fetchWebApi('v1/me/top/tracks?time_range=short_term&limit=5');
+                
+                if (data && data.items && data.items.length > 0) {
+                    const track = data.items[0]; // La IA elige el top de tu viernes
+                    
+                    await fetchWebApi('v1/me/player/play', 'PUT', { uris: [track.uri] });
+                    status.innerHTML = `Sintonizado: <b>${track.name}</b><br>${track.artists[0].name} 🗿🔯`;
+                } else {
+                    status.innerText = "Error: ¿Spotify está abierto en tu dispositivo?";
+                }
+            } catch (e) {
+                status.innerText = "Error: Token expirado. Renuévalo en el Console.";
+            }
+        }
+    </script>
+</body>
+</html>
