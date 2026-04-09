@@ -1,0 +1,95 @@
+[
+  {
+    "conversation_id": "tpc_3QdjjtMdxqUc",
+    "conversation_template_id": null,
+    "create_time": 1775100014.325,
+    "current_node": "msg_CmkfVjhXOaeRtv",
+    "gizmo_id": null,
+    "id": "tpc_3QdjjtMdxqUc",
+    "is_archived": false,
+    "mapping": {
+      "root-tpc_3QdjjtMdxqUc": {
+        "children": [
+          "msg_PdLVM6Gg2i7x9d"
+        ],
+        "id": "root-tpc_3QdjjtMdxqUc",
+        "message": null,
+        "parent": null
+      },
+      "msg_PdLVM6Gg2i7x9d": {
+        "children": [
+          "msg_CmkfVjhXOaeRtv"
+        ],
+        "id": "msg_PdLVM6Gg2i7x9d",
+        "message": {
+          "author": {
+            "metadata": {},
+            "name": null,
+            "role": "user"
+          },
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "BTC BNB and Whatsapp Instagram Google... All crypto Info"
+            ]
+          },
+          "create_time": 1775100014.331,
+          "end_turn": false,
+          "id": "msg_PdLVM6Gg2i7x9d",
+          "metadata": {},
+          "status": "finished_successfully",
+          "update_time": 1775100014.331,
+          "weight": 1
+        },
+        "parent": "root-tpc_3QdjjtMdxqUc"
+      },
+      "msg_CmkfVjhXOaeRtv": {
+        "children": [],
+        "id": "msg_CmkfVjhXOaeRtv",
+        "message": {
+          "author": {
+            "metadata": {},
+            "name": null,
+            "role": "assistant"
+          },
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "Do you mean (A) basic info about Bitcoin (BTC) and Binance Coin (BNB) plus (B) how WhatsApp, Instagram and Google relate to crypto? Below is a concise summary. Tell me which part you want expanded (price, how to buy, technical details, wallets, security, recent news, etc.).\n\n1) Bitcoin (BTC)\n- What it is: First cryptocurrency (2009), created by Satoshi Nakamoto. Peer‑to‑peer digital cash / store of value.\n- Tech: Proof‑of‑Work (SHA‑256), decentralized ledger (blockchain), fixed supply cap 21 million, periodic “halving” of mining rewards.\n- Use cases: Value transfer, censorship‑resistant store of value, settlement layer for other systems, institutional treasury asset.\n- How to hold: custodial exchanges, software wallets, hardware wallets (recommended for long‑term).\n- Risks: high volatility, regulatory/tax issues, irreversible transactions, custody/phishing risks, potential forks/security incidents.\n\n2) Binance Coin (BNB)\n- What it is: Native token of the Binance ecosystem (Binance Exchange + BNB Chain). Launched in 2017 (initially ERC‑20), migrated to Binance Chain / BNB Chain.\n- Tech & role: Used for trading fee discounts on Binance, gas fees on BNB Chain, token burns reduce supply; BNB Chain uses a consensus model (PoSA / validator set) that is more centralized than major public PoW/PoS chains.\n- Use cases: transaction fees, DeFi, tokens/DEXs on BNB Chain, staking/validator economics in some setups.\n- Risks: centralization and regulatory scrutiny of Binance, smart‑contract risks on BNB Chain, market volatility.\n\n3) WhatsApp, Instagram, Google — crypto relevance (summary as of mid‑2024)\n- WhatsApp: Primarily a messaging app; no widely deployed native crypto transfer feature. Meta previously explored payments and wallet concepts (Diem/Novi) but Diem/Novi were discontinued; WhatsApp supports traditional payments in some countries via local rails (not crypto).\n- Instagram (Meta): Meta rolled out NFT/display and creator payment experiments on Instagram and Facebook (allowing users to display NFTs and integrate with wallets in some regions). Availability and features vary by region and may change.\n- Google: No native cryptocurrency. Google Cloud offers services for blockchain analytics, node hosting and partnerships with crypto firms; Google BigQuery hosts public blockchain datasets for analysis. Google Play permits legitimate crypto wallet/exchange apps under policy rules; Google Ads has had evolving crypto advertising rules (strict/regionally restricted historically).\n\n4) Practical steps / security (quick)\n- Learn basics, understand taxes and regulation in your country.\n- Use reputable exchanges or OTC desks to buy/sell.\n- For significant holdings use a hardware wallet and keep seed phrase offline.\n- Enable strong account security: unique passwords, 2FA (preferably authenticator app), watch for phishing.\n- Verify smart contracts and dApps before connecting wallets; use small test amounts.\n\n5) Want next?\n- If you want live prices, recent market data, or step‑by‑step buy/store instructions tell me your country and whether you prefer custodial or self‑custody.\n- For technical deep dives (consensus, tokenomics, BNB Chain architecture, smart‑contract safety), say which topic."
+            ]
+          },
+          "create_time": 1775100014.337,
+          "end_turn": true,
+          "id": "msg_CmkfVjhXOaeRtv",
+          "metadata": {
+            "tps": 95.43088490456913,
+            "cost": 0.003658,
+            "ttft": 4134,
+            "latency": 23153,
+            "duration": 19019,
+            "costPoints": 3658,
+            "totalTokens": 1924,
+            "costTokenPoints": 3658,
+            "inputTextTokens": 109,
+            "costSearchPoints": 0,
+            "outputTextTokens": 727,
+            "totalInputTokens": 109,
+            "totalOutputTokens": 1815,
+            "inputCacheMissTokens": 109,
+            "outputReasoningTokens": 1088,
+            "model_slug": "gpt-5-mini"
+          },
+          "status": "finished_successfully",
+          "update_time": 1775100040.14,
+          "weight": 1
+        },
+        "parent": "msg_PdLVM6Gg2i7x9d"
+      }
+    },
+    "moderation_results": [],
+    "plugin_ids": null,
+    "safe_urls": [],
+    "title": "BTC BNB and Crypto Information",
+    "update_time": 1775100019.822
+  }
+]
