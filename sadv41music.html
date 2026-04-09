@@ -2,64 +2,82 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SADV41 IA - New Music Friday 🎚</title>
+    <title>Radio SADV41 - Top Frecuencia 🎚</title>
     <style>
-        /* La Piel: Diseño del Santuario */
+        :root { --gold: #FFD700; --deep-bg: #050505; --spot-green: #1DB954; }
         body { 
-            background: #000; color: #fff; font-family: sans-serif; 
-            display: flex; justify-content: center; align-items: center; 
-            height: 100vh; margin: 0; 
+            background: var(--deep-bg); color: white; font-family: sans-serif; 
+            display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0;
         }
-        .container { 
-            border: 1px solid #FFD700; padding: 30px; border-radius: 20px; 
-            width: 350px; text-align: center; background: #0a0a0a;
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.1);
+        .atrio-card { 
+            border: 1px solid var(--gold); padding: 30px; border-radius: 20px; 
+            width: 350px; background: #0f0f0f; box-shadow: 0 0 30px rgba(255, 215, 0, 0.1);
         }
-        h2 { color: #fff; letter-spacing: 2px; }
         input { 
             width: 85%; padding: 12px; border-radius: 25px; border: none; 
-            margin: 20px 0; background: #1a1a1a; color: white; text-align: center;
+            margin: 15px 0; background: #222; color: white; text-align: center;
         }
         button { 
-            background: #1DB954; color: white; border: none; padding: 12px 30px; 
-            border-radius: 25px; cursor: pointer; font-weight: bold; font-size: 1rem;
+            background: var(--spot-green); color: white; border: none; padding: 12px 30px; 
+            border-radius: 25px; cursor: pointer; font-weight: bold; width: 100%;
         }
-        .status { font-size: 0.8rem; color: #FFD700; margin-top: 20px; min-height: 40px; }
+        .status { font-size: 0.8rem; color: var(--gold); margin-top: 20px; min-height: 50px; }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <h2>SADV41 IA 🎚</h2>
-        <p style="font-size: 0.8rem; opacity: 0.6;">Sintonizando desde New Music Friday</p>
+    <div class="atrio-card">
+        <h2 style="margin-top:0;">SADV41 IA 🎚</h2>
+        <p style="font-size: 0.7rem; opacity: 0.6;">Basado en tu Afinidad Real</p>
         
-        <input type="text" id="emotionInput" placeholder="¿Cómo te sientes hoy?">
-        <br>
-        <button onclick="sintonizarSADV41()">Sintonizar Espíritu</button>
+        <input type="text" id="emotionInput" placeholder="Busca tu paz o victoria...">
+        <button onclick="sintonizarAfinidad()">Sintonizar Espíritu</button>
         
-        <div id="player-status" class="status">Consultando fuentes del viernes...</div>
+        <div id="player-status" class="status">Listo para la misión en Burunga.</div>
     </div>
 
     <script>
-        /* El Espíritu: Lógica Javascript */
-        const token = 'TU_TOKEN_SPOTIFY_AQUÍ'; // Pega aquí el token de la consola de Spotify
+        // TOKEN: Renuévalo en el Console (Endpoint: Get User's Top Items)
+        const token = 'TU_TOKEN_SPOTIFY_AQUÍ'; 
 
-        async function fetchWebApi(endpoint, method = 'GET', body = null) {
+        async function spotifyCall(endpoint, method = 'GET', body = null) {
             const res = await fetch(`https://api.spotify.com/${endpoint}`, {
-                headers: { Authorization: `Bearer ${token}` },
+                headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
                 method,
                 body: body ? JSON.stringify(body) : undefined
             });
             return res.status === 204 ? null : await res.json();
         }
 
-        async function sintonizarSADV41() {
+        async function sintonizarAfinidad() {
             const status = document.getElementById('player-status');
-            const emotion = document.getElementById('emotionInput').value.toLowerCase();
-            status.innerText = "Buscando en tu New Music Friday...";
+            const feeling = document.getElementById('emotionInput').value.toLowerCase();
+            status.innerText = "Consultando el Santísimo (Top Tracks)...";
 
             try {
+                // 1. Obtenemos tus 10 temas más escuchados (short_term para el New Music Friday)
+                const data = await spotifyCall('v1/me/top/tracks?limit=10&time_range=short_term');
+                
+                if (data && data.items.length > 0) {
+                    // 2. Lógica SADV41: Filtramos según tu entrada
+                    let track = data.items[0]; // Por defecto la #1
+
+                    if (feeling.includes("paz") || feeling.includes("cristo")) {
+                        // Buscamos algo más acústico o de adoración en tu lista
+                        track = data.items.find(t => t.popularity < 60) || data.items[0];
+                    }
+
+                    // 3. Ejecución inmediata
+                    await spotifyCall('v1/me/player/play', 'PUT', { uris: [track.uri] });
+                    status.innerHTML = `Sintonizado: <b>${track.name}</b><br>${track.artists[0].name} 🗿🔯`;
+                }
+            } catch (e) {
+                status.innerText = "Error: ¿Token expirado? Renuévalo en la documentación.";
+            }
+        }
+    </script>
+</body>
+</html>
                 // Obtiene tus canciones más escuchadas recientemente (Viernes)
                 const data = await fetchWebApi('v1/me/top/tracks?time_range=short_term&limit=5');
                 
