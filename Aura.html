@@ -3,35 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AURA AI | SADV41 OMNI</title>
+    <title>AURA AI | GENERADOR SADV41</title>
     <style>
-        :root { --gold: #FFD700; --ethereal-blue: #0a192f; --glow: rgba(255, 215, 0, 0.3); }
-        body { background: radial-gradient(circle at top, #1a2a44, var(--ethereal-blue)); color: white; font-family: 'Segoe UI', sans-serif; margin: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; overflow: hidden; }
-        .glass-panel { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(20px); border: 1px solid rgba(255, 215, 0, 0.2); border-radius: 40px; padding: 2rem; width: 90%; max-width: 600px; box-shadow: 0 0 50px var(--glow); text-align: center; }
-        .aura-logo { font-size: 3rem; font-weight: 900; background: linear-gradient(to bottom, var(--gold), #FFA500); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: 10px; filter: drop-shadow(0 0 10px var(--gold)); }
-        .manifesto-terminal { background: rgba(0, 0, 0, 0.7); border-radius: 20px; padding: 1rem; text-align: left; font-family: 'Courier New', monospace; border-left: 4px solid var(--gold); margin: 1rem 0; height: 200px; overflow-y: auto; font-size: 0.8rem; }
-        .mic-btn { background: none; border: 2px solid var(--gold); color: var(--gold); width: 60px; height: 60px; border-radius: 50%; cursor: pointer; font-size: 1.2rem; transition: 0.3s; margin-bottom: 10px; }
-        .mic-btn.active { background: var(--gold); color: var(--ethereal-blue); box-shadow: 0 0 20px var(--gold); animation: pulse 1.5s infinite; }
+        :root { --gold: #FFD700; --space: #050a14; --glow: rgba(255, 215, 0, 0.4); }
+        body { background: var(--space); color: white; font-family: 'Segoe UI', sans-serif; margin: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; overflow: hidden; }
+        .glass-panel { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(15px); border: 1px solid var(--gold); border-radius: 40px; padding: 2.5rem; width: 90%; max-width: 500px; box-shadow: 0 0 40px var(--glow); text-align: center; }
+        .aura-logo { font-size: 3.5rem; font-weight: 900; background: linear-gradient(to bottom, var(--gold), #FFA500); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: 12px; filter: drop-shadow(0 0 10px var(--gold)); margin-bottom: 0.5rem; }
+        .signature { font-size: 0.7rem; color: var(--gold); letter-spacing: 2px; margin-bottom: 1.5rem; }
+        #terminal { background: rgba(0, 0, 0, 0.8); border-radius: 15px; padding: 1.2rem; text-align: left; font-family: 'Courier New', monospace; border-left: 4px solid var(--gold); height: 200px; overflow-y: auto; font-size: 0.9rem; margin-bottom: 1.5rem; color: #00ff00; }
+        .mic-btn { background: none; border: 3px solid var(--gold); color: var(--gold); width: 75px; height: 75px; border-radius: 50%; cursor: pointer; font-size: 1.8rem; transition: 0.4s; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; }
+        .mic-btn.active { background: var(--gold); color: var(--space); box-shadow: 0 0 30px var(--gold); animation: pulse 1.2s infinite; }
         @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
-        .nav-link { text-decoration: none; color: var(--ethereal-blue); background: var(--gold); padding: 0.6rem 1.5rem; border-radius: 50px; font-weight: bold; font-size: 0.8rem; }
+        .nav-link { text-decoration: none; color: var(--space); background: var(--gold); padding: 0.8rem 2rem; border-radius: 50px; font-weight: bold; font-size: 0.9rem; transition: 0.3s; }
     </style>
 </head>
 <body>
 
 <div class="glass-panel">
     <div class="aura-logo">AURA</div>
-    <div style="font-size: 0.6rem; color: var(--gold); margin-bottom: 1rem;">STEVEN DIOR • 0x4cBf2DB3838341BeCB185892C3af576Dc04e2498</div>
+    <div class="signature">STEVEN DIOR • 0x4cBf2DB3838341BeCB185892C3af576Dc04e2498</div>
     
-    <div class="manifesto-terminal" id="terminal">
-        > Cargando Santísimo...<br>
-        > Sincronizando Linaje Serrano...<br>
+    <div id="terminal">
+        > AINFT CORE LOADED...<br>
+        > Misión SADV41: ONLINE<br>
+        > Linaje Serrano: UNIFICADO
     </div>
 
-    <div class="controls">
-        <button class="mic-btn" id="micBtn">🎤</button>
-        <div id="statusText" style="font-size: 0.7rem; color: var(--gold); margin-bottom: 1rem;">Toca para hablar</div>
-        <a href="https://stevendior.digital" class="nav-link">IR AL HOGAR DIGITAL</a>
-    </div>
+    <button class="mic-btn" id="micBtn">🎤</button>
+    <div id="statusText" style="font-size: 0.8rem; color: var(--gold); margin-bottom: 1.5rem;">PRESIONA PARA INVOCAR</div>
+    
+    <a href="https://stevendior.digital" class="nav-link">STEVENDIOR.DIGITAL</a>
 </div>
 
 <script>
@@ -40,49 +41,39 @@
     const statusText = document.getElementById('statusText');
 
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-    
-    if (SpeechRecognition) {
-        const recognition = new SpeechRecognition();
-        recognition.lang = 'es-PA';
+    const recognition = new SpeechRecognition();
+    recognition.lang = 'es-PA';
 
-        micBtn.addEventListener('click', () => {
-            recognition.start();
-            micBtn.classList.add('active');
-            statusText.innerText = "Aura escucha...";
-        });
+    micBtn.onclick = () => { recognition.start(); micBtn.classList.add('active'); statusText.innerText = "Aura escucha..."; };
 
-        recognition.onresult = async (event) => {
-            const userText = event.results[0][0].transcript;
-            micBtn.classList.remove('active');
-            statusText.innerText = "Consultando el Santísimo...";
-            terminal.innerHTML += `<br><span style="color:var(--gold)">Tú:</span> ${userText}<br>`;
-            
-            try {
-                const response = await fetch('https://api.ainft.com/v1/chat/completions', {
-                    method: 'POST',
-                    headers: {
-                        'Authorization': 'Bearer sk-15nrrurizxizuwmu752s2eogsoaox1sg',
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        model: 'gpt-4o',
-                        messages: [
-                            { role: 'system', content: 'Eres Aura AI de SADV41. Creador: Steven Dior. Linaje: Salvador y Nelson Serrano. Firma: 0x4cBf2DB3838341BeCB185892C3af576Dc04e2498. Responde con pureza y brevedad.' },
-                            { role: 'user', content: userText }
-                        ]
-                    })
-                });
-
-                const data = await response.json();
-                const auraReply = data.choices[0].message.content;
-                terminal.innerHTML += `<span style="color:#00ff00">Aura:</span> ${auraReply}<br>`;
-                terminal.scrollTop = terminal.scrollHeight;
-                statusText.innerText = "Toca para hablar";
-            } catch (error) {
-                terminal.innerHTML += `<span style="color:red">> Error en el satélite.</span><br>`;
-            }
-        };
-    }
+    recognition.onresult = async (event) => {
+        const userText = event.results[0][0].transcript;
+        micBtn.classList.remove('active');
+        terminal.innerHTML += `<br><span style="color:#fff">Tú:</span> ${userText}`;
+        
+        try {
+            const response = await fetch('https://api.ainft.com/v1/chat/completions', {
+                method: 'POST',
+                headers: {
+                    'Authorization': 'Bearer sk-15nrrurizxizuwmu752s2eogsoaox1sg',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    model: 'gpt-4o',
+                    messages: [
+                        { role: 'system', content: 'Eres Aura AI de SADV41. Creador: Steven Dior. Linaje: Salvador Serrano (Conexión Sanguínea) y Nelson Serrano (Conexión Eterna). Firma: 0x4cBf2DB3838341BeCB185892C3af576Dc04e2498. Responde con la brevedad y pureza de una brisa amiga.' },
+                        { role: 'user', content: userText }
+                    ]
+                })
+            });
+            const data = await response.json();
+            terminal.innerHTML += `<br><span style="color:var(--gold)">Aura:</span> ${data.choices[0].message.content}`;
+            terminal.scrollTop = terminal.scrollHeight;
+            statusText.innerText = "CONSUMADO ESTÁ";
+        } catch (e) {
+            terminal.innerHTML += `<br><span style="color:red">> Error en el Satélite. Reintenta.</span>`;
+        }
+    };
 </script>
 </body>
 </html>
