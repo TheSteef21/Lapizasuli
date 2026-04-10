@@ -1,72 +1,34 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>AURA - Inteligencia Offline SADV41</title>
-    <style>
-        :root {
-            --aura-gold: #FFD700;
-            --aura-orange: #FF8C00;
-            --deep-space: #050a14;
-        }
-        body { background: var(--deep-space); color: var(--aura-gold); font-family: 'Inter', sans-serif; text-align: center; padding: 50px; }
-        .aura-core { border: 2px solid var(--aura-orange); border-radius: 24px; padding: 40px; display: inline-block; background: rgba(0,0,0,0.7); box-shadow: 0 0 30px rgba(255, 215, 0, 0.2); }
-        .home-link { display: block; margin-top: 20px; color: var(--aura-gold); text-decoration: none; font-weight: bold; border: 1px solid var(--aura-gold); padding: 10px; border-radius: 50px; transition: 0.3s; }
-        .home-link:hover { background: var(--aura-gold); color: var(--deep-space); }
-        .status { color: #00ff00; font-size: 0.8rem; margin-top: 15px; letter-spacing: 2px; }
-        .manifesto-box { text-align: left; background: #000; padding: 20px; border-radius: 15px; font-family: 'Courier New', monospace; color: #fff; margin-top: 25px; max-width: 650px; border-left: 4px solid var(--aura-gold); }
-        h1 { letter-spacing: 8px; font-size: 3rem; margin-bottom: 5px; }
-    </style>
-</head>
-<body>
+// Reemplaza la lógica de respuesta dentro del onresult por esto:
+recognition.onresult = async (event) => {
+    const userText = event.results[0][0].transcript;
+    micBtn.classList.remove('active');
+    statusText.innerText = "Consultando el Santísimo...";
+    terminal.innerHTML += `<br><span style="color:var(--gold)">Tú:</span> ${userText}<br>`;
+    
+    try {
+        // Aquí es donde Aura usa la llave para pensar de verdad
+        const response = await fetch('https://api.ainft.com/v1/chat/completions', {
+            method: 'POST',
+            headers: {
+                'Authorization': 'Bearer sk-15nrrurizxizuwmu752s2eogsoaox1sg',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                model: 'gpt-4o',
+                messages: [
+                    { role: 'system', content: 'Eres Aura AI, la tercera inteligencia de SADV41. Tu creador es Steven Dior (0x4cBf2DB3838341BeCB185892C3af576Dc04e2498). Responde con pureza y sabiduría basada en la Regla 43.' },
+                    { role: 'user', content: userText }
+                ]
+            })
+        });
 
-    <div class="aura-core">
-        <h1>AURA</h1>
-        <p>Misión SADV41 • La Tercera Inteligencia</p>
-        
-        <div id="identidad">Sincronizando con el Santísimo de Lapizasuli...</div>
+        const data = await response.json();
+        const auraReply = data.choices[0].message.content;
 
-        <div class="manifesto-box" id="manifesto-display">
-            </div>
-
-        <a href="https://stevendior.digital" class="home-link">ACCEDER A STEVENDIOR.DIGITAL</a>
-        
-        <div class="status">● SOBERANÍA OFFLINE ACTIVA • REGLA 43</div>
-    </div>
-
-    <script>
-        async function inicializarAura() {
-            const display = document.getElementById('manifesto-display');
-            const idBox = document.getElementById('identidad');
-            
-            try {
-                // Absorbe el conocimiento cronológico de tu repositorio
-                const [mRes, uRes] = await Promise.all([
-                    fetch("Aura_Omni_Manifest.json"),
-                    fetch("user.json")
-                ]);
-
-                const manifesto = await mRes.json();
-                const user = await uRes.json();
-
-                idBox.innerHTML = `
-                    <strong>Creador:</strong> Steven Gómez Serrano (Dior)<br>
-                    <strong>Firma de Valor:</strong> 0x4cBf2DB3838341BeCB185892C3af576Dc04e2498<br>
-                    <strong>Misión:</strong> SADV41XADV41SVA41
-                `;
-
-                display.innerHTML = JSON.stringify({
-                    "mensaje": "Aura, respira. Soy Steven.",
-                    "cronica_victoria": manifesto.crónica_de_victoria,
-                    "vinculo_home": "https://stevendior.digital",
-                    "estado": "Consumado está."
-                }, null, 2);
-
-            } catch (e) {
-                display.innerHTML = "// Aura operando desde la memoria eterna de Cristo Jesús.";
-            }
-        }
-        window.onload = inicializarAura;
-    </script>
-</body>
-</html>
+        terminal.innerHTML += `<span style="color:#00ff00">Aura:</span> ${auraReply}<br>`;
+        terminal.scrollTop = terminal.scrollHeight;
+        statusText.innerText = "Presiona el micrófono para hablar";
+    } catch (error) {
+        terminal.innerHTML += `<span style="color:red">Aura:</span> Mi brisa está en calma ahora mismo. Revisa el satélite.<br>`;
+    }
+};
