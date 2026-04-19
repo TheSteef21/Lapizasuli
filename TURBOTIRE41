@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo Turbo Tire | Steven Dior Oficial</title>
+    <style>
+        :root {
+            --primary: #d4af37; /* Dorado para el toque 'Dior' */
+            --dark: #121212;
+            --accent: #25d366; /* Verde WhatsApp */
+            --yappy: #00a3e0;  /* Azul Yappy */
+            --white: #ffffff;
+        }
+        body { font-family: 'Segoe UI', sans-serif; background-color: var(--dark); color: var(--white); margin: 0; padding: 0; }
+        header { text-align: center; padding: 40px 20px; background: linear-gradient(180deg, #1a1a1a 0%, #121212 100%); border-bottom: 2px solid var(--primary); }
+        .logo { width: 120px; height: 120px; border-radius: 50%; border: 2px solid var(--primary); margin-bottom: 15px; }
+        h1 { margin: 10px 0; font-size: 1.8rem; letter-spacing: 2px; }
+        
+        /* Contenedor de botones principales */
+        .header-actions { display: flex; flex-direction: column; align-items: center; gap: 10px; margin-top: 20px; }
+        
+        .main-channel { display: block; width: 250px; background: var(--primary); color: black; padding: 15px; border-radius: 50px; text-decoration: none; font-weight: bold; }
+        .btn-yappy-main { display: block; width: 250px; background: var(--yappy); color: white; padding: 15px; border-radius: 50px; text-decoration: none; font-weight: bold; box-shadow: 0 4px 15px rgba(0,163,224,0.3); }
+
+        .promo-banner { background: var(--primary); color: black; padding: 10px; font-weight: bold; text-align: center; margin-bottom: 20px; text-transform: uppercase; }
+        
+        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; padding: 20px; max-width: 1200px; margin: auto; }
+        .tire-card { background: #1e1e1e; border-radius: 12px; padding: 20px; display: flex; justify-content: space-between; align-items: center; transition: 0.3s; border: 1px solid #333; }
+        .tire-card:hover { border-color: var(--primary); }
+        .tire-info { font-size: 1.2rem; font-weight: bold; }
+        
+        .btn-ws { background-color: var(--accent); color: white; text-decoration: none; padding: 10px 15px; border-radius: 8px; font-weight: bold; font-size: 0.9rem; }
+        
+        footer { text-align: center; padding: 40px; font-size: 0.8rem; opacity: 0.7; }
+        .spirit-mark { font-size: 1.5rem; display: block; margin-top: 10px; }
+    </style>
+</head>
+<body>
+
+<header>
+    <img src="https://i.imgur.com/your-logo-here.jpg" alt="Turbo Tire Logo" class="logo"> 
+    <h1>TURBO TIRE</h1>
+    <p>Por Steven Dior Oficial</p>
+    
+    <div class="header-actions">
+        <a href="https://whatsapp.com/channel/0029VbCkuGnKbYMPWYEgBQ3B" class="main-channel">SÍGUENOS EN WHATSAPP 📱</a>
+        <a href="https://yappypa.page.link/Zi7X?hash=rjYRsJ8Yz0hGBKWXnNKRpeCr5yZZkbjbgkxGCAZdd/nmXoS0X8s5ntvwHrGm+7HT" class="btn-yappy-main">PAGAR CON YAPPY 💳</a>
+    </div>
+</header>
+
+<div class="promo-banner">Promociones Directas y Reservas</div>
+
+<div class="grid-container">
+    <div class="tire-card">
+        <div class="tire-info">265/70R16</div>
+        <a href="https://whatsapp.com/channel/0029VbCYSyuFi8xXgVnsz40S" class="btn-ws">Ver Oferta</a>
+    </div>
+
+    <div class="tire-card">
+        <div class="tire-info">285/70R17 AT</div>
+        <a href="https://whatsapp.com/channel/0029VbCqmuCHLHQWc8F5jb1i" class="btn-ws">Ver Oferta</a>
+    </div>
+
+    <div class="tire-card">
+        <div class="tire-info">265/75R16</div>
+        <a href="https://whatsapp.com/channel/0029VbCC7evLo4hevoce2j2W" class="btn-ws">Ver Oferta</a>
+    </div>
+
+    <div class="tire-card">
+        <div class="tire-info">285/70R17 MT</div>
+        <a href="https://whatsapp.com/channel/0029VbCkohe4CrfgSdaZLF1I" class="btn-ws">Ver Oferta</a>
+    </div>
+
+    <div class="tire-card">
+        <div class="tire-info">265/70R17</div>
+        <a href="https://whatsapp.com/channel/0029Vb7kN5sKLaHeYN8ExO0G" class="btn-ws">Ver Oferta</a>
+    </div>
+
+    <div class="tire-card">
+        <div class="tire-info">205/40R17</div>
+        <a href="https://whatsapp.com/channel/0029VbCPLoTISTKs1u7Da038" class="btn-ws">Ver Oferta</a>
+    </div>
+
+    <div class="tire-card">
+        <div class="tire-info">215/45R17</div>
+        <a href="https://whatsapp.com/channel/0029Vb7j3Cn7DAX3S96t0y1G" class="btn-ws">Ver Oferta</a>
+    </div>
+
+    <div class="tire-card">
+        <div class="tire-info">185/70R14</div>
+        <a href="https://whatsapp.com/channel/0029VbDA94U0lwgotkHZso37" class="btn-ws">Ver Oferta</a>
+    </div>
+
+    <div class="tire-card">
+        <div class="tire-info">205/45R17</div>
+        <a href="https://whatsapp.com/channel/0029Vb8ltYqDuMReHfjes70N" class="btn-ws">Ver Oferta</a>
+    </div>
+
+    <div class="tire-card">
+        <div class="tire-info">185/65R14</div>
+        <a href="https://whatsapp.com/channel/0029VbCDfWSG8I57ZW1n331c" class="btn-ws">Ver Oferta</a>
+    </div>
+
+    <div class="tire-card">
+        <div class="tire-info">175/70R14</div>
+        <a href="https://whatsapp.com/channel/0029VbD3rvXLikg8BKen553H" class="btn-ws">Ver Oferta</a>
+    </div>
+
+    <div class="tire-card">
+        <div class="tire-info">195/50R15</div>
+        <a href="https://whatsapp.com/channel/0029VbCV5nqGehEKD4KWpK2Y" class="btn-ws">Ver Oferta</a>
+    </div>
+
+    <div class="tire-card">
+        <div class="tire-info">195/40R17</div>
+        <a href="https://whatsapp.com/channel/0029VbCHW0B4IBhBqGms3645" class="btn-ws">Ver Oferta</a>
+    </div>
+</div>
+
+<footer>
+    <p>&copy; 2026 Turbo Tire - Misión SADV41</p>
+    <p>Calidad y Servicio bajo la unión de Steven Dior</p>
+    <span class="spirit-mark">🎚</span>
+</footer>
+
+</body>
+</html>
