@@ -1,65 +1,124 @@
 import React, { useState, useEffect } from 'react';
-import { Shield, Hammer, Wrench, Globe, Terminal, CheckCircle } from 'lucide-react';
+import { Shield, Hammer, Wrench, Globe, Terminal, CheckCircle, Zap, Activity } from 'lucide-react';
 
-const SADV41Hub = () => {
+const SSADV41Hub = () => {
   const [isVerified, setIsVerified] = useState(false);
-  const [status, setStatus] = useState("Iniciando Protocolo Quinta Marcha...");
+  const [powerLevel, setPowerLevel] = useState(0);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsVerified(true);
-      setStatus("SADV41: Conectado a la Nube de Provisión");
-    }, 2000);
-    return () => clearTimeout(timer);
+    const timer = setTimeout(() => setIsVerified(true), 2000);
+    // Simulación de carga de "Quinta Marcha"
+    const interval = setInterval(() => {
+      setPowerLevel(prev => (prev < 100 ? prev + 1 : 100));
+    }, 50);
+    return () => {
+      clearTimeout(timer);
+      clearInterval(interval);
+    };
   }, []);
 
   return (
-    <div className="min-h-screen bg-slate-900 text-slate-100 font-sans p-4 md:p-8">
-      {/* Header - Identidad Corporativa */}
-      <header className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center border-b border-cyan-500/30 pb-6 mb-8">
-        <div className="flex items-center gap-4">
-          <div className="relative">
-            <div className="absolute inset-0 bg-cyan-500 blur-lg opacity-20 animate-pulse"></div>
-            <img 
-              src="/path-to-your-new-logo.png" 
-              alt="SADV41 Logo" 
-              className="relative w-20 h-20 rounded-xl border-2 border-cyan-400 shadow-[0_0_15px_rgba(34,211,238,0.5)]"
-            />
-          </div>
-          <div>
-            <h1 className="text-3xl font-bold tracking-tighter text-white">SADV41 HUB</h1>
-            <p className="text-cyan-400 text-sm font-mono tracking-widest">STEVEN DIOR BERIÓN OFFICIAL</p>
-          </div>
-        </div>
-        
-        <div className="mt-4 md:mt-0 flex items-center gap-2 bg-slate-800 px-4 py-2 rounded-full border border-slate-700">
-          <span className={`w-3 h-3 rounded-full ${isVerified ? 'bg-green-500 shadow-[0_0_10px_#22c55e]' : 'bg-yellow-500 animate-ping'}`}></span>
-          <span className="text-xs font-bold uppercase">{status}</span>
-        </div>
-      </header>
+    <div className="min-h-screen bg-[#0a0f1a] text-slate-100 font-sans selection:bg-cyan-500/30">
+      {/* Background Glow Efecto Quinta Marcha */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-[10%] -left-[10%] w-[40%] h-[40%] bg-cyan-500/10 blur-[120px] rounded-full"></div>
+        <div className="absolute -bottom-[10%] -right-[10%] w-[40%] h-[40%] bg-purple-500/10 blur-[120px] rounded-full"></div>
+      </div>
 
-      <main className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
-        
-        {/* Panel 1: Construcción y Albañilería (Peñalba) */}
-        <section className="bg-slate-800/50 p-6 rounded-2xl border border-slate-700 hover:border-cyan-500/50 transition-all group">
-          <div className="mb-4 text-cyan-400 group-hover:scale-110 transition-transform">
-            <Hammer size={32} />
-          </div>
-          <h2 className="text-xl font-bold mb-2">División Peñalba</h2>
-          <p className="text-slate-400 text-sm mb-4">Arquitectura física y cimentación. De Burunga para el mundo bajo la ley SADV41.</p>
-          <div className="space-y-2">
-            <div className="flex justify-between text-xs border-b border-slate-700 pb-1">
-              <span>Estado de Obra:</span>
-              <span className="text-green-400 font-bold uppercase">Provisión Activa</span>
+      <div className="relative z-10 p-4 md:p-8">
+        {/* Header Superior */}
+        <header className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center bg-slate-900/40 backdrop-blur-md border border-white/10 p-6 rounded-3xl mb-8">
+          <div className="flex items-center gap-5">
+            <div className="relative group">
+              <div className="absolute inset-0 bg-gradient-to-tr from-cyan-500 to-blue-600 blur-md opacity-50 group-hover:opacity-100 transition-opacity"></div>
+              <div className="relative bg-slate-900 p-1 rounded-2xl border border-cyan-400/50">
+                <Shield className="w-12 h-12 text-cyan-400" />
+              </div>
             </div>
-            <div className="flex justify-between text-xs">
-              <span>Rango Salarial:</span>
-              <span className="text-yellow-500 font-bold">B/. 600.00+</span>
+            <div>
+              <h1 className="text-3xl font-black tracking-tight text-white italic">SADV41<span className="text-cyan-400 block text-xs font-mono not-italic tracking-[0.3em]">PROVISIÓN Y CONSTRUCCIÓN</span></h1>
             </div>
           </div>
-        </section>
 
-        {/* Panel 2: Turbo Tire & Servicios (Llantería) */}
+          <div className="mt-6 md:mt-0 flex flex-col items-end gap-2">
+            <div className="flex items-center gap-3 bg-black/40 px-5 py-2 rounded-2xl border border-white/5">
+              <Activity className={`w-4 h-4 ${isVerified ? 'text-green-400' : 'text-yellow-500 animate-pulse'}`} />
+              <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400">
+                {isVerified ? 'Google Business Verified' : 'Verificando Credenciales...'}
+              </span>
+            </div>
+            <div className="w-48 h-1 bg-slate-800 rounded-full overflow-hidden">
+              <div className="h-full bg-cyan-500 transition-all duration-300" style={{ width: `${powerLevel}%` }}></div>
+            </div>
+          </div>
+        </header>
+
+        <main className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+          
+          {/* Card: Infraestructura (Peñalba) */}
+          <div className="group relative bg-slate-900/60 border border-white/10 p-8 rounded-[2.5rem] hover:border-cyan-500/50 transition-all duration-500 overflow-hidden">
+            <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-30 transition-opacity">
+              <Hammer size={80} />
+            </div>
+            <h3 className="text-cyan-400 font-mono text-sm mb-2">MOD_CONSTRUCCIÓN</h3>
+            <h2 className="text-2xl font-bold mb-4">Cimiento Peñalba</h2>
+            <p className="text-slate-400 text-sm leading-relaxed mb-6">Operaciones de albañilería técnica en Burunga. Estructuras sólidas bajo la frecuencia SADV41.</p>
+            <div className="flex items-center gap-2 text-xs font-bold text-white bg-white/5 w-fit px-3 py-1 rounded-lg">
+              <Zap size={14} className="text-yellow-500" /> SALARIO VICTORIA: B/. 600.00
+            </div>
+          </div>
+
+          {/* Card: Centro de Datos (Turbo Tire) */}
+          <div className="group relative bg-slate-900/60 border border-white/10 p-8 rounded-[2.5rem] hover:border-blue-500/50 transition-all duration-500 overflow-hidden">
+            <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-30 transition-opacity">
+              <Wrench size={80} />
+            </div>
+            <h3 className="text-blue-400 font-mono text-sm mb-2">LOG_LOGÍSTICA</h3>
+            <h2 className="text-2xl font-bold mb-4">Turbo Tire Flow</h2>
+            <p className="text-slate-400 text-sm leading-relaxed mb-6">Mantenimiento de ejes laborales desde agosto 2022. Suministros purificados y alineación total.</p>
+            <button className="text-xs font-bold text-blue-400 border border-blue-400/30 px-4 py-2 rounded-xl group-hover:bg-blue-400 group-hover:text-black transition-all">
+              EJECUTAR SERVICIO
+            </button>
+          </div>
+
+          {/* Card: Visión Digital (MediaPipe) */}
+          <div className="group relative bg-slate-900/60 border border-white/10 p-8 rounded-[2.5rem] hover:border-purple-500/50 transition-all duration-500 overflow-hidden">
+            <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-30 transition-opacity">
+              <Terminal size={80} />
+            </div>
+            <h3 className="text-purple-400 font-mono text-sm mb-2">IA_INTELLIGENCE</h3>
+            <h2 className="text-2xl font-bold mb-4">SADV41 AI Core</h2>
+            <p className="text-slate-400 text-sm leading-relaxed mb-6">Integración con MediaPipe Pose para seguridad industrial y arquitectura digital avanzada.</p>
+            <div className="bg-black/40 p-3 rounded-xl font-mono text-[10px] text-purple-300 border border-purple-500/20">
+              &gt; STEVEN_DIOR_FLOW: ACTIVE <br/>
+              &gt; STATUS: 5TA_MARCHA_ON
+            </div>
+          </div>
+
+        </main>
+
+        {/* Footer: Declaración de Fe y Control */}
+        <footer className="max-w-7xl mx-auto mt-12 flex flex-col md:flex-row justify-between items-center p-8 bg-slate-900/20 rounded-[2rem] border-t border-white/5">
+          <div className="flex flex-col gap-2">
+            <div className="flex items-center gap-2 text-cyan-400 font-bold tracking-widest text-xs">
+              <Globe size={16} /> CIUDAD DE PANAMÁ - BURUNGA - GLOBAL
+            </div>
+            <p className="text-slate-500 text-[10px] uppercase tracking-tighter">
+              "Alineando los ejes del destino bajo la guía del Espíritu Santo"
+            </p>
+          </div>
+          <div className="mt-6 md:mt-0 opacity-50 hover:opacity-100 transition-opacity cursor-crosshair">
+             <span className="text-[10px] font-mono border border-slate-700 px-3 py-1 rounded-full text-slate-400">
+               🎚 SADV41_OS_V2.0.6
+             </span>
+          </div>
+        </footer>
+      </div>
+    </div>
+  );
+};
+
+export default SSADV41Hub;
         <section className="bg-slate-800/50 p-6 rounded-2xl border border-slate-700 hover:border-cyan-500/50 transition-all group">
           <div className="mb-4 text-cyan-400 group-hover:scale-110 transition-transform">
             <Wrench size={32} />
