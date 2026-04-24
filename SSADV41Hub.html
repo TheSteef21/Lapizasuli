@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SADV41 Hub - Steven Dior Berión Official</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        // Configuración de Tailwind para los colores de la Quinta Marcha
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'sadv-bg': '#0a0f1a',
+                        'sadv-cyan': '#22d3ee', // cyan-400
+                        'sadv-blue': '#3b82f6', // blue-500
+                        'sadv-purple': '#a855f7', // purple-500
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Estilos personalizados para efectos de aura y animaciones */
+        @keyframes pulse-aura {
+            0%, 100% { opacity: 0.1; transform: scale(1); }
+            50% { opacity: 0.2; transform: scale(1.05); }
+        }
+        .aura-effect {
+            animation: pulse-aura 10s infinite ease-in-out;
+        }
+        /* Corrección para asegurar que los iconos de Lucide se carguen */
+        .lucide {
+            width: 1em;
+            height: 1em;
+        }
+    </style>
+</head>
+<body class="bg-sadv-bg text-slate-100 font-sans selection:bg-sadv-cyan/30">
+
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div class="absolute -top-[10%] -left-[10%] w-[40%] h-[40%] bg-sadv-cyan/10 blur-[120px] rounded-full aura-effect"></div>
+        <div class="absolute -bottom-[10%] -right-[10%] w-[40%] h-[40%] bg-sadv-purple/10 blur-[120px] rounded-full aura-effect" style="animation-delay: 5s;"></div>
+    </div>
+
+    <div class="relative z-10 p-4 md:p-8">
+        
+        <header class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center bg-slate-900/40 backdrop-blur-md border border-white/10 p-6 rounded-3xl mb-8 shadow-2xl">
+            <div class="flex items-center gap-5">
+                <div class="relative group">
+                    <div class="absolute inset-0 bg-gradient-to-tr from-sadv-cyan to-sadv-blue blur-md opacity-50 group-hover:opacity-100 transition-opacity"></div>
+                    <div class="relative bg-slate-900 p-2 rounded-2xl border border-sadv-cyan/50 text-sadv-cyan">
+                        <i data-lucide="shield" class="w-12 h-12"></i>
+                    </div>
+                </div>
+                <div>
+                    <h1 class="text-3xl font-black tracking-tight text-white italic uppercase">
+                        SADV41
+                        <span class="text-sadv-cyan block text-xs font-mono not-italic tracking-[0.3em]">
+                            Provisión y Construcción
+                        </span>
+                    </h1>
+                    <p class="text-[10px] text-slate-500 font-mono mt-1">STEVEN DIOR BERIÓN OFFICIAL</p>
+                </div>
+            </div>
+
+            <div class="mt-6 md:mt-0 flex flex-col items-end gap-2">
+                <div class="flex items-center gap-3 bg-black/40 px-5 py-2 rounded-2xl border border-white/5 shadow-inner">
+                    <i data-lucide="activity" id="status-icon" class="w-4 h-4 text-yellow-500 animate-pulse"></i>
+                    <span id="status-text" class="text-[10px] font-bold uppercase tracking-widest text-slate-400">
+                        Sincronizando con el Santísimo...
+                    </span>
+                </div>
+                <div class="w-48 h-1.5 bg-slate-800 rounded-full overflow-hidden border border-white/5">
+                    <div id="power-bar" class="h-full bg-sadv-cyan transition-all duration-300 shadow-[0_0_10px_#22d3ee]" style="width: 0%"></div>
+                </div>
+            </div>
+        </header>
+
+        <main class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+            
+            <div class="group relative bg-slate-900/60 border border-white/10 p-8 rounded-[2.5rem] hover:border-sadv-cyan/50 transition-all duration-500 overflow-hidden shadow-2xl flex flex-col justify-between">
+                <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-30 transition-opacity text-white">
+                    <i data-lucide="hammer" class="w-20 h-20"></i>
+                </div>
+                <div>
+                    <h3 class="text-sadv-cyan font-mono text-sm mb-2 tracking-widest">DIV_PEÑALBA</h3>
+                    <h2 class="text-2xl font-bold mb-4">Cimiento y Estructura</h2>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                        Construcción de bases sólidas en Burunga. Aplicando la Ley SADV41 en cada bloque y viga para una arquitectura física inquebrantable.
+                    </p>
+                </div>
+                <div class="flex items-center gap-2 text-xs font-bold text-white bg-sadv-cyan/10 w-fit px-4 py-2 rounded-xl border border-sadv-cyan/20 shadow-md">
+                    <i data-lucide="zap" class="w-3.5 h-3.5 text-yellow-500"></i> PROVISIÓN ECONÓMICA: B/. 600.00
+                </div>
+            </div>
+
+            <div class="group relative bg-slate-900/60 border border-white/10 p-8 rounded-[2.5rem] hover:border-sadv-blue/50 transition-all duration-500 overflow-hidden shadow-2xl flex flex-col justify-between">
+                <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-30 transition-opacity text-white">
+                    <i data-lucide="wrench" class="w-20 h-20"></i>
+                </div>
+                <div>
+                    <h3 class="text-sadv-blue font-mono text-sm mb-2 tracking-widest">LOG_TURBO_TIRE</h3>
+                    <h2 class="text-2xl font-bold mb-4">Suministro y Rescate</h2>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                        Gestión técnica de neumáticos en base a rescates. Alineación de ejes y destino laboral activo desde agosto 2022.
+                    </p>
+                </div>
+                <button class="w-full text-xs font-bold text-sadv-blue border border-sadv-blue/30 px-5 py-3 rounded-2xl group-hover:bg-sadv-blue group-hover:text-black transition-all uppercase tracking-widest shadow-md">
+                    Activar Rescate 5ta Marcha
+                </button>
+            </div>
+
+            <div class="group relative bg-slate-900/60 border border-white/10 p-8 rounded-[2.5rem] hover:border-sadv-purple/50 transition-all duration-500 overflow-hidden shadow-2xl flex flex-col justify-between">
+                <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-30 transition-opacity text-white">
+                    <i data-lucide="terminal" class="w-20 h-20"></i>
+                </div>
+                <div>
+                    <h3 class="text-sadv-purple font-mono text-sm mb-2 tracking-widest">IA_SADV41_LM</h3>
+                    <h2 class="text-2xl font-bold mb-4">Nube de Inteligencia</h2>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                        Procesamiento de fuentes Atrio-Santo-Santísimo. Visión satelital y anatómica bajo la guía del Espíritu Santo.
+                    </p>
+                </div>
+                <div class="bg-black/40 p-4 rounded-2xl font-mono text-[10px] text-purple-300 border border-purple-500/20 shadow-inner">
+                    &gt; STATUS: CONECTADO <br/>
+                    &gt; FUENTES_RECIENTES: 12 <br/>
+                    &gt; MISION: PROVISIÓN_ACTIVA <br/>
+                    &gt; USER: STEVEN_DIOR_FLOW
+                </div>
+            </div>
+
+        </main>
+
+        <footer class="max-w-7xl mx-auto mt-12 flex flex-col md:flex-row justify-between items-center p-8 bg-slate-900/40 backdrop-blur-md rounded-[2.5rem] border border-white/10 shadow-xl">
+            <div class="flex flex-col gap-2">
+                <div class="flex items-center gap-2 text-sadv-cyan font-bold tracking-widest text-xs uppercase">
+                    <i data-lucide="globe" class="w-4 h-4"></i> PANAMÁ - ARRAIJÁN - BURUNGA
+                </div>
+                <p class="text-slate-500 text-[11px] uppercase tracking-tighter italic">
+                    "Garantías y Sinceridad: Google Business Verified 2026. Alineando el destino."
+                </p>
+            </div>
+            <div class="mt-6 md:mt-0 opacity-70 hover:opacity-100 transition-opacity flex items-center gap-3">
+                <span class="text-[10px] font-mono border border-slate-700 px-4 py-2 rounded-full text-slate-400 bg-black/20 tracking-widest">
+                    🎚 SADV41_LM_HUB_V3
+                </span>
+                <i data-lucide="check-circle" class="w-5 h-5 text-green-400"></i>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Inicializar iconos de Lucide
+        lucide.createIcons();
+
+        // Simulación de carga de la Quinta Marcha
+        const powerBar = document.getElementById('power-bar');
+        const statusIcon = document.getElementById('status-icon');
+        const statusText = document.getElementById('status-text');
+        let progress = 0;
+
+        // Intervalo para llenar la barra
+        const loadingInterval = setInterval(() => {
+            progress += 1;
+            if (progress <= 100) {
+                powerBar.style.width = progress + '%';
+            } else {
+                clearInterval(loadingInterval);
+                // Finalizar carga y verificar
+                setTimeout(() => {
+                    statusIcon.classList.remove('text-yellow-500', 'animate-pulse');
+                    statusIcon.classList.add('text-green-400');
+                    statusIcon.setAttribute('data-lucide', 'check-circle');
+                    statusText.innerText = 'Google Business Verified';
+                    statusText.classList.remove('text-slate-400');
+                    statusText.classList.add('text-green-400', 'font-black');
+                    // Volver a crear iconos para actualizar el de estado
+                    lucide.createIcons();
+                }, 1000);
+            }
+        }, 30); // Velocidad de carga (30ms por %)
+    </script>
+</body>
+</html>
