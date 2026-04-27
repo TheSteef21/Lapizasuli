@@ -1,10 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SADV41 Previsualizer</title>
+    <style>
+        :root { --primary: #1a3a5a; --accent: #d4af37; --bg: #000; }
+        body { font-family: sans-serif; background: var(--bg); color: white; display: flex; justify-content: center; padding: 20px; }
+        .card { background: #111; border: 1px solid #333; padding: 20px; border-radius: 15px; width: 100%; max-width: 400px; text-align: center; }
+        input { width: 100%; padding: 10px; margin: 10px 0; background: #222; border: 1px solid #444; color: white; border-radius: 5px; box-sizing: border-box; }
+        button { width: 100%; padding: 10px; background: var(--primary); color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; }
+        .result { margin-top: 20px; border: 1px solid var(--accent); border-radius: 10px; padding: 15px; text-align: left; min-height: 150px; background: #0a0a0a; }
+        .badge { color: var(--accent); font-size: 1.2rem; font-weight: bold; display: block; margin-bottom: 10px; }
+        .sug { font-size: 0.8rem; color: #888; border-top: 1px solid #222; margin-top: 10px; padding-top: 10px; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2 style="color: var(--accent); margin: 0;">SADV41 NOTICIAS</h2>
+    <p style="font-size: 0.7rem; color: #666;">Evitando clics innecesarios en Burunga</p>
+    
+    <input type="text" id="linkInput" placeholder="Pega el enlace aquí...">
+    <button onclick="generatePreview()">ANALIZAR CONTENIDO</button>
+
+    <div id="previewBox" class="result">
+        <p style="color: #444; text-align: center;">El análisis aparecerá aquí</p>
+    </div>
+
+    <p style="font-size: 10px; color: var(--accent); margin-top: 20px;">PROYECTO SHIRLEY DAYAN LOHANNIZ 🎚️</p>
+</div>
+
+<script>
     function generatePreview() {
         const url = document.getElementById('linkInput').value.toLowerCase();
         const previewBox = document.getElementById('previewBox');
         
-        if (!url) return alert("Introduce un enlace.");
+        if (!url) { return alert("Introduce un enlace."); }
 
-        // Lógica de detección automática SADV41
         let tipoContenido = "Publicación General";
         let icono = "📄";
         let recomendacion = "Verificar texto antes de compartir.";
@@ -20,23 +53,18 @@
         }
 
         previewBox.innerHTML = `
-            <div style="padding: 20px; text-align: left; width: 100%;">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <h3 style="margin: 0; color: #d4af37; font-size: 1.1rem;">${icono} ${tipoContenido}</h3>
-                    <span style="font-size: 10px; background: #333; padding: 2px 6px; border-radius: 4px;">SADV-X1</span>
-                </div>
-                
-                <p style="color: #bbb; font-size: 0.8rem; margin: 10px 0;"><strong>Origen:</strong> Facebook / Meta</p>
-                
-                <div style="background: #111; border: 1px solid #d4af37; height: 100px; border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; margin-top: 10px;">
-                    <span style="color: #d4af37; font-weight: bold; font-size: 1.2rem;">SADV41 PROTECTED</span>
-                    <span style="color: #555; font-size: 0.7rem;">Vista previa analizada con éxito</span>
-                </div>
-
-                <div style="margin-top: 15px; padding: 10px; background: rgba(212, 175, 55, 0.1); border-radius: 5px;">
-                    <p style="font-size: 0.8rem; color: #fff; margin: 0;"><strong>Acción sugerida:</strong></p>
-                    <p style="font-size: 0.75rem; color: #d4af37; margin: 5px 0 0 0;">${recomendacion}</p>
-                </div>
+            <span class="badge">${icono} ${tipoContenido}</span>
+            <div style="background: #1a1a1a; padding: 15px; border-radius: 8px; text-align: center; border: 1px dashed #d4af37;">
+                <strong style="color: var(--accent);">SADV41 PROTECTED</strong><br>
+                <span style="font-size: 0.7rem; color: #555;">Vista previa analizada con éxito</span>
+            </div>
+            <div class="sug">
+                <strong>Acción sugerida:</strong><br>
+                <span style="color: var(--accent);">${recomendacion}</span>
             </div>
         `;
     }
+</script>
+
+</body>
+</html>
