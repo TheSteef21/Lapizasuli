@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SADV41 - Previsualizador de Enlaces</title>
+    <style>
+        :root {
+            --primary: #1a3a5a;
+            --accent: #d4af37;
+            --bg: #f4f7f6;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+        }
+        h1 { color: var(--primary); font-size: 1.5rem; margin-bottom: 1.5rem; }
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 1rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        button:hover { background-color: #2c527a; }
+        .preview-box {
+            margin-top: 2rem;
+            border: 2px dashed #ccc;
+            border-radius: 10px;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            background: #fafafa;
+        }
+        .preview-box img {
+            max-width: 100%;
+            height: auto;
+        }
+        .info-text {
+            padding: 10px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        .logo-small { font-weight: bold; color: var(--accent); margin-top: 1rem; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>SADV41 Noticia Burunga</h1>
+    <p>Pega el enlace para generar vista previa nativa</p>
+    
+    <input type="text" id="linkInput" placeholder="https://www.facebook.com/share/p/...">
+    <button onclick="generatePreview()">Previsualizar Enlace</button>
+
+    <div class="preview-box" id="previewBox">
+        <span id="placeholderText">La previsualización aparecerá aquí</span>
+    </div>
+
+    <div class="logo-small">Misión SADV41 🎚️</div>
+</div>
+
+<script>
+    function generatePreview() {
+        const url = document.getElementById('linkInput').value;
+        const previewBox = document.getElementById('previewBox');
+        
+        if (!url) {
+            alert("Por favor, pega un enlace primero.");
+            return;
+        }
+
+        // Simulación de extracción de Metadata/OpenGraph
+        // En un entorno real, usarías una API como LinkPreview o Microlink
+        previewBox.innerHTML = `
+            <div style="padding:20px;">
+                <p style="font-weight:bold; color:#1a3a5a;">Contenido Detectado</p>
+                <img src="https://via.placeholder.com/400x225.png?text=Miniatura+de+Video+Facebook" alt="Preview">
+                <div class="info-text">
+                    <strong>Origen:</strong> Facebook Mobile<br>
+                    <strong>Estado:</strong> Listo para compartir nativamente
+                </div>
+                <p style="font-size:0.8rem; color:red;">* Evita el click externo: Descarga este frame para tu historia.</p>
+            </div>
+        `;
+    }
+</script>
+
+</body>
+</html>
