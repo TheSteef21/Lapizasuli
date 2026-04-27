@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SADV41NEWS - Edición Semanal</title>
+    <style>
+        :root {
+            --bg-dark: #0a0a0c;
+            --card-bg: #16161a;
+            --accent-gold: #c5a059;
+            --accent-blue: #4a9eff;
+            --text-main: #e1e1e6;
+            --text-dim: #9494a0;
+            --breaking-red: #ff4d4d;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            border: 1px solid #2d2d35;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        header {
+            padding: 40px 20px;
+            text-align: center;
+            background: linear-gradient(180deg, #1c1c21 0%, var(--card-bg) 100%);
+            border-bottom: 2px solid var(--accent-gold);
+        }
+
+        .brand {
+            font-size: 2.5rem;
+            font-weight: 900;
+            letter-spacing: 4px;
+            margin: 0;
+            color: #fff;
+        }
+
+        .edition {
+            color: var(--accent-gold);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 10px;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .urgent-tag {
+            display: inline-block;
+            background: var(--breaking-red);
+            color: #fff;
+            padding: 4px 12px;
+            font-weight: bold;
+            font-size: 0.8rem;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            margin-top: 0;
+            color: #fff;
+        }
+
+        h2 {
+            color: var(--accent-blue);
+            font-size: 1.3rem;
+            border-left: 4px solid var(--accent-gold);
+            padding-left: 15px;
+            margin-top: 40px;
+        }
+
+        .stats-box {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .stat {
+            background: #1f1f25;
+            padding: 20px;
+            border-radius: 6px;
+            text-align: center;
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .stat-val {
+            display: block;
+            font-size: 1.6rem;
+            font-weight: bold;
+            color: #4cd964;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 12px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        li::before {
+            content: "•";
+            color: var(--accent-gold);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .references {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px dashed #333;
+            font-size: 0.8rem;
+            color: var(--text-dim);
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #0f0f12;
+            font-size: 0.8rem;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <div class="brand">SADV41NEWS</div>
+        <div class="edition">Semana 04 | Abril 2026</div>
+    </header>
+
+    <div class="content">
+        <span class="urgent-tag">URGENTE</span>
+        <h1>Navieras pagan hasta $4M por cruzar el Canal</h1>
+        <p>Las tensiones bélicas en el Estrecho de Ormuz han reconfigurado las rutas globales, convirtiendo al istmo panameño en el punto más crítico y costoso de la logística mundial este mes.</p>
+
+        <div class="stats-box">
+            <div class="stat">
+                <span class="stat-val">$4.0M</span>
+                <span class="stat-label">Subasta Récord</span>
+            </div>
+            <div class="stat">
+                <span class="stat-val">185%</span>
+                <span class="stat-label">Alza Mensual</span>
+            </div>
+            <div class="stat">
+                <span class="stat-val">40</span>
+                <span class="stat-label">Tránsitos/Día</span>
+            </div>
+        </div>
+
+        <h2>📈 Tarifas y Costos Extraordinarios</h2>
+        <ul>
+            <li><strong>Costo Base:</strong> El promedio operativo se mantiene entre $300k y $400k.</li>
+            <li><strong>Inflación de Subastas:</strong> Los precios saltaron de $130k históricos a un promedio de $425k por cupo. [1, 5, 7]</li>
+        </ul>
+
+        <h2>🚢 Situación Operativa</h2>
+        <ul>
+            <li><strong>Estabilidad:</strong> Niveles de agua óptimos permiten operar a plena capacidad. [11]</li>
+            <li><strong>Volumen:</strong> 6,288 buques transitados en el primer semestre fiscal (+3.7% anual). [5]</li>
+        </ul>
+
+        <h2>🌍 Causas de la Urgencia</h2>
+        <ul>
+            <li><strong>Conflicto Geopolítico:</strong> Inestabilidad entre EE.UU. e Irán desvía carga de Ormuz a Panamá. [1, 12]</li>
+            <li><strong>Energía Crítica:</strong> Buques de GNL priorizan seguridad sobre costo para llegar a Asia. [13]</li>
+        </ul>
+
+        <div class="references">
+            <strong>Referencias Verificadas:</strong><br>
+            [1] Tico Times: "Panama Canal fees hit $4 million" (25/04/26).<br>
+            [3] Lloyd’s List: "Hormuz crisis drives up auction prices".<br>
+            [11] ACP: "Draft restriction suspended for transiting vessels".<br>
+            [12] TeleSur: "Tarifas récord por tensión en Oriente Medio".
+        </div>
+    </div>
+
+    <footer>
+        SADV41 Digital Archive | "Verificando la realidad en cada versión"
+    </footer>
+</div>
+
+</body>
+</html>
