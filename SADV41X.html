@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SADV41 Dev Console</title>
+    <style>
+        :root { 
+            --primary: #1a3a5a; 
+            --accent: #d4af37; 
+            --bg: #000; 
+            --x-color: #ffffff; /* Blanco sobre negro para X */
+            --meta-color: #0668E1;
+        }
+        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: white; display: flex; flex-direction: column; align-items: center; min-height: 100vh; margin: 0; padding: 15px; }
+        
+        /* BARRA SUPERIOR DE CONEXIONES (TRINIDAD) */
+        .trinity-nav { width: 100%; max-width: 450px; display: flex; justify-content: space-around; margin-bottom: 20px; background: #111; padding: 15px; border-radius: 25px; border: 1px solid #333; }
+        
+        .nav-item { text-decoration: none; display: flex; flex-direction: column; align-items: center; transition: 0.3s; }
+        .nav-icon { font-size: 1.5rem; margin-bottom: 5px; }
+        .nav-label { font-size: 9px; font-weight: bold; color: #888; }
+        
+        .nav-item:hover .nav-label { color: var(--accent); }
+
+        /* TARJETA DE CONTROL SADV41 */
+        .dev-card { background: #111; border: 1px solid #333; padding: 20px; border-radius: 20px; width: 100%; max-width: 420px; position: relative; }
+        .user-tag { position: absolute; top: -10px; right: 20px; background: var(--accent); color: black; font-size: 10px; padding: 2px 10px; border-radius: 10px; font-weight: bold; }
+        
+        .section-title { font-size: 0.8rem; color: var(--accent); text-transform: uppercase; margin-bottom: 15px; letter-spacing: 1px; display: block; border-bottom: 1px solid #222; padding-bottom: 5px; }
+        
+        input { width: 100%; padding: 12px; margin-bottom: 10px; background: #1a1a1a; border: 1px solid #444; color: white; border-radius: 8px; box-sizing: border-box; }
+        
+        .btn-dev { width: 100%; padding: 12px; background: var(--primary); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; margin-bottom: 10px; }
+        
+        .status-box { background: rgba(255,255,255,0.03); border-radius: 10px; padding: 15px; font-size: 0.85rem; border-left: 3px solid var(--accent); }
+        
+        .footer { margin-top: 20px; font-size: 9px; color: #555; text-align: center; }
+    </style>
+</head>
+<body>
+
+    <div class="trinity-nav">
+        <a href="https://developer.x.com/en/portal/dashboard" class="nav-item">
+            <span class="nav-icon">𝕏</span>
+            <span class="nav-label">ATRIO (DEV)</span>
+        </a>
+        <a href="intent://send/+1234567890#Intent;scheme=smsto;package=com.whatsapp;action=android.intent.action.SENDTO;end" class="nav-item">
+            <span class="nav-icon">🎚️</span>
+            <span class="nav-label">SANTO (META)</span>
+        </a>
+        <a href="#" class="nav-item" style="opacity: 0.5;">
+            <span class="nav-icon">✨</span>
+            <span class="nav-label">SANTÍSIMO</span>
+        </a>
+    </div>
+
+    <div class="dev-card">
+        <span class="user-tag">@StevenG507 CONNECTED</span>
+        <span class="section-title">Análisis de Noticias Burunga</span>
+        
+        <input type="text" id="newsLink" placeholder="Enlace de fuente activa...">
+        <button class="btn-dev" onclick="analyze()">EJECUTAR PROTOCOLO SADV41</button>
+
+        <div id="output" class="status-box" style="display:none;">
+            <strong id="type"></strong><br>
+            <span id="instruction" style="color: #aaa;"></span>
+        </div>
+    </div>
+
+    <div class="footer">
+        SADV41 ECOSYSTEM UNIFIED<br>
+        SHIRLEY DAYAN LOHANNIZ 🎚️
+    </div>
+
+    <script>
+        function analyze() {
+            const out = document.getElementById('output');
+            out.style.display = 'block';
+            document.getElementById('type').innerText = "CONEXIÓN ESTABLECIDA";
+            document.getElementById('instruction').innerText = "Analizando flujo desde @StevenG507. Preparando reporte para WhatsApp...";
+        }
+    </script>
+</body>
+</html>
