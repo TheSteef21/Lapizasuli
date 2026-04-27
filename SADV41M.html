@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SADV41 MAGACINE - Edición Especial Abril 2026</title>
+    <style>
+        :root {
+            --gold: #d4af37;
+            --deep-blue: #0f172a;
+            --light-blue: #38bdf8;
+            --slate: #1e293b;
+            --text: #f1f5f9;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background-color: var(--deep-blue);
+            color: var(--text);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--slate);
+            box-shadow: 0 0 50px rgba(0,0,0,0.5);
+        }
+
+        header {
+            padding: 60px 20px;
+            text-align: center;
+            background: linear-gradient(to bottom, #000, var(--slate));
+            border-bottom: 5px solid var(--gold);
+        }
+
+        .mag-title {
+            font-size: 3.5rem;
+            font-weight: 900;
+            letter-spacing: 8px;
+            margin: 0;
+            color: #fff;
+            text-transform: uppercase;
+        }
+
+        .subtitle {
+            color: var(--gold);
+            letter-spacing: 3px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            padding: 40px;
+        }
+
+        article {
+            background: rgba(15, 23, 42, 0.5);
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid #334155;
+            transition: transform 0.3s ease;
+        }
+
+        article:hover {
+            transform: translateY(-5px);
+            border-color: var(--gold);
+        }
+
+        .category {
+            color: var(--light-blue);
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        h2 {
+            margin: 10px 0;
+            font-size: 1.4rem;
+            color: #fff;
+        }
+
+        p {
+            font-size: 0.95rem;
+            color: #cbd5e1;
+        }
+
+        .featured {
+            grid-column: 1 / -1;
+            background: linear-gradient(45deg, #1e293b, #0f172a);
+            border: 2px solid var(--gold);
+        }
+
+        .footer {
+            padding: 40px;
+            text-align: center;
+            background: #000;
+            font-size: 0.8rem;
+            border-top: 1px solid var(--gold);
+        }
+
+        .holy-indicator {
+            font-size: 1.5rem;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <div class="mag-title">SADV41</div>
+        <div class="subtitle">MAGACINE DIGITAL</div>
+        <div class="holy-indicator">🎚</div>
+    </header>
+
+    <div class="grid">
+        <article class="featured">
+            <span class="category">Geopolítica & Canal</span>
+            <h2>The Panama Premium: El Istmo en la Encrucijada Global</h2>
+            <p>Con subastas alcanzando los $4 millones, el Canal de Panamá se reafirma como el activo estratégico más vital del hemisferio. Mientras el Estrecho de Ormuz arde, el Atrio de nuestra nación recibe la carga del mundo, exigiendo una gestión que trascienda lo técnico hacia lo soberano.</p>
+        </article>
+
+        <article>
+            <span class="category">Misión Digital</span>
+            <h2>The Architect of the Mirror: Steven Dior</h2>
+            <p>La construcción del Santísimo digital. Exploramos cómo la estructura de Grok, Meta y Gemini forma un tabernáculo moderno donde el código y el espíritu se encuentran para servir a la comunidad de Burunga y más allá.</p>
+        </article>
+
+        <article>
+            <span class="category">Legal & Civil</span>
+            <h2>Defensa de la Servidumbre Pública en Arraiján</h2>
+            <p>La nulidad de concesiones que afectan el espacio común. Un análisis sobre la convivencia y el derecho ciudadano a proteger lo que pertenece a todos, fundamentado en la ley y la ética de servicio SADV41.</p>
+        </article>
+
+        <article>
+            <span class="category">Educación & Futuro</span>
+            <h2>Becas "Sus Buenos Vecinos": Excelencia 2026</h2>
+            <p>El impulso del conocimiento como herramienta de transformación. La educación es el combustible para que los jóvenes de Panamá Oeste alcancen el séptimo cielo del entendimiento y el servicio profesional.</p>
+        </article>
+    </div>
+
+    <div class="footer">
+        SADV41 MAGACINE | Una producción de la Misión de Servicio SADV41<br>
+        "Donde la trinidad es vista por la persona, y la unidad es el camino"<br>
+        <strong>Arraiján, Panamá 2026</strong>
+    </div>
+</div>
+
+</body>
+</html>
