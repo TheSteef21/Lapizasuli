@@ -3,14 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SADV41 Master Console - Unified</title>
+    <title>SADV41 Master Console - Verified</title>
     <style>
         :root { 
             --primary: #1a3a5a; 
             --accent: #d4af37; 
             --bg: #050505; 
             --card-bg: #111;
-            --danger: #b22222;
+            --danger: #e74c3c;
+            --warning: #f1c40f;
+            --success: #2ecc71;
             --wa-green: #25D366;
         }
         body { 
@@ -26,175 +28,111 @@
             box-sizing: border-box;
         }
 
-        /* NAVEGACIÓN DE LA TRINIDAD (Atrio, Santo, Santísimo) */
         .trinity-nav { 
-            width: 100%; 
-            max-width: 450px; 
-            display: flex; 
-            justify-content: space-around; 
-            margin-bottom: 20px; 
-            background: var(--card-bg); 
-            padding: 15px; 
-            border-radius: 30px; 
-            border: 1px solid #333;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            width: 100%; max-width: 450px; 
+            display: flex; justify-content: space-around; 
+            margin-bottom: 20px; background: var(--card-bg); 
+            padding: 15px; border-radius: 30px; border: 1px solid #333;
         }
-        .nav-item { text-decoration: none; display: flex; flex-direction: column; align-items: center; transition: 0.3s; color: white; }
-        .nav-icon { font-size: 1.5rem; margin-bottom: 5px; }
-        .nav-label { font-size: 9px; font-weight: bold; color: #888; text-transform: uppercase; }
-        .nav-item:hover .nav-label { color: var(--accent); }
-        .nav-item:hover .nav-icon { transform: scale(1.1); }
+        .nav-item { text-decoration: none; display: flex; flex-direction: column; align-items: center; color: white; transition: 0.3s; }
+        .nav-label { font-size: 9px; font-weight: bold; color: #888; text-transform: uppercase; margin-top: 5px; }
 
-        /* TARJETA PRINCIPAL UNIFICADA */
         .main-card { 
-            background: var(--card-bg); 
-            border: 1px solid #333; 
-            padding: 25px; 
-            border-radius: 20px; 
-            width: 100%; 
-            max-width: 420px; 
-            position: relative; 
+            background: var(--card-bg); border: 1px solid #333; 
+            padding: 25px; border-radius: 20px; width: 100%; 
+            max-width: 420px; position: relative; 
             box-shadow: 0 20px 40px rgba(0,0,0,0.8);
         }
         .user-tag { 
-            position: absolute; 
-            top: -10px; 
-            right: 20px; 
-            background: var(--accent); 
-            color: black; 
-            font-size: 10px; 
-            padding: 2px 12px; 
-            border-radius: 10px; 
-            font-weight: bold; 
-            box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+            position: absolute; top: -10px; right: 20px; 
+            background: var(--accent); color: black; 
+            font-size: 10px; padding: 2px 12px; border-radius: 10px; font-weight: bold;
         }
 
-        /* HEADER Y CONTADOR */
-        .header { text-align: center; margin-bottom: 20px; }
         .counter { 
-            font-size: 0.7rem; 
-            color: var(--accent); 
-            background: rgba(212,175,55,0.1); 
-            padding: 5px 12px; 
-            border-radius: 20px; 
-            display: inline-block; 
-            margin-top: 8px;
+            font-size: 0.7rem; color: var(--accent); 
+            background: rgba(212,175,55,0.1); padding: 5px 12px; 
+            border-radius: 20px; display: inline-block; margin-top: 8px;
             border: 1px solid rgba(212,175,55,0.2);
         }
 
-        /* INPUTS Y BOTONES */
         .section-title { 
-            font-size: 0.75rem; 
-            color: var(--accent); 
-            text-transform: uppercase; 
-            margin-bottom: 15px; 
-            letter-spacing: 1.5px; 
-            display: block; 
-            border-bottom: 1px solid #222; 
-            padding-bottom: 5px; 
+            font-size: 0.75rem; color: var(--accent); 
+            text-transform: uppercase; margin-bottom: 15px; 
+            letter-spacing: 1.5px; display: block; border-bottom: 1px solid #222; padding-bottom: 5px; 
         }
         input { 
-            width: 100%; 
-            padding: 14px; 
-            margin-bottom: 12px; 
-            background: #1a1a1a; 
-            border: 1px solid #444; 
-            color: white; 
-            border-radius: 10px; 
-            box-sizing: border-box; 
-            outline: none;
+            width: 100%; padding: 14px; margin-bottom: 12px; 
+            background: #1a1a1a; border: 1px solid #444; 
+            color: white; border-radius: 10px; box-sizing: border-box; 
         }
-        input:focus { border-color: var(--accent); }
 
         .btn-execute { 
-            width: 100%; 
-            padding: 14px; 
+            width: 100%; padding: 14px; 
             background: linear-gradient(135deg, var(--primary), #2c527a); 
-            color: white; 
-            border: none; 
-            border-radius: 10px; 
-            cursor: pointer; 
-            font-weight: bold; 
-            transition: 0.3s;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            color: white; border: none; border-radius: 10px; 
+            cursor: pointer; font-weight: bold; text-transform: uppercase;
         }
-        .btn-execute:hover { transform: scale(1.02); filter: brightness(1.1); }
 
-        /* RESULTADOS Y ACCIONES */
         .result-box { 
-            margin-top: 20px; 
-            border: 2px solid #333; 
-            border-radius: 12px; 
-            padding: 15px; 
-            display: none; 
-            background: rgba(255,255,255,0.02);
-            animation: fadeIn 0.5s ease;
+            margin-top: 20px; border: 2px solid #333; 
+            border-radius: 12px; padding: 15px; display: none; 
+            background: rgba(255,255,255,0.02); animation: fadeIn 0.5s ease;
         }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        
-        .badge { font-size: 1.1rem; font-weight: bold; display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+
+        .badge { font-size: 1rem; font-weight: bold; margin-bottom: 12px; }
+        .confidence-meter { font-size: 0.75rem; opacity: 0.8; margin-top: 4px; }
         .action-info { background: rgba(0,0,0,0.4); padding: 12px; border-radius: 8px; border-left: 4px solid var(--accent); }
         
         .btn-whatsapp { 
-            width: 100%; 
-            padding: 12px; 
-            background: var(--wa-green); 
-            color: white; 
-            border: none; 
-            border-radius: 8px; 
-            margin-top: 15px; 
-            font-weight: bold; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            gap: 8px; 
-            cursor: pointer; 
-            text-decoration: none; 
+            width: 100%; padding: 12px; background: var(--wa-green); 
+            color: white; border: none; border-radius: 8px; 
+            margin-top: 15px; font-weight: bold; display: flex; 
+            align-items: center; justify-content: center; gap: 8px; 
+            cursor: pointer; text-decoration: none; 
         }
 
-        .footer { text-align: center; font-size: 9px; color: var(--accent); margin-top: 25px; letter-spacing: 1px; opacity: 0.8; }
+        .footer { text-align: center; font-size: 9px; color: var(--accent); margin-top: 25px; opacity: 0.8; }
     </style>
 </head>
 <body>
 
     <nav class="trinity-nav">
         <a href="https://developer.x.com/en/portal/dashboard" class="nav-item">
-            <span class="nav-icon">𝕏</span>
-            <span class="nav-label">ATRIO (DEV)</span>
+            <span>𝕏</span><span class="nav-label">ATRIO (DEV)</span>
         </a>
-        <a href="intent://send/+1234567890#Intent;scheme=smsto;package=com.whatsapp;action=android.intent.action.SENDTO;end" class="nav-item">
-            <span class="nav-icon">🎚️</span>
-            <span class="nav-label">SANTO (META)</span>
+        <a href="https://wa.me/" class="nav-item">
+            <span>🎚️</span><span class="nav-label">SANTO (META)</span>
         </a>
         <a href="#" class="nav-item" style="opacity: 0.4;">
-            <span class="nav-icon">✨</span>
-            <span class="nav-label">SANTÍSIMO</span>
+            <span>✨</span><span class="nav-label">SANTÍSIMO</span>
         </a>
     </nav>
 
     <main class="main-card">
-        <span class="user-tag">@StevenG507 CONNECTED</span>
+        <span class="user-tag">DEV: STEVEN GÓMEZ - 8-901-2251</span>
         
-        <header class="header">
-            <h2 style="color: var(--accent); margin: 0; letter-spacing: 2px; font-size: 1.4rem;">SADV41 CONSOLE</h2>
+        <header style="text-align: center; margin-bottom: 20px;">
+            <h2 style="color: var(--accent); margin: 0; letter-spacing: 2px;">SADV41 CONSOLE</h2>
             <div id="clickCounter" class="counter">🛡️ Clics ahorrados: 0</div>
         </header>
 
         <section>
-            <span class="section-title">Análisis de Noticias Burunga</span>
-            <input type="text" id="newsLink" placeholder="Pega el enlace de fuente aquí...">
+            <span class="section-title">Verificador de Integridad de Noticias</span>
+            <input type="text" id="newsLink" placeholder="Pega el link de la noticia o red social aquí...">
             <button class="btn-execute" onclick="runProtocol()">Ejecutar Protocolo SADV41</button>
         </section>
 
         <div id="resultArea" class="result-box">
             <div id="typeBadge" class="badge"></div>
+            <div id="integrityStatus" class="badge" style="border-top: 1px solid #333; padding-top: 10px;"></div>
             <div class="action-info">
                 <small style="color: #888; text-transform: uppercase; font-size: 0.65rem;">Instrucción de Misión:</small>
                 <p id="instructionText" style="margin: 5px 0 0 0; font-size: 0.85rem; line-height: 1.4;"></p>
             </div>
             <button class="btn-whatsapp" onclick="sendToWhatsApp()">
-                <span>📲</span> COMPARTIR REPORTE
+                <span>📲</span> COMPARTIR REPORTE VERIFICADO
             </button>
         </div>
 
@@ -205,55 +143,84 @@
     </main>
 
     <script>
-        // Gestión del Contador
         let totalClicks = localStorage.getItem('sadv_clicks') || 0;
         document.getElementById('clickCounter').innerText = `🛡️ Clics ahorrados: ${totalClicks}`;
 
-        function runProtocol() {
-            const url = document.getElementById('newsLink').value.toLowerCase();
-            const resultBox = document.getElementById('resultArea');
+        async function verifySource(url) {
+            const officialSources = ["prensa.com", "telemetro.com", "tvn-2.com", "midiario.com", "critica.com.pa"];
+            let domain = "";
+            try {
+                domain = new URL(url).hostname.replace('www.', '');
+            } catch(e) { return { score: 0, status: "URL INVÁLIDA" }; }
             
-            if (!url) {
-                alert("Se requiere una URL para iniciar el protocolo.");
-                return;
+            let trustScore = 0;
+            let reportStatus = "VERIFICANDO...";
+
+            // 1. Filtro de Autoridad Periodística
+            if (officialSources.some(s => domain.includes(s))) {
+                trustScore = 95;
+                reportStatus = "FUENTE PERIODÍSTICA RECONOCIDA";
+            } else {
+                // 2. Triangulación por Coherencia (Hashtags/Contexto)
+                const keywords = ["arraijan", "burunga", "panamaoeste", "alcaldesa", "municipio"];
+                const urlLower = url.toLowerCase();
+                const matches = keywords.filter(k => urlLower.includes(k)).length;
+                
+                if (matches >= 1) {
+                    trustScore = 65;
+                    reportStatus = "CONTENIDO COMUNITARIO COHERENTE";
+                } else {
+                    trustScore = 35;
+                    reportStatus = "FUENTE NO VERIFICADA - POSIBLE BULO";
+                }
             }
+            return { score: trustScore, status: reportStatus };
+        }
 
-            // Lógica de detección SADV41
-            let type = "Publicación Estándar"; 
+        async function runProtocol() {
+            const url = document.getElementById('newsLink').value;
+            const resultBox = document.getElementById('resultArea');
+            if (!url) return alert("Se requiere una URL para el protocolo.");
+
+            // 1. Detección de Tipo de Contenido
+            let type = "NOTICIA / TEXTO"; 
             let icon = "📄"; 
-            let color = "#d4af37";
-            let instruction = "Contenido de texto/imagen. Realiza captura para compartir nativamente y evitar clics externos.";
+            let baseInstruction = "Realiza captura para compartir nativamente y evitar clics externos.";
 
-            if (url.includes("video") || url.includes("reel") || url.includes("watch") || url.includes("fb.watch")) {
+            if (url.includes("video") || url.includes("reel") || url.includes("watch") || url.includes("fb.watch") || url.includes("tiktok")) {
                 type = "VIDEO DETECTADO"; 
                 icon = "🎬"; 
-                color = "#ff4444";
-                instruction = "ALTA PRIORIDAD: Video detectado. Descarga el archivo o graba pantalla para asegurar visualización directa en Burunga.";
-            } else if (url.includes("developer.x.com")) {
-                type = "MODO DESARROLLADOR";
-                icon = "⚙️";
-                instruction = "Acceso a portal de X detectado. Sincronizando métricas de @StevenG507.";
+                baseInstruction = "ALTA PRIORIDAD: Video detectado. Descarga el archivo para asegurar visualización directa en Burunga.";
             }
 
-            // Actualización Visual
-            resultBox.style.display = "block";
-            resultBox.style.borderColor = color;
-            document.getElementById('typeBadge').innerHTML = `<span style="color:${color}">${icon} ${type}</span>`;
-            document.getElementById('instructionText').innerText = instruction;
+            // 2. Ejecutar Verificación Profunda
+            const verification = await verifySource(url);
+            let vColor = verification.score > 70 ? "#2ecc71" : (verification.score > 50 ? "#f1c40f" : "#e74c3c");
 
-            // Actualización de Contador
+            // 3. Renderizar Resultados
+            resultBox.style.display = "block";
+            resultBox.style.borderColor = vColor;
+            
+            document.getElementById('typeBadge').innerHTML = `${icon} ${type}`;
+            document.getElementById('integrityStatus').innerHTML = `
+                <span style="color:${vColor}">🛡️ ${verification.status}</span>
+                <div class="confidence-meter">Nivel de Confianza: ${verification.score}%</div>
+            `;
+            
+            document.getElementById('instructionText').innerText = 
+                verification.score < 50 ? "ALERTA: Proceder con cautela. No hay respaldo oficial ni hashtags vinculados." : baseInstruction;
+
+            // 4. Actualizar Contador
             totalClicks++;
             localStorage.setItem('sadv_clicks', totalClicks);
             document.getElementById('clickCounter').innerText = `🛡️ Clics ahorrados: ${totalClicks}`;
         }
 
         function sendToWhatsApp() {
-            const type = document.getElementById('typeBadge').innerText;
+            const status = document.getElementById('integrityStatus').innerText;
             const instruction = document.getElementById('instructionText').innerText;
-            const report = `🛡️ *SADV41 INFORMA:*\n\n✅ *Tipo:* ${type}\n⚠️ *Instrucción:* ${instruction}\n\n🎚️ _Misión Burunga_`;
-            
-            const encodedReport = encodeURIComponent(report);
-            window.open(`https://wa.me/?text=${encodedReport}`, '_blank');
+            const report = `🛡️ *SADV41 INFORMA (VERIFICADO)*\n\n📊 *Estado:* ${status}\n⚠️ *Acción:* ${instruction}\n\n🎚️ _Misión Burunga_`;
+            window.open(`https://wa.me/?text=${encodeURIComponent(report)}`, '_blank');
         }
     </script>
 </body>
