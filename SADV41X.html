@@ -3,94 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SADV41 Master Console - Verified</title>
+    <title>SADV41 Supreme Console - Steven Dior</title>
     <style>
         :root { 
-            --primary: #1a3a5a; 
-            --accent: #d4af37; 
-            --bg: #050505; 
-            --card-bg: #111;
-            --danger: #e74c3c;
-            --warning: #f1c40f;
-            --success: #2ecc71;
-            --wa-green: #25D366;
+            --primary: #1a3a5a; --accent: #d4af37; --bg: #050505; 
+            --card-bg: #111; --success: #2ecc71; --warning: #f1c40f; 
+            --danger: #e74c3c; --wa-green: #25D366; --yappy-blue: #00a1ff;
         }
         body { 
-            font-family: 'Segoe UI', sans-serif; 
-            background: var(--bg); 
-            color: white; 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            min-height: 100vh; 
-            margin: 0; 
-            padding: 15px; 
-            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif; background: var(--bg); color: white; 
+            display: flex; flex-direction: column; align-items: center; padding: 15px; margin: 0;
         }
-
+        
         .trinity-nav { 
-            width: 100%; max-width: 450px; 
-            display: flex; justify-content: space-around; 
-            margin-bottom: 20px; background: var(--card-bg); 
-            padding: 15px; border-radius: 30px; border: 1px solid #333;
+            width: 100%; max-width: 450px; display: flex; justify-content: space-around; 
+            margin-bottom: 20px; background: var(--card-bg); padding: 15px; border-radius: 30px; 
+            border: 1px solid #333; box-shadow: 0 4px 15px rgba(0,0,0,0.5);
         }
-        .nav-item { text-decoration: none; display: flex; flex-direction: column; align-items: center; color: white; transition: 0.3s; }
-        .nav-label { font-size: 9px; font-weight: bold; color: #888; text-transform: uppercase; margin-top: 5px; }
+        .nav-item { text-decoration: none; color: white; font-size: 9px; text-align: center; transition: 0.3s; }
+        .nav-item:hover { transform: scale(1.1); color: var(--accent); }
 
         .main-card { 
-            background: var(--card-bg); border: 1px solid #333; 
-            padding: 25px; border-radius: 20px; width: 100%; 
-            max-width: 420px; position: relative; 
+            background: var(--card-bg); border: 1px solid #333; padding: 25px; 
+            border-radius: 20px; width: 100%; max-width: 420px; position: relative; 
             box-shadow: 0 20px 40px rgba(0,0,0,0.8);
         }
         .user-tag { 
-            position: absolute; top: -10px; right: 20px; 
-            background: var(--accent); color: black; 
-            font-size: 10px; padding: 2px 12px; border-radius: 10px; font-weight: bold;
-        }
-
-        .counter { 
-            font-size: 0.7rem; color: var(--accent); 
-            background: rgba(212,175,55,0.1); padding: 5px 12px; 
-            border-radius: 20px; display: inline-block; margin-top: 8px;
-            border: 1px solid rgba(212,175,55,0.2);
+            position: absolute; top: -10px; right: 20px; background: var(--accent); 
+            color: black; font-size: 10px; padding: 2px 12px; border-radius: 10px; font-weight: bold;
         }
 
         .section-title { 
-            font-size: 0.75rem; color: var(--accent); 
-            text-transform: uppercase; margin-bottom: 15px; 
-            letter-spacing: 1.5px; display: block; border-bottom: 1px solid #222; padding-bottom: 5px; 
+            font-size: 0.75rem; color: var(--accent); text-transform: uppercase; 
+            margin-top: 20px; display: block; border-bottom: 1px solid #222; padding-bottom: 5px;
         }
         input { 
-            width: 100%; padding: 14px; margin-bottom: 12px; 
-            background: #1a1a1a; border: 1px solid #444; 
-            color: white; border-radius: 10px; box-sizing: border-box; 
+            width: 100%; padding: 14px; margin: 12px 0; background: #1a1a1a; 
+            border: 1px solid #444; color: white; border-radius: 10px; box-sizing: border-box; outline: none;
         }
+        input:focus { border-color: var(--accent); }
 
         .btn-execute { 
-            width: 100%; padding: 14px; 
-            background: linear-gradient(135deg, var(--primary), #2c527a); 
-            color: white; border: none; border-radius: 10px; 
-            cursor: pointer; font-weight: bold; text-transform: uppercase;
+            width: 100%; padding: 14px; background: linear-gradient(135deg, var(--primary), #2c527a); 
+            color: white; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; text-transform: uppercase;
         }
 
         .result-box { 
-            margin-top: 20px; border: 2px solid #333; 
-            border-radius: 12px; padding: 15px; display: none; 
-            background: rgba(255,255,255,0.02); animation: fadeIn 0.5s ease;
+            margin-top: 20px; border: 2px solid #333; border-radius: 12px; padding: 15px; 
+            display: none; background: rgba(255,255,255,0.02); animation: fadeIn 0.5s ease;
         }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        .badge { font-size: 1rem; font-weight: bold; margin-bottom: 12px; }
-        .confidence-meter { font-size: 0.75rem; opacity: 0.8; margin-top: 4px; }
-        .action-info { background: rgba(0,0,0,0.4); padding: 12px; border-radius: 8px; border-left: 4px solid var(--accent); }
-        
-        .btn-whatsapp { 
-            width: 100%; padding: 12px; background: var(--wa-green); 
-            color: white; border: none; border-radius: 8px; 
-            margin-top: 15px; font-weight: bold; display: flex; 
-            align-items: center; justify-content: center; gap: 8px; 
-            cursor: pointer; text-decoration: none; 
+        .yappy-card { 
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            margin-top: 20px; text-decoration: none; color: var(--yappy-blue); 
+            font-size: 11px; font-weight: bold; border: 1px dashed var(--yappy-blue); 
+            padding: 12px; border-radius: 12px; background: rgba(0, 161, 255, 0.05);
         }
 
         .footer { text-align: center; font-size: 9px; color: var(--accent); margin-top: 25px; opacity: 0.8; }
@@ -99,46 +67,38 @@
 <body>
 
     <nav class="trinity-nav">
-        <a href="https://developer.x.com/en/portal/dashboard" class="nav-item">
-            <span>𝕏</span><span class="nav-label">ATRIO (DEV)</span>
-        </a>
-        <a href="https://wa.me/" class="nav-item">
-            <span>🎚️</span><span class="nav-label">SANTO (META)</span>
-        </a>
-        <a href="#" class="nav-item" style="opacity: 0.4;">
-            <span>✨</span><span class="nav-label">SANTÍSIMO</span>
-        </a>
+        <a href="https://thesteef21.github.io/Lapizasuli/" class="nav-item"><span>🏠</span><br>MISIÓN PRINCIPAL</a>
+        <a href="https://developer.x.com/" class="nav-item"><span>𝕏</span><br>ATRIO (DEV)</a>
+        <a href="https://wa.me/50769362166" class="nav-item"><span>🎚️</span><br>SANTO (META)</a>
     </nav>
 
     <main class="main-card">
-        <span class="user-tag">DEV: STEVEN GÓMEZ - 8-901-2251</span>
+        <span class="user-tag">DEV: STEVEN GÓMEZ "DIOR" - @StevenDiorOficial de la SADV41</span>
         
-        <header style="text-align: center; margin-bottom: 20px;">
-            <h2 style="color: var(--accent); margin: 0; letter-spacing: 2px;">SADV41 CONSOLE</h2>
-            <div id="clickCounter" class="counter">🛡️ Clics ahorrados: 0</div>
+        <header style="text-align: center; margin-bottom: 15px;">
+            <h2 style="color: var(--accent); margin: 0; letter-spacing: 2px; font-size: 1.5rem;">SADV41 SUPREME</h2>
+            <div id="clickCounter" style="font-size: 0.7rem; color: var(--accent); margin-top: 5px;">🛡️ Clics ahorrados: 0</div>
         </header>
 
         <section>
-            <span class="section-title">Verificador de Integridad de Noticias</span>
-            <input type="text" id="newsLink" placeholder="Pega el link de la noticia o red social aquí...">
-            <button class="btn-execute" onclick="runProtocol()">Ejecutar Protocolo SADV41</button>
+            <span class="section-title">Analizador Global e Integridad</span>
+            <input type="text" id="newsLink" placeholder="Pega el link (Google News, X, Medios, etc.)">
+            <button class="btn-execute" onclick="runProtocol()">Ejecutar Verificación Maestro</button>
         </section>
 
         <div id="resultArea" class="result-box">
-            <div id="typeBadge" class="badge"></div>
-            <div id="integrityStatus" class="badge" style="border-top: 1px solid #333; padding-top: 10px;"></div>
-            <div class="action-info">
-                <small style="color: #888; text-transform: uppercase; font-size: 0.65rem;">Instrucción de Misión:</small>
-                <p id="instructionText" style="margin: 5px 0 0 0; font-size: 0.85rem; line-height: 1.4;"></p>
-            </div>
-            <button class="btn-whatsapp" onclick="sendToWhatsApp()">
-                <span>📲</span> COMPARTIR REPORTE VERIFICADO
-            </button>
+            <div id="typeBadge" style="font-size: 0.9rem; font-weight: bold; margin-bottom: 8px;"></div>
+            <div id="integrityStatus" style="font-weight: bold; margin-bottom: 10px; border-top: 1px solid #333; padding-top: 10px;"></div>
+            <div id="instructionText" style="font-size: 0.85rem; line-height: 1.4; color: #ccc;"></div>
+            <button class="btn-execute" style="background: var(--wa-green); margin-top: 15px;" onclick="sendToWhatsApp()">📲 COMPARTIR REPORTE</button>
         </div>
 
+        <a href="https://yappypa.page.link/Zi7X?hash=rjYRsJ8Yz0hGBKWXnNKRpeCr5yZZkbjbgkxGCAZdd/nmXoS0X8s5ntvwHrGm+7HT" class="yappy-card">
+            <span>⚡</span> DONAR APOYO A LA MISIÓN (6936-2166)
+        </a>
+
         <footer class="footer">
-            SADV41 ECOSYSTEM UNIFIED<br>
-            SHIRLEY DAYAN LOHANNIZ 🎚️
+            SADV41 ECOSYSTEM UNIFIED | SHIRLEY DAYAN LOHANNIZ 🎚️
         </footer>
     </main>
 
@@ -146,71 +106,62 @@
         let totalClicks = localStorage.getItem('sadv_clicks') || 0;
         document.getElementById('clickCounter').innerText = `🛡️ Clics ahorrados: ${totalClicks}`;
 
-        async function verifySource(url) {
-            const officialSources = ["prensa.com", "telemetro.com", "tvn-2.com", "midiario.com", "critica.com.pa"];
-            let domain = "";
-            try {
-                domain = new URL(url).hostname.replace('www.', '');
-            } catch(e) { return { score: 0, status: "URL INVÁLIDA" }; }
+        async function verifyHybridSource(url) {
+            const trustedGlobal = ["laestrella.com.pa", "prensa.com", "nytimes.com", "reuters.com", "apnews.com", "dw.com", "telemetro.com", "tvn-2.com"];
+            const localKeywords = ["arraijan", "burunga", "panamaoeste", "alcaldesa", "municipio"];
             
-            let trustScore = 0;
-            let reportStatus = "VERIFICANDO...";
+            let domain = "";
+            try { domain = new URL(url).hostname.toLowerCase(); } catch(e) { return { score: 0, status: "URL INVÁLIDA" }; }
+            
+            let score = 35;
+            let status = "FUENTE NO VERIFICADA / CAUTELA";
 
-            // 1. Filtro de Autoridad Periodística
-            if (officialSources.some(s => domain.includes(s))) {
-                trustScore = 95;
-                reportStatus = "FUENTE PERIODÍSTICA RECONOCIDA";
-            } else {
-                // 2. Triangulación por Coherencia (Hashtags/Contexto)
-                const keywords = ["arraijan", "burunga", "panamaoeste", "alcaldesa", "municipio"];
-                const urlLower = url.toLowerCase();
-                const matches = keywords.filter(k => urlLower.includes(k)).length;
-                
+            // 1. Verificación de Autoridad (Global/Local)
+            if (trustedGlobal.some(t => domain.includes(t))) {
+                score = 98;
+                status = "FUENTE DE ALTA INTEGRIDAD VERIFICADA";
+            } 
+            // 2. Verificación Agregador Google
+            else if (url.includes("google.com/news")) {
+                score = 85;
+                status = "AGREGADOR DE NOTICIAS RECONOCIDO";
+            }
+            // 3. Triangulación Comunitaria
+            else {
+                const matches = localKeywords.filter(k => url.toLowerCase().includes(k)).length;
                 if (matches >= 1) {
-                    trustScore = 65;
-                    reportStatus = "CONTENIDO COMUNITARIO COHERENTE";
-                } else {
-                    trustScore = 35;
-                    reportStatus = "FUENTE NO VERIFICADA - POSIBLE BULO";
+                    score = 65;
+                    status = "CONTENIDO COMUNITARIO COHERENTE";
                 }
             }
-            return { score: trustScore, status: reportStatus };
+
+            return { score, status };
         }
 
         async function runProtocol() {
-            const url = document.getElementById('newsLink').value;
+            const urlInput = document.getElementById('newsLink').value;
+            if (!urlInput) return alert("Ingresa un link");
+
+            const verification = await verifyHybridSource(urlInput);
             const resultBox = document.getElementById('resultArea');
-            if (!url) return alert("Se requiere una URL para el protocolo.");
+            resultBox.style.display = "block";
 
-            // 1. Detección de Tipo de Contenido
-            let type = "NOTICIA / TEXTO"; 
-            let icon = "📄"; 
-            let baseInstruction = "Realiza captura para compartir nativamente y evitar clics externos.";
-
-            if (url.includes("video") || url.includes("reel") || url.includes("watch") || url.includes("fb.watch") || url.includes("tiktok")) {
-                type = "VIDEO DETECTADO"; 
-                icon = "🎬"; 
-                baseInstruction = "ALTA PRIORIDAD: Video detectado. Descarga el archivo para asegurar visualización directa en Burunga.";
+            // Detección de multimedia
+            let icon = "📄"; let type = "REPORTE DE TEXTO";
+            if (urlInput.includes("video") || urlInput.includes("reel") || urlInput.includes("watch") || urlInput.includes("tiktok")) {
+                icon = "🎬"; type = "CONTENIDO MULTIMEDIA";
             }
 
-            // 2. Ejecutar Verificación Profunda
-            const verification = await verifySource(url);
-            let vColor = verification.score > 70 ? "#2ecc71" : (verification.score > 50 ? "#f1c40f" : "#e74c3c");
+            let color = verification.score > 80 ? "#2ecc71" : (verification.score > 50 ? "#f1c40f" : "#e74c3c");
+            resultBox.style.borderColor = color;
 
-            // 3. Renderizar Resultados
-            resultBox.style.display = "block";
-            resultBox.style.borderColor = vColor;
-            
             document.getElementById('typeBadge').innerHTML = `${icon} ${type}`;
-            document.getElementById('integrityStatus').innerHTML = `
-                <span style="color:${vColor}">🛡️ ${verification.status}</span>
-                <div class="confidence-meter">Nivel de Confianza: ${verification.score}%</div>
-            `;
+            document.getElementById('integrityStatus').innerHTML = `<span style="color:${color}">🛡️ ${verification.status}</span><br><small>Nivel de Confianza: ${verification.score}%</small>`;
             
-            document.getElementById('instructionText').innerText = 
-                verification.score < 50 ? "ALERTA: Proceder con cautela. No hay respaldo oficial ni hashtags vinculados." : baseInstruction;
+            document.getElementById('instructionText').innerText = verification.score < 50 
+                ? "ALERTA: Sin respaldo oficial ni coherencia comunitaria detectada. Proceder con extrema reserva."
+                : "Protocolo SADV41 validado. El contenido es apto para difusión bajo los estándares del desarrollador maestro.";
 
-            // 4. Actualizar Contador
             totalClicks++;
             localStorage.setItem('sadv_clicks', totalClicks);
             document.getElementById('clickCounter').innerText = `🛡️ Clics ahorrados: ${totalClicks}`;
@@ -218,8 +169,7 @@
 
         function sendToWhatsApp() {
             const status = document.getElementById('integrityStatus').innerText;
-            const instruction = document.getElementById('instructionText').innerText;
-            const report = `🛡️ *SADV41 INFORMA (VERIFICADO)*\n\n📊 *Estado:* ${status}\n⚠️ *Acción:* ${instruction}\n\n🎚️ _Misión Burunga_`;
+            const report = `🛡️ *SADV41 SUPREME INFORMA*\n\n✅ *Estado:* ${status}\n\n🎚️ _Misión Burunga_`;
             window.open(`https://wa.me/?text=${encodeURIComponent(report)}`, '_blank');
         }
     </script>
