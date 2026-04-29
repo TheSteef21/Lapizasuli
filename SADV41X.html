@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SADV41 Supreme Console - Steven Dior</title>
+    <title>SADV41 Supreme Console V2 - Search Engine</title>
     <style>
         :root { 
             --primary: #1a3a5a; --accent: #d4af37; --bg: #050505; 
@@ -52,6 +52,15 @@
             margin-top: 20px; border: 2px solid #333; border-radius: 12px; padding: 15px; 
             display: none; background: rgba(255,255,255,0.02); animation: fadeIn 0.5s ease;
         }
+        
+        .search-engine-area {
+            margin-top: 15px; padding: 10px; background: rgba(212,175,55,0.05); border-radius: 10px; border: 1px solid #333;
+        }
+        .search-link {
+            display: block; color: var(--yappy-blue); font-size: 0.8rem; margin: 5px 0; text-decoration: none;
+        }
+        .search-link:hover { text-decoration: underline; }
+
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
         .yappy-card { 
@@ -73,23 +82,29 @@
     </nav>
 
     <main class="main-card">
-        <span class="user-tag">DEV: STEVEN GÓMEZ "DIOR" - @StevenDiorOficial de la SADV41</span>
+        <span class="user-tag">DEV: STEVEN GÓMEZ "DIOR" - 8-901-2251</span>
         
         <header style="text-align: center; margin-bottom: 15px;">
-            <h2 style="color: var(--accent); margin: 0; letter-spacing: 2px; font-size: 1.5rem;">SADV41 SUPREME</h2>
+            <h2 style="color: var(--accent); margin: 0; letter-spacing: 2px; font-size: 1.5rem;">SADV41 SUPREME V2</h2>
             <div id="clickCounter" style="font-size: 0.7rem; color: var(--accent); margin-top: 5px;">🛡️ Clics ahorrados: 0</div>
         </header>
 
         <section>
-            <span class="section-title">Analizador Global e Integridad</span>
-            <input type="text" id="newsLink" placeholder="Pega el link (Google News, X, Medios, etc.)">
-            <button class="btn-execute" onclick="runProtocol()">Ejecutar Verificación Maestro</button>
+            <span class="section-title">Motor de Búsqueda y Verificación</span>
+            <input type="text" id="newsLink" placeholder="Pega el link de la noticia aquí...">
+            <button class="btn-execute" onclick="runProtocol()">Sincronizar y Buscar</button>
         </section>
 
         <div id="resultArea" class="result-box">
             <div id="typeBadge" style="font-size: 0.9rem; font-weight: bold; margin-bottom: 8px;"></div>
             <div id="integrityStatus" style="font-weight: bold; margin-bottom: 10px; border-top: 1px solid #333; padding-top: 10px;"></div>
-            <div id="instructionText" style="font-size: 0.85rem; line-height: 1.4; color: #ccc;"></div>
+            
+            <div class="search-engine-area">
+                <small style="color:var(--accent); font-weight:bold; display:block; margin-bottom:5px;">🔍 FUENTES CRUZADAS (MULTI-SEARCH):</small>
+                <div id="searchLinks"></div>
+            </div>
+
+            <div id="instructionText" style="font-size: 0.85rem; line-height: 1.4; color: #ccc; margin-top:10px;"></div>
             <button class="btn-execute" style="background: var(--wa-green); margin-top: 15px;" onclick="sendToWhatsApp()">📲 COMPARTIR REPORTE</button>
         </div>
 
@@ -107,33 +122,30 @@
         document.getElementById('clickCounter').innerText = `🛡️ Clics ahorrados: ${totalClicks}`;
 
         async function verifyHybridSource(url) {
-            const trustedGlobal = ["laestrella.com.pa", "prensa.com", "nytimes.com", "reuters.com", "apnews.com", "dw.com", "telemetro.com", "tvn-2.com"];
-            const localKeywords = ["arraijan", "burunga", "panamaoeste", "alcaldesa", "municipio"];
+            const trustedGlobal = ["laestrella.com.pa", "prensa.com", "nytimes.com", "reuters.com", "apnews.com", "dw.com", "telemetro.com", "tvn-2.com", "elmundo.es", "bbc.com"];
+            const localKeywords = ["arraijan", "burunga", "panamaoeste", "alcaldesa", "municipio", "panama"];
             
             let domain = "";
             try { domain = new URL(url).hostname.toLowerCase(); } catch(e) { return { score: 0, status: "URL INVÁLIDA" }; }
             
-            let score = 35;
-            let status = "FUENTE NO VERIFICADA / CAUTELA";
+            // ESCALA VARIABLE DINÁMICA
+            let score = 20; 
+            let status = "BAJA INTEGRIDAD / ANALIZANDO";
 
-            // 1. Verificación de Autoridad (Global/Local)
-            if (trustedGlobal.some(t => domain.includes(t))) {
-                score = 98;
-                status = "FUENTE DE ALTA INTEGRIDAD VERIFICADA";
-            } 
-            // 2. Verificación Agregador Google
-            else if (url.includes("google.com/news")) {
-                score = 85;
-                status = "AGREGADOR DE NOTICIAS RECONOCIDO";
-            }
-            // 3. Triangulación Comunitaria
-            else {
-                const matches = localKeywords.filter(k => url.toLowerCase().includes(k)).length;
-                if (matches >= 1) {
-                    score = 65;
-                    status = "CONTENIDO COMUNITARIO COHERENTE";
-                }
-            }
+            // Bonus por fuente oficial
+            if (trustedGlobal.some(t => domain.includes(t))) score += 75; 
+            else if (url.includes("google.com/news")) score += 65;
+            else if (url.includes("gov.pa")) score += 78;
+
+            // Bonus por palabras clave en URL (triangulación comunitaria)
+            const keywordMatches = localKeywords.filter(k => url.toLowerCase().includes(k)).length;
+            score += (keywordMatches * 10);
+
+            // Cap al 100%
+            if (score > 100) score = 100;
+            if (score > 80) status = "FUENTE DE ALTA INTEGRIDAD VERIFICADA";
+            else if (score > 50) status = "CONTENIDO COHERENTE / REVISIÓN SUGERIDA";
+            else status = "FUENTE NO VERIFICADA / RIESGO DE BULO";
 
             return { score, status };
         }
@@ -145,6 +157,18 @@
             const verification = await verifyHybridSource(urlInput);
             const resultBox = document.getElementById('resultArea');
             resultBox.style.display = "block";
+
+            // GENERADOR DE MOTOR DE BÚSQUEDA (Extracción de términos)
+            const urlObj = new URL(urlInput);
+            const pathTerms = urlObj.pathname.split(/[-_/.]/).filter(t => t.length > 3).slice(0, 5).join(" ");
+            const searchQuery = encodeURIComponent(pathTerms);
+            
+            const searchHtml = `
+                <a href="https://www.google.com/search?q=${searchQuery}" target="_blank" class="search-link">🌐 Ver en Google Search</a>
+                <a href="https://news.google.com/search?q=${searchQuery}" target="_blank" class="search-link">📰 Ver en Google Noticias</a>
+                <a href="https://twitter.com/search?q=${searchQuery}" target="_blank" class="search-link">🐦 Ver tendencia en X (Twitter)</a>
+            `;
+            document.getElementById('searchLinks').innerHTML = searchHtml;
 
             // Detección de multimedia
             let icon = "📄"; let type = "REPORTE DE TEXTO";
@@ -159,8 +183,8 @@
             document.getElementById('integrityStatus').innerHTML = `<span style="color:${color}">🛡️ ${verification.status}</span><br><small>Nivel de Confianza: ${verification.score}%</small>`;
             
             document.getElementById('instructionText').innerText = verification.score < 50 
-                ? "ALERTA: Sin respaldo oficial ni coherencia comunitaria detectada. Proceder con extrema reserva."
-                : "Protocolo SADV41 validado. El contenido es apto para difusión bajo los estándares del desarrollador maestro.";
+                ? "ALERTA: El sistema no detecta respaldo suficiente. Usa los enlaces de búsqueda arriba para contrastar."
+                : "Protocolo SADV41 exitoso. Se recomienda usar fuentes cruzadas para máxima precisión antes de difundir.";
 
             totalClicks++;
             localStorage.setItem('sadv_clicks', totalClicks);
@@ -169,7 +193,7 @@
 
         function sendToWhatsApp() {
             const status = document.getElementById('integrityStatus').innerText;
-            const report = `🛡️ *SADV41 SUPREME INFORMA*\n\n✅ *Estado:* ${status}\n\n🎚️ _Misión Burunga_`;
+            const report = `🛡️ *SADV41 SUPREME INFORMA*\n\n✅ *Integridad:* ${status}\n\n🎚️ _Misión Burunga_`;
             window.open(`https://wa.me/?text=${encodeURIComponent(report)}`, '_blank');
         }
     </script>
