@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -10,7 +9,7 @@
             --primary: #1a3a5a; --accent: #d4af37; --bg: #050505; 
             --card-bg: #111; --success: #2ecc71; --warning: #f1c40f; 
             --danger: #e74c3c; --wa-green: #25D366; --yappy-blue: #00a1ff;
-            --spotify-green: #1DB954; --ai-purple: #8a2be2;
+            --spotify-green: #1DB954; --ai-purple: #8a2be2; --ig-pink: #E1306C;
         }
         body { 
             font-family: 'Segoe UI', sans-serif; background: var(--bg); color: white; 
@@ -18,7 +17,6 @@
             min-height: 100vh; box-sizing: border-box;
         }
         
-        /* Navegación Trinity Expandida */
         .trinity-nav { 
             width: 100%; max-width: 480px; display: flex; justify-content: space-around; 
             margin-bottom: 20px; background: var(--card-bg); padding: 15px; border-radius: 30px; 
@@ -58,9 +56,7 @@
             transition: transform 0.2s, filter 0.3s; letter-spacing: 1px;
         }
         .btn-execute:hover { filter: brightness(1.1); transform: translateY(-1px); }
-        .btn-execute:active { transform: translateY(1px); }
 
-        /* Módulos de Control y Resultados */
         .control-box { 
             margin-top: 20px; border: 1px solid #333; border-radius: 12px; padding: 15px; 
             background: rgba(255,255,255,0.02); animation: fadeIn 0.5s ease;
@@ -71,11 +67,16 @@
         }
         .search-link {
             display: block; color: var(--yappy-blue); font-size: 0.8rem; margin: 6px 0; text-decoration: none;
-            transition: color 0.3s;
         }
         .search-link:hover { text-decoration: underline; color: var(--accent); }
 
-        .spotify-frame { width: 100%; border-radius: 12px; margin-top: 15px; border: none; box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
+        .channel-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px;
+        }
+        .channel-btn {
+            padding: 10px; border-radius: 10px; text-decoration: none; color: white;
+            font-size: 10px; font-weight: bold; text-align: center; display: flex; align-items: center; justify-content: center; gap: 5px;
+        }
 
         .upload-area {
             border: 2px dashed #444; padding: 25px; text-align: center; border-radius: 12px;
@@ -90,7 +91,6 @@
         }
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
         .footer { text-align: center; font-size: 9px; color: var(--accent); margin-top: 25px; opacity: 0.8; line-height: 1.4; }
     </style>
 </head>
@@ -108,28 +108,25 @@
         
         <header style="text-align: center; margin-bottom: 20px;">
             <h2 style="color: var(--accent); margin: 0; letter-spacing: 2px; font-size: 1.5rem;">SADV41 CENTER V3 SUPREME</h2>
-            <div id="clickCounter" style="font-size: 0.7rem; color: var(--accent); margin-top: 5px;">🛡️ Clics ahorrados: 0</div>
+            <div id="clickCounter" style="font-size: 0.7rem; color: var(--accent); margin-top: 5px;">🛡️ Clics ahorrados: 13</div>
             <div class="dgi-tag">Contribuyente No Inscrito DGI: 8-901-2251 DV04</div>
         </header>
 
         <section>
-            <span class="section-title">Análisis Global e Integridad V2 Search</span>
+            <span class="section-title">Análisis e Integridad V2 Search</span>
             <input type="text" id="newsLink" placeholder="Pega el link de la noticia aquí...">
             <button class="btn-execute" onclick="runProtocol()">Sincronizar, Verificar y Buscar</button>
             
             <div id="resultArea" class="control-box" style="display: none;">
                 <div id="typeBadge" style="font-size: 0.9rem; font-weight: bold; margin-bottom: 8px;"></div>
                 <div id="integrityStatus" style="font-weight: bold; margin-bottom: 10px; border-top: 1px solid #333; padding-top: 10px;"></div>
-                
                 <div class="search-engine-area">
-                    <small style="color:var(--accent); font-weight:bold; display:block; margin-bottom:5px; letter-spacing:0.5px;">🔍 FUENTES CRUZADAS (MULTI-SEARCH):</small>
+                    <small style="color:var(--accent); font-weight:bold; display:block; margin-bottom:5px;">🔍 FUENTES CRUZADAS (MULTI-SEARCH):</small>
                     <div id="searchLinks"></div>
                 </div>
-
                 <div id="instructionText" style="font-size: 0.85rem; line-height: 1.4; color: #ccc; margin-top:12px;"></div>
-                
                 <div style="display: flex; gap: 10px; margin-top: 15px;">
-                    <button class="btn-execute" style="background: var(--wa-green); flex: 1;" onclick="sendToWhatsApp()">📲 REPORTE WA</button>
+                    <button class="btn-execute" style="background: var(--wa-green); flex: 1;" onclick="sendToWhatsAppReport()">📲 REPORTE WA</button>
                     <button class="btn-execute" style="background: var(--ai-purple); flex: 1;" onclick="sendToAI()">🧠 ENVIAR A AI</button>
                 </div>
             </div>
@@ -137,21 +134,33 @@
 
         <section>
             <span class="section-title">SADV41 Radio & Spotify</span>
-            <iframe src="https://open.spotify.com/embed/user/0" class="spotify-frame" height="80" allowtransparency="true" allow="encrypted-media"></iframe>
-            <a href="https://open.spotify.com/artist/5imHnTjivt5qDGTeV2gDMT" target="_blank" style="display:block; text-align:center; font-size:10px; color:var(--spotify-green); text-decoration:none; margin-top:8px; font-weight:bold;">🔊 ABRIR REPRODUCTOR EXTERNO</a>
+            <div style="background: #181818; padding: 15px; border-radius: 12px; text-align: center; border: 1px solid #282828;">
+                <span style="color: var(--spotify-green); font-weight: bold; font-size: 14px;">SADV41 STREAM ACTIVE 🎧</span>
+                <p style="font-size: 10px; color: #aaa; margin: 5px 0;">Sincronizado con el usuario maestro</p>
+            </div>
+            <a href="https://open.spotify.com/artist/5imHnTjivt5qDGTeV2gDMT" target="_blank" style="display:block; text-align:center; font-size:10px; color:var(--spotify-green); text-decoration:none; margin-top:10px; font-weight:bold;">🟢 ABRIR REPRODUCTOR COMPLETO</a>
         </section>
 
         <section>
-            <span class="section-title">Centro de Desarrollo (Archivos)</span>
+            <span class="section-title">Canales de Difusión Oficial</span>
+            <div class="channel-grid">
+                <a href="https://www.instagram.com/channel/AbYkxpeEwOYHCA9J/?igsh=MWk2OXFidG9tOTBmZQ==" class="channel-btn" style="background: var(--ig-pink);">📸 INSTAGRAM</a>
+                <a href="https://whatsapp.com/channel/0029VbBIKAC47XeC0aGdlO3R" class="channel-btn" style="background: var(--wa-green);">💬 WHATSAPP</a>
+            </div>
+        </section>
+
+        <section>
+            <span class="section-title">Gestión de Archivos y Control</span>
             <div class="upload-area" onclick="document.getElementById('fileInput').click()">
                 <span style="font-size: 24px;">📂</span><br>
                 <small style="display:block; margin-top:5px; color:#aaa;">Subir texto o imágenes para análisis</small>
                 <input type="file" id="fileInput" style="display: none;" multiple onchange="handleFiles(this.files)">
             </div>
-            <div id="fileList" style="font-size: 10px; margin-top: 12px; color: #888; line-height: 1.3;"></div>
+            <button class="btn-execute" style="background: var(--wa-green); margin-top: 15px;" onclick="sendFileToControl()">🚀 ENVIAR A CENTRO DE CONTROL</button>
+            <div id="fileList" style="font-size: 10px; margin-top: 12px; color: #888;"></div>
         </section>
 
-        <a href="https://yappypa.page.link/Zi7X?hash=rjYRsJ8Yz0hGBKWXnNKRpeCr5yZZkbjbgkxGCAZdd/nmXoS0X8s5ntvwHrGm+7HT" class="yappy-card" style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 25px; text-decoration: none; color: var(--yappy-blue); font-size: 11px; font-weight: bold; border: 1px dashed var(--yappy-blue); padding: 14px; border-radius: 12px; background: rgba(0, 161, 255, 0.03); transition: background 0.3s;">
+        <a href="https://yappypa.page.link/Zi7X?hash=rjYRsJ8Yz0hGBKWXnNKRpeCr5yZZkbjbgkxGCAZdd/nmXoS0X8s5ntvwHrGm+7HT" class="yappy-card" style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 25px; text-decoration: none; color: var(--yappy-blue); font-size: 11px; font-weight: bold; border: 1px dashed var(--yappy-blue); padding: 14px; border-radius: 12px; background: rgba(0, 161, 255, 0.03);">
             <span>⚡</span> APOYO YAPPY (6936-2166)
         </a>
 
@@ -162,118 +171,64 @@
     </main>
 
     <script>
-        let totalClicks = localStorage.getItem('sadv_clicks') || 0;
+        let totalClicks = parseInt(localStorage.getItem('sadv_clicks') || 13);
         document.getElementById('clickCounter').innerText = `🛡️ Clics ahorrados: ${totalClicks}`;
 
-        // Lógica de Verificación Dinámica y Escala Variable V2
         async function verifyHybridSource(url) {
             const trustedGlobal = ["laestrella.com.pa", "prensa.com", "nytimes.com", "reuters.com", "apnews.com", "dw.com", "telemetro.com", "tvn-2.com", "elmundo.es", "bbc.com"];
             const localKeywords = ["arraijan", "burunga", "panamaoeste", "alcaldesa", "municipio", "panama"];
-            
             let domain = "";
             try { domain = new URL(url).hostname.toLowerCase(); } catch(e) { return { score: 0, status: "URL INVÁLIDA" }; }
-            
-            // ESCALA VARIABLE DINÁMICA (Puntaje base inicial 20)
             let score = 20; 
-            let status = "BAJA INTEGRIDAD / ANALIZANDO";
-
-            // Bonus por fuente oficial reconocidas
             if (trustedGlobal.some(t => domain.includes(t))) score += 75; 
             else if (url.includes("google.com/news")) score += 65;
             else if (url.includes("gov.pa")) score += 78;
-
-            // Bonus por palabras clave en URL (triangulación comunitaria)
             const keywordMatches = localKeywords.filter(k => url.toLowerCase().includes(k)).length;
             score += (keywordMatches * 10);
-
-            // Cap al 100% y determinación de estado
             if (score > 100) score = 100;
-            if (score > 80) status = "FUENTE DE ALTA INTEGRIDAD VERIFICADA";
-            else if (score > 50) status = "CONTENIDO COHERENTE / REVISIÓN SUGERIDA";
-            else status = "FUENTE NO VERIFICADA / RIESGO DE BULO";
-
+            let status = score > 80 ? "FUENTE DE ALTA INTEGRIDAD" : (score > 50 ? "CONTENIDO COHERENTE" : "FUENTE NO VERIFICADA");
             return { score, status };
         }
 
         async function runProtocol() {
             const urlInput = document.getElementById('newsLink').value;
             if (!urlInput) return alert("Ingresa un link");
-
+            const verification = await verifyHybridSource(urlInput);
             const resultBox = document.getElementById('resultArea');
             resultBox.style.display = "block";
-
-            // 1. Ejecutar Verificación Dinámica Variable
-            const verification = await verifyHybridSource(urlInput);
-
-            // 2. GENERADOR DE MOTOR DE BÚSQUEDA (Multi-Search Cruzado)
             let pathTerms = "noticia panama";
             try {
                 const urlObj = new URL(urlInput);
                 pathTerms = urlObj.pathname.split(/[-_/.]/).filter(t => t.length > 3).slice(0, 5).join(" ");
-                if(!pathTerms) pathTerms = urlObj.hostname.split('.')[0] + " noticia";
-            } catch(e) { /* Usar términos por defecto */ }
-            
+            } catch(e) {}
             const searchQuery = encodeURIComponent(pathTerms);
-            
-            const searchHtml = `
-                <a href="https://www.google.com/search?q=${searchQuery}" target="_blank" class="search-link">🌐 Ver en Google Search</a>
-                <a href="https://news.google.com/search?q=${searchQuery}" target="_blank" class="search-link">📰 Ver en Google Noticias</a>
-                <a href="https://twitter.com/search?q=${searchQuery}" target="_blank" class="search-link">🐦 Ver tendencia en X (Twitter)</a>
-            `;
-            document.getElementById('searchLinks').innerHTML = searchHtml;
-
-            // 3. Detección de tipo de multimedia
-            let icon = "📄"; let type = "REPORTE DE TEXTO";
-            if (urlInput.includes("video") || urlInput.includes("reel") || urlInput.includes("watch") || urlInput.includes("tiktok")) {
-                icon = "🎬"; type = "CONTENIDO MULTIMEDIA";
-            }
-
-            // 4. Renderizado de Resultados Dinámicos
+            document.getElementById('searchLinks').innerHTML = `
+                <a href="https://www.google.com/search?q=${searchQuery}" target="_blank" class="search-link">🌐 Google Search</a>
+                <a href="https://news.google.com/search?q=${searchQuery}" target="_blank" class="search-link">📰 Google Noticias</a>
+                <a href="https://twitter.com/search?q=${searchQuery}" target="_blank" class="search-link">🐦 X (Twitter)</a>`;
+            let icon = urlInput.includes("video") || urlInput.includes("tiktok") ? "🎬" : "📄";
             let color = verification.score > 80 ? "#2ecc71" : (verification.score > 50 ? "#f1c40f" : "#e74c3c");
             resultBox.style.borderColor = color;
-
-            document.getElementById('typeBadge').innerHTML = `${icon} ${type}`;
-            document.getElementById('integrityStatus').innerHTML = `<span style="color:${color}">🛡️ ${verification.status}</span><br><small>Nivel de Confianza: ${verification.score}%</small>`;
-            
-            document.getElementById('instructionText').innerText = verification.score < 50 
-                ? "ALERTA: El sistema no detecta respaldo suficiente. Usa los enlaces de fuentes cruzadas arriba para contrastar la información."
-                : "Protocolo SADV41 exitoso. Se recomienda usar las herramientas Multi-Search para máxima precisión antes de difundir.";
-
-            // 5. Actualización del Contador
+            document.getElementById('integrityStatus').innerHTML = `<span style="color:${color}">🛡️ ${verification.status}</span><br><small>Confianza: ${verification.score}%</small>`;
+            document.getElementById('instructionText').innerText = verification.score < 50 ? "ALERTA: Sin respaldo suficiente. Contrastar información." : "Protocolo SADV41 validado.";
             totalClicks++;
             localStorage.setItem('sadv_clicks', totalClicks);
             document.getElementById('clickCounter').innerText = `🛡️ Clics ahorrados: ${totalClicks}`;
         }
 
-        // Redirección directa al Ecosistema AI con datos
-        function sendToAI() {
-            const link = document.getElementById('newsLink').value;
-            if(!link) return alert("Pega un link primero");
-            window.open(`https://thesteef21.github.io/Lapizasuli/SADV41AI.html?data=${encodeURIComponent(link)}`, '_blank');
-        }
-
-        // Gestión visual de archivos para cola
         function handleFiles(files) {
             const list = document.getElementById('fileList');
-            if(files.length === 0) {
-                list.innerHTML = "";
-                return;
-            }
-            list.innerHTML = "<strong>Archivos en cola para análisis AI:</strong><br>";
-            for (let i = 0; i < files.length; i++) {
-                list.innerHTML += `- ${files[i].name} (${Math.round(files[i].size/1024)} KB)<br>`;
-            }
+            list.innerHTML = "<strong>Archivos en cola:</strong><br>";
+            for (let i = 0; i < files.length; i++) { list.innerHTML += `- ${files[i].name}<br>`; }
         }
 
-        function sendToWhatsApp() {
+        function sendFileToControl() { window.open("https://wa.me/50769362166?text=" + encodeURIComponent("🚀 *SADV41:* Transferencia de archivos analizados."), '_blank'); }
+        function sendToAI() { window.open(`https://thesteef21.github.io/Lapizasuli/SADV41AI.html?data=${encodeURIComponent(document.getElementById('newsLink').value)}`, '_blank'); }
+        function sendToWhatsAppReport() {
             const statusText = document.getElementById('integrityStatus').innerText;
-            const instruction = document.getElementById('instructionText').innerText;
-            const link = document.getElementById('newsLink').value;
-            const report = `🛡️ *SADV41 SUPREME REPORT*\n\n✅ *Integridad:* ${statusText}\n🔗 *Link:* ${link}\n⚠️ *Guía:* ${instruction}\n\n🎚️ _Misión Burunga_`;
+            const report = `🛡️ *SADV41 SUPREME REPORT*\n\n✅ *Integridad:* ${statusText}\n🔗 *Link:* ${document.getElementById('newsLink').value}\n\n🎚️ _Misión Burunga_`;
             window.open(`https://wa.me/?text=${encodeURIComponent(report)}`, '_blank');
         }
     </script>
 </body>
 </html>
-
-```
