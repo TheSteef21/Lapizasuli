@@ -36,12 +36,30 @@
         .artist-card {
             width: 250px;
             margin: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         .artist-card img {
             width: 100%;
             border-radius: 15px;
             border: 2px solid #d4af37;
             filter: sepia(0.5); /* Toque antiguo */
+            margin-bottom: 10px;
+        }
+        .btn-influence {
+            background-color: #3e2723;
+            color: #d4af37;
+            padding: 8px 15px;
+            border: 1px solid #d4af37;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 0.9em;
+            transition: 0.3s;
+        }
+        .btn-influence:hover {
+            background-color: #d4af37;
+            color: #1a1a1a;
         }
         .video-container {
             margin: 40px 0;
@@ -67,12 +85,12 @@
             background-color: #3e2723;
             color: #d4af37;
         }
-        a {
+        .main-link {
             color: #d4af37;
             text-decoration: none;
             font-weight: bold;
         }
-        a:hover {
+        .main-link:hover {
             text-decoration: underline;
         }
         .lyrics-concept {
@@ -113,17 +131,16 @@
         <div class="tribute-images">
             <div class="artist-card">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/6/6e/Stevie_Wonder_1973.JPG" alt="Stevie Wonder Tribute">
-                <p>Influencia: Stevie Wonder</p>
+                <a href="https://open.spotify.com/artist/7guDJrEfX3qb6FEbdPA5qi?si=e7y11Bp0RLq5RPWN0xxn5A" class="btn-influence" target="_blank">Stevie Wonder</a>
             </div>
             <div class="artist-card">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/a/a2/Ray_Charles_classic_portrait.JPG" alt="Ray Charles Tribute">
-                <p>Influencia: Ray Charles</p>
+                <a href="https://open.spotify.com/artist/1eYhYunlNJlDoQhtYBvPsi?si=WeEoZYGyTBKUCK22WnijsA" class="btn-influence" target="_blank">Ray Charles</a>
             </div>
         </div>
 
         <div class="streaming-section">
             <h3>🎧 Canales Oficiales y Streaming</h3>
-            <p>Accede a la biblioteca completa de éxitos y la radio oficial del artista:</p>
             <table>
                 <thead>
                     <tr>
@@ -136,17 +153,17 @@
                     <tr>
                         <td><strong>Spotify</strong></td>
                         <td>Playlist: Steven "Dior" Gómez y todos sus éxitos</td>
-                        <td><a href="Https://open.spotify.com/playlist/37i9dQZF1E4A7nH5KNziD4?si=gAOaiXXvTG-P9oIzdMr2aA" target="_blank">Escuchar Éxitos</a></td>
+                        <td><a href="Https://open.spotify.com/playlist/37i9dQZF1E4A7nH5KNziD4?si=gAOaiXXvTG-P9oIzdMr2aA" class="main-link" target="_blank">Escuchar Éxitos</a></td>
                     </tr>
                     <tr>
                         <td><strong>Spotify</strong></td>
                         <td>Radio Steven</td>
-                        <td><a href="https://open.spotify.com/playlist/37i9dQZF1E4A7nH5KNziD4?si=-uDAQziMQgaqRPZWun1GRQ&pi=B9s9CGXjRACcr" target="_blank">Sintonizar Radio</a></td>
+                        <td><a href="https://open.spotify.com/playlist/37i9dQZF1E4A7nH5KNziD4?si=-uDAQziMQgaqRPZWun1GRQ&pi=B9s9CGXjRACcr" class="main-link" target="_blank">Sintonizar Radio</a></td>
                     </tr>
                     <tr>
                         <td><strong>Spotify</strong></td>
                         <td>Cuenta Principal</td>
-                        <td><a href="https://open.spotify.com/artist/5imHnTjivt5qDGTeV2gDMT?si=E43kRWiaSNuh1BlG9ddKFw" target="_blank">Perfil Artista</a></td>
+                        <td><a href="https://open.spotify.com/artist/5imHnTjivt5qDGTeV2gDMT?si=E43kRWiaSNuh1BlG9ddKFw" class="main-link" target="_blank">Perfil Artista</a></td>
                     </tr>
                 </tbody>
             </table>
@@ -161,14 +178,13 @@
         <div class="philosophy">
             <h3>🏛️ Estética y Filosofía (SADV41)</h3>
             <ul>
-                <li><strong>Influencias:</strong> El soul, el R&B y la capacidad de resiliencia ante la adversidad global.</li>
-                <li><strong>Origen:</strong> Nacida en el umbral de 2020, consolidando el proyecto <strong>SADV41</strong>.</li>
-                <li><strong>Identidad:</strong> Steven Dior Legacy se proyecta como una obra de introspección y despertar.</li>
+                <li><strong>Influencias:</strong> El soul, el R&B y la capacidad de resiliencia.</li>
+                <li><strong>Origen:</strong> Nacida en el umbral de 2020 (Proyecto SADV41).</li>
+                <li><strong>Identidad:</strong> Obra de introspección y despertar.</li>
             </ul>
         </div>
 
         <h2>SADV41 - Steven Dior Legacy</h2>
-        <p><small>Nota: Coherencia de marca mantenida para <strong>Steven Dior Flow</strong>.</small></p>
     </div>
 
 </body>
