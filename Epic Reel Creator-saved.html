@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EL RONIN DEL ISTMO | Epic Content Concept</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;900&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        epic: {
+                            black: '#0a0a0a',
+                            dark: '#121212',
+                            accent: '#ff003c', // Intense Red
+                            blue: '#00f2ff',   // Electric Blue
+                            gold: '#ffbd39'    // Haki Gold
+                        }
+                    },
+                    fontFamily: {
+                        display: ['Syncopate', 'sans-serif'],
+                        body: ['Outfit', 'sans-serif']
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'glitch': 'glitch 1s linear infinite',
+                    },
+                    keyframes: {
+                        glitch: {
+                            '0%, 100%': { transform: 'translate(0)' },
+                            '33%': { transform: 'translate(-2px, 2px)' },
+                            '66%': { transform: 'translate(2px, -2px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0a0a0a;
+            color: #ffffff;
+            overflow-x: hidden;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1rem;
+        }
+
+        .text-gradient {
+            background: linear-gradient(to right, #ffffff, #888);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .accent-gradient {
+            background: linear-gradient(135deg, #ff003c 0%, #7000ff 100%);
+        }
+
+        .haki-border {
+            position: relative;
+        }
+
+        .haki-border::after {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            background: linear-gradient(45deg, transparent, #ffbd39, transparent);
+            z-index: -1;
+            border-radius: inherit;
+            animation: rotate 4s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .noise-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            opacity: 0.05;
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            z-index: 50;
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <div class="noise-bg"></div>
+
+    <!-- MAIN WRAPPER -->
+    <main class="relative z-10 max-w-6xl mx-auto px-4 py-12 md:py-24">
+        
+        <!-- HEADER SECTION -->
+        <header class="mb-16 text-center lg:text-left flex flex-col lg:flex-row items-center justify-between gap-8">
+            <div class="space-y-4">
+                <span class="inline-block px-4 py-1 bg-epic-accent text-white text-xs font-bold tracking-widest uppercase rounded-full animate-bounce">
+                    New Content Release
+                </span>
+                <h1 class="font-display text-5xl md:text-7xl lg:text-8xl font-bold leading-tight tracking-tighter">
+                    EPIC <br> <span class="text-epic-accent italic">CONCEPT</span>
+                </h1>
+                <p class="text-gray-400 max-w-md text-lg">
+                    Modern Urban Ronin aesthetic fused with Panamanian "Calle" energy. High-stakes visuals.
+                </p>
+            </div>
+            <div class="relative group">
+                <div class="absolute -inset-4 bg-epic-accent opacity-20 blur-2xl group-hover:opacity-40 transition duration-1000"></div>
+                <div class="glass-panel p-6 flex flex-col items-center">
+                    <span class="font-display text-xs text-gray-500 mb-2">VIBE CHECK</span>
+                    <div class="flex gap-2">
+                        <div class="h-12 w-2 bg-epic-blue animate-pulse"></div>
+                        <div class="h-12 w-2 bg-epic-accent animate-pulse" style="animation-delay: 0.2s"></div>
+                        <div class="h-12 w-2 bg-epic-gold animate-pulse" style="animation-delay: 0.4s"></div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- CONTEXT PANEL -->
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+            <!-- Video Topic Card -->
+            <div class="glass-panel p-8 relative overflow-hidden group hover:border-epic-blue transition-colors">
+                <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                    <svg class="w-24 h-24 text-epic-blue" fill="currentColor" viewBox="0 0 24 24"><path d="M21 16.5c0 .38-.21.71-.53.88l-7.97 4.43c-.31.17-.69.17-1 0L3.53 17.38c-.32-.17-.53-.5-.53-.88V7.5c0-.38.21-.71.53-.88l7.97-4.43c.31-.17.69-.17 1 0l7.97 4.43c.32.17.53.5.53.88v9z"/></svg>
+                </div>
+                <h3 class="text-epic-blue font-display text-sm tracking-widest mb-4 uppercase">Video Topic</h3>
+                <div class="prose prose-invert max-w-none text-gray-300">
+                    ¡Entendido! Como <strong>Steven Dior</strong>, imbuido con el <strong>Haki</strong> y el espíritu del <strong>5th Gear</strong>, he analizado esta imagen para que tu IA la procese con toda la épica de <em>One Piece</em>.
+                </div>
+            </div>
+
+            <!-- Cultural Focus Card -->
+            <div class="glass-panel p-8 flex flex-col justify-center border-l-4 border-l-epic-accent hover:bg-white/5 transition-all">
+                <h3 class="text-epic-accent font-display text-sm tracking-widest mb-2 uppercase">Cultural Focus</h3>
+                <div class="text-5xl md:text-6xl font-black font-display tracking-widest text-white flex items-center gap-4">
+                    PANAMÁ <span class="text-3xl">🇵🇦</span>
+                </div>
+                <p class="mt-4 text-gray-500 font-medium">Urban Fantasy & Ghetto Ronin Philosophy</p>
+            </div>
+        </section>
+
+        <!-- MAIN CONTENT: MEDIA & REEL SCRIPT -->
+        <section class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start mb-24">
+            
+            <!-- Media Display (Left side on desktop) -->
+            <div class="lg:col-span-5 sticky top-8">
+                <div class="relative haki-border p-1 rounded-2xl overflow-hidden">
+                    <div class="rounded-xl overflow-hidden bg-epic-dark">
+                        <img src='https://opal.google/board/blobs/901d316b-5a55-4c87-9965-14b4c2848986' alt='media_1' class="w-full h-auto object-cover hover:scale-105 transition-transform duration-700" />
+                    </div>
+                    <div class="absolute bottom-4 left-4 right-4 glass-panel p-4 flex items-center justify-between border-none">
+                        <div>
+                            <p class="text-[10px] uppercase tracking-widest text-epic-gold font-bold">Scanning Threat...</p>
+                            <p class="text-xs font-mono text-white">SUBJECT: RONIN_01_PTY</p>
+                        </div>
+                        <div class="w-3 h-3 bg-red-600 rounded-full animate-ping"></div>
+                    </div>
+                </div>
+
+                <!-- Technical breakdown below image -->
+                <div class="mt-8 space-y-4">
+                    <div class="flex items-center gap-4 group">
+                        <div class="w-10 h-10 rounded bg-epic-dark border border-white/10 flex items-center justify-center font-display text-xs group-hover:border-epic-gold transition-colors">01</div>
+                        <div>
+                            <h4 class="text-xs font-display text-epic-gold">Sujeto: Guerrero de las Sombras</h4>
+                            <p class="text-xs text-gray-400">Postura de combate Iaijutsu moderna.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4 group">
+                        <div class="w-10 h-10 rounded bg-epic-dark border border-white/10 flex items-center justify-center font-display text-xs group-hover:border-epic-blue transition-colors">02</div>
+                        <div>
+                            <h4 class="text-xs font-display text-epic-blue">Haki de Observación</h4>
+                            <p class="text-xs text-gray-400">Mirada focalizada 4K. Entorno nocturno.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content Text (Right side on desktop) -->
+            <div class="lg:col-span-7 space-y-12">
+                
+                <!-- REEL SCRIPT -->
+                <div class="glass-panel p-8 md:p-12 relative">
+                    <div class="absolute -top-4 -left-4 bg-epic-accent text-white px-4 py-2 font-display text-xs transform -rotate-3">
+                        REEL SCRIPT
+                    </div>
+                    
+                    <h2 class="text-4xl font-black font-display mb-8 italic tracking-tighter">"EL RONIN DEL ISTMO"</h2>
+
+                    <div class="space-y-10">
+                        <!-- Hook -->
+                        <div class="relative pl-6 border-l-2 border-epic-blue">
+                            <span class="absolute -left-[11px] top-0 w-5 h-5 rounded-full bg-epic-blue/20 flex items-center justify-center border border-epic-blue">
+                                <span class="w-2 h-2 rounded-full bg-epic-blue"></span>
+                            </span>
+                            <h3 class="font-display text-epic-blue text-sm mb-4">HOOK (0-3s)</h3>
+                            <div class="space-y-3">
+                                <p class="text-gray-200"><span class="text-epic-blue font-bold">VISUAL:</span> Ultra-zoomed, grainy 4K shot. Rapid glitch transitions.</p>
+                                <div class="bg-white/5 p-4 rounded border-r-4 border-epic-blue">
+                                    <p class="text-xl font-black text-white italic">“POV: Entraste al parking equivocado en la 507... 🇵🇦”</p>
+                                </div>
+                                <p class="text-gray-400 italic text-sm">"Xopa... ¿Tú crees que esto es un juego, fren?"</p>
+                            </div>
+                        </div>
+
+                        <!-- Body -->
+                        <div class="relative pl-6 border-l-2 border-epic-gold">
+                             <span class="absolute -left-[11px] top-0 w-5 h-5 rounded-full bg-epic-gold/20 flex items-center justify-center border border-epic-gold">
+                                <span class="w-2 h-2 rounded-full bg-epic-gold"></span>
+                            </span>
+                            <h3 class="font-display text-epic-gold text-sm mb-4">BODY (The Flow)</h3>
+                            <div class="space-y-3">
+                                <p class="text-gray-200"><span class="text-epic-gold font-bold">VISUAL:</span> Fast cuts synced to Brazilian Phonk bass.</p>
+                                <div class="bg-white/5 p-4 rounded border-r-4 border-epic-gold">
+                                    <p class="text-xl font-black text-white italic uppercase">“HAKI DE OBSERVACIÓN: ACTIVADO ⚡️”</p>
+                                </div>
+                                <p class="text-gray-400 italic text-sm">"While you were chasing yeyés, I studied the Haki del Istmo."</p>
+                            </div>
+                        </div>
+
+                        <!-- Climax -->
+                        <div class="relative pl-6 border-l-2 border-epic-accent">
+                             <span class="absolute -left-[11px] top-0 w-5 h-5 rounded-full bg-epic-accent/20 flex items-center justify-center border border-epic-accent">
+                                <span class="w-2 h-2 rounded-full bg-epic-accent"></span>
+                            </span>
+                            <h3 class="font-display text-epic-accent text-sm mb-4">CLIMAX (K.O.)</h3>
+                            <div class="space-y-3">
+                                <p class="text-gray-200"><span class="text-epic-accent font-bold">ACTION:</span> Neon-distorted skyline. Slow-mo nod of respect.</p>
+                                <div class="bg-white/5 p-4 rounded border-r-4 border-epic-accent">
+                                    <p class="text-xl font-black text-white italic uppercase">“EL ÚLTIMO SAMURAI DE CALLE 50. 🗿”</p>
+                                </div>
+                                <p class="text-gray-400 font-bold text-sm">"No es el arma, es el espíritu del guerrero. De una. 🗿"</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MEME SECTION -->
+                <div class="glass-panel p-8 md:p-12 bg-gradient-to-br from-epic-dark to-black border-t-4 border-epic-gold">
+                    <h2 class="text-2xl font-display font-bold mb-6 flex items-center gap-3">
+                        <span class="p-2 bg-epic-gold text-black rounded text-xs tracking-tighter">MEME STRUCTURE</span>
+                        META ANALYSIS
+                    </h2>
+                    
+                    <div class="space-y-6 text-lg leading-relaxed">
+                        <p>
+                            <span class="text-epic-gold font-black uppercase text-sm block mb-1">POV:</span>
+                            Eres el yeyesito que se le cerró al man en el tranque de la Vía España sin saber que el chombo trae el <span class="text-epic-gold font-bold">Haki de Armamento</span> integrado.
+                        </p>
+                        
+                        <div class="p-6 bg-white/5 rounded-xl border border-white/10 italic text-gray-300">
+                            <span class="text-epic-accent font-black uppercase text-sm block mb-2 not-italic">El no sabe...</span>
+                            Que ese paraguas táctico tiene más historia que el Casco Viejo. Mientras tú hablas mucho, él mantiene el focus de un Ronin del ghetto. El aura está pesada, el flow está en modo Legendario.
+                        </div>
+
+                        <p class="text-center py-6 font-display text-xl md:text-2xl font-bold tracking-tight">
+                            Personalidad de <span class="text-epic-blue">Gigachad</span>, <br>
+                            alma de guerrero <span class="text-epic-accent underline decoration-4">canalero</span>. 🗿
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- BENTO DETAILS SECTION -->
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-16">
+            <div class="glass-panel p-6 md:col-span-2">
+                <h4 class="font-display text-xs text-epic-blue mb-2">Aura Attributes</h4>
+                <p class="text-sm text-gray-400">La posición de las manos sugiere la preparación para una técnica de "Desenvainado Rápido" (Iaijutsu) aplicada al entorno urbano de Ciudad de Panamá.</p>
+            </div>
+            <div class="glass-panel p-6 bg-epic-accent/10 border-epic-accent/20 flex flex-col justify-center items-center text-center">
+                <span class="text-3xl mb-2">🔥</span>
+                <h4 class="font-display text-[10px] uppercase">Style Level</h4>
+                <p class="text-2xl font-black">LEGENDARIO</p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FLOATING DECOR -->
+    <div class="fixed top-0 right-0 p-10 hidden lg:block opacity-20 rotate-90 origin-top-right">
+        <span class="font-display text-9xl font-black outline-text tracking-widest" style="-webkit-text-stroke: 1px white; color: transparent;">PTY 507</span>
+    </div>
+
+</body>
+</html>
+
