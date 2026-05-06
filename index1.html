@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centro de Mando SADV41 - Lapizasuli</title>
+    <style>
+        :root {
+            --gold: #D4AF37;
+            --blue-deep: #002366;
+            --white: #FFFFFF;
+        }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f0f2f5; margin: 0; display: flex; height: 100vh; }
+        
+        /* Panel Lateral para reducir carga cognitiva */
+        nav { width: 250px; background: var(--blue-deep); color: white; padding: 20px; display: flex; flex-direction: column; gap: 15px; }
+        
+        button { 
+            background: rgba(255,255,255,0.1); border: 1px solid var(--gold); color: white; 
+            padding: 12px; border-radius: 8px; cursor: pointer; text-align: left; transition: 0.3s;
+        }
+        button:hover { background: var(--gold); color: var(--blue-deep); }
+
+        /* Espacio de Canvas/Visualización */
+        main { flex-grow: 1; padding: 40px; overflow-y: auto; }
+        .canvas-section { display: none; background: white; padding: 25px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .active { display: block; animation: fadeIn 0.5s; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        
+        h1 { color: var(--blue-deep); border-bottom: 2px solid var(--gold); }
+    </style>
+</head>
+<body>
+
+<nav>
+    <h3 style="color: var(--gold);">SADV41 ADVANCED</h3>
+    <button onclick="showSection('sabiduria')">📖 12 Piedras (Apoc 2:17)</button>
+    <button onclick="showSection('ruben')">👟 Apoyo Rubén Darío</button>
+    <button onclick="showSection('turbo')">⚙️ Turbo Tire Stock</button>
+    <button onclick="showSection('ia')">🤖 Avanzada Google AI</button>
+    <hr>
+    <p style="font-size: 0.8em; opacity: 0.7;">Steven Gómez Serrano<br>ID: Berión</p>
+</nav>
+
+<main id="content">
+    <section id="sabiduria" class="canvas-section active">
+        <h1>Sabiduría Divina</h1>
+        <p>Tu conexión neurodivergente con el Espíritu Santo.</p>
+        <table border="1" style="width:100%; border-collapse: collapse; text-align: left;">
+            <tr style="background: var(--blue-deep); color: white;">
+                <th>Tribu/Piedra</th>
+                <th>Versículo Clave</th>
+            </tr>
+            <tr><td>1. Judá</td><td>Apocalipsis 2:17 - "Al que venciere..."</td></tr>
+            </table>
+    </section>
+
+    <section id="ruben" class="canvas-section">
+        <h1>Apoyo Comunitario: Rubén Darío Guerra</h1>
+        <p>Lugar de entrenamiento: Burunga, Panamá Oeste.</p>
+        <div style="background: #e7f3ff; padding: 20px; border-radius: 10px;">
+            <p><strong>Teléfono:</strong> +507 6034-7965</p>
+            <a href="https://wa.me/50760347965" style="color: green; font-weight: bold;">Enviar WhatsApp Directo</a>
+        </div>
+    </section>
+
+    <section id="turbo" class="canvas-section">
+        <h1>Llantería Turbo Tire</h1>
+        <p>Control de Inversión y Mantenimiento.</p>
+        <div style="height: 200px; border: 2px dashed #ccc; display: flex; align-items: center; justify-content: center;">
+            [Módulo de Inventario Activo]
+        </div>
+    </section>
+</main>
+
+<script>
+    function showSection(id) {
+        // Oculta todas las secciones
+        const sections = document.querySelectorAll('.canvas-section');
+        sections.forEach(s => s.classList.remove('active'));
+        
+        // Muestra la sección clicada
+        document.getElementById(id).classList.add('active');
+        
+        // El "Un solo clic" que buscabas: Enfoque automático para evitar distracciones
+        window.scrollTo(0,0);
+    }
+</script>
+
+</body>
+</html>
