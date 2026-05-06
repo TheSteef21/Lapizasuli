@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SADV41 - Centro de Mando Gemi</title>
+    <style>
+        body { background-color: #0a0a0a; color: #00ffcc; font-family: 'Courier New', monospace; padding: 20px; }
+        .header { border-bottom: 2px solid #00ffcc; padding-bottom: 10px; margin-bottom: 30px; text-align: center; }
+        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .btn-func { 
+            background: transparent; border: 1px solid #00ffcc; color: #00ffcc; padding: 20px; 
+            cursor: pointer; font-size: 1.1em; transition: all 0.3s; text-transform: uppercase;
+        }
+        .btn-func:hover { background: #00ffcc; color: #0a0a0a; box-shadow: 0 0 15px #00ffcc; }
+        .versiculos-table { width: 100%; border-collapse: collapse; margin-top: 40px; color: #fff; }
+        .versiculos-table th, .versiculos-table td { border: 1px solid #444; padding: 12px; text-align: left; }
+        .versiculos-table th { background-color: #1a1a1a; color: #00ffcc; }
+        .tabernaculo-info { margin-top: 20px; font-style: italic; color: #888; text-align: center; }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>MISIÓN SADV41: INTERFAZ DE SABIDURÍA 🎚</h1>
+        <p>Steven Dior Gómez Serrano | Identidad en Cristo: Apocalipsis 2:17</p>
+    </div>
+
+    <div class="grid-container">
+        <button class="btn-func" onclick="showDemo('Navegación Autónoma', 'Ejecución de procesos en tiempo real en la web para gestión de DGI y música.')">Agente de Navegación</button>
+        <button class="btn-func" onclick="showDemo('Canvas Interactivo', 'Espacio de Vibe Coding para desarrollar apps de Turbo Tire en vivo.')">Entorno Canvas</button>
+        <button class="btn-func" onclick="showDemo('Generación Veo 3.1', 'Creación de video 4K para visualizadores de Steven Dior.')">Laboratorio de Video</button>
+        <button class="btn-func" onclick="showDemo('Audio Lyria Pro', 'Composición de bases urbanas y románticas de alta fidelidad.')">Estudio de Audio</button>
+        <button class="btn-func" onclick="showDemo('Visión Multimodal', 'Análisis de videos técnicos y supervisión de procesos de taller.')">Visión Avanzada</button>
+        <button class="btn-func" onclick="showDemo('Automatización Android', 'Control de apps y flujos de trabajo desde el dispositivo móvil.')">Control de Sistema</button>
+    </div>
+
+    <div id="demo-area" style="display:none; margin-top: 30px; border: 1px dashed #00ffcc; padding: 20px;">
+        <h2 id="demo-title"></h2>
+        <div id="demo-content"></div>
+        <button onclick="document.getElementById('demo-area').style.display='none'" style="margin-top:10px; background:red; color:white;">Cerrar Demo</button>
+    </div>
+
+    <script>
+        function showDemo(title, content) {
+            document.getElementById('demo-area').style.display = 'block';
+            document.getElementById('demo-title').innerText = title;
+            document.getElementById('demo-content').innerHTML = `<strong>Avance Técnico:</strong> <p>${content}</p><br><code>ESTADO: LISTO PARA DESARROLLAR CONEXIÓN NEURODIVERGENTE.</code>`;
+            window.scrollTo(0,document.body.scrollHeight);
+        }
+    </script>
+
+    <h2 style="margin-top: 50px; color: #ffd700;">LA TABLA DE LAS 12 TRIBUS: LA IDENTIDAD OCULTA</h2>
+    <table class="versiculos-table">
+        <thead>
+            <tr>
+                <th>N°</th>
+                <th>Referencia</th>
+                <th>El Misterio de la Persona que solo Dios conoce</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>1</td><td>Apocalipsis 2:17</td><td>"Al que venciere, daré a comer del maná escondido, y le daré una piedrita blanca, y en la piedrita escrito un nombre nuevo, el cual ninguno conoce sino aquel que lo recibe."</td></tr>
+            <tr><td>2</td><td>Salmos 139:16</td><td>"Mi embrión vieron tus ojos, y en tu libro estaban escritas todas aquellas cosas que fueron luego formadas, sin faltar una de ellas."</td></tr>
+            <tr><td>3</td><td>Isaías 43:1</td><td>"No temas, porque yo te redimí; te puse nombre, mío eres tú."</td></tr>
+            <tr><td>4</td><td>Gálatas 1:15</td><td>"Pero cuando agradó a Dios, que me apartó desde el vientre de mi madre, y me llamó por su gracia..."</td></tr>
+            <tr><td>5</td><td>Jeremías 1:5</td><td>"Antes que te formase en el vientre te conocí, y antes que nacieses te santifiqué."</td></tr>
+            <tr><td>6</td><td>2 Timoteo 2:19</td><td>"Conoce el Señor a los que son suyos."</td></tr>
+            <tr><td>7</td><td>1 Corintios 13:12</td><td>"Ahora conozco en parte; pero entonces conoceré como fui conocido."</td></tr>
+            <tr><td>8</td><td>Apocalipsis 12:1</td><td>"Apareció en el cielo una gran señal: una mujer vestida del sol, con la luna debajo de sus pies, y sobre su cabeza una corona de doce estrellas." (La identidad protegida por Dios).</td></tr>
+            <tr><td>9</td><td>Salmos 25:14</td><td>"La comunión íntima de Jehová es con los que le temen, y a ellos hará conocer su pacto."</td></tr>
+            <tr><td>10</td><td>Juan 10:3</td><td>"A las ovejas llama por su nombre, y las saca."</td></tr>
+            <tr><td>11</td><td>Efesios 2:10</td><td>"Porque somos hechura suya, creados en Cristo Jesús para buenas obras, las cuales Dios preparó de antemano para que anduviésemos en ellas."</td></tr>
+            <tr><td>12</td><td>Apocalipsis 3:12</td><td>"Y escribiré sobre él el nombre de mi Dios... y mi nombre nuevo."</td></tr>
+        </tbody>
+    </table>
+
+    <div class="tabernaculo-info">
+        Santísimo: Donde el Espíritu guía y el hombre sabio se arrodilla ante el Creador.
+    </div>
+</body>
+</html>
