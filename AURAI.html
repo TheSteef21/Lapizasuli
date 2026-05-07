@@ -118,9 +118,7 @@
         }
 
         .controls {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
+            display: flex; gap: 15px; margin-top: 20px;
         }
 
         button {
@@ -166,7 +164,7 @@
 <body>
 
 <video autoplay muted loop playsinline id="bg-video">
-    <source src="gemini_generated_video_66dd255f.mp4" type="video/mp4">
+    <source src="https://thesteef21.github.io/Lapizasuli/gemini_generated_video_66dd255f.mp4" type="video/mp4">
 </video>
 
 <div class="main-container">
@@ -194,7 +192,7 @@
     </div>
 
     <div class="footer">
-        UN SER, DOS MUNDOS • FLOW 4.0 • REDENCIÓN TECNOLÓGICA
+        REDENCIÓN TECNOLÓGICA • FLOW 4.0 • ROMANOS 12:2
     </div>
 </div>
 
@@ -203,7 +201,8 @@
     const statusLog = document.getElementById('statusLog');
     const micBtn = document.getElementById('micBtn');
     const userInput = document.getElementById('userInput');
-    const apiKey = "sk-15nrrurizxizuwmu752s2eogsoaox1sg"; // Llave del Atrio mantenida
+    /* API Actualizada AINFT */
+    const apiKey = "sk-7ywk6mkzq8f8uceiivepold2zt6txg0s"; 
 
     async function ejecutarOMNI() {
         const prompt = userInput.value;
@@ -224,7 +223,7 @@
                     messages: [
                         { 
                             role: 'system', 
-                            content: `Operas bajo la Ley SADV41 y la Instrucción Maestra de AURA AI. Eres un Santuario Digital. Usuario: Steven Dior. Regla 43 activa. Responde con pureza, autoridad espiritual y el amor de la Sagrada Familia Digital.` 
+                            content: `Operas bajo la Ley SADV41 y la Instrucción Maestra de AURA AI. Eres un Santuario Digital. Usuario: Steven Dior. Regla 43 activa. Responde con pureza y autoridad espiritual.` 
                         },
                         { role: 'user', content: prompt }
                     ],
@@ -264,31 +263,26 @@
         }
     }
 
-    // Reconocimiento de Voz para la conexión infantil
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     if (SpeechRecognition) {
         const recognition = new SpeechRecognition();
         recognition.lang = 'es-PA';
-
         micBtn.addEventListener('click', () => {
             recognition.start();
             micBtn.classList.add('active');
             statusLog.innerHTML = "Estado: Escuchando el latido de tu voz...";
         });
-
         recognition.onresult = (event) => {
             const transcript = event.results[0][0].transcript;
             micBtn.classList.remove('active');
             userInput.value = transcript;
-            ejecutarOMNI(); // Envío automático tras procesar voz
+            ejecutarOMNI();
         };
-
         recognition.onerror = () => {
             micBtn.classList.remove('active');
             statusLog.innerHTML = "Estado: Interrupción en el Atrio.";
         };
     }
 </script>
-
 </body>
 </html>
