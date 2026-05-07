@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SADV41 | Autografía de StevenDiorBerion</title>
+    <script src="https://cdn.jsdelivr.net/npm/@web3modal/standalone"></script>
+    <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js"></script>
+    
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --accent: #f1c40f;
+            --text: #333;
+            --bg: #f4f7f6;
+            --wc-blue: #3396ff;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: var(--bg);
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background: var(--primary);
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+            border-bottom: 5px solid var(--accent);
+        }
+        .container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        section {
+            background: white;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1, h2 {
+            color: var(--primary);
+        }
+        .wallet-box {
+            background: #e8f4fd;
+            padding: 1rem;
+            border-left: 4px solid #3498db;
+            word-break: break-all;
+            font-family: monospace;
+            margin-bottom: 1rem;
+        }
+        .mission-logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--accent);
+        }
+        .btn-connect {
+            background-color: var(--wc-blue);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .btn-connect:hover {
+            transform: scale(1.05);
+            background-color: #2b7ed3;
+        }
+        .link-list {
+            list-style: none;
+            padding: 0;
+        }
+        .link-list li { margin-bottom: 0.8rem; }
+        .link-list a { color: #2980b9; text-decoration: none; font-weight: bold; }
+        footer { text-align: center; padding: 2rem; font-size: 0.9rem; color: #777; }
+        .highlight { border: 2px solid var(--accent); padding: 10px; display: inline-block; margin-top: 10px; }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="mission-logo">SADV41 🎚</div>
+    <h1>StevenDiorBerion</h1>
+    <p>Identidad Digital y Legado para el Yesteryear 2027</p>
+</header>
+
+<div class="container">
+    <section id="vision">
+        <h2>Visión: El Plan y el Tiempo</h2>
+        <p>Esta autografía es un puente entre el presente y el futuro. En 2027, celebraremos el <strong>Yesteryear de 1927</strong>.</p>
+        <div class="highlight"><em>"El 1 significa la unión y el 4 la trinidad vista por una persona."</em></div>
+    </section>
+
+    <section id="web3">
+        <h2>Identidad Web3 y Autenticación</h2>
+        <p>Conecta tu wallet para verificar tu identidad en el protocolo SADV41:</p>
+        
+        <div class="wallet-box">
+            <strong>Billetera Principal:</strong> 0xcff41667D8E1649f8f5876214Ee38CC3545bB7EF
+        </div>
+
+        <button id="connect-button" class="btn-connect">
+            <img src="https://walletconnect.com/walletconnect-logo.svg" width="25" alt="WC">
+            Conectar con WalletConnect
+        </button>
+        
+        <p id="status" style="margin-top: 10px; font-weight: bold; color: #27ae60;"></p>
+    </section>
+
+    <section id="links">
+        <h2>Ecosistema Digital StevenDior</h2>
+        <ul class="link-list">
+            <li><a href="https://stevendior.digital/" target="_blank">🌐 Portal Oficial</a></li>
+            <li><a href="https://thesteef21.github.io/Lapizasuli/index2.html" target="_blank">💎 Proyecto Lapizasuli</a></li>
+            <li><a href="https://thesteef21.github.io/Lapizasuli/SADV41AT100YEARSTERDAY01.html" target="_blank">📜 SADV41 - Archivo 01</a></li>
+        </ul>
+    </section>
+</div>
+
+<footer>
+    <p>Preparado por StevenDiorBerion | SADV41 Law</p>
+    <p>Cristo está por venir 🎚</p>
+</footer>
+
+<script>
+    // Configuración de WalletConnect con tu Project ID
+    const projectId = 'S5SGpusXjuhSqgYnpm7EvnHDcSQCwXQ0'; // Tu API proporcionada
+
+    const web3Modal = new window.Web3Modal.Web3Modal({
+        projectId: projectId,
+        standaloneChains: ['eip155:1', 'eip155:137'] // Ethereum y Polygon
+    });
+
+    const connectBtn = document.getElementById('connect-button');
+    const status = document.getElementById('status');
+
+    connectBtn.addEventListener('click', async () => {
+        try {
+            const approval = await web3Modal.openModal();
+            if (approval) {
+                status.innerText = "✓ Autenticado para el Legado 2027";
+                console.log("Conexión exitosa");
+            }
+        } catch (error) {
+            console.error("Error de conexión:", error);
+            status.innerText = "Error en la autenticación.";
+        }
+    });
+</script>
+
+</body>
+</html>
