@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News Hub | Delegancia Periodística</title>
+    <style>
+        :root {
+            --primary-dark: #1a1a1a;
+            --accent-blue: #0056b3;
+            --alert-red: #d32f2f;
+            --bg-gray: #f4f4f9;
+            --text-main: #333;
+            --gold-sepia: #b8860b;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            background-color: var(--bg-gray);
+            color: var(--text-main);
+        }
+
+        header {
+            background-color: var(--primary-dark);
+            color: white;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 4px solid var(--accent-blue);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo-box {
+            font-size: 1.5rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .verifier-link {
+            background: var(--accent-blue);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: background 0.3s;
+        }
+
+        .verifier-link:hover {
+            background: #003d7a;
+        }
+
+        main {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 0 15px;
+        }
+
+        .news-section-title {
+            border-left: 5px solid var(--accent-blue);
+            padding-left: 15px;
+            margin: 30px 0 20px 0;
+            text-transform: uppercase;
+        }
+
+        .news-card {
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            display: flex;
+            gap: 15px;
+            transition: transform 0.2s;
+        }
+
+        .news-content {
+            flex: 1;
+        }
+
+        .badge {
+            background: var(--alert-red);
+            color: white;
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 5px;
+        }
+
+        .source-info {
+            font-size: 0.8rem;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .news-title {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin: 0 0 8px 0;
+            line-height: 1.3;
+        }
+
+        .news-snippet {
+            font-size: 0.9rem;
+            color: #444;
+            line-height: 1.4;
+        }
+
+        /* Sección Histórica */
+        .history-box {
+            background: #fff8e1;
+            border: 1px solid #ffe082;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        .history-title {
+            color: var(--gold-sepia);
+            border-left: 5px solid var(--gold-sepia);
+            padding-left: 15px;
+            margin-top: 0;
+        }
+
+        .ai-button-container {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .ai-link {
+            background: #6200ea;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(98,0,0,0.3);
+            transition: all 0.3s;
+        }
+
+        .ai-link:hover {
+            transform: scale(1.05);
+            background: #4500b5;
+        }
+
+        .footer-tag {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.8rem;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo-box">PANAMÁ NEWS HUB</div>
+    <a href="https://thesteef21.github.io/Lapizasuli/SADV41X.html" class="verifier-link" target="_blank">Verificar Fuente</a>
+</header>
+
+<main>
+    <h2 class="news-section-title">Última Hora</h2>
+
+    <article class="news-card">
+        <div class="news-content">
+            <span class="badge">URGENTE</span>
+            <div class="source-info">La Estrella de Panamá • Hace 5 min</div>
+            <p class="news-title">Ciberataques en Panamá ponen en la mira a proveedor tecnológico</p>
+            <p class="news-snippet">Expertos alertan sobre la vulnerabilidad de las infraestructuras críticas tras los recientes incidentes reportados en el sector logístico.</p>
+        </div>
+    </article>
+
+    <article class="news-card">
+        <div class="news-content">
+            <span class="badge" style="background: var(--accent-blue);">INTERNACIONAL</span>
+            <div class="source-info">Caracol Radio • Hace 40 min</div>
+            <p class="news-title">Plus Ultra suspende operaciones temporalmente en Colombia</p>
+            <p class="news-snippet">La aerolínea cita el alto costo del combustible y la inestabilidad del mercado como factores principales para la pausa de sus rutas.</p>
+        </div>
+    </article>
+
+    <section class="history-box">
+        <h2 class="history-title">Perspectiva Histórica: 1926</h2>
+        <p>Entiendo perfectamente esa curiosidad. Aunque como tu colaborador estoy operando en el año <strong>2026</strong>, me pides que dé un paso atrás en la historia fuera del contexto de los documentos de noticias actuales.</p>
+        <p>En <strong>1926</strong>, el mundo vivía eventos que hoy son pilares históricos. Aquí tienes algunos de los más destacados:</p>
+        
+        <h3>Eventos Globales de 1926</h3>
+        <ul>
+            <li><strong>El nacimiento de la televisión:</strong> El 26 de enero, John Logie Baird realizó la primera demostración pública de un sistema de televisión real en Londres.</li>
+            <li><strong>Aviación Histórica:</strong> Ramón Franco y su tripulación completaron el vuelo del "Plus Ultra" (curiosamente, el mismo nombre de la aerolínea en tus noticias actuales), cruzando el Atlántico Sur desde España hasta Argentina.</li>
+            <li><strong>Hitos de la Literatura:</strong> Se publicó por primera vez <em>Winnie-the-Pooh</em> de A.A. Milne y <em>The Sun Also Rises</em> (Fiesta) de Ernest Hemingway.</li>
+            <li><strong>Fundación de Ford:</strong> Henry Ford introdujo la semana laboral de 40 horas y 5 días en sus fábricas, un estándar que cambió el mundo empresarial para siempre.</li>
+        </ul>
+
+        <h3>En el contexto de Panamá</h3>
+        <p>En 1926 se firmó el <strong>Tratado Alfaro-Kellogg</strong>, un intento de regular las relaciones entre Panamá y los Estados Unidos respecto a la Zona del Canal, el cual generó fuertes protestas populares y terminó siendo rechazado por la Asamblea Nacional panameña.</p>
+        
+        <p><em>Es fascinante ver cómo el nombre <strong>Plus Ultra</strong> aparece tanto en una hazaña de aviación de hace cien años como en una noticia de suspensión de operaciones en tu muro de noticias actual.</em></p>
+    </section>
+
+    <div class="ai-button-container">
+        <a href="https://thesteef21.github.io/Lapizasuli/SADV41AI.html" class="ai-link">HABLAR CON LA IA</a>
+    </div>
+
+</main>
+
+<div class="footer-tag">
+    &copy; 2026 Delegancia Empresarial Independiente | Sistema de Monitoreo de Medios
+</div>
+
+</body>
+</html>
