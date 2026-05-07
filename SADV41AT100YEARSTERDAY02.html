@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News Hub | Delegancia Periodística - V2</title>
+    <style>
+        :root {
+            --primary-dark: #1a1a1a;
+            --accent-blue: #0056b3;
+            --alert-red: #d32f2f;
+            --bg-gray: #f4f4f9;
+            --text-main: #333;
+            --gold-sepia: #b8860b;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            background-color: var(--bg-gray);
+            color: var(--text-main);
+        }
+
+        header {
+            background-color: var(--primary-dark);
+            color: white;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 4px solid var(--accent-blue);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo-box {
+            font-size: 1.5rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .verifier-link {
+            background: var(--accent-blue);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: background 0.3s;
+        }
+
+        .verifier-link:hover {
+            background: #003d7a;
+        }
+
+        main {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 0 15px;
+        }
+
+        .news-section-title {
+            border-left: 5px solid var(--accent-blue);
+            padding-left: 15px;
+            margin: 30px 0 20px 0;
+            text-transform: uppercase;
+        }
+
+        .news-card {
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            display: flex;
+            gap: 15px;
+            transition: transform 0.2s;
+        }
+
+        .news-content {
+            flex: 1;
+        }
+
+        .badge {
+            background: var(--alert-red);
+            color: white;
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 5px;
+        }
+
+        .source-info {
+            font-size: 0.8rem;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .source-info a {
+            color: #666;
+            text-decoration: underline;
+        }
+
+        .news-title {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin: 0 0 8px 0;
+            line-height: 1.3;
+        }
+
+        .news-title a {
+            color: var(--text-main);
+            text-decoration: none;
+        }
+
+        .news-title a:hover {
+            color: var(--accent-blue);
+        }
+
+        .news-snippet {
+            font-size: 0.9rem;
+            color: #444;
+            line-height: 1.4;
+        }
+
+        /* Sección Histórica */
+        .history-box {
+            background: #fff8e1;
+            border: 1px solid #ffe082;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        .history-title {
+            color: var(--gold-sepia);
+            border-left: 5px solid var(--gold-sepia);
+            padding-left: 15px;
+            margin-top: 0;
+        }
+
+        .legacy-section {
+            border-top: 1px solid #ffe082;
+            margin-top: 20px;
+            padding-top: 20px;
+        }
+
+        .ai-button-container {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .ai-link {
+            background: #6200ea;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(98,0,0,0.3);
+            transition: all 0.3s;
+        }
+
+        .ai-link:hover {
+            transform: scale(1.05);
+            background: #4500b5;
+        }
+
+        .footer-tag {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.8rem;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo-box">PANAMÁ NEWS HUB</div>
+    <a href="https://thesteef21.github.io/Lapizasuli/SADV41X.html" class="verifier-link" target="_blank">Verificar Fuente</a>
+</header>
+
+<main>
+    <h2 class="news-section-title">Última Hora</h2>
+
+    <article class="news-card">
+        <div class="news-content">
+            <span class="badge">URGENTE</span>
+            <div class="source-info">
+                <a href="https://www.google.com/search?q=La+Estrella+de+Panamá+Ciberataques+en+Panamá" target="_blank">La Estrella de Panamá</a> • Hace 5 min
+            </div>
+            <p class="news-title">
+                <a href="https://www.google.com/search?q=Ciberataques+en+Panamá+ponen+en+la+mira+a+proveedor+tecnológico" target="_blank">Ciberataques en Panamá ponen en la mira a proveedor tecnológico</a>
+            </p>
+            <p class="news-snippet">Expertos alertan sobre la vulnerabilidad de las infraestructuras críticas tras los recientes incidentes reportados en el sector logístico.</p>
+        </div>
+    </article>
+
+    <article class="news-card">
+        <div class="news-content">
+            <span class="badge" style="background: var(--accent-blue);">INTERNACIONAL</span>
+            <div class="source-info">
+                <a href="https://www.google.com/search?q=Caracol+Radio+Plus+Ultra+suspende+operaciones" target="_blank">Caracol Radio</a> • Hace 40 min
+            </div>
+            <p class="news-title">
+                <a href="https://www.google.com/search?q=Plus+Ultra+suspende+operaciones+temporalmente+en+Colombia" target="_blank">Plus Ultra suspende operaciones temporalmente en Colombia</a>
+            </p>
+            <p class="news-snippet">La aerolínea cita el alto costo del combustible y la inestabilidad del mercado como factores principales para la pausa de sus rutas.</p>
+        </div>
+    </article>
+
+    <section class="history-box">
+        <h2 class="history-title">Perspectiva Histórica: 1926</h2>
+        <p>Entiendo perfectamente esa curiosidad. Aunque como tu colaborador estoy operando en el año <strong>2026</strong>, me pides que dé un paso atrás en la historia fuera del contexto de los documentos de noticias actuales.</p>
+        <p>En <strong>1926</strong>, el mundo vivía eventos que hoy son pilares históricos. Aquí tienes algunos de los más destacados:</p>
+        
+        <h3>Eventos Globales de 1926</h3>
+        <ul>
+            <li><strong>El nacimiento de la televisión:</strong> El 26 de enero, John Logie Baird realizó la primera demostración pública de un sistema de televisión real en Londres.</li>
+            <li><strong>Aviación Histórica:</strong> Ramón Franco y su tripulación completaron el vuelo del "Plus Ultra", cruzando el Atlántico Sur desde España hasta Argentina.</li>
+            <li><strong>Hitos de la Literatura:</strong> Se publicó por primera vez <em>Winnie-the-Pooh</em> de A.A. Milne y <em>The Sun Also Rises</em> de Ernest Hemingway.</li>
+            <li><strong>Fundación de Ford:</strong> Henry Ford introdujo la semana laboral de 40 horas y 5 días.</li>
+        </ul>
+
+        <div class="legacy-section">
+            <p>Esta es una hermosa manera de honrar la memoria de <strong>Ricardo J. Alfaro</strong>, un hombre cuya vida fue testimonio de integridad, patriotismo y una profunda visión jurídica que marcó el destino de Panamá.</p>
+            <p>Nutrirse de esa "voluntad pluscuamperfecta" nos invita a mirar hacia atrás, específicamente a <strong>1926</strong>, un año crucial para el Dr. Alfaro y para la soberanía panameña.</p>
+            
+            <h3>El Recuerdo de 1926: El Tratado Alfaro-Kellogg</h3>
+            <p>En julio de 1926, Ricardo J. Alfaro, actuando como Ministro Plenipotenciario en Washington, firmó junto al Secretario de Estado estadounidense, Frank B. Kellogg, el <strong>Tratado Alfaro-Kellogg</strong>. Aunque este tratado buscaba resolver las deficiencias del Convenio Taft y mejorar las condiciones comerciales y fiscales de Panamá frente a la Zona del Canal, Alfaro demostró su grandeza no solo en la negociación, sino en su respeto a la voluntad popular.</p>
+            <ul>
+                <li><strong>La Lección de Voluntad:</strong> El tratado contenía cláusulas polémicas (como la cooperación automática en caso de guerra) que generaron un fuerte rechazo en el pueblo panameño y en la Asamblea Nacional.</li>
+                <li><strong>El Legado:</strong> Alfaro, lejos de imponer su criterio, documentó este proceso con una honestidad intelectual admirable. Su libro <em>"Historia documentada de las negociaciones para la celebración del Tratado de 1926"</em> es hoy una joya para entender que la diplomacia no es solo firmar papeles, sino defender la dignidad de una nación.</li>
+            </ul>
+
+            <h3>Noticias del Día (Resumen Contextual)</h3>
+            <p>Para conectar ese espíritu de 1926 con el presente, hoy vemos que los valores que Alfaro defendió siguen vigentes en la agenda global:</p>
+            <ol>
+                <li><strong>Soberanía y Justicia Internacional:</strong> Mientras el Dr. Alfaro fue magistrado de la Corte Internacional de Justicia de La Haya, hoy las naciones siguen buscando en el derecho internacional la solución a conflictos territoriales y humanos.</li>
+                <li><strong>Derechos Humanos:</strong> Alfaro fue uno de los arquitectos del borrador de la Declaración Universal de los Derechos Humanos. Hoy, su legado vive en cada esfuerzo por proteger las libertades fundamentales.</li>
+                <li><strong>Lazos Fraternos (🇵🇦🇺🇸🇮🇱🇬🇧):</strong> Tu mención de estas banderas refleja la interconexión de la democracia y la fe. La diplomacia panameña continúa ese puente histórico manteniendo la neutralidad y la paz.</li>
+            </ol>
+            <p><strong>Que este recordatorio de 100 años atrás (en el umbral del centenario de aquellas gestas) te inspire a caminar con la rectitud de Ricardo J. Alfaro: con la pluma firme, el corazón en la patria y la fe puesta en la justicia.</strong></p>
+            <p>¡Bendiciones! 🇵🇦❤️</p>
+        </div>
+    </section>
+
+    <div class="ai-button-container">
+        <a href="https://thesteef21.github.io/Lapizasuli/SADV41AI.html" class="ai-link">HABLAR CON LA IA</a>
+    </div>
+
+</main>
+
+<div class="footer-tag">
+    &copy; 2026 Delegancia Empresarial Independiente | Sistema de Monitoreo de Medios
+</div>
+
+</body>
+</html>
