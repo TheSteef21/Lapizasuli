@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SADV41 | Legado StevenDiorBerion</title>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@web3modal/standalone"></script>
+    <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js"></script>
+
+    <style>
+        :root {
+            --primary: #1a252f;
+            --accent: #f1c40f; /* El color de la corona/misión */
+            --wc-blue: #3396ff;
+            --bg: #0f172a;
+            --card-bg: #1e293b;
+        }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background-color: var(--bg);
+            color: #f8fafc;
+            margin: 0;
+            line-height: 1.6;
+        }
+        header {
+            background: linear-gradient(180deg, var(--primary) 0%, #0f172a 100%);
+            padding: 3rem 1rem;
+            text-align: center;
+            border-bottom: 2px solid var(--accent);
+        }
+        .container {
+            max-width: 800px;
+            margin: -2rem auto 2rem;
+            padding: 0 1rem;
+        }
+        .card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            margin-bottom: 2rem;
+        }
+        .mission-badge {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+        .wallet-info {
+            background: rgba(51, 150, 255, 0.1);
+            border: 1px solid var(--wc-blue);
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 0.85rem;
+            word-break: break-all;
+        }
+        .btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .btn {
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .btn-connect { background: var(--wc-blue); color: white; }
+        .btn-pay { background: var(--accent); color: #000; }
+        .btn:hover { transform: translateY(-2px); opacity: 0.9; }
+
+        .status-tag {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            background: #27ae60;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="mission-badge">🎚</div>
+    <h1 style="margin:0;">SADV41 AT 100 YEARS</h1>
+    <p style="color: var(--accent);">Misión StevenDiorBerion | Yesteryear 2027</p>
+</header>
+
+<div class="container">
+    <section class="card">
+        <h2>Identificación Web3</h2>
+        <p>Autenticación vinculada a tus dominios permitidos y credenciales de API.</p>
+        
+        <div class="wallet-info">
+            <strong>WCPay ID:</strong> 2329befe80aa9e63f4aa218366bf7947<br>
+            <strong>Project ID:</strong> S5SGpusXjuhSqgYnpm7EvnHDcSQCwXQ0<br>
+            <strong>EIP155:</strong> 1:0x4cBf2DB3838341BeCB185892C3af576Dc04e2498
+        </div>
+
+        <div class="btn-group">
+            <button id="connect-wallet" class="btn btn-connect">
+                <img src="https://walletconnect.com/walletconnect-logo.svg" width="20">
+                Conectar WalletConnect
+            </button>
+            <button id="make-payment" class="btn btn-pay">
+                💰 Ejecutar WalletConnect Pay
+            </button>
+        </div>
+        <div id="auth-status" style="display:none;" class="status-tag">Protocolo SADV41 Verificado</div>
+    </section>
+
+    <section class="card">
+        <h2>Dominios en Allowlist</h2>
+        <p>Este sistema opera bajo los dominios verificados en tu Dashboard:</p>
+        <ul style="font-size: 0.9rem; color: #94a3b8;">
+            <li>stevendior.digital</li>
+            <li>thesteef21.github.io/Lapizasuli</li>
+        </ul>
+    </section>
+</div>
+
+<footer style="text-align:center; padding-bottom: 2rem; color: #64748b;">
+    <p>© 2026 StevenDiorBerion - El origen es 0</p>
+</footer>
+
+<script>
+    // Configuración con tus datos de las imágenes
+    const projectId = 'S5SGpusXjuhSqgYnpm7EvnHDcSQCwXQ0';
+    const wcPayId = '2329befe80aa9e63f4aa218366bf7947';
+
+    const web3Modal = new window.Web3Modal.Web3Modal({
+        projectId: projectId,
+        standaloneChains: ['eip155:1', 'eip155:137']
+    });
+
+    // Lógica de Conexión
+    document.getElementById('connect-wallet').addEventListener('click', async () => {
+        try {
+            const approval = await web3Modal.openModal();
+            if (approval) {
+                document.getElementById('auth-status').style.display = 'inline-block';
+                console.log("Autenticado con éxito en SADV41");
+            }
+        } catch (err) {
+            console.error("Error en conexión:", err);
+        }
+    });
+
+    // Simulación de WalletConnect Pay usando tu WCPay ID
+    document.getElementById('make-payment').addEventListener('click', () => {
+        alert("Iniciando integración de pago con WCPay ID: " + wcPayId + "\nRedirigiendo al flujo de pago seguro...");
+        // Aquí se integraría el SDK de WalletKit/Pay con el wcPayId
+    });
+</script>
+
+</body>
+</html>
