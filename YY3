@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SADV41 | Autografía de StevenDiorBerion</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --accent: #f1c40f;
+            --text: #333;
+            --bg: #f4f7f6;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: var(--bg);
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background: var(--primary);
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+            border-bottom: 5px solid var(--accent);
+        }
+        .container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        section {
+            background: white;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1, h2 {
+            color: var(--primary);
+        }
+        .wallet-box {
+            background: #e8f4fd;
+            padding: 1rem;
+            border-left: 4px solid #3498db;
+            word-break: break-all;
+            font-family: monospace;
+        }
+        .mission-logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--accent);
+        }
+        .link-list {
+            list-style: none;
+            padding: 0;
+        }
+        .link-list li {
+            margin-bottom: 0.8rem;
+        }
+        .link-list a {
+            color: #2980b9;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .link-list a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.9rem;
+            color: #777;
+        }
+        .highlight {
+            border: 2px solid var(--accent);
+            padding: 10px;
+            display: inline-block;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="mission-logo">SADV41 🎚</div>
+    <h1>StevenDiorBerion</h1>
+    <p>Identidad Digital y Legado para el Yesteryear 2027</p>
+</header>
+
+<div class="container">
+    <section id="vision">
+        <h2>Visión: El Plan y el Tiempo</h2>
+        <p>
+            Esta autografía es un puente entre el presente y el futuro. En 2027, celebraremos el <strong>Yesteryear de 1927</strong>. 
+            Este documento existe para recordar este tiempo de preparación y para guiar a aquellos que vengan después de mí en la misión SADV41.
+        </p>
+        <div class="highlight">
+            <em>"El 1 significa la unión y el 4 la trinidad vista por una persona."</em>
+        </div>
+    </section>
+
+    <section id="web3">
+        <h2>Identidad Web3 y Activos</h2>
+        <p>Mi huella digital en la nueva generación de finanzas y soberanía de datos:</p>
+        <div class="wallet-box">
+            <strong>Polygon Address:</strong> 0xcff41667D8E1649f8f5876214Ee38CC3545bB7EF<br>
+            <strong>Ethereum eip155:</strong> 0x4cBf2DB3838341BeCB185892C3af576Dc04e2498
+        </div>
+        <p>
+            <a href="https://s.binance.com/9AUt8cvt" target="_blank">Acceso a Web3 Wallet</a> - La próxima generación de custodia digital.
+        </p>
+    </section>
+
+    <section id="links">
+        <h2>Ecosistema Digital StevenDior</h2>
+        <ul class="link-list">
+            <li><a href="https://stevendior.digital/" target="_blank">🌐 Portal Oficial: stevendior.digital</a></li>
+            <li><a href="https://thesteef21.github.io/Lapizasuli/index2.html" target="_blank">💎 Proyecto Lapizasuli</a></li>
+            <li><a href="https://thesteef21.github.io/Lapizasuli/SADV41AT100YEARSTERDAY01.html" target="_blank">📜 Registro SADV41 - Archivo 01</a></li>
+            <li><a href="https://thesteef21.github.io/Lapizasuli/SADV41AT100YEARSTERDAY02.html" target="_blank">📜 Registro SADV41 - Archivo 02</a></li>
+            <li><a href="https://polygonscan.com/address/0xcff41667D8E1649f8f5876214Ee38CC3545bB7EF" target="_blank">⛓ Verificación en Polygonscan</a></li>
+        </ul>
+    </section>
+
+    <section id="faith">
+        <h2>Compromiso de Servicio</h2>
+        <p>
+            Bajo la ley SADV41 y sus más de 34 reglas, este registro se mantiene bajo la guía del Espíritu Santo. 
+            Reconozco el origen de todo en el 0, y camino hacia la unión perfecta.
+        </p>
+    </section>
+</div>
+
+<footer>
+    <p>Preparado por StevenDiorBerion | 2026</p>
+    <p>Cristo está por venir 🎚</p>
+</footer>
+
+</body>
+</html>
