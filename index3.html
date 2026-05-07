@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SADV41 | Master Dual Terminal</title>
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --card: #161616;
+            --neon: #00ffcc;
+            --promo-color: #f472b6;
+            --ipfs-color: #4ade80;
+            --text: #ffffff;
+            --matrix: rgba(0, 255, 204, 0.15);
+        }
+        body {
+            font-family: 'Inter', 'Courier New', monospace;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        header { width: 100%; max-width: 900px; border-bottom: 2px solid var(--neon); padding-bottom: 20px; margin-bottom: 30px; text-align: center; }
+        
+        /* POS CARD STYLE */
+        .pos-card {
+            width: 100%; max-width: 450px; background: var(--card); padding: 2.5rem;
+            border-radius: 32px; text-align: center; border: 1px solid #262626;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); position: relative; overflow: hidden; margin-bottom: 40px;
+        }
+        .env-badge { position: absolute; top: 0; left: 0; right: 0; padding: 8px; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; }
+        .promo-theme .env-badge { background: var(--promo-color); color: black; }
+        .ipfs-theme .env-badge { background: var(--ipfs-color); color: black; }
+        
+        .amount { font-size: 3.5rem; font-weight: 800; margin: 0.5rem 0; color: var(--neon); }
+        .selector-group { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 1.5rem 0; background: #222; padding: 5px; border-radius: 14px; }
+        .sel-btn { padding: 10px; border-radius: 10px; border: none; background: transparent; color: #888; cursor: pointer; transition: 0.3s; }
+        .sel-btn.active { background: #333; color: white; border: 1px solid var(--neon); }
+
+        /* BUSCADOR - ÁRBOL DE RECUERDOS */
+        .hub-section { width: 100%; max-width: 900px; }
+        .search-container { display: flex; gap: 10px; margin-bottom: 30px; }
+        input { flex: 1; background: #1a1a1a; border: 1px solid var(--neon); color: #fff; padding: 15px; border-radius: 8px; }
+        .master-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+        .card { background: rgba(0,255,204,0.05); border: 1px solid #333; padding: 20px; border-radius: 12px; cursor: pointer; transition: 0.3s; }
+        .card:hover { border-color: var(--neon); transform: translateY(-5px); }
+        .version-badge { float: right; background: var(--neon); color: black; padding: 2px 6px; font-size: 0.7rem; border-radius: 4px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>SADV41X TERMINAL DUAL</h1>
+        <p><i>"Lo que se ve fue hecho de lo que no se veía"</i></p>
+    </header>
+
+    <div class="pos-card ipfs-theme" id="pos-ui">
+        <div class="env-badge" id="env-label">NODO IPFS VERIFICADO</div>
+        <div style="margin-top: 10px; font-size: 0.8rem; color: var(--neon);">ESTADO: ACTIVO (YY5)</div>
+        <div class="amount">$100.00</div>
+        <div class="selector-group">
+            <button class="sel-btn" onclick="setEnv('promo')">PROMOCIÓN</button>
+            <button class="sel-btn active" onclick="setEnv('ipfs')">IPFS</button>
+        </div>
+        <button style="width:100%; padding:15px; border-radius:12px; font-weight:bold; cursor:pointer;" onclick="redirectPay()">
+            PAGAR CON WALLETCONNECT
+        </button>
+    </div>
+
+    <div class="hub-section">
+        <div class="search-container">
+            <input type="text" id="masterSearch" placeholder="Invocación de archivos (YY.html, neolatin...)" onkeyup="unifySearch()">
+        </div>
+        <div class="master-grid" id="mainDisplay"></div>
+    </div>
+
+    <script>
+        const urlRaiz = "https://thesteef21.github.io/Lapizasuli/";
+        const terminals = {
+            promo: { label: "PORTAL DE PROMOCIÓN", id: "pay_21a2ecc10...", url: "https://pay.walletconnect.com/...", theme: "promo-theme" },
+            ipfs: { label: "NODO IPFS VERIFICADO", id: "pay_fba2ecc10...", url: "https://pay.walletconnect.com/...", theme: "ipfs-theme" }
+        };
+
+        const registroMaestro = [
+            { nombre: "YY5 Terminal", file: "index3.html", ed: "05", tipo: "Dual", lang: "SADV41" },
+            { nombre: "Diccionario Neolatín", file: "neolatin_base.html", ed: "01", tipo: "Lingüística", lang: "Neo/Gnabe" },
+            { nombre: "Aura Engine", file: "Aura_engine.py", ed: "01", tipo: "Motor", lang: "Python" },
+            { nombre: "Quantum Hub", file: "SADV41QuantumHub.jsx", ed: "03", tipo: "Interfaz", lang: "React" }
+        ];
+
+        let currentEnv = 'ipfs';
+
+        function setEnv(env) {
+            currentEnv = env;
+            const data = terminals[env];
+            document.getElementById('env-label').innerText = data.label;
+            document.getElementById('pos-ui').className = 'pos-card ' + data.theme;
+            const buttons = document.querySelectorAll('.sel-btn');
+            buttons[0].className = env === 'promo' ? 'sel-btn active' : 'sel-btn';
+            buttons[1].className = env === 'ipfs' ? 'sel-btn active' : 'sel-btn';
+        }
+
+        function redirectPay() { window.open(terminals[currentEnv].url, '_blank'); }
+
+        function unifySearch() {
+            const query = document.getElementById('masterSearch').value.toLowerCase();
+            const display = document.getElementById('mainDisplay');
+            display.innerHTML = "";
+            registroMaestro.filter(i => i.nombre.toLowerCase().includes(query)).forEach(i => {
+                display.innerHTML += `
+                    <div class="card" onclick="window.location.href='${urlRaiz + i.file}'">
+                        <span class="version-badge">v.${i.ed}</span>
+                        <strong>${i.nombre}</strong><br>
+                        <small style="color:var(--neon)">${i.tipo} | ${i.lang}</small>
+                    </div>`;
+            });
+        }
+        unifySearch();
+    </script>
+</body>
+</html>
