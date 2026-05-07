@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SADV41 Unificado | StevenDiorBerion</title>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@web3modal/standalone"></script>
+    <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js"></script>
+
+    <style>
+        :root {
+            --primary: #0f172a;
+            --accent: #f1c40f;
+            --wc-blue: #3396ff;
+            --ipfs-color: #4ade80;
+            --promo-color: #f472b6;
+            --bg: #020617;
+            --card-bg: #1e293b;
+        }
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background-color: var(--bg);
+            color: #f1f5f9;
+            margin: 0;
+            line-height: 1.6;
+        }
+        header {
+            background: linear-gradient(180deg, var(--primary) 0%, var(--bg) 100%);
+            padding: 4rem 1rem;
+            text-align: center;
+            border-bottom: 3px solid var(--accent);
+        }
+        .container {
+            max-width: 900px;
+            margin: -3rem auto 3rem;
+            padding: 0 1.5rem;
+        }
+        .card {
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .environment-switch {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        .env-btn {
+            padding: 12px;
+            border-radius: 10px;
+            border: 2px solid transparent;
+            cursor: pointer;
+            font-weight: bold;
+            opacity: 0.6;
+            transition: 0.3s;
+        }
+        .env-btn.active { opacity: 1; border-color: var(--accent); }
+        .promo-active { background: var(--promo-color); color: white; }
+        .ipfs-active { background: var(--ipfs-color); color: #000; }
+
+        .wallet-display {
+            background: #0f172a;
+            padding: 1.5rem;
+            border-radius: 12px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            border-left: 5px solid var(--wc-blue);
+            margin: 20px 0;
+        }
+        .btn {
+            width: 100%;
+            padding: 16px;
+            border-radius: 12px;
+            font-weight: 800;
+            cursor: pointer;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 15px;
+            transition: 0.3s;
+        }
+        .btn-connect { background: var(--wc-blue); color: white; }
+        .btn-pay { background: var(--accent); color: #000; }
+        .btn:hover { filter: brightness(1.1); transform: translateY(-2px); }
+
+        .mission-log { font-size: 0.9rem; color: #94a3b8; border-top: 1px solid #334155; padding-top: 15px; }
+    </style>
+</head>
+<body>
+
+<header>
+    <div style="font-size: 4rem;">🎚</div>
+    <h1 id="main-title">Misión SADV41</h1>
+    <p>Legado StevenDiorBerion | Rumbo al 2027</p>
+</header>
+
+<div class="container">
+    <section class="card">
+        <h2>Control de Entorno</h2>
+        <div class="environment-switch">
+            <button class="env-btn active promo-active" onclick="switchEnv('promo')">PROMOCIÓN</button>
+            <button class="env-btn ipfs-active" id="ipfs-btn" onclick="switchEnv('ipfs')">IPFS (Web3)</button>
+        </div>
+
+        <div id="env-content">
+            <h3 id="env-title">Portal de Promoción</h3>
+            <p>Autenticación mediante la API Key <strong>StevenDiorOficial</strong>.</p>
+            
+            <div class="wallet-display">
+                <strong>WCPay ID:</strong> <span id="wcpay-id">2329befe80aa9e63f4aa218366bf7947</span><br>
+                <strong>Status:</strong> <span id="wallet-status">In Review (stevendior.digital)</span>
+            </div>
+        </div>
+
+        <button class="btn btn-connect" id="wc-connect">
+            <img src="https://walletconnect.com/walletconnect-logo.svg" width="22">
+            Autenticar WalletConnect
+        </button>
+        
+        <button class="btn btn-pay" id="wc-pay">
+            🛒 Ejecutar Pago Seguro
+        </button>
+
+        <div class="mission-log" style="margin-top: 25px;">
+            <p><strong>Registro de Ley SADV41:</strong> Todas las transacciones se verifican bajo el origen 0.</p>
+        </div>
+    </section>
+</div>
+
+<footer style="text-align: center; color: #475569; padding: 2rem;">
+    <p>© 2026 StevenDiorBerion | Cristo está por venir 🎚</p>
+</footer>
+
+<script>
+    // Datos extraídos de tus imágenes
+    const config = {
+        promo: {
+            title: "Portal de Promoción",
+            wcPayId: "2329befe80aa9e63f4aa218366bf7947", // De la imagen de Promoción
+            apiKey: "StevenDiorOficial",
+            status: "In Review (stevendior.digital)"
+        },
+        ipfs: {
+            title: "Nodo IPFS Descentralizado",
+            wcPayId: "ceb11307ca32cd9d4118b14ab54b542b", // De la imagen de IPFS
+            apiKey: "SADV41",
+            status: "Whitelisted (thesteef21.github.io)"
+        }
+    };
+
+    const projectId = 'S5SGpusXjuhSqgYnpm7EvnHDcSQCwXQ0';
+
+    function switchEnv(type) {
+        const data = config[type];
+        document.getElementById('env-title').innerText = data.title;
+        document.getElementById('wcpay-id').innerText = data.wcPayId;
+        document.getElementById('wallet-status').innerText = data.status;
+        
+        // Estética de botones
+        document.querySelectorAll('.env-btn').forEach(b => b.classList.remove('active'));
+        event.target.classList.add('active');
+    }
+
+    // Inicialización de Web3Modal
+    const web3Modal = new window.Web3Modal.Web3Modal({
+        projectId: projectId,
+        standaloneChains: ['eip155:1']
+    });
+
+    document.getElementById('wc-connect').addEventListener('click', async () => {
+        const approval = await web3Modal.openModal();
+        if(approval) alert("Conexión SADV41 Exitosa");
+    });
+
+    document.getElementById('wc-pay').addEventListener('click', () => {
+        const currentId = document.getElementById('wcpay-id').innerText;
+        alert("Iniciando flujo de WalletConnect Pay\nID Destino: " + currentId);
+    });
+</script>
+
+</body>
+</html>
