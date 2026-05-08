@@ -7,68 +7,101 @@
     <style>
         body {
             font-family: 'Georgia', serif;
-            background-color: #f4f4f4;
+            background-color: #121212; /* Fondo oscuro elegante */
+            color: #e0e0e0;
             margin: 0;
             padding: 20px;
-            color: #333;
+            line-height: 1.6;
         }
         .container {
-            max-width: 800px;
+            max-width: 850px;
             margin: auto;
-            background: white;
-            padding: 30px;
-            border: 1px solid #ddd;
-            box-shadow: 5px 5px 15px rgba(0,0,0,0.05);
+            background: #1e1e1e;
+            padding: 40px;
+            border: 1px solid #333;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
         header {
             text-align: center;
-            border-bottom: 4px double #333;
-            padding-bottom: 20px;
-            margin-bottom: 30px;
-        }
-        h1 {
-            font-size: 2.5em;
-            margin: 0;
-            text-transform: uppercase;
-        }
-        .week-block {
+            border-bottom: 2px solid #444;
+            padding-bottom: 30px;
             margin-bottom: 40px;
         }
-        .week-header {
-            background: #333;
-            color: white;
-            padding: 5px 15px;
-            font-size: 1.2em;
-            margin-bottom: 20px;
-        }
-        article {
-            border-bottom: 1px solid #eee;
-            padding-bottom: 20px;
-            margin-bottom: 20px;
-        }
-        .date {
-            color: #888;
-            font-size: 0.9em;
+        h1 {
+            font-size: 3em;
+            margin: 0;
+            letter-spacing: 2px;
+            color: #ffffff;
             text-transform: uppercase;
         }
+        .subtitle {
+            font-style: italic;
+            color: #aaa;
+            font-size: 1.2em;
+        }
+        .week-tag {
+            background: #333;
+            color: #fff;
+            display: inline-block;
+            padding: 5px 20px;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+        }
+        .date-divider {
+            color: #888;
+            font-size: 0.85em;
+            text-transform: uppercase;
+            border-bottom: 1px solid #333;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+        article {
+            margin-bottom: 50px;
+        }
         h2 {
-            color: #b90000;
+            color: #ff5722; /* Tono naranja vibrante del diseño original */
+            font-size: 1.8em;
             margin: 10px 0;
         }
-        .content {
-            line-height: 1.6;
+        .content p {
+            margin-bottom: 15px;
         }
-        .source-tag {
+        .source {
+            font-size: 0.8em;
+            color: #666;
             font-style: italic;
-            color: #555;
-            font-size: 0.85em;
+            margin-top: 10px;
         }
-        .sidebar-note {
-            background: #fff9c4;
-            padding: 10px;
-            border-left: 5px solid #fbc02d;
-            margin: 20px 0;
-            font-size: 0.9em;
+        .bullet-news {
+            list-style: none;
+            padding-left: 0;
+        }
+        .bullet-news li {
+            margin-bottom: 12px;
+            padding-left: 20px;
+            position: relative;
+        }
+        .bullet-news li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #ff5722;
+        }
+        .alert-box {
+            background: #2c2605;
+            border-left: 4px solid #ffd700;
+            padding: 15px;
+            margin: 30px 0;
+            color: #fff176;
+        }
+        footer {
+            text-align: center;
+            font-size: 0.8em;
+            color: #555;
+            margin-top: 50px;
+            border-top: 1px solid #333;
+            padding-top: 20px;
         }
     </style>
 </head>
@@ -76,52 +109,50 @@
 
 <div class="container">
     <header>
-        <h1>Cuaderno de Noticias</h1>
-        <p><i>Crónica Semanal de la Alcurnia Informativa</i></p>
+        <h1>CUADERNO DE NOTICIAS</h1>
+        <div class="subtitle">Crónica Semanal de la Alcurnia Informativa</div>
     </header>
 
-    <section class="week-block">
-        <div class="week-header">Semana 19 - Mayo 2026</div>
+    <div class="week-tag">Semana 19 - Mayo 2026</div>
+
+    <section class="day-block">
+        <div class="date-divider">Viernes, 08 de mayo de 2026</div>
 
         <article>
-            <div class="date">Viernes, 08 de mayo de 2026</div>
             <h2>Tensión internacional: EE.UU. ataca objetivos en Irán</h2>
             <div class="content">
-                [span_0](start_span)<p>A pesar del alto al fuego pactado, el Ejército estadounidense bombardeó buques iraníes en el estrecho de Ormuz[span_0](end_span). [span_1](start_span)El Centcom informó que las fuerzas iraníes lanzaron misiles y drones contra buques de guerra en tránsito, lo que provocó una respuesta inmediata para "eliminar las amenazas"[span_1](end_span).</p>
-                [span_2](start_span)[span_3](start_span)<p>Donald Trump ha amenazado a través de sus redes sociales con incrementar la ofensiva de forma "violenta" si no se firma un acuerdo de paz con rapidez[span_2](end_span)[span_3](end_span). [span_4](start_span)Por su parte, Irán acusa a los Estados Unidos de violar el alto al fuego vigente[span_4](end_span).</p>
+                [span_0](start_span)<p>A pesar del alto al fuego pactado, el Ejército estadounidense bombardeó buques iraníes en el estrecho de Ormuz[span_0](end_span). [span_1](start_span)El Centcom informó que las fuerzas iraníes lanzaron misiles y drones contra buques de guerra en tránsito, provocando una respuesta inmediata para "eliminar las amenazas"[span_1](end_span).</p>
+                [span_2](start_span)[span_3](start_span)<p>Donald Trump ha amenazado a través de sus redes sociales con incrementar la ofensiva de forma "violenta" si no se firma un acuerdo de paz con rapidez[span_2](end_span)[span_3](end_span). [span_4](start_span)[span_5](start_span)Por su parte, Irán acusa a los Estados Unidos de violar el alto al fuego vigente[span_4](end_span)[span_5](end_span).</p>
             </div>
-            [span_5](start_span)[span_6](start_span)<p class="source-tag">Fuente: Página|12[span_5](end_span)[span_6](end_span)</p>
+            [span_6](start_span)<div class="source">Fuente: Página|12[span_6](end_span)</div>
         </article>
 
         <article>
-            <div class="date">Viernes, 08 de mayo de 2026</div>
             <h2>Resumen de Política y Economía Regional</h2>
             <div class="content">
-                <ul>
-                    [span_7](start_span)<li><b>Relaciones Bilaterales:</b> Donald Trump y Lula da Silva mantuvieron una reunión de más de dos horas en la Casa Blanca para discutir temas arancelarios[span_7](end_span).</li>
-                    [span_8](start_span)<li><b>Justicia Argentina:</b> La Corte Suprema rechazó el recurso de "per saltum" presentado por el Gobierno respecto a la reforma laboral vigente[span_8](end_span).</li>
-                    [span_9](start_span)<li><b>Mercado:</b> Las expectativas del Banco Central prevén una demora en la baja de la inflación en Argentina[span_9](end_span).</li>
+                <ul class="bullet-news">
+                    [span_7](start_span)<li><strong>Relaciones Bilaterales:</strong> Donald Trump y Lula da Silva mantuvieron una reunión de más de dos horas en la Casa Blanca para discutir temas arancelarios[span_7](end_span).</li>
+                    [span_8](start_span)<li><strong>Justicia Argentina:</strong> La Corte Suprema rechazó el recurso de "per saltum" presentado por el Gobierno respecto a la reforma laboral vigente[span_8](end_span).</li>
+                    [span_9](start_span)<li><strong>Mercado:</strong> Las expectativas del Banco Central prevén una demora en la baja de la inflación en Argentina[span_9](end_span).</li>
                 </ul>
             </div>
-            [span_10](start_span)<p class="source-tag">Fuente: Archivo Digital Página|12[span_10](end_span)</p>
+            [span_10](start_span)<div class="source">Fuente: Archivo Digital Página|12[span_10](end_span)</div>
         </article>
 
-        <div class="sidebar-note">
+        <div class="alert-box">
             <strong>Registro de Alerta Sísmica:</strong> Durante la noche del 7 de mayo, se detectaron movimientos telúricos de magnitud 4.1 al sureste de Dominical, Costa Rica, y de 4.8 al sur de Panamá.
         </div>
 
         <article>
-            <div class="date">Viernes, 08 de mayo de 2026</div>
             <h2>Breves de Alcurnia</h2>
             <div class="content">
                 [span_11](start_span)<p>En el ámbito deportivo, la FIFA ha anunciado un cambio histórico: dejará de trabajar con Panini para el negocio de las figuritas de los Mundiales[span_11](end_span). [span_12](start_span)Mientras tanto, en Perú, crece la polémica por un proyecto de ley que busca eliminar el delito de femicidio[span_12](end_span).</p>
             </div>
         </article>
-
     </section>
 
-    <footer style="text-align: center; font-size: 0.8em; border-top: 1px solid #ddd; padding-top: 20px;">
-        © 2026 Noticias - Todos los derechos reservados.
+    <footer>
+        © 2026 Noticias - Todos los derechos reservados 🇵🇦🗿
     </footer>
 </div>
 
