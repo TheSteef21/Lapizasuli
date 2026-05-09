@@ -3,41 +3,194 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EBRG - Certificado de Realeza SADV41</title>
+    <title>EBRG - Inscripción y Certificado SADV41</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Inter:wght@400;900&display=swap');
         
         body { 
             background-color: #050505; 
             color: #e5e7eb; 
-            margin: 0;
-            overflow-x: hidden;
+            background-image: radial-gradient(circle at center, #111827 0%, #000000 100%);
+            font-family: 'Inter', sans-serif;
         }
         
-        /* Estilos específicos para la impresión del certificado */
+        .glitch-red { text-shadow: 2px 0 #ff0000, -2px 0 #0000ff; }
+        .text-gold { color: #d4af37; }
+        .border-gold { border-color: #d4af37; }
+        .bg-dark-card { background-color: rgba(17, 24, 39, 0.8); }
+
+        /* Regla de Oro para Impresión */
         @media print {
             body * { visibility: hidden; }
-            #certificado-imprimible, #certificado-imprimible * { visibility: visible; }
-            #certificado-imprimible {
+            #printable-area, #printable-area * { visibility: visible; }
+            #printable-area {
                 position: absolute;
                 left: 0;
                 top: 0;
                 width: 100%;
             }
         }
-
-        .glitch-red { text-shadow: 2px 0 #ff0000, -2px 0 #0000ff; }
-        .text-gold { color: #d4af37; }
     </style>
 </head>
 <body>
     <div id="root"></div>
 
-    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+        const { useState, useEffect } = React;
 
-    <script type="text/babel" src="EBRG-certificado.tsx"></script>
+        const EBRGPortal = () => {
+            const [nombre, setNombre] = useState('STEVEN GÓMEZ SERRANO');
+            const [disciplina, setDisciplina] = useState('Boxeo Clásico (Rubén Guerra Flow)');
+            const [contador, setContador] = useState(0);
+            const [procesando, setProcesando] = useState(false);
+
+            // Persistencia del Contador SADV41
+            useEffect(() => {
+                const total = localStorage.getItem('contador_guerreros');
+                if (total) setContador(parseInt(total));
+            }, []);
+
+            const registrarYImprimir = () => {
+                setProcesando(true);
+                // Simulación de envío a sadv41@gmail.com
+                setTimeout(() => {
+                    const nuevoTotal = contador + 1;
+                    setContador(nuevoTotal);
+                    localStorage.setItem('contador_guerreros', nuevoTotal.toString());
+                    setProcesando(false);
+                    window.print();
+                }, 1500);
+            };
+
+            return (
+                <div className="min-h-screen flex flex-col items-center p-4 md:p-8">
+                    
+                    {/* Header: Realeza de Burunga */}
+                    <header className="mb-10 text-center">
+                        <h1 className="text-4xl md:text-6xl font-black tracking-tighter text-white mb-2 uppercase glitch-red italic">
+                            RUBÉN GUERRA <span className="text-gold">SADV41</span>
+                        </h1>
+                        <p className="text-blue-400 italic font-mono tracking-[0.3em] uppercase text-[10px] md:text-xs">
+                            Preparación Tripartita: Física • Mental • Espiritual
+                        </p>
+                    </header>
+
+                    <main className="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+                        
+                        {/* Lado Izquierdo: Formulario y Enlaces */}
+                        <section className="bg-dark-card p-8 border-t-4 border-gold rounded-b-lg shadow-2xl backdrop-blur-md">
+                            <div className="flex justify-between items-center mb-6 border-b border-gray-800 pb-4">
+                                <h2 className="text-xl font-bold text-gold uppercase tracking-widest">Registro de Nodo</h2>
+                                <span className="text-xs font-mono bg-black px-2 py-1 border border-blue-900 text-blue-500">
+                                    GUERREROS: {contador.toString().padStart(4, '0')}
+                                </span>
+                            </div>
+
+                            <form className="space-y-4">
+                                <div>
+                                    <label className="block text-[10px] uppercase text-gray-500 font-bold mb-1">Nombre Completo (El Nodo)</label>
+                                    <input 
+                                        type="text" 
+                                        className="w-full bg-black border border-gray-700 p-3 rounded text-white focus:border-blue-500 outline-none uppercase font-black"
+                                        value={nombre}
+                                        onChange={(e) => setNombre(e.target.value.toUpperCase())}
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-[10px] uppercase text-gray-500 font-bold mb-1">Disciplina</label>
+                                    <select 
+                                        className="w-full bg-black border border-gray-700 p-3 rounded text-white focus:border-gold outline-none"
+                                        onChange={(e) => setDisciplina(e.target.value)}
+                                    >
+                                        <option>Boxeo Clásico (Rubén Guerra Flow)</option>
+                                        <option>Full Contact / Kick Boxing</option>
+                                        <option>Defensa Personal Disciplinaria</option>
+                                    </select>
+                                </div>
+                                
+                                {/* Enlaces de Registro Externo */}
+                                <div className="grid grid-cols-2 gap-3 py-2">
+                                    <a href="https://wa.me/message/GYU3IAM5KDXSB1" target="_blank" className="bg-green-900/20 border border-green-600 p-2 text-center text-[9px] rounded font-bold uppercase hover:bg-green-700 transition">WhatsApp</a>
+                                    <a href="https://yappypa.page.link/Zi7X?hash=rjYRsJ8Yz0hGBKWXnNKRpeCr5yZZkbjbgkxGCAZdd/nmXoS0X8s5ntvwHrGm+7HT" target="_blank" className="bg-blue-900/20 border border-blue-600 p-2 text-center text-[9px] rounded font-bold uppercase hover:bg-blue-700 transition">Yappy Pay</a>
+                                </div>
+
+                                <button 
+                                    type="button"
+                                    onClick={registrarYImprimir}
+                                    className={`w-full py-4 rounded font-black uppercase tracking-widest transition shadow-xl ${procesando ? 'bg-gray-700 animate-pulse' : 'bg-red-700 hover:bg-red-600 active:scale-95'}`}
+                                >
+                                    {procesando ? 'Procesando...' : 'Iniciar Transformación (Amén)'}
+                                </button>
+                            </form>
+                            <p className="mt-4 text-[9px] text-center text-gray-600 font-mono uppercase tracking-tighter">
+                                ID: CHRIST(O)-BOX-89012251 | sadv41@gmail.com
+                            </p>
+                        </section>
+
+                        {/* Lado Derecho: Certificado Dinámico */}
+                        <section id="printable-area" className="flex flex-col items-center">
+                            <div className="w-full p-1 border-2 border-double border-gold bg-black rounded shadow-2xl transition-all duration-500">
+                                <div className="border border-yellow-900/40 p-8 text-center relative overflow-hidden bg-gradient-to-b from-gray-900 to-black">
+                                    
+                                    {/* Sello de Fondo */}
+                                    <div className="absolute inset-0 opacity-[0.03] flex items-center justify-center pointer-events-none select-none">
+                                        <span className="text-9xl font-black rotate-[-15deg]">SADV41</span>
+                                    </div>
+
+                                    <div className="flex justify-between text-[7px] font-mono text-gold mb-6">
+                                        <span>ESTÉREO: 2200W</span>
+                                        <span>ESC. RUBÉN DARÍO GUERRA</span>
+                                    </div>
+
+                                    <h3 className="text-xl font-serif text-gold uppercase tracking-widest mb-1">Certificado de Realeza</h3>
+                                    <div className="w-16 h-px bg-gold mx-auto mb-6"></div>
+                                    
+                                    <p className="text-[9px] text-gray-500 uppercase tracking-widest mb-2">Otorgado al Guerrero:</p>
+                                    <h4 className="text-3xl md:text-4xl font-black text-white mb-8 border-b border-gold inline-block px-4 pb-1">
+                                        {nombre || "NOMBRE DEL GUERRERO"}
+                                    </h4>
+                                    
+                                    <div className="max-w-xs mx-auto text-[10px] leading-relaxed text-gray-400 italic mb-10">
+                                        "Por integrar la fuerza física en la disciplina de {disciplina} con la templanza del espíritu, bajo la guianza del Maestro Guerra."
+                                    </div>
+
+                                    <div className="flex justify-around items-end mt-4">
+                                        <div className="text-center">
+                                            <div className="w-16 border-b border-gray-700 mx-auto"></div>
+                                            <p className="text-[7px] font-bold uppercase mt-1">Rubén Guerra</p>
+                                            <p className="text-[5px] text-gold uppercase">Maestro</p>
+                                        </div>
+                                        <div className="bg-red-900/20 border border-red-900 p-2 rounded-full">
+                                            <span className="text-lg">🥊</span>
+                                        </div>
+                                        <div className="text-center">
+                                            <div className="w-16 border-b border-gray-700 mx-auto"></div>
+                                            <p className="text-[7px] font-bold uppercase mt-1">Steven Dior</p>
+                                            <p className="text-[5px] text-gold uppercase">Sello SADV41</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <p className="text-gray-500 text-[8px] mt-4 font-mono uppercase tracking-[0.4em]">The Real Essence • Burunga 2026</p>
+                        </section>
+
+                    </main>
+
+                    <footer className="mt-12 text-center text-gray-600 text-[9px] font-mono leading-loose">
+                        <p>GIGACHAD RESILIENCE PROJECT | PANAMÁ OESTE</p>
+                        <p className="text-blue-900 tracking-[1em] uppercase">SADV41XADV41SVA41</p>
+                    </footer>
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<EBRGPortal />);
+    </script>
 </body>
 </html>
