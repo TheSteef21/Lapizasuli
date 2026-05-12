@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SADV41X | Alcurnia Informativa & Master Hub</title>
+    <title>SADV41X | YYWEEK20 - Reporte Burunga</title>
     <style>
         :root {
             --neon: #00ffcc;
@@ -17,13 +17,12 @@
         body {
             background: var(--dark);
             color: #e0e0e0;
-            font-family: 'Georgia', serif; /* Herencia de Alcurnia */
+            font-family: 'Georgia', serif;
             margin: 0;
             padding: 20px;
             line-height: 1.6;
         }
         
-        /* HEADER UNIFICADO */
         header {
             text-align: center;
             border-bottom: 2px solid var(--neon);
@@ -39,7 +38,6 @@
         }
         .subtitle { font-style: italic; color: var(--gold); font-size: 1.1em; }
 
-        /* SISTEMA DE INVOCACIÓN SADV41X */
         .search-container { 
             display: flex; 
             gap: 10px; 
@@ -65,10 +63,9 @@
             font-family: 'Courier New', monospace;
         }
 
-        /* CONTENEDOR DE NOTICIAS (ALCURNIA) */
         .news-container { max-width: 850px; margin: auto; }
         .week-tag { 
-            background: #333; 
+            background: var(--crimson); 
             color: #fff; 
             display: inline-block; 
             padding: 5px 20px; 
@@ -95,7 +92,6 @@
         h2 { color: var(--orange); font-size: 1.8em; margin-top: 0; }
         h3 { color: var(--neon); font-family: 'Courier New', monospace; }
         
-        /* INFOGRAFÍAS Y ALERTAS */
         .infographic-box {
             border: 2px solid var(--gold);
             padding: 20px;
@@ -109,9 +105,9 @@
             padding: 15px; 
             color: #fff176; 
             font-size: 0.9em;
+            margin-top: 10px;
         }
 
-        /* GRID DE ARCHIVOS (MASTER HUB) */
         .master-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -132,6 +128,21 @@
         .card:hover { border-color: var(--neon); background: var(--matrix); transform: translateY(-3px); }
         .version-badge { position: absolute; top: 10px; right: 10px; background: var(--neon); color: var(--dark); padding: 2px 5px; font-size: 0.7rem; font-weight: bold; }
 
+        #sadv41-tool {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--neon);
+            color: var(--dark);
+            padding: 10px 20px;
+            display: none;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 0 15px var(--neon);
+            z-index: 1000;
+        }
+
         a { color: var(--neon); text-decoration: none; }
         a:hover { text-decoration: underline; }
     </style>
@@ -140,7 +151,7 @@
 
 <header>
     <h1>MOTOR SADV41X</h1>
-    <div class="subtitle">Crónica de Alcurnia & Árbol de Recuerdos</div>
+    <div class="subtitle">YYWEEK20: Liberación de Limitaciones | Burunga</div>
 </header>
 
 <div class="search-container">
@@ -149,52 +160,51 @@
 </div>
 
 <div class="news-container">
-    <div class="week-tag">Semana 19 - Mayo 2026</div>
+    <div class="week-tag">Semana 20 - Mayo 2026</div>
 
     <article>
-        <div class="date-divider">Sábado, 09 de mayo de 2026 | UAP Transparency</div>
-        <h2>Transparencia Aeroespacial: Sistema PURSUE</h2>
-        <p>Por orden directa del Presidente Trump, se ha iniciado la desclasificación masiva de archivos UAP. El <strong>Sistema PURSUE</strong> centraliza la liberación de datos físicos y digitales tras décadas de secretismo.</p>
+        <div class="date-divider">Lunes, 11 de mayo de 2026 | Protocolo de Transparencia</div>
+        <h2>Reporte de Inteligencia: El Parche de Panamá</h2>
         
+        <h3 style="color: var(--gold);">[01] Sistema y Listas UE</h3>
+        <p>La Asamblea Nacional de Panamá inicia consultas sobre la <strong>Ley de Sustancia Económica</strong>. Objetivo: Salir de la Lista Gris de la UE y limpiar los puentes corruptos.</p>
+        
+        <h3 style="color: var(--orange);">[03] Alerta Ciberseguridad</h3>
+        <p>Se confirman 5 incidentes de alto impacto. El sistema SADV41X recomienda el autoparche inmediato ante infraestructuras vulnerables.</p>
+
         <div class="infographic-box">
-            <h4 style="color: var(--gold); margin-top:0; text-align:center;">[ ESTRUCTURA PURSUE ]</h4>
-            <ul style="list-style: none; padding: 0; font-size: 0.9em;">
-                <li>📡 <b>Revisión:</b> Análisis de registros de 14 agencias federales.</li>
-                <li>📦 <b>Publicación:</b> Entregas escalonadas cada 21 días.</li>
-                <li>🔬 <b>Open Science:</b> Acceso a expertos externos para casos sin resolver.</li>
+            <h4 style="color: var(--gold); margin-top:0; text-align:center;">[ ESTRUCTURA DE ALERTA ]</h4>
+            <ul style="list-style: none; padding: 0; font-size: 0.9em; font-family: monospace;">
+                <li>🏛 <b>Justicia:</b> Captura contra ex-presidente (Rebeldía).</li>
+                <li>📈 <b>Economía:</b> MEF define 3% interés CEPANIM.</li>
+                <li>⛈ <b>Ambiente:</b> Tormentas y enjambres en Panamá Oeste.</li>
+                <li>🌎 <b>Global:</b> Trump evalúa Venezuela como estado 51.</li>
             </ul>
         </div>
+        
+        <aside class="alert-box">
+            <strong>SADV41X:</strong> La transparencia es la liberación del error 1099. Usa este reporte para validar los puentes.
+        </aside>
     </article>
 
-    <article>
-        <div class="date-divider">Sábado, 09 de mayo de 2026 | Reporte Local</div>
-        <h3 style="color: #4caf50;">Agroferias IMA: Punto Único en Coclé</h3>
-        <p>El IMA concentra sus ventas hoy en la <strong>Casa Comunal de San Cristóbal (Río Indio, Penonomé)</strong>. Se requiere cédula para compras a precios de feria.</p>
-        
-        <h3 style="color: #2196f3;">Costa Rica: Laura Fernández asume mando</h3>
-        <p>Investidura 2026-2030. Promesa de combate total al crimen organizado en la región.</p>
-
-        <div style="margin-top: 20px; text-align: center; border: 1px dashed var(--neon); padding: 10px;">
-            <a href="https://instagram.com/StevenDiorOficial" target="_blank">IG: @StevenDiorOficial</a> | 
-            <a href="file:///C:/SADV41X.html#infografias-ima">SADV41X.html Deep Link</a>
-        </div>
-
-        <aside class="alert-box" style="margin-top:20px;">
-            <strong>ESTADO CRÍTICO:</strong> Panamá 30.6°C | Nubosidad dispersa. Alerta por radiación UV.
-        </aside>
+    <article style="opacity: 0.7;">
+        <div class="date-divider">Sábado, 09 de mayo de 2026 | UAP Transparency</div>
+        <h2>Sistema PURSUE: Desclasificación</h2>
+        <p>Análisis de 14 agencias federales. Publicación escalonada cada 21 días por orden de Trump.</p>
     </article>
 </div>
 
-<div class="master-grid" id="mainDisplay">
-    </div>
+<div class="master-grid" id="mainDisplay"></div>
+
+<div id="sadv41-tool">BUSCAR EN SADV41X</div>
 
 <script>
 const urlRaiz = "https://thesteef21.github.io/Lapizasuli/";
 const registroMaestro = [
+    { nombre: "YYWEEK20", ed: "01", file: "YYWEEK20.html", tipo: "Reporte", lang: "SADV41X" },
     { nombre: "SADV41AT100YEARSTERDAY", ed: "02", file: "SADV41AT100YEARSTERDAY02.html", tipo: "Periodismo", lang: "Neolatín" },
     { nombre: "Aura Engine", ed: "01", file: "Aura_engine.py", tipo: "Motor GAPPAI", lang: "Python" },
-    { nombre: "Diccionario Neolatín", ed: "01", file: "neolatin_base.html", tipo: "Lingüística", lang: "Gnabe" },
-    { nombre: "Aura Core Memory", ed: "01", file: "Aura_Core_Memory.json", tipo: "Memoria", lang: "JSON" }
+    { nombre: "Diccionario Neolatín", ed: "01", file: "neolatin_base.html", tipo: "Lingüística", lang: "Gnabe" }
 ];
 
 function renderGrid(filter = "") {
@@ -224,6 +234,25 @@ function checkKeys(e) {
     renderGrid(e.target.value);
     if (e.key === "Enter") invocarArchivo();
 }
+
+// PROTOCOLO DE SELECCIÓN DINÁMICA
+const tool = document.getElementById('sadv41-tool');
+let lastSelection = "";
+
+document.addEventListener('mouseup', function() {
+    let selectedText = window.getSelection().toString().trim();
+    if (selectedText.length > 0) {
+        lastSelection = selectedText;
+        tool.style.display = 'block';
+        tool.innerText = "ENVIAR A SADV41X: " + (selectedText.substring(0, 15) + "...");
+    } else {
+        tool.style.display = 'none';
+    }
+});
+
+tool.addEventListener('click', function() {
+    window.location.href = "home.html?search=" + encodeURIComponent(lastSelection);
+});
 </script>
 
 </body>
