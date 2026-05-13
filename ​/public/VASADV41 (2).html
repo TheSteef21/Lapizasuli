@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>SADV41 - Calendario de Victoria</title>
+    <style>
+        body { background: #000; color: #fff; font-family: 'Segoe UI', sans-serif; padding: 20px; }
+        .tabernaculo { border: 2px solid #ffeb3b; border-radius: 15px; padding: 25px; background: #0a0a0a; max-width: 900px; margin: auto; box-shadow: 0 0 20px rgba(255, 235, 59, 0.2); }
+        h1 { color: #ffeb3b; text-align: center; letter-spacing: 4px; text-transform: uppercase; }
+        .lema { text-align: center; color: #888; font-style: italic; margin-bottom: 30px; }
+        
+        .calendario-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 20px; }
+        .dia-caja { background: #1a1a1a; border: 1px solid #333; border-radius: 10px; padding: 20px; text-align: center; transition: 0.3s; }
+        .dia-caja:hover { border-color: #ffeb3b; }
+        
+        .fecha { display: block; color: #888; font-size: 0.8rem; margin-bottom: 10px; text-transform: uppercase; }
+        .monto { display: block; font-size: 1.8rem; font-weight: bold; margin-bottom: 10px; }
+        .monto.ayer { color: #4caf50; }
+        .monto.hoy { color: #ffeb3b; }
+        
+        .detalle-mini { font-size: 0.75rem; color: #aaa; border-top: 1px solid #333; pt-10: 10px; padding-top: 10px; text-align: left; }
+        .tag-servicio { color: #81d4fa; font-weight: bold; }
+        
+        .nota-pie { margin-top: 30px; padding: 15px; background: #002b36; border-radius: 8px; font-size: 0.85rem; border-left: 4px solid #268bd2; }
+    </style>
+</head>
+<body>
+    <div class="tabernaculo">
+        <h1>SADV41 🎚 Misión de Servicio</h1>
+        <div class="lema">"Secuencia de Fe y Trabajo Honrado"</div>
+
+        <div class="calendario-grid">
+            <div class="dia-caja">
+                <span class="fecha">Domingo 22 Feb</span>
+                <span class="monto ayer">$3,201.00</span>
+                <div class="detalle-mini">
+                    • Producción Consolidada<br>
+                    • Efectivo: $120.00<br>
+                    • Transferencias Alexander G.
+                </div>
+            </div>
+
+            <div class="dia-caja" style="border-color: #ffeb3b;">
+                <span class="fecha">Lunes 23 Feb (Hoy)</span>
+                <span class="monto hoy">$160.50</span>
+                <div class="detalle-mini">
+                    • <span class="tag-servicio">Técnico Jefe:</span> Steven G.<br>
+                    • Llantas 2da (Toño): $30.00<br>
+                    • Transferencias: $98.00<br>
+                    • Reparación SUV + Otros
+                </div>
+            </div>
+        </div>
+
+        <div class="nota-pie">
+            <strong>ACTO DE GRACIA DEL DÍA:</strong> Se brindó apoyo al conductor accidentado (Bonifacio Barrios) con cable de carga y atención inmediata. La instalación y válvulas del cliente de ayer se entregaron como cortesía de la misión.
+        </div>
+    </div>
+</body>
+</html>
+                        <th>Origen</th>
+                        <th>Detalle / Referencia</th>
+                        <th>Monto ($)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Bancario</td><td>Transferencias Alexander (Prueba)</td><td>540.00</td></tr>
+                    <tr><td>Bancario</td><td>4 Llantas 265/75/16 (#729241306)</td><td>160.00</td></tr>
+                    <tr><td>Bancario</td><td>Llantas y Rines (#729876989)</td><td>800.00</td></tr>
+                    <tr><td>Bancario</td><td>Transferencias Alexander (#730562526 / #730824753)</td><td>496.00</td></tr>
+                    <tr><td>Bancario</td><td>M. Samudio (Rin 17/Llantas #731574548)</td><td>1,085.00</td></tr>
+                    <tr><td>Físico</td><td>Venta Efectivo (6x$20)</td><td>120.00</td></tr>
+                    <tr class="total-dia">
+                        <td colspan="2">TOTAL PRODUCIDO HOY</td>
+                        <td>$3,201.00</td>
+                    </tr>
+                </tbody>
+            </table>
+            <span class="bono">Bono de Maestría Sugerido (10%): $320.10</span>
+        </div>
+
+        <div class="seccion">
+            <h3 style="color: #ffeb3b;">Cláusulas de Contrato y Valor</h3>
+            <p>• <b>Experiencia:</b> 3 años y 6 meses de dominio técnico en Turbo Tire.</p>
+            <p>• <b>Capacidad:</b> Ejecución total de la operación (el trabajador que hace todo).</p>
+            <p>• <b>Honra:</b> Manejo integral de activos y flujos de caja bajo ley SADV41.</p>
+        </div>
+    </div>
+</body>
+</html>

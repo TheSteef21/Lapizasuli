@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Burunga 23 Aniversario - Desarrollo y Comunidad</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Poppins:wght@300;400;600&family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0056b3',
+                        accent: '#28a745',
+                        secondary: '#f7941d',
+                        darkBg: '#1a1a1a',
+                        lightText: '#ffffff',
+                        cardBg: '#ffffff',
+                        cardText: '#333333',
+                        grayText: '#dddddd',
+                    },
+                    fontFamily: {
+                        display: ['Montserrat', 'sans-serif'],
+                        body: ['Poppins', 'sans-serif'],
+                        accent: ['Outfit', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                        'float': 'float 3s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .hero-clip {
+            clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+        }
+        @media (max-width: 640px) {
+            .hero-clip {
+                clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%);
+            }
+        }
+        .section-underline::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: #f7941d;
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+        .grayscale-hover {
+            filter: grayscale(100%);
+            transition: all 0.4s ease;
+        }
+        .grayscale-hover:hover {
+            filter: grayscale(0%);
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body class="bg-[#f4f4f9] text-gray-800 font-body overflow-x-hidden">
+
+    <!-- HERO SECTION -->
+    <header class="relative min-h-[85vh] flex items-center justify-center text-white overflow-hidden hero-clip">
+        <!-- Background with Overlay -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://opal.google/board/blobs/b0d6f912-985f-441a-a990-29712ef1e22b" alt="Burunga Hero" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-primary/80"></div>
+        </div>
+
+        <div class="relative z-10 container mx-auto px-6 text-center animate-fade-in-up">
+            <img src="https://opal.google/board/blobs/0b101da5-d6db-4955-bc08-65636cc94d7a" alt="Burunga Logo" class="w-32 md:w-48 mx-auto mb-8 animate-float">
+            
+            <h1 class="font-display text-4xl md:text-7xl font-extrabold uppercase tracking-tighter mb-4 leading-tight">
+                Burunga en su <br>
+                <span class="text-secondary text-5xl md:text-8xl">23 Aniversario</span>
+            </h1>
+            
+            <div class="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 text-lg md:text-2xl font-accent font-semibold bg-black/30 backdrop-blur-md py-4 px-8 rounded-full inline-flex mt-6 border border-white/20">
+                <span class="flex items-center gap-2">
+                    <span class="text-secondary text-2xl">📅</span> 2 de mayo 2026
+                </span>
+                <span class="hidden md:block w-px h-6 bg-white/30"></span>
+                <span class="flex items-center gap-2">
+                    <span class="text-secondary text-2xl">📍</span> Arraiján Town Center
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <!-- INTRO SECTION -->
+    <section class="py-20 container mx-auto px-6 max-w-4xl text-center">
+        <h2 class="font-display text-3xl md:text-4xl text-primary mb-6 section-underline uppercase italic">Impulsando el Futuro de Panamá Oeste</h2>
+        <p class="text-lg md:text-xl text-gray-600 leading-relaxed mb-8">
+            Celebramos más que una fecha; conmemoramos nuestra <span class="text-primary font-semibold">identidad comunitaria</span> y una <span class="text-primary font-semibold">visión empresarial</span> audaz. Un espacio diseñado para el networking, la inversión local y el fortalecimiento de los lazos que hacen de Burunga un motor de crecimiento en la región.
+        </p>
+    </section>
+
+    <!-- REGISTRATION SECTION (CTA) -->
+    <section class="py-12 bg-white relative overflow-hidden">
+        <div class="container mx-auto px-6">
+            <div class="max-w-3xl mx-auto bg-white rounded-3xl shadow-2xl border border-gray-100 overflow-hidden relative z-10">
+                <div class="bg-primary p-4 text-center text-white font-bold uppercase tracking-widest text-sm">
+                    Oferta de Preventa Exclusiva
+                </div>
+                <div class="p-8 md:p-12 text-center">
+                    <h2 class="font-display text-3xl text-gray-800 mb-4">Asegura tu Espacio</h2>
+                    <p class="text-gray-500 mb-8 max-w-md mx-auto">Únete a emprendedores y líderes comunitarios en este evento histórico. Cupos limitados para la preventa especial.</p>
+                    
+                    <div class="mb-8">
+                        <span class="text-6xl md:text-8xl font-display font-black text-accent">$5</span>
+                        <p class="text-accent font-bold uppercase mt-2 tracking-wide">Preventa Especial</p>
+                    </div>
+
+                    <a href="tel:+50765341415" class="inline-block bg-secondary hover:bg-orange-600 text-white font-display text-xl px-12 py-5 rounded-full shadow-lg transition-all hover:scale-105 active:scale-95 uppercase tracking-wide">
+                        COMPRAR AHORA
+                    </a>
+
+                    <div class="mt-12 pt-8 border-t border-dashed border-gray-300">
+                        <div class="flex flex-col items-center gap-4">
+                            <p class="text-sm font-semibold text-gray-400 uppercase tracking-widest">Método de Pago</p>
+                            <div class="flex items-center gap-3 bg-[#e6f2ff] px-6 py-3 rounded-2xl border border-primary/20">
+                                <span class="font-bold text-primary text-xl">YAPPY:</span>
+                                <span class="font-display text-2xl text-primary tracking-tighter">+507 6534-1415</span>
+                            </div>
+                            <p class="text-xs text-gray-500 italic mt-2">Favor enviar comprobante de pago al mismo número para confirmar su entrada.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Decorative background elements -->
+        <div class="absolute top-0 right-0 w-64 h-64 bg-secondary/5 rounded-full -mr-32 -mt-32"></div>
+        <div class="absolute bottom-0 left-0 w-96 h-96 bg-primary/5 rounded-full -ml-48 -mb-48"></div>
+    </section>
+
+    <!-- TALENT SECTION -->
+    <section class="py-24 bg-darkBg text-white">
+        <div class="container mx-auto px-6 max-w-6xl">
+            <div class="text-center mb-16">
+                <h2 class="font-display text-4xl md:text-5xl mb-4 section-underline uppercase tracking-tight">Talento y Alegría</h2>
+                <p class="text-grayText max-w-2xl mx-auto">La energía de Arraiján se siente en cada nota. Presentamos a los artistas que pondrán ritmo a nuestra celebración.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 lg:gap-12">
+                <!-- Talent Card 1 -->
+                <div class="group relative bg-white/5 border-l-8 border-secondary p-8 rounded-2xl hover:bg-white/10 transition-all duration-300">
+                    <div class="flex flex-col h-full">
+                        <span class="text-secondary font-bold text-sm uppercase tracking-widest mb-2">Estelar</span>
+                        <h3 class="font-display text-3xl mb-4 group-hover:text-secondary transition-colors">Samy y Sandra Sandoval</h3>
+                        <p class="text-grayText leading-relaxed mb-6">Embajadores indiscutibles de nuestra música típica. Una presentación especial celebrando el orgullo de Burunga con todo el sabor interiorano.</p>
+                        <div class="mt-auto pt-4 flex items-center gap-2 text-secondary font-semibold">
+                            <span class="w-8 h-[2px] bg-secondary"></span>
+                            Los Patrones de la Cumbia
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Talent Card 2 -->
+                <div class="group relative bg-white/5 border-l-8 border-secondary p-8 rounded-2xl hover:bg-white/10 transition-all duration-300">
+                    <div class="flex flex-col h-full">
+                        <span class="text-secondary font-bold text-sm uppercase tracking-widest mb-2">Invitado Especial</span>
+                        <h3 class="font-display text-3xl mb-4 group-hover:text-secondary transition-colors">DJ Terco</h3>
+                        <p class="text-grayText leading-relaxed mb-6">El ritmo y la vibración que la juventud de Arraiján espera. Una mezcla explosiva de éxitos que mantendrán la energía al máximo durante toda la noche.</p>
+                        <div class="mt-auto pt-4 flex items-center gap-2 text-secondary font-semibold">
+                            <span class="w-8 h-[2px] bg-secondary"></span>
+                            Urban Beats & Energy
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DEVELOPMENT BLOCK -->
+    <section class="py-24 bg-white">
+        <div class="container mx-auto px-6 max-w-6xl">
+            <div class="flex flex-col md:flex-row gap-12 items-center mb-20">
+                <div class="md:w-1/2">
+                    <span class="inline-block bg-primary text-white text-xs font-bold uppercase px-4 py-1.5 rounded-full mb-4">Desarrollo Territorial</span>
+                    <h2 class="font-display text-4xl text-gray-900 mb-6 leading-tight">Alianzas Estratégicas</h2>
+                    <p class="text-gray-600 text-lg mb-8">
+                        Este evento es posible gracias al firme compromiso de organizaciones que creen en el potencial económico de Burunga. Juntos construimos una plataforma para el progreso local.
+                    </p>
+                    
+                    <div class="bg-gray-50 p-6 rounded-2xl flex items-center gap-6 border border-gray-100 shadow-sm">
+                        <div class="w-24 h-24 bg-white rounded-xl shadow p-2 flex items-center justify-center grayscale-hover overflow-hidden">
+                            <img src="https://opal.google/board/blobs/4aa37b7e-001c-4f98-9b06-260b4d9ca941" alt="Aliado Local" class="max-w-full max-h-full object-contain">
+                        </div>
+                        <div>
+                            <h4 class="font-display text-xl text-primary">Junta Comunal de Burunga</h4>
+                            <p class="text-secondary font-bold text-sm uppercase">Patrocinador Oficial</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="md:w-1/2 w-full">
+                    <!-- Gallery -->
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                        <div class="col-span-2 relative group overflow-hidden rounded-2xl h-48">
+                            <img src="https://opal.google/board/blobs/487b33c5-826c-4703-8749-d579297ede8b" alt="Progreso Burunga" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-black/40 flex items-end p-4">
+                                <span class="text-white font-bold text-sm">Progreso Burunga</span>
+                            </div>
+                        </div>
+                        <div class="relative group overflow-hidden rounded-2xl h-48">
+                            <img src="https://opal.google/board/blobs/52ac8eeb-eb53-4b3d-814e-88e5683e0144" alt="Comunidad Unida" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-black/40 flex items-end p-4">
+                                <span class="text-white font-bold text-xs">Comunidad Unida</span>
+                            </div>
+                        </div>
+                        <div class="col-span-3 relative group overflow-hidden rounded-2xl h-40">
+                            <img src="https://opal.google/board/blobs/b282b077-8ed0-41ad-b289-67a8ee1b7973" alt="Inversión Local" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-gradient-to-r from-primary/60 to-transparent flex items-center px-8">
+                                <span class="text-white font-display text-2xl font-bold italic">Inversión Local</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Strategic Grid (More Logos if needed, here just placeholders to fulfill layout instructions) -->
+            <div class="border-t border-gray-100 pt-16 text-center">
+                <p class="text-sm font-bold text-gray-400 uppercase tracking-widest mb-10">Organizaciones Comprometidas</p>
+                <div class="flex flex-wrap justify-center gap-12 opacity-60">
+                    <!-- Repeated logo for layout balance as per instruction for "Grid of Logos" -->
+                    <img src="https://opal.google/board/blobs/4aa37b7e-001c-4f98-9b06-260b4d9ca941" alt="Sponsor" class="h-16 w-auto grayscale-hover">
+                    <img src="https://opal.google/board/blobs/0b101da5-d6db-4955-bc08-65636cc94d7a" alt="Sponsor" class="h-16 w-auto grayscale-hover">
+                    <img src="https://opal.google/board/blobs/4aa37b7e-001c-4f98-9b06-260b4d9ca941" alt="Sponsor" class="h-16 w-auto grayscale-hover">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SIMPLE FOOTER (As per restriction, but following standard layout flow) -->
+    <div class="bg-gray-100 py-12 px-6 border-t border-gray-200">
+        <div class="container mx-auto max-w-4xl text-center">
+            <img src="https://opal.google/board/blobs/0b101da5-d6db-4955-bc08-65636cc94d7a" alt="Logo" class="w-20 mx-auto mb-6 opacity-50">
+            <p class="text-gray-500 font-medium mb-2 uppercase tracking-widest text-xs">Burunga 23 Aniversario</p>
+            <p class="font-accent text-gray-400 italic">"Construyendo identidad, generando prosperidad."</p>
+            <p class="mt-8 text-xs text-gray-400">&copy; 2026 Burunga, Panamá Oeste.</p>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>SADV41 - Registro Federal de Producción</title>
+    <style>
+        :root { --gold: #d4af37; --matrix: #00ff41; --bg: #0a0a0a; }
+        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: #ddd; padding: 20px; }
+        .hub-container { max-width: 900px; margin: auto; border: 2px solid var(--gold); border-radius: 20px; padding: 25px; background: #111; box-shadow: 0 0 20px rgba(212, 175, 55, 0.2); }
+        h1 { color: var(--gold); text-align: center; text-transform: uppercase; letter-spacing: 2px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-bottom: 30px; }
+        .link-card { background: #1a1a1a; padding: 15px; border-radius: 10px; border: 1px solid #333; text-decoration: none; color: white; transition: 0.3s; text-align: center; }
+        .link-card:hover { border-color: var(--matrix); background: #222; }
+        form { background: #000; padding: 20px; border-radius: 15px; border: 1px dashed var(--gold); }
+        input, select { width: 100%; padding: 12px; margin: 10px 0; background: #111; border: 1px solid #444; color: var(--matrix); border-radius: 8px; box-sizing: border-box; }
+        button { background: var(--gold); color: black; border: none; padding: 15px; width: 100%; font-weight: bold; border-radius: 10px; cursor: pointer; font-size: 1.1em; }
+        .footer { text-align: center; margin-top: 20px; font-size: 0.8em; color: #666; }
+    </style>
+</head>
+<body>
+
+<div class="hub-container">
+    <h1>🏛️ Misión SADV41: Hub de Producción 🇮🇱</h1>
+    <p style="text-align: center; color: var(--gold);">Sincronización Federal: Llantería Turbo Tire & Piñata IPFS</p>
+
+    <div class="grid">
+        <a href="https://jade-tricky-pig-245.mypinata.cloud/ipfs/bafybeidltz5lv7bbdnbsu4y3wgvy7yiybbjzotgpangrdma3qq6yjkuhve/primary%3Af/document/primary%3Af%2Funificacion.html" class="link-card"><h3>🏛️ Unificación</h3></a>
+        <a href="https://jade-tricky-pig-245.mypinata.cloud/ipfs/bafybeidltz5lv7bbdnbsu4y3wgvy7yiybbjzotgpangrdma3qq6yjkuhve/primary%3Af/document/primary%3Af%2FAGSADV41.html" class="link-card"><h3>🎚️ Atrio-Gestión</h3></a>
+        <a href="https://jade-tricky-pig-245.mypinata.cloud/ipfs/bafybeidltz5lv7bbdnbsu4y3wgvy7yiybbjzotgpangrdma3qq6yjkuhve/primary%3Af/document/primary%3Af%2FRegistroPSH.html" class="link-card"><h3>📉 Paz y Salvo</h3></a>
+        <a href="https://jade-tricky-pig-245.mypinata.cloud/ipfs/bafybeidltz5lv7bbdnbsu4y3wgvy7yiybbjzotgpangrdma3qq6yjkuhve/primary%3Af/document/primary%3Af%2FSADV41Federal.jsx" class="link-card"><h3>📊 Facturadora</h3></a>
+    </div>
+
+    <form id="registroForm">
+        <h2 style="color: var(--gold); text-align: center;">📝 Registro de Servicio Diario</h2>
+        <input type="text" name="cliente" placeholder="Nombre del Cliente / Placa" required>
+        <select name="servicio">
+            <option value="Cambio de Llantas">Cambio de Llantas</option>
+            <option value="Reparación">Reparación (Taco/Parche)</option>
+            <option value="Balanceo">Balanceo</option>
+            <option value="Rotación">Rotación</option>
+        </select>
+        <input type="number" step="0.01" name="monto" placeholder="Monto B/. (Base: 410.80)" required>
+        <button type="submit">🚀 INYECTAR DATOS A HOJA DE CÁLCULO</button>
+    </form>
+
+    <div class="footer">
+        Steven Gómez Serrano • Burunga, Arraiján • 🎚️ Cristo viene
+    </div>
+</div>
+
+<script>
+    // Reemplaza con tu URL de Google Apps Script (Web App)
+    const scriptURL = 'TU_URL_DE_GOOGLE_APPS_SCRIPT_AQUI';
+    const form = document.getElementById('registroForm');
+
+    form.addEventListener('submit', e => {
+        e.preventDefault();
+        fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+            .then(response => alert('¡Justicia Registrada! Datos enviados a la Hoja de Cálculo.'))
+            .catch(error => console.error('Error:', error.message));
+        form.reset();
+    });
+</script>
+
+</body>
+</html>

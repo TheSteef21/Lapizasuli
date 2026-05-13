@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SADV41 | Ruleta de Tómbola Federal</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body { 
+            background-color: #050a14; 
+            background-image: radial-gradient(circle at 50% 50%, #0b132b 0%, #02040a 100%);
+            color: #ffffff; 
+            font-family: system-ui, -apple-system, sans-serif; 
+            min-height: 100vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Efectos de Luz */
+        .cyan-glow { text-shadow: 0 0 15px #06b6d4, 0 0 30px #06b6d4; }
+        
+        /* Paneles de Cristal */
+        .glass-panel { 
+            background: rgba(16, 25, 43, 0.6); 
+            backdrop-filter: blur(8px); 
+            border: 1px solid rgba(59, 130, 246, 0.3); 
+            border-radius: 1rem;
+            padding: 2rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Contenedor de la Ruleta */
+        .wheel-container {
+            position: relative;
+            width: 350px;
+            height: 350px;
+            margin: 1.5rem auto;
+        }
+
+        /* El Canvas de la Ruleta */
+        #wheel {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 4px solid #1e293b;
+            box-shadow: 0 0 25px rgba(6, 182, 212, 0.4);
+            transition: transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99);
+        }
+
+        /* El Puntero (Flecha) */
+        .pointer {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0; 
+            height: 0; 
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-top: 30px solid #eab308;
+            z-index: 10;
+            filter: drop-shadow(0 0 5px #eab308);
+        }
+
+        /* Botones de Redes Sociales (Glassmorphism) */
+        .social-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.4);
+            text-decoration: none;
+            color: #fff;
+        }
+        .social-btn.instagram:hover { background: #e1306c; border-color: #e1306c; box-shadow: 0 0 15px rgba(225, 48, 108, 0.5); }
+        .social-btn.facebook:hover { background: #1877f2; border-color: #1877f2; box-shadow: 0 0 15px rgba(24, 119, 242, 0.5); }
+        .social-btn.tiktok:hover { background: #ff0050; border-color: #00f2fe; box-shadow: 0 0 15px rgba(0, 242, 254, 0.5); }
+
+        /* Animación del Premio */
+        @keyframes pop {
+            0% { transform: scale(0.8); opacity: 0; }
+            50% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .winner-pop { animation: pop 0.5s ease-out forwards; }
+    </style>
+</head>
+<body>
+
+    <header class="text-center z-10 mb-2">
+        <h1 class="text-3xl md:text-5xl font-bold cyan-glow mb-2 uppercase tracking-widest">SADV41 Tómbola</h1>
+        <p class="text-gray-300">Premio: <span class="text-yellow-400 font-bold">Cupón B/. 2.50</span> - Reparación/Instalación</p>
+    </header>
+
+    <main class="glass-panel z-10 w-full max-w-lg">
+        
+        <div class="wheel-container">
+            <div class="pointer"></div>
+            <canvas id="wheel" width="400" height="400"></canvas>
+        </div>
+
+        <button id="spin-btn" class="mt-2 px-8 py-3 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-full transition-all border border-blue-400 shadow-[0_0_15px_rgba(59,130,246,0.6)] uppercase tracking-wide">
+            Girar Tómbola
+        </button>
+
+        <div id="result-box" class="mt-4 hidden h-16">
+            <p class="text-xs text-gray-400 uppercase">Ganador del Cupón:</p>
+            <h2 id="winner-name" class="text-3xl font-bold text-yellow-400 mt-1 uppercase"></h2>
+        </div>
+
+    </main>
+
+    <div class="flex flex-wrap justify-center gap-4 mt-6 z-10">
+        <a href="https://instagram.com/StevenDiorOficial" target="_blank" class="social-btn instagram">
+            <i class="fab fa-instagram text-lg"></i> @StevenDiorOficial
+        </a>
+        <a href="https://facebook.com/StevenDiorOficial" target="_blank" class="social-btn facebook">
+            <i class="fab fa-facebook-f text-lg"></i> StevenDiorOficial
+        </a>
+        <a href="https://tiktok.com/@StevenDiorOficial" target="_blank" class="social-btn tiktok">
+            <i class="fab fa-tiktok text-lg"></i> @StevenDiorOficial
+        </a>
+    </div>
+
+    <footer class="mt-6 text-xs text-gray-600 z-10 uppercase tracking-widest border-t border-gray-800 pt-2">
+        Red de Operaciones SADV41 | Transmisión Federal Activa
+    </footer>
+
+    <script>
+        const canvas = document.getElementById("wheel");
+        const ctx = canvas.getContext("2d");
+        const spinBtn = document.getElementById("spin-btn");
+        const resultBox = document.getElementById("result-box");
+        const winnerName = document.getElementById("winner-name");
+
+        const sectors = [
+            { color: "#0ea5e9", label: "Taxi 1" },
+            { color: "#3b82f6", label: "Taxi 2" },
+            { color: "#6366f1", label: "Taxi 3" },
+            { color: "#8b5cf6", label: "Taxi 4" },
+            { color: "#d946ef", label: "Taxi 5" },
+            { color: "#ec4899", label: "Taxi 6" },
+            { color: "#f43f5e", label: "Taxi 7" },
+            { color: "#eab308", label: "Taxi 8" },
+            { color: "#22c55e", label: "Taxi 9" },
+            { color: "#14b8a6", label: "Taxi 10" }
+        ];
+
+        const tot = sectors.length;
+        const arc = (2 * Math.PI) / tot;
+        let rotation = 0; 
+
+        function drawWheel() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < tot; i++) {
+                const angle = i * arc;
+                
+                ctx.beginPath();
+                ctx.fillStyle = sectors[i].color;
+                ctx.moveTo(200, 200);
+                ctx.arc(200, 200, 200, angle, angle + arc);
+                ctx.lineTo(200, 200);
+                ctx.fill();
+                ctx.stroke();
+
+                ctx.save();
+                ctx.translate(200, 200);
+                ctx.rotate(angle + arc / 2);
+                ctx.textAlign = "right";
+                ctx.fillStyle = "#ffffff";
+                ctx.font = "bold 22px system-ui";
+                ctx.shadowColor = "rgba(0,0,0,0.5)";
+                ctx.shadowBlur = 4;
+                ctx.fillText(sectors[i].label, 180, 8);
+                ctx.restore();
+            }
+        }
+
+        drawWheel();
+
+        spinBtn.addEventListener("click", () => {
+            resultBox.classList.add("hidden");
+            resultBox.classList.remove("winner-pop");
+            spinBtn.disabled = true;
+            spinBtn.classList.add("opacity-50", "cursor-not-allowed");
+
+            const extraSpins = Math.floor(Math.random() * 5) + 5; 
+            const randomDegree = Math.floor(Math.random() * 360);
+            rotation += (extraSpins * 360) + randomDegree;
+
+            canvas.style.transform = `rotate(${rotation}deg)`;
+
+            setTimeout(() => {
+                const actualRotation = rotation % 360;
+                const pointerAngle = (360 - actualRotation + 270) % 360; 
+                const sectorIndex = Math.floor(pointerAngle / (360 / tot));
+                
+                const winner = sectors[sectorIndex].label;
+
+                winnerName.textContent = winner;
+                resultBox.classList.remove("hidden");
+                resultBox.classList.add("winner-pop");
+
+                spinBtn.disabled = false;
+                spinBtn.classList.remove("opacity-50", "cursor-not-allowed");
+            }, 4000); 
+        });
+    </script>
+</body>
+</html>

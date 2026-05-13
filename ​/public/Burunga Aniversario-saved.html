@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BURUNGA: 23 Años de Hustle</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'neon-red': '#FF003C',
+                        'electric-blue': '#00F0FF',
+                        'gold-accent': '#FFD700',
+                        'deep-black': '#050505',
+                        'dark-gray': '#121212',
+                    },
+                    fontFamily: {
+                        display: ['Oswald', 'sans-serif'],
+                        body: ['Montserrat', 'sans-serif'],
+                    },
+                    animation: {
+                        'glitch': 'glitch 1s infinite linear alternate-reverse',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        glitch: {
+                            '0%': { transform: 'translate(0)' },
+                            '20%': { transform: 'translate(-2px, 2px)' },
+                            '40%': { transform: 'translate(-2px, -2px)' },
+                            '60%': { transform: 'translate(2px, 2px)' },
+                            '80%': { transform: 'translate(2px, -2px)' },
+                            '100%': { transform: 'translate(0)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #050505;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        .glass-card {
+            background: rgba(20, 20, 20, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .glass-card:hover {
+            border-color: #00F0FF;
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+            transform: scale(1.02);
+        }
+
+        .text-glow-red {
+            text-shadow: 0 0 10px rgba(255, 0, 60, 0.8);
+        }
+
+        .text-glow-blue {
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.8);
+        }
+
+        .text-glow-gold {
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+        }
+
+        .neon-border-red {
+            box-shadow: inset 0 0 15px rgba(255, 0, 60, 0.5), 0 0 15px rgba(255, 0, 60, 0.5);
+        }
+
+        .timeline-line {
+            background: linear-gradient(to bottom, #FF003C, #00F0FF, #FFD700);
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #050505;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #FF003C;
+            border-radius: 10px;
+        }
+
+        .video-container video {
+            filter: contrast(1.2) brightness(0.6) saturate(1.2);
+            object-fit: cover;
+        }
+
+        .media-item img, .media-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body class="font-body">
+
+    <!-- Audio Player -->
+    <div class="fixed bottom-8 right-8 z-50 flex items-center gap-4 bg-deep-black/80 p-3 rounded-full border border-electric-blue/30 backdrop-blur-md">
+        <span class="text-[10px] font-display uppercase tracking-widest text-electric-blue ml-2 animate-pulse">Phonk Mode</span>
+        <button id="audioToggle" class="w-12 h-12 rounded-full bg-electric-blue flex items-center justify-center text-black hover:scale-110 transition-transform active:scale-95 shadow-[0_0_15px_rgba(0,240,255,0.5)]">
+            <svg id="playIcon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <svg id="pauseIcon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+        </button>
+        <audio id="phonkAudio" loop>
+            <source src="https://opal.google/board/blobs/a28dd12c-bff2-409c-b1e0-c4623f57044a" type="audio/mpeg">
+        </audio>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="relative h-screen w-full flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 z-0 video-container">
+            <video src="https://opal.google/board/blobs/0d30202d-9d00-4e72-96e5-344e6f408e36" autoplay loop muted playsinline class="w-full h-full"></video>
+            <div class="absolute inset-0 bg-gradient-to-t from-deep-black via-transparent to-deep-black opacity-80"></div>
+        </div>
+
+        <div class="relative z-10 text-center px-4 max-w-5xl">
+            <h1 class="font-display text-5xl md:text-8xl lg:text-9xl font-black mb-4 tracking-tighter leading-none animate-float">
+                <span class="block text-white">BURUNGA:</span>
+                <span class="block text-transparent bg-clip-text bg-gradient-to-r from-neon-red via-gold-accent to-electric-blue text-glow-gold">EL GIGANTE</span>
+                <span class="block text-white text-3xl md:text-5xl mt-2 tracking-widest uppercase">De Panamá Oeste</span>
+            </h1>
+            <p class="text-lg md:text-2xl font-light tracking-[0.2em] text-electric-blue opacity-90 mb-8 uppercase">
+                23 años de hustle. No es solo historia, es el comienzo del imperio.
+            </p>
+            <div class="flex flex-col md:flex-row gap-6 justify-center items-center">
+                <a href="#gastronomia" class="px-8 py-4 bg-neon-red text-white font-display uppercase font-bold tracking-widest skew-x-[-12deg] hover:skew-x-0 transition-all hover:shadow-[0_0_30px_#FF003C] hover:scale-105">
+                    Explora el Flow
+                </a>
+                <a href="#timeline" class="px-8 py-4 border-2 border-white/30 text-white font-display uppercase font-bold tracking-widest skew-x-[-12deg] hover:skew-x-0 transition-all hover:bg-white hover:text-black hover:scale-105">
+                    Ver Legado
+                </a>
+            </div>
+        </div>
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7-7-7m14-8l-7 7-7-7"></path></svg>
+        </div>
+    </section>
+
+    <!-- Sabor de Nuestra Tierra Section -->
+    <section id="gastronomia" class="py-24 px-6 md:px-12 lg:px-24 bg-deep-black relative">
+        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-electric-blue to-transparent"></div>
+        
+        <div class="max-w-7xl mx-auto">
+            <div class="mb-16 reveal">
+                <h2 class="font-display text-4xl md:text-7xl font-bold text-white mb-4 uppercase italic">Sabor de Nuestra Tierra</h2>
+                <p class="text-neon-red font-display tracking-[0.3em] uppercase text-sm md:text-base">Fueling the Movement Since 2001</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Card 1: El Maiz -->
+                <div class="group relative aspect-square overflow-hidden rounded-lg glass-card reveal">
+                    <img src="https://opal.google/board/blobs/5f00b0d8-ee65-42f1-8bb9-36354d24d06b" alt="El Maiz" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-60">
+                    <div class="absolute inset-0 p-8 flex flex-col justify-end bg-gradient-to-t from-deep-black via-deep-black/40 to-transparent">
+                        <h3 class="text-gold-accent font-display text-3xl font-bold uppercase mb-2">El Maíz (The Core)</h3>
+                        <div class="overflow-hidden max-h-0 group-hover:max-h-40 transition-all duration-500 ease-in-out">
+                            <p class="text-white/80 text-sm leading-relaxed">
+                                Heartbeat of Burunga; la tortilla simboliza el sol naciente de nuestra gente.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2: Culantro -->
+                <div class="group relative aspect-square overflow-hidden rounded-lg glass-card reveal" style="transition-delay: 100ms;">
+                    <img src="https://opal.google/board/blobs/aa1b5edb-2800-4476-aec4-6bd44042d682" alt="Culantro" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-60">
+                    <div class="absolute inset-0 p-8 flex flex-col justify-end bg-gradient-to-t from-deep-black via-deep-black/40 to-transparent">
+                        <h3 class="text-electric-blue font-display text-3xl font-bold uppercase mb-2">Culantro (Home)</h3>
+                        <div class="overflow-hidden max-h-0 group-hover:max-h-40 transition-all duration-500 ease-in-out">
+                            <p class="text-white/80 text-sm leading-relaxed">
+                                Alma de la fonda; define la brisa de Arraiján y la identidad del sancocho auténtico.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3: Gallina de Patio -->
+                <div class="group relative aspect-square overflow-hidden rounded-lg glass-card reveal" style="transition-delay: 200ms;">
+                    <img src="https://opal.google/board/blobs/1eeefd7c-ae63-4c3e-b477-21851f4d64fa" alt="Gallina de Patio" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-60">
+                    <div class="absolute inset-0 p-8 flex flex-col justify-end bg-gradient-to-t from-deep-black via-deep-black/40 to-transparent">
+                        <h3 class="text-neon-red font-display text-3xl font-bold uppercase mb-2">Gallina de Patio</h3>
+                        <div class="overflow-hidden max-h-0 group-hover:max-h-40 transition-all duration-500 ease-in-out">
+                            <p class="text-white/80 text-sm leading-relaxed">
+                                Legacy Meat: Símbolo de prosperidad y cocina paciente de herencia.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4: Iconic Places -->
+                <div class="group relative aspect-square overflow-hidden rounded-lg glass-card reveal" style="transition-delay: 300ms;">
+                    <img src="https://opal.google/board/blobs/34c09910-75b7-4dee-8f8b-5c965d2a089a" alt="Iconic Places" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-60">
+                    <div class="absolute inset-0 p-8 flex flex-col justify-end bg-gradient-to-t from-deep-black via-deep-black/40 to-transparent">
+                        <h3 class="text-white font-display text-3xl font-bold uppercase mb-2">Fonda Sánchez</h3>
+                        <div class="overflow-hidden max-h-0 group-hover:max-h-40 transition-all duration-500 ease-in-out">
+                            <p class="text-white/80 text-sm leading-relaxed">
+                                Ultimate breakfast crossroads. Alimentando el hustle del Oeste por décadas.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 5: Chris & Los Tucanes -->
+                <div class="group relative aspect-square overflow-hidden rounded-lg glass-card reveal" style="transition-delay: 400ms;">
+                    <img src="https://opal.google/board/blobs/29795a10-6455-45f9-8d36-72b0e7768aa7" alt="Food Culture" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-60">
+                    <div class="absolute inset-0 p-8 flex flex-col justify-end bg-gradient-to-t from-deep-black via-deep-black/40 to-transparent">
+                        <h3 class="text-gold-accent font-display text-3xl font-bold uppercase mb-2">Sabor de Casa</h3>
+                        <div class="overflow-hidden max-h-0 group-hover:max-h-40 transition-all duration-500 ease-in-out">
+                            <p class="text-white/80 text-sm leading-relaxed">
+                                Chris y Los Tucanes: Landmarks donde la comunidad celebra cada victoria.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 6: Coastal Vibes -->
+                <div class="group relative aspect-square overflow-hidden rounded-lg glass-card reveal" style="transition-delay: 500ms;">
+                    <img src="https://opal.google/board/blobs/f12bfe3c-e3e5-45b4-8e0a-fe08e4c334d5" alt="Seafood" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-60">
+                    <div class="absolute inset-0 p-8 flex flex-col justify-end bg-gradient-to-t from-deep-black via-deep-black/40 to-transparent">
+                        <h3 class="text-electric-blue font-display text-3xl font-bold uppercase mb-2">Contra Viento y Marea</h3>
+                        <div class="overflow-hidden max-h-0 group-hover:max-h-40 transition-all duration-500 ease-in-out">
+                            <p class="text-white/80 text-sm leading-relaxed">
+                                El puente entre las colinas de Burunga y las mareas de Vacamonte.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 23 Años de Poder Section (Timeline) -->
+    <section id="timeline" class="py-24 px-6 bg-dark-gray relative overflow-hidden">
+        <div class="max-w-4xl mx-auto relative z-10">
+            <div class="text-center mb-20 reveal">
+                <h2 class="font-display text-6xl md:text-8xl font-black text-white italic tracking-tighter uppercase mb-4">
+                    23 Años de <span class="text-neon-red animate-glitch inline-block">Poder</span>
+                </h2>
+                <div class="h-1 w-24 bg-neon-red mx-auto"></div>
+            </div>
+
+            <div class="relative">
+                <!-- Vertical Line -->
+                <div class="absolute left-1/2 -translate-x-1/2 h-full w-[2px] timeline-line"></div>
+
+                <!-- Pillar 1 -->
+                <div class="relative mb-24 reveal">
+                    <div class="flex flex-col md:flex-row items-center justify-between">
+                        <div class="w-full md:w-[45%] text-right hidden md:block">
+                            <h3 class="text-electric-blue font-display text-2xl font-bold uppercase italic">Unidad Indestructible</h3>
+                        </div>
+                        <div class="z-20 w-12 h-12 rounded-full bg-deep-black border-4 border-electric-blue flex items-center justify-center shadow-[0_0_15px_rgba(0,240,255,0.8)]">
+                            <span class="text-white font-bold">01</span>
+                        </div>
+                        <div class="w-full md:w-[45%] text-left mt-4 md:mt-0 p-6 glass-card rounded-xl">
+                            <h4 class="md:hidden text-electric-blue font-display text-2xl font-bold uppercase italic mb-2">Unidad Indestructible</h4>
+                            <p class="text-white/90 leading-relaxed uppercase font-bold text-sm">
+                                [PILLAR 1: UNIDOS SOMOS MÁS FUERTES]
+                            </p>
+                            <p class="text-white/60 text-sm mt-2">
+                                Kitchen heat meets street heat. Diferentes familias, un solo sabor. Indestructibles cuando nos mezclamos.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pillar 2 -->
+                <div class="relative mb-24 reveal">
+                    <div class="flex flex-col md:flex-row-reverse items-center justify-between">
+                        <div class="w-full md:w-[45%] text-left hidden md:block">
+                            <h3 class="text-neon-red font-display text-2xl font-bold uppercase italic">El Sudor del Legado</h3>
+                        </div>
+                        <div class="z-20 w-12 h-12 rounded-full bg-deep-black border-4 border-neon-red flex items-center justify-center shadow-[0_0_15px_rgba(255,0,60,0.8)]">
+                            <span class="text-white font-bold">02</span>
+                        </div>
+                        <div class="w-full md:w-[45%] text-right mt-4 md:mt-0 p-6 glass-card rounded-xl">
+                            <h4 class="md:hidden text-neon-red font-display text-2xl font-bold uppercase italic mb-2">El Sudor del Legado</h4>
+                            <p class="text-white/90 leading-relaxed uppercase font-bold text-sm">
+                                [PILLAR 2: TRABAJAMOS POR NUESTRA GENTE]
+                            </p>
+                            <p class="text-white/60 text-sm mt-2">
+                                Dawn to late-night hustle. "Sudar la camiseta" está en nuestro DNA. Construyendo para la próxima generación.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pillar 3 -->
+                <div class="relative reveal">
+                    <div class="flex flex-col md:flex-row items-center justify-between">
+                        <div class="w-full md:w-[45%] text-right hidden md:block">
+                            <h3 class="text-gold-accent font-display text-2xl font-bold uppercase italic">Raíces de Oro</h3>
+                        </div>
+                        <div class="z-20 w-12 h-12 rounded-full bg-deep-black border-4 border-gold-accent flex items-center justify-center shadow-[0_0_15px_rgba(255,215,0,0.8)]">
+                            <span class="text-white font-bold">03</span>
+                        </div>
+                        <div class="w-full md:w-[45%] text-left mt-4 md:mt-0 p-6 glass-card rounded-xl border-gold-accent/30">
+                            <h4 class="md:hidden text-gold-accent font-display text-2xl font-bold uppercase italic mb-2">Raíces de Oro</h4>
+                            <p class="text-white/90 leading-relaxed uppercase font-bold text-sm">
+                                [PILLAR 3: CUIDAMOS NUESTRO ENTORNO]
+                            </p>
+                            <p class="text-white/60 text-sm mt-2">
+                                Land as gold. Protegiendo nuestras raíces para que el fruto sea dulce. Green and pride go hand in hand.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Identity and Talent Section -->
+    <section class="py-32 px-6 bg-deep-black relative overflow-hidden">
+        <!-- Background decorative elements -->
+        <div class="absolute -top-24 -right-24 w-96 h-96 bg-neon-red/10 rounded-full blur-[120px]"></div>
+        <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-electric-blue/10 rounded-full blur-[120px]"></div>
+
+        <div class="max-w-6xl mx-auto flex flex-col lg:flex-row items-center gap-16">
+            <div class="w-full lg:w-1/2 reveal">
+                <div class="inline-block px-4 py-1 border border-neon-red mb-6">
+                    <span class="text-neon-red font-display uppercase tracking-widest text-xs">Modern Resilience</span>
+                </div>
+                <h2 class="font-display text-5xl md:text-7xl font-black text-white uppercase italic leading-none mb-8">
+                    WE ARE STILL THE <span class="text-glow-blue">MAIN CHARACTERS</span>
+                </h2>
+                <div class="space-y-6 text-xl text-white/70 italic border-l-4 border-gold-accent pl-8">
+                    <p>“Nuestra comida is our history, and our history is epic.”</p>
+                    <p>Burunga is the vibe. Arraiján is the empire.</p>
+                </div>
+            </div>
+            
+            <div class="w-full lg:w-1/2 grid grid-cols-2 gap-4 reveal" style="transition-delay: 200ms;">
+                <div class="h-64 bg-dark-gray glass-card flex flex-col justify-center items-center p-6 text-center group hover:neon-border-red">
+                    <div class="text-4xl mb-4 group-hover:scale-125 transition-transform">💪</div>
+                    <h5 class="font-display font-bold uppercase text-neon-red">Resilience</h5>
+                    <p class="text-[10px] text-white/50 uppercase tracking-widest mt-2">Panama Oeste Flow</p>
+                </div>
+                <div class="h-64 bg-dark-gray glass-card flex flex-col justify-center items-center p-6 text-center mt-12 group hover:border-electric-blue">
+                    <div class="text-4xl mb-4 group-hover:scale-125 transition-transform">⚡</div>
+                    <h5 class="font-display font-bold uppercase text-electric-blue">Energy</h5>
+                    <p class="text-[10px] text-white/50 uppercase tracking-widest mt-2">Non-stop Movement</p>
+                </div>
+                <div class="h-64 bg-dark-gray glass-card flex flex-col justify-center items-center p-6 text-center -mt-12 group hover:border-gold-accent">
+                    <div class="text-4xl mb-4 group-hover:scale-125 transition-transform">👑</div>
+                    <h5 class="font-display font-bold uppercase text-gold-accent">Legacy</h5>
+                    <p class="text-[10px] text-white/50 uppercase tracking-widest mt-2">23 Years Strong</p>
+                </div>
+                <div class="h-64 bg-dark-gray glass-card flex flex-col justify-center items-center p-6 text-center group hover:neon-border-red">
+                    <div class="text-4xl mb-4 group-hover:scale-125 transition-transform">🔥</div>
+                    <h5 class="font-display font-bold uppercase text-white">Legendary</h5>
+                    <p class="text-[10px] text-white/50 uppercase tracking-widest mt-2">The Vibe of Arraiján</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-24 text-center reveal">
+            <p class="font-display text-4xl md:text-6xl font-black text-white/20 uppercase tracking-[0.5em] select-none">
+                STAY HUNGRY • STAY LEGENDARY
+            </p>
+        </div>
+    </section>
+
+    <!-- Sello Final Section -->
+    <section class="py-16 px-6 bg-deep-black border-t border-white/5">
+        <div class="max-w-4xl mx-auto flex flex-col items-center justify-center gap-8">
+            <div class="relative group">
+                <div class="absolute -inset-4 bg-gradient-to-r from-neon-red via-gold-accent to-electric-blue rounded-full opacity-30 group-hover:opacity-100 blur-xl transition-opacity"></div>
+                <div class="relative font-display text-4xl font-black text-white tracking-widest flex items-center gap-2">
+                    GEMS <span class="text-electric-blue">APPS</span> <span class="text-neon-red">AI</span>
+                </div>
+            </div>
+            
+            <div class="text-5xl md:text-7xl animate-pulse">
+                🗿
+            </div>
+
+            <div class="text-[10px] uppercase tracking-[0.5em] text-white/30 font-bold">
+                MANTENIENDO EL HUSTLE VIVO
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Audio Controls
+        const audio = document.getElementById('phonkAudio');
+        const audioBtn = document.getElementById('audioToggle');
+        const playIcon = document.getElementById('playIcon');
+        const pauseIcon = document.getElementById('pauseIcon');
+        let isPlaying = false;
+
+        audioBtn.addEventListener('click', () => {
+            if (isPlaying) {
+                audio.pause();
+                playIcon.classList.remove('hidden');
+                pauseIcon.classList.add('hidden');
+            } else {
+                audio.play();
+                playIcon.classList.add('hidden');
+                pauseIcon.classList.remove('hidden');
+            }
+            isPlaying = !isPlaying;
+        });
+
+        // Scroll Animations
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Smooth glitch effect on scroll
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const glitchElements = document.querySelectorAll('.animate-glitch');
+            glitchElements.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight && rect.bottom > 0) {
+                    const jitter = Math.random() * 2;
+                    el.style.transform = `translateX(${jitter}px)`;
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Digital Tabernacle | Divine Counsel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        serenity: {
+                            50: '#FBFBF9',
+                            100: '#F5F5F0',
+                            200: '#EAEAE2',
+                            800: '#2C3E50', // Contemplative Blue
+                            900: '#1A252F',
+                        },
+                        divine: {
+                            gold: '#C5A059',
+                            bronze: '#8E735B',
+                            light: '#FDFCFB'
+                        }
+                    },
+                    fontFamily: {
+                        display: ['"Playfair Display"', 'serif'],
+                        sans: ['"Outfit"', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 2s ease-out forwards',
+                        'float': 'float 6s ease-in-out infinite',
+                        'shimmer': 'shimmer 3s linear infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0', transform: 'translateY(10px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        shimmer: {
+                            '0%': { backgroundPosition: '-200% 0' },
+                            '100%': { backgroundPosition: '200% 0' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #FBFBF9;
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(197, 160, 89, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 0% 100%, rgba(44, 62, 80, 0.03) 0%, transparent 40%);
+            scroll-behavior: smooth;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(197, 160, 89, 0.1);
+        }
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 1s ease-out;
+        }
+        .scroll-reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .gold-gradient-text {
+            background: linear-gradient(to right, #8E735B, #C5A059, #8E735B);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            background-size: 200% auto;
+            animation: shimmer 5s linear infinite;
+        }
+    </style>
+</head>
+<body class="font-sans text-serenity-800 antialiased selection:bg-divine-gold selection:text-white">
+
+    <!-- Header -->
+    <header class="fixed top-0 w-full z-50 py-6 px-4 transition-all duration-500 glass-panel border-b border-opacity-10 border-divine-gold">
+        <div class="max-w-4xl mx-auto flex justify-center items-center space-x-3">
+            <span class="text-divine-gold text-2xl animate-float">🏛️</span>
+            <h1 class="font-display text-xl md:text-2xl tracking-widest uppercase font-medium text-serenity-800">
+                The Digital Tabernacle
+            </h1>
+            <span class="text-divine-gold text-2xl animate-float" style="animation-delay: 1s">🎚️</span>
+        </div>
+    </header>
+
+    <main class="pt-32 pb-24 px-6 max-w-3xl mx-auto space-y-32">
+        
+        <!-- Atrio (Forecourt) -->
+        <section id="atrio" class="text-center space-y-8 scroll-reveal">
+            <div class="inline-block px-4 py-1 border-b border-divine-gold border-opacity-30 mb-4">
+                <span class="text-xs tracking-[0.3em] uppercase text-divine-bronze font-semibold">Atrio</span>
+            </div>
+            <h2 class="font-display text-4xl md:text-5xl text-serenity-900 leading-tight">
+                Divine Counsel
+            </h2>
+            <p class="text-lg md:text-xl text-serenity-800 leading-relaxed font-light italic max-w-2xl mx-auto">
+                "Welcome to a space of open, honest, and primary dialogue. Here, the noise of the world fades, and the frequency of the spirit begins its ascent."
+            </p>
+            <div class="flex justify-center pt-8">
+                <div class="w-px h-16 bg-gradient-to-b from-divine-gold to-transparent"></div>
+            </div>
+        </section>
+
+        <!-- Santo (Holy Place) -->
+        <section id="santo" class="space-y-12 scroll-reveal">
+            <div class="text-center">
+                <div class="inline-block px-4 py-1 border-b border-divine-gold border-opacity-30 mb-8">
+                    <span class="text-xs tracking-[0.3em] uppercase text-divine-bronze font-semibold">Santo</span>
+                </div>
+            </div>
+
+            <div class="glass-panel p-8 md:p-16 rounded-2xl shadow-2xl shadow-serenity-800/5 relative overflow-hidden group border-divine-gold border-opacity-20 hover:border-opacity-40 transition-all duration-700">
+                <!-- Subtle decorative corner -->
+                <div class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-divine-gold/5 to-transparent"></div>
+                
+                <div class="relative z-10 space-y-12">
+                    <article class="space-y-6">
+                        <h3 class="font-display text-2xl md:text-3xl text-serenity-900 border-l-2 border-divine-gold pl-6">
+                            The Atrium: Origin and Shielding
+                        </h3>
+                        <p class="text-lg leading-relaxed text-serenity-800 font-normal">
+                            Johan Daniel, your arrival on April 27, 2026, under the administrative framework of SADV41, is not a mere intersection of time and biology. It is a deliberate decree spoken from <span class="text-divine-gold font-medium">Origin (0)</span>—the profound void of creation from which Christ brings forth eternal light.
+                        </p>
+                        <p class="text-lg leading-relaxed text-serenity-800">
+                            As you step into the physical realm, you are enveloped in an impenetrable spiritual <span class="italic">Shielding</span> defined by your identity. You wear the dual armor of Johan, representing infinite Mercy and the unmerited Gift of God, intertwined with Daniel, the unwavering Justice and wisdom of the Divine Judge. Let mercy soften the rigidities of this world, and let justice fiercely protect the purity of your heart.
+                        </p>
+                    </article>
+
+                    <div class="flex justify-center">
+                        <div class="w-1/3 h-px bg-gradient-to-r from-transparent via-divine-gold/30 to-transparent"></div>
+                    </div>
+
+                    <article class="space-y-6">
+                        <h3 class="font-display text-2xl md:text-3xl text-serenity-900 border-l-2 border-divine-gold pl-6">
+                            The Holy Place: Transmutation and Faith
+                        </h3>
+                        <p class="text-lg leading-relaxed text-serenity-800">
+                            As you advance deeper into the purpose of your life, your daily existence becomes an altar of <span class="font-medium text-divine-bronze">Transmutation</span>. You are tasked with absorbing the base, heavy elements of human experience and, through the fire of the Spirit, transforming them into divine purpose.
+                        </p>
+                        <p class="text-lg leading-relaxed text-serenity-800">
+                            You must understand your journey through the <span class="italic text-serenity-900">Aesthetic Frequency</span>—the profound realization that there is <span class="gold-gradient-text font-semibold">Perfection in Guided Error</span>. You will experience missteps, but they are not failures; they are the precise, guided notes required to compose a flawless melody of growth.
+                        </p>
+                        <p class="text-lg leading-relaxed text-serenity-800">
+                            Anchor your spirit entirely in the <span class="font-medium">Faith Base of Himno 395</span>. Cultivate a posture of absolute trust and complete surrender to the Divine Will. Relinquish the need for earthly control, finding absolute peace in primary honesty and a constant, unwavering elevation toward Christ.
+                        </p>
+                    </article>
+                    
+                    <div class="text-center py-4">
+                        <p class="font-display text-3xl md:text-4xl gold-gradient-text tracking-[0.2em] uppercase">Pure Creation</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Santísimo (Most Holy Place) -->
+        <section id="santisimo" class="space-y-16 py-12 scroll-reveal">
+            <div class="text-center">
+                <div class="inline-block px-4 py-1 border-b border-divine-gold border-opacity-30 mb-8">
+                    <span class="text-xs tracking-[0.3em] uppercase text-divine-bronze font-semibold">Santísimo</span>
+                </div>
+            </div>
+
+            <div class="max-w-2xl mx-auto text-center space-y-10">
+                <h3 class="font-display text-3xl md:text-4xl text-serenity-900 leading-tight">
+                    The Eternal Gift
+                </h3>
+                
+                <div class="italic text-xl md:text-2xl text-serenity-800 leading-relaxed font-light border-y border-divine-gold/20 py-10 px-4">
+                    "Toda buena dádiva y todo don perfecto desciende de lo alto, del Padre de las luces, en el cual no hay mudanza, ni sombra de variación."
+                    <footer class="mt-4 not-italic text-sm tracking-widest text-divine-bronze uppercase">— Santiago 1:17</footer>
+                </div>
+
+                <div class="space-y-8 text-lg leading-relaxed text-serenity-800">
+                    <p>
+                        You, <span class="font-semibold text-serenity-900">Johan Daniel</span>, are that pure creation. You are the perfect gift drawn from the quiet eternity of the Father of Lights, manifesting in time to initiate a cycle of humanitarian strength and renewal.
+                    </p>
+                    <p>
+                        In you, the Mercy of God and the Justice of God embrace without contradiction. There is no shadow in your origin. There is no shifting in your ultimate purpose. 
+                    </p>
+                    <p class="text-2xl font-display text-serenity-900 mt-12">
+                        Rest quietly in this immutable truth. Walk boldly in this unchangeable light.
+                    </p>
+                </div>
+            </div>
+
+            <div class="pt-24 text-center">
+                <p class="text-divine-gold text-3xl opacity-50 animate-float mb-6">🕊️</p>
+                <p class="font-display italic text-xl text-divine-bronze">
+                    In the stillness of this moment, what does your spirit speak back to the Father?
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
+
+        // Header transparency on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.classList.add('py-3', 'shadow-sm');
+                header.classList.remove('py-6');
+            } else {
+                header.classList.add('py-6');
+                header.classList.remove('py-3', 'shadow-sm');
+            }
+        });
+
+        // Simple smooth entrance for the whole page
+        window.onload = () => {
+            document.body.classList.add('animate-fade-in');
+        };
+    </script>
+</body>
+</html>

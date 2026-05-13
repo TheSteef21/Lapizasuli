@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SADV41 - Registro de Provisión</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background: #000 url('https://raw.githubusercontent.com/TheSteef21/Lapizasuli/main/1771445538463.png') no-repeat center center fixed; background-size: cover; color: #fff; margin: 0; padding: 20px; }
+        .atrio { max-width: 500px; margin: auto; border: 1px solid #333; border-radius: 10px; padding: 15px; background: rgba(0,0,0,0.85); backdrop-filter: blur(5px); }
+        .header { border-bottom: 1px solid #333; padding-bottom: 10px; margin-bottom: 15px; text-align: center; color: #ffcc00; }
+        
+        .dia-fila { display: flex; justify-content: space-between; padding: 12px; border-bottom: 1px solid #222; cursor: pointer; transition: 0.3s; }
+        .dia-fila:hover { background: rgba(255,255,255,0.05); }
+        .monto-verde { color: #4CAF50; font-weight: bold; }
+        
+        .detalle-transacciones { display: none; background: #0a0a0a; padding: 10px; font-size: 0.9em; border-left: 2px solid #ffcc00; }
+        .tx-item { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid #1a1a1a; }
+        
+        /* Carrusel Inferior */
+        .carrusel-contenedor { margin-top: 30px; border-top: 1px solid #333; padding-top: 20px; }
+        .carrusel { display: flex; overflow-x: auto; gap: 15px; padding-bottom: 15px; scroll-snap-type: x mandatory; }
+        .carrusel::-webkit-scrollbar { height: 5px; }
+        .carrusel::-webkit-scrollbar-thumb { background: #ffcc00; border-radius: 10px; }
+        .carrusel-item { flex: 0 0 150px; background: #111; padding: 10px; border-radius: 8px; scroll-snap-align: center; border: 1px solid #222; text-align: center; }
+        .carrusel-item img { width: 100%; border-radius: 5px; margin-bottom: 8px; }
+
+        .estado { color: #ffcc00; margin-top: 20px; font-weight: bold; text-align: center; }
+    </style>
+</head>
+<body>
+
+    <div class="atrio">
+        <div class="header">🎚 SADV41<br>Registro de Provisión Diaria</div>
+
+        <button onclick="conectarWallet()" style="background: #111; color: #ffcc00; border: 1px solid #ffcc00; padding: 12px; border-radius: 50px; cursor: pointer; width: 100%; margin-bottom: 20px; font-weight: bold;">
+            🔗 VINCULAR WALLET (CAPO)
+        </button>
+
+        <div onclick="toggleDetalle('d22')" class="dia-fila">
+            <span>22 de Febrero 2026</span>
+            <span class="monto-verde">$3,201.00</span>
+        </div>
+        <div id="d22" class="detalle-transacciones">
+            <div class="tx-item"><span>Transf. Alexander Gonzalez</span><span>$3,081.00</span></div>
+            <div class="tx-item"><span>Efectivo (6 billetes de $20)</span><span>$120.00</span></div>
+            <div class="tx-item"><span>Venta Rin 17 (Mario Samudio)</span><span>Registrado</span></div>
+        </div>
+
+        <div onclick="toggleDetalle('d23')" class="dia-fila">
+            <span>23 de Febrero 2026</span>
+            <span class="monto-verde">$160.50</span>
+        </div>
+        <div id="d23" class="detalle-transacciones">
+            <div class="tx-item"><span>Cierre de Caja Operativo</span><span>$160.50</span></div>
+            <div class="tx-item"><span>Venta de Llantas (36)</span><span>Registrado</span></div>
+            <div class="tx-item"><span>Servicio SADV41</span><span>Activo</span></div>
+        </div>
+
+        <div onclick="toggleDetalle('d24')" class="dia-fila">
+            <span>24 de Febrero 2026</span>
+            <span class="monto-verde" id="total24">$227.75</span>
+        </div>
+        <div id="d24" class="detalle-transacciones">
+            <div class="tx-item"><span>Fondo Inicial Mañana</span><span>$65.25</span></div>
+            <div class="tx-item"><span>Venta 4 Llantas 195/65R15</span><span>+$168.00</span></div>
+            <div class="tx-item" style="color:#ff6b6b;"><span>Transf. Alexander G.</span><span>-$1.00</span></div>
+            <div class="tx-item" style="color:#ff6b6b;"><span>Apoyo Sidia Ortega</span><span>-$2.50</span></div>
+            <div class="tx-item" style="color:#ff6b6b;"><span>Apoyo Felipe Luo Qiu</span><span>-$2.00</span></div>
+            <div class="tx-item" style="border-top: 1px solid #4CAF50; padding-top: 5px;"><strong>BALANCE FINAL</strong><strong>$227.75</strong></div>
+        </div>
+
+        <div class="estado">Estado: ¡VIVE!</div>
+    </div>
+
+    <script src="https://unpkg.com/@walletconnect/modal@2.6.2/dist/index.js"></script>
+    <script>
+        function toggleDetalle(id) {
+            var x = document.getElementById(id);
+            x.style.display = (x.style.display === "block") ? "none" : "block";
+        }
+
+        window.conectarWallet = async () => {
+            const modal = new window.WalletConnectModal.WalletConnectModal({
+                projectId: 'ceb11307ca32cd9d4118b14ab54b542b',
+                themeMode: 'dark',
+                chains: ['eip155:1']
+            });
+            await modal.openModal();
+        };
+    </script>
+</body>
+</html>

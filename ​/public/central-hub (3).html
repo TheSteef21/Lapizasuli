@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SADV41 | Hub Central Federativo</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Fondo base con degradado por si el video falla o está vacío */
+        body { 
+            background-color: #0f172a; 
+            background-image: radial-gradient(circle at 50% 0%, #1e293b 0%, #050505 100%);
+            color: #ffffff; 
+            font-family: system-ui, -apple-system, sans-serif; 
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        /* Efectos de Luz */
+        .magenta-glow { text-shadow: 0 0 15px #FF00FF, 0 0 30px #FF00FF; }
+        .blue-glow { text-shadow: 0 0 15px #3b82f6, 0 0 30px #3b82f6; }
+        
+        /* Paneles de Cristal para los Acordeones */
+        .glass-panel { 
+            background: rgba(255, 255, 255, 0.03); 
+            backdrop-filter: blur(12px); 
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            border-radius: 0.75rem;
+            transition: all 0.3s ease; 
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+        .glass-panel:hover { 
+            border-color: rgba(59, 130, 246, 0.5); 
+            box-shadow: 0 5px 20px rgba(59, 130, 246, 0.15); 
+        }
+
+        /* Estilo de los Botones Internos (Enlaces) */
+        .link-card { 
+            display: flex; flex-direction: column; justify-content: center; align-items: center; 
+            text-align: center; padding: 1.25rem; border-radius: 0.5rem; 
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            text-decoration: none; color: inherit; 
+            transition: all 0.3s ease;
+        }
+        .link-card:hover { 
+            transform: translateY(-3px); 
+            border-color: #3b82f6; 
+            background: rgba(59, 130, 246, 0.15);
+            color: #60a5fa;
+        }
+
+        /* Estilo del Encabezado del Acordeón (Summary) */
+        summary {
+            padding: 1rem 1.5rem;
+            font-weight: 600;
+            font-size: 1.125rem;
+            cursor: pointer;
+            outline: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.02);
+            transition: background 0.3s ease;
+            list-style: none; /* Oculta la flecha nativa */
+        }
+        summary::-webkit-details-marker { display: none; }
+        summary:hover { background: rgba(255, 255, 255, 0.05); }
+        
+        /* Ícono de flecha personalizado */
+        details[open] summary .arrow { transform: rotate(180deg); }
+        .arrow { transition: transform 0.3s ease; color: #3b82f6; }
+
+        /* Video Retro 144p de Fondo (Con opacidad baja para no tapar todo) */
+        #video-bg {
+            position: fixed; top: 50%; left: 50%; min-width: 100%; min-height: 100%; 
+            z-index: -100; transform: translate(-50%, -50%) scale(1.1);
+            object-fit: cover;
+            filter: blur(4px) contrast(1.2) saturate(0.8);
+            opacity: 0.25; /* Reducido para que se vea el fondo oscuro elegantemente */
+        }
+    </style>
+</head>
+<body class="flex flex-col items-center p-4 md:p-8">
+
+    <video id="video-bg" autoplay loop muted>
+        <source src="" type="video/mp4">
+    </video>
+
+    <header class="w-full max-w-3xl text-center mb-8 z-10 relative">
+        <h1 class="text-4xl font-bold magenta-glow mb-2">🛡️ Comando Central SADV41</h1>
+        <p class="text-gray-300">Operador: Steven | Base: Burunga | Meta: B/. 600.00</p>
+    </header>
+
+    <main class="w-full max-w-3xl z-10 relative">
+        
+        <details open class="glass-panel">
+            <summary>
+                <span>🏛️ Sistemas Federales y SADV41</span>
+                <span class="arrow">▼</span>
+            </summary>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-3 p-4">
+                <a href="https://thesteef21.github.io/Lapizasuli/SADV41Federal.jsx" class="link-card">
+                    <span class="text-2xl mb-1">⚡</span><span class="text-sm font-semibold">SADV41 Federal</span>
+                </a>
+                <a href="https://thesteef21.github.io/Lapizasuli/SADV41Hub.jsx" class="link-card">
+                    <span class="text-2xl mb-1">🔗</span><span class="text-sm font-semibold">SADV41 Hub</span>
+                </a>
+                <a href="https://thesteef21.github.io/Lapizasuli/SADV41QuantumHub.jsx" class="link-card">
+                    <span class="text-2xl mb-1">🌌</span><span class="text-sm font-semibold">Quantum Hub</span>
+                </a>
+                <a href="https://thesteef21.github.io/Lapizasuli/VASADV41.html" class="link-card">
+                    <span class="text-2xl mb-1">🛡️</span><span class="text-sm font-semibold">VASADV41</span>
+                </a>
+                <a href="https://thesteef21.github.io/Lapizasuli/xadv41.html" class="link-card">
+                    <span class="text-2xl mb-1">⚔️</span><span class="text-sm font-semibold">XADV41</span>
+                </a>
+                <a href="https://thesteef21.github.io/Lapizasuli/AGSADV41.html" class="link-card">
+                    <span class="text-2xl mb-1">⚙️</span><span class="text-sm font-semibold">AGSADV41</span>
+                </a>
+                <a href="https://thesteef21.github.io/Lapizasuli/index.html" class="link-card">
+                    <span class="text-2xl mb-1">🏠</span><span class="text-sm font-semibold">Index Raíz</span>
+                </a>
+            </div>
+        </details>
+
+        <details class="glass-panel">
+            <summary>
+                <span>📖 Protocolos del Santísimo</span>
+                <span class="arrow">▼</span>
+            </summary>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-3 p-4">
+                <a href="https://thesteef21.github.io/Lapizasuli/SPBible.html" class="link-card">
+                    <span class="text-2xl mb-1">📖</span><span class="text-sm font-semibold">SPBible</span>
+                </a>
+                <a href="https://thesteef21.github.io/Lapizasuli/Palabra.html" class="link-card">
+                    <span class="text-2xl mb-1">🕊️</span><span class="text-sm font-semibold">Palabra</span>
+                </a>
+                <a href="https://thesteef21.github.io/Lapizasuli/SEC.html" class="link-card">
+                    <span class="text-2xl mb-1">🔒</span><span class="text-sm font-semibold">Cláusula SEC</span>
+                </a>
+                <a href="https://thesteef21.github.io/Lapizasuli/Vision" class="link-card">
+                    <span class="text-2xl mb-1">👁️</span><span class="text-sm font-semibold">Visión</span>
+                </a>
+                <a href="https://thesteef21.github.io/Lapizasuli/Cueva.json" class="link-card">
+                    <span class="text-2xl mb-1">⛰️</span><span class="text-sm font-semibold">La Cueva</span>
+                </a>
+            </div>
+        </details>
+
+        <details class="glass-panel">
+            <summary>
+                <span>💰 Facturación y Trayectoria</span>
+                <span class="arrow">▼</span>
+            </summary>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-3 p-4">
+                <a href="https://thesteef21.github.io/Lapizasuli/fact.html" class="link-card">
+                    <span class="text-2xl mb-1">🧾</span><span class="text-sm font-semibold">Facturador</span>
+                </a>
+                <a href="https://thesteef21.github.io/Lapizasuli/factos.html" class="link-card">
+                    <span class="text-2xl mb-1">📊</span><span class="text-sm font-semibold">Factos</span>
+                </a>
+                <a href="https://thesteef21.github.io/Lapizasuli/PagoUniversal.html" class="link-card">
+                    <span class="text-2xl mb-1">🌍</span><span class="text-sm font-semibold">Pago Universal</span>
+                </a>
+                <a href="https://thesteef21.github.io/Lapizasuli/RegistroPSH.html" class="link-card">
+                    <span class="text-2xl mb-1">📉</span><span class="text-sm font-semibold">Registro PSH</span>
+                </a>
+            </div>
+        </details>
+
+        <details class="glass-panel">
+            <summary>
+                <span>⏱️ Líneas de Tiempo</span>
+                <span class="arrow">▼</span>
+            </summary>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-3 p-4">
+                <a href="https://thesteef21.github.io/Lapizasuli/Calendario.html" class="link-card">
+                    <span class="text-2xl mb-1">📅</span><span class="text-sm font-semibold">Calendario M.</span>
+                </a>
+                <a href="https://thesteef21.github.io/Lapizasuli/calendario1.html" class="link-card">
+                    <span class="text-2xl mb-1">1️⃣</span><span class="text-sm font-semibold">Cal. 1</span>
+                </a>
+                <a href="https://thesteef21.github.io/Lapizasuli/calendario2.html" class="link-card">
+                    <span class="text-2xl mb-1">2️⃣</span><span class="text-sm font-semibold">Cal. 2</span>
+                </a>
+                <a href="https://thesteef21.github.io/Lapizasuli/calendario3.html" class="link-card">
+                    <span class="text-2xl mb-1">3️⃣</span><span class="text-sm font-semibold">Cal. 3</span>
+                </a>
+                <a href="https://thesteef21.github.io/Lapizasuli/StevenDiorFlowTime.html" class="link-card">
+                    <span class="text-2xl mb-1">⏳</span><span class="text-sm font-semibold">Dior Flow Time</span>
+                </a>
+            </div>
+        </details>
+
+        <details class="glass-panel">
+            <summary>
+                <span>📜 Certificados y Honores</span>
+                <span class="arrow">▼</span>
+            </summary>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-3 p-4">
+                <a href="https://thesteef21.github.io/Lapizasuli/certificados.html" class="link-card">
+                    <span class="text-2xl mb-1">🎖️</span><span class="text-sm font-semibold">Certificados</span>
+                </a>
+                <a href="https://thesteef21.github.io/Lapizasuli/crear-certificado.html" class="link-card">
+                    <span class="text-2xl mb-1">✍️</span><span class="text-sm font-semibold">Crear Cert.</span>
+                </a>
+                <a href="https://thesteef21.github.io/Lapizasuli/certificado.tsx" class="link-card">
+                    <span class="text-2xl mb-1">⚛️</span><span class="text-sm font-semibold">Certificado TSX</span>
+                </a>
+                <a href="https://thesteef21.github.io/Lapizasuli/honorss.html" class="link-card">
+                    <span class="text-2xl mb-1">🏆</span><span class="text-sm font-semibold">Honores</span>
+                </a>
+            </div>
+        </details>
+
+    </main>
+
+</body>
+</html>

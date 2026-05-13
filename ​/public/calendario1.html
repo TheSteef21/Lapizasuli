@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>SADV41 - Registro de Provisión</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background: #000; color: #fff; margin: 0; padding: 20px; }
+        .atrio { max-width: 500px; margin: auto; border: 1px solid #333; border-radius: 10px; padding: 15px; }
+        .header { border-bottom: 1px solid #333; padding-bottom: 10px; margin-bottom: 15px; }
+        
+        /* Estilo de los Días */
+        .dia-fila { 
+            display: flex; justify-content: space-between; padding: 12px; 
+            border-bottom: 1px solid #222; cursor: pointer; transition: 0.3s;
+        }
+        .dia-fila:hover { background: #111; }
+        .monto-verde { color: #4CAF50; font-weight: bold; }
+        
+        /* Panel Detallado Oculto */
+        .detalle-transacciones { 
+            display: none; background: #0a0a0a; padding: 10px; font-size: 0.9em; 
+            border-left: 2px solid #ffcc00; text-align: left;
+        }
+        .tx-item { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid #1a1a1a; }
+        
+        .estado { color: #ffcc00; margin-top: 20px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="atrio">
+        <div class="header">🎚 SADV41<br>Registro de Provisión Diaria</div>
+
+    <div onclick="toggleDetalle('d22')" class="dia-fila">
+    <span>22 de Febrero 2026</span>
+    <span class="monto-verde">$3,201.00</span>
+</div>
+
+<div id="d22" class="detalle-transacciones">
+    <div class="tx-item"><span>Transf. Alexander Gonzalez</span><span>$3,081.00</span></div>
+    <div class="tx-item"><span>Efectivo (6 billetes de $20)</span><span>$120.00</span></div>
+    <div class="tx-item"><span>Venta Rin 17 (Mario Samudio)</span><span>Registrado</span></div>
+</div>
+        <div onclick="toggleDetalle('d23')" class="dia-fila">
+    <span>23 de Febrero 2026</span>
+    <span class="monto-verde">$160.50</span>
+</div>
+
+
+        <div id="d23" class="detalle-transacciones">
+    <div class="tx-item"><span>Cierre de Caja Operativo</span><span>$160.50</span></div>
+    <div class="tx-item"><span>Venta de Llantas (36)</span><span>Registrado</span></div>
+    <div class="tx-item"><span>Instalación y Válvula</span><span>Gratis</span></div>
+    <div class="tx-item"><span>Servicio Agregado</span><span>SADV41</span></div>
+</div>
+
+
+        <div onclick="toggleDetalle('d24')" class="dia-fila">
+    <span>24 de Febrero 2026</span>
+    <span class="monto-verde" id="total24">$65.25</span>
+</div>
+<div id="d24" class="detalle-transacciones">
+    <div class="tx-item"><span>Entrada 1 (Mañana)</span><span>$2.50</span></div>
+    <div class="tx-item"><span>Entrada 2 (Mañana)</span><span>$24.00</span></div>
+    <div class="tx-item"><span>Entrada 3 (Mañana)</span><span>$38.75</span></div>
+    </div>
+
+
+        <div class="estado">Estado: ¡VIVE!</div>
+    </div>
+
+    <script>
+        function toggleDetalle(id) {
+            var x = document.getElementById(id);
+            x.style.display = (x.style.display === "block") ? "none" : "block";
+        }
+    </script>
+</body>
+</html>

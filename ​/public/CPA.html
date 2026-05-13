@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>SADV41 - Bitácora Turbo Tire</title>
+    <style>
+        body { background: #000; color: #fff; font-family: 'Segoe UI', sans-serif; padding: 20px; }
+        .tabernaculo { border: 2px solid #4caf50; border-radius: 15px; padding: 25px; background: #0a0a0a; max-width: 900px; margin: auto; box-shadow: 0 0 20px rgba(74, 175, 80, 0.2); }
+        h1 { color: #4caf50; text-align: center; letter-spacing: 4px; margin-bottom: 5px; }
+        .seccion-titulo { background: #1b5e20; color: #fff; padding: 10px; margin-top: 30px; border-radius: 5px; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 2px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th { background: #4caf50; color: #000; padding: 10px; font-size: 0.8rem; }
+        td { border-bottom: 1px solid #222; padding: 12px; text-align: center; }
+        .monto-trans { color: #81d4fa; }
+        .monto-efec { color: #a5d6a7; }
+        .total-dia { background: #111; color: #4caf50; font-size: 1.5rem; font-weight: bold; }
+        
+        /* Estilos del Calendario Acumulativo */
+        .calendario-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; margin-top: 15px; }
+        .dia-caja { border: 1px solid #333; padding: 10px; border-radius: 8px; background: #111; min-height: 60px; }
+        .dia-numero { font-size: 0.7rem; color: #888; display: block; margin-bottom: 5px; }
+        .dia-monto { color: #4caf50; font-weight: bold; font-size: 0.9rem; }
+        .hoy { border-color: #4caf50; box-shadow: inset 0 0 10px rgba(74, 175, 80, 0.2); }
+    </style>
+</head>
+<body>
+    <div class="tabernaculo">
+        <h1>SADV41 🎚 TURBO TIRE</h1>
+        
+        <div class="seccion-titulo">Registro Diario: 22 de Febrero</div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Origen</th>
+                    <th>Detalle</th>
+                    <th>Monto ($)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Bancario</td><td>Consolidado Transferencias</td><td class="monto-trans">3,081.00</td></tr>
+                <tr><td>Físico</td><td>Venta Efectivo</td><td class="monto-efec">120.00</td></tr>
+                <tr class="total-dia">
+                    <td colspan="2">TOTAL HOY</td>
+                    <td>$3,201.00</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="seccion-titulo">Acumulado Mensual: Febrero 2026</div>
+        <div class="calendario-grid">
+            <div class="dia-caja"><span class="dia-numero">19</span></div>
+            <div class="dia-caja"><span class="dia-numero">20</span></div>
+            <div class="dia-caja"><span class="dia-numero">21</span></div>
+            
+            <div class="dia-caja hoy">
+                <span class="dia-numero">22 (Hoy)</span>
+                <span class="dia-monto">$3,201.00</span>
+            </div>
+            
+            <div class="dia-caja"><span class="dia-numero">23</span><span class="dia-monto">---</span></div>
+            <div class="dia-caja"><span class="dia-numero">24</span><span class="dia-monto">---</span></div>
+            <div class="dia-caja"><span class="dia-numero">25</span><span class="dia-monto">---</span></div>
+        </div>
+
+        <p style="text-align:center; margin-top:30px; font-style:italic; color:#4caf50; font-size:0.8rem;">
+            "La constancia en el servicio es la base de la perfección" 🎚️
+        </p>
+    </div>
+</body>
+</html>
