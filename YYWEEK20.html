@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SADV41X | YYWEEK20 - Reporte Burunga</title>
+    <title>SADV41X | YYWEEK20 - Alcurnia Informativa</title>
     <style>
         :root {
             --neon: #00ffcc;
@@ -13,6 +13,7 @@
             --gold: #d4af37;
             --orange: #ff5722;
             --crimson: #dc143c;
+            --seismic-blue: #007bff;
         }
         body {
             background: var(--dark);
@@ -74,6 +75,8 @@
             margin-bottom: 20px;
             font-family: sans-serif;
         }
+        
+        /* Estilos de Alcurnia */
         article {
             background: #1e1e1e;
             padding: 35px;
@@ -91,23 +94,19 @@
         }
         h2 { color: var(--orange); font-size: 1.8em; margin-top: 0; }
         h3 { color: var(--neon); font-family: 'Courier New', monospace; }
-        
-        .infographic-box {
-            border: 2px solid var(--gold);
-            padding: 20px;
-            margin: 25px 0;
-            background-color: #151515;
-            border-radius: 4px;
-        }
+        h4 { color: var(--gold); border-left: 3px solid var(--gold); padding-left: 10px; margin-bottom: 10px; }
+
         .alert-box { 
             background: #2c2605; 
             border-left: 4px solid var(--gold); 
             padding: 15px; 
             color: #fff176; 
             font-size: 0.9em;
-            margin-top: 10px;
+            margin: 20px 0;
         }
+        .alert-box.seismic { border-color: var(--seismic-blue); background: #001a33; color: #add8e6; }
 
+        /* Master Grid */
         .master-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -128,21 +127,8 @@
         .card:hover { border-color: var(--neon); background: var(--matrix); transform: translateY(-3px); }
         .version-badge { position: absolute; top: 10px; right: 10px; background: var(--neon); color: var(--dark); padding: 2px 5px; font-size: 0.7rem; font-weight: bold; }
 
-        #sadv41-tool {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: var(--neon);
-            color: var(--dark);
-            padding: 10px 20px;
-            display: none;
-            font-family: 'Courier New', monospace;
-            font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0 0 15px var(--neon);
-            z-index: 1000;
-        }
-
+        .daily-verse { font-style: italic; color: var(--gold); text-align: center; border-top: 1px solid #333; padding-top: 20px; margin-top: 30px; }
+        
         a { color: var(--neon); text-decoration: none; }
         a:hover { text-decoration: underline; }
     </style>
@@ -151,7 +137,7 @@
 
 <header>
     <h1>MOTOR SADV41X</h1>
-    <div class="subtitle">YYWEEK20: Liberación de Limitaciones | Burunga</div>
+    <div class="subtitle">YYWEEK20: Transparencia Informativa | Burunga, Panamá</div>
 </header>
 
 <div class="search-container">
@@ -160,51 +146,60 @@
 </div>
 
 <div class="news-container">
-    <div class="week-tag">Semana 20 - Mayo 2026</div>
+    <div class="week-tag">Semana 20 - Reporte Actual</div>
 
-    <article>
-        <div class="date-divider">Lunes, 11 de mayo de 2026 | Protocolo de Transparencia</div>
-        <h2>Reporte de Inteligencia: El Parche de Panamá</h2>
+    <article id="news-14-mayo">
+        <div class="date-divider">Jueves, 14 de mayo de 2026 | Protocolo de Alcurnia</div>
+        <h2>Resumen Informativo Global y Local</h2>
         
-        <h3 style="color: var(--gold);">[01] Sistema y Listas UE</h3>
-        <p>La Asamblea Nacional de Panamá inicia consultas sobre la <strong>Ley de Sustancia Económica</strong>. Objetivo: Salir de la Lista Gris de la UE y limpiar los puentes corruptos.</p>
-        
-        <h3 style="color: var(--orange);">[03] Alerta Ciberseguridad</h3>
-        <p>Se confirman 5 incidentes de alto impacto. El sistema SADV41X recomienda el autoparche inmediato ante infraestructuras vulnerables.</p>
+        <div class="entry-content">
+            <h4>Política Internacional</h4>
+            <p>
+                Durante un banquete oficial, el presidente Trump resaltó valores compartidos entre EE. UU. y China. 
+                Por su parte, Xi Jinping enfatizó que ambas naciones deben ser socios y no rivales para el progreso global.
+            </p>
 
-        <div class="infographic-box">
-            <h4 style="color: var(--gold); margin-top:0; text-align:center;">[ ESTRUCTURA DE ALERTA ]</h4>
-            <ul style="list-style: none; padding: 0; font-size: 0.9em; font-family: monospace;">
-                <li>🏛 <b>Justicia:</b> Captura contra ex-presidente (Rebeldía).</li>
-                <li>📈 <b>Economía:</b> MEF define 3% interés CEPANIM.</li>
-                <li>⛈ <b>Ambiente:</b> Tormentas y enjambres en Panamá Oeste.</li>
-                <li>🌎 <b>Global:</b> Trump evalúa Venezuela como estado 51.</li>
-            </ul>
+            <h4>Seguridad en Panamá</h4>
+            <p>
+                Autoridades locales desmantelan red delictiva, resultando en el decomiso de bienes valorados en miles de dólares.
+            </p>
+
+            <aside class="alert-box seismic">
+                <strong>⚠️ Monitoreo Sísmico (Vía SISMO41):</strong>
+                <ul style="margin: 5px 0;">
+                    <li>M5.4 - El Litoral del San Juan, Colombia.</li>
+                    <li>M3.7 - Sur de Panamá.</li>
+                </ul>
+                <small><a href="https://thesteef21.github.io/Lapizasuli/SISMO41.html">Ver registro completo en SISMO41.html</a></small>
+            </aside>
+
+            <aside class="alert-box">
+                <strong>☁️ Clima (Burunga):</strong>
+                <p>Tormentas eléctricas y precipitaciones en zonas marítimas detectadas durante la mañana.</p>
+            </aside>
         </div>
-        
-        <aside class="alert-box">
-            <strong>SADV41X:</strong> La transparencia es la liberación del error 1099. Usa este reporte para validar los puentes.
-        </aside>
+
+        <footer class="daily-verse">
+            "He aquí Dios es salvación mía; me aseguraré y no temeré..." — Isaías 12:2 RVR1960
+        </footer>
     </article>
 
-    <article style="opacity: 0.7;">
-        <div class="date-divider">Sábado, 09 de mayo de 2026 | UAP Transparency</div>
-        <h2>Sistema PURSUE: Desclasificación</h2>
-        <p>Análisis de 14 agencias federales. Publicación escalonada cada 21 días por orden de Trump.</p>
+    <article style="opacity: 0.6; transform: scale(0.98);">
+        <div class="date-divider">Lunes, 11 de mayo de 2026</div>
+        <h2>Reporte de Inteligencia: El Parche de Panamá</h2>
+        <p>Consultas sobre la Ley de Sustancia Económica para salida de Listas Grises de la UE.</p>
     </article>
 </div>
 
 <div class="master-grid" id="mainDisplay"></div>
 
-<div id="sadv41-tool">BUSCAR EN SADV41X</div>
-
 <script>
 const urlRaiz = "https://thesteef21.github.io/Lapizasuli/";
 const registroMaestro = [
-    { nombre: "YYWEEK20", ed: "01", file: "YYWEEK20.html", tipo: "Reporte", lang: "SADV41X" },
+    { nombre: "YYWEEK20", ed: "02", file: "YYWEEK20.html", tipo: "Reporte", lang: "SADV41X" },
+    { nombre: "SISMO41", ed: "01", file: "SISMO41.html", tipo: "Geología", lang: "Alerta" },
     { nombre: "SADV41AT100YEARSTERDAY", ed: "02", file: "SADV41AT100YEARSTERDAY02.html", tipo: "Periodismo", lang: "Neolatín" },
-    { nombre: "Aura Engine", ed: "01", file: "Aura_engine.py", tipo: "Motor GAPPAI", lang: "Python" },
-    { nombre: "Diccionario Neolatín", ed: "01", file: "neolatin_base.html", tipo: "Lingüística", lang: "Gnabe" }
+    { nombre: "Aura Engine", ed: "01", file: "Aura_engine.py", tipo: "Motor GAPPAI", lang: "Python" }
 ];
 
 function renderGrid(filter = "") {
@@ -234,25 +229,6 @@ function checkKeys(e) {
     renderGrid(e.target.value);
     if (e.key === "Enter") invocarArchivo();
 }
-
-// PROTOCOLO DE SELECCIÓN DINÁMICA
-const tool = document.getElementById('sadv41-tool');
-let lastSelection = "";
-
-document.addEventListener('mouseup', function() {
-    let selectedText = window.getSelection().toString().trim();
-    if (selectedText.length > 0) {
-        lastSelection = selectedText;
-        tool.style.display = 'block';
-        tool.innerText = "ENVIAR A SADV41X: " + (selectedText.substring(0, 15) + "...");
-    } else {
-        tool.style.display = 'none';
-    }
-});
-
-tool.addEventListener('click', function() {
-    window.location.href = "home.html?search=" + encodeURIComponent(lastSelection);
-});
 </script>
 
 </body>
