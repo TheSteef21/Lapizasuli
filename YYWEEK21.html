@@ -76,7 +76,7 @@
             font-family: sans-serif;
         }
         
-        article {
+        article, .week-block-container {
             background: #1e1e1e;
             padding: 35px;
             border: 1px solid #333;
@@ -104,6 +104,16 @@
             margin: 20px 0;
         }
         .alert-box.seismic { border-color: var(--seismic-blue); background: #001a33; color: #add8e6; }
+        .alert-tag { background: var(--crimson); color: #fff; padding: 2px 8px; font-weight: bold; font-size: 0.8rem; font-family: sans-serif; }
+        
+        /* ESTILOS DE LA TABLA SÍSMICA */
+        .sismo-table { width: 100%; border-collapse: collapse; margin: 15px 0; font-family: 'Courier New', monospace; }
+        .sismo-table th, .sismo-table td { border: 1px solid #333; padding: 10px; text-align: left; }
+        .sismo-table th { background: #111; color: var(--gold); }
+        .high-alert td { color: #ff4444; }
+        .mid-alert td { color: #ffbb33; }
+        .low-alert td { color: #00C851; }
+        .technical-note { background: #111; padding: 15px; border-left: 3px solid var(--neon); margin-top: 15px; font-size: 0.9rem; }
 
         .master-grid {
             display: grid;
@@ -126,6 +136,8 @@
         .version-badge { position: absolute; top: 10px; right: 10px; background: var(--neon); color: var(--dark); padding: 2px 5px; font-size: 0.7rem; font-weight: bold; }
 
         .daily-verse { font-style: italic; color: var(--gold); text-align: center; border-top: 1px solid #333; padding-top: 20px; margin-top: 30px; }
+        .status-tag { display: inline-block; background: #333; color: var(--neon); font-size: 0.85rem; padding: 3px 10px; font-family: 'Courier New', monospace; margin: 5px 0; border: 1px solid var(--neon); }
+        .btn-alcurnia { display: inline-block; background: var(--neon); color: var(--dark); padding: 10px 20px; font-family: 'Courier New', monospace; font-weight: bold; margin-top: 15px; }
         
         a { color: var(--neon); text-decoration: none; }
         a:hover { text-decoration: underline; }
@@ -146,42 +158,119 @@
 <div class="news-container">
     <div class="week-tag">Semana 20 - Reporte Actual</div>
 
-    <article id="news-14-mayo">
-        <div class="date-divider">Jueves, 14 de mayo de 2026 | Protocolo de Alcurnia</div>
-        <h2>Resumen Informativo Global y Local</h2>
-        
-        <div class="entry-content">
-            <h4>Prensa Internacional (Casa Blanca)</h4>
-            <ul style="margin: 10px 0;">
-                <li>
-                    <strong>Diplomacia en Beijing:</strong> Recepción oficial del presidente Trump con Xi Jinping. Se enfatizó la necesidad de una cooperación estratégica frente a la rivalidad comercial.
-                    <br><small><a href="https://www.youtube.com/live/fEv7B8-taYM">[Ver Transmisión fEv7B]</a></small>
-                </li>
-                <li style="margin-top:10px;">
-                    <strong>Iniciativas Anti-Fraude:</strong> El vicepresidente JD Vance anunció medidas estrictas contra el fraude en programas de salud, incluyendo la suspensión de 800 proveedores fraudulentos de Medicare en California para proteger los fondos de los contribuyentes.
-                    <br><small><a href="https://www.youtube.com/live/aHEppAfStKg">[Ver Conferencia aHEpp]</a></small>
-                </li>
-            </ul>
+    <!-- CONTENEDOR MÓVIL ABSOLUTO UNIFICADO BAJO LA DIRECTIVA SADV41 -->
+    <div class="week-block-container">
+        <section id="YYWEEK20" class="week-block" style="max-width: 360px; margin: 0 auto; position: relative; z-index: 10;">
+            <div class="alcurnia-header">
+                <h2>Semana 20 - Mayo 2026</h2>
+                <p class="status-tag">Estado: Actualizado | Identificador: YYWEEK20</p>
+            </div>
 
-            <h4>Seguridad en Panamá</h4>
-            <p>
-                Autoridades locales desmantelan red delictiva, resultando en el decomiso de bienes valorados en miles de dólares.
-            </p>
+            <!-- REPORTE SÍSMICO UNIFICADO -->
+            <article class="news-item earthquake-report" style="background:transparent; padding:0; border:none; box-shadow:none; margin-bottom:30px;">
+                <header>
+                    <span class="alert-tag">MONITOREO SÍSMICO</span>
+                    <h3>Reporte de Actividad Telúrica - Región Istmo y Alrededores</h3>
+                </header>
+                <div class="content">
+                    <p>Durante las últimas 24 horas, la red de monitoreo ha registrado movimientos significativos en el cinturón de fuego del Pacífico y zonas de fractura adyacentes:</p>
+                    
+                    <table class="sismo-table">
+                        <thead>
+                            <tr>
+                                <th>Magnitud</th>
+                                <th>Localización</th>
+                                <th>Fecha/Hora (Local)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="high-alert">
+                                <td><strong>M 5.4</strong></td>
+                                <td>El Litoral del San Juan, Colombia</td>
+                                <td>14-Mayo | 14:05</td>
+                            </tr>
+                            <tr class="mid-alert">
+                                <td><strong>M 3.7</strong></td>
+                                <td>Sur de Panamá (Zona de Fractura)</td>
+                                <td>14-Mayo | 22:15</td>
+                            </tr>
+                            <tr class="low-alert">
+                                <td><strong>M 3.1</strong></td>
+                                <td>Provincias Centrales, Panamá</td>
+                                <td>15-Mayo | 04:30</td>
+                            </tr>
+                        </tbody>
+                    </table>
 
-            <aside class="alert-box seismic">
-                <strong>⚠️ Monitoreo Sísmico (Vía SISMO41):</strong>
-                <ul style="margin: 5px 0;">
-                    <li>M5.4 - El Litoral del San Juan, Colombia.</li>
-                    <li>M3.7 - Sur de Panamá.</li>
+                    <div class="technical-note">
+                        <p><strong>Nota del Analista:</strong> Se observa una liberación de energía constante en la microplaca de Panamá. El evento de 5.4 en Colombia fue perceptible en zonas altas de la provincia de Panamá Oeste sin reportes de daños estructurales.</p>
+                        <p class="citation" style="font-family:'Courier New', monospace; font-size:0.8rem; color:#888;">`Data Source: SISMO41 Real-Time Feed / Instituto de Geociencias`</p>
+                    </div>
+                </div>
+                
+                <footer class="connection-hub" style="margin-top: 15px;">
+                    <p>Vínculo dinámico activo: <a href="https://thesteef21.github.io/Lapizasuli/SISMO41.html" target="_blank">Acceso a Gráficas en Tiempo Real</a></p>
+                </footer>
+            </article>
+
+            <!-- NOTICIAS DEL 14 Y 15 DE MAYO (GEOPOLÍTICA E INFORMES DE ALCURNIA) -->
+            <article class="news-item top-story" style="background:transparent; padding:0; border:none; box-shadow:none; margin-bottom:30px;">
+                <header>
+                    <div class="date-divider">Viernes, 15 de Mayo de 2026 | 08:31 AM</div>
+                    <h3>Geopolítica en Tensión y Reporte Metereológico</h3>
+                </header>
+                <div class="content">
+                    <h4>Prensa Internacional (Casa Blanca)</h4>
+                    <ul style="margin: 10px 0; padding-left:20px;">
+                        <li>
+                            <strong>Diplomacia en Beijing:</strong> Recepción oficial del presidente Trump con Xi Jinping. Se enfatizó la necesidad de una cooperación estratégica frente a la rivalidad comercial.
+                            <br><small><a href="https://www.youtube.com/live/fEv7B8-taYM" target="_blank">[Ver Transmisión fEv7B]</a></small>
+                        </li>
+                        <li style="margin-top:10px;">
+                            <strong>Iniciativas Anti-Fraude:</strong> El vicepresidente JD Vance anunció medidas estrictas contra el fraude en programas de salud, incluyendo la suspensión de 800 proveedores fraudulentos de Medicare en California para proteger los fondos de los contribuyentes.
+                            <br><small><a href="https://www.youtube.com/live/aHEppAfStKg" target="_blank">[Ver Conferencia aHEpp]</a></small>
+                        </li>
+                    </ul>
+
+                    <p>Tras el histórico encuentro, los mercados globales observan con cautela la transición de "rivales a socios". Mientras tanto, en el istmo panameño, las condiciones climáticas exigen vigilancia por altos índices de humedad.</p>
+                    
+                    <div class="alert-box warning">
+                        <strong>Condiciones en Burunga:</strong> 28.3°C, Humedad del 84%. Se prevén tormentas eléctricas dispersas para la tarde.
+                    </div>
+                    
+                    <p class="citation" style="font-family:'Courier New', monospace; font-size:0.8rem; color:#888;">`Fuente: Notificaciones de Sistema / Reporte de Alcurnia`</p>
+                </div>
+            </article>
+
+            <!-- ALERTAS Y OPERATIVOS ADICIONALES -->
+            <aside class="sidebar-alert" style="margin-bottom:30px;">
+                <h4>Alerta Sísmica Regional</h4>
+                <ul style="padding-left:20px;">
+                    <li><strong>M 3.7:</strong> Al Sur de Panamá (Reciente)</li>
+                    <li><strong>M 5.4:</strong> El Litoral del San Juan, Colombia (14 de mayo)</li>
                 </ul>
-                <small><a href="https://thesteef21.github.io/Lapizasuli/SISMO41.html">Ver registro completo en SISMO41.html</a></small>
             </aside>
-        </div>
 
-        <footer class="daily-verse">
-            "He aquí Dios es salvación mía; me aseguraré y no temeré..." — Isaías 12:2 RVR1960
-        </footer>
-    </article>
+            <article class="news-item" style="background:transparent; padding:0; border:none; box-shadow:none; margin-bottom:30px;">
+                <header>
+                    <h3>Operativos de Seguridad en Panamá</h3>
+                </header>
+                <div class="content">
+                    <p>Las autoridades panameñas continúan el proceso de desmantelamiento de redes delictivas, con decomisos que ascienden a miles de dólares en bienes de lujo y efectivo.</p>
+                    <p class="citation" style="font-family:'Courier New', monospace; font-size:0.8rem; color:#888;">`Ref: Archivo de Seguridad Nacional - Mayo 14/15`</p>
+                </div>
+            </article>
+
+            <div class="link-footer" style="text-align:center; border-top: 1px solid #333; padding-top:15px;">
+                <a href="https://thesteef21.github.io/Lapizasuli/SISMO41.html" class="btn-alcurnia" target="_blank">Acceder a SISMO41 Hub</a>
+            </div>
+        </section>
+    </div>
+
+    <!-- SELLO ESCRITURAL DE LA MISIÓN -->
+    <footer class="daily-verse">
+        "He aquí Dios es salvación mía; me aseguraré y no temeré..." — Isaías 12:2 RVR1960
+    </footer>
 </div>
 
 <div class="master-grid" id="mainDisplay"></div>
