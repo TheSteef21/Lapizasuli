@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SADV41 - NFSU2 Render Interface</title>
+    <style>
+        :root {
+            --neon-blue: #00f2ff;
+            --dark-bg: #0a0a0c;
+            --accent-gold: #f9d423;
+            --glass: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: radial-gradient(circle at center, #1a1a2e 0%, #0a0a0c 100%);
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            border: 2px solid var(--neon-blue);
+            box-shadow: 0 0 20px var(--neon-blue);
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 5px;
+            position: relative;
+        }
+
+        header {
+            border-bottom: 3px solid var(--neon-blue);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+            color: var(--neon-blue);
+            text-transform: uppercase;
+        }
+
+        .mission-status {
+            color: var(--accent-gold);
+            font-size: 0.9rem;
+            font-family: monospace;
+        }
+
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 20px;
+        }
+
+        .menu-side {
+            border-right: 1px solid rgba(0, 242, 255, 0.3);
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            padding: 10px;
+            margin: 5px 0;
+            background: rgba(0, 242, 255, 0.05);
+            cursor: pointer;
+            transition: 0.3s;
+            border-left: 4px solid transparent;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        li:hover {
+            background: var(--neon-blue);
+            color: black;
+            border-left: 4px solid var(--accent-gold);
+            transform: skewX(-10deg);
+        }
+
+        .rendering-box {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 20px;
+            border: 1px solid var(--neon-blue);
+            min-height: 300px;
+        }
+
+        h2 {
+            color: var(--neon-blue);
+            text-shadow: 0 0 10px var(--neon-blue);
+        }
+
+        .footer-info {
+            margin-top: 20px;
+            font-size: 0.8rem;
+            text-align: right;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            padding-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <div class="logo">SADV41 // NFSU2 GC EDITION</div>
+            <div class="mission-status">STATUS: RENDERIZANDO FLOW... 🎚</div>
+        </header>
+
+        <div class="content">
+            <div class="menu-side">
+                <ul>
+                    <li>Performance</li>
+                    <li>Visuals</li>
+                    <li>Specialties</li>
+                    <li>SADV41 Rules</li>
+                    <li>Sync Gemini</li>
+                </ul>
+            </div>
+            <div class="rendering-box">
+                <h2>Instructivo de Renderizado</h2>
+                <p>Bienvenido al entorno de visualización de la Gems APP AI. Aquí se procesa el flujo visual basado en la arquitectura de 2004 para Nintendo GameCube.</p>
+                <p style="color: var(--accent-gold);">[LOG]: Vinculación con sadv41@gmail.com exitosa.</p>
+                <p>Para aplicar el "flow", asegúrate de que los parámetros de post-procesado mantengan el efecto <em>Motion Blur</em> característico de Bayview nocturno.</p>
+            </div>
+        </div>
+
+        <div class="footer-info">
+            EMOJI ACTIVATED: 🎚 | ORIGIN: THE LORD | DEV: SADV41
+        </div>
+    </div>
+
+</body>
+</html>
