@@ -17,17 +17,11 @@
                         electricBlue: '#00D1FF',
                         magenta: '#FF00E5',
                         sodiumOrange: '#FFB800',
-                        cyanFlare: '#00FFFF',
                     },
                     fontFamily: {
                         header: ['Orbitron', 'sans-serif'],
                         technical: ['Archivo Narrow', 'sans-serif'],
                         mono: ['JetBrains+Mono', 'monospace'],
-                    },
-                    boxShadow: {
-                        'neon-blue': '0 0 15px rgba(0, 209, 255, 0.4), 0 0 5px rgba(0, 209, 255, 0.2)',
-                        'neon-magenta': '0 0 15px rgba(255, 0, 229, 0.4), 0 0 5px rgba(255, 0, 229, 0.2)',
-                        'inner-glow': 'inset 0 0 20px rgba(0, 209, 255, 0.1)',
                     }
                 }
             }
@@ -47,13 +41,9 @@
         }
 
         .scanline {
-            width: 100%;
-            height: 2px;
+            width: 100%; height: 2px;
             background: rgba(0, 209, 255, 0.1);
-            position: fixed;
-            z-index: 50;
-            top: 0;
-            pointer-events: none;
+            position: fixed; z-index: 50; top: 0; pointer-events: none;
             animation: scanline 8s linear infinite;
         }
 
@@ -62,13 +52,8 @@
             100% { top: 100%; }
         }
 
-        .bloom-text-blue {
-            text-shadow: 0 0 8px rgba(0, 209, 255, 0.8), 0 0 15px rgba(0, 209, 255, 0.5);
-        }
-
-        .bloom-text-magenta {
-            text-shadow: 0 0 8px rgba(255, 0, 229, 0.8), 0 0 15px rgba(255, 0, 229, 0.5);
-        }
+        .bloom-text-blue { text-shadow: 0 0 8px rgba(0, 209, 255, 0.8), 0 0 15px rgba(0, 209, 255, 0.5); }
+        .bloom-text-magenta { text-shadow: 0 0 8px rgba(255, 0, 229, 0.8), 0 0 15px rgba(255, 0, 229, 0.5); }
 
         .glass-panel {
             background: rgba(10, 10, 20, 0.75);
@@ -77,139 +62,59 @@
             position: relative;
             overflow: hidden;
         }
-
         .glass-panel::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 100%;
-            background: #00D1FF;
-            box-shadow: 0 0 10px #00D1FF;
+            content: ""; position: absolute; top: 0; left: 0; width: 4px; height: 100%;
+            background: #00D1FF; box-shadow: 0 0 10px #00D1FF;
         }
 
-        .corner-accent {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            border: 2px solid #FF00E5;
-        }
-
+        .corner-accent { position: absolute; width: 10px; height: 10px; border: 2px solid #FF00E5; }
         .corner-tl { top: -2px; left: -2px; border-right: 0; border-bottom: 0; }
         .corner-tr { top: -2px; right: -2px; border-left: 0; border-bottom: 0; }
         .corner-bl { bottom: -2px; left: -2px; border-right: 0; border-top: 0; }
         .corner-br { bottom: -2px; right: -2px; border-left: 0; border-top: 0; }
 
-        .pulsing-indicator {
-            animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-        }
+        .pulsing-indicator { animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.1); } }
 
-        @keyframes pulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.5; transform: scale(1.1); }
-        }
-
-        /* 3D Rotating Mesh Representation via Animation */
-        .chassis-wireframe {
-            position: relative;
-            width: 100%;
-            height: 170px;
+        .chassis-viewport {
+            position: relative; width: 100%; height: 170px;
             background: rgba(5, 5, 10, 0.6);
             border: 1px dashed rgba(0, 209, 255, 0.25);
-            background-size: cover;
-            background-position: center;
+            background-size: cover; background-position: center;
         }
 
         .rotating-mesh {
-            animation: holographicRotation 12s linear infinite alternate;
+            animation: holographicRotation 10s linear infinite alternate;
             transform-origin: center;
         }
-
         @keyframes holographicRotation {
             0% { transform: scaleX(1) skewY(0deg); filter: brightness(1); }
-            50% { transform: scaleX(0.96) skewY(1deg); filter: brightness(1.2); }
+            50% { transform: scaleX(0.95) skewY(0.5deg); filter: brightness(1.2); }
             100% { transform: scaleX(1) skewY(0deg); filter: brightness(1); }
         }
 
-        /* Wheel Hub & Physics */
-        .wheel-hub {
-            position: absolute;
-            width: 66px;
-            height: 66px;
-            bottom: 22px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 5;
-        }
-
         .tire-profile {
-            width: 54px;
-            height: 54px;
             border-radius: 50%;
-            border: 4px solid #E2E8F0;
-            background: radial-gradient(circle, rgba(0,0,0,0.8) 30%, rgba(30,30,40,0.9) 70%);
+            background: radial-gradient(circle, rgba(0,0,0,0.85) 30%, rgba(20,20,30,0.95) 70%);
             box-shadow: 0 0 12px rgba(0, 209, 255, 0.3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.1s ease, border-color 0.3s ease;
-            animation: tireSpin 4s linear infinite;
+            display: flex; align-items: center; justify-content: center;
+            animation: tireSpin 3s linear infinite;
+            transition: width 0.1s ease, height 0.1s ease;
         }
+        @keyframes tireSpin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-        /* Rims Representation */
-        .rim-lines {
-            width: 85%;
-            height: 85%;
-            border-radius: 50%;
-            border: 1px dashed rgba(0, 255, 255, 0.6);
-            position: relative;
-        }
-        .rim-lines::before, .rim-lines::after {
-            content: '';
-            position: absolute;
-            background: rgba(0, 255, 255, 0.4);
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-        }
-        .rim-lines::before { width: 100%; height: 2px; }
-        .rim-lines::after { width: 2px; height: 100%; }
+        .tire-slick { border: 4px solid #00D1FF; }
+        .tire-semi { border: 5px double #FF00E5; }
+        .tire-wet { border: 4px dashed #FFB800; }
 
-        @keyframes tireSpin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
+        .rim-lines { width: 80%; height: 80%; border-radius: 50%; border: 1px dashed rgba(0, 255, 255, 0.5); position: relative; }
+        .rim-lines::before, .rim-lines::after { content: ''; position: absolute; background: rgba(0, 255, 255, 0.4); top: 50%; left: 50%; transform: translate(-50%, -50%); }
+        .rim-lines::before { width: 100%; height: 1px; }
+        .rim-lines::after { width: 1px; height: 100%; }
 
-        .tire-slick { border-color: #00D1FF; border-style: solid; }
-        .tire-semi { border-color: #FF00E5; border-style: double; }
-        .tire-wet { border-color: #FFB800; border-style: dashed; }
-
-        /* Custom Custom Knob / Input Range styling */
-        .knob-slider {
-            -webkit-appearance: none;
-            width: 100%;
-            background: transparent;
-        }
-        .knob-slider:focus { outline: none; }
-        .knob-slider::-webkit-slider-runnable-track {
-            width: 100%;
-            height: 6px;
-            background: rgba(0, 209, 255, 0.2);
-            border-radius: 3px;
-            border: 1px solid rgba(0, 209, 255, 0.4);
-        }
-        .knob-slider::-webkit-slider-thumb {
-            height: 18px;
-            width: 18px;
-            border-radius: 50%;
-            background: #FF00E5;
-            cursor: pointer;
-            -webkit-appearance: none;
-            margin-top: -6px;
-            box-shadow: 0 0 10px #FF00E5;
-            border: 2px solid #FFF;
-        }
+        .knob-slider { -webkit-appearance: none; width: 100%; background: transparent; }
+        .knob-slider::-webkit-slider-runnable-track { width: 100%; height: 6px; background: rgba(0, 209, 255, 0.15); border-radius: 3px; border: 1px solid rgba(0, 209, 255, 0.3); }
+        .knob-slider::-webkit-slider-thumb { height: 16px; width: 16px; border-radius: 50%; background: #FF00E5; cursor: pointer; -webkit-appearance: none; margin-top: -5px; box-shadow: 0 0 8px #FF00E5; border: 2px solid #FFF; }
     </style>
 </head>
 <body class="font-technical antialiased p-4 min-h-screen flex items-center justify-center">
@@ -236,4 +141,137 @@
         <section class="glass-panel p-4 border-electricBlue/40">
             <div class="corner-accent corner-tr"></div>
             <div class="flex justify-between items-center mb-2">
-                <span class="font-mono text-[10px] text-magenta">3D CHASSIS RENDER (ROTATING
+                <span class="font-mono text-[10px] text-magenta">3D CHASSIS RENDER (ROTATING)</span>
+                <span class="text-[9px] font-mono bg-electricBlue/20 text-electricBlue px-1.5 py-0.5 border border-electricBlue/30">SCALE: 1:18</span>
+            </div>
+
+            <div class="chassis-viewport rounded overflow-hidden flex items-center justify-center" id="viewportBg">
+                
+                <svg id="hologramMesh" class="absolute inset-0 w-full h-full rotating-mesh z-10 pointer-events-none" viewBox="0 0 340 170" fill="none">
+                    <path d="M30 115 C 50 112, 55 92, 75 90 C 95 88, 115 82, 135 62 C 155 46, 215 46, 245 46 C 265 46, 275 62, 285 75 C 295 78, 305 82, 315 95 C 320 105, 315 122, 300 122 L35 122 Z" stroke="#00FFFF" stroke-width="1.2" stroke-dasharray="2 1" fill="rgba(0, 255, 255, 0.02)"/>
+                    <path d="M75 90 L285 75 M135 62 L245 72 M160 46 L180 122 M230 46 L210 122" stroke="#00FFFF" stroke-width="0.5" opacity="0.3"/>
+                    <line x1="10" y1="122" x2="330" y2="122" stroke="#FF00E5" stroke-width="1.5" stroke-dasharray="4 2"/>
+                </svg>
+
+                <div class="absolute left-[54px] bottom-[26px] z-20">
+                    <div id="tire-front" class="tire-profile tire-slick">
+                        <div class="rim-lines"></div>
+                    </div>
+                </div>
+                
+                <div class="absolute right-[54px] bottom-[26px] z-20">
+                    <div id="tire-rear" class="tire-profile tire-slick">
+                        <div class="rim-lines"></div>
+                    </div>
+                </div>
+
+                <label class="absolute bottom-2 left-2 bg-black/80 border border-electricBlue/40 px-2 py-1 rounded text-[8px] font-mono text-electricBlue cursor-pointer hover:bg-electricBlue hover:text-midnight transition-colors z-30">
+                    [+] CARGAR FOTO CAR
+                    <input type="file" id="photoUploader" accept="image/*" class="hidden" onchange="loadCustomCar(event)">
+                </label>
+            </div>
+
+            <div class="mt-4 p-3 bg-midnight/90 border border-white/10 rounded">
+                <div class="flex justify-between items-center text-[10px] font-mono text-white/70 mb-1">
+                    <span class="text-electricBlue">MÉTRICA RINES:</span>
+                    <span id="metricDisplay" class="font-bold text-sodiumOrange text-xs">19"</span>
+                </div>
+                
+                <div class="relative w-full px-1 mb-2">
+                    <input type="range" id="sizeKnob" min="15" max="22" step="0.5" value="19" oninput="tuneTireSize(this.value)" class="knob-slider mt-2">
+                    <div class="flex justify-between text-[8px] font-mono text-white/40 mt-1">
+                        <span>15"</span>
+                        <span>17"</span>
+                        <span class="text-magenta font-bold">19"</span>
+                        <span>21"</span>
+                        <span>22"</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-3 grid grid-cols-3 gap-2 text-center text-xs font-mono">
+                <button onclick="changeTire('tire-slick')" class="bg-midnight border border-electricBlue text-electricBlue py-1.5 rounded text-[10px] uppercase font-bold tracking-tight">
+                    SLICK R1
+                </button>
+                <button onclick="changeTire('tire-semi')" class="bg-midnight border border-magenta text-magenta py-1.5 rounded text-[10px] uppercase font-bold tracking-tight">
+                    SEMI STREET
+                </button>
+                <button onclick="changeTire('tire-wet')" class="bg-midnight border border-sodiumOrange text-sodiumOrange py-1.5 rounded text-[10px] uppercase font-bold tracking-tight">
+                    WET TRACK
+                </button>
+            </div>
+        </section>
+
+        <section class="glass-panel p-4 border-sodiumOrange/40">
+            <h2 class="font-header text-[11px] text-sodiumOrange tracking-wider mb-2 uppercase">Engine Prompt Config</h2>
+            <div class="bg-black/60 p-3 rounded font-mono text-[11px] text-white/90 leading-normal border border-white/5 relative">
+                <span class="text-sodiumOrange">$ CONFIG_TIRING:</span> A white Honda S2000 customized with Turbo Tires by Steven Dior, dynamic high-speed composition.
+                <div class="mt-3 flex justify-end">
+                    <button onclick="navigator.clipboard.writeText('A white Honda S2000 customized with Turbo Tires by Steven Dior.')" class="bg-sodiumOrange/10 border border-sodiumOrange text-sodiumOrange px-3 py-1 font-header text-[10px] uppercase hover:bg-sodiumOrange hover:text-midnight transition-all flex items-center gap-1">
+                        Copy Action <span>→</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <footer class="glass-panel p-3 border-magenta/40 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <div class="w-6 h-6 border border-magenta rounded-full flex items-center justify-center text-[10px] text-magenta shadow-neon-magenta font-bold">✓</div>
+                <div>
+                    <h3 class="font-header text-[10px] text-white tracking-tighter">SECURE REPOSITORY</h3>
+                    <p class="font-mono text-[8px] text-magenta/80 uppercase">VERIFICATION STEVEN DIOR</p>
+                </div>
+            </div>
+            <div class="text-right font-mono text-[8px] text-white/30">
+                SYS_REF_2026<br>LEVEL: 777
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        let currentStyleClass = 'tire-slick';
+
+        function changeTire(tireClass) {
+            currentStyleClass = tireClass;
+            const sizeValue = document.getElementById('sizeKnob').value;
+            tuneTireSize(sizeValue);
+        }
+
+        function tuneTireSize(size) {
+            document.getElementById('metricDisplay').innerText = size + '"';
+            const front = document.getElementById('tire-front');
+            const rear = document.getElementById('tire-rear');
+            
+            // Mapeo matemático preciso para la escala visual
+            const calculatedPixels = 42 + ((size - 15) * 3.14);
+            
+            front.style.width = calculatedPixels + 'px';
+            front.style.height = calculatedPixels + 'px';
+            rear.style.width = calculatedPixels + 'px';
+            rear.style.height = calculatedPixels + 'px';
+            
+            front.className = 'tire-profile ' + currentStyleClass;
+            rear.className = 'tire-profile ' + currentStyleClass;
+        }
+
+        function loadCustomCar(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const viewport = document.getElementById('viewportBg');
+                    const hologram = document.getElementById('hologramMesh');
+                    viewport.style.backgroundImage = "url('" + e.target.result + "')";
+                    if (hologram) hologram.style.opacity = "0.2";
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Inicialización instantánea
+        window.onload = function() {
+            tuneTireSize(19);
+        };
+    </script>
+</body>
+</html>
