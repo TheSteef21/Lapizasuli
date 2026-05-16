@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 170" fill="none" class="rotating-mesh">
+    <path d="M30 115 C 50 112, 55 92, 75 90 C 95 88, 115 82, 135 62 C 155 46, 215 46, 245 46 C 265 46, 275 62, 285 75 C 295 78, 305 82, 315 95 C 320 105, 315 122, 300 122 L35 122 Z" stroke="#00FFFF" stroke-width="1.2" stroke-dasharray="2 1" fill="rgba(0, 255, 255, 0.02)"/>
+    <path d="M75 90 L285 75 M135 62 L245 72 M160 46 L180 122 M230 46 L210 122" stroke="#00FFFF" stroke-width="0.5" opacity="0.3"/>
+    <line x1="10" y1="122" x2="330" y2="122" stroke="#FF00E5" stroke-width="1.5" stroke-dasharray="4 2"/>
+</svg>
