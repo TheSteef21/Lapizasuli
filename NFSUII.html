@@ -110,51 +110,106 @@
             50% { opacity: 0.5; transform: scale(1.1); }
         }
 
-        /* Renderizado Técnico del Chasis S2000 */
+        /* 3D Rotating Mesh Representation via Animation */
         .chassis-wireframe {
             position: relative;
             width: 100%;
-            height: 160px;
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px dashed rgba(0, 209, 255, 0.2);
+            height: 170px;
+            background: rgba(5, 5, 10, 0.6);
+            border: 1px dashed rgba(0, 209, 255, 0.25);
+            background-size: cover;
+            background-position: center;
         }
 
+        .rotating-mesh {
+            animation: holographicRotation 12s linear infinite alternate;
+            transform-origin: center;
+        }
+
+        @keyframes holographicRotation {
+            0% { transform: scaleX(1) skewY(0deg); filter: brightness(1); }
+            50% { transform: scaleX(0.96) skewY(1deg); filter: brightness(1.2); }
+            100% { transform: scaleX(1) skewY(0deg); filter: brightness(1); }
+        }
+
+        /* Wheel Hub & Physics */
         .wheel-hub {
             position: absolute;
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            border: 2px dashed #00D1FF;
-            background: rgba(5, 5, 10, 0.9);
-            bottom: 12px;
+            width: 66px;
+            height: 66px;
+            bottom: 22px;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.3s ease;
-        }
-
-        .wheel-hub::after {
-            content: '';
-            width: 12px;
-            height: 12px;
-            background: #FF00E5;
-            border-radius: 50%;
-            box-shadow: 0 0 8px #FF00E5;
+            z-index: 5;
         }
 
         .tire-profile {
-            position: absolute;
-            width: 58px;
-            height: 58px;
+            width: 54px;
+            height: 54px;
             border-radius: 50%;
-            border: 4px solid #FFB800;
-            box-shadow: 0 0 10px rgba(255, 184, 0, 0.4);
-            transition: all 0.3s ease;
+            border: 4px solid #E2E8F0;
+            background: radial-gradient(circle, rgba(0,0,0,0.8) 30%, rgba(30,30,40,0.9) 70%);
+            box-shadow: 0 0 12px rgba(0, 209, 255, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.1s ease, border-color 0.3s ease;
+            animation: tireSpin 4s linear infinite;
         }
 
-        .tire-slick { border-style: solid; }
-        .tire-semi { border-style: double; border-width: 6px; }
-        .tire-wet { border-style: dashed; }
+        /* Rims Representation */
+        .rim-lines {
+            width: 85%;
+            height: 85%;
+            border-radius: 50%;
+            border: 1px dashed rgba(0, 255, 255, 0.6);
+            position: relative;
+        }
+        .rim-lines::before, .rim-lines::after {
+            content: '';
+            position: absolute;
+            background: rgba(0, 255, 255, 0.4);
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .rim-lines::before { width: 100%; height: 2px; }
+        .rim-lines::after { width: 2px; height: 100%; }
+
+        @keyframes tireSpin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .tire-slick { border-color: #00D1FF; border-style: solid; }
+        .tire-semi { border-color: #FF00E5; border-style: double; }
+        .tire-wet { border-color: #FFB800; border-style: dashed; }
+
+        /* Custom Custom Knob / Input Range styling */
+        .knob-slider {
+            -webkit-appearance: none;
+            width: 100%;
+            background: transparent;
+        }
+        .knob-slider:focus { outline: none; }
+        .knob-slider::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 6px;
+            background: rgba(0, 209, 255, 0.2);
+            border-radius: 3px;
+            border: 1px solid rgba(0, 209, 255, 0.4);
+        }
+        .knob-slider::-webkit-slider-thumb {
+            height: 18px;
+            width: 18px;
+            border-radius: 50%;
+            background: #FF00E5;
+            cursor: pointer;
+            -webkit-appearance: none;
+            margin-top: -6px;
+            box-shadow: 0 0 10px #FF00E5;
+            border: 2px solid #FFF;
+        }
     </style>
 </head>
 <body class="font-technical antialiased p-4 min-h-screen flex items-center justify-center">
@@ -181,84 +236,4 @@
         <section class="glass-panel p-4 border-electricBlue/40">
             <div class="corner-accent corner-tr"></div>
             <div class="flex justify-between items-center mb-2">
-                <span class="font-mono text-[10px] text-magenta">CHASSIS: S2000_J's_RACING</span>
-                <span class="text-[9px] font-mono bg-electricBlue/20 text-electricBlue px-1.5 py-0.5 border border-electricBlue/30">SCALE: 1:18</span>
-            </div>
-
-            <div class="chassis-wireframe rounded overflow-hidden flex items-center justify-center">
-                <svg class="absolute inset-0 w-full h-full opacity-30" viewBox="0 0 320 160" fill="none">
-                    <path d="M20 120 L40 115 L60 85 L110 80 L140 55 L220 55 L250 82 L290 85 L300 100 L300 120 Z" stroke="#00D1FF" stroke-width="1.5" stroke-dasharray="2 2"/>
-                    <line x1="0" y1="120" x2="320" y2="120" stroke="#FF00E5" stroke-width="1"/>
-                </svg>
-
-                <div class="wheel-hub left-[52px]" id="hub-front">
-                    <div id="tire-front" class="tire-profile w-[56px] h-[56px] tire-slick"></div>
-                </div>
-                
-                <div class="wheel-hub right-[52px]" id="hub-rear">
-                    <div id="tire-rear" class="tire-profile w-[56px] h-[56px] tire-slick"></div>
-                </div>
-
-                <div class="absolute top-2 left-2 text-[9px] font-mono text-white/40">
-                    TURBO TIRE BY STEVEN DIOR
-                </div>
-            </div>
-
-            <div class="mt-4 grid grid-cols-3 gap-2 text-center text-xs font-mono">
-                <button onclick="changeTire('tire-slick')" class="bg-midnight border border-electricBlue text-electricBlue py-1.5 px-1 hover:bg-electricBlue hover:text-midnight transition-all rounded">
-                    SLICK R1
-                </button>
-                <button onclick="changeTire('tire-semi')" class="bg-midnight border border-magenta text-magenta py-1.5 px-1 hover:bg-magenta hover:text-midnight transition-all rounded">
-                    SEMI STREET
-                </button>
-                <button onclick="changeTire('tire-wet')" class="bg-midnight border border-sodiumOrange text-sodiumOrange py-1.5 px-1 hover:bg-sodiumOrange hover:text-midnight transition-all rounded">
-                    WET TRACK
-                </button>
-            </div>
-        </section>
-
-        <section class="glass-panel p-4 border-sodiumOrange/40">
-            <h2 class="font-header text-[11px] text-sodiumOrange tracking-wider mb-2 uppercase">Engine Prompt Config</h2>
-            <div class="bg-black/60 p-3 rounded font-mono text-[11px] text-white/90 leading-normal border border-white/5 relative">
-                <span class="text-sodiumOrange">$ CONFIG_TIRING:</span> A white Honda S2000 customized with Turbo Tires by Steven Dior, dynamic high-speed composition, neon setup tracking wheel rotation.
-                <div class="mt-3 flex justify-end">
-                    <button onclick="navigator.clipboard.writeText('A white Honda S2000 customized with Turbo Tires by Steven Dior, dynamic high-speed composition.')" class="bg-sodiumOrange/10 border border-sodiumOrange text-sodiumOrange px-3 py-1 font-header text-[10px] uppercase hover:bg-sodiumOrange hover:text-midnight transition-all flex items-center gap-1">
-                        Copy Action <span>→</span>
-                    </button>
-                </div>
-            </div>
-        </section>
-
-        <footer class="glass-panel p-3 border-magenta/40 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-                <div class="w-6 h-6 border border-magenta rounded-full flex items-center justify-center text-[10px] text-magenta shadow-neon-magenta font-bold">
-                    ✓
-                </div>
-                <div>
-                    <h3 class="font-header text-[10px] text-white tracking-tighter">SECURE REPOSITORY</h3>
-                    <p class="font-mono text-[8px] text-magenta/80 uppercase">VERIFICATION STEVEN DIOR</p>
-                </div>
-            </div>
-            <div class="text-right font-mono text-[8px] text-white/30">
-                SYS_REF_2026<br>
-                LEVEL: 777
-            </div>
-        </footer>
-    </div>
-
-    <script>
-        function changeTire(tireClass) {
-            const front = document.getElementById('tire-front');
-            const rear = document.getElementById('tire-rear');
-            
-            // Limpieza de clases previas
-            front.className = 'tire-profile';
-            rear.className = 'tire-profile';
-            
-            // Inyección de la nueva especificación Turbo Tire
-            front.classList.add(tireClass);
-            rear.classList.add(tireClass);
-        }
-    </script>
-</body>
-</html>
+                <span class="font-mono text-[10px] text-magenta">3D CHASSIS RENDER (ROTATING
