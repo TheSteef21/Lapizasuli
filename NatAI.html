@@ -100,11 +100,6 @@
             transition: 0.3s;
             resize: none;
         }
-        textarea:focus {
-            outline: none;
-            border-color: var(--neon-blue);
-            box-shadow: 0 0 10px rgba(0, 209, 255, 0.2);
-        }
         
         .voice-grid {
             display: flex;
@@ -114,8 +109,8 @@
         }
 
         button {
-            background-color: var(--gold);
-            color: var(--deep-blue);
+            background-color: #d4af37;
+            color: #0a192f;
             border: none;
             padding: 12px 20px;
             font-weight: bold;
@@ -131,29 +126,14 @@
             box-sizing: border-box;
         }
         button:hover {
-            background-color: var(--white);
-            color: var(--deep-blue);
+            background-color: #e6f1ff;
             box-shadow: 0 0 12px rgba(230, 241, 255, 0.4);
         }
         
         .btn-secondary {
             background-color: #112240;
-            color: var(--gold);
-            border: 1px solid var(--gold);
-        }
-        .btn-secondary:hover {
-            background-color: rgba(214, 175, 55, 0.1);
-            color: var(--white);
-        }
-        
-        footer {
-            text-align: center;
-            font-size: 0.75rem;
-            font-family: monospace;
-            color: rgba(230, 241, 255, 0.4);
-            margin-top: auto;
-            padding: 1rem 0;
-            width: 100%;
+            color: #d4af37;
+            border: 1px solid #d4af37;
         }
     </style>
 </head>
@@ -164,7 +144,6 @@
     </header>
 
     <div class="container">
-        
         <div class="card">
             <div class="system-status">
                 <div class="pulse-dot" id="statusDot"></div>
@@ -172,7 +151,7 @@
             </div>
             
             <label style="font-size: 0.85rem; color: rgba(230,241,255,0.7);" for="missionInput">Comando de la Misión o Transmisión:</label>
-            <textarea id="missionInput" rows="4" placeholder="Presiona el micrófono y habla naturalmente..."></textarea>
+            <textarea id="missionInput" rows="5" placeholder="Presiona el micrófono y habla naturalmente..."></textarea>
             
             <div class="voice-grid">
                 <button id="btnListen" onclick="startVoiceRecognition()">
@@ -185,14 +164,13 @@
         </div>
 
         <div class="card">
-            <div class="system-status" style="color: var(--gold);">
+            <div class="system-status" style="color: #d4af37;">
                 <span>[🏛️] CENTRAL_STATION_FEED</span>
             </div>
             <p style="margin: 0; font-size: 0.85rem; line-height: 1.4; color: rgba(230,241,255,0.9);">
                 La palabra unifica el arte y la arquitectura. El código se mantiene limpio, modular y blindado bajo el protocolo operativo NatAI.
             </p>
         </div>
-
     </div>
 
     <footer>
@@ -200,8 +178,10 @@
     </footer>
 
     <script>
+        // Setup global de APIs de Audio nativas
         const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
         let recognition = null;
+        let speechQueueText = ""; 
 
         if (SpeechRecognition) {
             recognition = new SpeechRecognition();
@@ -211,3 +191,112 @@
 
             recognition.onstart = function() {
                 const btn = document.getElementById('btnListen');
+                const dot = document.getElementById('statusDot');
+                const status = document.getElementById('statusText');
+                
+                btn.innerText = "🛑 GRABANDO EN DIRECTO...";
+                btn.style.backgroundColor = "#FF00E5"; 
+                btn.style.color = "#ffffff";
+                
+                dot.style.backgroundColor = "#ff00e5";
+                dot.style.boxShadow = "0 0 8px #ff00e5";
+                status.innerText = "NatAI // LISTENING_STREAM...";
+            };
+
+            recognition.onresult = function(event) {
+                const speechResult = event.results[0][0].transcript;
+                // Procesamiento textual síncrono inmediato
+                processNatAIResponse(speechResult);
+            };
+
+            recognition.onerror = function(event) {
+                console.error("Error de canal de voz: ", event.error);
+                if(event.error === 'not-allowed') {
+                    alert("Acceso al micrófono denegado. Asegúrate de navegar mediante HTTPS y permitir el acceso al hardware.");
+                }
+                resetSystemUI();
+            };
+
+            recognition.onend = function() {
+                resetSystemUI();
+                // CRÍTICO: Disparar la voz inmediatamente al cerrar el canal de escucha 
+                // para heredar el gesto táctil inicial del usuario de forma nativa.
+                if(speechQueueText) {
+                    executeVoiceSynthesis(speechQueueText);
+                    speechQueueText = ""; // Limpiar pila
+                }
+            };
+        } else {
+            document.getElementById('btnListen').innerText = "❌ SISTEMA DE VOZ NO SOPORTADO";
+            document.getElementById('btnListen').disabled = true;
+        }
+
+        function resetSystemUI() {
+            document.getElementById('btnListen').innerText = "🎙️ INICIAR ESCUCHA LÁSER";
+            document.getElementById('btnListen').style.backgroundColor = "#d4af37";
+            document.getElementById('btnListen').style.color = "#0a192f";
+            
+            document.getElementById('statusDot').style.backgroundColor = "#22c55e";
+            document.getElementById('statusDot').style.boxShadow = "0 0 8px #22c55e";
+            document.getElementById('statusText').innerText = "NatAI // INTELLIGENCE_ACTIVE";
+        }
+
+        function startVoiceRecognition() {
+            if (recognition) {
+                // Activar un pulso de audio silencioso inicial forzado. 
+                // Esto burla el bloqueo de reproducción automática en iOS y Android Chrome.
+                window.speechSynthesis.cancel();
+                const forceUnlock = new SpeechSynthesisUtterance("");
+                window.speechSynthesis.speak(forceUnlock);
+
+                try {
+                    recognition.start();
+                } catch (e) {
+                    recognition.stop();
+                }
+            }
+        }
+
+        function processNatAIResponse(userInput) {
+            let responseText = "";
+            const cleanInput = userInput.toLowerCase();
+
+            if (cleanInput.includes("hola") || cleanInput.includes("saludos")) {
+                responseText = "Saludos Ministro Plenipotenciario Steven Dior. El núcleo NatAI del Tabernáculo Digital se encuentra completamente activo y a tus órdenes.";
+            } else if (cleanInput.includes("unifica")) {
+                responseText = "Comando Unifica detectado. Consolidando la arquitectura de datos, limpiando bloques HTML y blindando el contenedor móvil a frecuencia setecientos setenta y siete.";
+            } else if (cleanInput.includes("cristo") || cleanInput.includes("agradable")) {
+                responseText = "Transmisión confirmada. Todo lo que construimos con orden, belleza y lealtad refleja la luz del Arquitecto Perfecto.";
+            } else {
+                responseText = "Comando recibido con éxito en la estación central NatAI. Procesando de manera natural: " + userInput + ". El sistema se mantiene blindado.";
+            }
+
+            document.getElementById('missionInput').value = "TÚ: " + userInput + "\n\nNatAI: " + responseText;
+            
+            // Almacenar el payload en la cola de reproducción antes de que termine el proceso de escucha
+            speechQueueText = responseText;
+        }
+
+        function executeVoiceSynthesis(text) {
+            window.speechSynthesis.cancel(); 
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'es-MX'; 
+            utterance.pitch = 1.0;
+            utterance.rate = 1.05; 
+            window.speechSynthesis.speak(utterance);
+        }
+
+        function manualReproduction() {
+            const currentContent = document.getElementById('missionInput').value;
+            if (!currentContent) return;
+            
+            if (currentContent.includes("NatAI: ")) {
+                const splitText = currentContent.split("NatAI: ");
+                executeVoiceSynthesis(splitText[1]);
+            } else {
+                executeVoiceSynthesis(currentContent);
+            }
+        }
+    </script>
+</body>
+</html>
