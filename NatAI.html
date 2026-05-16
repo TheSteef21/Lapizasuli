@@ -202,125 +202,12 @@
     <script>
         const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
         let recognition = null;
-        let isSpeaking = false;
 
         if (SpeechRecognition) {
             recognition = new SpeechRecognition();
-            recognition.lang = 'es-PA'; // Calibrado para la región de Panamá
+            recognition.lang = 'es-PA'; 
             recognition.interimResults = false;
             recognition.maxAlternatives = 1;
 
             recognition.onstart = function() {
                 const btn = document.getElementById('btnListen');
-                const dot = document.getElementById('statusDot');
-                const status = document.getElementById('statusText');
-                
-                btn.innerText = "🛑 GRABANDO EN DIRECTO...";
-                btn.style.backgroundColor = var(--magenta);
-                btn.style.color = "#ffffff";
-                
-                dot.style.backgroundColor = "#ff00e5";
-                dot.style.boxShadow = "0 0 8px #ff00e5";
-                status.innerText = "NatAI // LISTENING_STREAM...";
-            };
-
-            recognition.onresult = function(event) {
-                const speechResult = event.results[0][0].transcript;
-                document.getElementById('missionInput').value = speechResult;
-                
-                // Ejecución instantánea de la respuesta inteligente de NatAI
-                processNatAIResponse(speechResult);
-            };
-
-            recognition.onerror = function(event) {
-                console.error("Error en el canal láser de voz: ", event.error);
-                resetSystemUI();
-            };
-
-            recognition.onend = function() {
-                resetSystemUI();
-            };
-        } else {
-            document.getElementById('btnListen').innerText = "❌ SISTEMA DE VOZ NO SOPORTADO";
-            document.getElementById('btnListen').disabled = true;
-        }
-
-        function resetSystemUI() {
-            const btn = document.getElementById('btnListen');
-            const dot = document.getElementById('statusDot');
-            const status = document.getElementById('statusText');
-            
-            btn.innerText = "🎙️ INICIAR ESCUCHA LÁSER";
-            btn.style.backgroundColor = "var(--gold)";
-            btn.style.color = "var(--deep-blue)";
-            
-            dot.style.backgroundColor = "#22c55e";
-            dot.style.boxShadow = "0 0 8px #22c55e";
-            status.innerText = "NatAI // INTELLIGENCE_ACTIVE";
-        }
-
-        function startVoiceRecognition() {
-            if (recognition) {
-                // Si la IA está hablando, silenciar antes de escuchar
-                if (window.speechSynthesis.speaking) {
-                    window.speechSynthesis.cancel();
-                }
-                try {
-                    recognition.start();
-                } catch (e) {
-                    recognition.stop();
-                }
-            }
-        }
-
-        // MOTOR CONVERSACIONAL INTERNO NATAI
-        function processNatAIResponse(userInput) {
-            let responseText = "";
-            const cleanInput = userInput.toLowerCase();
-
-            // Análisis sintáctico rápido basado en los pilares del Tabernáculo
-            if (cleanInput.includes("hola") || cleanInput.includes("saludos")) {
-                responseText = "Saludos Ministro Plenipotenciario Steven Dior. El núcleo NatAI del Tabernáculo Digital se encuentra completamente activo y a tus órdenes.";
-            } else if (cleanInput.includes("unifica")) {
-                responseText = "Comando Unifica detectado. Consolidando la arquitectura de datos, limpiando bloques HTML y blindando el contenedor móvil a frecuencia setecientos setenta y siete.";
-            } else if (cleanInput.includes("cristo") || cleanInput.includes("agradable")) {
-                responseText = "Transmisión confirmada. Todo lo que construimos con orden, belleza y lealtad refleja la luz del Arquitecto Perfecto.";
-            } else {
-                // Respuesta por defecto interactiva que simula la confirmación de la misión
-                responseText = "Comando recibido con éxito en la estación central NatAI. Procesando: " + userInput + ". El sistema se mantiene blindado.";
-            }
-
-            // Mostrar la respuesta de la IA en la consola de pantalla para confirmación visual
-            setTimeout(() => {
-                document.getElementById('missionInput').value = "TÚ: " + userInput + "\n\nNatAI: " + responseText;
-                executeVoiceSynthesis(responseText);
-            }, 400);
-        }
-
-        // MOTOR DE SÍNTESIS DE VOZ (TEXT-TO-SPEECH)
-        function executeVoiceSynthesis(text) {
-            window.speechSynthesis.cancel(); // Limpiar cola anterior
-
-            const utterance = new SpeechSynthesisUtterance(text);
-            utterance.lang = 'es-MX'; // Tono refinado y claro en español
-            utterance.pitch = 1.0;
-            utterance.rate = 1.05; // Velocidad óptima de procesamiento operativo
-
-            window.speechSynthesis.speak(utterance);
-        }
-
-        function manualReproduction() {
-            const currentContent = document.getElementById('missionInput').value;
-            if (!currentContent) return;
-            
-            // Extraer solo la respuesta de NatAI si ya existe en pantalla
-            if (currentContent.includes("NatAI: ")) {
-                const splitText = currentContent.split("NatAI: ");
-                executeVoiceSynthesis(splitText[1]);
-            } else {
-                executeVoiceSynthesis(currentContent);
-            }
-        }
-    </script>
-</body>
-</html>
