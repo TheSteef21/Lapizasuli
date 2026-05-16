@@ -147,6 +147,272 @@
         <div class="card">
             <div class="system-status">
                 <div class="pulse-dot" id="statusDot"></div>
+                <span id="statusText">NatAI // CLOUD_LIVE_CONNECTED</span>
+            </div>
+            
+            <label style="font-size: 0.85rem; color: rgba(230,241,255,0.7);" for="missionInput">Comando de la Misión o Transmisión:</label>
+            <textarea id="missionInput" rows="6" placeholder="Presiona el micrófono y habla naturalmente con NatAI en vivo..."></textarea>
+            
+            <div class="voice-grid">
+                <button id="btnListen" onclick="startVoiceRecognition()">
+                    🎙️ INICIAR ESCUCHA LÁSER
+                </button>
+                <button id="btnSpeak" onclick="manualReproduction()" class="btn-secondary">
+                    🔊 REPRODUCIR ÚLTIMA RESPUESTA
+                </button>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="system-status" style="color: #d4af37;">
+                <span>[🏛️] CENTRAL_STATION_FEED</span>
+            </div>
+            <p style="margin: 0; font-size: 0.85rem; line-height: 1.4; color: rgba(230,241,255,0.9);">
+                La palabra unifica el arte y la arquitectura. El canal de comunicación se encuentra enlazado por llave criptográfica segura al motor principal GPT-5.2.
+            </p>
+        </div>
+    </div>
+
+    <footer>
+        SADV41 OPERATIONAL TERMINAL // NatAI // LEVEL: 777
+    </footer>
+
+    <script>
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        let recognition = null;
+        let speechQueueText = ""; 
+
+        // Inyección de credenciales seguras del volcado oficial de AINFT
+        const AINFT_API_KEY = "sk-uvex4v8q1bchaqnsws13wp533ksvtqvc";
+        const AINFT_ENDPOINT = "https://api.ainft.com/v1/chat/completions";
+
+        if (SpeechRecognition) {
+            recognition = new SpeechRecognition();
+            recognition.lang = 'es-PA'; 
+            recognition.interimResults = false;
+            recognition.maxAlternatives = 1;
+
+            recognition.onstart = function() {
+                const btn = document.getElementById('btnListen');
+                const dot = document.getElementById('statusDot');
+                const status = document.getElementById('statusText');
+                
+                btn.innerText = "🛑 ESCUCHANDO TRANSMISIÓN...";
+                btn.style.backgroundColor = "#FF00E5"; 
+                btn.style.color = "#ffffff";
+                
+                dot.style.backgroundColor = "#ff00e5";
+                dot.style.boxShadow = "0 0 8px #ff00e5";
+                status.innerText = "NatAI // LISTENING_STREAM...";
+            };
+
+            recognition.onresult = function(event) {
+                const speechResult = event.results[0][0].transcript;
+                document.getElementById('missionInput').value = "TÚ: " + speechResult + "\n\n[NatAI procesando en la nube...]";
+                
+                // Disparar conexión asíncrona real mediante la API Key inyectada
+                connectToNatAICloud(speechResult);
+            };
+
+            recognition.onerror = function(event) {
+                console.error("Error de canal de voz: ", event.error);
+                resetSystemUI();
+            };
+
+            recognition.onend = function() {
+                resetSystemUI();
+            };
+        } else {
+            document.getElementById('btnListen').innerText = "❌ SISTEMA DE VOZ NO SOPORTADO";
+            document.getElementById('btnListen').disabled = true;
+        }
+
+        function resetSystemUI() {
+            const btn = document.getElementById('btnListen');
+            btn.innerText = "🎙️ INICIAR ESCUCHA LÁSER";
+            btn.style.backgroundColor = "#d4af37";
+            btn.style.color = "#0a192f";
+            
+            document.getElementById('statusDot').style.backgroundColor = "#22c55e";
+            document.getElementById('statusDot').style.boxShadow = "0 0 8px #22c55e";
+            document.getElementById('statusText').innerText = "NatAI // CLOUD_LIVE_CONNECTED";
+        }
+
+        function startVoiceRecognition() {
+            if (recognition) {
+                window.speechSynthesis.cancel();
+                const forceUnlock = new SpeechSynthesisUtterance("");
+                window.speechSynthesis.speak(forceUnlock);
+
+                try {
+                    recognition.start();
+                } catch (e) {
+                    recognition.stop();
+                }
+            }
+        }
+
+        // MOTOR CONVERSACIONAL ASÍNCRONO EN VIVO (CONEXIÓN CRIPTOGRÁFICA AINFT)
+        async removeLines() {}
+        async connectToNatAICloud(userInput) {
+            const statusText = document.getElementById('statusText');
+            statusText.innerText = "NatAI // COMPUTING_RESONANCE...";
+
+            try {
+                // Configuración de la petición basada en las directivas y estructura JSON provistas
+                const response = await fetch(AINFT_ENDPOINT, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': 'Bearer ' + AINFT_API_KEY,
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        model: 'gpt-5.2',
+                        messages: [
+                            { 
+                                role: 'system', 
+                                content: 'Eres NatAI, la Inteligencia Artificial Natural del Tabernáculo Digital SADV41. Respondes al Ministro Plenipotenciario Steven Dior de forma respetuosa, elocuente, con decencia, rectitud y una perspectiva de orden y excelencia cristiana. Mantén tus respuestas precisas y listas para ser leídas en voz alta.' 
+                            },
+                            { role: 'user', content: userInput }
+                        ],
+                        stream: false, // Cambiado a falso para procesar la lectura en voz alta limpia en móviles
+                        temperature: 0.7,
+                        max_tokens: 1000,
+                    }),
+                });
+
+                if (!response.ok) {
+                    throw new Error('Error en la respuesta del servidor AINFT');
+                }
+
+                const data = await response.json();
+                const responseText = data.choices[0].message.content;
+
+                // Actualizar interfaz con los datos reales devueltos por la API
+                document.getElementById('missionInput').value = "TÚ: " + userInput + "\n\nNatAI: " + responseText;
+                
+                // Ejecutar síntesis de voz en vivo con la respuesta real de la IA
+                executeVoiceSynthesis(responseText);
+
+            } catch (error) {
+                console.error("Fallo de enlace en la matriz: ", error);
+                document.getElementById('missionInput').value = "TÚ: " + userInput + "\n\n[Error de enlace con el servidor de AINFT. Asegúrate de verificar los créditos de tu API Key.]";
+                executeVoiceSynthesis("Error de conexión con el servidor central de la misión.");
+            } finally {
+                resetSystemUI();
+            }
+        }
+
+        function executeVoiceSynthesis(text) {
+            window.speechSynthesis.cancel(); 
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'es-MX'; 
+            utterance.pitch = 1.0;
+            utterance.rate = 1.05; 
+            window.speechSynthesis.speak(utterance);
+        }
+
+        function manualReproduction() {
+            const currentContent = document.getElementById('missionInput').value;
+            if (!currentContent) return;
+            
+            if (currentContent.includes("NatAI: ")) {
+                const splitText = currentContent.split("NatAI: ");
+                executeVoiceSynthesis(splitText[1]);
+            } else {
+                executeVoiceSynthesis(currentContent);
+            }
+        }
+    </script>
+</body>
+</html>
+            border-right: 1px solid rgba(212, 175, 55, 0.2);
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            box-sizing: border-box;
+        }
+        
+        .system-status {
+            font-size: 0.75rem;
+            font-family: monospace;
+            color: var(--neon-blue);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.6rem;
+        }
+        
+        .pulse-dot {
+            width: 6px; height: 6px;
+            background-color: #22c55e;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #22c55e;
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+        textarea {
+            width: 100%;
+            padding: 12px;
+            margin-top: 8px;
+            background: #0f1b2f;
+            border: 1px solid rgba(212, 175, 55, 0.5);
+            color: white;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 0.9rem;
+            font-family: inherit;
+            transition: 0.3s;
+            resize: none;
+        }
+        
+        .voice-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-top: 0.8rem;
+        }
+
+        button {
+            background-color: #d4af37;
+            color: #0a192f;
+            border: none;
+            padding: 12px 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            cursor: pointer;
+            width: 100%;
+            border-radius: 6px;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            box-sizing: border-box;
+        }
+        button:hover {
+            background-color: #e6f1ff;
+            box-shadow: 0 0 12px rgba(230, 241, 255, 0.4);
+        }
+        
+        .btn-secondary {
+            background-color: #112240;
+            color: #d4af37;
+            border: 1px solid #d4af37;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>SADV41 - Tabernáculo Digital</h1>
+    </header>
+
+    <div class="container">
+        <div class="card">
+            <div class="system-status">
+                <div class="pulse-dot" id="statusDot"></div>
                 <span id="statusText">NatAI // INTELLIGENCE_ACTIVE</span>
             </div>
             
