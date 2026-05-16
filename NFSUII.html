@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Turbo Tire Tester - EASADV41-UG2</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=JetBrains+Mono:wght@300;500&family=Archivo+Narrow:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        midnight: '#05050A',
+                        electricBlue: '#00D1FF',
+                        magenta: '#FF00E5',
+                        sodiumOrange: '#FFB800',
+                        cyanFlare: '#00FFFF',
+                    },
+                    fontFamily: {
+                        header: ['Orbitron', 'sans-serif'],
+                        technical: ['Archivo Narrow', 'sans-serif'],
+                        mono: ['JetBrains+Mono', 'monospace'],
+                    },
+                    boxShadow: {
+                        'neon-blue': '0 0 15px rgba(0, 209, 255, 0.4), 0 0 5px rgba(0, 209, 255, 0.2)',
+                        'neon-magenta': '0 0 15px rgba(255, 0, 229, 0.4), 0 0 5px rgba(255, 0, 229, 0.2)',
+                        'inner-glow': 'inset 0 0 20px rgba(0, 209, 255, 0.1)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #05050A;
+            background-image: 
+                radial-gradient(circle at 50% 50%, rgba(0, 209, 255, 0.05) 0%, transparent 70%),
+                linear-gradient(rgba(5, 5, 10, 0.8) 50%, rgba(0, 0, 0, 0) 50%),
+                linear-gradient(90deg, rgba(0, 209, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(rgba(0, 209, 255, 0.03) 1px, transparent 1px);
+            background-size: 100% 100%, 100% 4px, 40px 40px, 40px 40px;
+            color: #E2E8F0;
+            overflow-x: hidden;
+        }
+
+        .scanline {
+            width: 100%;
+            height: 2px;
+            background: rgba(0, 209, 255, 0.1);
+            position: fixed;
+            z-index: 50;
+            top: 0;
+            pointer-events: none;
+            animation: scanline 8s linear infinite;
+        }
+
+        @keyframes scanline {
+            0% { top: 0; }
+            100% { top: 100%; }
+        }
+
+        .bloom-text-blue {
+            text-shadow: 0 0 8px rgba(0, 209, 255, 0.8), 0 0 15px rgba(0, 209, 255, 0.5);
+        }
+
+        .bloom-text-magenta {
+            text-shadow: 0 0 8px rgba(255, 0, 229, 0.8), 0 0 15px rgba(255, 0, 229, 0.5);
+        }
+
+        .glass-panel {
+            background: rgba(10, 10, 20, 0.75);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 209, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-panel::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: #00D1FF;
+            box-shadow: 0 0 10px #00D1FF;
+        }
+
+        .corner-accent {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border: 2px solid #FF00E5;
+        }
+
+        .corner-tl { top: -2px; left: -2px; border-right: 0; border-bottom: 0; }
+        .corner-tr { top: -2px; right: -2px; border-left: 0; border-bottom: 0; }
+        .corner-bl { bottom: -2px; left: -2px; border-right: 0; border-top: 0; }
+        .corner-br { bottom: -2px; right: -2px; border-left: 0; border-top: 0; }
+
+        .pulsing-indicator {
+            animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.1); }
+        }
+
+        /* Renderizado Técnico del Chasis S2000 */
+        .chassis-wireframe {
+            position: relative;
+            width: 100%;
+            height: 160px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px dashed rgba(0, 209, 255, 0.2);
+        }
+
+        .wheel-hub {
+            position: absolute;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: 2px dashed #00D1FF;
+            background: rgba(5, 5, 10, 0.9);
+            bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .wheel-hub::after {
+            content: '';
+            width: 12px;
+            height: 12px;
+            background: #FF00E5;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #FF00E5;
+        }
+
+        .tire-profile {
+            position: absolute;
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            border: 4px solid #FFB800;
+            box-shadow: 0 0 10px rgba(255, 184, 0, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .tire-slick { border-style: solid; }
+        .tire-semi { border-style: double; border-width: 6px; }
+        .tire-wet { border-style: dashed; }
+    </style>
+</head>
+<body class="font-technical antialiased p-4 min-h-screen flex items-center justify-center">
+    <div class="scanline"></div>
+
+    <div class="w-full max-w-[360px] z-10 mx-auto flex flex-col gap-5">
+        
+        <header class="w-full border-b border-electricBlue/40 pb-2 relative">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <div class="bg-electricBlue text-midnight px-2 py-0.5 font-header font-black text-sm italic skew-x-[-12deg]">
+                        EASADV41
+                    </div>
+                    <h1 class="font-header text-sm tracking-wider text-white">TURBO TIRE <span class="text-electricBlue bloom-text-blue">TESTER</span></h1>
+                </div>
+                <div class="flex items-center gap-1 font-mono text-[9px]">
+                    <span class="w-2 h-2 rounded-full bg-green-500 pulsing-indicator shadow-[0_0_6px_#22c55e]"></span>
+                    <span class="text-green-500">ACTIVE</span>
+                </div>
+            </div>
+            <div class="absolute bottom-[-1px] right-0 w-1/3 h-[1px] bg-magenta shadow-[0_0_8px_#FF00E5]"></div>
+        </header>
+
+        <section class="glass-panel p-4 border-electricBlue/40">
+            <div class="corner-accent corner-tr"></div>
+            <div class="flex justify-between items-center mb-2">
+                <span class="font-mono text-[10px] text-magenta">CHASSIS: S2000_J's_RACING</span>
+                <span class="text-[9px] font-mono bg-electricBlue/20 text-electricBlue px-1.5 py-0.5 border border-electricBlue/30">SCALE: 1:18</span>
+            </div>
+
+            <div class="chassis-wireframe rounded overflow-hidden flex items-center justify-center">
+                <svg class="absolute inset-0 w-full h-full opacity-30" viewBox="0 0 320 160" fill="none">
+                    <path d="M20 120 L40 115 L60 85 L110 80 L140 55 L220 55 L250 82 L290 85 L300 100 L300 120 Z" stroke="#00D1FF" stroke-width="1.5" stroke-dasharray="2 2"/>
+                    <line x1="0" y1="120" x2="320" y2="120" stroke="#FF00E5" stroke-width="1"/>
+                </svg>
+
+                <div class="wheel-hub left-[52px]" id="hub-front">
+                    <div id="tire-front" class="tire-profile w-[56px] h-[56px] tire-slick"></div>
+                </div>
+                
+                <div class="wheel-hub right-[52px]" id="hub-rear">
+                    <div id="tire-rear" class="tire-profile w-[56px] h-[56px] tire-slick"></div>
+                </div>
+
+                <div class="absolute top-2 left-2 text-[9px] font-mono text-white/40">
+                    TURBO TIRE BY STEVEN DIOR
+                </div>
+            </div>
+
+            <div class="mt-4 grid grid-cols-3 gap-2 text-center text-xs font-mono">
+                <button onclick="changeTire('tire-slick')" class="bg-midnight border border-electricBlue text-electricBlue py-1.5 px-1 hover:bg-electricBlue hover:text-midnight transition-all rounded">
+                    SLICK R1
+                </button>
+                <button onclick="changeTire('tire-semi')" class="bg-midnight border border-magenta text-magenta py-1.5 px-1 hover:bg-magenta hover:text-midnight transition-all rounded">
+                    SEMI STREET
+                </button>
+                <button onclick="changeTire('tire-wet')" class="bg-midnight border border-sodiumOrange text-sodiumOrange py-1.5 px-1 hover:bg-sodiumOrange hover:text-midnight transition-all rounded">
+                    WET TRACK
+                </button>
+            </div>
+        </section>
+
+        <section class="glass-panel p-4 border-sodiumOrange/40">
+            <h2 class="font-header text-[11px] text-sodiumOrange tracking-wider mb-2 uppercase">Engine Prompt Config</h2>
+            <div class="bg-black/60 p-3 rounded font-mono text-[11px] text-white/90 leading-normal border border-white/5 relative">
+                <span class="text-sodiumOrange">$ CONFIG_TIRING:</span> A white Honda S2000 customized with Turbo Tires by Steven Dior, dynamic high-speed composition, neon setup tracking wheel rotation.
+                <div class="mt-3 flex justify-end">
+                    <button onclick="navigator.clipboard.writeText('A white Honda S2000 customized with Turbo Tires by Steven Dior, dynamic high-speed composition.')" class="bg-sodiumOrange/10 border border-sodiumOrange text-sodiumOrange px-3 py-1 font-header text-[10px] uppercase hover:bg-sodiumOrange hover:text-midnight transition-all flex items-center gap-1">
+                        Copy Action <span>→</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <footer class="glass-panel p-3 border-magenta/40 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <div class="w-6 h-6 border border-magenta rounded-full flex items-center justify-center text-[10px] text-magenta shadow-neon-magenta font-bold">
+                    ✓
+                </div>
+                <div>
+                    <h3 class="font-header text-[10px] text-white tracking-tighter">SECURE REPOSITORY</h3>
+                    <p class="font-mono text-[8px] text-magenta/80 uppercase">VERIFICATION STEVEN DIOR</p>
+                </div>
+            </div>
+            <div class="text-right font-mono text-[8px] text-white/30">
+                SYS_REF_2026<br>
+                LEVEL: 777
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        function changeTire(tireClass) {
+            const front = document.getElementById('tire-front');
+            const rear = document.getElementById('tire-rear');
+            
+            // Limpieza de clases previas
+            front.className = 'tire-profile';
+            rear.className = 'tire-profile';
+            
+            // Inyección de la nueva especificación Turbo Tire
+            front.classList.add(tireClass);
+            rear.classList.add(tireClass);
+        }
+    </script>
+</body>
+</html>
