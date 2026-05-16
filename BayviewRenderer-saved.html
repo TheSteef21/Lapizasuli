@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EASADV41-UG2 Render Engine Report</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=JetBrains+Mono:wght@300;500&family=Archivo+Narrow:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        midnight: '#05050A',
+                        electricBlue: '#00D1FF',
+                        magenta: '#FF00E5',
+                        sodiumOrange: '#FFB800',
+                        cyanFlare: '#00FFFF',
+                    },
+                    fontFamily: {
+                        header: ['Orbitron', 'sans-serif'],
+                        technical: ['Archivo Narrow', 'sans-serif'],
+                        mono: ['JetBrains+Mono', 'monospace'],
+                    },
+                    boxShadow: {
+                        'neon-blue': '0 0 15px rgba(0, 209, 255, 0.4), 0 0 5px rgba(0, 209, 255, 0.2)',
+                        'neon-magenta': '0 0 15px rgba(255, 0, 229, 0.4), 0 0 5px rgba(255, 0, 229, 0.2)',
+                        'inner-glow': 'inset 0 0 20px rgba(0, 209, 255, 0.1)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #05050A;
+            background-image: 
+                radial-gradient(circle at 50% 50%, rgba(0, 209, 255, 0.05) 0%, transparent 70%),
+                linear-gradient(rgba(5, 5, 10, 0.8) 50%, rgba(0, 0, 0, 0) 50%),
+                linear-gradient(90deg, rgba(0, 209, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(rgba(0, 209, 255, 0.03) 1px, transparent 1px);
+            background-size: 100% 100%, 100% 4px, 40px 40px, 40px 40px;
+            color: #E2E8F0;
+            overflow-x: hidden;
+        }
+
+        .scanline {
+            width: 100%;
+            height: 2px;
+            background: rgba(0, 209, 255, 0.1);
+            position: fixed;
+            z-index: 50;
+            top: 0;
+            pointer-events: none;
+            animation: scanline 8s linear infinite;
+        }
+
+        @keyframes scanline {
+            0% { top: 0; }
+            100% { top: 100%; }
+        }
+
+        .bloom-text-blue {
+            text-shadow: 0 0 8px rgba(0, 209, 255, 0.8), 0 0 15px rgba(0, 209, 255, 0.5);
+        }
+
+        .bloom-text-magenta {
+            text-shadow: 0 0 8px rgba(255, 0, 229, 0.8), 0 0 15px rgba(255, 0, 229, 0.5);
+        }
+
+        .glass-panel {
+            background: rgba(10, 10, 20, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 209, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-panel::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: #00D1FF;
+            box-shadow: 0 0 10px #00D1FF;
+        }
+
+        .corner-accent {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border: 2px solid #FF00E5;
+        }
+
+        .corner-tl { top: -2px; left: -2px; border-right: 0; border-bottom: 0; }
+        .corner-tr { top: -2px; right: -2px; border-left: 0; border-bottom: 0; }
+        .corner-bl { bottom: -2px; left: -2px; border-right: 0; border-top: 0; }
+        .corner-br { bottom: -2px; right: -2px; border-left: 0; border-top: 0; }
+
+        .pulsing-indicator {
+            animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.1); }
+        }
+
+        .slider-handle {
+            transition: all 0.3s ease;
+        }
+        
+        .slider-handle:hover {
+            transform: translateX(10px);
+            filter: drop-shadow(0 0 8px #FF00E5);
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #05050A;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #00D1FF;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="font-technical antialiased p-4 md:p-8">
+    <div class="scanline"></div>
+
+    <!-- Header Section -->
+    <header class="max-w-7xl mx-auto mb-10">
+        <div class="flex flex-col md:flex-row justify-between items-center border-b-2 border-electricBlue/40 pb-4 relative">
+            <div class="flex items-center gap-4">
+                <div class="bg-electricBlue text-midnight px-3 py-1 font-header font-black text-xl italic tracking-tighter skew-x-[-12deg]">
+                    EASADV41-UG2
+                </div>
+                <h1 class="font-header text-2xl md:text-3xl tracking-widest text-white italic">RENDER <span class="text-electricBlue bloom-text-blue">ENGINE</span></h1>
+            </div>
+            <div class="mt-4 md:mt-0 flex items-center gap-3 font-mono text-sm">
+                <span class="w-3 h-3 rounded-full bg-green-500 pulsing-indicator shadow-[0_0_10px_#22c55e]"></span>
+                <span class="text-green-500 bloom-text-blue tracking-tighter">SYSTEM STATUS: ACTIVE</span>
+                <span class="text-electricBlue/50">|</span>
+                <span class="text-white/70">VER: 2.0.4.UG</span>
+            </div>
+            <div class="absolute bottom-[-2px] right-0 w-1/3 h-[2px] bg-magenta shadow-[0_0_10px_#FF00E5]"></div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto grid grid-cols-1 gap-8">
+        
+        <!-- Top Tier: Technical Analysis -->
+        <section>
+            <div class="flex items-center gap-3 mb-6">
+                <h2 class="font-header text-lg text-magenta italic tracking-widest uppercase">Technical Analysis</h2>
+                <div class="h-[1px] flex-grow bg-magenta/30"></div>
+                <span class="font-mono text-xs text-magenta/60">CHASSIS_ID: S2000</span>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Widebody Card -->
+                <div class="glass-panel p-6 group hover:shadow-neon-blue transition-all duration-500">
+                    <div class="corner-accent corner-tr"></div>
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-2 bg-electricBlue/10 border border-electricBlue/40">
+                            <svg class="w-8 h-8 text-electricBlue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path></svg>
+                        </div>
+                        <span class="text-[10px] font-mono bg-green-500/20 text-green-400 px-2 py-0.5 border border-green-500/40">STATUS: OPTIMIZED</span>
+                    </div>
+                    <h3 class="font-header text-white mb-3 italic tracking-tight">WIDEBODY SPECIFICATION</h3>
+                    <p class="text-sm text-white/70 font-mono leading-relaxed">
+                        Type-RS widebody kit with 70mm fender flares. Front bumper features oversized air intakes and integrated canards. Rear quarter panels reconstructed for wider track width integration. Structural reinforcement via multi-point chassis bracing.
+                    </p>
+                </div>
+
+                <!-- Carbon Fiber Card -->
+                <div class="glass-panel p-6 group hover:shadow-neon-blue transition-all duration-500">
+                    <div class="corner-accent corner-tr"></div>
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-2 bg-electricBlue/10 border border-electricBlue/40">
+                            <svg class="w-8 h-8 text-electricBlue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+                        </div>
+                        <span class="text-[10px] font-mono bg-green-500/20 text-green-400 px-2 py-0.5 border border-green-500/40">STATUS: OPTIMIZED</span>
+                    </div>
+                    <h3 class="font-header text-white mb-3 italic tracking-tight">CARBON FIBER COMPONENTS</h3>
+                    <p class="text-sm text-white/70 font-mono leading-relaxed">
+                        Grade-A dry carbon fiber weave. Hood: Vented cowl design. Trunk: Ducktail spoiler. Side mirrors: Aerodynamic teardrop housings. Rear Diffuser: Five-fin vortex generator assembly.
+                    </p>
+                </div>
+
+                <!-- Underglow Card -->
+                <div class="glass-panel p-6 group hover:shadow-neon-blue transition-all duration-500">
+                    <div class="corner-accent corner-tr"></div>
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-2 bg-cyanFlare/10 border border-cyanFlare/40">
+                            <svg class="w-8 h-8 text-cyanFlare" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        </div>
+                        <span class="text-[10px] font-mono bg-green-500/20 text-green-400 px-2 py-0.5 border border-green-500/40">STATUS: OPTIMIZED</span>
+                    </div>
+                    <h3 class="font-header text-white mb-3 italic tracking-tight">UNDERGLOW LIGHTING</h3>
+                    <p class="text-sm text-white/70 font-mono leading-relaxed">
+                        High-intensity neon tube simulation. Voltage: 12V DC. Color Calibration: <span class="text-cyanFlare">#00FFFF</span>. Placement: Four-point peripheral array with localized diffusion on wet pavement surfaces.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Middle Tier: Logic Console -->
+        <section>
+            <div class="flex items-center gap-3 mb-6">
+                <h2 class="font-header text-lg text-sodiumOrange italic tracking-widest uppercase">Video Generation Prompt</h2>
+                <div class="h-[1px] flex-grow bg-sodiumOrange/30"></div>
+            </div>
+            
+            <div class="glass-panel p-1 group border-sodiumOrange/40">
+                <div class="bg-black/80 p-6 relative">
+                    <div class="absolute top-2 right-2 flex gap-2">
+                        <div class="w-2 h-2 rounded-full bg-red-500/50"></div>
+                        <div class="w-2 h-2 rounded-full bg-yellow-500/50"></div>
+                        <div class="w-2 h-2 rounded-full bg-green-500/50"></div>
+                    </div>
+                    <div class="font-mono text-sm md:text-base leading-relaxed text-sodiumOrange mb-8">
+                        <span class="text-white/40 mr-2">$ EXECUTE --PROMPT</span>
+                        A white Honda S2000 with a J’s Racing style widebody kit and glowing cyan underglow racing through a rain-slicked neon-lit city at night, low chase camera angle following closely behind the rear bumper, aggressive camera movement with motion blur, high bloom effects on city lights and car headlights, detailed wet road reflections, 2004-era street racing game aesthetic, cinematic feel, 16:9 aspect ratio, high-fidelity textures.
+                        <span class="inline-block w-2 h-5 bg-sodiumOrange ml-1 animate-pulse align-middle"></span>
+                    </div>
+                    
+                    <div class="flex justify-end">
+                        <button onclick="navigator.clipboard.writeText('A white Honda S2000 with a J’s Racing style widebody kit and glowing cyan underglow racing through a rain-slicked neon-lit city at night, low chase camera angle following closely behind the rear bumper, aggressive camera movement with motion blur, high bloom effects on city lights and car headlights, detailed wet road reflections, 2004-era street racing game aesthetic, cinematic feel, 16:9 aspect ratio, high-fidelity textures.')" class="bg-sodiumOrange/10 border-2 border-sodiumOrange text-sodiumOrange px-6 py-2 font-header italic font-black uppercase tracking-tighter hover:bg-sodiumOrange hover:text-midnight transition-colors flex items-center gap-2 group-hover:shadow-[0_0_15px_#FFB800]">
+                            Execute Command
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bottom Tier: Certification -->
+        <section class="mb-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div class="glass-panel p-8 flex items-center gap-6 border-magenta/40 group overflow-visible">
+                    <div class="corner-accent corner-bl"></div>
+                    <div class="corner-accent corner-tl"></div>
+                    <div class="relative">
+                        <div class="w-20 h-20 border-4 border-magenta rounded-full flex items-center justify-center shadow-neon-magenta group-hover:scale-110 transition-transform">
+                            <svg class="w-12 h-12 text-magenta bloom-text-magenta" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                        </div>
+                        <div class="absolute inset-0 border-2 border-dashed border-magenta rounded-full animate-[spin_10s_linear_infinite]"></div>
+                    </div>
+                    <div>
+                        <h3 class="font-header text-xl text-white italic bloom-text-magenta">INTEGRITY SEAL</h3>
+                        <p class="font-mono text-sm text-magenta/80 mt-1 uppercase tracking-tighter">Verification Complete. Status: Secure.</p>
+                        <a href="https://github.com/Lapizasuli" target="_blank" class="inline-flex items-center gap-2 mt-4 text-xs font-mono text-white/50 hover:text-electricBlue transition-colors group">
+                            <span class="w-2 h-2 bg-electricBlue rounded-full group-hover:animate-ping"></span>
+                            LOGGED IN LAPIZASULI REPOSITORY
+                        </a>
+                    </div>
+                </div>
+
+                <div class="flex flex-col items-center md:items-end justify-center">
+                    <div class="text-right font-mono text-xs text-white/30 mb-4 hidden md:block">
+                        SYS_REF_GEN_2004_AUTH<br>
+                        COORD_X: 43.221 // COORD_Y: 12.884<br>
+                        SESSION_EXPIRY: NEVER
+                    </div>
+                    <div class="flex items-center gap-4 bg-midnight border border-white/10 p-4 rounded-full w-full max-w-xs justify-between group cursor-pointer overflow-hidden">
+                        <span class="font-header text-sm italic tracking-widest text-white/40 ml-4 group-hover:text-magenta transition-colors">TUNE_ENGINE</span>
+                        <div class="w-12 h-12 bg-magenta rounded-full flex items-center justify-center slider-handle shadow-neon-magenta">
+                            <span class="text-2xl text-white">🎚️</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="fixed bottom-0 left-0 w-full h-1 bg-gradient-to-r from-electricBlue via-magenta to-sodiumOrange opacity-50"></div>
+</body>
+</html>
