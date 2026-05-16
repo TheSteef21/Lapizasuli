@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NSADV41 - Matriz de Pactos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=JetBrains+Mono:wght@300;500;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        midnight: '#05050A',
+                        cyanMatrix: '#00FFFF',
+                        gold: '#d4af37',
+                        magenta: '#FF00E5',
+                    },
+                    fontFamily: {
+                        header: ['Orbitron', 'sans-serif'],
+                        mono: ['JetBrains+Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            color: #fff;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* CAPAS DE FONDO NSADV41 */
+        #video-background {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translateX(-50%) translateY(-50%);
+            z-index: -2;
+            object-fit: cover;
+            opacity: 0.4;
+            transition: opacity 1s ease-in-out;
+        }
+
+        #image-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://thesteef21.github.io/Lapizasuli/1778896928737.png');
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+            opacity: 0.35;
+            mix-blend-mode: screen;
+        }
+
+        .scanline {
+            width: 100%; height: 2px; background: rgba(0, 255, 255, 0.15);
+            position: fixed; z-index: 50; top: 0; pointer-events: none;
+            animation: scanline 6s linear infinite;
+        }
+        @keyframes scanline { 0% { top: 0; } 100% { top: 100%; } }
+
+        /* CONTENEDOR CENTRAL BLINDADO MÓVIL (DIRECTIVA) */
+        .container-sadv41 {
+            width: 100%;
+            max-width: 360px;
+            z-index: 10;
+            position: relative;
+            margin: 0 auto;
+            padding: 1rem;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .glass-panel {
+            background: rgba(5, 5, 10, 0.65);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.1);
+        }
+
+        .glass-panel::before {
+            content: ""; position: absolute; top: 0; left: 0; width: 3px; height: 100%;
+            background: #00FFFF; box-shadow: 0 0 10px #00FFFF;
+        }
+
+        /* EFECTO DADO / TABLA DE VERSÍCULOS */
+        .verse-dice {
+            background: rgba(0, 20, 40, 0.8);
+            border: 1px solid var(--gold);
+            padding: 0.75rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            min-height: 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .verse-dice:hover {
+            box-shadow: 0 0 12px rgba(212, 175, 55, 0.5);
+            transform: scale(1.02);
+        }
+        .verse-dice::after {
+            content: "↻";
+            position: absolute;
+            top: 4px; right: 6px;
+            font-size: 10px;
+            color: rgba(255,255,255,0.3);
+        }
+        .lang-badge {
+            font-size: 8px;
+            text-transform: uppercase;
+            color: #FF00E5;
+            margin-bottom: 4px;
+            letter-spacing: 1px;
+        }
+
+        /* BOTONES DE RED */
+        .link-btn {
+            display: block;
+            width: 100%;
+            background: rgba(0, 255, 255, 0.05);
+            border: 1px solid #00FFFF;
+            color: #00FFFF;
+            text-align: center;
+            padding: 0.6rem;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        .link-btn:hover {
+            background: #00FFFF;
+            color: #000;
+            box-shadow: 0 0 10px #00FFFF;
+        }
+        .link-gold {
+            border-color: #d4af37; color: #d4af37;
+        }
+        .link-gold:hover {
+            background: #d4af37; color: #000; box-shadow: 0 0 10px #d4af37;
+        }
+    </style>
+</head>
+<body>
+    <div class="scanline"></div>
+
+    <video id="video-background" autoplay muted playsinline></video>
+    <div id="image-overlay"></div>
+
+    <div class="container-sadv41">
+        
+        <header class="text-center py-4 border-b border-cyanMatrix/40 relative glass-panel mb-2">
+            <h1 class="font-header text-xl tracking-widest text-white shadow-[0_0_10px_#00FFFF]">NSADV41</h1>
+            <p class="font-mono text-[9px] text-cyanMatrix mt-1 uppercase">Pacto Perpetuo • Frecuencia 777</p>
+            <div class="absolute right-2 top-2 text-[10px] animate-pulse">🇵🇦🇺🇸🇮🇱🇬🇧🇨🇳</div>
+        </header>
+
+        <div class="glass-panel p-3 flex flex-col gap-2">
+            <div class="font-mono text-[9px] text-white/50 mb-1 border-b border-white/10 pb-1">NÚCLEO OPERATIVO:</div>
+            <a href="https://thesteef21.github.io/Lapizasuli/" class="link-btn" target="_blank">Terminal Base (Home)</a>
+            <a href="https://thesteef21.github.io/Lapizasuli/YYWEEK21.html" class="link-btn" target="_blank">Noticias de Alcurnia</a>
+            <a href="https://rareevo.io/?coupon=STEVENDIOR" class="link-btn link-gold" target="_blank">Rare Evo Blockchain (Afiliación)</a>
+            <a href="https://thesteef21.github.io/Lapizasuli/NatAI.html" class="link-btn text-[#FF00E5] border-[#FF00E5] hover:bg-[#FF00E5]" target="_blank">NatAI - Inteligencia Natural</a>
+        </div>
+
+        <div class="glass-panel p-3">
+            <div class="font-mono text-[9px] text-gold mb-3 text-center tracking-widest">
+                LOS 12 PACTOS DE LUZ
+                <br><span class="text-white/40 text-[7px]">S-N-F-I-S-R-K-S 🎚️🇮🇱❣️</span>
+            </div>
+            
+            <div class="grid grid-cols-2 gap-2" id="verse-grid">
+                </div>
+        </div>
+
+        <footer class="text-center font-mono text-[8px] text-white/30 py-4">
+            LA HONRA Y GLORIA ES PARA EL SEÑOR NUESTRO DIOS.<br>
+            STEVEN DIOR // NSADV41
+        </footer>
+    </div>
+
+    <script>
+        // LÓGICA DE VIDEOS EN BUCLE (RAW GITHUB URLS)
+        const videos = [
+            "https://raw.githubusercontent.com/TheSteef21/Lapizasuli/main/InShot_20260216_192659194.mp4",
+            "https://raw.githubusercontent.com/TheSteef21/Lapizasuli/main/gemini_generated_video_66dd255f.mp4",
+            "https://raw.githubusercontent.com/TheSteef21/Lapizasuli/main/gemini_generated_video_5c308b4a.mp4"
+        ];
+        
+        let currentVideoIndex = 0;
+        const videoPlayer = document.getElementById('video-background');
+
+        function playNextVideo() {
+            videoPlayer.style.opacity = 0; // Transición
+            setTimeout(() => {
+                currentVideoIndex = Math.floor(Math.random() * videos.length);
+                videoPlayer.src = videos[currentVideoIndex];
+                videoPlayer.play();
+                videoPlayer.style.opacity = 0.4;
+            }, 500);
+        }
+
+        videoPlayer.addEventListener('ended', playNextVideo);
+        // Iniciar primer video
+        videoPlayer.src = videos[0];
+        videoPlayer.play();
+
+        // LÓGICA DE LA TABLA DE 12 PACTOS (7 NIVELES + HEBREO)
+        // Secuencia: 0: Español, 1: Ngäbe, 2: Francés, 3: Inglés, 4: Sueco, 5: Ruso, 6: Coreano, 7: Hebreo 🇮🇱
+        const levelNames = ["ESPAÑOL (ORIGEN)", "NGÄBE (TIERRA)", "FRANCÉS (DIPLOMACIA)", "INGLÉS (CONEXIÓN)", "SUECO (ORDEN)", "RUSO (FIRMEZA)", "COREANO (HONOR)", "HEBREO 🇮🇱 (LITÚRGICO)"];
+        
+        // Referencias bíblicas de pactos y alianzas de paz
+        const pactos = [
+            { ref: "1 Reyes 5:12", text: "Hiram y Salomón hicieron alianza de paz." },
+            { ref: "Génesis 21:27", text: "Abraham y Abimelec hicieron un pacto." },
+            { ref: "Génesis 26:28", text: "Haya ahora juramento y pacto entre nosotros." },
+            { ref: "Génesis 31:44", text: "Ven, hagamos pacto tú y yo como testimonio." },
+            { ref: "1 Samuel 18:3", text: "Jonatán y David hicieron un pacto de amor." },
+            { ref: "2 Samuel 5:11", text: "Hiram rey de Tiro envió embajadores a David." },
+            { ref: "Josué 9:15", text: "Josué hizo paz con ellos, concediéndoles la vida." },
+            { ref: "1 Reyes 3:1", text: "Salomón emparentó con Faraón rey de Egipto." },
+            { ref: "2 Crónicas 2:11", text: "Huram rey de Tiro respondió con amor a Salomón." },
+            { ref: "Isaías 19:24", text: "Israel será bendición en medio de la tierra." },
+            { ref: "Zacarías 8:23", text: "Hombres de toda lengua tomarán el manto de un judío." },
+            { ref: "Apocalipsis 21:24", text: "Las naciones andarán a la luz de ella." }
+        ];
+
+        // Función para simular la traducción en los 8 niveles (simplificado para el script)
+        function getTranslatedText(baseText, level, ref) {
+            if(level === 0) return `[${ref}] ${baseText}`;
+            if(level === 1) return `[${ref}] (Fonética Ngäbe) Ñöbä...`;
+            if(level === 2) return `[${ref}] (Francés) Alliance de paix...`;
+            if(level === 3) return `[${ref}] (Inglés) Covenant of peace...`;
+            if(level === 4) return `[${ref}] (Sueco) Fredsfördrag...`;
+            if(level === 5) return `[${ref}] (Ruso) Завет мира...`;
+            if(level === 6) return `[${ref}] (Coreano) 평화의 언약...`;
+            if(level === 7) return `[${ref}] (Hebreo) בְּרִית שָׁלוֹם... 🎚️🇮🇱❣️`;
+            return baseText;
+        }
+
+        const grid = document.getElementById('verse-grid');
+        
+        // Estado actual del dado para cada uno de los 12 versículos
+        let verseStates = new Array(12).fill(0);
+
+        function renderGrid() {
+            grid.innerHTML = '';
+            pactos.forEach((pacto, index) => {
+                const currentLevel = verseStates[index];
+                const displayLang = levelNames[currentLevel];
+                const displayText = getTranslatedText(pacto.text, currentLevel, pacto.ref);
+
+                const diceDiv = document.createElement('div');
+                diceDiv.className = 'verse-dice font-mono';
+                diceDiv.onclick = () => rotateDice(index);
+                
+                diceDiv.innerHTML = `
+                    <div class="lang-badge">${displayLang}</div>
+                    <div class="text-[9px] text-white/80 leading-tight">${displayText}</div>
+                `;
+                grid.appendChild(diceDiv);
+            });
+        }
+
+        function rotateDice(index) {
+            // Avanza al siguiente nivel del 0 al 7, luego vuelve al 0
+            verseStates[index] = (verseStates[index] + 1) % 8;
+            renderGrid();
+        }
+
+        // Inicializar
+        renderGrid();
+    </script>
+</body>
+</html>
