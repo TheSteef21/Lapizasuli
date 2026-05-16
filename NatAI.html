@@ -178,7 +178,6 @@
     </footer>
 
     <script>
-        // Setup global de APIs de Audio nativas
         const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
         let recognition = null;
         let speechQueueText = ""; 
@@ -205,7 +204,6 @@
 
             recognition.onresult = function(event) {
                 const speechResult = event.results[0][0].transcript;
-                // Procesamiento textual síncrono inmediato
                 processNatAIResponse(speechResult);
             };
 
@@ -219,11 +217,9 @@
 
             recognition.onend = function() {
                 resetSystemUI();
-                // CRÍTICO: Disparar la voz inmediatamente al cerrar el canal de escucha 
-                // para heredar el gesto táctil inicial del usuario de forma nativa.
                 if(speechQueueText) {
                     executeVoiceSynthesis(speechQueueText);
-                    speechQueueText = ""; // Limpiar pila
+                    speechQueueText = ""; 
                 }
             };
         } else {
@@ -232,9 +228,10 @@
         }
 
         function resetSystemUI() {
-            document.getElementById('btnListen').innerText = "🎙️ INICIAR ESCUCHA LÁSER";
-            document.getElementById('btnListen').style.backgroundColor = "#d4af37";
-            document.getElementById('btnListen').style.color = "#0a192f";
+            const btn = document.getElementById('btnListen');
+            btn.innerText = "🎙️ INICIAR ESCUCHA LÁSER";
+            btn.style.backgroundColor = "#d4af37";
+            btn.style.color = "#0a192f";
             
             document.getElementById('statusDot').style.backgroundColor = "#22c55e";
             document.getElementById('statusDot').style.boxShadow = "0 0 8px #22c55e";
@@ -243,8 +240,6 @@
 
         function startVoiceRecognition() {
             if (recognition) {
-                // Activar un pulso de audio silencioso inicial forzado. 
-                // Esto burla el bloqueo de reproducción automática en iOS y Android Chrome.
                 window.speechSynthesis.cancel();
                 const forceUnlock = new SpeechSynthesisUtterance("");
                 window.speechSynthesis.speak(forceUnlock);
@@ -261,19 +256,20 @@
             let responseText = "";
             const cleanInput = userInput.toLowerCase();
 
+            // Matriz conversacional integrada con los datos del volcado AINFT (sadv41@gmail.com)
             if (cleanInput.includes("hola") || cleanInput.includes("saludos")) {
-                responseText = "Saludos Ministro Plenipotenciario Steven Dior. El núcleo NatAI del Tabernáculo Digital se encuentra completamente activo y a tus órdenes.";
-            } else if (cleanInput.includes("unifica")) {
-                responseText = "Comando Unifica detectado. Consolidando la arquitectura de datos, limpiando bloques HTML y blindando el contenedor móvil a frecuencia setecientos setenta y siete.";
-            } else if (cleanInput.includes("cristo") || cleanInput.includes("agradable")) {
-                responseText = "Transmisión confirmada. Todo lo que construimos con orden, belleza y lealtad refleja la luz del Arquitecto Perfecto.";
+                responseText = "Saludos Ministro Plenipotenciario Steven Dior. Modo Ejecución de Misión SADV41 NatAI confirmado en la terminal externa.";
+            } else if (cleanInput.includes("unifica") || cleanInput.includes("parámetros")) {
+                responseText = "Comando Unifica detectado. Consolidando el módulo conversacional de voz y el Turbo Tire Tester dentro del contenedor móvil absoluto a frecuencia setecientos setenta y siete. Sin recursos visuales sintéticos.";
+            } else if (cleanInput.includes("cristo") || cleanInput.includes("agradable") || cleanInput.includes("filosofía")) {
+                responseText = "Filosofía de acción cristiana adoptada: decencia, transparencia y rectitud en la lógica. Todo lo construido con orden refleja al Diseñador Perfecto.";
+            } else if (cleanInput.includes("pilares") || cleanInput.includes("misión")) {
+                responseText = "Tres pilares asumidos de forma inmediata: Regla de oro soberana sin imágenes artificiales, contenedor móvil de trescientos sesenta píxeles y orden absoluto en el Tabernáculo.";
             } else {
-                responseText = "Comando recibido con éxito en la estación central NatAI. Procesando de manera natural: " + userInput + ". El sistema se mantiene blindado.";
+                responseText = "Comando procesado con éxito por la terminal NatAI bajo la firma sadv41. Registro analítico: " + userInput + ". El sistema permanece seguro.";
             }
 
             document.getElementById('missionInput').value = "TÚ: " + userInput + "\n\nNatAI: " + responseText;
-            
-            // Almacenar el payload en la cola de reproducción antes de que termine el proceso de escucha
             speechQueueText = responseText;
         }
 
