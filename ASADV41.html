@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASADV41 - Neural Animal Interface</title>
+    <style>
+        :root {
+            --primary-glow: #00ffcc;
+            --bg-color: #0d1117;
+            --panel-bg: #161b22;
+        }
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: var(--bg-color);
+            color: #c9d1d9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .console-container {
+            background: var(--panel-bg);
+            border: 1px solid var(--primary-glow);
+            border-radius: 8px;
+            padding: 30px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 0 20px rgba(0, 255, 204, 0.2);
+        }
+        h1 {
+            text-align: center;
+            color: var(--primary-glow);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 1.5rem;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #8b949e;
+        }
+        select, button {
+            width: 100%;
+            padding: 10px;
+            background: #0d1117;
+            color: #fff;
+            border: 1px solid #30363d;
+            border-radius: 5px;
+            font-family: inherit;
+        }
+        button {
+            background: var(--primary-glow);
+            color: #000;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+        button:hover {
+            box-shadow: 0 0 15px var(--primary-glow);
+        }
+        #output-terminal {
+            margin-top: 20px;
+            background: #000;
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid #30363d;
+            min-height: 80px;
+            color: #00ffcc;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="console-container">
+        <h1>ASADV41 API Link</h1>
+        
+        <div class="form-group">
+            <label for="subject-select">Seleccionar Sujeto de Análisis:</label>
+            <select id="subject-select">
+                <option value="zoe_pitbull">Sujeto Alpha: Zoe (Canino - Pitbull)</option>
+                <option value="lazzie_golden">Sujeto Beta: Lazzie II (Canino - Golden Retriever)</option>
+                <option value="randy_mix">Sujeto Gamma: Randy (Canino)</option>
+                <option value="generic_unknown">Sujeto Externo (Especie no identificada)</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Entrada de Espectro Acústico:</label>
+            <button id="record-btn">Capturar Frecuencia 🎙️</button>
+        </div>
+
+        <button id="transmit-btn">Ejecutar Instrucción Maestra ASADV41</button>
+
+        <div id="output-terminal">
+            [STANDBY] Esperando flujo de datos biométricos...
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('transmit-btn').addEventListener('click', async () => {
+            const terminal = document.getElementById('output-terminal');
+            const subject = document.getElementById('subject-select').value;
+            
+            terminal.innerHTML = "[PROCESANDO] Estableciendo conexión con API ASADV41...<br>";
+            
+            // Simulación del payload enviado a la inteligencia artificial
+            const payload = {
+                mission: "ASADV41",
+                subject_id: subject,
+                audio_hz_avg: Math.floor(Math.random() * 500) + 150, // Frecuencia simulada
+                timestamp: new Date().toISOString()
+            };
+
+            // Simulación del tiempo de respuesta del servidor (Fetch API)
+            setTimeout(() => {
+                terminal.innerHTML += `[ENVIADO] Payload: ${JSON.stringify(payload)}<br>`;
+                terminal.innerHTML += `[RESPUESTA IA] Análisis completado. Estado: <strong>Alerta de Juego (Confiabilidad: 94%)</strong>.`;
+            }, 1500);
+        });
+
+        document.getElementById('record-btn').addEventListener('click', () => {
+            const terminal = document.getElementById('output-terminal');
+            terminal.innerHTML = "[CAPTURANDO] Analizando patrón bioacústico en el entorno... ⚡";
+        });
+    </script>
+</body>
+</html>
