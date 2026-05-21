@@ -271,6 +271,8 @@
             font-size: 9px;
             color: #3f3f46;
             font-family: monospace;
+            word-break: break-all;
+            padding: 0 10px;
         }
     </style>
 </head>
@@ -356,12 +358,19 @@
 
         <footer>
             <div class="ley-axioma">ORIGEN 0 • UNIÓN 1 • TRINIDAD 4 • 🎚</div>
-            <div class="endpoint-tag">UI Endpoint: bless.html // Secure Execution // Gear Ultra</div>
+            <div class="endpoint-tag" id="api-identity">BLESS API: GQTvq6UeHZ...AjRA4s9cJBjKtSP</div>
         </footer>
 
     </div>
 
     <script>
+        // Configuración de Identidad de Red (BLESS API Key Autorizada)
+        const BLESS_API_CONFIG = {
+            key: "GQTvq6UeHZYRURVHGpvBpllxU477MCgoT5LhgQYzcNWDzik0AjRA4s9cJBjKtSP",
+            name: "BLESS",
+            status: "Authorized"
+        };
+
         const BIBLICAL_VERSES = [
             { ref: "Juan 3:16", text: "Porque de tal manera amó Dios al mundo..." },
             { ref: "Rut 2:12", text: "Que Jehová recompense tu obra..." },
@@ -391,10 +400,12 @@
 
             document.getElementById('remanente-val').innerText = calculated.toFixed(3);
 
-            if (valueMilli === TARGET_MILLI) {
+            // Verificación del Remanente y Autorización de API BLESS
+            if (valueMilli === TARGET_MILLI && BLESS_API_CONFIG.status === "Authorized") {
                 verseIndex = 0; 
                 updateVerseDOM();
                 document.getElementById('bloque-verso').style.display = 'block';
+                console.log(`[SADV41] ${BLESS_API_CONFIG.name} Key vinculada con éxito.`);
             } else {
                 document.getElementById('bloque-verso').style.display = 'none';
             }
