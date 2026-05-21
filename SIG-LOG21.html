@@ -1,0 +1,187 @@
+import weasyprint
+
+html_content = """<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>SADV41 - Cronología del Siglo XXI (Múltiplos de 7)</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 15mm 12mm;
+            background-color: #f7f9fa;
+        }
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            color: #222222;
+            background-color: #f7f9fa;
+            line-height: 1.25;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background-color: #065f46;
+            color: #ffffff;
+            padding: 20px 15mm;
+            margin: -15mm -12mm 25px -12mm;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 20pt;
+            letter-spacing: 1px;
+        }
+        .header p {
+            margin: 5px 0 0 0;
+            font-size: 11pt;
+            color: #d1fae5;
+        }
+        .container {
+            padding: 0 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            background-color: #ffffff;
+        }
+        th {
+            background-color: #059669;
+            color: #ffffff;
+            font-weight: bold;
+            font-size: 11pt;
+            padding: 10px 12px;
+            text-align: left;
+            border: 1px solid #cbd5e0;
+        }
+        td {
+            padding: 10px 12px;
+            font-size: 10pt;
+            border: 1px solid #e2e8f0;
+            vertical-align: top;
+        }
+        tr:nth-child(even) {
+            background-color: #f0fdf4;
+        }
+        .number-cell {
+            font-weight: bold;
+            color: #059669;
+            font-size: 11pt;
+            width: 12%;
+            text-align: center;
+        }
+        .concept-cell {
+            font-weight: bold;
+            color: #064e3b;
+            width: 28%;
+        }
+        .history-cell {
+            color: #374151;
+            width: 60%;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Cronología del Siglo XXI (Desde 2000)</h1>
+        <p>Estructura de la Historia de Panamá bajo el Diseño Divino de los Múltiplos del 7</p>
+    </div>
+
+    <div class="container">
+        <table>
+            <thead>
+                <tr>
+                    <th style="text-align: center;">Múltiplo</th>
+                    <th>Hito Histórico / Visión (2000 - 2100)</th>
+                    <th>Descripción y Contexto del Nuevo Milenio</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="number-cell">7</td>
+                    <td class="concept-cell">Ampliación del Canal (2007)</td>
+                    <td class="history-cell">Inicio de la obra de ingeniería más importante del siglo. Panamá decide en democracia expandir su capacidad, reafirmando su pacto con el comercio mundial y su destino de servicio.</td>
+                </tr>
+                <tr>
+                    <td class="number-cell">14</td>
+                    <td class="concept-cell">El Metro de Panamá (2014)</td>
+                    <td class="history-cell">Inauguración de la Línea 1, el primer sistema de metro en Centroamérica. Coincide con el Centenario del Canal, marcando un salto hacia la modernidad urbana y tecnológica.</td>
+                </tr>
+                <tr>
+                    <td class="number-cell">21</td>
+                    <td class="concept-cell">El Bicentenario (2021)</td>
+                    <td class="history-cell">Celebración de los 200 años de independencia de España. Un año de profunda reflexión post-pandemia donde Panamá busca reconstruir su tejido social y su identidad soberana.</td>
+                </tr>
+                <tr>
+                    <td class="number-cell">28</td>
+                    <td class="concept-cell">Consolidación Logística (2028)</td>
+                    <td class="history-cell">Visión: Panamá completa su red de conectividad total con el Cuarto Puente y la Línea 3, uniendo definitivamente las riberas del canal en un solo flujo económico y social.</td>
+                </tr>
+                <tr>
+                    <td class="number-cell">35</td>
+                    <td class="concept-cell">Hub Digital de América (2035)</td>
+                    <td class="history-cell">Visión: El istmo se transforma en el centro de datos y soberanía digital del continente, aprovechando los cables submarinos para ser el cerebro tecnológico de la región.</td>
+                </tr>
+                <tr>
+                    <td class="number-cell">42</td>
+                    <td class="concept-cell">Sostenibilidad y Vida (2042)</td>
+                    <td class="history-cell">Visión: Tras alcanzar la madurez en el manejo de sus recursos hídricos, Panamá se convierte en modelo mundial de economía verde y protección de la biodiversidad tropical.</td>
+                </tr>
+                <tr>
+                    <td class="number-cell">49</td>
+                    <td class="concept-cell">El Jubileo del Siglo XXI (2049)</td>
+                    <td class="history-cell">Visión: Un año de restitución nacional. El istmo celebra 50 años de administración plena del Canal con una economía diversificada que llega a cada rincón del país.</td>
+                </tr>
+                <tr>
+                    <td class="number-cell">56</td>
+                    <td class="concept-cell">Educación y Ciencia (2056)</td>
+                    <td class="history-cell">Visión: El sistema educativo panameño produce la primera generación de científicos e innovadores que lideran proyectos espaciales y biotecnológicos desde el istmo.</td>
+                </tr>
+                <tr>
+                    <td class="number-cell">63</td>
+                    <td class="concept-cell">Centenario de la Gesta (2063)</td>
+                    <td class="history-cell">Visión: Al cumplirse 100 años del 9 de enero de 1964, Panamá honra su memoria con un país totalmente integrado, sin brechas sociales y con una justicia equitativa.</td>
+                </tr>
+                <tr>
+                    <td class="number-cell">70</td>
+                    <td class="concept-cell">Liderazgo Diplomático (2070)</td>
+                    <td class="history-cell">Visión: Panamá se establece como la sede permanente de la paz mundial, el lugar donde se resuelven los conflictos globales gracias a su neutralidad histórica.</td>
+                </tr>
+                <tr>
+                    <td class="number-cell">77</td>
+                    <td class="concept-cell">Centenario de los Tratados (2077)</td>
+                    <td class="history-cell">Visión: Celebración de un siglo de la firma Torrijos-Carter. El Canal es ahora una entidad automatizada y cuántica, motor de una nación desarrollada.</td>
+                </tr>
+                <tr>
+                    <td class="number-cell">84</td>
+                    <td class="concept-cell">Integración Humana (2084)</td>
+                    <td class="history-cell">Visión: La tecnología y la espiritualidad se unen en el istmo. Panamá lidera movimientos de bienestar humano y ético en la era de la inteligencia avanzada.</td>
+                </tr>
+                <tr>
+                    <td class="number-cell">91</td>
+                    <td class="concept-cell">Resiliencia Climática (2091)</td>
+                    <td class="history-cell">Visión: El país ha superado los retos del cambio de siglo, demostrando que su posición geográfica es un refugio seguro y próspero para la humanidad.</td>
+                </tr>
+                <tr>
+                    <td class="number-cell">98</td>
+                    <td class="concept-cell">Cierre del Ciclo 98 (2098)</td>
+                    <td class="history-cell">Visión: El Siglo XXI culmina con Panamá como la joya del continente, un puente no solo de barcos, sino de luz, conocimiento y unidad para las próximas generaciones.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>
+"""
+
+# Generar archivos
+with open("cronologia_siglo_xxi.html", "w", encoding="utf-8") as f:
+    f.write(html_content)
+
+weasyprint.HTML(string=html_content).write_pdf("cronologia_siglo_xxi.pdf")
+"""
