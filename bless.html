@@ -5,153 +5,193 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SADV41 - Multicadena Universal</title>
     <style>
-        /* Estilos Base del Ecosistema Oscuro - SADV41 */
-        body {
-            background-color: #0d0d0d;
-            color: #FFFFFF;
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 95vh;
-        }
+        /* ==========================================================================
+           ESTILOS MEJORADOS - SADV41 ECOSYSTEM (Gear Ultra v1.0)
+           ========================================================================== */
 
-        .sadv41-container {
-            background-color: #121212;
-            padding: 24px;
-            border-radius: 12px;
-            max-width: 480px;
-            width: 100%;
-            border: 1px solid #222;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+        /* Reseteo y Base */
+        *, *::before, *::after {
             box-sizing: border-box;
         }
 
-        /* Encabezado */
+        body {
+            background-color: #09090b; /* Un oscuro más profundo y moderno */
+            color: #f4f4f5;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            margin: 0;
+            padding: 16px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Contenedor Principal Omnicadena */
+        .sadv41-container {
+            background: linear-gradient(145deg, #121214, #18181b);
+            padding: 28px;
+            border-radius: 16px;
+            max-width: 480px;
+            width: 100%;
+            border: 1px solid #27272a;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.7), 
+                        0 8px 10px -6px rgba(0, 0, 0, 0.7);
+        }
+
+        /* Encabezado Principal */
         header {
             border-bottom: 2px solid #e5a93c;
-            padding-bottom: 12px;
-            margin-bottom: 20px;
+            padding-bottom: 16px;
+            margin-bottom: 24px;
             text-align: center;
         }
 
         header h1 {
             color: #e5a93c;
             margin: 0;
-            letter-spacing: 1px;
-            font-size: 22px;
+            font-size: 20px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
         }
 
         header p {
             font-size: 12px;
-            color: #888;
-            margin: 4px 0 0 0;
+            color: #a1a1aa;
+            margin: 6px 0 0 0;
+            font-weight: 500;
         }
 
-        /* Panel Cómputo de Remanente */
+        header strong {
+            color: #f4f4f5;
+        }
+
+        /* Panel de Cómputo Matemático */
         .panel-computo {
-            border: 1px solid #333;
-            border-radius: 8px;
-            padding: 16px;
+            border: 1px solid #27272a;
+            border-radius: 10px;
+            padding: 18px;
             margin-bottom: 20px;
-            background-color: #1a1a1a;
+            background-color: #1c1c1f;
         }
 
         .panel-computo h3 {
             color: #e5a93c;
-            margin: 0 0 12px 0;
-            font-size: 15px;
+            margin: 0 0 14px 0;
+            font-size: 13px;
             text-align: center;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
+            font-weight: 700;
         }
 
         .grid-datos {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 12px;
+            gap: 14px;
             font-size: 13px;
         }
 
         .grid-item {
-            border-bottom: 1px solid #222;
-            padding-bottom: 4px;
+            border-bottom: 1px solid #27272a;
+            padding-bottom: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        /* Bloque Dinámico del Verso */
+        .grid-item strong {
+            color: #a1a1aa;
+        }
+
+        /* Alerta y Bloque del Verso Activo */
         .alerta-verso {
-            background-color: #1c281c;
-            border: 1px solid #2e7d32;
-            border-radius: 8px;
-            padding: 16px;
-            margin-bottom: 20px;
+            background: linear-gradient(135deg, #142215, #1c2e1e);
+            border: 1px solid #166534;
+            border-radius: 10px;
+            padding: 18px;
+            margin-bottom: 24px;
             text-align: center;
+            box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.05);
             display: none; /* Se activa por JavaScript tras verificar enteros */
         }
 
         .badge-verificado {
             font-size: 10px;
-            color: #81c784;
-            display: block;
-            margin-bottom: 6px;
-            font-weight: bold;
-            letter-spacing: 0.5px;
+            color: #4ade80;
+            display: inline-block;
+            margin-bottom: 8px;
+            font-weight: 700;
+            letter-spacing: 0.75px;
+            background-color: rgba(22, 101, 52, 0.4);
+            padding: 2px 8px;
+            border-radius: 4px;
         }
 
         .verso-titulo {
             color: #e5a93c;
-            font-size: 15px;
+            font-size: 16px;
+            font-weight: 700;
             display: block;
+            margin-bottom: 4px;
         }
 
         .verso-texto {
             font-style: italic;
             font-size: 13px;
-            margin: 6px 0 12px 0;
-            color: #c8e6c9;
-            line-height: 1.4;
+            margin: 8px 0 16px 0;
+            color: #bbf7d0;
+            line-height: 1.5;
         }
 
+        /* Botón Interactivo de Guianza */
         .btn-rotar {
-            background-color: #2e7d32;
-            color: white;
+            background-color: #16a34a;
+            color: #ffffff;
             border: none;
-            padding: 6px 12px;
-            border-radius: 4px;
+            padding: 8px 16px;
+            border-radius: 6px;
             cursor: pointer;
-            font-size: 11px;
-            font-weight: bold;
-            transition: background 0.2s;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease-in-out;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
 
         .btn-rotar:hover {
-            background-color: #1b5e20;
+            background-color: #15803d;
+            transform: translateY(-1px);
         }
 
-        /* Explorador de Contratos */
+        .btn-rotar:active {
+            transform: translateY(0);
+        }
+
+        /* Explorador de Contratos (BEP20) */
         .explorador-contratos {
-            border: 1px solid #333;
-            border-radius: 8px;
-            padding: 14px;
-            background-color: #1a1a1a;
+            border: 1px solid #27272a;
+            border-radius: 10px;
+            padding: 16px;
+            background-color: #1c1c1f;
         }
 
         .explorador-titulo {
-            font-size: 12px;
-            color: #888;
+            font-size: 11px;
+            color: #71717a;
             display: block;
-            margin-bottom: 10px;
-            font-weight: bold;
-            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
         .token-row {
             display: flex;
             flex-direction: column;
-            padding: 8px 0;
-            border-bottom: 1px solid #222;
+            padding: 10px 0;
+            border-bottom: 1px solid #27272a;
         }
 
         .token-row:last-child {
@@ -165,61 +205,71 @@
         }
 
         .token-id {
-            font-weight: bold;
+            font-weight: 700;
             color: #e5a93c;
             font-size: 14px;
+            letter-spacing: 0.5px;
         }
 
         .token-balance {
             font-size: 12px;
-            color: #aaa;
+            color: #e4e4e7;
+            font-family: monospace;
         }
 
         .token-status {
             font-size: 9px;
-            padding: 2px 6px;
-            border-radius: 10px;
-            font-weight: bold;
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .status-active {
-            background-color: #1c3a1c;
-            color: #81c784;
+            background-color: rgba(22, 101, 52, 0.3);
+            color: #4ade80;
+            border: 1px solid rgba(34, 197, 94, 0.2);
         }
 
         .status-pending {
-            background-color: #3a2a1c;
-            color: #ffb74d;
+            background-color: rgba(120, 53, 4, 0.3);
+            color: #fbd561;
+            border: 1px solid rgba(234, 179, 8, 0.2);
         }
 
         .token-address {
             font-size: 10px;
-            color: #555;
-            font-family: monospace;
+            color: #52525b;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
             word-break: break-all;
-            margin-top: 4px;
+            margin-top: 6px;
+            background-color: #141416;
+            padding: 4px 6px;
+            border-radius: 4px;
+            border: 1px solid #242427;
         }
 
-        /* Footer Ley Inmutable */
+        /* Footer y Axioma de Ley */
         footer {
-            margin-top: 20px;
+            margin-top: 24px;
             font-size: 11px;
-            color: #666;
+            color: #52525b;
             text-align: center;
-            border-top: 1px solid #222;
-            padding-top: 12px;
+            border-top: 1px solid #27272a;
+            padding-top: 16px;
         }
 
         .ley-axioma {
-            letter-spacing: 1px;
-            font-weight: bold;
-            color: #555;
+            letter-spacing: 1.5px;
+            font-weight: 700;
+            color: #71717a;
             margin-bottom: 4px;
         }
 
         .endpoint-tag {
             font-size: 9px;
-            color: #444;
+            color: #3f3f46;
             font-family: monospace;
         }
     </style>
@@ -312,7 +362,6 @@
     </div>
 
     <script>
-        // Catálogo de Versos Oficiales del Remanente
         const BIBLICAL_VERSES = [
             { ref: "Juan 3:16", text: "Porque de tal manera amó Dios al mundo..." },
             { ref: "Rut 2:12", text: "Que Jehová recompense tu obra..." },
@@ -322,23 +371,20 @@
 
         let verseIndex = 0;
 
-        // Renderizado del verso actual en base al índice síncrono
         function updateVerseDOM() {
             document.getElementById('v-ref').innerText = BIBLICAL_VERSES[verseIndex].ref;
             document.getElementById('v-text').innerText = `"${BIBLICAL_VERSES[verseIndex].text}"`;
         }
 
-        // Rotación lineal exacta sin desfases
         function rotateVerse() {
             verseIndex = (verseIndex + 1) % BIBLICAL_VERSES.length;
             updateVerseDOM();
         }
 
-        // Inicialización y verificación por milésimas (Protección contra fallas de flotantes)
         window.addEventListener('DOMContentLoaded', () => {
             const BASE_FUND = 3.16;
             const TITHE_DEDUCTION = 0.316;
-            const TARGET_MILLI = 2844; // El parámetro exacto validado con Binance AI
+            const TARGET_MILLI = 2844; 
 
             const calculated = parseFloat((BASE_FUND - TITHE_DEDUCTION).toFixed(3));
             const valueMilli = Math.round(calculated * 1000);
@@ -346,7 +392,7 @@
             document.getElementById('remanente-val').innerText = calculated.toFixed(3);
 
             if (valueMilli === TARGET_MILLI) {
-                verseIndex = 0; // Sincronización del punto de inicio
+                verseIndex = 0; 
                 updateVerseDOM();
                 document.getElementById('bloque-verso').style.display = 'block';
             } else {
