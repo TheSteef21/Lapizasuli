@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conectores por Probar - SADV41 Hub</title>
+    <style>
+        :root {
+            --bg-color: #121212;
+            --card-bg: #1e1e1e;
+            --accent-color: #00e676;
+            --text-color: #ffffff;
+            --text-muted: #aaaaaa;
+            --border-color: #333333;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--text-color);
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            font-size: 0.9rem;
+        }
+
+        h2 {
+            color: var(--accent-color);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 8px;
+            margin-top: 40px;
+            font-size: 1.4rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #2a2a2a;
+            color: var(--text-color);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        tr {
+            border-bottom: 1px solid var(--border-color);
+            transition: background-color 0.2s;
+        }
+
+        tr:last-child {
+            border-bottom: none;
+        }
+
+        tr:hover {
+            background-color: #252525;
+        }
+
+        .app-name {
+            font-weight: bold;
+            color: #ffffff;
+            white-space: nowrap;
+        }
+
+        .beta-tag {
+            background-color: #ff9100;
+            color: #000000;
+            font-size: 0.7rem;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-left: 6px;
+            font-weight: bold;
+            vertical-align: middle;
+        }
+
+        .description {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .check-col {
+            text-align: center;
+            width: 50px;
+        }
+
+        input[type="checkbox"] {
+            accent-color: var(--accent-color);
+            transform: scale(1.2);
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Panel de Conectores Pendientes</h1>
+    <div class="subtitle">Lista unificada de aplicaciones, servicios integrables y APIs para pruebas de conectividad y flujos automatizados.</div>
+
+    <h2>1. Aplicaciones de Sistema (Apps)</h2>
+    <table>
+        <thead>
+            <tr>
+                <th class="check-col">Probar</th>
+                <th>Aplicación / Conector</th>
+                <th>Descripción / Propósito de la Prueba</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Wrike</td>
+                <td class="description">Gestiona proyectos, organiza tareas y colabora sin problemas en Wrike.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Neimo</td>
+                <td class="description">Acelera la inteligencia regulatoria con IA para equipos legales y de cumplimiento.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Atlassian</td>
+                <td class="description">Busca, crea y gestiona Jira, Confluence y Compass.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">HubSpot <span class="beta-tag">Beta</span></td>
+                <td class="description">Busca datos de CRM, rastrea contactos y analiza información de ventas y marketing.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Intercom</td>
+                <td class="description">Accede a conversaciones de clientes, analiza comentarios y genera ideas accionables.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Close</td>
+                <td class="description">Automatiza tu canal de prospectos de ventas con Close CRM.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Explorium</td>
+                <td class="description">Accede a datos empresariales y de contacto integrales para obtener información impulsada por IA.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">RevenueCat</td>
+                <td class="description">Gestiona aplicaciones de suscripción, controla derechos y automatiza flujos de trabajo.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Jam</td>
+                <td class="description">Analiza grabaciones de pantalla, contexto y problemas automáticamente.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Granola</td>
+                <td class="description">Busca, resume y reúne información de cada transcripción de reunión.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">monday.com</td>
+                <td class="description">Coordina tareas, gestiona tableros y optimiza los flujos de trabajo de tus proyectos.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">ClickUp</td>
+                <td class="description">Automatiza la gestión de tareas y los flujos de trabajo de proyectos con ClickUp.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Sentry</td>
+                <td class="description">Revise errores, analice causas raíz y sugiera soluciones para una rápida resolución de problemas.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Todoist</td>
+                <td class="description">Organiza tus tareas, optimiza los proyectos y mejora la productividad.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">MiniMax</td>
+                <td class="description">Genera voz, música, imágenes y videos con MiniMax.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Morningstar <span class="beta-tag">Beta</span></td>
+                <td class="description">Accede a datos de inversión, investigaciones y análisis de Morningstar para valores globales.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">PopHIVE</td>
+                <td class="description">Accede a datos de salud pública desde los paneles de PopHIVE.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">PostHog</td>
+                <td class="description">Realiza análisis de productos, gestiona banderas de funciones y ejecuta experimentos.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Jotform</td>
+                <td class="description">Crea, gestiona y recopila datos a través de formularios en línea potentes.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Firecrawl</td>
+                <td class="description">Desbloquea potentes capacidades de scraping web, crawling y búsqueda.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Xero</td>
+                <td class="description">Vea datos financieros, genere informes y obtenga información personalizada sobre su negocio.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Box</td>
+                <td class="description">Busca archivos de Box en Manus para previsualizar documentos y extraer datos estructurados.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Mercury <span class="beta-tag">Beta</span></td>
+                <td class="description">Banca en línea para startups, pequeñas empresas y compañías en crecimiento.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Neon</td>
+                <td class="description">Usa lenguaje natural para consultar y gestionar Postgres.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Fireflies</td>
+                <td class="description">Automatiza la transcripción de reuniones y los conocimientos de las conversaciones.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Linear</td>
+                <td class="description">Rastrea problemas, gestiona proyectos y organiza flujos de trabajo en tu equipo.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Context7</td>
+                <td class="description">Acceso a documentación técnica y ejemplos de implementación específicos de la biblioteca actual.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Webflow</td>
+                <td class="description">Gestiona sitios de Webflow, edita páginas y organiza el contenido de tu CMS con facilidad.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">PayPal para Empresas</td>
+                <td class="description">Gestiona transacciones, facturas y operaciones comerciales de manera eficiente.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Asana</td>
+                <td class="description">Optimiza la gestión de proyectos y tareas con Asana.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Serena</td>
+                <td class="description">Desbloquea la gestión eficiente de código con las herramientas semánticas y de edición de Serena.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">tl;dv</td>
+                <td class="description">Optimiza los flujos de trabajo de reuniones con transcripciones y puntos destacados de llamadas.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Wix</td>
+                <td class="description">Buscar datos del sitio web, acceder al contenido y automatizar flujos de trabajo dentro de Wix.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Playwright</td>
+                <td class="description">Automatiza navegadores para pruebas, scraping y más con Playwright.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">ElevenLabs</td>
+                <td class="description">Genere, clone y transcriba voz realista con ElevenLabs.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">LINE</td>
+                <td class="description">Conéctate a las cuentas oficiales de LINE para mensajería automatizada.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">CoinGecko</td>
+                <td class="description">Accede a datos del mercado en tiempo real, precios, tendencias y análisis en la cadena.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Airtable</td>
+                <td class="description">Organiza datos estructurados, gestiona registros y colabora con tu equipo.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Hugging Face</td>
+                <td class="description">Explora modelos de IA, accede a conjuntos de datos y descubre las últimas tendencias de investigación.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Crypto.com</td>
+                <td class="description">Transmite datos de mercado en vivo para precios, volúmenes, libros de órdenes y tendencias.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Make</td>
+                <td class="description">Convierte los flujos de trabajo de Make en herramientas de IA para la ejecución inteligente de automatizaciones.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Metabase</td>
+                <td class="description">Accede a los análisis de datos de Metabase con almacenamiento en caché y optimización de respuestas.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Stripe</td>
+                <td class="description">Simplifica la facturación, los pagos y la gestión de cuentas empresariales.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Cloudflare</td>
+                <td class="description">Administra los Workers de Cloudflare, crea aplicaciones y despliega recursos en línea.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Slack</td>
+                <td class="description">Lee y escribe conversaciones de Slack en Manus.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">HeyGen</td>
+                <td class="description">Crea avatares de IA realistas, genera voces y produce videos realistas.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Zapier</td>
+                <td class="description">Conecta Manus y automatiza flujos de trabajo entre miles de aplicaciones.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Prisma Postgres</td>
+                <td class="description">Conéctate a Postgres, gestiona bases de datos y consulta datos de manera segura y eficiente.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Vercel</td>
+                <td class="description">Gestiona proyectos, despliegues y dominios de Vercel.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Supabase</td>
+                <td class="description">Gestiona proyectos de Supabase, consulta bases de datos y organiza datos de manera eficiente.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Ahrefs</td>
+                <td class="description">Analiza el rendimiento de SEO, rastrea posiciones y realiza investigaciones de palabras clave.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Canva</td>
+                <td class="description">Descubre, completa automáticamente y exporta diseños de Canva en un solo lugar.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Similarweb</td>
+                <td class="description">Accede al tráfico del sitio web, audiencia, SEO e inteligencia de aplicaciones desde Similarweb.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Dify</td>
+                <td class="description">Conecta Dify y organiza flujos de trabajo impulsados por IA en tus herramientas favoritas.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Higgsfield</td>
+                <td class="description">Crea imágenes y videos cinematográficos con Higgsfield.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Notion</td>
+                <td class="description">Busca contenido del espacio de trabajo, actualiza notas y automatiza flujos de trabajo en Notion.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Alpaca <span class="beta-tag">Beta</span></td>
+                <td class="description">Opera acciones, criptomonedas y opciones mientras analizas datos de mercado en tiempo real.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Privacy.com <span class="beta-tag">Beta</span></td>
+                <td class="description">Crea y gestiona tarjetas virtuales y analiza el historial de transacciones.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Truthifi</td>
+                <td class="description">Accede a información en tiempo real sobre portafolios de inversión, asignación y comisiones.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Omni Analytics <span class="beta-tag">Beta</span></td>
+                <td class="description">Consulta conjuntos de datos y realiza análisis de lenguaje natural con Omni.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Conjuntos de Datos Financieros</td>
+                <td class="description">Accede a precios de acciones en tiempo real, datos financieros, presentaciones de la SEC y datos de mercado.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Unusual Whales <span class="beta-tag">Beta</span></td>
+                <td class="description">Acceda a datos en tiempo real sobre flujos de opciones, dark pool y transacciones congresionales.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Alpha Vantage</td>
+                <td class="description">Accede a datos del mercado de valores en tiempo real e históricos, así como a indicadores técnicos.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">MotherDuck</td>
+                <td class="description">Consulta el almacén de datos y crea visualizaciones interactivas con MotherDuck.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Resend</td>
+                <td class="description">Envía correos electrónicos, gestiona contactos, campañas masivas y dominios con Resend.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Guru</td>
+                <td class="description">Busca, pregunta y actualiza la base de conocimientos de Guru.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Hex</td>
+                <td class="description">Busca proyectos de Hex y haz preguntas de datos en Threads.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Apify</td>
+                <td class="description">Descubre y ejecuta Actores de Apify para la extracción de datos web y la automatización.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Cal.com</td>
+                <td class="description">Programa, reprograma y gestiona reservas y tipos de eventos en Cal.com.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Superhuman Mail</td>
+                <td class="description">Conecta Superhuman Mail para buscar correos electrónicos, redactar respuestas y gestionar eventos del calendario.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Scite</td>
+                <td class="description">Basar las respuestas en investigaciones revisadas por pares con Citas Inteligentes y búsqueda en texto completo.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Consensus</td>
+                <td class="description">Busca entre millones de artículos de investigación académica revisados por pares.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">PandaDoc</td>
+                <td class="description">Crea, envía y firma electrónicamente documentos directamente desde PandaDoc.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Lumin PDF</td>
+                <td class="description">Gestiona PDFs, solicitudes de firma y espacios de trabajo con Lumin PDF.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Mem</td>
+                <td class="description">Buscar, crear y organizar notas y colecciones de Mem.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Fellow</td>
+                <td class="description">Busca y accede a las notas de reuniones, tareas de acción y transcripciones de Fellow.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Circleback</td>
+                <td class="description">Busca y accede a reuniones, transcripciones, tareas y correos electrónicos de Circleback.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Calendly</td>
+                <td class="description">Administra la programación, los eventos, la disponibilidad y los invitados con Calendly.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Brex <span class="beta-tag">Beta</span></td>
+                <td class="description">Consulta gastos, usuarios, tarjetas y límites de gasto de Brex mediante lenguaje natural.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">FactSet <span class="beta-tag">Beta</span></td>
+                <td class="description">Accede a datos fundamentales, estimaciones, propiedad y operaciones de FactSet.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Ramp <span class="beta-tag">Beta</span></td>
+                <td class="description">Automatiza tarjetas corporativas, controles de gasto y flujos de trabajo financieros.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">S&P Global <span class="beta-tag">Beta</span></td>
+                <td class="description">Consulta datos financieros, de empresas y de mercado de S&P Global.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Zoom <span class="beta-tag">Beta</span></td>
+                <td class="description">Accede a recursos de reuniones, grabaciones y crea documentos de Zoom.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Hume</td>
+                <td class="description">Crea audio expresivo de texto a voz con Hume AI.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>2. APIs Personalizadas (Desarrollo, IA y Web3)</h2>
+    <table>
+        <thead>
+            <tr>
+                <th class="check-col">Probar</th>
+                <th>API / Servicio</th>
+                <th>Descripción / Propósito de la Prueba</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Tripo AI</td>
+                <td class="description">Transforma texto o imágenes en modelos 3D detallados rápida y eficientemente.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">API de Stripe</td>
+                <td class="description">Gestiona transacciones de manera programada y automatiza la facturación para tu negocio.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">HeyGen API</td>
+                <td class="description">Genera videos impulsados por IA con avatares realistas utilizando HeyGen API.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Dropbox</td>
+                <td class="description">Gestiona archivos, carpetas y compartidos en Dropbox.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">API de Supabase</td>
+                <td class="description">Gestiona bases de datos Postgres con autenticación, almacenamiento de archivos y más.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Flux</td>
+                <td class="description">Crea impresionantes imágenes generadas por IA con diversos estilos artísticos y conceptos.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Kling</td>
+                <td class="description">Genera contenido de video de alta calidad con IA y da vida a conceptos visuales creativos.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Polygon.io</td>
+                <td class="description">Accede a datos del mercado en tiempo real e históricos de acciones, forex, criptomonedas y opciones.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Cohere</td>
+                <td class="description">Construye aplicaciones de IA empresariales y optimiza los flujos de trabajo de procesamiento de texto.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Luma AI</td>
+                <td class="description">Crea videos y mundos en 3D realistas e hiperrealistas a partir de descripciones de texto o imágenes.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Minimax API</td>
+                <td class="description">Integra capacidades avanzadas de procesamiento de lenguaje y generación de voz o música.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Midjourney API</td>
+                <td class="description">Genera imágenes artísticas y fotorrealistas de alta calidad mediante flujos programáticos.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Runway API</td>
+                <td class="description">Utiliza herramientas de generación y edición de video con IA para crear contenido dinámico en tus flujos.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">OpenAI API</td>
+                <td class="description">Accede a modelos GPT avanzados para procesamiento de texto, análisis de datos complejos y automatizaciones.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Anthropic API</td>
+                <td class="description">Aprovecha los modelos Claude para razonamiento lógico complejo, análisis de código y generación contextual de alta fidelidad.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Gemini API</td>
+                <td class="description">Integra los modelos multimodales nativos de Google para procesar audio, video, código y texto a gran escala.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Groq API</td>
+                <td class="description">Ejecuta inferencias de modelos de lenguaje de código abierto a velocidades ultra rápidas mediante hardware optimizado.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Perplexity API</td>
+                <td class="description">Realiza búsquedas web enriquecidas y obtenga respuestas sintetizadas en tiempo real con datos actualizados.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Mistral API</td>
+                <td class="description">Accede a modelos lingüísticos eficientes y optimizados para tareas específicas de desarrollo.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">DeepSeek API</td>
+                <td class="description">Aprovecha capacidades avanzadas de codificación, traducción y razonamiento matemático con alta eficiencia de costos.</td>
+            </tr>
+            <tr>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="app-name">Ecosystem Web3 API</td>
+                <td class="description">Conecta carteras (Wallets), maneja datos en la cadena (On-chain) y optimiza transacciones de activos digitales.</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
