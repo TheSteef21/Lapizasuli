@@ -252,7 +252,6 @@ if(!apiKey) return alert("Falta credencial de acceso.");
 status.innerText = "CONECTANDO...";
 status.style.color = "#FF00E5";
 
-// Proxy seguro para evadir las restricciones CORS del navegador en GitHub Pages
 const proxyUrl = "https://api.allorigins.win/raw?url=" + encodeURIComponent(LUMA_ENDPOINT);
 
 try {
@@ -328,30 +327,49 @@ const archivos = document.getElementById('fotos-entorno').files;
 const status = document.getElementById('forgeStatus');
 const visor = document.getElementById('visor-3d');
 
-if (archivos.length === 0) return alert("Selecciona un archivo de imagen o un modelo .glb");
+if (archivos.length === 0) return alert("Selecciona una imagen (.jpg/.png) o modelo (.glb)");
 
 status.innerText = "PROCESANDO...";
 status.style.color = "#FF00E5";
-executeVoiceOutput("Iniciando procesamiento de polígonos.");
+executeVoiceOutput("Iniciando mapeo de textura en la matriz.");
 
-setTimeout(() => {
+setTimeout(async () => {
 const archivoSubido = archivos[0];
 const nombreArchivo = archivoSubido.name.toLowerCase();
 
-// Si el archivo ya es un modelo 3D (.glb o .gltf), se renderiza directamente en tiempo real
 if (nombreArchivo.endsWith('.glb') || nombreArchivo.endsWith('.gltf')) {
+// Carga directa si ya es un archivo 3D
 visor.src = URL.createObjectURL(archivoSubido);
 status.innerText = "PROYECTADO";
 status.style.color = "#22c55e";
-executeVoiceOutput("Modelo tridimensional local proyectado exitosamente.");
+executeVoiceOutput("Modelo tridimensional local proyectado.");
 } else {
-// Si es una imagen plana, muestra la simulación estructurada estándar
+// LÓGICA DE REEMPLAZO DE TEXTURA (Equivalente nativo a tu script de Python)
 visor.src = "https://modelviewer.dev/shared-assets/models/Astronaut.glb";
-status.innerText = "PROYECTADO";
-status.style.color = "#22c55e";
-executeVoiceOutput("Matriz tridimensional de entorno proyectada.");
+
+visor.addEventListener('load', async () => {
+try {
+const urlImagen = URL.createObjectURL(archivoSubido);
+const textura = await visor.createTexture(urlImagen);
+
+if (visor.model && visor.model.materials.length > 0) {
+const material = visor.model.materials[0];
+// Localiza el mapa de color base (textura) del material y lo sustituye por la imagen cargada
+if (material.pbrMetallicRoughness && material.pbrMetallicRoughness.baseColorTexture) {
+material.pbrMetallicRoughness.baseColorTexture.setTexture(textura);
 }
-}, 2500);
+}
+status.innerText = "TEXTURIZADO";
+status.style.color = "#22c55e";
+executeVoiceOutput("Textura inyectada correctamente en el modelo base.");
+} catch (err) {
+status.innerText = "ERR_TEXTURA";
+status.style.color = "var(--error-red)";
+console.error(err);
+}
+}, { once: true });
+}
+}, 2000);
 }
 
 const micBtn = document.getElementById('micBtn');
