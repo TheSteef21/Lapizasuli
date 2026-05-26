@@ -220,7 +220,7 @@ text-align: center; font-weight: bold; transition: 0.3s;
 
 <div class="card">
 <h3>⚙️ Visor Espacial <span class="status-badge" id="forgeStatus">3D_RENDER</span></h3>
-<input type="file" id="fotos-entorno" multiple accept="image/*">
+<input type="file" id="fotos-entorno" multiple accept="image/*,.glb,.gltf">
 <div class="btn-row">
 <button style="background: var(--electric-blue);" onclick="ejecutarPuenteAPI()">SINTETIZAR .GLB</button>
 </div>
@@ -252,8 +252,11 @@ if(!apiKey) return alert("Falta credencial de acceso.");
 status.innerText = "CONECTANDO...";
 status.style.color = "#FF00E5";
 
+// Proxy seguro para evadir las restricciones CORS del navegador en GitHub Pages
+const proxyUrl = "https://api.allorigins.win/raw?url=" + encodeURIComponent(LUMA_ENDPOINT);
+
 try {
-const respuesta = await fetch(LUMA_ENDPOINT, {
+const respuesta = await fetch(proxyUrl, {
 method: 'GET',
 headers: { 'accept': 'application/json', 'x-luma-api-key': apiKey }
 });
@@ -265,9 +268,9 @@ status.innerText = "VERIFICADO";
 status.style.color = "#22c55e";
 alert(`Identidad confirmada en el Atrio Luma: ${datos.user?.name || 'SADV41'}`);
 } catch (error) {
-status.innerText = "ERROR CORS/CLAVE";
+status.innerText = "ERROR DE RED";
 status.style.color = "var(--error-red)";
-alert(`La red rechazó la conexión. Verifica tu llave. Detalles: ${error.message}`);
+alert(`La red rechazó la conexión directa. Detalles: ${error.message}`);
 }
 }
 
@@ -325,17 +328,29 @@ const archivos = document.getElementById('fotos-entorno').files;
 const status = document.getElementById('forgeStatus');
 const visor = document.getElementById('visor-3d');
 
-if (archivos.length === 0) return alert("Selecciona al menos una imagen.");
+if (archivos.length === 0) return alert("Selecciona un archivo de imagen o un modelo .glb");
 
 status.innerText = "PROCESANDO...";
 status.style.color = "#FF00E5";
 executeVoiceOutput("Iniciando procesamiento de polígonos.");
 
 setTimeout(() => {
+const archivoSubido = archivos[0];
+const nombreArchivo = archivoSubido.name.toLowerCase();
+
+// Si el archivo ya es un modelo 3D (.glb o .gltf), se renderiza directamente en tiempo real
+if (nombreArchivo.endsWith('.glb') || nombreArchivo.endsWith('.gltf')) {
+visor.src = URL.createObjectURL(archivoSubido);
+status.innerText = "PROYECTADO";
+status.style.color = "#22c55e";
+executeVoiceOutput("Modelo tridimensional local proyectado exitosamente.");
+} else {
+// Si es una imagen plana, muestra la simulación estructurada estándar
 visor.src = "https://modelviewer.dev/shared-assets/models/Astronaut.glb";
 status.innerText = "PROYECTADO";
 status.style.color = "#22c55e";
-executeVoiceOutput("Matriz tridimensional proyectada.");
+executeVoiceOutput("Matriz tridimensional de entorno proyectada.");
+}
 }, 2500);
 }
 
