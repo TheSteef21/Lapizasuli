@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>AURAI OMNI MAX | Matriz Unificada SADV41</title>
-<link rel="preconnect" href="[https://fonts.googleapis.com](https://fonts.googleapis.com)">
-<link rel="preconnect" href="[https://fonts.gstatic.com](https://fonts.gstatic.com)" crossorigin>
-<link href="[https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=JetBrains+Mono:wght@300;500&family=Archivo+Narrow:ital,wght@0,400;0,700;1,400;1,700&display=swap](https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=JetBrains+Mono:wght@300;500&family=Archivo+Narrow:ital,wght@0,400;0,700;1,400;1,700&display=swap)" rel="stylesheet">
-<script type="module" src="[https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js](https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js)"></script>
-​<style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=JetBrains+Mono:wght@300;500&family=Archivo+Narrow:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+<style>
 :root {
 --gold: #d4af37;
 --ethereal-blue: #0a192f;
@@ -21,7 +21,7 @@
 --glow-blue: 0 0 10px rgba(0, 209, 255, 0.5);
 --error-red: #ff3333;
 }
-​body, html {
+body, html {
 margin: 0;
 padding: 0;
 width: 100%;
@@ -33,7 +33,7 @@ justify-content: center;
 align-items: flex-start;
 overflow-x: hidden;
 }
-​#bg-video {
+#bg-video {
 position: fixed;
 top: 50%;
 left: 50%;
@@ -45,7 +45,7 @@ z-index: -1;
 transform: translateX(-50%) translateY(-50%);
 filter: brightness(0.25) contrast(1.2);
 }
-​.visor-container {
+.visor-container {
 width: 100%;
 max-width: 360px;
 z-index: 10;
@@ -63,13 +63,13 @@ display: flex;
 flex-direction: column;
 gap: 15px;
 }
-​.scanline {
+.scanline {
 width: 100%; height: 2px; background: rgba(0, 209, 255, 0.15);
 position: absolute; top: 0; left: 0; pointer-events: none; z-index: 50;
 animation: scanline 6s linear infinite;
 }
 @keyframes scanline { 0% { top: 0; } 100% { top: 100%; } }
-​.header-title {
+.header-title {
 font-family: 'Orbitron', sans-serif;
 font-size: 1.2rem;
 text-align: center;
@@ -80,7 +80,7 @@ margin: 0;
 padding-bottom: 10px;
 border-bottom: 1px solid rgba(212, 175, 55, 0.3);
 }
-​.signature {
+.signature {
 font-family: 'JetBrains Mono', monospace;
 font-size: 0.6rem;
 text-align: center;
@@ -91,14 +91,14 @@ white-space: nowrap;
 overflow: hidden;
 text-overflow: ellipsis;
 }
-​.card {
+.card {
 background: rgba(0, 0, 0, 0.6);
 border-radius: 12px;
 padding: 12px;
 border-left: 3px solid var(--gold);
 position: relative;
 }
-​.card h3 {
+.card h3 {
 margin: 0 0 10px 0;
 font-size: 0.8rem;
 text-transform: uppercase;
@@ -108,14 +108,14 @@ display: flex;
 justify-content: space-between;
 align-items: center;
 }
-​.status-badge {
+.status-badge {
 font-family: 'JetBrains Mono', monospace;
 font-size: 0.55rem;
 background: rgba(212, 175, 55, 0.2);
 padding: 2px 6px;
 border-radius: 4px;
 }
-​input, textarea {
+input, textarea {
 width: 100%;
 background: #050a14;
 border: 1px solid rgba(0, 209, 255, 0.3);
@@ -130,8 +130,8 @@ resize: none;
 }
 input[type="file"] { padding: 5px; font-size: 0.65rem; }
 input:focus, textarea:focus { border-color: var(--electric-blue); box-shadow: var(--glow-blue); }
-​.btn-row { display: flex; gap: 8px; margin-top: 10px; }
-​button {
+.btn-row { display: flex; gap: 8px; margin-top: 10px; }
+button {
 flex: 1;
 background: var(--gold);
 color: var(--ethereal-blue);
@@ -147,7 +147,7 @@ transition: 0.3s;
 }
 button:hover { background: white; color: var(--ethereal-blue); }
 button:active { transform: scale(0.98); }
-​.btn-mic {
+.btn-mic {
 background: transparent;
 border: 1px solid var(--electric-blue);
 color: var(--electric-blue);
@@ -161,7 +161,7 @@ background: var(--magenta); color: white; border-color: var(--magenta);
 animation: pulse-mic 1s infinite;
 }
 @keyframes pulse-mic { 0% { box-shadow: 0 0 0 0 rgba(255, 0, 229, 0.5); } 70% { box-shadow: 0 0 0 10px rgba(255, 0, 229, 0); } }
-​/* Visor Espacial 3D */
+/* Visor Espacial 3D */
 model-viewer {
 width: 100%;
 height: 200px;
@@ -170,7 +170,7 @@ border-radius: 6px;
 border: 1px dashed var(--electric-blue);
 margin-top: 10px;
 }
-​.pay-links { display: flex; flex-direction: column; gap: 8px; margin-top: 5px; }
+.pay-links { display: flex; flex-direction: column; gap: 8px; margin-top: 5px; }
 .wallet-link {
 font-family: 'Orbitron', sans-serif;
 font-size: 0.65rem; color: var(--gold); text-decoration: none;
@@ -182,21 +182,26 @@ text-align: center; font-weight: bold; transition: 0.3s;
 </style>
 </head>
 <body>
-​<video autoplay muted loop playsinline id="bg-video">
-<source src="[https://thesteef21.github.io/Lapizasuli/gemini_generated_video_66dd255f.mp4](https://thesteef21.github.io/Lapizasuli/gemini_generated_video_66dd255f.mp4)" type="video/mp4">
+
+<video autoplay muted loop playsinline id="bg-video">
+<source src="https://thesteef21.github.io/Lapizasuli/gemini_generated_video_66dd255f.mp4" type="video/mp4">
 </video>
-​<div class="visor-container">
+
+<div class="visor-container">
 <div class="scanline"></div>
-​<h1 class="header-title">AURAI OMNI</h1>
+
+<h1 class="header-title">AURAI OMNI</h1>
 <div class="signature">STEVEN DIOR | CAL-7hEhBBGMVL7tO2w</div>
-​<div class="card">
+
+<div class="card">
 <h3>📍 El Atrio <span class="status-badge" id="lumaStatus">LUMA_NET</span></h3>
 <input type="password" id="lumaApiKey" placeholder="x-luma-api-key..." value="cal-7hEhBBGMVL7tO2w">
 <div class="btn-row">
 <button style="background: #111; border: 1px solid #333; color: #fff;" onclick="verificarIdentidadLuma()">Verificar Canal Luma</button>
 </div>
 </div>
-​<div class="card">
+
+<div class="card">
 <h3>🕊️ Motor Técnico <span class="status-badge" id="aiStatus">GPT-5.2</span></h3>
 <textarea id="userInput" rows="2" placeholder="Transmite directiva o análisis de entorno..."></textarea>
 <div class="btn-row">
@@ -204,14 +209,16 @@ text-align: center; font-weight: bold; transition: 0.3s;
 <button onclick="transmitToAiCloud()">FORJAR MATRIZ</button>
 </div>
 </div>
-​<div class="card">
+
+<div class="card">
 <h3>✨ El Santísimo <span class="status-badge">VOICE_OUT</span></h3>
 <textarea id="voiceOutput" rows="3" readonly placeholder="Guianza vocal sintetizada aparecerá aquí..."></textarea>
 <div class="btn-row">
 <button style="background: transparent; border: 1px solid var(--gold); color: var(--gold);" onclick="manualReproduction()">🔊 REPETIR TRANSMISIÓN</button>
 </div>
 </div>
-​<div class="card">
+
+<div class="card">
 <h3>⚙️ Visor Espacial <span class="status-badge" id="forgeStatus">3D_RENDER</span></h3>
 <input type="file" id="fotos-entorno" multiple accept="image/*">
 <div class="btn-row">
@@ -219,55 +226,67 @@ text-align: center; font-weight: bold; transition: 0.3s;
 </div>
 <model-viewer id="visor-3d" alt="Modelo 3D Forjado" auto-rotate camera-controls shadow-intensity="1"></model-viewer>
 </div>
-​<div class="card" style="border-left-color: var(--electric-blue);">
+
+<div class="card" style="border-left-color: var(--electric-blue);">
 <h3 style="color: var(--electric-blue);">🔗 Raíz Financiera <span class="status-badge" style="background: rgba(0,209,255,0.2);">WEB3</span></h3>
 <div class="pay-links">
-<a href="[https://pay.walletconnect.com/?pid=pay_89a2ecc101KR0EV8RKRCFSYTZTG0CX8VNF](https://pay.walletconnect.com/?pid=pay_89a2ecc101KR0EV8RKRCFSYTZTG0CX8VNF)" class="wallet-link" style="border-color: var(--electric-blue); color: var(--electric-blue);">CONTRATO SOSTÉN (1)</a>
-<a href="[https://pay.walletconnect.com/?pid=pay_9ba2ecc101KR0EWRYCRN6AZ1NKHT36V9SF](https://pay.walletconnect.com/?pid=pay_9ba2ecc101KR0EWRYCRN6AZ1NKHT36V9SF)" class="wallet-link" style="border-color: var(--electric-blue); color: var(--electric-blue);">CONTRATO SOSTÉN (2)</a>
+<a href="https://pay.walletconnect.com/?pid=pay_89a2ecc101KR0EV8RKRCFSYTZTG0CX8VNF" class="wallet-link" style="border-color: var(--electric-blue); color: var(--electric-blue);">CONTRATO SOSTÉN (1)</a>
+<a href="https://pay.walletconnect.com/?pid=pay_9ba2ecc101KR0EWRYCRN6AZ1NKHT36V9SF" class="wallet-link" style="border-color: var(--electric-blue); color: var(--electric-blue);">CONTRATO SOSTÉN (2)</a>
 </div>
 </div>
-​<div class="footer">SADV41 OMNI • ROMANOS 12:2</div>
+
+<div class="footer">SADV41 OMNI • ROMANOS 12:2</div>
 </div>
-​<script>
-const AINFT_API_KEY = "sk-uvex4v8q1bchaqnsws13wp533ksvtqvc";
+
+<script>
+const AINFT_API_KEY = "sk-jwd2lmyhie5ekh9mu0iclmoppihlmhwx";
 const AINFT_ENDPOINT = "https://api.ainft.com/v1/chat/completions";
 const LUMA_ENDPOINT = "https://public-api.luma.com/v1/user/get-self";
 let globalResponseText = "";
-​async function verificarIdentidadLuma() {
+
+async function verificarIdentidadLuma() {
 const apiKey = document.getElementById('lumaApiKey').value;
 const status = document.getElementById('lumaStatus');
 if(!apiKey) return alert("Falta credencial de acceso.");
-​status.innerText = "CONECTANDO...";
+
+status.innerText = "CONECTANDO...";
 status.style.color = "#FF00E5";
-​try {
+
+try {
 const respuesta = await fetch(LUMA_ENDPOINT, {
 method: 'GET',
 headers: { 'accept': 'application/json', 'x-luma-api-key': apiKey }
 });
-​if (!respuesta.ok) throw new Error(Código ${respuesta.status});
-​const datos = await respuesta.json();
+
+if (!respuesta.ok) throw new Error(`Código ${respuesta.status}`);
+
+const datos = await respuesta.json();
 status.innerText = "VERIFICADO";
 status.style.color = "#22c55e";
-alert(Identidad confirmada en el Atrio Luma: ${datos.user?.name || 'SADV41'});
+alert(`Identidad confirmada en el Atrio Luma: ${datos.user?.name || 'SADV41'}`);
 } catch (error) {
 status.innerText = "ERROR CORS/CLAVE";
 status.style.color = "var(--error-red)";
-alert(La red rechazó la conexión. Verifica tu llave. Detalles: ${error.message});
+alert(`La red rechazó la conexión. Verifica tu llave. Detalles: ${error.message}`);
 }
 }
-​async function transmitToAiCloud() {
+
+async function transmitToAiCloud() {
 const userInput = document.getElementById('userInput').value;
 const voiceOut = document.getElementById('voiceOutput');
 const aiStatus = document.getElementById('aiStatus');
-​if (!userInput) return alert("Ingresa una directiva.");
-​aiStatus.innerText = "FORJANDO...";
+
+if (!userInput) return alert("Ingresa una directiva.");
+
+aiStatus.innerText = "FORJANDO...";
 aiStatus.style.color = "#FF00E5";
 voiceOut.value = "Sintetizando directiva...";
-​try {
+
+try {
 const response = await fetch(AINFT_ENDPOINT, {
 method: 'POST',
 headers: {
-'Authorization': Bearer ${AINFT_API_KEY},
+'Authorization': `Bearer ${AINFT_API_KEY}`,
 'Content-Type': 'application/json',
 },
 body: JSON.stringify({
@@ -280,58 +299,73 @@ stream: false,
 temperature: 0.7
 }),
 });
-​if (!response.ok) throw new Error(Código ${response.status});
-​const data = await response.json();
+
+if (!response.ok) throw new Error(`Código ${response.status}`);
+
+const data = await response.json();
 let cleanVozText = data.choices && data.choices[0] ? data.choices[0].message.content : "Respuesta vacía.";
-​if (cleanVozText.includes("[CODE_START]")) cleanVozText = cleanVozText.split("[CODE_START]")[0].trim();
-​globalResponseText = cleanVozText;
+
+if (cleanVozText.includes("[CODE_START]")) cleanVozText = cleanVozText.split("[CODE_START]")[0].trim();
+
+globalResponseText = cleanVozText;
 voiceOut.value = cleanVozText;
-​aiStatus.innerText = "ONLINE";
+
+aiStatus.innerText = "ONLINE";
 aiStatus.style.color = "#00D1FF";
 executeVoiceOutput(cleanVozText);
 } catch (error) {
 aiStatus.innerText = "DESCONEXIÓN";
 aiStatus.style.color = "var(--error-red)";
-voiceOut.value = Error AINFT: ${error.message};
+voiceOut.value = `Error AINFT: ${error.message}`;
 }
 }
-​function ejecutarPuenteAPI() {
+
+function ejecutarPuenteAPI() {
 const archivos = document.getElementById('fotos-entorno').files;
 const status = document.getElementById('forgeStatus');
 const visor = document.getElementById('visor-3d');
-​if (archivos.length === 0) return alert("Selecciona al menos una imagen.");
-​status.innerText = "PROCESANDO...";
+
+if (archivos.length === 0) return alert("Selecciona al menos una imagen.");
+
+status.innerText = "PROCESANDO...";
 status.style.color = "#FF00E5";
 executeVoiceOutput("Iniciando procesamiento de polígonos.");
-​setTimeout(() => {
+
+setTimeout(() => {
 visor.src = "https://modelviewer.dev/shared-assets/models/Astronaut.glb";
 status.innerText = "PROYECTADO";
 status.style.color = "#22c55e";
 executeVoiceOutput("Matriz tridimensional proyectada.");
 }, 2500);
 }
-​const micBtn = document.getElementById('micBtn');
+
+const micBtn = document.getElementById('micBtn');
 const inputArea = document.getElementById('userInput');
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-​if (SpeechRecognition) {
+
+if (SpeechRecognition) {
 const recognition = new SpeechRecognition();
 recognition.lang = 'es-PA';
-​micBtn.addEventListener('click', () => {
+
+micBtn.addEventListener('click', () => {
 window.speechSynthesis.cancel();
 try {
 recognition.start();
 micBtn.classList.add('active');
 } catch(e) { }
 });
-​recognition.onresult = (event) => {
+
+recognition.onresult = (event) => {
 inputArea.value = event.results[0][0].transcript;
 micBtn.classList.remove('active');
 transmitToAiCloud();
 };
-​recognition.onerror = () => micBtn.classList.remove('active');
+
+recognition.onerror = () => micBtn.classList.remove('active');
 recognition.onend = () => micBtn.classList.remove('active');
 }
-​function executeVoiceOutput(text) {
+
+function executeVoiceOutput(text) {
 window.speechSynthesis.cancel();
 const utterance = new SpeechSynthesisUtterance(text);
 utterance.lang = 'es-MX';
@@ -339,7 +373,8 @@ utterance.pitch = 0.95;
 utterance.rate = 1.05;
 window.speechSynthesis.speak(utterance);
 }
-​function manualReproduction() {
+
+function manualReproduction() {
 if (globalResponseText) executeVoiceOutput(globalResponseText);
 }
 </script>
