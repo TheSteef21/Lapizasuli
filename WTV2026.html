@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aura Flow 4.0 | West Team Voleibol</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Space+Grotesk:wght@300;500;700&family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'matte-black': '#050505',
+                        'cyber-cyan': '#00ffcc',
+                        'neon-volt': '#ffff00',
+                        'prestige-gold': '#ff9900',
+                        'deep-navy': '#0d0d16',
+                        'glass-white': 'rgba(255, 255, 255, 0.05)',
+                    },
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                        display: ['Montserrat', 'sans-serif'],
+                        mono: ['Space Grotesk', 'monospace'],
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        glow: {
+                            '0%': { boxShadow: '0 0 5px rgba(0, 255, 204, 0.2)' },
+                            '100%': { boxShadow: '0 0 20px rgba(0, 255, 204, 0.6)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #050505;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .text-glow-cyan { text-shadow: 0 0 10px rgba(0, 255, 204, 0.5); }
+        .text-glow-gold { text-shadow: 0 0 10px rgba(255, 153, 0, 0.5); }
+        .bg-gradient-gold { background: linear-gradient(135deg, #ff9900 0%, #ffd700 100%); }
+        .bg-gradient-cyber { background: linear-gradient(135deg, #00ffcc 0%, #0066ff 100%); }
+        .birria-gradient { background: linear-gradient(135deg, #00ff66 0%, #ffd700 100%); }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #050505; }
+        ::-webkit-scrollbar-thumb { background: #222; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #333; }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- NAVIGATION -->
+    <nav class="fixed top-0 w-full z-50 glass-card border-b border-white/10 px-6 py-4">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <span class="text-2xl font-black tracking-tighter text-white font-display">AURA<span class="text-cyber-cyan">FLOW</span></span>
+                <span class="text-[10px] bg-white/10 px-2 py-0.5 rounded-full text-white/50 font-mono">V4.0</span>
+            </div>
+            <div class="hidden md:flex space-x-8 text-sm font-medium tracking-widest uppercase">
+                <a href="#hero" class="hover:text-cyber-cyan transition-colors">Inicio</a>
+                <a href="#principles" class="hover:text-cyber-cyan transition-colors">Principios</a>
+                <a href="#west-team" class="hover:text-cyber-cyan transition-colors">West Team</a>
+                <a href="#news" class="hover:text-cyber-cyan transition-colors">Última Hora</a>
+            </div>
+            <a href="https://wa.me/50769362166" target="_blank" class="bg-cyber-cyan text-black px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider hover:scale-105 transition-transform active:scale-95">
+                ¡Actívate!
+            </a>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section id="hero" class="relative min-h-screen flex flex-col items-center justify-center pt-24 px-6 overflow-hidden">
+        <!-- Ambient background elements -->
+        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-cyber-cyan/10 rounded-full blur-[120px] -z-10"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-prestige-gold/10 rounded-full blur-[120px] -z-10"></div>
+
+        <div class="text-center max-w-4xl mx-auto mb-12">
+            <h1 class="text-5xl md:text-8xl font-black font-display leading-tight mb-6 animate-float">
+                FLUIDEZ EN <br/><span class="text-transparent bg-clip-text bg-gradient-to-r from-cyber-cyan to-blue-500">OPERACIÓN</span>
+            </h1>
+            <p class="text-lg md:text-xl text-white/60 font-light max-w-2xl mx-auto leading-relaxed">
+                Descubre la evolución de la eficiencia. Aura Flow 4.0 redefine la arquitectura de procesos a través de la automatización inteligente y la claridad estratégica.
+            </p>
+        </div>
+
+        <!-- Video Player / Hero Anchor -->
+        <div class="w-full max-w-5xl aspect-video rounded-3xl overflow-hidden border border-white/10 shadow-2xl relative group">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
+                <p class="text-cyber-cyan font-mono text-sm mb-2">SOURCE: AURA FLOW 4.0</p>
+                <h3 class="text-2xl font-bold">Arquitectura de Certeza</h3>
+            </div>
+            <!-- Video Placeholder/Mock representing the "Aura Flow 4.0" visuals -->
+            <div class="w-full h-full bg-deep-navy flex flex-col items-center justify-center relative">
+                <div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(#00ffcc 1px, transparent 1px); background-size: 30px 30px;"></div>
+                <div class="z-10 text-center">
+                    <div class="w-20 h-20 bg-cyber-cyan rounded-full flex items-center justify-center mb-6 cursor-pointer hover:scale-110 transition-transform shadow-[0_0_30px_rgba(0,255,204,0.4)]">
+                        <svg class="w-8 h-8 text-black fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    </div>
+                    <p class="text-xs uppercase tracking-[0.3em] font-bold text-white/40">Visualización de Sistema de Flujo</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEWS WIDGET (ULTIMA HORA) -->
+    <section id="news" class="py-12 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex items-center space-x-4 mb-8">
+                <div class="h-1 w-12 bg-cyber-cyan shadow-[0_0_10px_#00ffcc]"></div>
+                <h2 class="text-sm font-mono font-bold tracking-[0.5em] text-cyber-cyan uppercase">Última Hora</h2>
+            </div>
+            
+            <div class="glass-card rounded-2xl p-1 overflow-hidden">
+                <div class="bg-black/40 p-6 md:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6">
+                    <div class="flex-1">
+                        <div class="flex items-center space-x-3 mb-2">
+                            <span class="flex h-2 w-2 rounded-full bg-cyber-cyan animate-ping"></span>
+                            <span class="text-xs font-mono text-cyber-cyan">LIVE STATUS: ACTIVE MATCH</span>
+                        </div>
+                        <h3 class="text-2xl md:text-3xl font-bold mb-2">🏐 ¡WEST TEAM VOLEIBOL SE ACTIVA! 🏐</h3>
+                        <p class="text-white/60 font-light italic">"🔥 HOY HAY BIRRIA DE LA BUENA. ¡Actívate que venimos fuerte!"</p>
+                    </div>
+                    <div class="flex flex-col items-end text-right">
+                        <div class="text-xs font-mono text-white/30 mb-1">PRÓXIMA SESIÓN</div>
+                        <div class="text-xl font-bold text-neon-volt">LUNES & VIERNES</div>
+                        <div class="text-sm text-white/50 font-mono tracking-tighter">19:00 - 22:00 HRS</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRINCIPLES SECTION -->
+    <section id="principles" class="py-24 px-6 bg-[#080808]">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Automation -->
+                <div class="group p-8 rounded-3xl border border-white/5 hover:border-cyber-cyan/30 transition-all duration-500 hover:bg-white/[0.02]">
+                    <div class="w-12 h-12 rounded-xl bg-cyber-cyan/10 flex items-center justify-center mb-6 text-cyber-cyan group-hover:scale-110 transition-transform">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 font-display uppercase tracking-wider">Automatización</h3>
+                    <p class="text-white/50 text-sm leading-relaxed">
+                        Sistemas diseñados para actuar sin fricción. La orquestación de tareas permite un flujo continuo basado en la lógica de "Verdad Única".
+                    </p>
+                </div>
+                <!-- Clarity -->
+                <div class="group p-8 rounded-3xl border border-white/5 hover:border-prestige-gold/30 transition-all duration-500 hover:bg-white/[0.02]">
+                    <div class="w-12 h-12 rounded-xl bg-prestige-gold/10 flex items-center justify-center mb-6 text-prestige-gold group-hover:scale-110 transition-transform">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 font-display uppercase tracking-wider">Claridad</h3>
+                    <p class="text-white/50 text-sm leading-relaxed">
+                        Eliminación de ruido digital. Cada elemento visual tiene un propósito estratégico para guiar el ojo hacia la acción inmediata.
+                    </p>
+                </div>
+                <!-- Efficiency -->
+                <div class="group p-8 rounded-3xl border border-white/5 hover:border-white/30 transition-all duration-500 hover:bg-white/[0.02]">
+                    <div class="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center mb-6 text-white group-hover:scale-110 transition-transform">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 font-display uppercase tracking-wider">Eficiencia</h3>
+                    <p class="text-white/50 text-sm leading-relaxed">
+                        Arquitectura de un solo toque. Reducción de pasos desde el descubrimiento hasta la interacción final vía WhatsApp.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WEST TEAM VOLEIBOL HUB -->
+    <section id="west-team" class="py-24 px-6 relative">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="text-xs font-mono font-bold tracking-[0.5em] text-white/30 uppercase block mb-4">Identity & Branding</span>
+                <h2 class="text-4xl md:text-6xl font-black font-display mb-4">SADV41 <span class="text-prestige-gold">LEGACY</span></h2>
+                <div class="w-24 h-1 bg-prestige-gold mx-auto"></div>
+            </div>
+
+            <!-- THE FLYERS GRID -->
+            <div class="flex flex-wrap justify-center gap-[25px] max-w-[900px] mx-auto p-[25px] bg-matte-black border border-[#222] rounded-[16px]">
+                
+                <!-- Flyer 1: Premium (Dark & Gold) -->
+                <div class="bg-[#0d0d0d] border-2 border-prestige-gold p-[30px] max-w-[380px] flex-1 basis-[340px] flex flex-col justify-between text-center min-h-[500px]">
+                    <div>
+                        <h3 class="text-[2.2rem] font-black text-prestige-gold tracking-[1px] font-sans leading-none mb-1">WEST TEAM</h3>
+                        <p class="text-[1.3rem] italic text-white mt-[-5px] mb-[20px] tracking-[2px]"> • VOLEIBOL • </p>
+                        
+                        <div class="border-t-2 border-b-2 border-prestige-gold py-[20px] mb-[20px]">
+                            <p class="text-[1.1rem] text-[#dddddd] mb-2 font-sans">Horario Oficial de la Birria:</p>
+                            <p class="text-[1.6rem] font-bold text-white mb-1">Lunes y Viernes</p>
+                            <p class="text-[1.5rem] text-prestige-gold font-sans font-bold uppercase">7:00 PM a 10:00 PM</p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <p class="text-[0.95rem] text-[#888888] mb-[15px] font-sans">
+                            <span class="text-white font-bold">📢 Próximamente:</span> Apertura de cancha los sábados.
+                        </p>
+                        <a href="https://wa.me/50769362166" target="_blank" class="inline-block px-[25px] py-[13px] my-[15px] birria-gradient text-[#0d0d0d] font-black text-[0.9rem] uppercase tracking-[1px] rounded-[50px] border-2 border-white shadow-[0_0_25px_#00ff66,0_0_10px_#ffd700] hover:scale-105 transition-transform">
+                            🏐 ¡ACTÍVATE AL WHATSAPP!
+                        </a>
+                        <div class="mt-[20px] text-[0.7rem] font-sans text-[#555555] uppercase tracking-[1px]">
+                            SADV41 en la jugada 🇵🇦😎👍🏼🦅
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Flyer 2: Cyber (Neon Cyan) -->
+                <div class="bg-[#111116] border-2 border-cyber-cyan p-[25px] max-w-[380px] flex-1 basis-[340px] flex flex-col justify-between text-center min-h-[500px] shadow-[0_0_15px_rgba(0,255,204,0.2)] font-mono">
+                    <div>
+                        <div class="text-[0.8rem] text-cyber-cyan tracking-[3px] mb-[5px]">### LIVE ACTION ###</div>
+                        <h3 class="font-black text-[2rem] text-white uppercase tracking-[1px] leading-[1.1] font-sans">West Team</h3>
+                        <h3 class="text-[2rem] text-neon-volt uppercase tracking-[1px] leading-[1.1] mb-2">Voleibol</h3>
+                        
+                        <hr class="border-0 border-t border-dashed border-[#333] my-[15px]">
+                        
+                        <div class="bg-[#1a1a24] p-[15px] rounded-[8px] mb-[15px]">
+                            <p class="text-[1.2rem] font-bold text-white mb-[5px]">🔥 ¡HOY HAY BIRRIA! 🔥</p>
+                            <p class="text-[1.4rem] text-cyber-cyan font-bold my-[10px]">LUNES Y VIERNES</p>
+                            <p class="text-[1.6rem] text-neon-volt font-bold tracking-[1px]">7:00 PM - 10:00 PM</p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="text-[0.9rem] text-[#a0a0a0] italic bg-yellow-400/10 p-[8px] rounded-[5px] border border-yellow-400/20 mb-[15px]">
+                            ⚡ Próximamente: ¡También los SÁBADOS!
+                        </div>
+                        <a href="https://wa.me/50769362166" target="_blank" class="inline-block px-[25px] py-[13px] my-[15px] birria-gradient text-[#0d0d0d] font-black text-[0.9rem] uppercase tracking-[1px] rounded-[50px] border-2 border-white shadow-[0_0_25px_#00ff66,0_0_10px_#ffd700] hover:scale-105 transition-transform">
+                            🏐 ¡ENTRA A LA BIRRIA!
+                        </a>
+                        <div class="mt-[20px] text-[0.75rem] text-[#777788] border-t border-[#222] pt-[12px]">
+                            <span class="bg-black px-2 py-1 rounded border border-[#333]">SADV41 en la jugada 🇵🇦😎👍🏼🦅</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- CALL TO ACTION SECTION -->
+    <section class="py-24 px-6 bg-gradient-to-b from-transparent to-cyber-cyan/10">
+        <div class="max-w-4xl mx-auto glass-card rounded-[40px] p-12 text-center relative overflow-hidden">
+            <div class="absolute top-0 right-0 p-8 opacity-10">
+                <svg class="w-48 h-48" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>
+            </div>
+            <h2 class="text-3xl md:text-5xl font-black mb-8 relative z-10">¿LISTO PARA <br/><span class="text-cyber-cyan">LA JUGADA?</span></h2>
+            <p class="text-white/60 mb-10 text-lg max-w-xl mx-auto relative z-10">
+                Únete a nuestra comunidad oficial en WhatsApp y recibe notificaciones de juego en tiempo real. 
+            </p>
+            <a href="https://wa.me/50769362166" target="_blank" class="bg-white text-black px-12 py-5 rounded-full font-black uppercase tracking-widest hover:bg-cyber-cyan transition-all duration-300 relative z-10 hover:shadow-[0_0_50px_rgba(0,255,204,0.3)] inline-block">
+                Enviar Mensaje Directo
+            </a>
+        </div>
+    </section>
+
+    <!-- FOOTER SIGNATURE -->
+    <div class="py-12 px-6 text-center border-t border-white/5">
+        <div class="flex items-center justify-center space-x-6 opacity-40 hover:opacity-100 transition-opacity">
+            <span class="text-xs font-mono uppercase tracking-widest">Aura Flow 4.0</span>
+            <span class="text-xl">🎚</span>
+            <span class="text-xs font-mono uppercase tracking-widest">SADV41 Systems</span>
+        </div>
+    </div>
+
+    <script>
+        // Smooth scroll implementation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Simple Intersection Observer for scroll animations
+        const observerOptions = { threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100');
+                    entry.target.classList.remove('opacity-0', 'translate-y-10');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            section.classList.add('transition-all', 'duration-1000', 'opacity-0', 'translate-y-10');
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
+
