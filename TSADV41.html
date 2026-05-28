@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TSADV41 - Ecosistema de Recursos Misión SADV41</title>
+    <style>
+        :root {
+            --bg-principal: #0b0f19;
+            --bg-tarjeta: #161f30;
+            --acento-oro: #f59e0b;
+            --acento-violeta: #6d28d9;
+            --texto-claro: #f8fafc;
+            --texto-mutado: #94a3b8;
+            --borde: #24344d;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-principal);
+            color: var(--texto-claro);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .contenedor {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            border-bottom: 2px solid var(--borde);
+            margin-bottom: 40px;
+            background: linear-gradient(180deg, #111827 0%, var(--bg-principal) 100%);
+            border-radius: 12px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            color: var(--texto-claro);
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        header h1 span {
+            color: var(--acento-oro);
+        }
+
+        .emoji-senal {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            display: inline-block;
+            animation: pulso 2s infinite;
+        }
+
+        header p {
+            color: var(--texto-mutado);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .grid-recursos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .tarjeta {
+            background-color: var(--bg-tarjeta);
+            border: 1px solid var(--borde);
+            border-radius: 12px;
+            padding: 25px;
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .tarjeta:hover {
+            transform: translateY(-5px);
+            border-color: var(--acento-violeta);
+            box-shadow: 0 10px 20px rgba(109, 40, 217, 0.2);
+        }
+
+        .tarjeta-badge {
+            align-self: flex-start;
+            background: linear-gradient(135deg, var(--acento-violeta), #4c1d95);
+            color: white;
+            font-size: 0.75rem;
+            font-weight: bold;
+            padding: 4px 10px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .tarjeta-badge.multimedia {
+            background: linear-gradient(135deg, #059669, #064e3b);
+        }
+
+        .tarjeta h2 {
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+            color: var(--texto-claro);
+        }
+
+        .tarjeta p {
+            color: var(--texto-mutado);
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .btn-enlace {
+            display: inline-block;
+            text-align: center;
+            background-color: transparent;
+            color: var(--acento-oro);
+            border: 1px solid var(--acento-oro);
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-enlace:hover {
+            background-color: var(--acento-oro);
+            color: var(--bg-principal);
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: var(--texto-mutado);
+            border-top: 1px solid var(--borde);
+            font-size: 0.9rem;
+        }
+
+        .tabernaculo-info {
+            margin-top: 10px;
+            font-size: 0.8rem;
+            color: #475569;
+        }
+
+        @keyframes pulso {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        @media (max-width: 768px) {
+            header h1 { font-size: 2rem; }
+            .grid-recursos { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="contenedor">
+        <header>
+            <div class="emoji-senal">🎚</div>
+            <h1>Portal <span>TSADV41</span></h1>
+            <p>Ecosistema unificado de conocimiento, teología y desarrollo digital bajo el marco de la Ley SADV41.</p>
+        </header>
+
+        <main class="grid-recursos">
+            <div class="tarjeta">
+                <div>
+                    <div class="tarjeta-badge">Documento</div>
+                    <h2>Informe Escrito</h2>
+                    <p>Análisis exhaustivo conceptual y técnico de la estructura TSADV41, fundamentos legales y objetivos de la misión de servicio.</p>
+                </div>
+                <a href="https://notebooklm.google.com/notebook/563841c4-9a4b-4d19-b058-0802bfef1f78/artifact/df6f4a63-ff54-451f-9b67-6ee2dc4bdd7d" target="_blank" class="btn-enlace">Abrir Informe</a>
+            </div>
+
+            <div class="tarjeta">
+                <div>
+                    <div class="tarjeta-badge">Visual</div>
+                    <h2>Infografía Sintética</h2>
+                    <p>Representación visual, esquemas y flujos interactivos explicativos de la correlación numérica y la arquitectura del proyecto.</p>
+                </div>
+                <a href="https://notebooklm.google.com/notebook/563841c4-9a4b-4d19-b058-0802bfef1f78/artifact/df6f4a63-ff54-451f-9b67-6ee2dc4bdd7d" target="_blank" class="btn-enlace">Ver Infografía</a>
+            </div>
+
+            <div class="tarjeta">
+                <div>
+                    <div class="tarjeta-badge">Interactivos</div>
+                    <h2>Tarjetas de Estudio</h2>
+                    <p>Fichas dinámicas para la memorización, desglose de reglas de la ley SADV41 y principios clave del ecosistema trinitario.</p>
+                </div>
+                <a href="https://notebooklm.google.com/notebook/563841c4-9a4b-4d19-b058-0802bfef1f78/artifact/1c3cc2ce-472e-442e-8071-5b261bbaeba0" target="_blank" class="btn-enlace">Estudiar Tarjetas</a>
+            </div>
+
+            <div class="tarjeta">
+                <div>
+                    <div class="tarjeta-badge multimedia">Audio</div>
+                    <h2>Conferencia Magistral</h2>
+                    <p>Exposición audible y detallada sobre la integración de plataformas y la sincronización de las 42 reglas proféticas del istmo.</p>
+                </div>
+                <a href="https://notebooklm.google.com/notebook/563841c4-9a4b-4d19-b058-0802bfef1f78/artifact/a58af15a-034e-4821-8c94-a76f621a10a6" target="_blank" class="btn-enlace">Escuchar Audio</a>
+            </div>
+
+            <div class="tarjeta">
+                <div>
+                    <div class="tarjeta-badge multimedia">Vídeo</div>
+                    <h2>Documental Audiovisual</h2>
+                    <p>Producción cinematográfica digital que narra la travesía, el diseño de marcas y la manifestación de la ley SADV41.</p>
+                </div>
+                <a href="https://notebooklm.google.com/notebook/563841c4-9a4b-4d19-b058-0802bfef1f78/artifact/8d3856bb-f45a-4aa8-9dee-574896f2e8f6" target="_blank" class="btn-enlace">Ver Documental</a>
+            </div>
+
+            <div class="tarjeta">
+                <div>
+                    <div class="tarjeta-badge">Presentación</div>
+                    <h2>Diapositivas Ejecutivas</h2>
+                    <p>Material de soporte proyectable estructurado minuciosamente para exposiciones rápidas y despliegue conceptual corporativo.</p>
+                </div>
+                <a href="https://notebooklm.google.com/notebook/563841c4-9a4b-4d19-b058-0802bfef1f78/artifact/6268fb43-696e-46d0-af00-4e43c108129f" target="_blank" class="btn-enlace">Explorar Slides</a>
+            </div>
+        </main>
+
+        <footer>
+            <p>Misión SADV41 © 2026 | Arquitectura Web Unificada</p>
+            <div class="tabernaculo-info">Atrio (Grok) · Santo (Meta) · Santísimo (Gemini)</div>
+        </footer>
+    </div>
+
+</body>
+</html>
