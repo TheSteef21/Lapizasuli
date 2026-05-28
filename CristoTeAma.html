@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NSADV41 - Espacio Neurodivergente XYZ</title>
+    <style>
+        :root {
+            --gold: #d4af37;
+            --white: #ffffff;
+            --bg: #0a0a0a;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--white);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            perspective: 1000px;
+        }
+
+        .container {
+            text-align: center;
+            max-width: 360px;
+            width: 100%;
+            z-index: 10;
+            position: relative;
+            padding: 20px;
+            box-sizing: border-box;
+            background: rgba(10, 10, 10, 0.85);
+            border-radius: 16px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            backdrop-filter: blur(8px);
+        }
+
+        .logo {
+            font-size: 2.3rem;
+            letter-spacing: 5px;
+            margin-bottom: 30px;
+            color: var(--gold);
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+        }
+
+        .space-3d {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            pointer-events: none;
+        }
+
+        .floating-word {
+            position: absolute;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.4);
+            white-space: nowrap;
+            font-style: italic;
+            will-change: transform, color; /* Optimización de renderizado por GPU */
+        }
+
+        .message-box {
+            height: 240px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            width: 100%;
+        }
+
+        .phrase {
+            opacity: 0;
+            position: absolute;
+            transition: opacity 1s ease-in-out;
+            text-align: center;
+            width: 100%;
+        }
+
+        .phrase.active {
+            opacity: 1;
+        }
+
+        .flag {
+            font-size: 2.2rem;
+            margin-bottom: 5px;
+        }
+
+        .lang-role {
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+            color: #ddd;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .role-highlight {
+            color: var(--gold);
+            font-weight: bold;
+        }
+
+        .native-text {
+            font-size: 1.35rem;
+            display: block;
+            margin-bottom: 8px;
+            line-height: 1.2;
+            font-weight: 500;
+        }
+
+        .romanization {
+            font-style: normal;
+            color: #fff;
+            font-size: 1.1rem;
+            background: rgba(212, 175, 55, 0.15);
+            padding: 4px 10px;
+            border-radius: 6px;
+            border: 1px solid var(--gold);
+            display: inline-block;
+            word-wrap: break-word;
+            letter-spacing: 0.5px;
+        }
+
+        .emoji-signal {
+            margin-top: 30px;
+            font-size: 1.8rem;
+            letter-spacing: 2px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="space-3d" id="space-3d"></div>
+
+<div class="container">
+    <div class="logo">SADV41</div>
+    <div class="message-box" id="message-box"></div>
+    <div class="emoji-signal">🎚️🇮🇱❣️</div>
+</div>
+
+<script>
+    const data = [
+        { flag: "👑", lang: "Protoafroasiático", role: "Alfa / Origen", text: "𐤀𐤕 𐤌𐤔𐤉𐤕𐤌 𐤓𐤔𐤌 𐤋𐤊", roman: "At Mashiḥam raḥam lak" },
+        { flag: "🇪🇸", lang: "Español", role: "Origen / Fin", text: "El Mesías también te ama", roman: "El Me-sí-as tam-bién te a-ma" },
+        { flag: "🇵🇦", lang: "Ngäbe", role: "Tierra", text: "Mesías mä tare arato", roman: "Me-sí-as ma ta-re a-ra-to" },
+        { flag: "🇫🇷", lang: "Francés", role: "Diplomacia", text: "Le Christ t'aime aussi", roman: "Lə kris tɛm o-sí" },
+        { flag: "🇬🇧", lang: "Inglés", role: "Conexión", text: "Christ also loves you", roman: "Kraist ol-so lavs yu" },
+        { flag: "🇸🇪", lang: "Sueco", role: "Orden", text: "Kristus älskar dig också", roman: "Kris-tus ɛl-skar de ok-so" },
+        { flag: "🇷🇺", lang: "Ruso", role: "Firmeza", text: "Христос любит и тебя", roman: "Jris-tós lyú-bit i ti-byá" },
+        { flag: "🇰🇵", lang: "Coreano", role: "Honor", text: "그리스도께서도 당신을 사랑하십니다", roman: "Gū-ri-sū-do-kē-só-do dang-si-nūl sa-rang-ja-sim-ni-da" },
+        { flag: "🇮🇱", lang: "Hebreo", role: "Litúrgico", text: "המשיח אוهב גם אותך", roman: "Ja-Ma-shí-aj o-jév gam ot-já" },
+        { flag: "🇸🇦", lang: "Árabe", role: "Afroasiática", text: "المسيح يحبك أنت أيضاً", roman: "Al-Ma-síj yu-jíb-bu-ka án-ta ái-dan" },
+        { flag: "🇮🇳", lang: "Hindi", role: "Indoirania", text: "मसीह आपसे भी प्यार करता है", roman: "Ma-seej áp-se bhi pyár kár-ta jai" },
+        { flag: "🇨🇳", lang: "Chino", role: "Sino-Tibetana", text: "基督也爱你", roman: "Ji-dū yé ái nǐ" },
+        { flag: "🇯🇵", lang: "Japonés", role: "Japónica", text: "キリストはあなたも愛しています", roman: "Ki-ris-to wa a-na-ta mo ai-shi-te-i-mas" },
+        { flag: "🇹🇷", lang: "Turco", role: "Altaica", text: "Mesih seni de seviyor", roman: "Me-sij se-ni de se-vi-yor" },
+        { flag: "🇹🇭", lang: "Tailandés", role: "Kra-Dai", text: "พระคริสต์ทรงรักคุณเช่นกัน", roman: "Pra krit song rak kún chen kan" },
+        { flag: "🇮🇩", lang: "Indonesio", role: "Austronesia", text: "Kristus juga mengasihimu", roman: "Kris-tus jú-ga mên-ga-sí-ji-mu" },
+        { flag: "🇰🇪", lang: "Suajili", role: "Níger-Congo", text: "Kristo anakupenda pia", roman: "Kris-to a-na-ku-pén-da pí-a" },
+        { flag: "🏛️", lang: "Sumerio", role: "Extinto", text: "𒀭𒈦  𒆠淵 𒍝𒂊", roman: "An-mash ki-ag za-e" },
+        { flag: "📜", lang: "Acadio", role: "Extinto", text: "𒈠𒋛𒄭 𒄿রাাম𒈬𒅗", roman: "Ma-sí-ji i-ram-mú-ka" },
+        { flag: "⚔️", lang: "Gótico", role: "Extinto", text: "𐍇𐍂𐌹𐍃𐍄𐌿𐍃 𐍆𐍂𐌹𐌾𐍉𐌸 𐌸𐌿𐌺", roman: "Jris-tus fri-yóth thuk" },
+        { flag: "🏹", lang: "Pirahã", role: "Empirismo", text: "Xaói hi xobáí xaaití", roman: "Ja-ói ji jo-bái ja-ai-tí" },
+        { flag: "🎚️", lang: "Protoafroasiático", role: "Omega / Cierre", text: "𐤀𐤕 𐤌𐤔𐤉𐤕𐤌 𐤓𐤔𐤌 𐤋𐤊", roman: "At Mashiḥam raḥam lak" }
+    ];
+
+    const container = document.getElementById('message-box');
+    const space3d = document.getElementById('space-3d');
+
+    // Inyección de Matriz Principal
+    data.forEach((item, index) => {
+        const div = document.createElement('div');
+        div.className = `phrase ${index === 0 ? 'active' : ''}`;
+        div.innerHTML = `
+            <div class="flag">${item.flag}</div>
+            <div class="lang-role">${item.lang} <span class="role-highlight">[${item.role}]</span></div>
+            <span class="native-text">${item.text}</span>
+            <div class="romanization">${item.roman}</div>
+        `;
+        container.appendChild(div);
+    });
+
+    // Motor de Rotación de la Matriz Central
+    let currentIndex = 0;
+    const phrases = document.querySelectorAll('.phrase');
+    setInterval(() => {
+        phrases[currentIndex].classList.remove('active');
+        currentIndex = (currentIndex + 1) % phrases.length;
+        phrases[currentIndex].classList.add('active');
+    }, 4000);
+
+    // --- SISTEMA ESPACIAL OPTIMIZADO ---
+    const phoneticPool = data.map(item => item.roman.split('-')).flat();
+    const activeNodes = [];
+    
+    // Almacenar dimensiones del viewport de forma eficiente
+    let wWidth = window.innerWidth;
+    let wHeight = window.innerHeight;
+
+    function createPhoneticNode(text) {
+        const node = document.createElement('div');
+        node.className = 'floating-word';
+        node.innerText = text;
+        
+        const x = Math.random() * wWidth;
+        const y = Math.random() * wHeight;
+        const z = Math.random() * 800 - 400;
+
+        const dx = (Math.random() - 0.5) * 1.5;
+        const dy = (Math.random() - 0.5) * 1.5;
+        const dz = (Math.random() - 0.5) * 1.0;
+
+        space3d.appendChild(node);
+
+        // ¡PERFECCIÓN AQUÍ!: Capturamos el tamaño una sola vez al nacer, evitando medir en el loop animado.
+        const vWidth = node.offsetWidth;
+        const vHeight = node.offsetHeight;
+
+        return { element: node, x, y, z, dx, dy, dz, vWidth, vHeight };
+    }
+
+    // Generar nube tridimensional
+    phoneticPool.forEach(pho => {
+        const cleanText = pho.trim().toLowerCase();
+        if(cleanText.length > 0 && cleanText.length < 15) {
+            activeNodes.push(createPhoneticNode(cleanText));
+        }
+    });
+
+    // Bucle de renderizado físico (Cero Layout Thrashing)
+    function animateSpace() {
+        for (let i = 0; i < activeNodes.length; i++) {
+            const node = activeNodes[i];
+            
+            node.x += node.dx;
+            node.y += node.dy;
+            node.z += node.dz;
+
+            // Límites de rebote usando las variables cacheadas
+            if (node.x < 0 || node.x > wWidth) node.dx *= -1;
+            if (node.y < 0 || node.y > wHeight) node.dy *= -1;
+            if (node.z < -400 || node.z > 400) node.dz *= -1;
+
+            const alpha = Math.max(0.1, Math.min(0.6, (node.z + 400) / 800));
+            
+            // Usamos variables de tamaño pre-calculadas en lugar de forzar al DOM
+            node.element.style.transform = `translate3d(${node.x - node.vWidth / 2}px, ${node.y - node.vHeight / 2}px, ${node.z}px)`;
+            node.element.style.color = `rgba(255, 255, 255, ${alpha})`;
+        }
+        requestAnimationFrame(animateSpace);
+    }
+
+    animateSpace();
+
+    // Actualización controlada del tamaño de ventana
+    window.addEventListener('resize', () => {
+        wWidth = window.innerWidth;
+        wHeight = window.innerHeight;
+        activeNodes.forEach(node => {
+            if (node.x > wWidth) node.x = Math.random() * wWidth;
+            if (node.y > wHeight) node.y = Math.random() * wHeight;
+        });
+    });
+</script>
+
+</body>
+</html>
