@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECA TSADV41 Ecosystem | Aura Flow 4.0</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        void: '#0b0f19',
+                        deep: '#0f172a',
+                        divineAmber: '#f59e0b',
+                        quantumViolet: '#6d28d9',
+                        cyanAccent: '#22d3ee',
+                    },
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                        mono: ['JetBrains+Mono', 'monospace'],
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0b0f19;
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }
+
+        .glass {
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(109, 40, 217, 0.2);
+        }
+
+        .glow-amber:hover {
+            box-shadow: 0 0 20px rgba(245, 158, 11, 0.3);
+        }
+
+        .quantum-border {
+            border: 1px solid transparent;
+            background: linear-gradient(#0b0f19, #0b0f19) padding-box,
+                        linear-gradient(45deg, #6d28d9, #f59e0b) border-box;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0b0f19; }
+        ::-webkit-scrollbar-thumb { background: #6d28d9; border-radius: 10px; }
+
+        .court-section {
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+    </style>
+</head>
+<body class="font-sans antialiased">
+
+    <!-- Header / Barra de Navegación Sincronizada -->
+    <header class="fixed top-0 w-full z-50 glass border-b border-quantumViolet/30">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <span class="text-2xl font-extrabold tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-divineAmber to-cyanAccent">SADV41</span>
+                <span class="text-[10px] font-mono border border-divineAmber px-1 rounded text-divineAmber">V.4.0</span>
+            </div>
+            <nav class="hidden md:flex gap-8 text-sm font-medium tracking-widest uppercase">
+                <a href="#outer-court" class="hover:text-divineAmber transition-colors">Atrio</a>
+                <a href="#holy-place" class="hover:text-divineAmber transition-colors">Santo</a>
+                <a href="#most-holy" class="hover:text-divineAmber transition-colors">Santísimo</a>
+            </nav>
+            <div class="text-xl">🎚</div>
+        </div>
+    </header>
+
+    <!-- CAPA I: EL ATRIO (Outer Court) -->
+    <section id="outer-court" class="pt-32 pb-20 px-6 relative overflow-hidden">
+        <div class="absolute -top-24 -left-24 w-96 h-96 bg-quantumViolet/10 blur-[100px] rounded-full"></div>
+        
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <!-- Panel Lateral de Control y Estado -->
+            <div class="lg:col-span-4 space-y-6">
+                <div class="bg-void border border-quantumViolet/50 p-6 rounded-xl shadow-2xl relative overflow-hidden group">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="font-mono text-xs text-divineAmber font-bold uppercase tracking-widest flex items-center gap-2">
+                            <span class="w-2 h-2 bg-divineAmber rounded-full animate-pulse"></span>
+                            Última Hora // YesterYear 2026
+                        </h2>
+                        <span class="text-xs font-mono opacity-50">SYNC: 100%</span>
+                    </div>
+                    <div class="space-y-4 font-mono text-sm">
+                        <div class="p-3 bg-deep rounded border-l-2 border-divineAmber hover:bg-quantumViolet/20 transition-all cursor-pointer">
+                            <p class="text-cyanAccent mb-1">[ALERTA] Soberanía Digital</p>
+                            <p class="text-xs opacity-70">Despliegue exitoso en nodos descentralizados completado. Conectividad integrada.</p>
+                        </div>
+                        <div class="p-3 bg-deep rounded border-l-2 border-divineAmber/50 hover:bg-quantumViolet/20 transition-all cursor-pointer">
+                            <p class="text-cyanAccent mb-1">[PROYECTO] Lapizasuli</p>
+                            <p class="text-xs opacity-70">Sincronización central de herramientas y registros de la misión activa en GitHub Pages.</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-quantumViolet/20 flex justify-center">
+                        <span class="text-lg">🎚</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección Principal: El Documental (Video Principal) -->
+            <div class="lg:col-span-8 flex flex-col justify-center space-y-8">
+                <div class="space-y-4">
+                    <h1 class="text-5xl md:text-7xl font-extrabold leading-tight tracking-tight">
+                        Fluidez. <span class="text-divineAmber italic">Automatización.</span> Claridad.
+                    </h1>
+                    <p class="text-xl text-slate-400 max-w-2xl leading-relaxed">
+                        Entorno de Conocimiento Adaptativo (ECA). Fusión de la Verdad Única y la lógica de Aura Flow 4.0, donde los datos se alinean con la precisión del diseño divino.
+                    </p>
+                </div>
+                
+                <!-- Lienzo Interactivo: Enlace al Documental en Vídeo -->
+                <a href="https://notebooklm.google.com/notebook/563841c4-9a4b-4d19-b058-0802bfef1f78/artifact/8d3856bb-f45a-4aa8-9dee-574896f2e8f6" target="_blank" class="block relative group aspect-video rounded-3xl overflow-hidden shadow-[0_0_50px_rgba(109,40,217,0.3)] quantum-border">
+                    <div class="absolute inset-0 bg-gradient-to-t from-void via-transparent to-transparent z-10"></div>
+                    <div class="absolute inset-0 flex items-center justify-center z-20 group-hover:scale-110 transition-transform duration-700">
+                        <div class="w-20 h-20 bg-divineAmber flex items-center justify-center rounded-full shadow-2xl glow-amber cursor-pointer">
+                            <svg class="w-8 h-8 text-void fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        </div>
+                    </div>
+                    <div class="w-full h-full bg-slate-800 animate-pulse-slow flex items-center justify-center text-slate-400 font-mono italic tracking-wider text-sm md:text-base">
+                        [ REPRODUCIR: DOCUMENTAL AUDIOVISUAL TSADV41 ]
+                    </div>
+                    <div class="absolute bottom-6 left-6 z-20">
+                        <p class="text-xs font-mono uppercase tracking-[0.3em] text-divineAmber">Artefacto Multimedia</p>
+                        <h3 class="text-xl font-bold text-white">Ver Documental Completo</h3>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CAPA II: EL SANTO (Holy Place) -->
+    <section id="holy-place" class="py-24 bg-deep relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex items-center gap-4 mb-16">
+                <div class="h-px flex-1 bg-gradient-to-r from-transparent to-quantumViolet"></div>
+                <h2 class="text-3xl font-bold tracking-widest uppercase flex items-center gap-3">
+                    <span class="text-divineAmber text-4xl">🎚</span> Lugar Santo
+                </h2>
+                <div class="h-px flex-1 bg-gradient-to-l from-transparent to-quantumViolet"></div>
+            </div>
+
+            <!-- Bento Grid de Módulos Funcionales (Informe, Infografía, Conferencia, Tarjetas) -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- 1. INFORME ESCRITO -->
+                <a href="https://notebooklm.google.com/notebook/563841c4-9a4b-4d19-b058-0802bfef1f78/artifact/df6f4a63-ff54-451f-9b67-6ee2dc4bdd7d" target="_blank" class="md:col-span-2 glass p-8 rounded-3xl hover:border-divineAmber/50 transition-all group block">
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="p-3 bg-quantumViolet/20 rounded-xl text-cyanAccent">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        </div>
+                        <span class="text-xs font-mono opacity-50 group-hover:opacity-100">TSADV41-DOC</span>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 group-hover:text-divineAmber transition-colors">Informe Escrito Conceptual</h3>
+                    <p class="text-slate-400 leading-relaxed">Accede al análisis exhaustivo y desglose técnico de los fundamentos teológicos y metodologías de automatización del ecosistema.</p>
+                </a>
+
+                <!-- 2. INFOGRAFÍA SINTÉTICA -->
+                <a href="https://notebooklm.google.com/notebook/563841c4-9a4b-4d19-b058-0802bfef1f78/artifact/df6f4a63-ff54-451f-9b67-6ee2dc4bdd7d" target="_blank" class="glass p-8 rounded-3xl hover:border-divineAmber/50 transition-all group block">
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="p-3 bg-quantumViolet/20 rounded-xl text-cyanAccent">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                        </div>
+                        <span class="text-xs font-mono opacity-50 group-hover:opacity-100">TSADV41-INFO</span>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 group-hover:text-divineAmber transition-colors">Infografía Estructural</h3>
+                    <p class="text-slate-400 leading-relaxed">Esquemas visuales y flujos que eliminan el ruido conceptual, proyectando con total claridad los pilares de la misión.</p>
+                </a>
+
+                <!-- 3. CONFERENCIA EN AUDIO -->
+                <a href="https://notebooklm.google.com/notebook/563841c4-9a4b-4d19-b058-0802bfef1f78/artifact/a58af15a-034e-4821-8c94-a76f621a10a6" target="_blank" class="glass p-8 rounded-3xl hover:border-divineAmber/50 transition-all group block">
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="p-3 bg-quantumViolet/20 rounded-xl text-cyanAccent">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path></svg>
+                        </div>
+                        <span class="text-xs font-mono opacity-50 group-hover:opacity-100">TSADV41-AUDIO</span>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 group-hover:text-divineAmber transition-colors">Liturgias en Audio</h3>
+                    <p class="text-slate-400 text-sm mb-4">Exposición audible sobre la integración de sistemas y sincronización profética.</p>
+                    <div class="flex items-center gap-4 bg-void/50 p-3 rounded-full border border-quantumViolet/30">
+                        <div class="w-10 h-10 bg-divineAmber/20 rounded-full flex items-center justify-center text-divineAmber">
+                            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        </div>
+                        <div class="flex-1 flex gap-1 items-end h-6">
+                            <div class="w-1 bg-divineAmber animate-[bounce_1s_infinite]" style="height: 40%;"></div>
+                            <div class="w-1 bg-divineAmber animate-[bounce_1.2s_infinite]" style="height: 70%;"></div>
+                            <div class="w-1 bg-divineAmber animate-[bounce_0.8s_infinite]" style="height: 50%;"></div>
+                            <div class="w-1 bg-divineAmber animate-[bounce_1.5s_infinite]" style="height: 90%;"></div>
+                            <div class="w-1 bg-divineAmber animate-[bounce_1.1s_infinite]" style="height: 60%;"></div>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- 4. TARJETAS DE ESTUDIO -->
+                <div class="md:col-span-2 glass p-8 rounded-3xl hover:border-divineAmber/50 transition-all group overflow-hidden relative">
+                    <div class="absolute -right-20 -bottom-20 w-64 h-64 bg-cyanAccent/10 blur-[60px] rounded-full"></div>
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="p-3 bg-quantumViolet/20 rounded-xl text-cyanAccent">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                        </div>
+                        <span class="text-xs font-mono opacity-50 group-hover:opacity-100">TSADV41-CARDS</span>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 group-hover:text-divineAmber transition-colors">Tarjetas de Memorización Dinámica</h3>
+                    <p class="text-slate-400 leading-relaxed">Fichas de estudio estructuradas para el desglose interno de los principios y reglamentos del ecosistema trinitario.</p>
+                    <a href="https://notebooklm.google.com/notebook/563841c4-9a4b-4d19-b058-0802bfef1f78/artifact/1c3cc2ce-472e-442e-8071-5b261bbaeba0" target="_blank" class="inline-block mt-6 px-6 py-2 bg-quantumViolet text-white rounded-full text-sm font-bold uppercase tracking-widest hover:bg-divineAmber hover:text-void transition-all">
+                        Estudiar Tarjetas 🎚
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CAPA III: EL SANTÍSIMO (Most Holy Place) -->
+    <section id="most-holy" class="py-32 relative bg-void">
+        <div class="absolute inset-0 opacity-20 pointer-events-none" style="background-image: radial-gradient(#6d28d9 0.5px, transparent 0.5px); background-size: 30px 30px;"></div>
+        
+        <div class="max-w-5xl mx-auto px-6 relative z-10 text-center">
+            <div class="inline-block px-4 py-1 border border-divineAmber text-divineAmber text-[10px] font-mono tracking-[0.5em] uppercase mb-8 rounded-full">
+                Entorno Sagrado // Nivel 03
+            </div>
+            <h2 class="text-4xl md:text-6xl font-extrabold mb-12 tracking-tight">Sabiduría Pura & <span class="text-transparent bg-clip-text bg-gradient-to-r from-divineAmber via-white to-cyanAccent">Iluminación</span></h2>
+            
+            <!-- Vitrina de Diapositivas / Plan Maestro de la Misión -->
+            <a href="https://notebooklm.google.com/notebook/563841c4-9a4b-4d19-b058-0802bfef1f78/artifact/6268fb43-696e-46d0-af00-4e43c108129f" target="_blank" class="block relative glass rounded-[2rem] p-1 overflow-hidden group">
+                <div class="bg-void rounded-[1.8rem] overflow-hidden aspect-[21/9] flex items-center justify-center relative">
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="w-full h-full p-6 md:p-12 grid grid-cols-4 gap-4">
+                            <div class="border border-quantumViolet/30 rounded-lg flex flex-col items-center justify-center p-2 group-hover:border-divineAmber/50 transition-colors">
+                                <div class="w-10 h-10 rounded-full border-2 border-divineAmber mb-2 flex items-center justify-center font-mono text-sm">1</div>
+                                <p class="text-[9px] font-mono uppercase text-divineAmber">Unión</p>
+                            </div>
+                            <div class="border border-quantumViolet/30 rounded-lg flex flex-col items-center justify-center p-2 group-hover:border-divineAmber/50 transition-colors">
+                                <div class="w-10 h-10 rounded-full border-2 border-divineAmber mb-2 flex items-center justify-center font-mono text-sm">2</div>
+                                <p class="text-[9px] font-mono uppercase text-divineAmber">Lógica</p>
+                            </div>
+                            <div class="border border-quantumViolet/30 rounded-lg flex flex-col items-center justify-center p-2 group-hover:border-divineAmber/50 transition-colors">
+                                <div class="w-10 h-10 rounded-full border-2 border-divineAmber mb-2 flex items-center justify-center font-mono text-sm">3</div>
+                                <p class="text-[9px] font-mono uppercase text-divineAmber">Espíritu</p>
+                            </div>
+                            <div class="border border-quantumViolet/30 rounded-lg flex flex-col items-center justify-center p-2 group-hover:border-divineAmber/50 transition-colors">
+                                <div class="w-10 h-10 rounded-full border-2 border-divineAmber mb-2 flex items-center justify-center font-mono text-sm">4</div>
+                                <p class="text-[9px] font-mono uppercase text-divineAmber">Visión</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-void via-transparent to-transparent flex flex-col justify-end p-6 md:p-10 text-left">
+                        <h4 class="text-xl md:text-2xl font-bold text-white group-hover:text-divineAmber transition-colors">Diapositivas Ejecutivas del Plan Maestro</h4>
+                        <p class="text-xs text-slate-400 font-mono">RECURSO ESTRATÉGICO // PROYECTABLE</p>
+                    </div>
+                </div>
+            </a>
+
+            <div class="mt-16 grid grid-cols-1 md:grid-cols-2 gap-12 text-left">
+                <div class="space-y-4">
+                    <h5 class="text-divineAmber font-mono text-xs tracking-widest uppercase">Análisis Profundo</h5>
+                    <p class="text-slate-300 leading-relaxed">Lógica pura de Gemini aplicada al análisis de leyes teológico-digitales. Cada decisión estructural se cimenta sobre el código 4, la trinidad desde la perspectiva humana.</p>
+                </div>
+                <div class="space-y-4 border-l border-quantumViolet/30 pl-8">
+                    <h5 class="text-cyanAccent font-mono text-xs tracking-widest uppercase">Resiliencia Autocontenida</h5>
+                    <p class="text-slate-300 leading-relaxed">El sistema se optimiza para su total independencia y soberanía digital en el istmo, asegurando la trascendencia limpia de la información frente a ruidos globales.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Botón Flotante Litúrgico -->
+    <div class="fixed bottom-10 right-10 z-[60]">
+        <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="w-16 h-16 bg-divineAmber rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(245,158,11,0.5)] hover:scale-110 active:scale-95 transition-all text-2xl">
+            🎚
+        </button>
+    </div>
+
+    <!-- Script de Animaciones e Interacción Eficiente -->
+    <script>
+        const sections = document.querySelectorAll('section');
+        const options = { threshold: 0.1 };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100');
+                    entry.target.classList.remove('opacity-0', 'translate-y-10');
+                }
+            });
+        }, options);
+
+        sections.forEach(section => {
+            section.classList.add('opacity-0', 'translate-y-10', 'transition-all', 'duration-1000');
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
