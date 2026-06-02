@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sovereign Hub | SADV41</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#020617',
+                        oro: '#eab308',
+                        blanco: '#f8fafc',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #020617;
+            background-image: radial-gradient(#1e293b 0.5px, transparent 0.5px);
+            background-size: 24px 24px;
+            color: #f8fafc;
+        }
+        .glass {
+            background: rgba(2, 6, 23, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(234, 179, 8, 0.2);
+        }
+        .border-oro {
+            border: 1px solid #eab308;
+        }
+        .text-shadow-oro {
+            text-shadow: 0 0 10px rgba(234, 179, 8, 0.5);
+        }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-oro selection:text-navy">
+
+    <!-- Header -->
+    <header class="fixed w-full z-50 glass border-b border-oro/30 px-6 py-4 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+            <span class="text-2xl">🎚️</span>
+            <h1 class="font-serif text-xl tracking-wider text-oro font-bold">SOVEREIGN HUB</h1>
+        </div>
+        <div class="text-xs uppercase tracking-widest opacity-70 italic font-light">SADV41 Digital Architecture</div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="pt-28 pb-12 px-6 max-w-6xl mx-auto space-y-8">
+        
+        <!-- Hero Section -->
+        <section class="text-center py-12">
+            <h2 class="font-serif text-5xl md:text-7xl mb-6 text-blanco leading-tight">
+                Remanente <span class="text-oro">Fiel</span>
+            </h2>
+            <p class="max-w-2xl mx-auto text-lg text-slate-300 font-light leading-relaxed">
+                Empowering the future of Web3 through the fusion of elite engineering and cultural sovereignty.
+            </p>
+        </section>
+
+        <!-- Bento Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            
+            <!-- Event Card -->
+            <div class="md:col-span-2 glass p-8 rounded-xl border-oro/20 transition-all hover:border-oro duration-500">
+                <h3 class="text-oro font-bold text-sm tracking-widest uppercase mb-4">Featured Event</h3>
+                <h4 class="text-3xl font-serif mb-4">Rare Evo: July 28–31</h4>
+                <p class="text-slate-400 mb-6">Join the vanguard of the digital evolution. Register now to secure your position in the future of decentralized culture.</p>
+                <a href="https://rareevo.io/?coupon=STEVENDIOR" target="_blank" class="inline-block bg-oro text-navy px-6 py-3 rounded font-bold hover:scale-105 transition-transform">
+                    Register Now
+                </a>
+            </div>
+
+            <!-- Coupon Card -->
+            <div class="glass p-8 rounded-xl border-oro/20 flex flex-col justify-center items-center text-center">
+                <span class="text-oro mb-2 text-xs uppercase font-bold">Exclusive Code</span>
+                <div class="text-2xl font-mono tracking-widest border border-dashed border-oro p-4 rounded bg-navy/50">STEVENDIOR</div>
+                <p class="text-[10px] text-slate-500 mt-4">Valid for event registration</p>
+            </div>
+
+            <!-- Video Wrapper -->
+            <div class="md:col-span-3 glass p-2 rounded-xl border-oro/20 overflow-hidden">
+                <div class="aspect-video bg-navy w-full flex items-center justify-center border border-oro/10">
+                    <p class="text-oro/50 font-serif italic text-xl">Sovereign Mission Broadcast Pending</p>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Motto Footer -->
+    <footer class="text-center py-12 px-6">
+        <p class="font-serif text-oro text-xl italic tracking-wide">
+            "¡Porque La Verdad y la Historia escriben la cultura!"
+        </p>
+    </footer>
+
+    <script>
+        // Micro-animation observer for fade-ins
+        const observerOptions = { threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    entry.target.classList.remove('opacity-0', 'translate-y-10');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section, .glass').forEach(el => {
+            el.classList.add('transition-all', 'duration-700', 'opacity-0', 'translate-y-10');
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
