@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ezequiel Raúl Sánchez Návalo | Música & Live Streams</title>
+    <style>
+        :root {
+            --bg-color: #0b0c10;
+            --card-bg: #1f2833;
+            --text-color: #c5c6c7;
+            --accent-color: #66fcf1;
+            --accent-hover: #45a29e;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-top: 40px;
+            margin-bottom: 30px;
+            max-width: 600px;
+        }
+
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 3px solid var(--accent-color);
+            object-fit: cover;
+            margin-bottom: 15px;
+            box-shadow: 0 0 15px rgba(102, 252, 241, 0.3);
+        }
+
+        header h1 {
+            color: var(--white);
+            font-size: 2rem;
+            margin-bottom: 5px;
+            letter-spacing: 1px;
+        }
+
+        header p {
+            color: var(--accent-color);
+            font-size: 1rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Sección de Estado En Vivo */
+        .live-status {
+            background-color: var(--card-bg);
+            border-left: 4px solid #fe2c55; /* Color característico de TikTok */
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        .live-status h3 {
+            color: var(--white);
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .live-indicator {
+            width: 10px;
+            height: 10px;
+            background-color: #fe2c55;
+            border-radius: 50%;
+            display: inline-block;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.9); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.5; }
+            100% { transform: scale(0.9); opacity: 1; }
+        }
+
+        /* Enlaces de Redes y Música */
+        .links-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .btn-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--card-bg);
+            color: var(--white);
+            text-decoration: none;
+            padding: 16px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+            text-align: center;
+        }
+
+        .btn-link:hover {
+            background-color: transparent;
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 252, 241, 0.2);
+        }
+
+        /* Botón destacado para TikTok */
+        .btn-tiktok {
+            background: linear-gradient(45deg, #010101, #25f4ee, #fe2c55);
+            background-size: 200% 200%;
+            color: var(--white);
+            border: none;
+        }
+        
+        .btn-tiktok:hover {
+            color: var(--white);
+            box-shadow: 0 5px 15px rgba(254, 44, 85, 0.4);
+            border-color: transparent;
+        }
+
+        /* Formulario de Contacto / Contrataciones */
+        .contact-section {
+            background-color: var(--card-bg);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        .contact-section h3 {
+            color: var(--white);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 12px;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            background-color: var(--bg-color);
+            border: 1px solid #45a29e;
+            border-radius: 4px;
+            color: var(--white);
+            font-size: 0.9rem;
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn-submit:hover {
+            background-color: var(--accent-hover);
+        }
+
+        footer {
+            margin-top: 50px;
+            margin-bottom: 20px;
+            font-size: 0.8rem;
+            text-align: center;
+            opacity: 0.6;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <!-- Reemplazar 'profile.jpg' con la foto real del artista -->
+        <img src="https://via.placeholder.com/120" alt="Ezequiel Raúl Sánchez Návalo" class="profile-img">
+        <h1>Ezequiel Raúl Sánchez Návalo</h1>
+        <p>Músico & Productor</p>
+    </header>
+
+    <div class="container">
+        
+        <!-- Estado del Live Stream -->
+        <div class="live-status">
+            <h3><span class="live-indicator"></span> Transmisiones en Vivo</h3>
+            <p style="font-size: 0.9rem;">¡Sintoniza mis sesiones musicales en directo desde TikTok!</p>
+        </div>
+
+        <!-- Lista de enlaces del artista -->
+        <div class="links-list">
+            <!-- El enlace principal a TikTok -->
+            <a href="https://www.tiktok.com/@TuUsuario" target="_blank" class="btn-link btn-tiktok">
+                Sigueme en TikTok (@TuUsuario)
+            </a>
+            
+            <!-- Espacio para plataformas de audio (Spotify, YouTube, etc.) -->
+            <a href="#" target="_blank" class="btn-link">
+                Escucha mi música en Spotify
+            </a>
+
+            <a href="#" target="_blank" class="btn-link">
+                Canal Oficial de YouTube
+            </a>
+            
+            <!-- Enlace directo para chat de WhatsApp de trabajo si lo requiere -->
+            <a href="https://wa.me/507XXXXXXXX" target="_blank" class="btn-link" style="border-left: 4px solid #25D366;">
+                Contactar por WhatsApp
+            </a>
+        </div>
+
+        <!-- Formulario básico para Booking / Eventos -->
+        <div class="contact-section">
+            <h3>Contacto & Contrataciones</h3>
+            <form action="#" method="POST">
+                <div class="form-group">
+                    <input type="text" name="name" placeholder="Tu Nombre" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" name="email" placeholder="Correo Electrónico" required>
+                </div>
+                <div class="form-group">
+                    <textarea name="message" rows="3" placeholder="Cuéntame sobre tu evento o propuesta..." required></textarea>
+                </div>
+                <button type="submit" class="btn-submit">Enviar Mensaje</button>
+            </form>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Ezequiel Raúl Sánchez Návalo. Todos los derechos reservados.</p>
+    </footer>
+
+</body>
+</html>
