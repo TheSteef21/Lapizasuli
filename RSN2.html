@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ezequiel Raúl Sánchez Návalo | Fuente 2</title>
+    <style>
+        :root {
+            --bg-color: #121212;
+            --card-bg: #1e1e1e;
+            --text-muted: #a0a0a0;
+            --tiktok-cyan: #25f4ee;
+            --tiktok-pink: #fe2c55;
+            --white: #ffffff;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Helvetica Neue', Arial, sans-serif; }
+
+        body {
+            background-color: var(--bg-color); color: var(--white);
+            display: flex; flex-direction: column; align-items: center;
+            min-height: 100vh; padding: 25px;
+        }
+
+        header { text-align: center; margin-top: 30px; margin-bottom: 25px; }
+
+        .profile-img {
+            width: 110px; height: 110px; border-radius: 50%;
+            border: 4px solid var(--white); object-fit: cover; margin-bottom: 12px;
+        }
+
+        header h1 { font-size: 1.8rem; font-weight: 700; }
+        header p { color: var(--tiktok-cyan); font-size: 0.9rem; font-weight: bold; letter-spacing: 1px; margin-top: 4px; }
+
+        .container { width: 100%; max-width: 480px; display: flex; flex-direction: column; gap: 15px; }
+
+        .live-box {
+            background: linear-gradient(90deg, rgba(37,244,238,0.1) 0%, rgba(254,44,85,0.1) 100%);
+            border: 1px solid rgba(255,255,255,0.1); padding: 15px; border-radius: 16px; text-align: center;
+        }
+        .live-title { font-weight: bold; font-size: 1.1rem; color: var(--white); display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .dot { width: 8px; height: 8px; background-color: var(--tiktok-pink); border-radius: 50%; animation: flash 1s infinite alternate; }
+        @keyframes flash { from { opacity: 0.2; } to { opacity: 1; } }
+
+        .links-container { display: flex; flex-direction: column; gap: 10px; }
+        .link-pill {
+            display: block; text-align: center; background-color: var(--card-bg);
+            color: var(--white); text-decoration: none; padding: 15px;
+            border-radius: 50px; font-weight: 600; font-size: 0.95rem;
+            transition: all 0.2s ease; border: 1px solid rgba(255,255,255,0.05);
+        }
+        .link-pill:hover { transform: scale(1.02); background-color: #2a2a2a; border-color: var(--tiktok-cyan); }
+        .pill-tiktok { background-color: var(--white); color: #000000; }
+        .pill-tiktok:hover { background-color: var(--tiktok-pink); color: var(--white); border-color: transparent; }
+
+        .form-box { background-color: var(--card-bg); padding: 22px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.05); }
+        .form-box h4 { margin-bottom: 12px; text-align: center; font-size: 1.1rem; }
+        
+        .input-item { width: 100%; padding: 12px; background-color: #2b2b2b; border: none; border-radius: 25px; color: var(--white); margin-bottom: 10px; text-indent: 10px; font-size: 0.9rem; }
+        .input-item:focus { outline: 1px solid var(--tiktok-pink); }
+        select.input-item { text-indent: 6px; padding-left: 10px; }
+
+        .btn-send { width: 100%; padding: 12px; background: linear-gradient(90deg, var(--tiktok-cyan), var(--tiktok-pink)); color: var(--white); border: none; border-radius: 25px; font-weight: bold; cursor: pointer; }
+
+        footer { margin-top: 40px; font-size: 0.75rem; color: var(--text-muted); }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="https://via.placeholder.com/120" alt="Ezequiel" class="profile-img">
+        <h1>Ezequiel Raúl Sánchez Návalo</h1>
+        <p>Mezclas & Entretenimiento</p>
+    </header>
+
+    <div class="container">
+        <div class="live-box">
+            <div class="live-title"><span class="dot"></span> En Vivo por TikTok</div>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 4px;">Sintoniza los mejores sets y dinámicas musicales.</p>
+        </div>
+
+        <div class="links-container">
+            <a href="https://www.tiktok.com/@resn..10" target="_blank" class="link-pill pill-tiktok">TikTok Oficial (@resn..10)</a>
+            <a href="#" target="_blank" class="link-pill">Escuchar en Spotify</a>
+            <a href="#" target="_blank" class="link-pill">Canal de YouTube</a>
+            <a href="https://wa.me/507XXXXXXXX" target="_blank" class="link-pill" style="border: 1px solid #25D366; color: #25D366;">WhatsApp de Contacto</a>
+        </div>
+
+        <div class="form-box">
+            <h4>¡Interactúa en el Live!</h4>
+            <form action="#" method="POST">
+                <input type="text" class="input-item" placeholder="Tu Nombre / Alias" required>
+                <select class="input-item" name="motivo">
+                    <option value="show" style="color:#000;">Contrataciones / Eventos</option>
+                    <option value="cancion" style="color:#000;">Pedir Canción en el Live</option>
+                    <option value="saludo" style="color:#000;">Enviar Saludo</option>
+                </select>
+                <textarea class="input-item" rows="2" placeholder="Mensaje o sugerencia musical..." style="border-radius:15px; text-indent:5px; padding:10px;" required></textarea>
+                <button type="submit" class="btn-send">Enviar Mensaje</button>
+            </form>
+        </div>
+    </div>
+    <footer><p>&copy; 2026 Ezequiel Raúl Sánchez Návalo.</p></footer>
+</body>
+</html>
