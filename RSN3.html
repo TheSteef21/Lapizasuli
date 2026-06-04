@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ezequiel Raúl Sánchez Návalo | Fuente 3</title>
+    <style>
+        :root {
+            --dark-bg: #050505;
+            --panel-bg: #111111;
+            --gold-gradient: linear-gradient(135deg, #f39c12 0%, #f1c40f 100%);
+            --gold-text: #f1c40f;
+            --light-text: #e0e0e0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Century Gothic', sans-serif; }
+
+        body {
+            background-color: var(--dark-bg); color: var(--light-text);
+            display: flex; flex-direction: column; align-items: center;
+            min-height: 100vh; padding: 30px 15px;
+        }
+
+        header { text-align: center; margin-bottom: 35px; }
+
+        .avatar {
+            width: 115px; height: 115px; border-radius: 50%;
+            border: 2px solid #f1c40f; padding: 4px; object-fit: cover; margin-bottom: 15px;
+        }
+
+        header h1 { font-size: 1.7rem; font-weight: 300; letter-spacing: 2px; color: #fff; }
+        header p { color: var(--gold-text); font-size: 0.85rem; letter-spacing: 3px; margin-top: 5px; text-transform: uppercase; }
+
+        .container { width: 100%; max-width: 460px; display: flex; flex-direction: column; gap: 20px; }
+
+        .live-banner {
+            background-color: var(--panel-bg); border: 1px dashed var(--gold-text);
+            padding: 12px; border-radius: 4px; text-align: center; font-size: 0.9rem;
+        }
+        .live-banner span { color: #fe2c55; font-weight: bold; animation: blink 1.2s infinite; }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+        .group-links { display: flex; flex-direction: column; gap: 10px; }
+        .gold-button {
+            display: block; text-align: center; background-color: var(--panel-bg);
+            color: var(--light-text); text-decoration: none; padding: 16px;
+            font-size: 0.9rem; letter-spacing: 1px; font-weight: bold;
+            border: 1px solid #222; border-radius: 4px; transition: all 0.3s;
+        }
+        .gold-button:hover { background-color: #161616; border-color: var(--gold-text); color: var(--gold-text); }
+        .gold-tiktok { background: var(--gold-gradient); color: #000; border: none; }
+        .gold-tiktok:hover { background: transparent; border: 1px solid var(--gold-text); color: var(--gold-text); }
+
+        .booking-form { background-color: var(--panel-bg); padding: 25px; border-radius: 4px; border: 1px solid #1a1a1a; }
+        .booking-form h3 { text-align: center; font-size: 1.1rem; margin-bottom: 18px; letter-spacing: 1px; color: #fff; }
+
+        .box-field { margin-bottom: 15px; }
+        .box-field input, .box-field select, .box-field textarea {
+            width: 100%; padding: 12px; background-color: #0a0a0a; border: 1px solid #222;
+            color: #fff; font-size: 0.85rem; border-radius: 2px;
+        }
+        .box-field input:focus, .box-field select:focus, .box-field textarea:focus { border-color: var(--gold-text); outline: none; }
+
+        .submit-gold { width: 100%; padding: 13px; background: var(--gold-gradient); color: #000; border: none; font-weight: bold; cursor: pointer; letter-spacing: 1px; text-transform: uppercase; }
+        .submit-gold:hover { opacity: 0.9; }
+
+        footer { margin-top: auto; padding-top: 40px; font-size: 0.7rem; opacity: 0.4; }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="https://via.placeholder.com/120" alt="Ezequiel" class="avatar">
+        <h1>Ezequiel R. Sánchez</h1>
+        <p>DJ • Entertainment Show</p>
+    </header>
+
+    <div class="container">
+        <div class="live-banner">
+            Sesiones de Mezcla <span>● EN DIRECTO</span> desde TikTok
+        </div>
+
+        <div class="group-links">
+            <a href="https://www.tiktok.com/@resn..10" target="_blank" class="gold-button gold-tiktok">TIKTOK OFICIAL (@resn..10)</a>
+            <a href="#" target="_blank" class="gold-button">SPOTIFY PLAYLIST</a>
+            <a href="#" target="_blank" class="gold-button">YOUTUBE MUSIC CHANNELS</a>
+            <a href="https://wa.me/507XXXXXXXX" target="_blank" class="gold-button" style="border-bottom: 2px solid #25D366;">WHATSAPP DIRECTO</a>
+        </div>
+
+        <div class="booking-form">
+            <h3>RESERVA DE SETS & TRACKS</h3>
+            <form action="#" method="POST">
+                <div class="box-field"><input type="text" placeholder="Nombre Comercial o Alias" required></div>
+                <div class="box-field">
+                    <select>
+                        <option value="show" style="background:#111;">Booking / Presentaciones</option>
+                        <option value="cancion" style="background:#111;">Sugerencias Musicales</option>
+                        <option value="saludo" style="background:#111;">Menciones Especiales</option>
+                    </select>
+                </div>
+                <div class="box-field"><textarea rows="3" placeholder="Describe los detalles o lista de canciones..." required></textarea></div>
+                <button type="submit" class="submit-gold">Enviar Solicitud</button>
+            </form>
+        </div>
+    </div>
+    <footer><p>© 2026 EZEQUIEL SÁNCHEZ. ALL RIGHTS RESERVED.</p></footer>
+</body>
+</html>
