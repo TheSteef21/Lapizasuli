@@ -1,0 +1,125 @@
+SÑ<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SADV41: Sustento Espiritual y Tecnológico</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.0/ethers.umd.min.js"></script>
+</head>
+<body class="bg-gray-900 text-gray-100 font-sans min-h-screen flex flex-col justify-between">
+
+    <header class="border-b border-gray-800 bg-gray-950 p-4 sticky top-0 z-50">
+        <div class="max-w-5xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-2">
+                <span class="text-2xl">🛡️</span>
+                <h1 class="text-xl font-bold tracking-wider text-yellow-500">SADV41 WEB3</h1>
+            </div>
+            <button id="btnConnect" onclick="connectWallet()" class="bg-yellow-500 hover:bg-yellow-600 text-gray-950 font-semibold px-5 py-2 rounded-lg transition-all shadow-md flex items-center gap-2">
+                ⚡ Conectar Binance Wallet
+            </button>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto p-6 my-8 flex-grow w-full">
+        
+        <div id="walletStatus" class="hidden mb-8 p-4 bg-gray-800/50 border border-yellow-500/30 rounded-xl">
+            <p class="text-sm text-gray-400">Dirección Conectada:</p>
+            <p id="walletAddress" class="font-mono text-yellow-400 break-all text-sm sm:text-base"></p>
+        </div>
+
+        <section class="mb-10">
+            <h2 class="text-2xl font-bold mb-4 border-l-4 border-yellow-500 pl-3 text-white">1. Administración Espiritual y Provisión</h2>
+            <p class="text-gray-300 leading-relaxed mb-4">
+                La verdadera riqueza de la <strong>SADV41</strong> no radica en los sistemas financieros del mundo, sino en la alineación entre la tecnología de vanguardia y un propósito eterno. Al integrar herramientas Web3.0 con una visión clara de mayordomía, nos posicionamos fuera de las presiones de la escasez del sistema tradicional.
+            </p>
+            <blockquote class="border-l-2 border-gray-600 pl-4 italic text-gray-400 my-4 text-sm">
+                "Cuando la tecnología se rinde al servicio del espíritu, la escasez deja de ser un obstáculo y la provisión se convierte en un flujo constante."
+            </blockquote>
+        </section>
+
+        <hr class="border-gray-800 my-8">
+
+        <section class="mb-10">
+            <h2 class="text-2xl font-bold mb-4 border-l-4 border-yellow-500 pl-3 text-white">2. Ecosistema Técnico Activo</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+                <div class="bg-black p-4 rounded-xl border border-gray-800 font-mono text-xs text-green-400 shadow-inner">
+                    <p class="text-gray-500"># Inicializar repositorio de habilidades Binance Hub</p>
+                    <p class="text-white"><span class="text-yellow-500">$</span> npx skills add binance/binance-skills-hub/skills/binance-web3</p>
+                </div>
+
+                <div class="bg-gray-950 p-4 rounded-xl border border-gray-800 flex flex-col justify-between">
+                    <div>
+                        <h4 class="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-1">Gobernanza & Destino Oficial (StevenDiorOficial)</h4>
+                        <p class="font-mono text-xs text-yellow-500 break-all select-all">0x59cB5992c35d6cD0fE6Ea94436c6AAE41F6E5fDD</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <hr class="border-gray-800 my-8">
+
+        <section class="mb-6">
+            <h2 class="text-2xl font-bold mb-6 border-l-4 border-yellow-500 pl-3 text-white">3. Enlaces Estratégicos y Sostenimiento</h2>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <a href="https://take.app/es/stevendior/pay?ref=SADV41" target="_blank" class="block p-5 bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700 hover:border-yellow-500 rounded-xl text-center transition-all group">
+                    <span class="text-3xl block mb-2 group-hover:scale-110 transition-transform">💰</span>
+                    <span class="block font-bold text-white text-sm">Pasarela de Ofrendas (PAB)</span>
+                    <span class="text-xs text-gray-400 mt-1 block">Take App Oficial</span>
+                </a>
+
+                <a href="https://web3.binance.com/en/referral?ref=ORCZSDLK" target="_blank" class="block p-5 bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700 hover:border-yellow-500 rounded-xl text-center transition-all group">
+                    <span class="text-3xl block mb-2 group-hover:scale-110 transition-transform">🌐</span>
+                    <span class="block font-bold text-white text-sm">Binance Web3 Portal</span>
+                    <span class="text-xs text-gray-400 mt-1 block">Acceso y Registro</span>
+                </a>
+
+                <a href="https://app.walletconnect.com/stake" target="_blank" class="block p-5 bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700 hover:border-yellow-500 rounded-xl text-center transition-all group">
+                    <span class="text-3xl block mb-2 group-hover:scale-110 transition-transform">🥩</span>
+                    <span class="block font-bold text-white text-sm">WalletConnect Stake</span>
+                    <span class="text-xs text-gray-400 mt-1 block">Plataforma de Gobernanza</span>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="border-t border-gray-800 bg-gray-950 p-4 text-center text-xs text-gray-500">
+        <p>&copy; 2026 SADV41 — Canal de Administración y Mayordomía Descentralizada.</p>
+    </footer>
+
+    <script>
+        async function connectWallet() {
+            const btn = document.getElementById('btnConnect');
+            const statusDiv = document.getElementById('walletStatus');
+            const addressP = document.getElementById('walletAddress');
+
+            // Comprobar si hay un proveedor inyectado (Binance Wallet / MetaMask / Trust Wallet)
+            if (typeof window.ethereum !== 'undefined') {
+                try {
+                    // Solicitar acceso a las cuentas
+                    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                    const account = accounts[0];
+                    
+                    // Actualizar Interfaz Gráfica
+                    addressP.innerText = account;
+                    statusDiv.classList.remove('hidden');
+                    btn.innerText = "🌐 Conectado Exitosamente";
+                    btn.classList.replace('bg-yellow-500', 'bg-green-600');
+                    btn.classList.replace('text-gray-950', 'text-white');
+                    
+                    console.log("Conectado a la dApp mediante dirección:", account);
+                } catch (error) {
+                    console.error("Acceso denegado por el usuario", error);
+                    alert("Conexión cancelada.");
+                }
+            } else {
+                // Alerta e instrucciones si no detecta extensión o app Web3
+                alert("No se detectó un proveedor Web3 (Binance Wallet). Si estás en móvil, abre este enlace desde el navegador interno de tu Binance App > Web3 Wallet.");
+                window.open('https://web3.binance.com/en/referral?ref=ORCZSDLK', '_blank');
+            }
+        }
+    </script>
+</body>
+</html>
