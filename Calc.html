@@ -57,7 +57,7 @@ function calculate() {
     let precioConMargen = price * 1.35;
     
     // 2. Comisión Yappy Comercial (1%)
-    let comisionYappy = Math.ceil((precioConMargen * 0.01) * 100) / 100; // Redondeo hacia arriba
+    let comisionYappy = Math.ceil((precioConMargen * 0.01) * 100) / 100;
     
     // 3. ITBMS sobre la comisión (7%)
     let itbmsComision = Math.round((comisionYappy * 0.07) * 100) / 100;
