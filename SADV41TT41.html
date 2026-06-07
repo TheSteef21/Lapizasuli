@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo Turbo Tire | Steven Dior Oficial</title>
+    <style>
+        :root {
+            --primary: #d4af37; /* Dorado Steven Dior */
+            --dark: #121212;
+            --card-bg: #1e1e1e;
+            --accent: #25d366; /* Verde WhatsApp */
+            --yappy: #00a3e0;  /* Azul Yappy */
+            --white: #ffffff;
+            --text-muted: #a0aec0;
+            --border-color: #333333;
+            --table-th-bg: #171923;
+            --tab-active: #2d3748;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body { 
+            font-family: 'Segoe UI', Arial, sans-serif; 
+            background-color: var(--dark); 
+            color: var(--white); 
+            line-height: 1.5;
+        }
+
+        header { 
+            text-align: center; 
+            padding: 40px 20px; 
+            background: linear-gradient(180deg, #1a1a1a 0%, #121212 100%); 
+            border-bottom: 2px solid var(--primary); 
+        }
+
+        .logo { 
+            width: 120px; 
+            height: 120px; 
+            border-radius: 50%; 
+            border: 2px solid var(--primary); 
+            margin-bottom: 15px; 
+            object-fit: cover;
+        }
+
+        h1 { 
+            margin: 10px 0; 
+            font-size: 2rem; 
+            letter-spacing: 2px; 
+            font-weight: 700;
+        }
+        
+        .header-actions { 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            gap: 12px; 
+            margin-top: 25px; 
+        }
+        
+        .main-channel { 
+            display: block; 
+            width: 280px; 
+            background: var(--primary); 
+            color: black; 
+            padding: 15px; 
+            border-radius: 50px; 
+            text-decoration: none; 
+            font-weight: bold; 
+            text-align: center;
+            transition: transform 0.2s;
+        }
+
+        .btn-yappy-main { 
+            display: block; 
+            width: 280px; 
+            background: var(--yappy); 
+            color: white; 
+            padding: 15px; 
+            border-radius: 50px; 
+            text-decoration: none; 
+            font-weight: bold; 
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,163,224,0.3); 
+            transition: transform 0.2s;
+        }
+
+        .main-channel:hover, .btn-yappy-main:hover {
+            transform: scale(1.03);
+        }
+
+        .promo-banner { 
+            background: var(--primary); 
+            color: black; 
+            padding: 12px; 
+            font-weight: bold; 
+            text-align: center; 
+            text-transform: uppercase; 
+            letter-spacing: 1px;
+            font-size: 11pt;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        /* Enlaces de Interés Estilizados */
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 12px;
+            margin-bottom: 40px;
+            background: #1a1a1a;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .links-grid a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px;
+            background: var(--card-bg);
+            color: var(--primary);
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 10pt;
+            border: 1px solid var(--border-color);
+            transition: all 0.2s ease;
+        }
+
+        .links-grid a:hover {
+            background: var(--primary);
+            color: black;
+            border-color: var(--primary);
+        }
+
+        /* Panel de Control Interactivo (Tabs y Filtros) */
+        .control-panel {
+            background: #1a1a1a;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Sistema de Pestañas */
+        .tabs-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 15px;
+        }
+
+        .tab-btn {
+            background: var(--card-bg);
+            color: var(--white);
+            border: 1px solid var(--border-color);
+            padding: 10px 18px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 10pt;
+            transition: all 0.2s;
+        }
+
+        .tab-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .tab-btn.active {
+            background: var(--primary);
+            color: black;
+            border-color: var(--primary);
+        }
+
+        /* Filtros de Tipo de Llanta (AT, MT, RT...) */
+        .filter-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .filter-label {
+            font-size: 9pt;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            font-weight: bold;
+        }
+
+        .filter-btn {
+            background: #2d3748;
+            color: var(--white);
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 9pt;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--white);
+            color: black;
+        }
+
+        /* Switch Control de Datos (Autos vs Motor) */
+        .switch-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--card-bg);
+            padding: 10px 15px;
+            border-radius: 8px;
+            width: max-content;
+            border: 1px solid var(--border-color);
+        }
+
+        .switch-label {
+            font-size: 10pt;
+            font-weight: 600;
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 26px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #4a5568;
+            transition: .3s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px; width: 18px;
+            left: 4px; bottom: 4px;
+            background-color: white;
+            transition: .3s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: var(--primary);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(24px);
+            background-color: black;
+        }
+        
+        /* Contenedores de Tablas y Animación de Celdas */
+        .category-section {
+            display: none; /* Controlado por JS */
+            background: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            margin-bottom: 40px;
+        }
+
+        .category-section.active-tab {
+            display: block;
+        }
+
+        .category-header {
+            background-color: var(--tab-active);
+            color: var(--white);
+            padding: 15px 20px;
+            font-size: 11pt;
+            font-weight: 600;
+            border-bottom: 2px solid var(--primary);
+        }
+        
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 10pt;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background-color: var(--table-th-bg);
+            color: var(--primary);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 9pt;
+            letter-spacing: 0.5px;
+        }
+
+        tr:nth-child(even) { background-color: #161616; }
+        tr:hover { background-color: #252525; }
+
+        .id-cell {
+            font-weight: bold;
+            color: var(--primary);
+            width: 70px;
+            text-align: center;
+        }
+
+        .measure-cell { font-weight: 600; color: var(--white); }
+        
+        /* Celdas dinámicas con Transición */
+        .dynamic-data-cell {
+            transition: all 0.25s ease-in-out;
+        }
+        .mode-motor .car-view { display: none; }
+        .mode-motor .motor-view { display: inline; color: #f6ad55; font-weight: 500; }
+        .mode-car .car-view { display: inline; }
+        .mode-car .motor-view { display: none; }
+
+        footer { 
+            text-align: center; 
+            padding: 50px 20px; 
+            font-size: 0.85rem; 
+            opacity: 0.8; 
+            border-top: 1px solid var(--border-color);
+            background: #0d0d0d;
+        }
+
+        .spirit-mark { font-size: 1.8rem; display: block; margin-top: 15px; }
+    </style>
+</head>
+<body class="mode-car">
+
+<header>
+    <img src="https://i.imgur.com/your-logo-here.jpg" alt="Turbo Tire Logo" class="logo"> 
+    <h1>TURBO TIRE</h1>
+    <p>Por Steven Dior Oficial</p>
+    
+    <div class="header-actions">
+        <a href="https://whatsapp.com/channel/0029VbCkuGnKbYMPWYEgBQ3B" class="main-channel" target="_blank">SÍGUENOS EN WHATSAPP 📱</a>
+        <a href="https://yappypa.page.link/Zi7X?hash=rjYRsJ8Yz0hGBKWXnNKRpeCr5yZZkbjbgkxGCAZdd/nmXoS0X8s5ntvwHrGm+7HT" class="btn-yappy-main" target="_blank">PAGAR CON YAPPY 💳</a>
+    </div>
+</header>
+
+<div class="promo-banner">Promociones Directas, Inventario y Reservas</div>
+
+<div class="container">
+
+    <!-- Enlaces del Ecosistema Lapizasuli / SADV41 -->
+    <div class="links-grid">
+        <a href="https://thesteef21.github.io/Lapizasuli/Calc.html" target="_blank">Calculadora Pagos Netos</a>
+        <a href="https://thesteef21.github.io/Lapizasuli/Bless.html" target="_blank">Crypto Mundo de Pagos</a>
+        <a href="https://thesteef21.github.io/Lapizasuli/Noticias.html" target="_blank">Portal de Noticias</a>
+        <a href="https://thesteef21.github.io/Lapizasuli/GSADV41.html" target="_blank">Ecosistema GSADV41</a>
+        <a href="https://wa.me/50769362166" target="_blank">WhatsApp Ventas/Pagos</a>
+        <a href="https://instagram.com/llanteria_turbotire" target="_blank">Instagram (Galería)</a>
+        <a href="https://tiktok.com/@AlexTurbotire" target="_blank">TikTok @AlexTurbotire</a>
+        <a href="https://tiktok.com/@LlanteroBurunga" target="_blank">TikTok @LlanteroBurunga</a>
+    </div>
+
+    <!-- PANEL DE CONTROL MULTI-FILTRO -->
+    <div class="control-panel">
+        <!-- Pestañas de Navegación por Rines -->
+        <div class="tabs-container">
+            <button class="tab-btn active" onclick="switchTab(1)">Autos Compactos / Sedanes</button>
+            <button class="tab-btn" onclick="switchTab(2)">Crossovers / SUVs Medianas</button>
+            <button class="tab-btn" onclick="switchTab(3)">Pick-ups / Carga / Trabajo</button>
+            <button class="tab-btn" onclick="switchTab(4)">Off-Road / Mud-Terrain / 33"</button>
+        </div>
+
+        <!-- Barra de Filtros de Labrado / Tipo Llanta -->
+        <div class="filter-wrapper">
+            <span class="filter-label">Tipo de Banda:</span>
+            <button class="filter-btn active" onclick="filterTireType('ALL', this)">Todas</button>
+            <button class="filter-btn" onclick="filterTireType('AT', this)">A/T</button>
+            <button class="filter-btn" onclick="filterTireType('MT', this)">M/T</button>
+            <button class="filter-btn" onclick="filterTireType('RT', this)">R/T</button>
+            <button class="filter-btn" onclick="filterTireType('HT', this)">H/T</button>
+            <button class="filter-btn" onclick="filterTireType('AT2', this)">AT2</button>
+        </div>
+
+        <!-- Switch de Datos de Destino (Carro vs Motor) -->
+        <div class="switch-container">
+            <span class="switch-label">Ver Compatibilidad:</span>
+            <span style="font-size: 9pt; color: var(--text-muted);">Autos</span>
+            <label class="toggle-switch">
+                <input type="checkbox" id="dataViewToggle" onchange="toggleDataView(this)">
+                <span class="slider"></span>
+            </label>
+            <span style="font-size: 9pt; color: var(--primary); font-weight: bold;">Motores</span>
+        </div>
+    </div>
+
+    <!-- CATEGORÍA 1 -->
+    <div id="cat-1" class="category-section active-tab">
+        <div class="category-header">Rines 14", 15" y 16" Perfil Bajo/Medio</div>
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr><th class="id-cell">#</th><th>Medida</th><th>Marca / Detalle</th><th id="th-dynamic-1">Aplicación del Vehículo</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td class="id-cell">#3</td><td class="measure-cell">195/50r15</td><td>Runway</td><td class="dynamic-data-cell"><span class="car-view">Honda Civic, Toyota Yaris, Hyundai Accent (Modificados)</span><span class="motor-view">D16 VTEC / 1NZ-FE 1.5L / G4FA 1.4L</span></td></tr>
+                    <tr><td class="id-cell">#4</td><td class="measure-cell">185/65r15</td><td>Hankook</td><td class="dynamic-data-cell"><span class="car-view">Nissan Versa, Toyota Avanza, Kia Rio</span><span class="motor-view">HR16DE 1.6L / 2NR-VE 1.5L / G4LC 1.4L</span></td></tr>
+                    <tr><td class="id-cell">#10</td><td class="measure-cell">185/65r15</td><td>Uniroyal</td><td class="dynamic-data-cell"><span class="car-view">Nissan Versa, Honda Civic, Renault Logan</span><span class="motor-view">HR16DE / K4M 1.6L 16v</span></td></tr>
+                    <tr><td class="id-cell">#28</td><td class="measure-cell">205/55r16</td><td>Linglong</td><td class="dynamic-data-cell"><span class="car-view">Toyota Corolla, Hyundai Elantra, Kia Cerato</span><span class="motor-view">1ZR-FE 1.6L / G4NB Nu 1.8L / G4FG 1.6L</span></td></tr>
+                    <tr><td class="id-cell">#29</td><td class="measure-cell">205/55r16</td><td>Linglong</td><td class="dynamic-data-cell"><span class="car-view">Toyota Corolla, Honda Civic, Mazda 3</span><span class="motor-view">2ZR-FE 1.8L / R18A 1.8L / SkyActiv-G 2.0L</span></td></tr>
+                    <tr><td class="id-cell">#30</td><td class="measure-cell">185/55r16</td><td>Linglong</td><td class="dynamic-data-cell"><span class="car-view">Honda City, Honda Fit, Chevrolet Spark (Modificado)</span><span class="motor-view">L15Z 1.5L i-VTEC / L15A / S-TEC 1.2L</span></td></tr>
+                    <tr><td class="id-cell">#31</td><td class="measure-cell">185/60r15</td><td>Kleber</td><td class="dynamic-data-cell"><span class="car-view">Toyota Yaris, Swift, Volkswagen Polo</span><span class="motor-view">1NZ-FE / M15A 1.5L / EA211 1.6L MSI</span></td></tr>
+                    <tr><td class="id-cell">#32</td><td class="measure-cell">185/60r14</td><td>Semperit</td><td class="dynamic-data-cell"><span class="car-view">Hyundai i10, Kia Picanto (Older), Chevy Aveo</span><span class="motor-view">G3LA 1.0L / G4LA 1.2L / F14D3 1.4L</span></td></tr>
+                    <tr><td class="id-cell">#33</td><td class="measure-cell">185/55r16</td><td>Bridgestone</td><td class="dynamic-data-cell"><span class="car-view">Honda City, Nissan Note, Suzuki Swift Sport</span><span class="motor-view">L15B / HR16DE / M16A 1.6L VVT</span></td></tr>
+                    <tr><td class="id-cell">#34</td><td class="measure-cell">185/60r15</td><td>Yokohama</td><td class="car-view-cell dynamic-data-cell"><span class="car-view">Toyota Yaris, Mazda 2, Hyundai Accent</span><span class="motor-view">2NR-FE 1.5L Dual VVT-i / SkyActiv 1.5 / Kappa 1.4L</span></td></tr>
+                    <tr><td class="id-cell">#35</td><td class="measure-cell">185/55r16</td><td>Linglong</td><td class="dynamic-data-cell"><span class="car-view">Honda Fit, Chevrolet Sail, Ford Fiesta</span><span class="motor-view">L15A / S-TEC III 1.5L / Sigma 1.6L Ti-VCT</span></td></tr>
+                    <tr><td class="id-cell">#36</td><td class="measure-cell">185/70r14</td><td>Centara</td><td class="dynamic-data-cell"><span class="car-view">Nissan Sentra, Toyota Corolla (Modelos anteriores)</span><span class="motor-view">QG18DE 1.8L / 4A-FE 1.6L</span></td></tr>
+                    <tr><td class="id-cell">#37</td><td class="measure-cell">195/50r15</td><td>Bridgestone</td><td class="dynamic-data-cell"><span class="car-view">Volkswagen Gol, Mitsubishi Lancer, Ford Fiesta</span><span class="motor-view">EA111 1.6L MI / 4G18 1.6L / Rocam 1.6L</span></td></tr>
+                    <tr><td class="id-cell">#38</td><td class="measure-cell">185/65r14</td><td>Hankook</td><td class="dynamic-data-cell"><span class="car-view">Kia Rio Styling, Hyundai Accent, Chevrolet Optra</span><span class="motor-view">G4EE 1.4L / F18D3 1.8L DOHC</span></td></tr>
+                    <tr><td class="id-cell">#39</td><td class="measure-cell">185/60r14</td><td>Greenlander</td><td class="dynamic-data-cell"><span class="car-view">Volkswagen Pointer, Toyota Tercel, Daewoo Lanos</span><span class="motor-view">EA827 1.8L / 5E-FE 1.5L / A15SMS</span></td></tr>
+                    <tr><td class="id-cell">#40</td><td class="measure-cell">175/70r14</td><td>Linglong</td><td class="dynamic-data-cell"><span class="car-view">Hyundai Accent, Kia Rio, Toyota Yaris</span><span class="motor-view">G4EH Alpha 1.3L / 2NZ-FE</span></td></tr>
+                    <tr><td class="id-cell">#99</td><td class="measure-cell">175/65R14</td><td>BRIDGESTONE</td><td class="dynamic-data-cell"><span class="car-view">Toyota Yaris, Honda Fit, Hyundai Getz, Kia Picanto</span><span class="motor-view">1NZ-FE / L13A i-DSI / G4EA 1.3L / G4HE 1.0L</span></td></tr>
+                    <tr><td class="id-cell">#100</td><td class="measure-cell">175/65R14</td><td>NEXEN</td><td class="dynamic-data-cell"><span class="car-view">Fiat Palio, Ford Fiesta, Chevrolet Spark GT</span><span class="motor-view">1.8 8v Fire / Zetec Rocam / B12D2 1.2L</span></td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- CATEGORÍA 2 -->
+    <div id="cat-2" class="category-section">
+        <div class="category-header">Rines 16", 17" y 18" Perfil Convencional</div>
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr><th class="id-cell">#</th><th>Medida</th><th>Marca / Detalle</th><th id="th-dynamic-2">Aplicación del Vehículo</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td class="id-cell">#1</td><td class="measure-cell">225/60r17</td><td>Yokohama</td><td class="dynamic-data-cell"><span class="car-view">Subaru Forester, Hyundai Tucson, Kia Sportage</span><span class="motor-view">FB20 Boxer / G4NA Nu 2.0L / G4KD Theta II</span></td></tr>
+                    <tr><td class="id-cell">#2</td><td class="measure-cell">225/55r18</td><td>Greenlander</td><td class="dynamic-data-cell"><span class="car-view">Hyundai Tucson, Kia Sportage, Mitsubishi Outlander</span><span class="motor-view">G4FD 1.6 GDI / 4B12 2.4L MIVEC</span></td></tr>
+                    <tr><td class="id-cell">#6</td><td class="measure-cell">225/65r17</td><td>Bridgestone</td><td class="dynamic-data-cell"><span class="car-view">Toyota RAV4, Honda CR-V, Nissan X-Trail</span><span class="motor-view">2AR-FE 2.5L / K24Z 2.4L i-VTEC / QR25DE 2.5L</span></td></tr>
+                    <tr><td class="id-cell">#7</td><td class="measure-cell">215/70r16</td><td>Hankook</td><td class="dynamic-data-cell"><span class="car-view">Hyundai Tucson (Older), Kia Sportage, Mitsubishi ASX</span><span class="motor-view">G4GC Beta 2.0L / 4B11 2.0L MIVEC</span></td></tr>
+                    <tr><td class="id-cell">#8</td><td class="measure-cell">215/70r16</td><td>Hankook</td><td class="dynamic-data-cell"><span class="car-view">Toyota RAV4, Suzuki Grand Vitara</span><span class="motor-view">1AZ-FE 2.0L / J20A 2.0L VVT</span></td></tr>
+                    <tr><td class="id-cell">#9</td><td class="measure-cell">205/65r16</td><td>Hilo</td><td class="dynamic-data-cell"><span class="car-view">Nissan Kicks, Hyundai Creta, Chevrolet Tracker</span><span class="motor-view">HR16DE / G4FG Gamma 1.6L / ECOTEC 1.8L</span></td></tr>
+                    <tr><td class="id-cell">#11</td><td class="measure-cell">225/55r18</td><td>Greenlander</td><td class="dynamic-data-cell"><span class="car-view">Jeep Compass, Subaru XV, Nissan Qashqai</span><span class="motor-view">2.4L Tigershark / FB20 / MR20DD 2.0L</span></td></tr>
+                    <tr><td class="id-cell">#12</td><td class="measure-cell">225/55r18</td><td>Nexen</td><td class="dynamic-data-cell"><span class="car-view">Mitsubishi Outlander, Peugeot 3008, Renault Koleos</span><span class="motor-view">4B12 / 1.6L THP Turbo / TR25 (Nissan Engine)</span></td></tr>
+                    <tr><td class="id-cell">#13</td><td class="measure-cell">215/60r17</td><td>Dunlop</td><td class="dynamic-data-cell"><span class="car-view">Nissan Qashqai, Jeep Renegade, Mitsubishi ASX</span><span class="motor-view">MR20DE 2.0L / 1.8L E.torQ / 4B11</span></td></tr>
+                    <tr><td class="id-cell">#14</td><td class="measure-cell">215/60r17</td><td>Dunlop</td><td class="dynamic-data-cell"><span class="car-view">Hyundai Creta, Chevrolet Trax, Chery Tiggo</span><span class="motor-view">Smartstream G1.5 / 1.4L Turbo ECOTEC / 2.0 Acteco</span></td></tr>
+                    <tr><td class="id-cell">#15</td><td class="measure-cell">225/60r16</td><td>Linglong</td><td class="dynamic-data-cell"><span class="car-view">Hyundai Tucson, Kia Sportage, Subaru Outback (Older)</span><span class="motor-view">G6BA V6 2.7L / EJ25 2.5L SOHC Boxer</span></td></tr>
+                    <tr><td class="id-cell">#16</td><td class="measure-cell">215/65r16</td><td>Boto</td><td class="dynamic-data-cell"><span class="car-view">Renault Duster, Nissan Qashqai, Hyundai Tucson</span><span class="motor-view">F4R 2.0L 16v / HR16DE / G4NA</span></td></tr>
+                    <tr><td class="id-cell">#17</td><td class="measure-cell">205/65r16</td><td>Wanderer</td><td class="dynamic-data-cell"><span class="car-view">Honda HR-V, Nissan Kicks, Kia Seltos</span><span class="motor-view">R18Z9 1.8L i-VTEC / HR16DE / G4FL Gamma II 1.5L</span></td></tr>
+                    <tr><td class="id-cell">#18</td><td class="measure-cell">205/65r16</td><td>Wanderer</td><td class="dynamic-data-cell"><span class="car-view">Chevrolet Tracker, Suzuki Vitara</span><span class="motor-view">1.2L Turbo CSS Prime / M16A 1.6L VVT</span></td></tr>
+                    <tr><td class="id-cell">#19</td><td class="measure-cell">225/50r17</td><td>Nokian</td><td class="dynamic-data-cell"><span class="car-view">BMW Serie 3, Audi A4, Honda Accord, Ford Fusion</span><span class="motor-view">N20B20 2.0T / 2.0 TFSI EA888 / K24W / 2.5 Duratec</span></td></tr>
+                    <tr><td class="id-cell">#20</td><td class="measure-cell">225/60r18</td><td>Centara</td><td class="dynamic-data-cell"><span class="car-view">Honda CR-V, Nissan X-Trail, Toyota RAV4 (High Trim)</span><span class="motor-view">K24W / QR25DE / 2AR-FE</span></td></tr>
+                    <tr><td class="id-cell">#21</td><td class="measure-cell">225/60r18</td><td>Centara</td><td class="dynamic-data-cell"><span class="car-view">Subaru Outback, Mazda CX-5, Ford Escape</span><span class="motor-view">FB25 Boxer / SkyActiv-G 2.5L / 2.0L EcoBoost</span></td></tr>
+                    <tr><td class="id-cell">#22</td><td class="measure-cell">225/60r18</td><td>Centara</td><td class="dynamic-data-cell"><span class="car-view">Honda CR-V, Jeep Cherokee</span><span class="motor-view">L15B7 1.5T Turbo / 3.2L Pentastar V6</span></td></tr>
+                    <tr><td class="id-cell">#23</td><td class="measure-cell">225/60r18</td><td>Centara</td><td class="dynamic-data-cell"><span class="car-view">Renault Koleos, Haval H6</span><span class="motor-view">QR25DE (Nissan tech) / 4B15 1.5T GDIT</span></td></tr>
+                    <tr><td class="id-cell">#24</td><td class="measure-cell">205/65r16</td><td>Polo</td><td class="dynamic-data-cell"><span class="car-view">Nissan Kicks, Hyundai Creta</span><span class="motor-view">HR16DE / G4FG Gamma</span></td></tr>
+                    <tr><td class="id-cell">#25</td><td class="measure-cell">215/50r17</td><td>Centara</td><td class="dynamic-data-cell"><span class="car-view">Toyota Prius, Mazda 3, Chevrolet Cruze</span><span class="motor-view">2ZR-FXE Atkinson / SkyActiv-G 2.0 / 1.4L Turbo Family 0</span></td></tr>
+                    <tr><td class="id-cell">#26</td><td class="measure-cell">215/45r17</td><td>Rapid</td><td class="dynamic-data-cell"><span class="car-view">Toyota Corolla, Kia Cerato Pro, Hyundai Elantra i35</span><span class="motor-view">2ZR-FE 1.8L / G4FG 1.6L / G4GD 1.8L Nu</span></td></tr>
+                    <tr><td class="id-cell">#27</td><td class="measure-cell">205/45r17</td><td>Pirelli</td><td class="dynamic-data-cell"><span class="car-view">Mini Cooper, Suzuki Swift Sport, Ford Fiesta ST</span><span class="motor-view">B38 1.5T / K14C 1.4T Boosterjet / EcoBoost 1.6T</span></td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- CATEGORÍA 3 -->
+    <div id="cat-3" class="category-section">
+        <div class="category-header">Pick-ups, SUVs Grandes y Camionetas de Trabajo (A/T y H/T)</div>
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr><th class="id-cell">#</th><th>Medida</th><th>Marca / Detalle</th><th id="th-dynamic-3">Aplicación del Vehículo</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td class="id-cell">#5</td><td class="measure-cell">185r14</td><td>Sportrak</td><td class="dynamic-data-cell"><span class="car-view">Mitsubishi L300, Toyota Hiace, Nissan Urvan (Carga)</span><span class="motor-view">4G63 2.0L / 2KD-FTV 2.5 D-4D / QD32 Diesel 3.2L</span></td></tr>
+                    <tr><td class="id-cell">#41</td><td class="measure-cell">265/60r18</td><td>(Chejo Aportó) HT</td><td class="dynamic-data-cell"><span class="car-view">Toyota Hilux, Nissan Frontier, Mitsubishi L200, Ford Ranger</span><span class="motor-view">1GD-FTV 2.8 Diesel / YD25DDTi / 4N15 MIVEC / Puma 3.2L</span></td></tr>
+                    <tr><td class="id-cell">#42</td><td class="measure-cell">265/60r18</td><td>(Chejo Aportó) HT</td><td class="dynamic-data-cell"><span class="car-view">Chevrolet Colorado, Isuzu D-Max, Toyota Fortuner</span><span class="motor-view">Duramax 2.8L / 4JJ1-TCX 3.0L / 2GD-FTV 2.4L</span></td></tr>
+                    <tr><td class="id-cell">#43</td><td class="measure-cell">265/60r18</td><td>(Chejo Aportó) HT</td><td class="dynamic-data-cell"><span class="car-view">Ford Ranger, Jeep Grand Cherokee</span><span class="motor-view">Puma 2.2L TDCI / 3.6L Pentastar V6</span></td></tr>
+                    <tr><td class="id-cell">#44</td><td class="measure-cell">265/60r18</td><td>(Chejo Aportó) HT</td><td class="dynamic-data-cell"><span class="car-view">Mitsubishi Montero Sport, Nissan Pathfinder</span><span class="motor-view">4M41 3.2L DI-D / VQ35DE 3.5L V6</span></td></tr>
+                    <tr><td class="id-cell">#45</td><td class="measure-cell">265/65r17</td><td>Toyo HT</td><td class="dynamic-data-cell"><span class="car-view">Toyota Hilux, Land Cruiser Prado, Mitsubishi L200, Isuzu D-Max</span><span class="motor-view">1KD-FTV 3.0 D-4D / 1GR-FE 4.0L V6 / 4N15 / 4JJ3 3.0L</span></td></tr>
+                    <tr><td class="id-cell">#46</td><td class="measure-cell">265/65r17</td><td>Interstate HT</td><td class="dynamic-data-cell"><span class="car-view">Ford Ranger, Chevrolet Colorado, Nissan Frontier</span><span class="motor-view">Duratec 2.5L Gasolina / EcoTec 2.5 / QR25DE</span></td></tr>
+                    <tr><td class="id-cell">#47</td><td class="measure-cell">245/65r17</td><td>Windforce AT</td><td class="dynamic-data-cell"><span class="car-view">Ford Explorer, Jeep Grand Cherokee, VW Amarok</span><span class="motor-view">3.5L Duratec Ti-VCT V6 / 3.0L EcoDiesel V6 / 2.0L BiTDI</span></td></tr>
+                    <tr><td class="id-cell">#48</td><td class="measure-cell">245/65r17</td><td>Grandtrek HT</td><td class="dynamic-data-cell"><span class="car-view">Chevrolet Trailblazer, Honda Pilot</span><span class="motor-view">3.6L High Feature V6 / J35Y 3.5L i-VTEC V6</span></td></tr>
+                    <tr><td class="id-cell">#49</td><td class="measure-cell">27x8.5r14</td><td>Conqueror AT</td><td class="dynamic-data-cell"><span class="car-view">Pickups compactos clásicos, Camionetas de carga liviana</span><span class="motor-view">Toyota 22R / Nissan Z24 (Carburados)</span></td></tr>
+                    <tr><td class="id-cell">#52</td><td class="measure-cell">265/70r17</td><td>Runway AT</td><td class="dynamic-data-cell"><span class="car-view">Jeep Wrangler, Toyota Prado, Ford F-150, Ram 1500</span><span class="motor-view">3.6L Pentastar / 1KD-FTV / 3.3L Cyclone V6 / 3.6L Pentastar</span></td></tr>
+                    <tr><td class="id-cell">#53</td><td class="measure-cell">265/70r17</td><td>Runway AT</td><td class="dynamic-data-cell"><span class="car-view">Toyota Tacoma, Nissan Titan</span><span class="motor-view">2GR-FKS 3.5L V6 / VK56DE 5.6L V8 Endurance</span></td></tr>
+                    <tr><td class="id-cell">#54</td><td class="measure-cell">265/70r17</td><td>Deestone AT</td><td class="dynamic-data-cell"><span class="car-view">Chevrolet Tahoe, Suburban, GMC Sierra</span><span class="motor-view">5.3L EcoTec3 V8 L83 / Vortec 5.3L</span></td></tr>
+                    <tr><td class="id-cell">#55</td><td class="measure-cell">265/70r17</td><td>Deestone AT</td><td class="dynamic-data-cell"><span class="car-view">Toyota Land Cruiser, Jeep Gladiator</span><span class="motor-view">1VD-FTV 4.5L Twin-Turbo V8 Diesel / 3.6L Pentastar</span></td></tr>
+                    <tr><td class="id-cell">#56</td><td class="measure-cell">265/65r17</td><td>Lch AT</td><td class="dynamic-data-cell"><span class="car-view">Toyota Hilux, Ford Ranger, Mitsubishi L200</span><span class="motor-view">2TR-FE 2.7L Gasolina / EcoBlue 2.0L Turbo</span></td></tr>
+                    <tr><td class="id-cell">#57</td><td class="measure-cell">265/65r17</td><td>Lch AT</td><td class="dynamic-data-cell"><span class="car-view">Nissan Frontier, Isuzu D-Max, Toyota Prado</span><span class="motor-view">YS23DDTT 2.3L Twin Turbo / RZ4E 1.9L / 2TR-FE</span></td></tr>
+                    <tr><td class="id-cell">#58</td><td class="measure-cell">235/70r16</td><td>Goodyear HT</td><td class="dynamic-data-cell"><span class="car-view">Ford Ranger (Older), Chevrolet S10, Jeep Liberty</span><span class="motor-view">O courage 2.3L / Vortec 2.4L / PowerTech 3.7L V6</span></td></tr>
+                    <tr><td class="id-cell">#59</td><td class="measure-cell">255/70r16</td><td>AT</td><td class="dynamic-data-cell"><span class="car-view">Nissan Frontier, Ford Ranger, Chevrolet Colorado</span><span class="motor-view">YD25DDTi / Puma 2.2L / Duramax 2.5L</span></td></tr>
+                    <tr><td class="id-cell">#60</td><td class="measure-cell">265/60r18</td><td>AT</td><td class="dynamic-data-cell"><span class="car-view">Toyota Hilux Revo, Isuzu D-Max, Ford Ranger Wildtrak</span><span class="motor-view">1GD-FTV / 4JJ3-TCX / Puma 3.2L 5cil</span></td></tr>
+                    <tr><td class="id-cell">#67</td><td class="measure-cell">275/55r20</td><td>Hankook HT</td><td class="dynamic-data-cell"><span class="car-view">Ford F-150 Lariat, Chevrolet Tahoe, RAM 1500, Toyota Tundra</span><span class="motor-view">3.5L EcoBoost V6 / 5.3L V8 / 5.7L Hemi V8 MDS / 3.4L Twin-Turbo V6 V35A</span></td></tr>
+                    <tr><td class="id-cell">#73</td><td class="measure-cell">265/60R18</td><td>Continental HT XL</td><td class="dynamic-data-cell"><span class="car-view">Toyota Fortuner, Ford Ranger Limited, Jeep Grand Cherokee</span><span class="motor-view">1GD-FTV / Puma 3.2L / 3.0L EcoDiesel V6</span></td></tr>
+                    <tr><td class="id-cell">#74</td><td class="measure-cell">265/65R17</td><td>Linglong AT</td><td class="dynamic-data-cell"><span class="car-view">Mitsubishi L200 Triton, Toyota Hilux, Nissan Frontier NP300</span><span class="motor-view">4N15 / 2GD-FTV / YD25</span></td></tr>
+                    <tr><td class="id-cell">#75</td><td class="measure-cell">265/65R17</td><td>Deestone Shipayat AT</td><td class="dynamic-data-cell"><span class="car-view">Toyota Prado, Isuzu D-Max, Chevrolet Colorado</span><span class="motor-view">1GR-FE V6 / 4JJ1 3.0L / Duramax 2.8L</span></td></tr>
+                    <tr><td class="id-cell">#76</td><td class="measure-cell">265/65r17</td><td>AT</td><td class="dynamic-data-cell"><span class="car-view">Ford Ranger, Toyota Hilux, Great Wall Wingle</span><span class="motor-view">Puma 2.2L / 2TR-FE / GW4D20 2.0 Turbodiesel</span></td></tr>
+                    <tr><td class="id-cell">#82</td><td class="measure-cell">265/65R17</td><td>Bridgestone AT</td><td class="dynamic-data-cell"><span class="car-view">Toyota Prado, Toyota Hilux (Original)</span><span class="motor-view">1KD-FTV 3.0L D-4D / 2KD-FTV</span></td></tr>
+                    <tr><td class="id-cell">#83</td><td class="measure-cell">265/65R17</td><td>Deestone Shi Payat AT</td><td class="dynamic-data-cell"><span class="car-view">Mitsubishi L200, Nissan Frontier, Isuzu D-Max</span><span class="motor-view">4M41 / YD25 / 4JJ1</span></td></tr>
+                    <tr><td class="id-cell">#84</td><td class="measure-cell">265/65R17</td><td>Ecovision AT</td><td class="dynamic-data-cell"><span class="car-view">Ford Ranger, Foton Tunland, Chevrolet Colorado</span><span class="motor-view">Duratec 2.5L / Cummins ISF 2.8L / Duramax 2.8</span></td></tr>
+                    <tr><td class="id-cell">#85</td><td class="measure-cell">265/65R17</td><td>Bridgestone AT</td><td class="dynamic-data-cell"><span class="car-view">Toyota Hilux, Mitsubishi Montero Sport</span><span class="motor-view">1GD-FTV / 4N15 MIVEC</span></td></tr>
+                    <tr><td class="id-cell">#86</td><td class="measure-cell">265/65R17</td><td>Linglong AT</td><td class="dynamic-data-cell"><span class="car-view">Nissan Frontier, Isuzu D-Max</span><span class="motor-view">QR25DE / RZ4E 1.9L Diesel</span></td></tr>
+                    <tr><td class="id-cell">#87</td><td class="measure-cell">265/60R18</td><td>Bridgestone HT</td><td class="dynamic-data-cell"><span class="car-view">Toyota Hilux, Toyota Fortuner (Uso Urbano/Asfalto)</span><span class="motor-view">1GD-FTV / 2TR-FE 2.7L</span></td></tr>
+                    <tr><td class="id-cell">#89</td><td class="measure-cell">245/65R17</td><td>Windforce AT</td><td class="dynamic-data-cell"><span class="car-view">Ford Explorer, Jeep Grand Cherokee</span><span class="motor-view">2.3L EcoBoost I4 / 3.6L Pentastar</span></td></tr>
+                    <tr><td class="id-cell">#90</td><td class="measure-cell">245/65R17</td><td>Windforce AT</td><td class="dynamic-data-cell"><span class="car-view">Chevrolet Trailblazer, Mitsubishi Nativa</span><span class="motor-view">3.6L HF V6 / 4M41 3.2L DI-D</span></td></tr>
+                    <tr><td class="id-cell">#91</td><td class="measure-cell">265/65R17</td><td>Deestone Shipayat AT</td><td class="dynamic-data-cell"><span class="car-view">Toyota Prado, Ford Ranger, Mitsubishi L200</span><span class="motor-view">1KD-FTV / Puma 3.2L / 4N15</span></td></tr>
+                    <tr><td class="id-cell">#92</td><td class="measure-cell">265/70R16</td><td>Kumho HT</td><td class="dynamic-data-cell"><span class="car-view">Mitsubishi L200 (Older), Nissan Frontier D22, Toyota Hilux</span><span class="motor-view">4D56 2.5L TD / QD32 Diesel / 1KZ-TE 3.0L Turbo Diesel</span></td></tr>
+                    <tr><td class="id-cell">#97</td><td class="measure-cell">265/70R16</td><td>Linglong AT2</td><td class="dynamic-data-cell"><span class="car-view">Mitsubishi Montero, Nissan Patrol, Toyota Land Cruiser Prado 90</span><span class="motor-view">6G74 3.5L V6 / TB45E 4.5L I6 / 1KZ-TE 3.0L</span></td></tr>
+                    <tr><td class="id-cell">#98</td><td class="measure-cell">265/70R16</td><td>Neoland AT</td><td class="dynamic-data-cell"><span class="car-view">Toyota Hilux (KUN25), Isuzu Rodeo, Ford Ranger</span><span class="motor-view">2KD-FTV 2.5L / 6VD1 3.2L V6 / Puma 2.2L</span></td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- CATEGORÍA 4 -->
+    <div id="cat-4" class="category-section">
+        <div class="category-header">Off-Road Pesado, Mud-Terrain y Tamaños Grandes Modificados (M/T, R/T, 33")</div>
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr><th class="id-cell">#</th><th>Medida</th><th>Marca / Detalle</th><th id="th-dynamic-4">Aplicación del Vehículo</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td class="id-cell">#50</td><td class="measure-cell">285/75r16</td><td>Tourador MT</td><td class="dynamic-data-cell"><span class="car-view">Nissan Patrol, Toyota Land Cruiser (Modificados con Lift Kit)</span><span class="motor-view">TD42 Turbo Diesel 4.2L / 1HZ 4.2L Atmosférico I6</span></td></tr>
+                    <tr><td class="id-cell">#51</td><td class="measure-cell">285/75r16</td><td>Tourador MT</td><td class="dynamic-data-cell"><span class="car-view">Toyota Hilux, Ford Ranger, Jeep Wrangler (Elevación 3"+)</span><span class="motor-view">1GD-FTV / Puma 3.2L / 2.0L Hurricane Turbo I4</span></td></tr>
+                    <tr><td class="id-cell">#61</td><td class="measure-cell">275/65r18</td><td>AT</td><td class="dynamic-data-cell"><span class="car-view">Ford F-150, Toyota Tundra, Ram 1500 (Heavy Duty)</span><span class="motor-view">5.0L Coyote V8 / 5.7L i-Force V8 / 5.7L Hemi V8</span></td></tr>
+                    <tr><td class="id-cell">#62</td><td class="measure-cell">275/65r18</td><td>Tourador AT</td><td class="dynamic-data-cell"><span class="car-view">Ford F-150, Chevrolet Silverado, GMC Sierra</span><span class="motor-view">3.5L EcoBoost / 5.3L EcoTec3 V8 / 6.2L EcoTec3 V8 L86</span></td></tr>
+                    <tr><td class="id-cell">#63</td><td class="measure-cell">275/65r18</td><td>Tourador AT</td><td class="dynamic-data-cell"><span class="car-view">Toyota Tundra, Nissan Titan</span><span class="motor-view">3UR-FE 5.7L V8 / VK56VD 5.6L V8 DIG</span></td></tr>
+                    <tr><td class="id-cell">#64</td><td class="measure-cell">275/65r18</td><td>Tourador AT</td><td class="dynamic-data-cell"><span class="car-view">Ford F-150 FX4, Ram 1500 Rebel</span><span class="motor-view">2.7L EcoBoost V6 / 3.6L Pentastar eTorque V6</span></td></tr>
+                    <tr><td class="id-cell">#65</td><td class="measure-cell">275/65r18</td><td>Tourador AT</td><td class="dynamic-data-cell"><span class="car-view">Nissan Patrol Y62, Jeep Wrangler (Oversized)</span><span class="motor-view">VK56VD 5.6L V8 (400hp) / 3.6L Pentastar V6</span></td></tr>
+                    <tr><td class="id-cell">#66</td><td class="measure-cell">285/70r17</td><td>Roadcruza RT</td><td class="dynamic-data-cell"><span class="car-view">Jeep Wrangler JK/JL, Toyota Prado Modificada, Ford Ranger Raptor</span><span class="motor-view">3.6L Pentastar / 1GR-FE V6 / 2.0L EcoBlue Bi-Turbo Diesel</span></td></tr>
+                    <tr><td class="id-cell">#68</td><td class="measure-cell">285/70r17</td><td>AT</td><td class="dynamic-data-cell"><span class="car-view">Toyota Tacoma TRD Pro, Jeep Gladiator, Ford F-150</span><span class="motor-view">2GR-FKS 3.5L V6 / 3.6L Pentastar / 5.0L Coyote V8</span></td></tr>
+                    <tr><td class="id-cell">#69</td><td class="measure-cell">285/70r17</td><td>AT</td><td class="dynamic-data-cell"><span class="car-view">RAM 1500 Rebel, Chevrolet Silverado Z71</span><span class="motor-view">5.7L Hemi V8 / 5.3L EcoTec3 V8</span></td></tr>
+                    <tr><td class="id-cell">#70</td><td class="measure-cell">285/70r17</td><td>AT</td><td class="dynamic-data-cell"><span class="car-view">Nissan Patrol, Toyota Land Cruiser Serie 200</span><span class="motor-view">TB48DE 4.8L I6 (Patrol Super Safari) / 1VD-FTV 4.5L V8</span></td></tr>
+                    <tr><td class="id-cell">#71</td><td class="measure-cell">285/70r17</td><td>MT</td><td class="dynamic-data-cell"><span class="car-view">Jeep Wrangler Rubicon, Toyota Hilux (Setup Extremo Offroad)</span><span class="motor-view">2.0L Hurricane Turbo / 1GD-FTV 2.8L Diesel</span></td></tr>
+                    <tr><td class="id-cell">#72</td><td class="measure-cell">285/70r17</td><td>AT</td><td class="dynamic-data-cell"><span class="car-view">Ford Ranger Raptor, Chevrolet Colorado ZR2</span><span class="motor-view">3.0L EcoBoost V6 Nano (292hp) / 2.7L Turbo High-Output I4</span></td></tr>
+                    <tr><td class="id-cell">#77</td><td class="measure-cell">285/70r16</td><td>AT</td><td class="dynamic-data-cell"><span class="car-view">Toyota Land Cruiser S80, Nissan Patrol (Modificados Rin 16")</span><span class="motor-view">1HD-FT 4.2L 24v Turbodiesel / TB45E 4.5L</span></td></tr>
+                    <tr><td class="id-cell">#78</td><td class="measure-cell">285/70r15</td><td>AT</td><td class="dynamic-data-cell"><span class="car-view">Camionetas clásicas americanas modificadas (Rin 15 Extra Ancho)</span><span class="motor-view">Chevy Small-Block 350 v8 / Ford Windsor 302 v8</span></td></tr>
+                    <tr><td class="id-cell">#79</td><td class="measure-cell">285/70r16</td><td>MT</td><td class="dynamic-data-cell"><span class="car-view">Mitsubishi Montero Pro, Toyota Tacoma (Setup fango Rin 16")</span><span class="motor-view">6G75 3.8L V6 MIVEC / 5VZ-FE 3.4L V6</span></td></tr>
+                    <tr><td class="id-cell">#80</td><td class="measure-cell">285/70r16</td><td>AT2</td><td class="dynamic-data-cell"><span class="car-view">Nissan Frontier, Isuzu D-Max (Con suspensión modificada)</span><span class="motor-view">YD25DDTi High Output / 4JJ1-TCX 3.0L</span></td></tr>
+                    <tr><td class="id-cell">#81</td><td class="measure-cell">245/75r17</td><td>MT</td><td class="dynamic-data-cell"><span class="car-view">Jeep Wrangler Sport, Ford F-250 / F-350 (Trabajo Pesado M/T)</span><span class="motor-view">3.6L Pentastar / 6.7L Power Stroke V8 Turbo Diesel</span></td></tr>
+                    <tr><td class="id-cell">#88</td><td class="measure-cell">265/75R16</td><td>LT RT Armatrack</td><td class="dynamic-data-cell"><span class="car-view">Toyota Land Cruiser, Nissan Patrol, Ford Ranger (Rugged Terrain)</span><span class="motor-view">1HZ 4.2L / TD42 / Puma 3.2L Diesel</span></td></tr>
+                    <tr><td class="id-cell">#93</td><td class="measure-cell">33r18</td><td>AT</td><td class="dynamic-data-cell"><span class="car-view">Ford F-150, Ram 1500, Chevrolet Silverado (Diámetro 33")</span><span class="motor-view">5.0L Coyote / 5.7L Hemi / 5.3L EcoTec3 V8</span></td></tr>
+                    <tr><td class="id-cell">#94</td><td class="measure-cell">33r18</td><td>AT</td><td class="dynamic-data-cell"><span class="car-view">Toyota Tundra, GMC Sierra</span><span class="motor-view">3UR-FE 5.7L / 6.2L EcoTec3 V8</span></td></tr>
+                    <tr><td class="id-cell">#95</td><td class="measure-cell">33r18</td><td>AT</td><td class="dynamic-data-cell"><span class="car-view">Jeep Wrangler Unlimited (Elevación con Rin 18")</span><span class="motor-view">3.6L Pentastar 24V VVT</span></td></tr>
+                    <tr><td class="id-cell">#96</td><td class="measure-cell">33r20</td><td>MT</td><td class="dynamic-data-cell"><span class="car-view">Camionetas Full-Size con rines de lujo de 20" y look agresivo M/T</span><span class="motor-view">Ford 3.5L EcoBoost High Output / Chevy 6.2L V8 Modificado</span></td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>&copy; 2026 Turbo Tire - Misión SADV41</p>
+    <p>Calidad y Servicio bajo la unión de Steven Dior</p>
+    <span class="spirit-mark">🎚</span>
+</footer>
+
+<script>
+    let currentTireType = 'ALL';
+    let currentTabId = 1;
+
+    // Manejo del cambio de Pestañas (Tabs)
+    function switchTab(tabIndex) {
+        currentTabId = tabIndex;
+        // Quitar la clase activa de todos los botones y secciones
+        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+        document.querySelectorAll('.category-section').forEach(sec => sec.classList.remove('active-tab'));
+        
+        // Agregar la clase activa al elemento seleccionado
+        document.querySelectorAll('.tab-btn')[tabIndex - 1].classList.add('active');
+        document.getElementById(`cat-${tabIndex}`).classList.add('active-tab');
+        
+        // Ejecutar filtro sobre la nueva pestaña visible
+        applyFilters();
+    }
+
+    // Almacenamiento del tipo de llanta seleccionado
+    function filterTireType(type, buttonElement) {
+        currentTireType = type;
+        document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+        buttonElement.classList.add('active');
+        
+        applyFilters();
+    }
+
+    // Algoritmo Reactivo de Filtrado
+    function applyFilters() {
+        const activeTableSection = document.getElementById(`cat-${currentTabId}`);
+        const rows = activeTableSection.querySelectorAll('tbody tr');
+
+        rows.forEach(row => {
+            const detailText = row.cells[2].textContent.toUpperCase(); // Celda de Marca/Detalle
+            
+            if (currentTireType === 'ALL') {
+                row.style.display = '';
+            } else {
+                // Validación exacta o de subtexto para evitar colisiones entre 'AT' y 'AT2'
+                if (currentTireType === 'AT') {
+                    // Si busca AT, ocultar si contiene AT2 específicamente pero no AT solo
+                    if (detailText.includes('AT2')) {
+                        row.style.display = 'none';
+                    } else if (detailText.includes('AT') || detailText.includes('A/T')) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                } else if (currentTireType === 'AT2') {
+                    if (detailText.includes('AT2')) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                } else {
+                    // Para MT, RT, HT
+                    const standardFormat = currentTireType; // MT
+                    const slashedFormat = currentTireType.split('').join('/'); // M/T
+                    
+                    if (detailText.includes(standardFormat) || detailText.includes(slashedFormat)) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                }
+            }
+        });
+    }
+
+    // Switch de visualización mutacional Autos vs Motores
+    function toggleDataView(toggleElement) {
+        const body = document.body;
+        if (toggleElement.checked) {
+            body.classList.remove('mode-car');
+            body.classList.add('mode-motor');
+            updateTableHeaders('Motorización Sugerida');
+        } else {
+            body.classList.remove('mode-motor');
+            body.classList.add('mode-car');
+            updateTableHeaders('Aplicación del Vehículo');
+        }
+    }
+
+    function updateTableHeaders(text) {
+        for (let i = 1; i <= 4; i++) {
+            const th = document.getElementById(`th-dynamic-${i}`);
+            if(th) th.textContent = text;
+        }
+    }
+</script>
+
+</body>
+</html>
