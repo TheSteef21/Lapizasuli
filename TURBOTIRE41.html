@@ -8,117 +8,439 @@
         :root {
             --primary: #d4af37; /* Dorado para el toque 'Dior' */
             --dark: #121212;
+            --card-bg: #1e1e1e;
             --accent: #25d366; /* Verde WhatsApp */
             --yappy: #00a3e0;  /* Azul Yappy */
             --white: #ffffff;
+            --text-muted: #a0aec0;
+            --border-color: #333333;
+            --table-th-bg: #2d3748;
         }
-        body { font-family: 'Segoe UI', sans-serif; background-color: var(--dark); color: var(--white); margin: 0; padding: 0; }
-        header { text-align: center; padding: 40px 20px; background: linear-gradient(180deg, #1a1a1a 0%, #121212 100%); border-bottom: 2px solid var(--primary); }
-        .logo { width: 120px; height: 120px; border-radius: 50%; border: 2px solid var(--primary); margin-bottom: 15px; }
-        h1 { margin: 10px 0; font-size: 1.8rem; letter-spacing: 2px; }
         
-        .header-actions { display: flex; flex-direction: column; align-items: center; gap: 10px; margin-top: 20px; }
-        
-        .main-channel { display: block; width: 250px; background: var(--primary); color: black; padding: 15px; border-radius: 50px; text-decoration: none; font-weight: bold; }
-        .btn-yappy-main { display: block; width: 250px; background: var(--yappy); color: white; padding: 15px; border-radius: 50px; text-decoration: none; font-weight: bold; box-shadow: 0 4px 15px rgba(0,163,224,0.3); }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-        .promo-banner { background: var(--primary); color: black; padding: 10px; font-weight: bold; text-align: center; margin-bottom: 20px; text-transform: uppercase; }
+        body { 
+            font-family: 'Segoe UI', Arial, sans-serif; 
+            background-color: var(--dark); 
+            color: var(--white); 
+            line-height: 1.5;
+            padding: 0; 
+            margin: 0;
+        }
+
+        header { 
+            text-align: center; 
+            padding: 40px 20px; 
+            background: linear-gradient(180deg, #1a1a1a 0%, #121212 100%); 
+            border-bottom: 2px solid var(--primary); 
+        }
+
+        .logo { 
+            width: 120px; 
+            height: 120px; 
+            border-radius: 50%; 
+            border: 2px solid var(--primary); 
+            margin-bottom: 15px; 
+            object-fit: cover;
+        }
+
+        h1 { 
+            margin: 10px 0; 
+            font-size: 2rem; 
+            letter-spacing: 2px; 
+            color: var(--white);
+            font-weight: 700;
+        }
         
-        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; padding: 20px; max-width: 1200px; margin: auto; }
-        .tire-card { background: #1e1e1e; border-radius: 12px; padding: 20px; display: flex; justify-content: space-between; align-items: center; transition: 0.3s; border: 1px solid #333; }
-        .tire-card:hover { border-color: var(--primary); }
-        .tire-info { font-size: 1.2rem; font-weight: bold; }
+        .header-actions { 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            gap: 12px; 
+            margin-top: 25px; 
+        }
         
-        .btn-ws { background-color: var(--accent); color: white; text-decoration: none; padding: 10px 15px; border-radius: 8px; font-weight: bold; font-size: 0.9rem; }
+        .main-channel { 
+            display: block; 
+            width: 280px; 
+            background: var(--primary); 
+            color: black; 
+            padding: 15px; 
+            border-radius: 50px; 
+            text-decoration: none; 
+            font-weight: bold; 
+            text-align: center;
+            transition: transform 0.2s;
+        }
+
+        .btn-yappy-main { 
+            display: block; 
+            width: 280px; 
+            background: var(--yappy); 
+            color: white; 
+            padding: 15px; 
+            border-radius: 50px; 
+            text-decoration: none; 
+            font-weight: bold; 
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,163,224,0.3); 
+            transition: transform 0.2s;
+        }
+
+        .main-channel:hover, .btn-yappy-main:hover {
+            transform: scale(1.03);
+        }
+
+        .promo-banner { 
+            background: var(--primary); 
+            color: black; 
+            padding: 12px; 
+            font-weight: bold; 
+            text-align: center; 
+            text-transform: uppercase; 
+            letter-spacing: 1px;
+            font-size: 11pt;
+        }
         
-        footer { text-align: center; padding: 40px; font-size: 0.8rem; opacity: 0.7; }
-        .spirit-mark { font-size: 1.5rem; display: block; margin-top: 10px; }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        /* Enlaces de Interés Estilizados */
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 12px;
+            margin-bottom: 40px;
+            background: #1a1a1a;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .links-grid a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px;
+            background: var(--card-bg);
+            color: var(--primary);
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 10pt;
+            border: 1px solid var(--border-color);
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+
+        .links-grid a:hover {
+            background: var(--primary);
+            color: black;
+            border-color: var(--primary);
+        }
+        
+        /* Secciones de Categorías */
+        .category-section {
+            margin-bottom: 40px;
+            background: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        .category-header {
+            background-color: var(--table-th-bg);
+            color: var(--white);
+            padding: 15px 20px;
+            font-size: 12pt;
+            font-weight: 600;
+            border-bottom: 2px solid var(--primary);
+        }
+        
+        /* Contenedor de tabla responsiva */
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        /* Tablas */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 10pt;
+            background: transparent;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background-color: #171923;
+            color: var(--primary);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 9pt;
+            letter-spacing: 0.5px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #161616;
+        }
+
+        tr:hover {
+            background-color: #252525;
+        }
+
+        .id-cell {
+            font-weight: bold;
+            color: var(--primary);
+            width: 80px;
+            text-align: center;
+        }
+
+        th.id-cell {
+            text-align: center;
+        }
+
+        .measure-cell {
+            font-weight: 600;
+            color: var(--white);
+        }
+
+        .car-cell {
+            color: var(--text-muted);
+        }
+        
+        footer { 
+            text-align: center; 
+            padding: 50px 20px; 
+            font-size: 0.85rem; 
+            opacity: 0.8; 
+            border-top: 1px solid var(--border-color);
+            background: #0d0d0d;
+        }
+
+        .spirit-mark { 
+            font-size: 1.8rem; 
+            display: block; 
+            margin-top: 15px; 
+        }
     </style>
 </head>
 <body>
 
 <header>
+    <!-- Puedes reemplazar este enlace por el logo real de la misión SADV41 -->
     <img src="https://i.imgur.com/your-logo-here.jpg" alt="Turbo Tire Logo" class="logo"> 
     <h1>TURBO TIRE</h1>
     <p>Por Steven Dior Oficial</p>
     
     <div class="header-actions">
-        <a href="https://whatsapp.com/channel/0029VbCkuGnKbYMPWYEgBQ3B" class="main-channel">SÍGUENOS EN WHATSAPP 📱</a>
-        <a href="https://yappypa.page.link/Zi7X?hash=rjYRsJ8Yz0hGBKWXnNKRpeCr5yZZkbjbgkxGCAZdd/nmXoS0X8s5ntvwHrGm+7HT" class="btn-yappy-main">PAGAR CON YAPPY 💳</a>
+        <a href="https://whatsapp.com/channel/0029VbCkuGnKbYMPWYEgBQ3B" class="main-channel" target="_blank">SÍGUENOS EN WHATSAPP 📱</a>
+        <a href="https://yappypa.page.link/Zi7X?hash=rjYRsJ8Yz0hGBKWXnNKRpeCr5yZZkbjbgkxGCAZdd/nmXoS0X8s5ntvwHrGm+7HT" class="btn-yappy-main" target="_blank">PAGAR CON YAPPY 💳</a>
     </div>
 </header>
 
-<div class="promo-banner">Promociones Directas y Reservas</div>
+<div class="promo-banner">Promociones Directas, Inventario y Reservas</div>
 
-<div class="grid-container">
-    <div class="tire-card">
-        <div class="tire-info">195/60R15</div>
-        <a href="https://whatsapp.com/channel/0029Vb7ToCxDDmFO4ahs2m1m" class="btn-ws">Ver Oferta</a>
+<div class="container">
+
+    <!-- Accesos Directos a tus Plataformas y Repositorios -->
+    <div class="links-grid">
+        <a href="https://thesteef21.github.io/Lapizasuli/Calc.html" target="_blank">Calculadora Pagos Netos</a>
+        <a href="https://thesteef21.github.io/Lapizasuli/Bless.html" target="_blank">Crypto Mundo de Pagos</a>
+        <a href="https://thesteef21.github.io/Lapizasuli/Noticias.html" target="_blank">Portal de Noticias</a>
+        <a href="https://thesteef21.github.io/Lapizasuli/GSADV41.html" target="_blank">Ecosistema GSADV41</a>
+        <a href="https://wa.me/50769362166" target="_blank">WhatsApp Ventas/Pagos</a>
+        <a href="https://instagram.com/llanteria_turbotire" target="_blank">Instagram (Galería)</a>
+        <a href="https://tiktok.com/@AlexTurbotire" target="_blank">TikTok @AlexTurbotire</a>
+        <a href="https://tiktok.com/@LlanteroBurunga" target="_blank">TikTok @LlanteroBurunga</a>
     </div>
 
-    <div class="tire-card">
-        <div class="tire-info">265/70R16</div>
-        <a href="https://whatsapp.com/channel/0029VbCYSyuFi8xXgVnsz40S" class="btn-ws">Ver Oferta</a>
+    <!-- CATEGORÍA 1 -->
+    <div class="category-section">
+        <div class="category-header">1. Autos Compactos, Sedanes y Hatchbacks (Rines 14", 15" y 16" Perfil Bajo/Medio)</div>
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th class="id-cell">#</th>
+                        <th>Medida</th>
+                        <th>Marca / Detalle</th>
+                        <th>Posibles Autos Comunes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td class="id-cell">#3</td><td class="measure-cell">195/50r15</td><td>Runway</td><td class="car-cell">Honda Civic, Toyota Yaris, Hyundai Accent (Modificados)</td></tr>
+                    <tr><td class="id-cell">#4</td><td class="measure-cell">185/65r15</td><td>Hankook</td><td class="car-cell">Nissan Versa, Toyota Avanza, Kia Rio</td></tr>
+                    <tr><td class="id-cell">#10</td><td class="measure-cell">185/65r15</td><td>Uniroyal</td><td class="car-cell">Nissan Versa, Honda Civic, Renault Logan</td></tr>
+                    <tr><td class="id-cell">#28</td><td class="measure-cell">205/55r16</td><td>Linglong</td><td class="car-cell">Toyota Corolla, Hyundai Elantra, Kia Cerato</td></tr>
+                    <tr><td class="id-cell">#29</td><td class="measure-cell">205/55r16</td><td>Linglong</td><td class="car-cell">Toyota Corolla, Honda Civic, Mazda 3</td></tr>
+                    <tr><td class="id-cell">#30</td><td class="measure-cell">185/55r16</td><td>Linglong</td><td class="car-cell">Honda City, Honda Fit, Chevrolet Spark (Modificado)</td></tr>
+                    <tr><td class="id-cell">#31</td><td class="measure-cell">185/60r15</td><td>Kleber</td><td class="car-cell">Toyota Yaris, Swift, Volkswagen Polo</td></tr>
+                    <tr><td class="id-cell">#32</td><td class="measure-cell">185/60r14</td><td>Semperit</td><td class="car-cell">Hyundai i10, Kia Picanto (Older), Chevy Aveo</td></tr>
+                    <tr><td class="id-cell">#33</td><td class="measure-cell">185/55r16</td><td>Bridgestone</td><td class="car-cell">Honda City, Nissan Note, Suzuki Swift Sport</td></tr>
+                    <tr><td class="id-cell">#34</td><td class="measure-cell">185/60r15</td><td>Yokohama</td><td class="car-cell">Toyota Yaris, Mazda 2, Hyundai Accent</td></tr>
+                    <tr><td class="id-cell">#35</td><td class="measure-cell">185/55r16</td><td>Linglong</td><td class="car-cell">Honda Fit, Chevrolet Sail, Ford Fiesta</td></tr>
+                    <tr><td class="id-cell">#36</td><td class="measure-cell">185/70r14</td><td>Centara</td><td class="car-cell">Nissan Sentra, Toyota Corolla (Modelos anteriores)</td></tr>
+                    <tr><td class="id-cell">#37</td><td class="measure-cell">195/50r15</td><td>Bridgestone</td><td class="car-cell">Volkswagen Gol, Mitsubishi Lancer, Ford Fiesta</td></tr>
+                    <tr><td class="id-cell">#38</td><td class="measure-cell">185/65r14</td><td>Hankook</td><td class="car-cell">Kia Rio Styling, Hyundai Accent, Chevrolet Optra</td></tr>
+                    <tr><td class="id-cell">#39</td><td class="measure-cell">185/60r14</td><td>Greenlander</td><td class="car-cell">Volkswagen Pointer, Toyota Tercel, Daewoo Lanos</td></tr>
+                    <tr><td class="id-cell">#40</td><td class="measure-cell">175/70r14</td><td>Linglong</td><td class="car-cell">Hyundai Accent, Kia Rio, Toyota Yaris</td></tr>
+                    <tr><td class="id-cell">#99</td><td class="measure-cell">175/65R14</td><td>BRIDGESTONE</td><td class="car-cell">Toyota Yaris, Honda Fit, Hyundai Getz, Kia Picanto</td></tr>
+                    <tr><td class="id-cell">#100</td><td class="measure-cell">175/65R14</td><td>NEXEN</td><td class="car-cell">Fiat Palio, Ford Fiesta, Chevrolet Spark GT</td></tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 
-    <div class="tire-card">
-        <div class="tire-info">285/70R17 AT</div>
-        <a href="https://whatsapp.com/channel/0029VbCqmuCHLHQWc8F5jb1i" class="btn-ws">Ver Oferta</a>
+    <!-- CATEGORÍA 2 -->
+    <div class="category-section">
+        <div class="category-header">2. Crossovers y SUVs Medianas (Rines 16", 17" y 18" Perfil Convencional)</div>
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th class="id-cell">#</th>
+                        <th>Medida</th>
+                        <th>Marca / Detalle</th>
+                        <th>Posibles Autos Comunes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td class="id-cell">#1</td><td class="measure-cell">225/60r17</td><td>Yokohama</td><td class="car-cell">Subaru Forester, Hyundai Tucson, Kia Sportage</td></tr>
+                    <tr><td class="id-cell">#2</td><td class="measure-cell">225/55r18</td><td>Greenlander</td><td class="car-cell">Hyundai Tucson, Kia Sportage, Mitsubishi Outlander</td></tr>
+                    <tr><td class="id-cell">#6</td><td class="measure-cell">225/65r17</td><td>Bridgestone</td><td class="car-cell">Toyota RAV4, Honda CR-V, Nissan X-Trail</td></tr>
+                    <tr><td class="id-cell">#7</td><td class="measure-cell">215/70r16</td><td>Hankook</td><td class="car-cell">Hyundai Tucson (Older), Kia Sportage, Mitsubishi ASX</td></tr>
+                    <tr><td class="id-cell">#8</td><td class="measure-cell">215/70r16</td><td>Hankook</td><td class="car-cell">Toyota RAV4, Suzuki Grand Vitara</td></tr>
+                    <tr><td class="id-cell">#9</td><td class="measure-cell">205/65r16</td><td>Hilo</td><td class="car-cell">Nissan Kicks, Hyundai Creta, Chevrolet Tracker</td></tr>
+                    <tr><td class="id-cell">#11</td><td class="measure-cell">225/55r18</td><td>Greenlander</td><td class="car-cell">Jeep Compass, Subaru XV, Nissan Qashqai</td></tr>
+                    <tr><td class="id-cell">#12</td><td class="measure-cell">225/55r18</td><td>Nexen</td><td class="car-cell">Mitsubishi Outlander, Peugeot 3008, Renault Koleos</td></tr>
+                    <tr><td class="id-cell">#13</td><td class="measure-cell">215/60r17</td><td>Dunlop</td><td class="car-cell">Nissan Qashqai, Jeep Renegade, Mitsubishi ASX</td></tr>
+                    <tr><td class="id-cell">#14</td><td class="measure-cell">215/60r17</td><td>Dunlop</td><td class="car-cell">Hyundai Creta, Chevrolet Trax, Chery Tiggo</td></tr>
+                    <tr><td class="id-cell">#15</td><td class="measure-cell">225/60r16</td><td>Linglong</td><td class="car-cell">Hyundai Tucson, Kia Sportage, Subaru Outback (Older)</td></tr>
+                    <tr><td class="id-cell">#16</td><td class="measure-cell">215/65r16</td><td>Boto</td><td class="car-cell">Renault Duster, Nissan Qashqai, Hyundai Tucson</td></tr>
+                    <tr><td class="id-cell">#17</td><td class="measure-cell">205/65r16</td><td>Wanderer</td><td class="car-cell">Honda HR-V, Nissan Kicks, Kia Seltos</td></tr>
+                    <tr><td class="id-cell">#18</td><td class="measure-cell">205/65r16</td><td>Wanderer</td><td class="car-cell">Chevrolet Tracker, Suzuki Vitara</td></tr>
+                    <tr><td class="id-cell">#19</td><td class="measure-cell">225/50r17</td><td>Nokian</td><td class="car-cell">BMW Serie 3, Audi A4, Honda Accord, Ford Fusion</td></tr>
+                    <tr><td class="id-cell">#20</td><td class="measure-cell">225/60r18</td><td>Centara</td><td class="car-cell">Honda CR-V, Nissan X-Trail, Toyota RAV4 (High Trim)</td></tr>
+                    <tr><td class="id-cell">#21</td><td class="measure-cell">225/60r18</td><td>Centara</td><td class="car-cell">Subaru Outback, Mazda CX-5, Ford Escape</td></tr>
+                    <tr><td class="id-cell">#22</td><td class="measure-cell">225/60r18</td><td>Centara</td><td class="car-cell">Honda CR-V, Jeep Cherokee</td></tr>
+                    <tr><td class="id-cell">#23</td><td class="measure-cell">225/60r18</td><td>Centara</td><td class="car-cell">Renault Koleos, Haval H6</td></tr>
+                    <tr><td class="id-cell">#24</td><td class="measure-cell">205/65r16</td><td>Polo</td><td class="car-cell">Nissan Kicks, Hyundai Creta</td></tr>
+                    <tr><td class="id-cell">#25</td><td class="measure-cell">215/50r17</td><td>Centara</td><td class="car-cell">Toyota Prius, Mazda 3, Chevrolet Cruze</td></tr>
+                    <tr><td class="id-cell">#26</td><td class="measure-cell">215/45r17</td><td>Rapid</td><td class="car-cell">Toyota Corolla, Kia Cerato Pro, Hyundai Elantra i35</td></tr>
+                    <tr><td class="id-cell">#27</td><td class="measure-cell">205/45r17</td><td>Pirelli</td><td class="car-cell">Mini Cooper, Suzuki Swift Sport, Ford Fiesta ST</td></tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 
-    <div class="tire-card">
-        <div class="tire-info">265/75R16</div>
-        <a href="https://whatsapp.com/channel/0029VbCC7evLo4hevoce2j2W" class="btn-ws">Ver Oferta</a>
+    <!-- CATEGORÍA 3 -->
+    <div class="category-section">
+        <div class="category-header">3. Pick-ups, SUVs Grandes y Camionetas de Trabajo (A/T y H/T)</div>
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th class="id-cell">#</th>
+                        <th>Medida</th>
+                        <th>Marca / Detalle</th>
+                        <th>Posibles Autos Comunes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td class="id-cell">#5</td><td class="measure-cell">185r14</td><td>Sportrak</td><td class="car-cell">Mitsubishi L300, Toyota Hiace, Nissan Urvan (Carga)</td></tr>
+                    <tr><td class="id-cell">#41</td><td class="measure-cell">265/60r18</td><td>(Chejo Aportó)</td><td class="car-cell">Toyota Hilux, Nissan Frontier, Mitsubishi L200, Ford Ranger</td></tr>
+                    <tr><td class="id-cell">#42</td><td class="measure-cell">265/60r18</td><td>(Chejo Aportó)</td><td class="car-cell">Chevrolet Colorado, Isuzu D-Max, Toyota Fortuner</td></tr>
+                    <tr><td class="id-cell">#43</td><td class="measure-cell">265/60r18</td><td>(Chejo Aportó)</td><td class="car-cell">Ford Ranger, Jeep Grand Cherokee</td></tr>
+                    <tr><td class="id-cell">#44</td><td class="measure-cell">265/60r18</td><td>(Chejo Aportó)</td><td class="car-cell">Mitsubishi Montero Sport, Nissan Pathfinder</td></tr>
+                    <tr><td class="id-cell">#45</td><td class="measure-cell">265/65r17</td><td>Toyo</td><td class="car-cell">Toyota Hilux, Land Cruiser Prado, Mitsubishi L200, Isuzu D-Max</td></tr>
+                    <tr><td class="id-cell">#46</td><td class="measure-cell">265/65r17</td><td>Interstate</td><td class="car-cell">Ford Ranger, Chevrolet Colorado, Nissan Frontier</td></tr>
+                    <tr><td class="id-cell">#47</td><td class="measure-cell">245/65r17</td><td>Windforce</td><td class="car-cell">Ford Explorer, Jeep Grand Cherokee, VW Amarok</td></tr>
+                    <tr><td class="id-cell">#48</td><td class="measure-cell">245/65r17</td><td>Grandtrek</td><td class="car-cell">Chevrolet Trailblazer, Honda Pilot</td></tr>
+                    <tr><td class="id-cell">#49</td><td class="measure-cell">27x8.5r14</td><td>Conqueror</td><td class="car-cell">Pickups compactos clásicos, Camionetas de carga liviana</td></tr>
+                    <tr><td class="id-cell">#52</td><td class="measure-cell">265/70r17</td><td>Runway</td><td class="car-cell">Jeep Wrangler, Toyota Prado, Ford F-150, Ram 1500</td></tr>
+                    <tr><td class="id-cell">#53</td><td class="measure-cell">265/70r17</td><td>Runway</td><td class="car-cell">Toyota Tacoma, Nissan Titan</td></tr>
+                    <tr><td class="id-cell">#54</td><td class="measure-cell">265/70r17</td><td>Deestone</td><td class="car-cell">Chevrolet Tahoe, Suburban, GMC Sierra</td></tr>
+                    <tr><td class="id-cell">#55</td><td class="measure-cell">265/70r17</td><td>Deestone</td><td class="car-cell">Toyota Land Cruiser, Jeep Gladiator</td></tr>
+                    <tr><td class="id-cell">#56</td><td class="measure-cell">265/65r17</td><td>Lch</td><td class="car-cell">Toyota Hilux, Ford Ranger, Mitsubishi L200</td></tr>
+                    <tr><td class="id-cell">#57</td><td class="measure-cell">265/65r17</td><td>Lch</td><td class="car-cell">Nissan Frontier, Isuzu D-Max, Toyota Prado</td></tr>
+                    <tr><td class="id-cell">#58</td><td class="measure-cell">235/70r16</td><td>Goodyear</td><td class="car-cell">Ford Ranger (Older), Chevrolet S10, Jeep Liberty</td></tr>
+                    <tr><td class="id-cell">#59</td><td class="measure-cell">255/70r16</td><td>AT</td><td class="car-cell">Nissan Frontier, Ford Ranger, Chevrolet Colorado</td></tr>
+                    <tr><td class="id-cell">#60</td><td class="measure-cell">265/60r18</td><td>AT</td><td class="car-cell">Toyota Hilux Revo, Isuzu D-Max, Ford Ranger Wildtrak</td></tr>
+                    <tr><td class="id-cell">#67</td><td class="measure-cell">275/55r20</td><td>Hankook</td><td class="car-cell">Ford F-150 Lariat, Chevrolet Tahoe, RAM 1500, Toyota Tundra</td></tr>
+                    <tr><td class="id-cell">#73</td><td class="measure-cell">265/60R18</td><td>Continental HT XL</td><td class="car-cell">Toyota Fortuner, Ford Ranger Limited, Jeep Grand Cherokee</td></tr>
+                    <tr><td class="id-cell">#74</td><td class="measure-cell">265/65R17</td><td>Linglong AT</td><td class="car-cell">Mitsubishi L200 Triton, Toyota Hilux, Nissan Frontier NP300</td></tr>
+                    <tr><td class="id-cell">#75</td><td class="measure-cell">265/65R17</td><td>Deestone Shipayat AT</td><td class="car-cell">Toyota Prado, Isuzu D-Max, Chevrolet Colorado</td></tr>
+                    <tr><td class="id-cell">#76</td><td class="measure-cell">265/65r17</td><td>AT</td><td class="car-cell">Ford Ranger, Toyota Hilux, Great Wall Wingle</td></tr>
+                    <tr><td class="id-cell">#82</td><td class="measure-cell">265/65R17</td><td>Bridgestone AT</td><td class="car-cell">Toyota Prado, Toyota Hilux (Original)</td></tr>
+                    <tr><td class="id-cell">#83</td><td class="measure-cell">265/65R17</td><td>Deestone Shi Payat AT</td><td class="car-cell">Mitsubishi L200, Nissan Frontier, Isuzu D-Max</td></tr>
+                    <tr><td class="id-cell">#84</td><td class="measure-cell">265/65R17</td><td>Ecovision AT</td><td class="car-cell">Ford Ranger, Foton Tunland, Chevrolet Colorado</td></tr>
+                    <tr><td class="id-cell">#85</td><td class="measure-cell">265/65R17</td><td>Bridgestone AT</td><td class="car-cell">Toyota Hilux, Mitsubishi Montero Sport</td></tr>
+                    <tr><td class="id-cell">#86</td><td class="measure-cell">265/65R17</td><td>Linglong AT</td><td class="car-cell">Nissan Frontier, Isuzu D-Max</td></tr>
+                    <tr><td class="id-cell">#87</td><td class="measure-cell">265/60R18</td><td>Bridgestone HT</td><td class="car-cell">Toyota Hilux, Toyota Fortuner (Uso Urbano/Asfalto)</td></tr>
+                    <tr><td class="id-cell">#89</td><td class="measure-cell">245/65R17</td><td>Windforce AT</td><td class="car-cell">Ford Explorer, Jeep Grand Cherokee</td></tr>
+                    <tr><td class="id-cell">#90</td><td class="measure-cell">245/65R17</td><td>Windforce AT</td><td class="car-cell">Chevrolet Trailblazer, Mitsubishi Nativa</td></tr>
+                    <tr><td class="id-cell">#91</td><td class="measure-cell">265/65R17</td><td>Deestone Shipayat AT</td><td class="car-cell">Toyota Prado, Ford Ranger, Mitsubishi L200</td></tr>
+                    <tr><td class="id-cell">#92</td><td class="measure-cell">265/70R16</td><td>Kumho HT</td><td class="car-cell">Mitsubishi L200 (Older), Nissan Frontier D22, Toyota Hilux</td></tr>
+                    <tr><td class="id-cell">#97</td><td class="measure-cell">265/70R16</td><td>Linglong AT2</td><td class="car-cell">Mitsubishi Montero, Nissan Patrol, Toyota Land Cruiser Prado 90</td></tr>
+                    <tr><td class="id-cell">#98</td><td class="measure-cell">265/70R16</td><td>Neoland</td><td class="car-cell">Toyota Hilux (KUN25), Isuzu Rodeo, Ford Ranger</td></tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 
-    <div class="tire-card">
-        <div class="tire-info">285/70R17 MT</div>
-        <a href="https://whatsapp.com/channel/0029VbCkohe4CrfgSdaZLF1I" class="btn-ws">Ver Oferta</a>
-    </div>
-
-    <div class="tire-card">
-        <div class="tire-info">265/70R17</div>
-        <a href="https://whatsapp.com/channel/0029Vb7kN5sKLaHeYN8ExO0G" class="btn-ws">Ver Oferta</a>
-    </div>
-
-    <div class="tire-card">
-        <div class="tire-info">205/40R17</div>
-        <a href="https://whatsapp.com/channel/0029VbCPLoTISTKs1u7Da038" class="btn-ws">Ver Oferta</a>
-    </div>
-
-    <div class="tire-card">
-        <div class="tire-info">215/45R17</div>
-        <a href="https://whatsapp.com/channel/0029Vb7j3Cn7DAX3S96t0y1G" class="btn-ws">Ver Oferta</a>
-    </div>
-
-    <div class="tire-card">
-        <div class="tire-info">185/70R14</div>
-        <a href="https://whatsapp.com/channel/0029VbDA94U0lwgotkHZso37" class="btn-ws">Ver Oferta</a>
-    </div>
-
-    <div class="tire-card">
-        <div class="tire-info">205/45R17</div>
-        <a href="https://whatsapp.com/channel/0029Vb8ltYqDuMReHfjes70N" class="btn-ws">Ver Oferta</a>
-    </div>
-
-    <div class="tire-card">
-        <div class="tire-info">185/65R14</div>
-        <a href="https://whatsapp.com/channel/0029VbCDfWSG8I57ZW1n331c" class="btn-ws">Ver Oferta</a>
-    </div>
-
-    <div class="tire-card">
-        <div class="tire-info">175/70R14</div>
-        <a href="https://whatsapp.com/channel/0029VbD3rvXLikg8BKen553H" class="btn-ws">Ver Oferta</a>
-    </div>
-
-    <div class="tire-card">
-        <div class="tire-info">195/50R15</div>
-        <a href="https://whatsapp.com/channel/0029VbCV5nqGehEKD4KWpK2Y" class="btn-ws">Ver Oferta</a>
-    </div>
-
-    <div class="tire-card">
-        <div class="tire-info">195/40R17</div>
-        <a href="https://whatsapp.com/channel/0029VbCHW0B4IBhBqGms3645" class="btn-ws">Ver Oferta</a>
+    <!-- CATEGORÍA 4 -->
+    <div class="category-section">
+        <div class="category-header">4. Off-Road Pesado, Mud-Terrain y Tamaños Grandes Modificados (M/T, R/T, 33")</div>
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th class="id-cell">#</th>
+                        <th>Medida</th>
+                        <th>Marca / Detalle</th>
+                        <th>Posibles Autos Comunes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td class="id-cell">#50</td><td class="measure-cell">285/75r16</td><td>Tourador</td><td class="car-cell">Nissan Patrol, Toyota Land Cruiser (Modificados con Lift Kit)</td></tr>
+                    <tr><td class="id-cell">#51</td><td class="measure-cell">285/75r16</td><td>Tourador</td><td class="car-cell">Toyota Hilux, Ford Ranger, Jeep Wrangler (Elevación 3"+)</td></tr>
+                    <tr><td class="id-cell">#61</td><td class="measure-cell">275/65r18</td><td>AT</td><td class="car-cell">Ford F-150, Toyota Tundra, Ram 1500 (Heavy Duty)</td></tr>
+                    <tr><td class="id-cell">#62</td><td class="measure-cell">275/65r18</td><td>Tourador</td><td class="car-cell">Ford F-150, Chevrolet Silverado, GMC Sierra</td></tr>
+                    <tr><td class="id-cell">#63</td><td class="measure-cell">275/65r18</td><td>Tourador</td><td class="car-cell">Toyota Tundra, Nissan Titan</td></tr>
+                    <tr><td class="id-cell">#64</td><td class="measure-cell">275/65r18</td><td>Tourador</td><td class="car-cell">Ford F-150 FX4, Ram 1500 Rebel</td></tr>
+                    <tr><td class="id-cell">#65</td><td class="measure-cell">275/65r18</td><td>Tourador</td><td class="car-cell">Nissan Patrol Y62, Jeep Wrangler (Oversized)</td></tr>
+                    <tr><td class="id-cell">#66</td><td class="measure-cell">285/70r17</td><td>Roadcruza</td><td class="car-cell">Jeep Wrangler JK/JL, Toyota Prado Modificada, Ford Ranger Raptor</td></tr>
+                    <tr><td class="id-cell">#68</td><td class="measure-cell">285/70r17</td><td>AT</td><td class="car-cell">Toyota Tacoma TRD Pro, Jeep Gladiator, Ford F-150</td></tr>
+                    <tr><td class="id-cell">#69</td><td class="measure-cell">285/70r17</td><td>AT</td><td class="car-cell">RAM 1500 Rebel, Chevrolet Silverado Z71</td></tr>
+                    <tr><td class="id-cell">#70</td><td class="measure-cell">285/70r17</td><td>AT</td><td class="car-cell">Nissan Patrol, Toyota Land Cruiser Serie 200</td></tr>
+                    <tr><td class="id-cell">#71</td><td class="measure-cell">285/70r17</td><td>MT</td><td class="car-cell">Jeep Wrangler Rubicon, Toyota Hilux (Setup Extremo Offroad)</td></tr>
+                    <tr><td class="id-cell">#72</td><td class="measure-cell">285/70r17</td><td>AT</td><td class="car-cell">Ford Ranger Raptor, Chevrolet Colorado ZR2</td></tr>
+                    <tr><td class="id-cell">#77</td><td class="measure-cell">285/70r16</td><td>AT</td><td class="car-cell">Toyota Land Cruiser S80, Nissan Patrol (Modificados Rin 16")</td></tr>
+                    <tr><td class="id-cell">#78</td><td class="measure-cell">285/70r15</td><td>AT</td><td class="car-cell">Camionetas clásicas americanas modificadas (Rin 15 Extra Ancho)</td></tr>
+                    <tr><td class="id-cell">#79</td><td class="measure-cell">285/70r16</td><td>MT</td><td class="car-cell">Mitsubishi Montero Pro, Toyota Tacoma (Setup fango Rin 16")</td></tr>
+                    <tr><td class="id-cell">#80</td><td class="measure-cell">285/70r16</td><td>AT2</td><td class="car-cell">Nissan Frontier, Isuzu D-Max (Con suspensión modificada)</td></tr>
+                    <tr><td class="id-cell">#81</td><td class="measure-cell">245/75r17</td><td>MT</td><td class="car-cell">Jeep Wrangler Sport, Ford F-250 / F-350 (Trabajo Pesado M/T)</td></tr>
+                    <tr><td class="id-cell">#88</td><td class="measure-cell">265/75R16</td><td>LT RT Armatrack</td><td class="car-cell">Toyota Land Cruiser, Nissan Patrol, Ford Ranger (Rugged Terrain)</td></tr>
+                    <tr><td class="id-cell">#93</td><td class="measure-cell">33r18</td><td>AT</td><td class="car-cell">Ford F-150, Ram 1500, Chevrolet Silverado (Diámetro 33")</td></tr>
+                    <tr><td class="id-cell">#94</td><td class="measure-cell">33r18</td><td>AT</td><td class="car-cell">Toyota Tundra, GMC Sierra</td></tr>
+                    <tr><td class="id-cell">#95</td><td class="measure-cell">33r18</td><td>AT</td><td class="car-cell">Jeep Wrangler Unlimited (Elevación con Rin 18")</td></tr>
+                    <tr><td class="id-cell">#96</td><td class="measure-cell">33r20</td><td>MT</td><td class="car-cell">Camionetas Full-Size con rines de lujo de 20" y look agresivo M/T</td></tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 
