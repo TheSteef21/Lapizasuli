@@ -13,30 +13,32 @@ def webhook():
         token = request.args.get("hub.verify_token")
         challenge = request.args.get("hub.challenge")
         
-        if mode == "subscribe" and token == os.getenv("WHATSAPP_TOKEN"):
+        # Obtenemos el token desde la variable de entorno
+        stored_token = os.getenv("WHATSAPP_TOKEN")
+        
+        # Verificación lógica
+        if mode == "subscribe" and token == stored_token:
             return challenge, 200
-        return "Forbidden", 403
+        else:
+            # Esto aparecerá en tus logs de Render si la comparación falla
+            print(f"Error de validación: Recibido '{token}', esperado '{stored_token}'")
+            return "Forbidden", 403
 
     # 2. Recepción y procesamiento de mensajes (POST)
     if request.method == "POST":
         data = request.json
         try:
-            # Extracción del cuerpo del mensaje y el teléfono
             value = data['entry'][0]['changes'][0]['value']
             if 'messages' in value:
                 mensaje = value['messages'][0]['text']['body']
                 telefono = value['messages'][0]['from']
                 
-                # Procesar con IA (misión SADV41) y responder
                 respuesta = obtener_respuesta_ia(mensaje)
                 enviar_factura_whatsapp(telefono, respuesta)
-                
         except (KeyError, IndexError):
-            # Ignoramos mensajes que no sean de texto (ej: confirmaciones de entrega)
             pass
             
         return "OK", 200
 
 if __name__ == "__main__":
-    # Render asigna el puerto automáticamente, así que dejamos que Flask elija
     app.run()
