@@ -6,7 +6,7 @@ def enviar_factura_whatsapp(telefono_cliente, mensaje_texto):
     # Credenciales desde variables de entorno (por seguridad)
     BUSINESS_ID = "1019425660663203"
     PHONE_ID = "1152154214647264"
-    TOKEN = os.getenv("WHATSAPP_TOKEN") # Configura esto en GitHub Secrets
+    TOKEN = os.getenv("WHATSAPP_ACCESS_TOKEN") # Configura esto en GitHub Secrets
     
     url = f"https://graph.facebook.com/v21.0/{PHONE_ID}/messages"
     
