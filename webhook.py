@@ -20,7 +20,6 @@ def webhook():
         if mode == "subscribe" and token == stored_token:
             return challenge, 200
         else:
-            # Esto aparecerá en tus logs de Render si la comparación falla
             print(f"Error de validación: Recibido '{token}', esperado '{stored_token}'")
             return "Forbidden", 403
 
@@ -29,13 +28,23 @@ def webhook():
         data = request.json
         try:
             value = data['entry'][0]['changes'][0]['value']
+            
+            # Verificamos si hay mensajes en la carga útil
             if 'messages' in value:
-                mensaje = value['messages'][0]['text']['body']
-                telefono = value['messages'][0]['from']
-                
-                respuesta = obtener_respuesta_ia(mensaje)
-                enviar_factura_whatsapp(telefono, respuesta)
-        except (KeyError, IndexError):
+                # Verificamos si realmente es un mensaje de texto para evitar el KeyError
+                if 'text' in value['messages'][0]:
+                    mensaje = value['messages'][0]['text']['body']
+                    telefono = value['messages'][0]['from']
+                    
+                    # Procesar con IA (Misión SADV41) y responder
+                    respuesta = obtener_respuesta_ia(mensaje)
+                    enviar_factura_whatsapp(telefono, respuesta)
+                else:
+                    # Es un evento de confirmación (leído/entregado), lo ignoramos
+                    pass
+        except (KeyError, IndexError) as e:
+            # Capturamos el error en logs para monitoreo sin detener el servidor
+            print(f"Error procesando el payload de Meta: {e}")
             pass
             
         return "OK", 200
