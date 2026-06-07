@@ -3,81 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora de Ventas - Yappy</title>
+    <title>Calculadora de Ventas SADV41</title>
     <style>
-        body { font-family: Arial, sans-serif; background-color: #f4f4f9; display: flex; justify-content: center; padding: 20px; }
-        .card { background: white; padding: 25px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); width: 100%; max-width: 400px; }
-        h2 { color: #004691; text-align: center; margin-bottom: 20px; }
-        label { display: block; margin-bottom: 8px; font-weight: bold; color: #333; }
-        input { width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; font-size: 16px; }
-        .results { background: #eef2f7; padding: 15px; border-radius: 10px; margin-bottom: 20px; }
+        body { font-family: 'Courier New', Courier, monospace; background-color: #0b1120; display: flex; justify-content: center; padding: 20px; }
+        .card { background: #1e293b; padding: 25px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); width: 100%; max-width: 400px; border: 1px solid #d4af37; }
+        h2 { color: #d4af37; text-align: center; margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; font-weight: bold; color: #f8fafc; }
+        input { width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid #475569; border-radius: 8px; background: #0f172a; color: white; font-size: 16px; }
+        .results { background: #0f172a; padding: 15px; border-radius: 10px; margin-bottom: 20px; color: #f8fafc; }
         .row { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 14px; }
-        .total-row { border-top: 1px solid #ccc; margin-top: 10px; padding-top: 10px; font-weight: bold; font-size: 18px; color: #004691; }
-        .btn { display: block; text-align: center; padding: 15px; border-radius: 8px; text-decoration: none; font-weight: bold; margin-bottom: 10px; transition: 0.3s; }
+        .total-row { border-top: 1px solid #d4af37; margin-top: 10px; padding-top: 10px; font-weight: bold; font-size: 18px; color: #d4af37; }
+        .btn { display: block; text-align: center; padding: 15px; border-radius: 8px; text-decoration: none; font-weight: bold; margin-bottom: 10px; }
         .btn-yappy { background-color: #004691; color: white; }
         .btn-whatsapp { background-color: #25D366; color: white; }
-        .btn:hover { opacity: 0.9; }
-        .info-text { font-size: 11px; color: #666; text-align: center; margin-top: 10px; }
     </style>
 </head>
 <body>
 
 <div class="card">
-    <h2>Calculadora de Precio</h2>
+    <h2>Calculadora SADV41</h2>
     
-    <label for="price">Precio del Producto ($):</label>
+    <label for="price">Precio Base ($):</label>
     <input type="number" id="price" placeholder="Ej: 24.07" oninput="calculate()">
 
+    <!-- INICIO_FACTSADV41 -->
     <div class="results" id="output">
-        <div class="row"><span>Precio con Margen (35%):</span> <span id="res-margen">$0.00</span></div>
+        <div class="row"><span>Margen (35%):</span> <span id="res-margen">$0.00</span></div>
         <div class="row"><span>Comisión Yappy (1%):</span> <span id="res-comision">$0.00</span></div>
-        <div class="row"><span>ITBMS de Comisión (7%):</span> <span id="res-itbms">$0.00</span></div>
+        <div class="row"><span>ITBMS Comisión (7%):</span> <span id="res-itbms">$0.00</span></div>
         <div class="row total-row"><span>Total a Pagar:</span> <span id="res-total">$0.00</span></div>
     </div>
+    <!-- FIN_FACTSADV41 -->
 
-    <a href="https://yappypa.page.link/Zi7X?hash=rjYRsJ8Yz0hGBKWXnNKRpeCr5yZZkbjbgkxGCAZdd/nmXoS0X8s5ntvwHrGm+7HT" class="btn btn-yappy">Pagar con Yappy</a>
-    
+    <a href="https://yappypa.page.link/Zi7X" class="btn btn-yappy">Pagar con Yappy</a>
     <a href="https://wa.me/50769362166" class="btn btn-whatsapp">Consultar por WhatsApp</a>
-
-    <p class="info-text">
-        Nota: El sistema calcula automáticamente la comisión de Yappy Comercial y el ITBMS sobre la misma.
-    </p>
 </div>
 
 <script>
 function calculate() {
     let price = parseFloat(document.getElementById('price').value);
-    
-    if (isNaN(price) || price <= 0) {
-        resetValues();
-        return;
-    }
+    if (isNaN(price) || price <= 0) return;
 
-    // 1. Sumar el 35% de margen solicitado
     let precioConMargen = price * 1.35;
-    
-    // 2. Comisión Yappy Comercial (1%)
     let comisionYappy = Math.ceil((precioConMargen * 0.01) * 100) / 100;
-    
-    // 3. ITBMS sobre la comisión (7%)
     let itbmsComision = Math.round((comisionYappy * 0.07) * 100) / 100;
     
-    // 4. Monto total final
-    let totalPagar = precioConMargen;
-
     document.getElementById('res-margen').innerText = '$' + precioConMargen.toFixed(2);
     document.getElementById('res-comision').innerText = '$' + comisionYappy.toFixed(2);
     document.getElementById('res-itbms').innerText = '$' + itbmsComision.toFixed(2);
-    document.getElementById('res-total').innerText = '$' + totalPagar.toFixed(2);
-}
-
-function resetValues() {
-    document.getElementById('res-margen').innerText = '$0.00';
-    document.getElementById('res-comision').innerText = '$0.00';
-    document.getElementById('res-itbms').innerText = '$0.00';
-    document.getElementById('res-total').innerText = '$0.00';
+    document.getElementById('res-total').innerText = '$' + precioConMargen.toFixed(2);
 }
 </script>
-
 </body>
 </html>
