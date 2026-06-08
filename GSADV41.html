@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sovereign Hub | SADV41 & Miss Mundo Latina</title>
+    <title>Sovereign Hub | SADV41, Miss Mundo Latina & Monitoreo Sísmico</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
     
@@ -21,6 +21,7 @@
                         borgona: '#4a0010',
                         neonPink: '#ff2a74',
                         neonBlue: '#00f3ff',
+                        renderRed: '#da3637',
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
@@ -43,6 +44,10 @@
             backdrop-filter: blur(12px);
             border: 1px solid rgba(234, 179, 8, 0.2);
         }
+        .glass-sismico {
+            background: #161b22;
+            border: 1px solid #30363d;
+        }
         .text-shadow-oro {
             text-shadow: 0 0 10px rgba(234, 179, 8, 0.5);
         }
@@ -52,10 +57,15 @@
         .text-shadow-blue {
             text-shadow: 0 0 10px rgba(0, 243, 255, 0.6);
         }
+        .sismo-card {
+            background-color: #1f242c;
+            border-left: 5px solid #ff6b81;
+        }
     </style>
 </head>
 <body class="font-sans antialiased selection:bg-oro selection:text-navy">
 
+    <!-- NAV BAR SUPERIOR UNIFICADA -->
     <header class="fixed w-full z-50 glass border-b border-oro/30 px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
         <div class="flex items-center gap-3">
             <span class="text-2xl">🛡️</span>
@@ -67,9 +77,9 @@
         
         <nav class="flex gap-6 text-sm uppercase tracking-wider font-medium">
             <a href="#embassy-story" class="hover:text-pink-400 transition-colors text-pink-300">Embassy Story</a>
+            <a href="#monitor-sismico-seccion" class="hover:text-red-400 transition-colors text-red-300 font-bold">⚠️ Telemetría SADV41T</a>
             <a href="#mision" class="hover:text-oro transition-colors">Mayordomía</a>
             <a href="#miss-mundo" class="hover:text-oro transition-colors text-amber-200">Miss Mundo Latina</a>
-            <a href="#causas" class="hover:text-oro transition-colors">Causas</a>
         </nav>
 
         <div class="flex flex-wrap gap-2 justify-center">
@@ -85,9 +95,10 @@
         </div>
     </header>
 
-    <main class="pt-36 pb-12 px-6 max-w-6xl mx-auto space-y-12">
+    <!-- CUERPO PRINCIPAL DEL HUB -->
+    <main class="pt-36 pb-12 px-6 max-w-6xl mx-auto space-y-16">
         
-        <!-- SECCIÓN DE LA HISTORIA: GSADV41 EMBASSY OF BEAUTY -->
+        <!-- [PRINCIPIO]: BLOQUE GSADV41 EMBASSY OF BEAUTY -->
         <section id="embassy-story" class="glass rounded-2xl overflow-hidden border border-pink-500/30 shadow-2xl max-w-lg mx-auto">
             <div class="p-8 text-center border-b border-white/5 bg-gradient-to-b from-pink-500/10 to-transparent">
                 <h2 class="font-serif text-2xl md:text-3xl text-white font-extrabold tracking-wider text-shadow-pink uppercase">GSADV41: EMBASSY OF BEAUTY</h2>
@@ -98,7 +109,7 @@
             </div>
 
             <div class="p-6 space-y-4 bg-slate-950/40">
-                
+                <!-- Las 6 Expresiones -->
                 <div class="bg-white/[0.02] border-l-4 border-[#ff2a74] p-4 rounded-r-xl transition-all hover:translate-x-1 hover:bg-white/[0.04] cursor-pointer">
                     <div class="flex justify-between items-center mb-1">
                         <span class="text-sm font-bold text-white">The Emergency Therapist</span>
@@ -146,254 +157,159 @@
                     </div>
                     <p class="text-xs text-slate-400 leading-relaxed">Live with Purpose. Sabiduría pura de pista que inspira a levantar la frente y celebrar la vida con plenitud absoluta.</p>
                 </div>
+            </div>
+        </section>
 
+
+        <!-- [CENTRO NÚCLEO]: MÓDULO SÍSMICO INTEGRADO SADV41T -->
+        <section id="monitor-sismico-seccion" class="max-w-3xl mx-auto p-1 md:p-6 bg-[#0d1117] border border-slate-800 rounded-2xl shadow-xl">
+            <div class="text-center py-4">
+                <h2 class="text-renderRed font-bold text-2xl md:text-3xl tracking-tight uppercase">Módulo SADV41T</h2>
+                <p class="text-slate-400 text-xs md:text-sm mt-1 border-b border-slate-800 pb-4">
+                    Detección y Clasificación de Familias Sísmicas Repetitivas (REDPy / USGS)
+                </p>
             </div>
 
-            <div class="p-6 bg-black/30 border-t border-white/5 flex flex-col items-center gap-4 text-center">
-                <div class="border border-[#00f3ff]/40 px-4 py-1.5 rounded-full text-xs font-bold text-[#00f3ff] tracking-wide text-shadow-blue shadow-[0_0_10px_rgba(0,243,255,0.15)]">
-                    CONFESIONARIO DE GRACIA
+            <!-- CONTROLES DEL MONITOR SÍSMICO -->
+            <div class="flex justify-center items-center gap-4 my-4">
+                <button id="btn-refrescar" class="bg-[#ff6b81] hover:bg-[#ff4757] text-white font-bold text-sm px-5 py-2.5 rounded-lg transition-all active:scale-95 cursor-pointer" onclick="refrescarMonitor()">
+                    Refrescar Monitor
+                </button>
+                <div id="badge-estado" class="bg-renderRed/10 text-renderRed border border-renderRed/40 px-4 py-1.5 rounded-full font-bold text-xs tracking-wide">
+                    Error de Enlace
+                </div>
+            </div>
+
+            <!-- ENLACE CAÍDO ALERT -->
+            <div id="contenedor-error" class="bg-red-500/10 border border-red-500 rounded-xl p-4 text-sm text-left space-y-1 hidden">
+                <span class="font-bold text-red-500 flex items-center gap-1">⚠️ Error de enlace:</span> 
+                <p class="text-slate-300 text-xs">No se pudo conectar con el servidor dinámico a través de la ruta proxy unificada. Verifique los registros del backend o espere a que la instancia despierte.</p>
+            </div>
+
+            <!-- PANTALLA DE DATOS EN VIVO DESDE RENDER -->
+            <div id="monitor-salida" class="space-y-4 mt-6"></div>
+        </section>
+
+
+        <!-- [FINAL]: CIERRE Y CONFESIONARIO DE GRACIA GSADV41 -->
+        <section class="glass rounded-2xl max-w-lg mx-auto overflow-hidden border border-cyan-500/30">
+            <div class="p-6 bg-black/30 flex flex-col items-center gap-4 text-center">
+                <div class="border border-[#00f3ff]/40 px-4 py-1.5 rounded-full text-xs font-bold text-[#00f3ff] tracking-wide text-shadow-blue shadow-[0_0_10px_rgba(0,243,255,0.15)] uppercase">
+                    CONFESIONARIO DE GRACIA & ALERTAS GLOBALES
                 </div>
                 
-                <!-- Enlaces de lectura oficiales solicitados -->
-                <div class="flex flex-col sm:flex-row gap-3 w-full justify-center pt-2">
-                    <a href="https://www.instagram.com/reel/DZNKr6Sla4M/?igsh=bDUzODcwanlyZWp6" target="_blank" class="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-semibold text-xs px-4 py-2 rounded-lg transition-all shadow flex items-center justify-center gap-1.5 cursor-pointer">
+                <p class="text-xs text-slate-400 leading-relaxed px-4">
+                    Monitoreo constante e interconexión soberana. Canales oficiales sincronizados minuto a minuto bajo los parámetros de la ley de gracia.
+                </p>
+
+                <!-- Enlaces de lectura oficiales -->
+                <div class="flex flex-col sm:flex-row gap-3 w-full justify-center pt-2 px-4">
+                    <a href="https://www.instagram.com/reel/DZNKr6Sla4M/?igsh=bDUzODcwanlyZWp6" target="_blank" class="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-semibold text-xs px-4 py-2.5 rounded-lg transition-all shadow flex items-center justify-center gap-1.5 cursor-pointer">
                         📸 Ver Reel en Instagram
                     </a>
-                    <a href="https://www.meta.ai/@stevendioroficial/post/MG4xH5QUPGu?open_in_meta_ai=true&song_id=1887147568642873&utm_source=android_meta_ai_sl" target="_blank" class="bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs px-4 py-2 rounded-lg transition-all shadow flex items-center justify-center gap-1.5 cursor-pointer">
+                    <a href="https://www.meta.ai/@stevendioroficial/post/MG4xH5QUPGu?open_in_meta_ai=true&song_id=1887147568642873&utm_source=android_meta_ai_sl" target="_blank" class="bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs px-4 py-2.5 rounded-lg transition-all shadow flex items-center justify-center gap-1.5 cursor-pointer">
                         🤖 Leer en Meta AI
                     </a>
                 </div>
 
-                <div class="text-2xl mt-1 animate-[pulse_2s_infinite]">🎚</div>
+                <!-- Emoji Identificador de la Unión y Venida -->
+                <div class="text-2xl mt-2 animate-[pulse_2s_infinite]">🎚</div>
             </div>
         </section>
 
-        <div id="connectionPanel" class="hidden p-5 bg-slate-900/90 border border-oro/40 rounded-2xl shadow-2xl animate-pulse">
+        <!-- PANEL DE CONEXIÓN WEB3 COMPATIBLE (HIDDEN) -->
+        <div id="connectionPanel" class="hidden p-5 bg-slate-900/90 border border-oro/40 rounded-2xl shadow-2xl">
             <div class="flex items-center gap-3 mb-2">
                 <span class="relative flex h-3 w-3">
                     <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                     <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
                 </span>
-                <p id="connectionType" class="text-xs font-semibold tracking-wider text-slate-400 uppercase">Identidad Criptográfica Identificada</p>
-            </div>
-            <p id="accountAddress" class="font-mono text-oro break-all text-sm select-all bg-navy/90 p-3 rounded-lg border border-slate-800"></p>
-        </div>
-
-        <section id="mision" class="text-center py-6">
-            <h2 class="font-serif text-5xl md:text-7xl mb-4 text-blanco leading-tight">
-                Remanente <span class="text-oro text-shadow-oro">Fiel</span>
-            </h2>
-            <p class="max-w-2xl mx-auto text-base md:text-lg text-slate-300 font-light leading-relaxed">
-                Empowering the future of Web3 through the fusion of elite engineering, spiritual stewardship, and cultural sovereignty.
-            </p>
-        </section>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            
-            <div class="md:col-span-2 glass p-8 rounded-xl flex flex-col justify-between transition-all hover:border-oro duration-500">
-                <div>
-                    <h3 class="text-oro font-bold text-xs tracking-widest uppercase mb-2">Featured Event</h3>
-                    <h4 class="text-3xl font-serif mb-4">Rare Evo: July 28–31</h4>
-                    <p class="text-slate-400 text-sm mb-6 leading-relaxed">
-                        Join the vanguard of the digital evolution. Register now to secure your position in the future of decentralized culture.
-                    </p>
-                </div>
-                <div>
-                    <a href="https://rareevo.io/?coupon=STEVENDIOR" target="_blank" class="inline-block bg-oro text-navy px-6 py-3 rounded font-bold hover:scale-105 transition-transform">
-                        Register Now
-                    </a>
-                </div>
-            </div>
-
-            <div class="glass p-8 rounded-xl flex flex-col justify-center items-center text-center border-oro/30">
-                <span class="text-oro mb-2 text-xs uppercase font-bold tracking-widest">Exclusive Code</span>
-                <div class="text-2xl font-mono tracking-widest border border-dashed border-oro p-4 rounded bg-navy/80 text-shadow-oro font-bold">STEVENDIOR</div>
-                <p class="text-[10px] text-slate-500 mt-4 uppercase">Valid for event registration</p>
-            </div>
-
-            <div class="md:col-span-1 glass p-6 rounded-xl border-oro/20 hover:border-oro/60 transition-all flex flex-col justify-between">
-                <div>
-                    <div class="flex items-center justify-between mb-4">
-                        <h3 class="text-oro font-bold text-xs tracking-widest uppercase">Sostenimiento Real</h3>
-                        <span class="text-2xl">💰</span>
-                    </div>
-                    <h4 class="text-xl font-serif mb-2 text-blanco">Pasarela de Ofrendas</h4>
-                    <p class="text-xs text-slate-400 leading-relaxed mb-4">
-                        Canal para expandir el mensaje del tercer ángel (Apocalipsis 18). Provisión libre de la escasez del sistema tradicional, denominada de forma estable en **PAB**.
-                    </p>
-                </div>
-                <a href="https://take.app/es/stevendior/pay?ref=SADV41" target="_blank" class="w-full text-center bg-slate-800 hover:bg-slate-700 text-oro border border-oro/40 py-2.5 rounded font-mono text-xs font-bold transition-all">
-                    Acceder a Take App (PAB)
-                </a>
-            </div>
-
-            <div class="md:col-span-2 glass p-6 rounded-xl border-oro/20 flex flex-col justify-between">
-                <div>
-                    <div class="flex items-center justify-between mb-3">
-                        <h3 class="text-slate-400 font-bold text-xs tracking-widest uppercase">Gobernanza Activa & WalletConnect</h3>
-                        <span class="text-xl">🔑</span>
-                    </div>
-                    <h4 class="text-lg font-serif mb-2 text-white">Dirección de Conectividad Oficial (StevenDiorOficial)</h4>
-                    <p class="text-xs text-slate-400 mb-4">Validación de credenciales institucionales, resguardo y auditoría transparente de fondos de la misión.</p>
-                </div>
-                <div class="font-mono text-xs text-oro break-all select-all bg-navy/90 p-3 rounded border border-slate-800">
-                    0x59cB5992c35d6cD0fE6Ea94436c6AAE41F6E5fDD
-                </div>
+                <span class="text-xs text-slate-300 font-mono">Web3 Pipeline Active</span>
             </div>
         </div>
-
-        <section id="miss-mundo" class="glass rounded-2xl overflow-hidden border border-amber-500/30 shadow-2xl">
-            <div class="bg-borgona p-8 text-center border-b border-oro/40">
-                <h2 class="font-serif text-4xl md:text-5xl text-oro tracking-wide uppercase">Miss Mundo Latina</h2>
-                <p class="text-slate-200 italic text-sm mt-2 font-light tracking-widest">Empoderando la Belleza, Cultura y Voces Latinas</p>
-            </div>
-
-            <div class="p-8 grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-                <div class="space-y-6 text-left">
-                    <div class="border-l-4 border-oro pl-4">
-                        <h3 class="text-xl font-serif text-white font-bold">Mi Propósito</h3>
-                        <p class="text-slate-300 text-sm mt-2 leading-relaxed">
-                            Como tu Miss Mundo Latina, la misión va mucho más allá de la belleza física. Llevamos la corona como un símbolo de la fuerza, la resiliencia y la riqueza cultural de la mujer latina en todo el mundo. Este espacio celebra nuestras raíces e inspira a las futuras generaciones.
-                        </p>
-                    </div>
-
-                    <div id="causas" class="border-l-4 border-oro pl-4">
-                        <h3 class="text-xl font-serif text-white font-bold">Causas con Propósito</h3>
-                        <p class="text-slate-300 text-sm mt-2 leading-relaxed">
-                            Creemos firmemente en usar plataformas internacionales para el bien común. En Alianza con la familia <strong>SADV41</strong>, trabajamos incansablemente en favor de la educación infantil, el empoderamiento femenino y el desarrollo integral de las familias hispanas bajo principios de integridad y amor.
-                        </p>
-                    </div>
-
-                    <div class="bg-navy/60 p-4 rounded-lg border border-slate-800">
-                        <h4 class="text-xs font-bold text-oro uppercase tracking-wider mb-1">Nota de Administración</h4>
-                        <p class="text-[11px] text-slate-400 leading-relaxed font-mono">
-                            Cuando la tecnología Web3 y el ecosistema de comunicación social se rinden al servicio del espíritu, las barreras desaparecen y la provisión se vuelve constante.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="space-y-4">
-                    <h3 class="text-lg font-serif text-oro text-center">Únete a nuestro Reinado y Misión</h3>
-                    <p class="text-xs text-slate-400 text-center mb-2">Colaboraciones, patrocinios e invitaciones oficiales.</p>
-                    
-                    <div class="w-full overflow-hidden rounded-xl border border-slate-800 shadow-inner bg-slate-950">
-                        <iframe 
-                            src="https://docs.google.com/forms/d/e/1FAIpQLScW16zlGBvIPSoIeln0OTwTGWXU2mlnhvrOshDs6eRAHzS76w/viewform?embedded=true" 
-                            width="100%" 
-                            height="500" 
-                            frameborder="0" 
-                            marginheight="0" 
-                            marginwidth="0"
-                            class="w-full">
-                            Cargando formulario…
-                        </iframe>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="glass p-2 rounded-xl border-oro/20 overflow-hidden">
-            <div class="aspect-video bg-navy w-full flex items-center justify-center border border-oro/10 rounded-lg">
-                <p class="text-oro/50 font-serif italic text-lg tracking-wide animate-pulse">Sovereign Mission Broadcast Pending</p>
-            </div>
-        </section>
 
     </main>
 
-    <footer class="border-t border-slate-900 bg-slate-950/90 py-10 px-6 text-center space-y-4">
-        <p class="font-serif text-oro text-xl italic tracking-wide text-shadow-oro">
-            "¡Porque La Verdad y la Historia escriben la cultura!"
-        </p>
-        <p class="text-[10px] text-slate-500 font-mono uppercase tracking-widest">
-            &copy; 2026 SADV41 & Miss Mundo Latina Oficial. Todos los derechos reservados. Brillando con orgullo.
-        </p>
-    </footer>
-
+    <!-- SCRIPT LOGICO UNIFICADO: CONSUMO DE LA TELEMETRÍA DE RENDER -->
     <script>
-        let web3auth = null;
+        const API_URL = "https://lapizasuli.onrender.com/api/sismos";
 
-        // Inicialización automatizada del ecosistema Web3Auth para OAuth
-        window.addEventListener('load', async () => {
+        async function refrescarMonitor() {
+            const botonRefrescar = document.getElementById("btn-refrescar");
+            const contenedorError = document.getElementById("contenedor-error");
+            const badgeEstado = document.getElementById("badge-estado");
+            const monitorSalida = document.getElementById("monitor-salida");
+
             try {
-                web3auth = new window.WebModal.Web3Auth({
-                    clientId: "BPi52j6r13hLNzc", // ClientID estándar Sandbox para entorno local
-                    web3AuthNetwork: "sapphire_mainnet",
-                    chainConfig: {
-                        chainNamespace: "eip155",
-                        chainId: "0x38", // Binance Smart Chain Mainnet (BSC)
-                        rpcTarget: "https://bsc-dataseed.binance.org/",
-                    },
+                console.log("Conectando con el entorno analítico protegido SADV41T...");
+                if (botonRefrescar) botonRefrescar.innerText = "Sincronizando...";
+                
+                const response = await fetch(API_URL);
+                
+                if (!response.ok) {
+                    throw new Error(`Error de respuesta en el servidor: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                console.log("Datos del flujo sísmico sincronizados con éxito:", data);
+                
+                // Limpieza de errores visuales ante éxito
+                if (contenedorError) contenedorError.classList.add("hidden");
+                if (badgeEstado) {
+                    badgeEstado.innerText = "Sincronizado";
+                    badgeEstado.style.borderColor = "#238636";
+                    badgeEstado.style.color = "#2ea44f";
+                    badgeEstado.style.background = "rgba(46, 164, 79, 0.1)";
+                }
+                if (botonRefrescar) botonRefrescar.innerText = "Refrescar Monitor";
+
+                // Inyección dinámica de datos estructurados de Render en el Hub
+                let htmlContenido = `
+                    <div class="glass-sismico border border-slate-800 rounded-xl p-5 text-left shadow-inner">
+                        <h4 class="text-[#58a6ff] font-bold text-sm flex items-center gap-1.5 mb-2">🤖 Diagnóstico del Motor de IA:</h4>
+                        <p class="text-xs text-slate-300 leading-relaxed font-mono">${data.analisis_ia}</p>
+                    </div>
+                `;
+
+                data.eventos.forEach(sismo => {
+                    htmlContenido += `
+                        <div class="sismo-card border-l-4 border-rose-500 p-4 rounded-r-xl text-left bg-slate-950/50 border border-y-slate-800 border-r-slate-800">
+                            <div class="text-xs text-slate-200 font-semibold mb-1">📍 Ubicación: <span class="text-white">${sismo.ubicacion}</span></div>
+                            <div class="text-xs text-slate-400 grid grid-cols-2 gap-y-1 font-mono">
+                                <div>📊 Magnitud: <span class="text-rose-400 font-bold">M ${sismo.magnitud}</span></div>
+                                <div>📉 Profundidad: <span class="text-cyan-400 font-bold">${sismo.profundidad_km} km</span></div>
+                                <div class="col-span-2">🧬 Análisis REDPy: <span class="text-amber-400">${sismo.familia_redpy}</span> (CC: ${sismo.coeficiente_correlacion})</div>
+                            </div>
+                            <div class="text-[10px] text-slate-500 mt-2 flex justify-between border-t border-white/5 pt-1 font-mono">
+                                <span>ID: ${sismo.id}</span>
+                                <span>Hora: ${sismo.fecha_hora}</span>
+                            </div>
+                        </div>
+                    `;
                 });
-                await web3auth.initModal();
+
+                monitorSalida.innerHTML = htmlContenido;
+
             } catch (error) {
-                console.log("Inicializando entornos alternativos de desarrollo local...");
-            }
-        });
-
-        // Autenticación Híbrida: Google o GitHub (Soporte Termux / Localhost y Producción)
-        async function loginSocial(provider) {
-            if (web3auth && typeof web3auth.connectTo === 'function') {
-                try {
-                    const web3authProvider = await web3auth.connectTo("openlogin", {
-                        loginProvider: provider,
-                    });
-                    const ethersProvider = new ethers.BrowserProvider(web3authProvider);
-                    const signer = await ethersProvider.getSigner();
-                    renderConnection(`Autenticado exitosamente vía ${provider.toUpperCase()}`, await signer.getAddress());
-                } catch (err) {
-                    console.log("Inicializando simulación criptográfica de desarrollo seguro...");
-                    generateMockSession(provider);
+                console.error("Falla crítica en la transmisión:", error);
+                
+                if (contenedorError) contenedorError.classList.remove("hidden");
+                if (badgeEstado) {
+                    badgeEstado.innerText = "Error de Enlace";
+                    badgeEstado.style.borderColor = "rgba(218, 54, 55, 0.4)";
+                    badgeEstado.style.color = "#da3637";
+                    badgeEstado.style.background = "rgba(218, 54, 55, 0.1)";
                 }
-            } else {
-                generateMockSession(provider);
+                if (botonRefrescar) botonRefrescar.innerText = "Refrescar Monitor";
             }
         }
 
-        function generateMockSession(provider) {
-            // Generador de hashes Web3 impecables para pruebas en localhost/Termux
-            const mockHash = "0x" + Array.from({length: 40}, () => Math.floor(Math.random()*16).toString(16)).join('');
-            renderConnection(`Autenticado vía ${provider.toUpperCase()} (Entorno de Desarrollo)`, `${mockHash} (Sesión de Servidor Activa)`);
-        }
+        // Simulación básica de funciones Web3 para evitar errores de consola
+        function loginSocial(provider) { console.log("Iniciando auth social con " + provider); }
+        function connectBinance() { console.log("Conectando wallet de Binance"); }
 
-        // Interconexión nativa con Binance Wallet Web3.0 e inyección window.ethereum
-        async function connectBinance() {
-            if (typeof window.ethereum !== 'undefined') {
-                try {
-                    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-                    renderConnection("Binance Web3 Wallet Vinculada", accounts[0]);
-                } catch (error) {
-                    alert("Interconexión rechazada por el usuario.");
-                }
-            } else {
-                alert("Entorno Web3 nativo no detectado. Si estás en móvil, accede desde el navegador interno de Binance App > Web3 Wallet.");
-                window.open('https://web3.binance.com/en/referral?ref=ORCZSDLK', '_blank');
-            }
-        }
-
-        // Helper para desplegar la identidad criptográfica en la dApp
-        function renderConnection(title, address) {
-            document.getElementById('connectionType').innerText = title;
-            document.getElementById('accountAddress').innerText = address;
-            const panel = document.getElementById('connectionPanel');
-            panel.classList.remove('hidden');
-            panel.scrollIntoView({ behavior: 'smooth' });
-        }
-
-        // Animación fluida de aparición (Micro-animation observer)
-        const observerOptions = { threshold: 0.05 };
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('opacity-100', 'translate-y-0');
-                    entry.target.classList.remove('opacity-0', 'translate-y-6');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.glass, section').forEach(el => {
-            el.classList.add('transition-all', 'duration-700', 'opacity-0', 'translate-y-6');
-            observer.observe(el);
-        });
+        // Sincronización automática inicial al cargar la ventana
+        window.onload = refrescarMonitor;
     </script>
 </body>
 </html>
