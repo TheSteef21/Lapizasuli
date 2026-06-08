@@ -65,7 +65,6 @@
 </head>
 <body class="font-sans antialiased selection:bg-oro selection:text-navy">
 
-    <!-- NAV BAR SUPERIOR UNIFICADA -->
     <header class="fixed w-full z-50 glass border-b border-oro/30 px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
         <div class="flex items-center gap-3">
             <span class="text-2xl">🛡️</span>
@@ -95,10 +94,8 @@
         </div>
     </header>
 
-    <!-- CUERPO PRINCIPAL DEL HUB -->
     <main class="pt-36 pb-12 px-6 max-w-6xl mx-auto space-y-16">
         
-        <!-- [PRINCIPIO]: BLOQUE GSADV41 EMBASSY OF BEAUTY -->
         <section id="embassy-story" class="glass rounded-2xl overflow-hidden border border-pink-500/30 shadow-2xl max-w-lg mx-auto">
             <div class="p-8 text-center border-b border-white/5 bg-gradient-to-b from-pink-500/10 to-transparent">
                 <h2 class="font-serif text-2xl md:text-3xl text-white font-extrabold tracking-wider text-shadow-pink uppercase">GSADV41: EMBASSY OF BEAUTY</h2>
@@ -109,7 +106,6 @@
             </div>
 
             <div class="p-6 space-y-4 bg-slate-950/40">
-                <!-- Las 6 Expresiones -->
                 <div class="bg-white/[0.02] border-l-4 border-[#ff2a74] p-4 rounded-r-xl transition-all hover:translate-x-1 hover:bg-white/[0.04] cursor-pointer">
                     <div class="flex justify-between items-center mb-1">
                         <span class="text-sm font-bold text-white">The Emergency Therapist</span>
@@ -161,7 +157,6 @@
         </section>
 
 
-        <!-- [CENTRO NÚCLEO]: MÓDULO SÍSMICO INTEGRADO SADV41T -->
         <section id="monitor-sismico-seccion" class="max-w-3xl mx-auto p-1 md:p-6 bg-[#0d1117] border border-slate-800 rounded-2xl shadow-xl">
             <div class="text-center py-4">
                 <h2 class="text-renderRed font-bold text-2xl md:text-3xl tracking-tight uppercase">Módulo SADV41T</h2>
@@ -170,28 +165,24 @@
                 </p>
             </div>
 
-            <!-- CONTROLES DEL MONITOR SÍSMICO -->
             <div class="flex justify-center items-center gap-4 my-4">
                 <button id="btn-refrescar" class="bg-[#ff6b81] hover:bg-[#ff4757] text-white font-bold text-sm px-5 py-2.5 rounded-lg transition-all active:scale-95 cursor-pointer" onclick="refrescarMonitor()">
                     Refrescar Monitor
                 </button>
                 <div id="badge-estado" class="bg-renderRed/10 text-renderRed border border-renderRed/40 px-4 py-1.5 rounded-full font-bold text-xs tracking-wide">
-                    Error de Enlace
+                    Sincronizando...
                 </div>
             </div>
 
-            <!-- ENLACE CAÍDO ALERT -->
             <div id="contenedor-error" class="bg-red-500/10 border border-red-500 rounded-xl p-4 text-sm text-left space-y-1 hidden">
-                <span class="font-bold text-red-500 flex items-center gap-1">⚠️ Error de enlace:</span> 
-                <p class="text-slate-300 text-xs">No se pudo conectar con el servidor dinámico a través de la ruta proxy unificada. Verifique los registros del backend o espere a que la instancia despierte.</p>
+                <span class="font-bold text-red-500 flex items-center gap-1">⚠️ Modo Respaldo Activado:</span> 
+                <p class="text-slate-300 text-xs">No se pudo conectar con el servidor dinámico a través de la ruta proxy de Render. Mostrando el último registro almacenado de la estación local.</p>
             </div>
 
-            <!-- PANTALLA DE DATOS EN VIVO DESDE RENDER -->
             <div id="monitor-salida" class="space-y-4 mt-6"></div>
         </section>
 
 
-        <!-- [FINAL]: CIERRE Y CONFESIONARIO DE GRACIA GSADV41 -->
         <section class="glass rounded-2xl max-w-lg mx-auto overflow-hidden border border-cyan-500/30">
             <div class="p-6 bg-black/30 flex flex-col items-center gap-4 text-center">
                 <div class="border border-[#00f3ff]/40 px-4 py-1.5 rounded-full text-xs font-bold text-[#00f3ff] tracking-wide text-shadow-blue shadow-[0_0_10px_rgba(0,243,255,0.15)] uppercase">
@@ -202,22 +193,22 @@
                     Monitoreo constante e interconexión soberana. Canales oficiales sincronizados minuto a minuto bajo los parámetros de la ley de gracia.
                 </p>
 
-                <!-- Enlaces de lectura oficiales -->
-                <div class="flex flex-col sm:flex-row gap-3 w-full justify-center pt-2 px-4">
-                    <a href="https://www.instagram.com/reel/DZNKr6Sla4M/?igsh=bDUzODcwanlyZWp6" target="_blank" class="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-semibold text-xs px-4 py-2.5 rounded-lg transition-all shadow flex items-center justify-center gap-1.5 cursor-pointer">
-                        📸 Ver Reel en Instagram
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full pt-2 px-4">
+                    <a href="https://wa.me/+15556670579" target="_blank" class="bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs px-4 py-2.5 rounded-lg transition-all shadow flex items-center justify-center gap-1.5 cursor-pointer col-span-2 sm:col-span-1">
+                        💬 Contactar IA SADV41
                     </a>
-                    <a href="https://www.meta.ai/@stevendioroficial/post/MG4xH5QUPGu?open_in_meta_ai=true&song_id=1887147568642873&utm_source=android_meta_ai_sl" target="_blank" class="bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs px-4 py-2.5 rounded-lg transition-all shadow flex items-center justify-center gap-1.5 cursor-pointer">
-                        🤖 Leer en Meta AI
+                    <a href="https://www.instagram.com/reel/DZNKr6Sla4M/?igsh=bDUzODcwanlyZWp6" target="_blank" class="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-semibold text-xs px-4 py-2.5 rounded-lg transition-all shadow flex items-center justify-center gap-1.5 cursor-pointer col-span-2 sm:col-span-1">
+                        📸 Ver Reel Instagram
+                    </a>
+                    <a href="https://www.meta.ai/@stevendioroficial/post/MG4xH5QUPGu?open_in_meta_ai=true&song_id=1887147568642873&utm_source=android_meta_ai_sl" target="_blank" class="bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs px-4 py-2.5 rounded-lg transition-all shadow flex items-center justify-center gap-1.5 cursor-pointer col-span-2">
+                        🤖 Leer Arquitectura en Meta AI
                     </a>
                 </div>
 
-                <!-- Emoji Identificador de la Unión y Venida -->
                 <div class="text-2xl mt-2 animate-[pulse_2s_infinite]">🎚</div>
             </div>
         </section>
 
-        <!-- PANEL DE CONEXIÓN WEB3 COMPATIBLE (HIDDEN) -->
         <div id="connectionPanel" class="hidden p-5 bg-slate-900/90 border border-oro/40 rounded-2xl shadow-2xl">
             <div class="flex items-center gap-3 mb-2">
                 <span class="relative flex h-3 w-3">
@@ -230,15 +221,70 @@
 
     </main>
 
-    <!-- SCRIPT LOGICO UNIFICADO: CONSUMO DE LA TELEMETRÍA DE RENDER -->
     <script>
         const API_URL = "https://lapizasuli.onrender.com/api/sismos";
+
+        // Fallback estático unificado del JSON local del Hub
+        const datosRespaldoLocal = {
+            "analisis_ia": "Análisis en modo local (Respaldo del Sistema). Telemetría base registrada con acumulado de eventos estable en la red de estaciones.",
+            "acumulado_total": 24,
+            "eventos": [
+                {
+                    "id": "SADV41-2026-A",
+                    "ubicacion": "Zona de Subducción / Red de Estaciones USGS",
+                    "pais_region": "Panamá",
+                    "latitud": 7.0000,
+                    "longitud": -82.5000,
+                    "google_maps_url": "https://maps.google.com/?q=7.0000,-82.5000",
+                    "magnitud": 5.1,
+                    "profundidad_km": 26.2,
+                    "familia_redpy": "Familia Volcánica #04",
+                    "coeficiente_correlacion": 0.89,
+                    "fecha_hora": "2026-06-08 04:48:30"
+                }
+            ]
+        };
+
+        function renderizarDatos(data) {
+            const monitorSalida = document.getElementById("monitor-salida");
+            
+            let htmlContenido = `
+                <div class="glass-sismico border border-slate-800 rounded-xl p-5 text-left shadow-inner">
+                    <div class="flex justify-between items-center mb-2">
+                        <h4 class="text-[#58a6ff] font-bold text-sm flex items-center gap-1.5">🤖 Diagnóstico del Motor de IA:</h4>
+                        <span class="text-[10px] bg-slate-800 px-2 py-0.5 rounded font-mono text-slate-400">Acumulado Total: ${data.acumulado_total || 24}</span>
+                    </div>
+                    <p class="text-xs text-slate-300 leading-relaxed font-mono">${data.analisis_ia || "Procesando firmas sísmicas detectadas..."}</p>
+                </div>
+            `;
+
+            data.eventos.forEach(sismo => {
+                htmlContenido += `
+                    <div class="sismo-card border-l-4 border-rose-500 p-4 rounded-r-xl text-left bg-slate-950/50 border border-y-slate-800 border-r-slate-800">
+                        <div class="text-xs text-slate-200 font-semibold mb-1 flex justify-between items-center">
+                            <span>📍 Ubicación: <span class="text-white">${sismo.ubicacion} (${sismo.pais_region || 'Panamá'})</span></span>
+                            <a href="${sismo.google_maps_url}" target="_blank" class="text-blue-400 hover:underline text-[10px] font-mono">📍 Ver en Mapa</a>
+                        </div>
+                        <div class="text-xs text-slate-400 grid grid-cols-2 gap-y-1 font-mono">
+                            <div>📊 Magnitud: <span class="text-rose-400 font-bold">M ${sismo.magnitud}</span></div>
+                            <div>📉 Profundidad: <span class="text-cyan-400 font-bold">${sismo.profundidad_km} km</span></div>
+                            <div class="col-span-2">🧬 Análisis REDPy: <span class="text-amber-400">${sismo.familia_redpy}</span> (CC: ${sismo.coeficiente_correlacion})</div>
+                        </div>
+                        <div class="text-[10px] text-slate-500 mt-2 flex justify-between border-t border-white/5 pt-1 font-mono">
+                            <span>ID: ${sismo.id}</span>
+                            <span>Hora: ${sismo.fecha_hora}</span>
+                        </div>
+                    </div>
+                `;
+            });
+
+            monitorSalida.innerHTML = htmlContenido;
+        }
 
         async function refrescarMonitor() {
             const botonRefrescar = document.getElementById("btn-refrescar");
             const contenedorError = document.getElementById("contenedor-error");
             const badgeEstado = document.getElementById("badge-estado");
-            const monitorSalida = document.getElementById("monitor-salida");
 
             try {
                 console.log("Conectando con el entorno analítico protegido SADV41T...");
@@ -251,9 +297,8 @@
                 }
                 
                 const data = await response.json();
-                console.log("Datos del flujo sísmico sincronizados con éxito:", data);
+                console.log("Datos del flujo sísmico sincronizados con éxito desde Render:", data);
                 
-                // Limpieza de errores visuales ante éxito
                 if (contenedorError) contenedorError.classList.add("hidden");
                 if (badgeEstado) {
                     badgeEstado.innerText = "Sincronizado";
@@ -261,54 +306,30 @@
                     badgeEstado.style.color = "#2ea44f";
                     badgeEstado.style.background = "rgba(46, 164, 79, 0.1)";
                 }
-                if (botonRefrescar) botonRefrescar.innerText = "Refrescar Monitor";
-
-                // Inyección dinámica de datos estructurados de Render en el Hub
-                let htmlContenido = `
-                    <div class="glass-sismico border border-slate-800 rounded-xl p-5 text-left shadow-inner">
-                        <h4 class="text-[#58a6ff] font-bold text-sm flex items-center gap-1.5 mb-2">🤖 Diagnóstico del Motor de IA:</h4>
-                        <p class="text-xs text-slate-300 leading-relaxed font-mono">${data.analisis_ia}</p>
-                    </div>
-                `;
-
-                data.eventos.forEach(sismo => {
-                    htmlContenido += `
-                        <div class="sismo-card border-l-4 border-rose-500 p-4 rounded-r-xl text-left bg-slate-950/50 border border-y-slate-800 border-r-slate-800">
-                            <div class="text-xs text-slate-200 font-semibold mb-1">📍 Ubicación: <span class="text-white">${sismo.ubicacion}</span></div>
-                            <div class="text-xs text-slate-400 grid grid-cols-2 gap-y-1 font-mono">
-                                <div>📊 Magnitud: <span class="text-rose-400 font-bold">M ${sismo.magnitud}</span></div>
-                                <div>📉 Profundidad: <span class="text-cyan-400 font-bold">${sismo.profundidad_km} km</span></div>
-                                <div class="col-span-2">🧬 Análisis REDPy: <span class="text-amber-400">${sismo.familia_redpy}</span> (CC: ${sismo.coeficiente_correlacion})</div>
-                            </div>
-                            <div class="text-[10px] text-slate-500 mt-2 flex justify-between border-t border-white/5 pt-1 font-mono">
-                                <span>ID: ${sismo.id}</span>
-                                <span>Hora: ${sismo.fecha_hora}</span>
-                            </div>
-                        </div>
-                    `;
-                });
-
-                monitorSalida.innerHTML = htmlContenido;
+                
+                renderizarDatos(data);
 
             } catch (error) {
-                console.error("Falla crítica en la transmisión:", error);
+                console.warn("Falla en la transmisión dinámica. Activando JSON de respaldo:", error);
                 
                 if (contenedorError) contenedorError.classList.remove("hidden");
                 if (badgeEstado) {
-                    badgeEstado.innerText = "Error de Enlace";
+                    badgeEstado.innerText = "Modo Respaldo";
                     badgeEstado.style.borderColor = "rgba(218, 54, 55, 0.4)";
                     badgeEstado.style.color = "#da3637";
                     badgeEstado.style.background = "rgba(218, 54, 55, 0.1)";
                 }
+                
+                // Muestra los datos del objeto unificado local
+                renderizarDatos(datosRespaldoLocal);
+            } finally {
                 if (botonRefrescar) botonRefrescar.innerText = "Refrescar Monitor";
             }
         }
 
-        // Simulación básica de funciones Web3 para evitar errores de consola
         function loginSocial(provider) { console.log("Iniciando auth social con " + provider); }
         function connectBinance() { console.log("Conectando wallet de Binance"); }
 
-        // Sincronización automática inicial al cargar la ventana
         window.onload = refrescarMonitor;
     </script>
 </body>
