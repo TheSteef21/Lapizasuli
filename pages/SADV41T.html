@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SADV41T - Monitor de Terremotos (REDPy)</title>
+    <title>SADV41T - Monitor de Terremotos (REDPy Proxy Secure)</title>
     <style>
         :root {
             --bg-color: #0d0e12;
@@ -12,6 +12,7 @@
             --text-secondary: #a4b0be;
             --accent-color: #ff4757;
             --accent-ok: #2ed573;
+            --accent-ia: #d4b572;
             --border-color: #222531;
         }
 
@@ -85,11 +86,11 @@
 
         .status-badge {
             font-size: 0.85rem;
-            color: var(--accent-ok);
-            background: rgba(46, 213, 115, 0.1);
+            color: #4fa8ff;
+            background: rgba(79, 168, 255, 0.1);
             padding: 4px 10px;
             border-radius: 20px;
-            border: 1px solid var(--accent-ok);
+            border: 1px solid #4fa8ff;
         }
 
         .terremoto-card {
@@ -126,17 +127,45 @@
         }
 
         .grid-detalles {
-            display: block;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px 20px;
         }
 
         .detalle-item {
-            margin: 6px 0;
+            margin: 3px 0;
             font-size: 0.95rem;
             color: var(--text-secondary);
         }
 
         .detalle-item strong {
             color: var(--text-primary);
+        }
+
+        /* Sección de IA Integrada */
+        .ia-panel {
+            background-color: #0b162c;
+            border: 1px solid rgba(212, 181, 114, 0.4);
+            border-left: 5px solid var(--accent-ia);
+            border-radius: 6px;
+            padding: 20px;
+            margin-top: 25px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+        }
+
+        .ia-panel h4 {
+            margin: 0 0 10px 0;
+            color: var(--accent-ia);
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+        }
+
+        .ia-panel p {
+            margin: 0;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: #d1dfed;
         }
 
         #error-message {
@@ -160,41 +189,100 @@
 
     <div class="container">
         <div class="control-panel">
-            <button class="btn-actualizar" onclick="solicitarDatosSismicos()">Refrescar Monitor</button>
-            <span class="status-badge" id="live-status">Conectado al Entorno Local</span>
+            <button class="btn-actualizar" id="btnRefrescar" onclick="solicitarDatosSismicos()">Refrescar Monitor</button>
+            <span class="status-badge" id="live-status">Conectado a la Nube (Proxy Secure)</span>
         </div>
         
         <div id="panel-eventos">
             </div>
 
+        <div id="panel-ia-container">
+            </div>
+
         <div id="error-message">
-            ⚠️ <strong>Error de lectura de flujo:</strong> No se encuentra el archivo 'terremotos.json'. Ejecuta 'procesador.py' en tu terminal para generar los datos iniciales.
+            ⚠️ <strong>Error de enlace:</strong> No se pudo conectar con el servidor dinámico a través de la ruta proxy unificada. Verifique los registros del backend.
         </div>
     </div>
 
     <script>
+        // Carga automática al abrir la interfaz
+        window.addEventListener('DOMContentLoaded', () => {
+            solicitarDatosSismicos();
+        });
+
         async function solicitarDatosSismicos() {
+            const btn = document.getElementById('btnRefrescar');
             const panel = document.getElementById('panel-eventos');
+            const panelIA = document.getElementById('panel-ia-container');
             const errorContainer = document.getElementById('error-message');
             const statusBadge = document.getElementById('live-status');
             
             try {
-                // Fetch nativo al archivo de intercambio json
-                const respuesta = await fetch('terremotos.json');
-                if (!respuesta.ok) throw new Error('Diferencia de datos o archivo ausente');
+                btn.disabled = true;
+                btn.innerText = "Sincronizando...";
+                errorContainer.style.display = 'none';
+
+                // Endpoint relativo enmascarado detrás de la arquitectura del servidor
+                const urlAPI = "/api/sismos";
                 
-                const sismos = await respuesta.json();
+                const respuesta = await fetch(urlAPI);
+                if (!respuesta.ok) throw new Error('Error en el canal de flujo analítico');
+                
+                const resultado = await respuesta.json();
                 
                 panel.innerHTML = '';
-                errorContainer.style.display = 'none';
+                panelIA.innerHTML = '';
+                
                 statusBadge.textContent = "Datos Sincronizados";
                 statusBadge.style.color = "var(--accent-ok)";
                 statusBadge.style.borderColor = "var(--accent-ok)";
                 statusBadge.style.background = "rgba(46, 213, 115, 0.1)";
 
-                sismos.forEach(evento => {
+                // 1. Renderizar eventos sísmicos estructurados
+                resultado.eventos.forEach(evento => {
                     const card = document.createElement('div');
                     card.className = 'terremoto-card';
                     
                     card.innerHTML = `
                         <div class="card-header">
+                            <h3>${evento.ubicacion}</h3>
+                            <span class="magnitud">M ${evento.magnitud}</span>
+                        </div>
+                        <div class="grid-detalles">
+                            <div class="detalle-item"><strong>ID Proceso:</strong> ${evento.id}</div>
+                            <div class="detalle-item"><strong>Fecha/Hora:</strong> ${evento.fecha_hora}</div>
+                            <div class="detalle-item"><strong>Profundidad:</strong> ${evento.profundidad_km} km</div>
+                            <div class="detalle-item"><strong>Clasificación REDPy:</strong> ${evento.familia_redpy}</div>
+                            <div class="detalle-item"><strong>Coeficiente Correlación:</strong> ${evento.coeficiente_correlacion}</div>
+                            <div class="detalle-item"><strong>Ondas Coincidentes:</strong> ${evento.ondas_coincidentes} multipletes</div>
+                        </div>
+                    `;
+                    panel.appendChild(card);
+                });
+
+                // 2. Renderizar diagnóstico inteligente de la IA
+                if (resultado.analisis_ia) {
+                    const iaCard = document.createElement('div');
+                    iaCard.className = 'ia-panel';
+                    iaCard.innerHTML = `
+                        <h4>🎚️ DIAGNÓSTICO INTELIGENTE (SADV41 CORE)</h4>
+                        <p>${resultado.analisis_ia}</p>
+                    `;
+                    panelIA.appendChild(iaCard);
+                }
+
+            } catch (error) {
+                console.error(error);
+                errorContainer.style.display = 'block';
+                statusBadge.textContent = "Error de Enlace";
+                statusBadge.style.color = "var(--accent-color)";
+                statusBadge.style.borderColor = "var(--accent-color)";
+                statusBadge.style.background = "rgba(255, 71, 87, 0.1)";
+            } finally {
+                btn.disabled = false;
+                btn.innerText = "Refrescar Monitor";
+            }
+        }
+    </script>
+</body>
+</html>
