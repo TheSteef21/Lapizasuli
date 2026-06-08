@@ -1,65 +1,59 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SADV41T - Monitor de Terremotos (REDPy Proxy Secure)</title>
-    <style>
-        :root {
-            --bg-color: #0d0e12;
-            --card-bg: #15171e;
-            --text-primary: #f1f2f6;
-            --text-secondary: #a4b0be;
-            --accent-color: #ff4757;
-            --accent-ok: #2ed573;
-            --accent-ia: #d4b572;
-            --border-color: #222531;
-        }
+// ==================================================
+// CONFIGURACIÓN DE CONSUMO DINÁMICO EN FRONTEND
+// ENTORNO: GitHub Pages -> Interconexión Segura con Render
+// ==================================================
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-primary);
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+// URL exacta apuntando al proxy de datos analíticos
+const API_URL = "https://lapizasuli.onrender.com/api/sismos";
 
-        header {
-            text-align: center;
-            margin-bottom: 30px;
-            border-bottom: 2px solid var(--border-color);
-            width: 100%;
-            max-width: 850px;
-            padding-bottom: 15px;
-        }
+async function refrescarMonitor() {
+    const botonRefrescar = document.getElementById("btn-refrescar"); // Ajustar ID según tu HTML
+    const contenedorError = document.getElementById("contenedor-error"); 
 
-        h1 {
-            color: var(--accent-color);
-            margin: 0 0 5px 0;
-            font-size: 2.2rem;
-            letter-spacing: 1px;
+    try {
+        console.log("Conectando con el entorno analítico protegido SADV41T...");
+        
+        // Efecto visual opcional en interfaz: bloquea o indica carga mientras Render despierta
+        if (botonRefrescar) botonRefrescar.innerText = "Sincronizando...";
+        
+        const response = await fetch(API_URL);
+        
+        if (!response.ok) {
+            throw new Error(`Error de respuesta en el servidor: ${response.status}`);
         }
+        
+        const data = await response.json();
+        console.log("Datos del flujo sísmico sincronizados con éxito:", data);
+        
+        // Ocultar indicadores de error si la conexión fue exitosa
+        if (contenedorError) contenedorError.style.display = "none";
+        if (botonRefrescar) botonRefrescar.innerText = "Refrescar Monitor";
 
-        .sub-bar {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            margin: 5px 0;
+        // ==================================================
+        // LOGICA DE INYECCIÓN DE DATOS EN TU INTERFAZ (UI)
+        // Ejemplos de uso directo del JSON recibido:
+        // - data.eventos: Lista de sismos detectados
+        // - data.analisis_ia: Diagnóstico clasificado por REDPy
+        // ==================================================
+        
+        renderizarEventosEnPantalla(data.eventos, data.analisis_ia);
+
+    } catch (error) {
+        console.error("Falla crítica en la transmisión:", error);
+        
+        // Activación visual del cuadro rojo "Error de Enlace" en tu HTML
+        if (contenedorError) {
+            contenedorError.style.display = "block";
+            contenedorError.innerText = "Error de enlace: No se pudo conectar con el servidor dinámico a través de la ruta proxy unificada. Verifique los registros del backend.";
         }
+        if (botonRefrescar) botonRefrescar.innerText = "Refrescar Monitor";
+    }
+}
 
-        .container {
-            width: 100%;
-            max-width: 850px;
-        }
-
-        .control-panel {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            background-color: var(--card-bg);
+function renderizarEventosEnPantalla(eventos, analisisIa) {
+    // Aquí ejecutas el mapeo e impresión de las tarjetas en tu frontend.
+    console.log("Procesando renderizado de multipletes...");
+}
             padding: 12px 20px;
             border-radius: 6px;
             border: 1px solid var(--border-color);
