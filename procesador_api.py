@@ -1,19 +1,19 @@
 # ==================================================
-# ARCHIVO: procesador_api.py (CÓDIGO INTEGRAL BLINDADO)
-# ENTORNO: Misión SADV41 / Enmascaramiento por Proxy Seguro
+# ARCHIVO: procesador_api.py (CÓDIGO INTEGRAL UNIFICADO Y BLINDADO)
+# ENTORNO: Misión SADV41 / Enmascaramiento por Proxy Seguro y Webhook
 # ==================================================
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Request, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from datetime import datetime
 import random
 import json
 import os
 
-# 1. INICIALIZACIÓN DEL SERVIDOR WEB PROTEGIDO
+# 1. INICIALIZACIÓN DEL SERVIDOR WEB PROTEGIDO (Instancia Única)
 app = FastAPI(
     title="SADV41T - API de Monitoreo Sísmico Dinámico Inteligente",
-    description="Servicio unificado bajo la ley SADV41 que integra el núcleo analítico REDPy con enmascaramiento proxy."
+    description="Servicio unificado bajo la ley SADV41 que integra el núcleo analítico REDPy, proxy seguro y Webhook activo."
 )
 
 # Configuración de CORS total para evitar bloqueos en tu Frontend (GitHub Pages)
@@ -25,7 +25,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# 2. BÓVEDA Y CAPTURA SEGURA DE VARIABLES DE ENTORNO (RENDER)
+# 2. BÓVEDA Y CAPTURA SEGURA DE VARIABLES DE ENTORNO (RENDER / REPOSITORY SECRETS)
 API_KEY_IA = os.environ.get("AI_API_KEY")
 ARCHIVO_DATOS = "terremotos.json"
 
@@ -38,7 +38,7 @@ except (ValueError, TypeError):
     UMBRAL_ALERTA = 4.0
 
 
-# 3. NÚCLEO LOGÍCO: PROCESAMIENTO CIENTÍFICO (REDPy / USGS)
+# 3. NÚCLEO LÓGICO: PROCESAMIENTO CIENTÍFICO (REDPy / USGS)
 def procesar_flujo_sísmico():
     """Genera, clasifica y empaqueta las estructuras analíticas de ondas coincidentes."""
     return [
@@ -85,7 +85,20 @@ def generar_diagnostico_ia(eventos, umbral):
         )
 
 
-# 4. ENDPOINT PROXY (OCULTA LA ESTRUCTURA REAL DETRÁS DE RUTA RELATIVA)
+# 4. GESTIÓN DE ENDPOINTS (RUTAS DE LA API)
+
+# Ruta 4.1: Raíz (Soluciona el error 404 en el navegador al verificar el servicio en Render)
+@app.get("/")
+def read_root():
+    return {
+        "status": "online",
+        "mision": "SADV41",
+        "servicio": "Procesador Analítico de Sismos Activo",
+        "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    }
+
+
+# Ruta 4.2: Endpoint Proxy (Oculta la estructura interna sirviendo los datos simulados/procesados)
 @app.get("/api/sismos")
 def obtener_analisis_sismico_dinamico():
     print("\n==================================================")
@@ -93,7 +106,6 @@ def obtener_analisis_sismico_dinamico():
     print("==================================================")
     print("-> Validando peticiones a través del canal enmascarado...")
     
-    # El sistema opera los datos internamente en RAM usando las configuraciones invisibles
     eventos = procesar_flujo_sísmico()
     analisis_ia = generar_diagnostico_ia(eventos, UMBRAL_ALERTA)
     
@@ -107,14 +119,34 @@ def obtener_analisis_sismico_dinamico():
     }
 
 
-# 5. EJECUCIÓN SCRIPT LOCAL (COMPATIBILIDAD TERMUX)
+# Ruta 4.3: Webhook de Entrada (Recibe alertas externas y ejecuta respuestas automáticas)
+@app.post("/webhook")
+async def recibir_sismos(request: Request):
+    print("\n==================================================")
+    print("WEBHOOK RECEPTOR - ENTORNO ANALÍTICO SADV41 SISMOS")
+    print("==================================================")
+    try:
+        payload = await request.json()
+        print(f"-> Alerta de sismo externa interceptada con éxito: {payload}")
+        
+        # Aquí puedes expandir la lógica para escribir en archivos o disparar notificaciones
+        return {
+            "status": "success", 
+            "message": "Alerta procesada y registrada bajo los parámetros de la ley SADV41"
+        }
+    except Exception as e:
+        print(f"[ERROR WEBHOOK] Falla al decodificar la transmisión: {e}")
+        raise HTTPException(status_code=400, detail=f"Error procesando datos: {str(e)}")
+
+
+# 5. EJECUCIÓN SCRIPT LOCAL (COMPATIBILIDAD CON TERMUX)
 if __name__ == "__main__":
     print("==================================================")
     print("INICIANDO PROCESAMIENTO SÍSMICO - ENTORNO LOCAL SADV41")
     print("==================================================")
     print("-> Generando archivo de intercambio tradicional...")
     
-    # Mantiene la compatibilidad escribiendo el archivo físico terremotos.json solo de manera local
+    # Mantiene la compatibilidad escribiendo el archivo físico terremotos.json localmente
     eventos_locales = procesar_flujo_sísmico()
     try:
         with open(ARCHIVO_DATOS, "w", encoding="utf-8") as f:
@@ -123,7 +155,7 @@ if __name__ == "__main__":
     except Exception as e:
         print(f"\n[FALLA DETECTADA] No se pudo escribir el archivo local: {e}")
 
-    # Levanta el entorno de red local para pruebas en Termux
+    # Levanta el entorno de red local para tus pruebas con Termux en tu celular
     import uvicorn
     print("\nLevantando servidor de desarrollo local...")
     uvicorn.run("procesador_api:app", host="127.0.0.1", port=8000, reload=True)
