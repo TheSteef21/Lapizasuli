@@ -129,7 +129,6 @@ async def recibir_sismos(request: Request):
         payload = await request.json()
         print(f"-> Alerta de sismo externa interceptada con éxito: {payload}")
         
-        # Aquí puedes expandir la lógica para escribir en archivos o disparar notificaciones
         return {
             "status": "success", 
             "message": "Alerta procesada y registrada bajo los parámetros de la ley SADV41"
@@ -146,7 +145,6 @@ if __name__ == "__main__":
     print("==================================================")
     print("-> Generando archivo de intercambio tradicional...")
     
-    # Mantiene la compatibilidad escribiendo el archivo físico terremotos.json localmente
     eventos_locales = procesar_flujo_sísmico()
     try:
         with open(ARCHIVO_DATOS, "w", encoding="utf-8") as f:
@@ -155,7 +153,6 @@ if __name__ == "__main__":
     except Exception as e:
         print(f"\n[FALLA DETECTADA] No se pudo escribir el archivo local: {e}")
 
-    # Levanta el entorno de red local para tus pruebas con Termux en tu celular
     import uvicorn
     print("\nLevantando servidor de desarrollo local...")
     uvicorn.run("procesador_api:app", host="127.0.0.1", port=8000, reload=True)
