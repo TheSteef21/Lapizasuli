@@ -1,282 +1,195 @@
-// ==================================================
-// CONFIGURACIÓN DE CONSUMO DINÁMICO EN FRONTEND
-// ENTORNO: GitHub Pages -> Interconexión Segura con Render
-// ==================================================
-
-// URL exacta apuntando al proxy de datos analíticos
-const API_URL = "https://lapizasuli.onrender.com/api/sismos";
-
-async function refrescarMonitor() {
-    const botonRefrescar = document.getElementById("btn-refrescar"); // Ajustar ID según tu HTML
-    const contenedorError = document.getElementById("contenedor-error"); 
-
-    try {
-        console.log("Conectando con el entorno analítico protegido SADV41T...");
-        
-        // Efecto visual opcional en interfaz: bloquea o indica carga mientras Render despierta
-        if (botonRefrescar) botonRefrescar.innerText = "Sincronizando...";
-        
-        const response = await fetch(API_URL);
-        
-        if (!response.ok) {
-            throw new Error(`Error de respuesta en el servidor: ${response.status}`);
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo SADV41T - Monitoreo Sísmico</title>
+    
+    <style>
+        body {
+            background-color: #0d1117;
+            color: #c9d1d9;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            padding: 20px;
+            margin: 0;
         }
-        
-        const data = await response.json();
-        console.log("Datos del flujo sísmico sincronizados con éxito:", data);
-        
-        // Ocultar indicadores de error si la conexión fue exitosa
-        if (contenedorError) contenedorError.style.display = "none";
-        if (botonRefrescar) botonRefrescar.innerText = "Refrescar Monitor";
-
-        // ==================================================
-        // LOGICA DE INYECCIÓN DE DATOS EN TU INTERFAZ (UI)
-        // Ejemplos de uso directo del JSON recibido:
-        // - data.eventos: Lista de sismos detectados
-        // - data.analisis_ia: Diagnóstico clasificado por REDPy
-        // ==================================================
-        
-        renderizarEventosEnPantalla(data.eventos, data.analisis_ia);
-
-    } catch (error) {
-        console.error("Falla crítica en la transmisión:", error);
-        
-        // Activación visual del cuadro rojo "Error de Enlace" en tu HTML
-        if (contenedorError) {
-            contenedorError.style.display = "block";
-            contenedorError.innerText = "Error de enlace: No se pudo conectar con el servidor dinámico a través de la ruta proxy unificada. Verifique los registros del backend.";
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
         }
-        if (botonRefrescar) botonRefrescar.innerText = "Refrescar Monitor";
-    }
-}
-
-function renderizarEventosEnPantalla(eventos, analisisIa) {
-    // Aquí ejecutas el mapeo e impresión de las tarjetas en tu frontend.
-    console.log("Procesando renderizado de multipletes...");
-}
-            padding: 12px 20px;
-            border-radius: 6px;
-            border: 1px solid var(--border-color);
+        h1 {
+            color: #da3637;
+            font-size: 2.5rem;
+            margin-bottom: 5px;
         }
-
+        p.subtitle {
+            color: #8b949e;
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #21262d;
+            padding-bottom: 15px;
+        }
+        .control-panel {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
         .btn-actualizar {
-            background-color: var(--accent-color);
-            color: white;
+            background-color: #ff6b81;
+            color: #ffffff;
             border: none;
-            padding: 10px 22px;
-            border-radius: 4px;
-            cursor: pointer;
+            padding: 10px 20px;
+            font-size: 1rem;
             font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
             transition: background 0.2s, transform 0.1s;
         }
-
         .btn-actualizar:hover {
-            background-color: #ff6b81;
+            background-color: #ff4757;
         }
-        
         .btn-actualizar:active {
             transform: scale(0.98);
         }
-
-        .status-badge {
-            font-size: 0.85rem;
-            color: #4fa8ff;
-            background: rgba(79, 168, 255, 0.1);
-            padding: 4px 10px;
+        .badge-status {
+            background: rgba(218, 54, 55, 0.1);
+            color: #da3637;
+            border: 1px solid rgba(218, 54, 55, 0.4);
+            padding: 4px 12px;
             border-radius: 20px;
-            border: 1px solid #4fa8ff;
-        }
-
-        .terremoto-card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-left: 5px solid var(--accent-color);
-            border-radius: 6px;
-            padding: 20px;
-            margin-bottom: 15px;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
-        }
-
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-        }
-
-        .card-header h3 {
-            margin: 0;
-            font-size: 1.25rem;
-            color: var(--text-primary);
-        }
-
-        .magnitud {
-            background-color: var(--accent-color);
-            color: white;
-            padding: 6px 14px;
-            border-radius: 4px;
             font-weight: bold;
-            font-size: 1.3rem;
-            box-shadow: 0 2px 5px rgba(255, 71, 87, 0.4);
+            font-size: 0.9rem;
         }
-
-        .grid-detalles {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 8px 20px;
+        .error-panel {
+            background-color: rgba(255, 71, 87, 0.1);
+            border: 1px solid var(--accent-color, #ff4757);
+            border-radius: 6px;
+            padding: 15px 20px;
+            margin-top: 20px;
+            text-align: left;
+            display: none; /* Se activa dinámicamente si falla el fetch */
         }
-
-        .detalle-item {
-            margin: 3px 0;
-            font-size: 0.95rem;
-            color: var(--text-secondary);
+        .error-panel strong {
+            color: #ff4757;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
         }
-
-        .detalle-item strong {
-            color: var(--text-primary);
-        }
-
-        /* Sección de IA Integrada */
+        /* Contenedores para renderizar los datos que vienen del backend */
         .ia-panel {
-            background-color: #0b162c;
-            border: 1px solid rgba(212, 181, 114, 0.4);
-            border-left: 5px solid var(--accent-ia);
+            background-color: #161b22;
+            border: 1px solid #30363d;
             border-radius: 6px;
             padding: 20px;
-            margin-top: 25px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            margin-top: 20px;
+            text-align: left;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
-
         .ia-panel h4 {
             margin: 0 0 10px 0;
-            color: var(--accent-ia);
-            letter-spacing: 1px;
-            display: flex;
-            align-items: center;
+            color: #58a6ff;
         }
-
-        .ia-panel p {
-            margin: 0;
-            font-size: 0.95rem;
-            line-height: 1.5;
-            color: #d1dfed;
-        }
-
-        #error-message {
-            background-color: rgba(255, 71, 87, 0.1);
-            border: 1px solid var(--accent-color);
-            color: #ff6b6b;
+        .sismo-card {
+            background-color: #1f242c;
+            border-left: 5px solid #ff6b81;
             padding: 15px;
-            border-radius: 6px;
-            text-align: center;
-            margin-top: 20px;
-            display: none;
+            margin-top: 15px;
+            border-radius: 0 6px 6px 0;
+            text-align: left;
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>Módulo SADV41T</h1>
-        <div class="sub-bar">Detección y Clasificación de Familias Sísmicas Repetitivas (REDPy / USGS)</div>
-    </header>
-
     <div class="container">
+        <h1>Módulo SADV41T</h1>
+        <p class="subtitle">Detección y Clasificación de Familias Sísmicas Repetitivas (REDPy / USGS)</p>
+
         <div class="control-panel">
-            <button class="btn-actualizar" id="btnRefrescar" onclick="solicitarDatosSismicos()">Refrescar Monitor</button>
-            <span class="status-badge" id="live-status">Conectado a la Nube (Proxy Secure)</span>
+            <button id="btn-refrescar" class="btn-actualizar" onclick="refrescarMonitor()">Refrescar Monitor</button>
+            <div id="badge-estado" class="badge-status">Error de Enlace</div>
         </div>
-        
-        <div id="panel-eventos">
-            </div>
 
-        <div id="panel-ia-container">
-            </div>
-
-        <div id="error-message">
-            ⚠️ <strong>Error de enlace:</strong> No se pudo conectar con el servidor dinámico a través de la ruta proxy unificada. Verifique los registros del backend.
+        <div id="contenedor-error" class="error-panel">
+            <strong>⚠️ Error de enlace:</strong> No se pudo conectar con el servidor dinámico a través de la ruta proxy unificada. Verifique los registros del backend o espere a que la instancia despierte.
         </div>
+
+        <div id="monitor-salida"></div>
     </div>
 
     <script>
-        // Carga automática al abrir la interfaz
-        window.addEventListener('DOMContentLoaded', () => {
-            solicitarDatosSismicos();
-        });
+        const API_URL = "https://lapizasuli.onrender.com/api/sismos";
 
-        async function solicitarDatosSismicos() {
-            const btn = document.getElementById('btnRefrescar');
-            const panel = document.getElementById('panel-eventos');
-            const panelIA = document.getElementById('panel-ia-container');
-            const errorContainer = document.getElementById('error-message');
-            const statusBadge = document.getElementById('live-status');
-            
+        async function refrescarMonitor() {
+            const botonRefrescar = document.getElementById("btn-refrescar");
+            const contenedorError = document.getElementById("contenedor-error");
+            const badgeEstado = document.getElementById("badge-estado");
+            const monitorSalida = document.getElementById("monitor-salida");
+
             try {
-                btn.disabled = true;
-                btn.innerText = "Sincronizando...";
-                errorContainer.style.display = 'none';
+                console.log("Conectando con el entorno analítico protegido SADV41T...");
+                if (botonRefrescar) botonRefrescar.innerText = "Sincronizando...";
+                
+                const response = await fetch(API_URL);
+                
+                if (!response.ok) {
+                    throw new Error(`Error de respuesta en el servidor: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                console.log("Datos del flujo sísmico sincronizados con éxito:", data);
+                
+                // Si conecta, limpiamos errores y actualizamos interfaz
+                if (contenedorError) contenedorError.style.display = "none";
+                if (badgeEstado) {
+                    badgeEstado.innerText = "Sincronizado";
+                    badgeEstado.style.borderColor = "#238636";
+                    badgeEstado.style.color = "#2ea44f";
+                    badgeEstado.style.background = "rgba(46, 164, 79, 0.1)";
+                }
+                if (botonRefrescar) botonRefrescar.innerText = "Refrescar Monitor";
 
-                // Endpoint relativo enmascarado detrás de la arquitectura del servidor
-                const urlAPI = "/api/sismos";
-                
-                const respuesta = await fetch(urlAPI);
-                if (!respuesta.ok) throw new Error('Error en el canal de flujo analítico');
-                
-                const resultado = await respuesta.json();
-                
-                panel.innerHTML = '';
-                panelIA.innerHTML = '';
-                
-                statusBadge.textContent = "Datos Sincronizados";
-                statusBadge.style.color = "var(--accent-ok)";
-                statusBadge.style.borderColor = "var(--accent-ok)";
-                statusBadge.style.background = "rgba(46, 213, 115, 0.1)";
+                // Renderizado dinámico de la respuesta de Render en pantalla
+                let htmlContenido = `
+                    <div class="ia-panel">
+                        <h4>🤖 Diagnóstico del Motor de IA:</h4>
+                        <p>${data.analisis_ia}</p>
+                    </div>
+                `;
 
-                // 1. Renderizar eventos sísmicos estructurados
-                resultado.eventos.forEach(evento => {
-                    const card = document.createElement('div');
-                    card.className = 'terremoto-card';
-                    
-                    card.innerHTML = `
-                        <div class="card-header">
-                            <h3>${evento.ubicacion}</h3>
-                            <span class="magnitud">M ${evento.magnitud}</span>
-                        </div>
-                        <div class="grid-detalles">
-                            <div class="detalle-item"><strong>ID Proceso:</strong> ${evento.id}</div>
-                            <div class="detalle-item"><strong>Fecha/Hora:</strong> ${evento.fecha_hora}</div>
-                            <div class="detalle-item"><strong>Profundidad:</strong> ${evento.profundidad_km} km</div>
-                            <div class="detalle-item"><strong>Clasificación REDPy:</strong> ${evento.familia_redpy}</div>
-                            <div class="detalle-item"><strong>Coeficiente Correlación:</strong> ${evento.coeficiente_correlacion}</div>
-                            <div class="detalle-item"><strong>Ondas Coincidentes:</strong> ${evento.ondas_coincidentes} multipletes</div>
+                data.eventos.forEach(sismo => {
+                    htmlContenido += `
+                        <div class="sismo-card">
+                            <strong>📍 Ubicación:</strong> ${sismo.ubicacion}<br>
+                            <strong>📊 Magnitud:</strong> M ${sismo.magnitud} | <strong>📉 Profundidad:</strong> ${sismo.profundidad_km} km<br>
+                            <strong>🧬 Análisis REDPy:</strong> ${sismo.familia_redpy} (CC: ${sismo.coeficiente_correlacion})<br>
+                            <small style="color: #8b949e;">ID: ${sismo.id} | Hora: ${sismo.fecha_hora}</small>
                         </div>
                     `;
-                    panel.appendChild(card);
                 });
 
-                // 2. Renderizar diagnóstico inteligente de la IA
-                if (resultado.analisis_ia) {
-                    const iaCard = document.createElement('div');
-                    iaCard.className = 'ia-panel';
-                    iaCard.innerHTML = `
-                        <h4>🎚️ DIAGNÓSTICO INTELIGENTE (SADV41 CORE)</h4>
-                        <p>${resultado.analisis_ia}</p>
-                    `;
-                    panelIA.appendChild(iaCard);
-                }
+                monitorSalida.innerHTML = htmlContenido;
 
             } catch (error) {
-                console.error(error);
-                errorContainer.style.display = 'block';
-                statusBadge.textContent = "Error de Enlace";
-                statusBadge.style.color = "var(--accent-color)";
-                statusBadge.style.borderColor = "var(--accent-color)";
-                statusBadge.style.background = "rgba(255, 71, 87, 0.1)";
-            } finally {
-                btn.disabled = false;
-                btn.innerText = "Refrescar Monitor";
+                console.error("Falla crítica en la transmisión:", error);
+                
+                // Muestra el aviso de error en rojo de forma estilizada
+                if (contenedorError) contenedorError.style.display = "block";
+                if (badgeEstado) {
+                    badgeEstado.innerText = "Error de Enlace";
+                    badgeEstado.style.borderColor = "rgba(218, 54, 55, 0.4)";
+                    badgeEstado.style.color = "#da3637";
+                    badgeEstado.style.background = "rgba(218, 54, 55, 0.1)";
+                }
+                if (botonRefrescar) botonRefrescar.innerText = "Refrescar Monitor";
             }
         }
+
+        // Ejecutar una carga inicial automática al abrir el monitor
+        window.onload = refrescarMonitor;
     </script>
 </body>
 </html>
