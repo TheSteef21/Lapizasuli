@@ -11,6 +11,8 @@
             --dark: #1d3557;
             --light: #f1faee;
             --whatsapp: #25D366;
+            --maps: #4285F4;
+            --tiktok: #010101;
         }
 
         body {
@@ -24,7 +26,7 @@
 
         header {
             background-color: var(--primary);
-            padding: 20px;
+            padding: 25px 20px;
             color: white;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
@@ -37,7 +39,7 @@
         }
 
         header p {
-            margin: 5px 0 0 0;
+            margin: 8px 0 0 0;
             font-size: 1.1rem;
             color: var(--accent);
             font-weight: bold;
@@ -47,6 +49,7 @@
             max-width: 600px;
             margin: 30px auto;
             padding: 0 20px;
+            box-sizing: border-box;
         }
 
         .promo-card {
@@ -54,7 +57,12 @@
             border-radius: 15px;
             padding: 20px;
             box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-            margin-bottom: 30px;
+            margin-bottom: 25px;
+        }
+
+        .promo-card h3 {
+            margin-top: 0;
+            font-size: 1.3rem;
         }
 
         .video-container {
@@ -64,6 +72,7 @@
             overflow: hidden;
             border-radius: 10px;
             background: #000;
+            margin-bottom: 15px;
         }
 
         .video-container iframe {
@@ -75,33 +84,89 @@
             border: none;
         }
 
-        .btn-whatsapp {
+        /* Estilos de Botones de Acción */
+        .actions-group {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+            margin-top: 25px;
+        }
+
+        .btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            background-color: var(--whatsapp);
             color: white;
             text-decoration: none;
-            padding: 15px 30px;
-            font-size: 1.2rem;
+            padding: 15px 25px;
+            font-size: 1.1rem;
             font-weight: bold;
             border-radius: 50px;
-            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4);
             transition: transform 0.2s, box-shadow 0.2s;
-            width: 80%;
-            max-width: 320px;
+            width: 90%;
+            max-width: 340px;
+            box-sizing: border-box;
         }
 
+        .btn:hover {
+            transform: scale(1.03);
+        }
+
+        .btn-whatsapp {
+            background-color: var(--whatsapp);
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+        }
         .btn-whatsapp:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.6);
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.5);
         }
 
+        .btn-maps {
+            background-color: var(--maps);
+            box-shadow: 0 5px 15px rgba(66, 133, 244, 0.3);
+        }
+        .btn-maps:hover {
+            box-shadow: 0 8px 20px rgba(66, 133, 244, 0.5);
+        }
+
+        .btn-tiktok {
+            background-color: var(--tiktok);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        .btn-tiktok:hover {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .emoji-divider {
+            font-size: 1.8rem;
+            margin: 25px 0;
+            letter-spacing: 5px;
+        }
+
+        /* Pie de página con marca SADV41 */
         footer {
-            margin-top: 5px;
-            font-size: 0.9rem;
-            color: #888;
-            padding: 20px;
+            margin-top: 40px;
+            background-color: var(--dark);
+            color: white;
+            padding: 30px 20px;
+            font-size: 0.95rem;
+        }
+
+        footer p {
+            margin: 5px 0;
+        }
+
+        .sadv-link {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+            transition: color 0.2s;
+        }
+
+        .sadv-link:hover {
+            color: white;
         }
     </style>
 </head>
@@ -127,17 +192,44 @@
             </div>
         </div>
 
-        <!-- Botón de Acción Directa con Mensaje Personalizado -->
-        <a href="https://wa.me/50762136855?text=Hola%20Don%20David!%20vengo%20de%20parte%20de%20StevenDiorOficial%20%E2%9A%A1%EF%B8%8F%F0%9F%87%B5%F0%9F%87%A6%20%C2%BFQu%C3%A9%20me%20recomiendas%20para%20comer%3F%20%F0%9F%A7%94" 
-           target="_blank" 
-           class="btn-whatsapp">
-           📱 ¡Pregunta por la Recomendación!
-        </a>
+        <div class="emoji-divider">❤️🗿🍗</div>
+
+        <!-- Grupo de Botones de Acción de la SPA -->
+        <div class="actions-group">
+            
+            <!-- Botón de Pedido Directo -->
+            <a href="https://wa.me/50762136855?text=Hola%20Don%20David!%20vengo%20de%20parte%20de%20StevenDiorOficial%20%E2%9A%A1%EF%B8%8F%F0%9F%87%B5%F0%9F%87%A6%20%C2%BFQu%C3%A9%20me%20recomiendas%20para%20comer%3F%20%F0%9F%A7%94" 
+               target="_blank" 
+               class="btn btn-whatsapp">
+               📱 ¡Pregunta por la Recomendación!
+            </a>
+
+            <!-- Botón de Google Maps -->
+            <a href="https://maps.app.goo.gl/uztS7KVRinxh8h1E8?g_st=ac" 
+               target="_blank" 
+               class="btn btn-maps">
+               📍 Visítanos en Google Maps
+            </a>
+
+            <!-- Botón para Compartir/Ver Video de TikTok -->
+            <a href="https://vt.tiktok.com/ZSQ6vo8rF/" 
+               target="_blank" 
+               class="btn btn-tiktok">
+               🎬 Comparte nuestro TikTok
+            </a>
+
+        </div>
 
     </div>
 
+    <!-- Footer con atribución del Servicio SADV41 -->
     <footer>
         <p>&copy; 2026 Don David Fast Food. Todos los derechos reservados.</p>
+        <a href="https://thesteef21.github.io/Lapizasuli/pages/GSADV41.html" 
+           target="_blank" 
+           class="sadv-link">
+           Un servicio de SADV41 Vanguardia Panameña para el mundo ⚡️🇵🇦🪄
+        </a>
     </footer>
 
 </body>
