@@ -1,7 +1,7 @@
 import os
 import requests
 from flask import Flask, request, jsonify
-from chistes import obtener_chiste_aleatorio
+from .chistes import obtener_chiste_aleatorio
 
 # 1. INICIALIZACIÓN DE LA APLICACIÓN (¡Obligatoria aquí arriba!)
 app = Flask(__name__)
