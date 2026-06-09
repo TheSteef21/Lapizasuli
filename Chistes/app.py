@@ -2,7 +2,7 @@ import os
 import requests
 from flask import Flask, request, jsonify
 # Corregido: Importamos desde 'chiste' en singular para coincidir con tu archivo
-from chiste import obtener_chiste_aleatorio
+from chistes import obtener_chiste_aleatorio
 
 app = Flask(__name__)
 
