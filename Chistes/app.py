@@ -1,9 +1,14 @@
 import os
+import sys
 import requests
 from flask import Flask, request, jsonify
-from .chistes import obtener_chiste_aleatorio
 
-# 1. INICIALIZACIÓN DE LA APLICACIÓN (¡Obligatoria aquí arriba!)
+# Añadimos la carpeta actual al path para que encuentre chistes.py sin importar la raíz
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+
+# Ahora la importación limpia y directa funcionará a la perfección
+from chistes import obtener_chiste_aleatorio
+
 app = Flask(__name__)
 
 @app.route('/webhook/chiste', methods=['GET', 'POST'])
