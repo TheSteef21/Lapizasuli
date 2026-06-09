@@ -1,4 +1,3 @@
-# chistes.py
 import random
 
 CHISTES_SADV41 = [
