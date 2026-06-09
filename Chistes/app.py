@@ -1,19 +1,25 @@
+import os
+import requests
+from flask import Flask, request, jsonify
+from chistes import obtener_chiste_aleatorio
+
+# 1. INICIALIZACIÓN DE LA APLICACIÓN (¡Obligatoria aquí arriba!)
+app = Flask(__name__)
+
 @app.route('/webhook/chiste', methods=['GET', 'POST'])
 def manejar_webhook_chiste():
-    # 1. VERIFICACIÓN DE META (Método GET)
+    # 2. VERIFICACIÓN DE META (Método GET)
     if request.method == 'GET':
-        # Meta envía estos parámetros para validar tu webhook
         mode = request.args.get('hub.mode')
         token = request.args.get('hub.verify_token')
         challenge = request.args.get('hub.challenge')
         
-        # Comparamos con tu token personalizado que tienes en la captura
         if mode == 'subscribe' and token == 'STEVENDIORFLOW':
             return challenge, 200
         else:
             return 'Token de verificación inválido', 403
 
-    # 2. EJECUCIÓN DEL CONTAGIO DE HUMOR (Método POST)
+    # 3. EJECUCIÓN DEL CONTAGIO DE HUMOR (Método POST)
     if request.method == 'POST':
         mensaje_humor = obtener_chiste_aleatorio()
         
@@ -37,3 +43,8 @@ def manejar_webhook_chiste():
             }), 200
         except requests.exceptions.RequestException as e:
             return jsonify({"error": f"Error al propagar en el Atrio: {e}"}), 500
+
+# 4. CONFIGURACIÓN DE ARRANQUE PARA LOCAL O DETECCIÓN
+if __name__ == '__main__':
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
