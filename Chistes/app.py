@@ -1,19 +1,17 @@
 import os
 import requests
 from flask import Flask, request, jsonify
-# Importamos el módulo que acabamos de crear
-from chistes import obtener_chiste_aleatorio
+# Corregido: Importamos desde 'chiste' en singular para coincidir con tu archivo
+from chiste import obtener_chiste_aleatorio
 
 app = Flask(__name__)
 
-# --- Tus rutas actuales (/webhook/terremoto, etc.) se quedan exactamente igual ---
-
 @app.route('/webhook/chiste', methods=['POST'])
 def enviar_contagio_humor():
-    # No requerimos payload complejo, solo el trigger del ecosistema
+    # Trigger del ecosistema
     mensaje_humor = obtener_chiste_aleatorio()
     
-    # Reutilizamos tus variables de entorno para la API de Meta / WhatsApp Business
+    # Variables de entorno para la API de Meta / WhatsApp Business
     whatsapp_url = f"https://graph.facebook.com/v17.0/{os.environ.get('WHATSAPP_BUSINESS_ACCOUNT_ID')}/messages"
     headers = {
         "Authorization": f"Bearer {os.environ.get('WHATSAPP_TOKEN')}",
@@ -34,6 +32,10 @@ def enviar_contagio_humor():
         }), 200
     except requests.exceptions.RequestException as e:
         return jsonify({"error": f"Error al propagar en el Atrio: {e}"}), 500
+
+if __name__ == '__main__':
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
 
 if __name__ == '__main__':
     # Render usa la variable PORT
