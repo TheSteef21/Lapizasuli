@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SADV41 Asset Hub - TikTok Streak Mascot & México</title>
+    <style>
+        :root {
+            --bg-color: #0b0b0f;
+            --card-bg: #12121a;
+            --neon-purple: #bc00dd;
+            --neon-green: #00ff66;
+            --neon-red: #ff2a5f;
+            --text-color: #ffffff;
+            --muted-text: #8e8e9f;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Fondo espacial con sutil brillo de matriz */
+        .matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 30%, rgba(188, 0, 221, 0.15), transparent 60%);
+            z-index: -1;
+        }
+
+        header {
+            text-align: center;
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+            background: linear-gradient(45deg, var(--text-color), var(--neon-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(188, 0, 221, 0.4);
+        }
+
+        header p {
+            color: var(--neon-green);
+            font-weight: bold;
+            letter-spacing: 1px;
+            font-size: 1rem;
+            text-shadow: 0 0 10px rgba(0, 255, 102, 0.3);
+            margin-top: 0;
+        }
+
+        /* Envoltura para organizar los módulos en paralelo o columna según pantalla */
+        .main-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+            justify-content: center;
+            width: 95%;
+            max-width: 1100px;
+            margin-bottom: 40px;
+        }
+
+        .container {
+            flex: 1;
+            min-width: 320px;
+            max-width: 500px;
+            background: var(--card-bg);
+            border: 2px solid rgba(188, 0, 221, 0.3);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.7), inset 0 0 15px rgba(188, 0, 221, 0.1);
+            text-align: center;
+            backdrop-filter: blur(10px);
+            transition: border 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        .container.mexico-card {
+            border-color: rgba(255, 42, 95, 0.3);
+        }
+
+        .container:hover {
+            border-color: var(--neon-green);
+        }
+
+        /* Sección del Asset / Mascota / Video */
+        .asset-box {
+            position: relative;
+            width: 100%;
+            height: 320px;
+            background: #000;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px dashed var(--muted-text);
+            overflow: hidden;
+        }
+
+        .asset-box::before {
+            content: '';
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            background: conic-gradient(transparent, var(--neon-purple), transparent, var(--neon-green), transparent);
+            animation: rotateMatrix 6s linear infinite;
+            z-index: 1;
+        }
+
+        .container.mexico-card .asset-box::before {
+            background: conic-gradient(transparent, var(--neon-red), transparent, var(--neon-green), transparent);
+        }
+
+        .asset-box-inner {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            right: 2px;
+            bottom: 2px;
+            background: #09090d;
+            border-radius: 13px;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow: hidden;
+        }
+
+        .asset-icon {
+            font-size: 4rem;
+            margin-bottom: 10px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Información del Enlace Interno/Externo */
+        .asset-info {
+            text-align: left;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            margin-bottom: 25px;
+            border-left: 4px solid var(--neon-purple);
+        }
+
+        .container.mexico-card .asset-info {
+            border-left-color: var(--neon-red);
+        }
+
+        .asset-info div {
+            margin-bottom: 8px;
+        }
+
+        .asset-info div:last-child {
+            margin-bottom: 0;
+        }
+
+        .label {
+            color: var(--muted-text);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            display: block;
+        }
+
+        .value {
+            color: #fff;
+            word-break: break-all;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .value a {
+            color: var(--neon-green);
+            text-decoration: none;
+            transition: text-shadow 0.2s;
+        }
+
+        .value a:hover {
+            text-shadow: 0 0 8px var(--neon-green);
+        }
+
+        /* Botón de Acción Principal de Promociones */
+        .btn-action {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(90deg, var(--neon-purple), #9000a8);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(188, 0, 221, 0.4);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            box-sizing: border-box;
+        }
+
+        .container.mexico-card .btn-action {
+            background: linear-gradient(90deg, var(--neon-red), #b30030);
+            box-shadow: 0 4px 15px rgba(255, 42, 95, 0.4);
+        }
+
+        .btn-action:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 255, 102, 0.4);
+            background: linear-gradient(90deg, #9000a8, var(--neon-green));
+            color: #000;
+        }
+
+        .container.mexico-card .btn-action:hover {
+            background: linear-gradient(90deg, #b30030, var(--neon-green));
+        }
+
+        footer {
+            margin-top: auto;
+            padding: 30px 0;
+            font-size: 0.8rem;
+            color: var(--muted-text);
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        footer span {
+            color: var(--neon-purple);
+            font-weight: bold;
+        }
+
+        /* Animaciones */
+        @keyframes rotateMatrix {
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="matrix-bg"></div>
+
+    <header>
+        <h1>SADV41 Asset Vault</h1>
+        <p>@StevenDiorOficial • Control de Promociones</p>
+    </header>
+
+    <div class="main-wrapper">
+
+        <!-- MÓDULO 1: STREAK MASCOT -->
+        <div class="container">
+            <div class="asset-box">
+                <div class="asset-box-inner">
+                    <div class="asset-icon">🔥🐧</div>
+                    <div style="color: var(--neon-green); font-size: 1.1rem; font-weight: bold;">TikTok Streak Mascot</div>
+                    <span style="font-size: 0.8rem; color: var(--muted-text); margin-top: 5px;">Asset compartido entre cuentas sincronizadas</span>
+                </div>
+            </div>
+
+            <div class="asset-info">
+                <div>
+                    <span class="label">Origen del Asset</span>
+                    <span class="value"><a href="https://tiktok.me/streak/ZS9j6byAKMtEj-5xvTS/" target="_blank">tiktok.me/streak/ZS9j6byAKMtEj-5xvTS/</a></span>
+                </div>
+                <div style="margin-top: 12px;">
+                    <span class="label">División Operativa</span>
+                    <span class="value">@Steven507oficial (Resguardo) <br> @StevenDiorOficial (Campañas)</span>
+                </div>
+                <div style="margin-top: 12px;">
+                    <span class="label">Estado del Enlace</span>
+                    <span class="value" style="color: var(--neon-green);">● Activo en la Matriz</span>
+                </div>
+            </div>
+
+            <a href="https://tiktok.me/streak/ZS9j6byAKMtEj-5xvTS/" target="_blank" class="btn-action">
+                Verificar Asset Original 🎚
+            </a>
+        </div>
+
+        <!-- MÓDULO 2: MEMORIAL DE MÉXICO -->
+        <div class="container mexico-card">
+            <div class="asset-box">
+                <div class="asset-box-inner" style="padding: 2px;">
+                    <video id="mexicoVideo" width="100%" height="100%" controls style="border-radius: 12px; object-fit: cover; background: #000;">
+                        <source src="http://localhost:5000/static/assets/mexico_memorial.mp4" type="video/mp4">
+                        Tu navegador no soporta el formato de video de la matriz.
+                    </video>
+                </div>
+            </div>
+
+            <div class="asset-info">
+                <div>
+                    <span class="label">Memorial Organizado</span>
+                    <span class="value" style="color: var(--neon-red);">Recordar a México 🇲🇽</span>
+                </div>
+                <div style="margin-top: 12px;">
+                    <span class="label">Enlace Espejo Original</span>
+                    <span class="value"><a href="https://vt.tiktok.com/ZSQmeJaBm/" target="_blank" style="color: var(--neon-red);">vt.tiktok.com/ZSQmeJaBm/</a></span>
+                </div>
+                <div style="margin-top: 12px;">
+                    <span class="label">Soberanía del Recurso</span>
+                    <span class="value" style="color: var(--neon-green);">● Servido Local vía tiktokmex.py</span>
+                </div>
+            </div>
+
+            <a href="https://vt.tiktok.com/ZSQmeJaBm/" target="_blank" class="btn-action">
+                Abrir Enlace Externo 🎚
+            </a>
+        </div>
+
+    </div>
+
+    <footer>
+        Misión de Servicio <span>SADV41</span> — 2026. Blindaje de activos digitales.
+    </footer>
+
+    <script>
+        // Consumir el API local de tiktokmex.py para traer dinámicamente el thumbnail original de TikTok como póster del video
+        async def_load_poster() {
+            try {
+                const response = await fetch('http://localhost:5000/api/preview-mexico');
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data.status === 'success' && data.thumbnail) {
+                        document.getElementById('mexicoVideo').setAttribute('poster', data.thumbnail);
+                    }
+                }
+            } catch (error) {
+                console.log("Servidor local no detectado o API offline. Corriendo con reproductor nativo estándar.");
+            }
+        }
+        // Ejecutar al cargar la interfaz
+        window.addEventListener('DOMContentLoaded', def_load_poster);
+    </script>
+</body>
+</html>
