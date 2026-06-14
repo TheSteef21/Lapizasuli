@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sovereign Hub | SADV41 Vault, Miss Mundo Latina & Telemetría</title>
-    
-    <!-- Scripts Core -->
+    <title>Sovereign Hub | SADV41, Miss Mundo Latina & Monitoreo Sísmico</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    
     <script src="https://cdn.jsdelivr.net/npm/@web3auth/modal@8"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.0/ethers.umd.min.js"></script>
 
@@ -23,15 +22,10 @@
                         neonPink: '#ff2a74',
                         neonBlue: '#00f3ff',
                         renderRed: '#da3637',
-                        cardBg: '#12121a',
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
                         serif: ['Playfair Display', 'serif'],
-                    },
-                    animation: {
-                        'matrix-slow': 'rotateMatrix 8s linear infinite',
-                        'float-slow': 'float 3s ease-in-out infinite',
                     }
                 }
             }
@@ -54,29 +48,32 @@
             background: #161b22;
             border: 1px solid #30363d;
         }
-        .text-shadow-oro { text-shadow: 0 0 10px rgba(234, 179, 8, 0.5); }
-        .text-shadow-pink { text-shadow: 0 0 10px rgba(255, 42, 116, 0.6); }
-        .text-shadow-blue { text-shadow: 0 0 10px rgba(0, 243, 255, 0.6); }
+        .text-shadow-oro {
+            text-shadow: 0 0 10px rgba(234, 179, 8, 0.5);
+        }
+        .text-shadow-pink {
+            text-shadow: 0 0 10px rgba(255, 42, 116, 0.6);
+        }
+        .text-shadow-blue {
+            text-shadow: 0 0 10px rgba(0, 243, 255, 0.6);
+        }
         .sismo-card {
             background-color: #1f242c;
             border-left: 5px solid #ff6b81;
         }
-        
-        /* Animaciones complejas nativas */
-        @keyframes rotateMatrix {
-            100% { transform: rotate(360deg); }
+        /* Efecto Arcoíris Animado para la iniciativa Panini FIFA 2026 */
+        .rainbow-border {
+            position: relative;
+            background: rgba(2, 6, 23, 0.65);
+            backdrop-filter: blur(14px);
+            border: 2px solid transparent;
+            border-image: linear-gradient(45deg, #ff007f, #7f00ff, #00f3ff, #00ff7f, #ffea00, #ff007f) 1;
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.15);
         }
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-        .animate-matrix { animation: rotateMatrix 6s linear infinite; }
-        .animate-float { animation: float 3s ease-in-out infinite; }
     </style>
 </head>
-<body class="font-sans antialiased selection:bg-oro selection:text-navy min-height-screen flex flex-col">
+<body class="font-sans antialiased selection:bg-oro selection:text-navy">
 
-    <!-- HEADER / CONTROL DE ACCESO SOBERANO -->
     <header class="fixed w-full z-50 glass border-b border-oro/30 px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
         <div class="flex items-center gap-3">
             <span class="text-2xl">🛡️</span>
@@ -86,11 +83,11 @@
             </div>
         </div>
         
-        <nav class="flex flex-wrap gap-4 md:gap-6 text-xs md:text-sm uppercase tracking-wider font-medium justify-center">
+        <nav class="flex gap-6 text-sm uppercase tracking-wider font-medium">
             <a href="#embassy-story" class="hover:text-pink-400 transition-colors text-pink-300">Embassy Story</a>
             <a href="#monitor-sismico-seccion" class="hover:text-red-400 transition-colors text-red-300 font-bold">⚠️ Telemetría SADV41T</a>
-            <a href="#asset-vault" class="hover:text-cyan-400 transition-colors text-cyan-300">Asset Vault</a>
-            <a href="#confesionario" class="hover:text-oro transition-colors">Mayordomía</a>
+            <a href="#mision" class="hover:text-oro transition-colors">Mayordomía</a>
+            <a href="#miss-mundo" class="hover:text-oro transition-colors text-amber-200">Miss Mundo Latina</a>
         </nav>
 
         <div class="flex flex-wrap gap-2 justify-center">
@@ -106,224 +103,156 @@
         </div>
     </header>
 
-    <!-- FLUJO CENTRAL DE OPERACIONES -->
-    <main class="pt-44 flex-grow pb-12 px-4 md:px-6 max-w-6xl w-full mx-auto space-y-16">
+    <main class="pt-36 pb-12 px-6 max-w-6xl mx-auto space-y-16">
         
-        <!-- SECCIÓN 1: EMBASSY OF BEAUTY & TELEMETRÍA SÍSMICA (GRID LATERAL) -->
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-            
-            <!-- GSADV41: EMBASSY OF BEAUTY (5 Columnas) -->
-            <section id="embassy-story" class="glass rounded-2xl overflow-hidden border border-pink-500/30 shadow-2xl lg:col-span-5">
-                <div class="p-6 text-center border-b border-white/5 bg-gradient-to-b from-pink-500/10 to-transparent">
-                    <h2 class="font-serif text-xl md:text-2xl text-white font-extrabold tracking-wider text-shadow-pink uppercase">GSADV41: EMBASSY OF BEAUTY</h2>
-                    <p class="text-oro font-semibold text-[11px] tracking-widest mt-1 uppercase">6 Expressions of Sisterhood & Grace</p>
-                </div>
-
-                <div class="p-4 space-y-3 bg-slate-950/40 max-h-[520px] overflow-y-auto custom-scrollbar">
-                    <!-- Iteración de Expresiones -->
-                    <div class="bg-white/[0.02] border-l-4 border-neonPink p-3 rounded-r-xl transition-all hover:translate-x-1 hover:bg-white/[0.04]">
-                        <div class="flex justify-between items-center mb-1">
-                            <span class="text-xs font-bold text-white">The Emergency Therapist</span>
-                            <span class="text-[9px] text-oro uppercase tracking-wider font-semibold">Consuelo</span>
-                        </div>
-                        <p class="text-[11px] text-slate-400 leading-relaxed">Restoring Her Crown. Te recibe con empatía divina, te seca las lágrimas y te recuerda el valor real de tu corona.</p>
-                    </div>
-
-                    <div class="bg-white/[0.02] border-l-4 border-neonBlue p-3 rounded-r-xl transition-all hover:translate-x-1 hover:bg-white/[0.04]">
-                        <div class="flex justify-between items-center mb-1">
-                            <span class="text-xs font-bold text-white">The Beauty Ambassador</span>
-                            <span class="text-[9px] text-oro uppercase tracking-wider font-semibold">Generosidad</span>
-                        </div>
-                        <p class="text-[11px] text-slate-400 leading-relaxed">A Mirror of Generosity. Despliega un tocador impecable para ofrecer retoques de gracia y elegancia sin costo.</p>
-                    </div>
-
-                    <div class="bg-white/[0.02] border-l-4 border-neonPink p-3 rounded-r-xl transition-all hover:translate-x-1 hover:bg-white/[0.04]">
-                        <div class="flex justify-between items-center mb-1">
-                            <span class="text-xs font-bold text-white">The 5-Minute Sister</span>
-                            <span class="text-[9px] text-oro uppercase tracking-wider font-semibold">Conexión</span>
-                        </div>
-                        <p class="text-[11px] text-slate-400 leading-relaxed">Instant Connection. Admiración mutua y genuina de pasarela; un choque de palmas y un lazo digital instantáneo.</p>
-                    </div>
-
-                    <div class="bg-white/[0.02] border-l-4 border-neonBlue p-3 rounded-r-xl transition-all hover:translate-x-1 hover:bg-white/[0.04]">
-                        <div class="flex justify-between items-center mb-1">
-                            <span class="text-xs font-bold text-white">The Search Squadron</span>
-                            <span class="text-[9px] text-oro uppercase tracking-wider font-semibold">Resguardo</span>
-                        </div>
-                        <p class="text-[11px] text-slate-400 leading-relaxed">No Woman Left Behind. Activación inmediata y solidaria ante el llamado de alerta para proteger a la compañera.</p>
-                    </div>
-
-                    <div class="bg-white/[0.02] border-l-4 border-neonPink p-3 rounded-r-xl transition-all hover:translate-x-1 hover:bg-white/[0.04]">
-                        <div class="flex justify-between items-center mb-1">
-                            <span class="text-xs font-bold text-white">The Mirror Visionary</span>
-                            <span class="text-[9px] text-oro uppercase tracking-wider font-semibold">Esencia</span>
-                        </div>
-                        <p class="text-[11px] text-slate-400 leading-relaxed">Perfecting the Reflection. Captura la luz, la sofisticación y el encuadre perfecto de la hermandad en el espejo.</p>
-                    </div>
-
-                    <div class="bg-white/[0.02] border-l-4 border-neonBlue p-3 rounded-r-xl transition-all hover:translate-x-1 hover:bg-white/[0.04]">
-                        <div class="flex justify-between items-center mb-1">
-                            <span class="text-xs font-bold text-white">The Dancefloor Philosopher</span>
-                            <span class="text-[9px] text-oro uppercase tracking-wider font-semibold">Propósito</span>
-                        </div>
-                        <p class="text-[11px] text-slate-400 leading-relaxed">Live with Purpose. Sabiduría pura de pista que inspira a levantar la frente y celebrar la vida con plenitud absoluta.</p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- MÓDULO SÍSMICO TELEMETRÍA SADV41T (7 Columnas) -->
-            <section id="monitor-sismico-seccion" class="p-6 bg-[#0d1117] border border-slate-800 rounded-2xl shadow-xl lg:col-span-7 w-full">
-                <div class="text-center py-2">
-                    <h2 class="text-renderRed font-bold text-xl md:text-2xl tracking-tight uppercase">Módulo SADV41T</h2>
-                    <p class="text-slate-400 text-xs mt-1 border-b border-slate-800 pb-4 font-mono">
-                        Detección y Clasificación de Familias Sísmicas Repetitivas (REDPy / USGS)
-                    </p>
-                </div>
-
-                <div class="flex justify-center items-center gap-4 my-4">
-                    <button id="btn-refrescar" class="bg-[#ff6b81] hover:bg-[#ff4757] text-white font-bold text-xs px-4 py-2 rounded-lg transition-all active:scale-95 cursor-pointer font-mono" onclick="refrescarMonitor()">
-                        Refrescar Monitor
-                    </button>
-                    <div id="badge-estado" class="bg-renderRed/10 text-renderRed border border-renderRed/40 px-3 py-1 rounded-full font-bold text-[11px] tracking-wide font-mono">
-                        Sincronizando...
-                    </div>
-                </div>
-
-                <div id="contenedor-error" class="bg-red-500/10 border border-red-500 rounded-xl p-4 text-xs text-left space-y-1 hidden font-mono">
-                    <span class="font-bold text-red-500 flex items-center gap-1">⚠️ Modo Respaldo Activado:</span> 
-                    <p class="text-slate-300">No se pudo conectar con el servidor dinámico a través de la ruta proxy de Render. Mostrando el último registro almacenado de la estación local.</p>
-                </div>
-
-                <div id="monitor-salida" class="space-y-4 mt-4"></div>
-            </section>
-        </div>
-
-        <!-- SECCIÓN 2: SADV41 ASSET VAULT (PRODUCCIÓN & PROMOESTRELLA DE CONTROL) -->
-        <section id="asset-vault" class="space-y-6">
-            <div class="text-center">
-                <h2 class="font-serif text-2xl tracking-wider text-white font-extrabold uppercase bg-linear-to-r from-white to-neonPink bg-clip-text text-transparent">SADV41 Asset Vault</h2>
-                <p class="text-xs text-emerald-400 font-bold tracking-widest uppercase font-mono mt-1">● Control de Promociones Integrado</p>
+        <!-- SECCIÓN DE NUEVA INICIATIVA: PANINI FIFA 2026 & TIKTOK (RECUADRO TRANSPARENTE ARCOÍRIS) -->
+        <section class="max-w-lg mx-auto rainbow-border rounded-xl p-6 text-center transition-transform hover:scale-[1.01]">
+            <div class="flex items-center justify-center gap-2 mb-2">
+                <span class="text-xl">⚽</span>
+                <h3 class="font-bold text-sm tracking-widest text-white uppercase font-mono">PANINI FIFA 2026 × TIKTOK</h3>
+                <span class="text-xl">📱</span>
             </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                
-                <!-- ASSET 1: STREAK MASCOT -->
-                <div class="bg-cardBg border-2 border-neonPink/30 hover:border-emerald-500 rounded-2xl p-6 transition-all shadow-2xl flex flex-col justify-between">
-                    <div>
-                        <div class="relative w-full h-48 bg-black rounded-xl mb-4 flex justify-center items-center border border-dashed border-slate-700 overflow-hidden">
-                            <!-- Efecto de matriz interno animado -->
-                            <div class="absolute inset-0 bg-gradient-to-tr from-neonPink/10 to-transparent pointer-events-none"></div>
-                            <div class="text-center z-10">
-                                <div class="text-5xl mb-2 animate-float">🔥🐧</div>
-                                <div class="text-emerald-400 font-bold font-mono text-sm">TikTok Streak Mascot</div>
-                                <span class="text-[10px] text-slate-500 font-mono">Compartido entre cuentas sincronizadas</span>
-                            </div>
-                        </div>
-
-                        <div class="bg-black/40 p-4 rounded-xl text-xs space-y-2 border-l-4 border-neonPink font-mono">
-                            <div>
-                                <span class="text-[10px] text-slate-500 block uppercase font-bold">Origen del Asset</span>
-                                <span class="text-white break-all"><a href="https://tiktok.me/streak/ZS9j6byAKMtEj-5xvTS/" target="_blank" class="text-emerald-400 hover:underline">tiktok.me/streak/ZS9j6byAKMtEj-5xvTS/</a></span>
-                            </div>
-                            <div>
-                                <span class="text-[10px] text-slate-500 block uppercase font-bold">División Operativa</span>
-                                <span class="text-slate-300">@Steven507oficial (Resguardo)<br>@StevenDiorOficial (Campañas)</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mt-6">
-                        <a href="https://tiktok.me/streak/ZS9j6byAKMtEj-5xvTS/" target="_blank" class="w-full text-center block bg-gradient-to-r from-neonPink to-purple-800 hover:from-purple-800 hover:to-emerald-500 hover:text-black font-bold py-3 px-4 rounded-full text-xs tracking-wider uppercase transition-all shadow-lg shadow-neonPink/20">
-                            Verificar Asset Original 🎚
-                        </a>
-                    </div>
-                </div>
-
-                <!-- ASSET 2: MEMORIAL DE MÉXICO -->
-                <div class="bg-cardBg border-2 border-red-500/30 hover:border-emerald-500 rounded-2xl p-6 transition-all shadow-2xl flex flex-col justify-between">
-                    <div>
-                        <div class="relative w-full h-48 bg-black rounded-xl mb-4 overflow-hidden border border-slate-800">
-                            <video id="mexicoVideo" class="w-full h-full object-cover" controls>
-                                <source src="http://localhost:5000/static/assets/mexico_memorial.mp4" type="video/mp4">
-                                Tu navegador no soporta el formato de video de la matriz.
-                            </video>
-                        </div>
-
-                        <div class="bg-black/40 p-4 rounded-xl text-xs space-y-2 border-l-4 border-renderRed font-mono">
-                            <div>
-                                <span class="text-[10px] text-slate-500 block uppercase font-bold">Memorial Organizado</span>
-                                <span class="text-renderRed font-bold">Recordar a México 🇲🇽</span>
-                            </div>
-                            <div>
-                                <span class="text-[10px] text-slate-500 block uppercase font-bold">Enlace Espejo Original</span>
-                                <span class="text-white break-all"><a href="https://vt.tiktok.com/ZSQmeJaBm/" target="_blank" class="text-renderRed hover:underline">vt.tiktok.com/ZSQmeJaBm/</a></span>
-                            </div>
-                            <div>
-                                <span class="text-[10px] text-slate-500 block uppercase font-bold">Soberanía del Recurso</span>
-                                <span class="text-emerald-400">● Servido Local vía tiktokmex.py</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mt-6">
-                        <a href="https://vt.tiktok.com/ZSQmeJaBm/" target="_blank" class="w-full text-center block bg-gradient-to-r from-renderRed to-amber-900 hover:from-amber-900 hover:to-emerald-500 hover:text-black font-bold py-3 px-4 rounded-full text-xs tracking-wider uppercase transition-all shadow-lg shadow-renderRed/20">
-                            Abrir Enlace Externo 🎚
-                        </a>
-                    </div>
-                </div>
-
+            <p class="text-xs text-slate-300 leading-relaxed px-2 mb-4">
+                ¡La colección digital oficial ha comenzado! Descubre y colecciona las cartas exclusivas de los jugadores del Mundial directamente desde la plataforma de entretenimiento global.
+            </p>
+            <div class="inline-block bg-white/10 px-4 py-1.5 rounded-full text-[11px] font-extrabold text-white tracking-widest uppercase mb-4 animate-pulse">
+                ✨ CONSIGUE LA TUYA ✨
+            </div>
+            <div>
+                <a href="https://vt.tiktok.com/ZS9jSnGRqbtuf-qfUyV/" target="_blank" class="inline-flex bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-400 hover:to-purple-500 text-white font-bold text-xs px-6 py-2.5 rounded-lg transition-all shadow-md tracking-wider uppercase cursor-pointer">
+                    Abrir Sobres en TikTok
+                </a>
             </div>
         </section>
 
-        <!-- SECCIÓN 3: CONFESIONARIO DE GRACIA & ALERTAS GLOBALES -->
-        <section id="confesionario" class="glass rounded-2xl max-w-xl mx-auto overflow-hidden border border-cyan-500/30 shadow-2xl">
+        <section id="embassy-story" class="glass rounded-2xl overflow-hidden border border-pink-500/30 shadow-2xl max-w-lg mx-auto">
+            <div class="p-8 text-center border-b border-white/5 bg-gradient-to-b from-pink-500/10 to-transparent">
+                <h2 class="font-serif text-2xl md:text-3xl text-white font-extrabold tracking-wider text-shadow-pink uppercase">GSADV41: EMBASSY OF BEAUTY</h2>
+                <p class="text-oro font-semibold text-sm tracking-widest mt-1 uppercase">6 Expressions of Sisterhood & Grace</p>
+                <p class="text-xs text-slate-400 mt-4 leading-relaxed">
+                    El santuario secreto donde la belleza no compite; se comparte, se restaura y se multiplica bajo la ley de gracia de Miss Mundo GSADV41.
+                </p>
+            </div>
+
+            <div class="p-6 space-y-4 bg-slate-950/40">
+                <div class="bg-white/[0.02] border-l-4 border-[#ff2a74] p-4 rounded-r-xl transition-all hover:translate-x-1 hover:bg-white/[0.04] cursor-pointer">
+                    <div class="flex justify-between items-center mb-1">
+                        <span class="text-sm font-bold text-white">The Emergency Therapist</span>
+                        <span class="text-[10px] text-oro uppercase tracking-wider font-semibold">Consuelo</span>
+                    </div>
+                    <p class="text-xs text-slate-400 leading-relaxed">Restoring Her Crown. Te recibe con empatía divina, te seca las lágrimas y te recuerda el valor real de tu corona.</p>
+                </div>
+
+                <div class="bg-white/[0.02] border-l-4 border-[#00f3ff] p-4 rounded-r-xl transition-all hover:translate-x-1 hover:bg-white/[0.04] cursor-pointer">
+                    <div class="flex justify-between items-center mb-1">
+                        <span class="text-sm font-bold text-white">The Beauty Ambassador</span>
+                        <span class="text-[10px] text-oro uppercase tracking-wider font-semibold">Generosidad</span>
+                    </div>
+                    <p class="text-xs text-slate-400 leading-relaxed">A Mirror of Generosity. Despliega un tocador impecable para ofrecer retoques de gracia y elegancia sin costo.</p>
+                </div>
+
+                <div class="bg-white/[0.02] border-l-4 border-[#ff2a74] p-4 rounded-r-xl transition-all hover:translate-x-1 hover:bg-white/[0.04] cursor-pointer">
+                    <div class="flex justify-between items-center mb-1">
+                        <span class="text-sm font-bold text-white">The 5-Minute Sister</span>
+                        <span class="text-[10px] text-oro uppercase tracking-wider font-semibold">Conexión</span>
+                    </div>
+                    <p class="text-xs text-slate-400 leading-relaxed">Instant Connection. Admiración mutua y genuina de pasarela; un choque de palmas y un lazo digital instantáneo.</p>
+                </div>
+
+                <div class="bg-white/[0.02] border-l-4 border-[#00f3ff] p-4 rounded-r-xl transition-all hover:translate-x-1 hover:bg-white/[0.04] cursor-pointer">
+                    <div class="flex justify-between items-center mb-1">
+                        <span class="text-sm font-bold text-white">The Search Squadron</span>
+                        <span class="text-[10px] text-oro uppercase tracking-wider font-semibold">Resguardo</span>
+                    </div>
+                    <p class="text-xs text-slate-400 leading-relaxed">No Woman Left Behind. Activación inmediata y solidaria ante el llamado de alerta para proteger a la compañera.</p>
+                </div>
+
+                <div class="bg-white/[0.02] border-l-4 border-[#ff2a74] p-4 rounded-r-xl transition-all hover:translate-x-1 hover:bg-white/[0.04] cursor-pointer">
+                    <div class="flex justify-between items-center mb-1">
+                        <span class="text-sm font-bold text-white">The Mirror Visionary</span>
+                        <span class="text-[10px] text-oro uppercase tracking-wider font-semibold">Esencia</span>
+                    </div>
+                    <p class="text-xs text-slate-400 leading-relaxed">Perfecting the Reflection. Captura la luz, la sofisticación y el encuadre perfecto de la hermandad en el espejo.</p>
+                </div>
+
+                <div class="bg-white/[0.02] border-l-4 border-[#00f3ff] p-4 rounded-r-xl transition-all hover:translate-x-1 hover:bg-white/[0.04] cursor-pointer">
+                    <div class="flex justify-between items-center mb-1">
+                        <span class="text-sm font-bold text-white">The Dancefloor Philosopher</span>
+                        <span class="text-[10px] text-oro uppercase tracking-wider font-semibold">Propósito</span>
+                    </div>
+                    <p class="text-xs text-slate-400 leading-relaxed">Live with Purpose. Sabiduría pura de pista que inspira a levantar la frente y celebrar la vida con plenitud absoluta.</p>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="monitor-sismico-seccion" class="max-w-3xl mx-auto p-1 md:p-6 bg-[#0d1117] border border-slate-800 rounded-2xl shadow-xl">
+            <div class="text-center py-4">
+                <h2 class="text-renderRed font-bold text-2xl md:text-3xl tracking-tight uppercase">Módulo SADV41T</h2>
+                <p class="text-slate-400 text-xs md:text-sm mt-1 border-b border-slate-800 pb-4">
+                    Detección y Clasificación de Familias Sísmicas Repetitivas (REDPy / USGS)
+                </p>
+            </div>
+
+            <div class="flex justify-center items-center gap-4 my-4">
+                <button id="btn-refrescar" class="bg-[#ff6b81] hover:bg-[#ff4757] text-white font-bold text-sm px-5 py-2.5 rounded-lg transition-all active:scale-95 cursor-pointer" onclick="refrescarMonitor()">
+                    Refrescar Monitor
+                </button>
+                <div id="badge-estado" class="bg-renderRed/10 text-renderRed border border-renderRed/40 px-4 py-1.5 rounded-full font-bold text-xs tracking-wide">
+                    Sincronizando...
+                </div>
+            </div>
+
+            <div id="contenedor-error" class="bg-red-500/10 border border-red-500 rounded-xl p-4 text-sm text-left space-y-1 hidden">
+                <span class="font-bold text-red-500 flex items-center gap-1">⚠️ Modo Respaldo Activado:</span> 
+                <p class="text-slate-300 text-xs">No se pudo conectar con el servidor dinámico a través de la ruta proxy de Render. Mostrando el último registro almacenado de la estación local.</p>
+            </div>
+
+            <div id="monitor-salida" class="space-y-4 mt-6"></div>
+        </section>
+
+
+        <section class="glass rounded-2xl max-w-lg mx-auto overflow-hidden border border-cyan-500/30">
             <div class="p-6 bg-black/30 flex flex-col items-center gap-4 text-center">
-                <div class="border border-neonBlue/40 px-4 py-1.5 rounded-full text-[10px] font-bold text-neonBlue tracking-wide text-shadow-blue shadow-[0_0_10px_rgba(0,243,255,0.15)] uppercase font-mono">
+                <div class="border border-[#00f3ff]/40 px-4 py-1.5 rounded-full text-xs font-bold text-[#00f3ff] tracking-wide text-shadow-blue shadow-[0_0_10px_rgba(0,243,255,0.15)] uppercase">
                     CONFESIONARIO DE GRACIA & ALERTAS GLOBALES
                 </div>
                 
-                <p class="text-xs text-slate-400 leading-relaxed px-4 font-sans">
-                    Monitoreo constante e interconexión soberana. Canales oficiales sincronizados minuto a minuto bajo los parámetros de la ley de gracia de la misión de servicio.
+                <p class="text-xs text-slate-400 leading-relaxed px-4">
+                    Monitoreo constante e interconexión soberana. Canales oficiales sincronizados minuto a minuto bajo los parámetros de la ley de gracia.
                 </p>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full pt-2 px-4 font-mono text-xs">
-                    <a href="https://wa.me/+15556670579" target="_blank" class="bg-emerald-600 hover:bg-emerald-500 text-white font-semibold px-4 py-2.5 rounded-lg transition-all shadow flex items-center justify-center gap-1.5 cursor-pointer col-span-2 sm:col-span-1">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full pt-2 px-4">
+                    <a href="https://wa.me/+15556670579" target="_blank" class="bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs px-4 py-2.5 rounded-lg transition-all shadow flex items-center justify-center gap-1.5 cursor-pointer col-span-2 sm:col-span-1">
                         💬 Contactar IA SADV41
                     </a>
-                    <a href="https://www.instagram.com/reel/DZNKr6Sla4M/?igsh=bDUzODcwanlyZWp6" target="_blank" class="bg-gradient-to-r from-purple-600 to-neonPink hover:from-purple-500 hover:to-pink-500 text-white font-semibold px-4 py-2.5 rounded-lg transition-all shadow flex items-center justify-center gap-1.5 cursor-pointer col-span-2 sm:col-span-1">
+                    <a href="https://www.instagram.com/reel/DZNKr6Sla4M/?igsh=bDUzODcwanlyZWp6" target="_blank" class="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-semibold text-xs px-4 py-2.5 rounded-lg transition-all shadow flex items-center justify-center gap-1.5 cursor-pointer col-span-2 sm:col-span-1">
                         📸 Ver Reel Instagram
                     </a>
-                    <a href="https://www.meta.ai/@stevendioroficial/post/MG4xH5QUPGu?open_in_meta_ai=true&song_id=1887147568642873&utm_source=android_meta_ai_sl" target="_blank" class="bg-blue-600 hover:bg-blue-500 text-white font-semibold px-4 py-2.5 rounded-lg transition-all shadow flex items-center justify-center gap-1.5 cursor-pointer col-span-2">
+                    <a href="https://www.meta.ai/@stevendioroficial/post/MG4xH5QUPGu?open_in_meta_ai=true&song_id=1887147568642873&utm_source=android_meta_ai_sl" target="_blank" class="bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs px-4 py-2.5 rounded-lg transition-all shadow flex items-center justify-center gap-1.5 cursor-pointer col-span-2">
                         🤖 Leer Arquitectura en Meta AI
                     </a>
                 </div>
 
-                <!-- El testigo de la venida -->
-                <div class="text-2xl mt-2 animate-pulse">🎚</div>
+                <div class="text-2xl mt-2 animate-[pulse_2s_infinite]">🎚</div>
             </div>
         </section>
 
-        <!-- PANEL DE PIPELINE OCULTO PARA ESTADOS WEB3 -->
-        <div id="connectionPanel" class="hidden p-5 bg-slate-900/90 border border-oro/40 rounded-2xl shadow-2xl font-mono">
+        <div id="connectionPanel" class="hidden p-5 bg-slate-900/90 border border-oro/40 rounded-2xl shadow-2xl">
             <div class="flex items-center gap-3 mb-2">
                 <span class="relative flex h-3 w-3">
                     <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                     <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
                 </span>
-                <span class="text-xs text-slate-300">Web3 Pipeline Active</span>
+                <span class="text-xs text-slate-300 font-mono">Web3 Pipeline Active</span>
             </div>
         </div>
 
     </main>
 
-    <!-- FOOTER PROTEGIDO -->
-    <footer class="border-t border-slate-900 bg-black/40 py-6 text-center text-xs text-slate-500 tracking-wider font-mono mt-auto">
-        Misión de Servicio <span class="text-oro font-bold">SADV41</span> — 2026. Blindaje de activos digitales y control de flujo analítico.
-    </footer>
-
-    <!-- PIPELINE LÓGICO Y CONTROL DE FLUJO DE APIS -->
     <script>
         const API_URL = "https://lapizasuli.onrender.com/api/sismos";
 
-        // Fallback estático unificado del JSON local del Hub
         const datosRespaldoLocal = {
             "analisis_ia": "Análisis en modo local (Respaldo del Sistema). Telemetría base registrada con acumulado de eventos estable en la red de estaciones.",
             "acumulado_total": 24,
@@ -346,26 +275,25 @@
 
         function renderizarDatos(data) {
             const monitorSalida = document.getElementById("monitor-salida");
-            if(!monitorSalida) return;
             
             let htmlContenido = `
-                <div class="glass-sismico border border-slate-800 rounded-xl p-4 text-left shadow-inner">
+                <div class="glass-sismico border border-slate-800 rounded-xl p-5 text-left shadow-inner">
                     <div class="flex justify-between items-center mb-2">
-                        <h4 class="text-[#58a6ff] font-bold text-xs flex items-center gap-1.5 font-mono">🤖 Diagnóstico del Motor de IA:</h4>
+                        <h4 class="text-[#58a6ff] font-bold text-sm flex items-center gap-1.5">🤖 Diagnóstico del Motor de IA:</h4>
                         <span class="text-[10px] bg-slate-800 px-2 py-0.5 rounded font-mono text-slate-400">Acumulado Total: ${data.acumulado_total || 24}</span>
                     </div>
-                    <p class="text-[11px] text-slate-300 leading-relaxed font-mono">${data.analisis_ia || "Procesando firmas sísmicas detectadas..."}</p>
+                    <p class="text-xs text-slate-300 leading-relaxed font-mono">${data.analisis_ia || "Procesando firmas sísmicas detectadas..."}</p>
                 </div>
             `;
 
             data.eventos.forEach(sismo => {
                 htmlContenido += `
                     <div class="sismo-card border-l-4 border-rose-500 p-4 rounded-r-xl text-left bg-slate-950/50 border border-y-slate-800 border-r-slate-800">
-                        <div class="text-xs text-slate-200 font-semibold mb-1 flex justify-between items-center font-mono">
-                            <span>📍 Ubicación: <span class="text-white text-[11px]">${sismo.ubicacion} (${sismo.pais_region || 'Panamá'})</span></span>
-                            <a href="${sismo.google_maps_url}" target="_blank" class="text-blue-400 hover:underline text-[10px]">📍 Ver en Mapa</a>
+                        <div class="text-xs text-slate-200 font-semibold mb-1 flex justify-between items-center">
+                            <span>📍 Ubicación: <span class="text-white">${sismo.ubicacion} (${sismo.pais_region || 'Panamá'})</span></span>
+                            <a href="${sismo.google_maps_url}" target="_blank" class="text-blue-400 hover:underline text-[10px] font-mono">📍 Ver en Mapa</a>
                         </div>
-                        <div class="text-xs text-slate-400 grid grid-cols-2 gap-y-1 font-mono text-[11px]">
+                        <div class="text-xs text-slate-400 grid grid-cols-2 gap-y-1 font-mono">
                             <div>📊 Magnitud: <span class="text-rose-400 font-bold">M ${sismo.magnitud}</span></div>
                             <div>📉 Profundidad: <span class="text-cyan-400 font-bold">${sismo.profundidad_km} km</span></div>
                             <div class="col-span-2">🧬 Análisis REDPy: <span class="text-amber-400">${sismo.familia_redpy}</span> (CC: ${sismo.coeficiente_correlacion})</div>
@@ -426,29 +354,10 @@
             }
         }
 
-        // Carga dinámica de Poster/Thumbnail para el Memorial de México
-        async function def_load_poster() {
-            try {
-                const response = await fetch('http://localhost:5000/api/preview-mexico');
-                if (response.ok) {
-                    const data = await response.json();
-                    if (data.status === 'success' && data.thumbnail) {
-                        document.getElementById('mexicoVideo').setAttribute('poster', data.thumbnail);
-                    }
-                }
-            } catch (error) {
-                console.log("Servidor local no detectado o API offline. Corriendo con reproductor nativo estándar.");
-            }
-        }
-
         function loginSocial(provider) { console.log("Iniciando auth social con " + provider); }
         function connectBinance() { console.log("Conectando wallet de Binance"); }
 
-        // Inicialización Unificada
-        window.onload = function() {
-            refrescarMonitor();
-            def_load_poster();
-        };
+        window.onload = refrescarMonitor;
     </script>
 </body>
 </html>
