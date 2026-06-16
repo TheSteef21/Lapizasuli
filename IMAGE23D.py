@@ -1,15 +1,14 @@
 # -*- coding: utf-8 -*-
 """
-Misión SADV41 — Motor de Generación Geométrica Dinámica (2D a 3D)
+Misión SADV41 — Servidor de Inferencia y Reconstrucción Geométrica
 Archivo: IMAGE23D.py
-Estatus: Producción / Generación Real Dinámica
-Descripción: Lee la imagen enviada, procesa sus píxeles y esculpe una malla 
-             tridimensional (.glb) única basada en el relieve de la imagen.
+Estatus: Evolución Consecutiva — Filosofía Dior
+Descripción: Integra el motor de procesamiento de píxeles dinámico dentro de la
+             arquitectura FastAPI consolidada que demostró estabilidad en Render.
 """
 
 import os
 import io
-import math
 import struct
 import logging
 from fastapi import FastAPI, UploadFile, File, HTTPException
@@ -17,14 +16,20 @@ from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 from PIL import Image
 
+# 1. Conservamos la estructura de Logs que ya documenta tu éxito
 logging.basicConfig(
     level=logging.INFO,
-    format="%(asctime)s - [SADV41_GENERATOR] - %(levelname)s - %(message)s"
+    format="%(asctime)s - [SADV41_EVO] - %(levelname)s - %(message)s"
 )
 logger = logging.getLogger(__name__)
 
-app = FastAPI(title="SADV41 - Real Image-to-3D Engine", version="3.0.0")
+app = FastAPI(
+    title="SADV41 - Motor de Inferencia Image-to-3D",
+    description="Evolución unificada sobre la base operativa real.",
+    version="3.1.0"
+)
 
+# 2. Mantenemos la pasarela CORS exacta que abrió la comunicación sin bloqueos
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -33,49 +38,62 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# 3. Ruta Raíz de confirmación (Health Check)
 @app.get("/")
 async def root_status():
-    return {"status": "online", "engine": "SADV41 Dynamic Heightmap Core"}
+    logger.info("Verificación de estado de salud del sistema.")
+    return {
+        "status": "online",
+        "mission": "SADV41",
+        "module": "IMAGE23D",
+        "engine": "FastAPI Dynamic Pixel Sculptor"
+    }
 
+# 4. El Endpoint Funcional — Ahora con Cómputo Geométrico Dinámico Real
 @app.post("/generate-3d/")
 async def generate_3d_endpoint(file: UploadFile = File(...)):
-    logger.info(f"Iniciando reconstrucción dinámica para: {file.filename}")
+    logger.info(f"Petición entrante validada. Nombre del recurso: {file.filename}")
     
+    # Validación de formato idéntica a la anterior
     extension = os.path.splitext(file.filename)[1].lower()
     if extension not in [".jpg", ".jpeg", ".png", ".webp"]:
-        raise HTTPException(status_code=400, detail="Formato de imagen no soportado.")
+        logger.warning(f"Extensión rechazada: {extension}")
+        raise HTTPException(
+            status_code=400, 
+            detail="Formato de archivo no soportado por el motor."
+        )
     
     try:
-        # 1. Leer los bytes de la imagen y abrirla dinámicamente con PIL
+        # LEER LA IMAGEN EN MEMORIA (Origen dinámico enviado desde tu celular)
         file_bytes = await file.read()
-        img = Image.open(io.BytesIO(file_bytes)).convert("L") # Convertir a escala de grises para relieve
-        img = img.resize((16, 16)) # Redimensionar a una matriz de 16x16 para no saturar la CPU de Render
+        logger.info(f"Matriz binaria leída: {len(file_bytes)} bytes.")
+        
+        # Procesamiento de relieve mediante escala de grises (Luminancia)
+        img = Image.open(io.BytesIO(file_bytes)).convert("L")
+        img = img.resize((16, 16)) # Malla optimizada de 16x16 para la CPU gratuita de Render
         
         width, height = img.size
         pixels = img.load()
         
-        vertices = []
-        indices = []
+        position_buffer = bytearray()
+        index_buffer = bytearray()
         
-        # 2. Algoritmo de Escultura Tridimensional basado en Píxeles
-        # Generamos coordenadas X, Y, Z basadas en la posición del píxel y su brillo (Z)
+        # ALGORITMO DE ESCULTURA (Modifica los vértices según la foto real)
         for y in range(height):
             for x in range(width):
-                # Normalizar coordenadas entre -0.5 y 0.5
+                # Mapeo espacial normalizado de los ejes
                 nx = (x / (width - 1)) - 0.5
                 ny = (y / (height - 1)) - 0.5
                 
-                # El brillo del píxel (0 a 255) define la altura Z de la geometría
-                brightness = pixels[x, y]
-                nz = (brightness / 255.0) * 0.3 # Escalar relieve max de 0.3
+                # El brillo del píxel esculpe la profundidad Z en tiempo real
+                nz = (pixels[x, y] / 255.0) * 0.25
                 
-                # Guardar vértice (X, Y, Z)
-                vertices.extend([nx, nz, ny]) # Intercambiamos Y y Z para orientación 3D
+                # Empaquetamos la posición tridimensional como Floats de precisión (Little-Endian)
+                position_buffer.extend(struct.pack('<fff', nx, nz, ny))
                 
-        # 3. Construcción de la topología de caras (Triángulos enlazados)
+        # CONSTRUCCIÓN DE LA TOPOLOGÍA DE TRIÁNGULOS
         for y in range(height - 1):
             for x in range(width - 1):
-                # Índices de los 4 vértices de cada celda de la imagen
                 row1 = y * width
                 row2 = (y + 1) * width
                 
@@ -84,61 +102,61 @@ async def generate_3d_endpoint(file: UploadFile = File(...)):
                 v2 = row2 + x
                 v3 = row2 + x + 1
                 
-                # Primer triángulo de la celda
-                indices.extend([v0, v1, v2])
-                # Segundo triángulo de la celda
-                indices.extend([v1, v3, v2])
+                # Definición de las caras de la malla indexada
+                index_buffer.extend(struct.pack('<HHH', v0, v1, v2))
+                index_buffer.extend(struct.pack('<HHH', v1, v3, v2))
 
-        # 4. Empaquetamiento binario en formato glTF/GLB estándar (Formato legible por model-viewer)
-        v_count = len(vertices) // 3
-        i_count = len(indices)
+        # Alineación de memoria para cumplir el estándar estricto de glTF/GLB
+        while len(position_buffer) % 4 != 0: position_buffer.extend(b'\x00')
+        while len(index_buffer) % 4 != 0: index_buffer.extend(b'\x00')
         
-        v_binary = struct.pack(f'<{len(vertices)}f', *vertices)
-        i_binary = struct.pack(f'<{i_count}H', *indices)
+        pos_len = len(position_buffer)
+        idx_len = len(index_buffer)
+        total_bin_len = pos_len + idx_len
         
-        # Alineación de bytes
-        while len(v_binary) % 4 != 0: v_binary += b'\x00'
-        while len(i_binary) % 4 != 0: i_binary += b'\x00'
-        
-        v_len = len(v_binary)
-        i_len = len(i_binary)
-        total_bin_len = v_len + i_len
-        
-        # Estructura JSON interna del glTF descriptivo
+        # ESTRUCTURA JSON INTERNA DEL CONTENEDOR GLB
         json_str = (
             f'{{"asset":{{"version":"2.0"}},'
             f'"scene":0,"scenes":[{{"nodes":[0]}}],'
             f'"nodes":[{{"mesh":0}}],'
             f'"meshes":[{{"primitives":[{{"attributes":{{"POSITION":0}},"indices":1,"mode":4}}]}}],'
             f'"bufferViews":['
-            f'{{"buffer":0,"byteOffset":0,"byteLength":{v_len},"target":34962}},'
-            f'{{"buffer":0,"byteOffset":{v_len},"byteLength":{i_len},"target":34963}}],'
+            f'{{"buffer":0,"byteOffset":0,"byteLength":{pos_len},"target":34962}},'
+            f'{{"buffer":0,"byteOffset":{pos_len},"byteLength":{idx_len},"target":34963}}],'
             f'"buffers":[{{"byteLength":{total_bin_len}}}],'
             f'"accessors":['
-            f'{{"bufferView":0,"componentType":5126,"count":{v_count},"type":"VEC3"}},'
-            f'{{"bufferView":1,"componentType":5123,"count":{i_count},"type":"SCALAR"}}]}}'
+            f'{{"bufferView":0,"componentType":5126,"count":{width*height},"type":"VEC3"}},'
+            f'{{"bufferView":1,"componentType":5123,"count":{idx_len//2},"type":"SCALAR"}}]}}'
         )
         
         json_bytes = json_str.encode('utf-8')
         while len(json_bytes) % 4 != 0: json_bytes += b' '
         
-        # Cabecera binaria GLB oficial
+        # ENSAMBLAJE DE LA CABECERA BINARIA FÍSICA (.GLB)
         header = struct.pack('<4sII', b'glTF', 2, 12 + 8 + len(json_bytes) + 8 + total_bin_len)
         chunk_json = struct.pack('<I4s', len(json_bytes), b'JSON') + json_bytes
-        chunk_bin = struct.pack('<I4s', total_bin_len, b'BIN\x00') + v_binary + i_binary
+        chunk_bin = struct.pack('<I4s', total_bin_len, b'BIN\x00') + position_buffer + index_buffer
         
-        output_filename = "dynamic_output.glb"
+        output_filename = "dynamic_sadv41.glb"
         with open(output_filename, "wb") as f:
             f.write(header + chunk_json + chunk_bin)
             
-        logger.info(f"¡Geometría esculpida dinámicamente con éxito desde los píxeles!")
-        return FileResponse(path=output_filename, media_type="model/gltf-binary", filename="sadv41_mesh.glb")
+        logger.info("Flujo tridimensional dinámico generado y listo para despacho.")
+        
+        # Retorno del archivo real a través del flujo HTTP que tu mesón HTML ya sabe escuchar
+        return FileResponse(
+            path=output_filename, 
+            media_type="model/gltf-binary", 
+            filename="sadv41_mesh.glb"
+        )
         
     except Exception as e:
-        logger.error(f"Fallo en la escultura dinámica: {str(e)}")
-        raise HTTPException(status_code=500, detail=str(e))
+        logger.error(f"Fallo crítico en el motor de escultura: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Error en la infraestructura: {str(e)}")
 
+# 5. Mapeo Automatizado del Puerto de Render ($PORT) que ya está verificado en verde
 if __name__ == "__main__":
     import uvicorn
     port = int(os.environ.get("PORT", 10000))
+    logger.info(f"Lanzando pasarela Uvicorn consolidada en el puerto: {port}")
     uvicorn.run(app, host="0.0.0.0", port=port)
