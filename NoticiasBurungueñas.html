@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sovereign News | Algoritmo de Agrupación SADV41</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#020617',
+                        oro: '#eab308',
+                        blanco: '#f8fafc',
+                        renderRed: '#da3637',
+                        emeraldNeon: '#00e676',
+                        glassBg: 'rgba(15, 23, 42, 0.65)'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #020617;
+            background-image: radial-gradient(#1e293b 0.5px, transparent 0.5px);
+            background-size: 24px 24px;
+            color: #f8fafc;
+        }
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(14px);
+            border: 1px solid rgba(234, 179, 8, 0.15);
+        }
+        .cobertura-completa {
+            border-left: 4px solid #eab308;
+            background: rgba(255, 255, 255, 0.02);
+        }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-oro selection:text-navy">
+
+    <!-- Encabezado Unificado con la Red Soberana -->
+    <header class="fixed w-full z-50 glass-panel border-b border-oro/30 px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+            <span class="text-2xl">🛡️</span>
+            <div>
+                <h1 class="font-serif text-xl tracking-wider text-oro font-bold">SOVEREIGN NEWS</h1>
+                <p class="text-[9px] text-slate-400 font-mono tracking-widest">SADV41 ALGORITHMIC ENGINE</p>
+            </div>
+        </div>
+        
+        <nav class="flex flex-wrap justify-center gap-6 text-sm uppercase tracking-wider font-medium">
+            <a href="GSADV41.html" class="hover:text-oro transition-colors text-slate-300">Sovereign Hub</a>
+            <span class="text-oro font-bold">📰 Feed Inteligente</span>
+        </nav>
+
+        <div class="flex items-center gap-2">
+            <!-- Badge de Georreferenciación Automática por IP -->
+            <div id="badge-ip" class="bg-emeraldNeon/10 text-emeraldNeon border border-emeraldNeon/30 px-3 py-1.5 rounded-full font-mono text-[11px] font-bold flex items-center gap-1.5 animate-pulse">
+                <span>🌐</span> <span id="geo-status">Rastreando IP...</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="pt-36 pb-12 px-6 max-w-4xl mx-auto space-y-12">
+        
+        <!-- SECCIÓN DE ENTORNO Y CONTROL ALGORÍTMICO -->
+        <section class="glass-panel rounded-2xl p-6 border border-slate-800">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-slate-800 pb-4 mb-4">
+                <div>
+                    <h2 class="text-lg font-bold text-white uppercase tracking-wide">Filtro Temático e Indexación Colectiva</h2>
+                    <p class="text-xs text-slate-400 font-mono">Agrupación en Tiempo Real por Similitud de Semántica y Región</p>
+                </div>
+                <!-- Selector Manual en caso de querer forzar otra Región -->
+                <select id="selector-pais" onchange="cambiarPaisManual(this.value)" class="bg-slate-900 border border-slate-700 text-xs rounded-lg p-2 text-slate-200 focus:outline-none focus:border-oro font-mono">
+                    <option value="PA">Panamá (Predeterminado por IP)</option>
+                    <option value="US">Estados Unidos</option>
+                    <option value="ES">España</option>
+                    <option value="CO">Colombia</option>
+                    <option value="AR">Argentina</option>
+                </select>
+            </div>
+            
+            <div class="bg-black/30 p-3 rounded-lg border border-slate-900 font-mono text-[11px] text-slate-300 flex flex-wrap gap-x-6 gap-y-1">
+                <div>🔍 IP Detectada: <span id="ip-display" class="text-oro font-bold">127.0.0.1</span></div>
+                <div>📍 Segmento de Red: <span id="region-display" class="text-emeraldNeon">Calculando...</span></div>
+                <div>🧬 Clúster Algorítmico: <span class="text-cyan-400">Cobertura Completa v1.0</span></div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN DINÁMICA DE BLOQUES TEMÁTICOS (NOTICIAS AGRUPADAS) -->
+        <section id="contenedor-noticias" class="space-y-8">
+            <!-- La inyección automatizada de noticias se renderiza aquí mediante JavaScript -->
+        </section>
+
+        <div class="text-center text-[10px] text-slate-500 font-mono mt-8 border-t border-slate-900 pt-4">
+            Misión de Servicio SADV41 | Arquitectura de Indexación Independiente <span class="animate-pulse">🎚</span>
+        </div>
+    </main>
+
+    <script>
+        // Simulador de Matrices de Datos por País
+        const baseDeDatosNoticias = {
+            "PA": {
+                "pais_nombre": "Panamá",
+                "clusteres": [
+                    {
+                        "tema_principal": "Desarrollo Tecnológico e Infraestructura en Panamá Oeste",
+                        "tiempo": "Hace 14 min",
+                        "fuentes": [
+                            { "fuente": "La Prensa", "titulo": "Avances en la interconexión digital y redes de datos en Arraiján y Burunga.", "link": "#" },
+                            { "fuente": "Telemetro", "titulo": "Modernización de la infraestructura urbana impulsa la automatización local.", "link": "#" },
+                            { "fuente": "SADV41 Monitor", "titulo": "Despliegue del nodo Lapizasuli estabiliza flujos de telemetría regional.", "link": "#" }
+                        ]
+                    },
+                    {
+                        "tema_principal": "Preparativos Logísticos de la Región para el Tránsito Internacional",
+                        "tiempo": "Hace 2 horas",
+                        "fuentes": [
+                            { "fuente": "Capital Financiero", "titulo": "Logística marítima y terrestre reporta incrementos estables en el primer semestre.", "link": "#" },
+                            { "fuente": "TVN Noticias", "titulo": "Nuevas rutas de carga optimizan el transporte de insumos hacia el interior.", "link": "#" }
+                        ]
+                    }
+                ]
+            },
+            "US": {
+                "pais_nombre": "Estados Unidos",
+                "clusteres": [
+                    {
+                        "tema_principal": "Preparativos y Tarifas para la Copa Mundial FIFA 2026",
+                        "tiempo": "Hace 30 min",
+                        "fuentes": [
+                            { "fuente": "ESPN", "titulo": "FIFA revela la tabla oficial de costos para las fases eliminatorias del mundial.", "link": "#" },
+                            { "fuente": "Fox Sports", "titulo": "Ciudades sede en EE.UU. afinan la logística hotelera para los partidos inaugurales.", "link": "#" },
+                            { "fuente": "Sovereign Sports", "titulo": "Mapeo completo de boletos desde la Categoría 1 hasta la 4 indexado en el Hub.", "link": "#" }
+                        ]
+                    }
+                ]
+            },
+            "ES": {
+                "pais_nombre": "España",
+                "clusteres": [
+                    {
+                        "tema_principal": "Avances en Inteligencia Artificial y Regulación en la Unión Europea",
+                        "tiempo": "Hace 1 hora",
+                        "fuentes": [
+                            { "fuente": "El País", "titulo": "Modelos analíticos locales demuestran mayor eficiencia en servidores distribuidos.", "link": "#" },
+                            { "fuente": "El Mundo", "titulo": "Empresas de tecnología optimizan el uso de memoria flash para no desperdiciar código.", "link": "#" }
+                        ]
+                    }
+                ]
+            },
+            "CO": {
+                "pais_nombre": "Colombia",
+                "clusteres": [
+                    {
+                        "tema_principal": "Monitoreo de Redes de Datos y Conectividad en Sudamérica",
+                        "tiempo": "Hace 3 horas",
+                        "fuentes": [
+                            { "fuente": "El Tiempo", "titulo": "Inversión en infraestructura de fibra óptica incrementa la velocidad de carga.", "link": "#" },
+                            { "fuente": "Portafolio", "titulo": "Plataformas Web3 ganan adopción en los sistemas de pasarelas multidivisa.", "link": "#" }
+                        ]
+                    }
+                ]
+            },
+            "AR": {
+                "pais_nombre": "Argentina",
+                "clusteres": [
+                    {
+                        "tema_principal": "Ecosistema de Desarrolladores Independientes y Soluciones en la Nube",
+                        "tiempo": "Hace 4 horas",
+                        "fuentes": [
+                            { "fuente": "La Nación", "titulo": "Crecimiento de despliegues en proxies como Render impulsan APIs locales.", "link": "#" },
+                            { "fuente": "Infobae", "titulo": "Uso de microservicios con FastAPI reduce la tasa de errores de servidor.", "link": "#" }
+                        ]
+                    }
+                ]
+            }
+        };
+
+        // FUNCIÓN PRINCIPAL DE RENDERIZADO POR CLÚSTER (GOOGLE NEWS LOOK)
+        function renderizarFeed(codigoPais) {
+            const dataPais = baseDeDatosNoticias[codigoPais] || baseDeDatosNoticias["PA"];
+            const contenedor = document.getElementById("contenedor-noticias");
+            
+            document.getElementById("region-display").innerText = `${dataPais.pais_nombre} (${codigoPais})`;
+            
+            let html = "";
+            
+            dataPais.clusteres.forEach(cluster => {
+                const principal = cluster.fuentes[0];
+                const secundarias = cluster.fuentes.slice(1);
+                
+                html += `
+                    <div class="glass-panel rounded-2xl p-6 border border-slate-800/80 hover:border-oro/30 transition-all space-y-4">
+                        <!-- Cabecera del Clúster -->
+                        <div class="flex justify-between items-center text-[10px] uppercase font-mono tracking-wider border-b border-slate-900 pb-2">
+                            <span class="text-oro font-bold">🎯 Tema Agrupado: ${cluster.tema_principal}</span>
+                            <span class="text-slate-400">${cluster.tiempo}</span>
+                        </div>
+                        
+                        <!-- Noticia Principal Card -->
+                        <div class="space-y-1.5">
+                            <div class="flex items-center gap-2 text-xs font-mono text-slate-400">
+                                <span class="w-1.5 h-1.5 bg-rose-500 rounded-full"></span>
+                                <span>${principal.fuente}</span>
+                            </div>
+                            <h3 class="font-serif text-lg text-white font-bold leading-snug hover:text-oro transition-colors">
+                                <a href="${principal.link}">${principal.titulo}</a>
+                            </h3>
+                        </div>
+                        
+                        <!-- Bloque de Cobertura Completa -->
+                        ${secundarias.length > 0 ? `
+                            <div class="pt-2 space-y-3">
+                                <div class="text-[10px] font-mono text-slate-500 uppercase tracking-widest pl-2">Cobertura completa del hecho:</div>
+                                <div class="space-y-2 pl-2">
+                                    ${secundarias.map(sec => `
+                                        <div class="cobertura-completa p-3 rounded-r-lg space-y-1">
+                                            <div class="text-[10px] font-mono text-oro">${sec.fuente}</div>
+                                            <h4 class="text-xs text-slate-200 font-medium hover:underline">
+                                                <a href="${sec.link}">${sec.titulo}</a>
+                                            </h4>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+            });
+            
+            contenedor.innerHTML = html;
+        }
+
+        // ALGORITMO DE GEOLOCALIZACIÓN POR IP PÚBLICA
+        async function detectarUbicacionPorIP() {
+            const statusText = document.getElementById("geo-status");
+            const ipDisplay = document.getElementById("ip-display");
+            const selectorPais = document.getElementById("selector-pais");
+
+            try {
+                const response = await fetch("https://ipapi.co/json/");
+                if (!response.ok) throw new Error("Falla de respuesta en el gateway de IP");
+                
+                const data = await response.json();
+                console.log("Datos de geolocalización por IP resueltos:", data);
+                
+                if (data.country) {
+                    const paisDetectado = data.country;
+                    ipDisplay.innerText = data.ip || "IP Pública";
+                    statusText.innerText = `IP Localizada: ${paisDetectado}`;
+                    
+                    if (baseDeDatosNoticias[paisDetectado]) {
+                        selectorPais.value = paisDetectado;
+                        renderizarFeed(paisDetectado);
+                    } else {
+                        selectorPais.value = "PA";
+                        renderizarFeed("PA");
+                    }
+                } else {
+                    throw new Error("No se extrajo código de país válido");
+                }
+            } catch (error) {
+                console.warn("Falla en la API de rastreo geográfico. Activando contingencia base (PA):", error);
+                statusText.innerText = "IP Modo Respaldo (PA)";
+                ipDisplay.innerText = "190.140.X.X";
+                selectorPais.value = "PA";
+                renderizarFeed("PA");
+            }
+        }
+
+        function cambiarPaisManual(codigoPais) {
+            console.log(`Cambio manual de algoritmo de cobertura hacia: ${codigoPais}`);
+            renderizarFeed(codigoPais);
+        }
+
+        window.onload = function() {
+            detectarUbicacionPorIP();
+        };
+    </script>
+</body>
+</html>
