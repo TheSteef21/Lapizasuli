@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sovereign News & Infraestructura | SADV41 Engine</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#020617',
+                        oro: '#eab308',
+                        blanco: '#f8fafc',
+                        lobsterRed: '#da3637',
+                        emeraldNeon: '#00e676',
+                        glassBg: 'rgba(15, 23, 42, 0.65)'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #020617;
+            background-image: radial-gradient(#1e293b 0.5px, transparent 0.5px);
+            background-size: 24px 24px;
+            color: #f8fafc;
+        }
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(14px);
+            border: 1px solid rgba(234, 179, 8, 0.15);
+        }
+        .glass-panel-claw {
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(14px);
+            border: 1px solid rgba(218, 54, 55, 0.2);
+        }
+        .cobertura-completa {
+            border-left: 4px solid #eab308;
+            background: rgba(255, 255, 255, 0.02);
+        }
+        .tech-badge {
+            border-left: 3px solid #da3637;
+            background: rgba(255, 255, 255, 0.02);
+        }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-oro selection:text-navy">
+
+    <header class="fixed w-full z-50 glass-panel border-b border-oro/30 px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+            <span class="text-2xl">🛡️</span>
+            <div>
+                <h1 class="font-serif text-xl tracking-wider text-oro font-bold">SOVEREIGN NEWS</h1>
+                <p class="text-[9px] text-slate-400 font-mono tracking-widest">SADV41 ALGORITHMIC ENGINE & INFRALOG</p>
+            </div>
+        </div>
+        
+        <nav class="flex flex-wrap justify-center gap-6 text-sm uppercase tracking-wider font-medium">
+            <a href="GSADV41.html" class="hover:text-oro transition-colors text-slate-300">Sovereign Hub</a>
+            <a href="#feed-inteligente" class="hover:text-oro transition-colors text-slate-300">📰 Feed Inteligente</a>
+            <a href="#sandbox-kiloclaw" class="hover:text-lobsterRed transition-colors text-slate-300">⚙️ Sandbox KiloClaw</a>
+        </nav>
+
+        <div class="flex items-center gap-2">
+            <div id="badge-ip" class="bg-emeraldNeon/10 text-emeraldNeon border border-emeraldNeon/30 px-3 py-1.5 rounded-full font-mono text-[11px] font-bold flex items-center gap-1.5 animate-pulse">
+                <span>🌐</span> <span id="geo-status">Rastreando IP...</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="pt-36 pb-12 px-6 max-w-4xl mx-auto space-y-16">
+        
+        <section id="feed-inteligente" class="glass-panel rounded-2xl p-6 border border-slate-800 scroll-mt-28">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-slate-800 pb-4 mb-4">
+                <div>
+                    <h2 class="text-lg font-bold text-white uppercase tracking-wide">Filtro Temático e Indexación Colectiva</h2>
+                    <p class="text-xs text-slate-400 font-mono">Agrupación en Tiempo Real por Similitud de Semántica y Región</p>
+                </div>
+                <select id="selector-pais" onchange="cambiarPaisManual(this.value)" class="bg-slate-900 border border-slate-700 text-xs rounded-lg p-2 text-slate-200 focus:outline-none focus:border-oro font-mono">
+                    <option value="PA">Panamá (Predeterminado por IP)</option>
+                    <option value="US">Estados Unidos</option>
+                    <option value="ES">España</option>
+                    <option value="CO">Colombia</option>
+                    <option value="AR">Argentina</option>
+                </select>
+            </div>
+            
+            <div class="bg-black/30 p-3 rounded-lg border border-slate-900 font-mono text-[11px] text-slate-300 flex flex-wrap gap-x-6 gap-y-1">
+                <div>🔍 IP Detectada: <span id="ip-display" class="text-oro font-bold">127.0.0.1</span></div>
+                <div>📍 Segmento de Red: <span id="region-display" class="text-emeraldNeon">Calculando...</span></div>
+                <div>🧬 Clúster Algorítmico: <span class="text-cyan-400">Cobertura Completa v1.0</span></div>
+            </div>
+        </section>
+
+        <section id="contenedor-noticias" class="space-y-8">
+            </section>
+
+
+        <hr class="border-slate-900" />
+
+        <section id="sandbox-kiloclaw" class="space-y-8 scroll-mt-28">
+            <div class="flex items-center gap-3">
+                <span class="text-2xl text-lobsterRed">🦞</span>
+                <div>
+                    <h2 class="font-serif text-2xl text-white font-bold tracking-wide">Módulo de Monitoreo: KILO<span class="text-lobsterRed">CLAW</span></h2>
+                    <p class="text-xs text-slate-400 font-mono uppercase tracking-wider">Infraestructura Externa de Agentes Indexados</p>
+                </div>
+            </div>
+
+            <div class="glass-panel-claw rounded-2xl p-8 border border-slate-800/80 text-center space-y-4">
+                <span class="bg-amber-500/10 text-oro border border-amber-500/20 text-xs font-mono px-3 py-1 rounded-full">
+                    🔸 1-day free trial · No credit card required
+                </span>
+                <h3 class="font-serif text-2xl md:text-3xl text-white font-bold max-w-2xl mx-auto leading-tight">
+                    Try <span class="text-lobsterRed underline decoration-wavy">OpenClaw</span> without the self-hosting headaches
+                </h3>
+                <p class="text-xs text-slate-400 max-w-xl mx-auto font-sans leading-relaxed">
+                    KiloClaw deploys, hosts, and secures your OpenClaw agent – 500+ AI models included, running in under 5 minutes.
+                </p>
+                <div class="pt-2 flex flex-wrap justify-center gap-4">
+                    <button class="bg-lobsterRed hover:bg-red-700 text-white font-semibold text-xs px-5 py-2.5 rounded-xl transition-all shadow-lg shadow-lobsterRed/20">
+                        Get your OpenClaw agent
+                    </button>
+                    <button class="bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-300 font-semibold text-xs px-5 py-2.5 rounded-xl transition-all">
+                        Book a setup session
+                    </button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="glass-panel-claw rounded-2xl p-6 border border-slate-800 space-y-4">
+                    <div class="flex items-center gap-2 border-b border-slate-900 pb-3">
+                        <span class="text-xl">🔥</span>
+                        <h4 class="text-sm font-bold uppercase tracking-wider text-white">Firecracker MicroVM</h4>
+                    </div>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Aislamiento completo de hardware mediante micro-máquinas virtuales dedicadas. Olvídate de los contenedores compartidos tradicionales; cada agente se ejecuta en su propio núcleo aislado con tiempos de respuesta en milisegundos.
+                    </p>
+                    <div class="bg-black/40 p-3 rounded-lg font-mono text-[11px] text-emeraldNeon">
+                        $ status --vm-type=firecracker --active
+                    </div>
+                </div>
+
+                <div class="glass-panel-claw rounded-2xl p-6 border border-slate-800 space-y-4">
+                    <div class="flex items-center gap-2 border-b border-slate-900 pb-3">
+                        <span class="text-xl">🌐</span>
+                        <h4 class="text-sm font-bold uppercase tracking-wider text-white">Headless Browser & Shell</h4>
+                    </div>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        El agente autónomo cuenta con capacidades nativas de terminal remota y un navegador sin interfaz gráfica integrado. Esto le permite interactuar directamente con la web profunda, resolver automatizaciones y ejecutar scripts complejos.
+                    </p>
+                    <div class="bg-black/40 p-3 rounded-lg font-mono text-[11px] text-cyan-400">
+                        $ claw-agent --enable-headless-browser --shell-access
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-panel-claw rounded-2xl p-6 border border-slate-800 space-y-6">
+                <div>
+                    <h4 class="text-sm font-bold text-white uppercase tracking-wide">Paso a Paso: ¿Dónde quieres chatear?</h4>
+                    <p class="text-xs text-slate-400 font-mono">Configuración Omnicanal Integrada</p>
+                </div>
+
+                <div class="space-y-3">
+                    <div class="tech-badge p-4 rounded-r-xl space-y-2">
+                        <div class="flex justify-between items-center text-xs font-mono">
+                            <span class="text-sky-400 font-bold">✈️ Telegram Bot Integration (Recomendado)</span>
+                            <span class="text-slate-500">Paso 1 de 2</span>
+                        </div>
+                        <ol class="text-xs text-slate-300 list-decimal list-inside space-y-1 pl-1">
+                            <li>Abre Telegram e inicia un chat con <span class="text-oro font-mono">@BotFather</span>.</li>
+                            <li>Ejecuta el comando <span class="text-oro font-mono">/newbot</span> y sigue las instrucciones en pantalla.</li>
+                            <li>Copia el token HTTP resultante e inyéctalo en la pasarela de control.</li>
+                        </ol>
+                        <div class="pt-2">
+                            <input type="text" placeholder="Paste your bot token here..." class="w-full bg-slate-950 border border-slate-800 text-xs rounded-lg p-2.5 text-slate-300 font-mono focus:outline-none focus:border-lobsterRed">
+                        </div>
+                    </div>
+
+                    <div class="tech-badge p-4 rounded-r-xl opacity-60 border-l-slate-600">
+                        <div class="flex justify-between items-center text-xs font-mono">
+                            <span class="text-indigo-400 font-bold">👾 Discord Webhook & App Bot</span>
+                            <span class="text-slate-500">Opciones adicionales</span>
+                        </div>
+                        <p class="text-xs text-slate-400">Conecta tu agente directamente a un servidor o canal privado para automatizaciones colectivas.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-panel-claw rounded-2xl p-6 border border-slate-800 space-y-4">
+                <h4 class="text-xs font-mono uppercase text-slate-400 tracking-widest text-center">Matriz de Comparación y Entornos</h4>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center font-mono text-xs">
+                    <div class="bg-black/30 p-3 rounded-lg border border-slate-900">
+                        <div class="text-lobsterRed font-bold">OpenClaw vs n8n</div>
+                        <div class="text-[10px] text-slate-500 mt-1">Flujo Autónomo vs Nodos Estáticos</div>
+                    </div>
+                    <div class="bg-black/30 p-3 rounded-lg border border-slate-900">
+                        <div class="text-lobsterRed font-bold">vs Perplexity Computer</div>
+                        <div class="text-[10px] text-slate-500 mt-1">Navegación UI vs Control de Servidor</div>
+                    </div>
+                    <div class="bg-black/30 p-3 rounded-lg border border-slate-900">
+                        <div class="text-lobsterRed font-bold">vs ZeroClaw / Hermes</div>
+                        <div class="text-[10px] text-slate-500 mt-1">Aislamiento de Memoria Directo</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="text-center text-[10px] text-slate-500 font-mono mt-8 border-t border-slate-900 pt-4">
+            Misión de Servicio SADV41 | Arquitectura de Indexación Independiente <span class="animate-pulse">🎚</span>
+        </div>
+    </main>
+
+    <script>
+        // Simulador de Matrices de Datos por País
+        const baseDeDatosNoticias = {
+            "PA": {
+                "pais_nombre": "Panamá",
+                "clusteres": [
+                    {
+                        "tema_principal": "Desarrollo Tecnológico e Infraestructura en Panamá Oeste",
+                        "tiempo": "Hace 14 min",
+                        "fuentes": [
+                            { "fuente": "La Prensa", "titulo": "Avances en la interconexión digital y redes de datos en Arraiján y Burunga.", "link": "#" },
+                            { "fuente": "Telemetro", "titulo": "Modernización de la infraestructura urbana impulsa la automatización local.", "link": "#" },
+                            { "fuente": "SADV41 Monitor", "titulo": "Despliegue del nodo Lapizasuli estabiliza flujos de telemetría regional.", "link": "#" }
+                        ]
+                    },
+                    {
+                        "tema_principal": "Preparativos Logísticos de la Región para el Tránsito Internacional",
+                        "tiempo": "Hace 2 horas",
+                        "fuentes": [
+                            { "fuente": "Capital Financiero", "titulo": "Logística marítima y terrestre reporta incrementos estables en el primer semestre.", "link": "#" },
+                            { "fuente": "TVN Noticias", "titulo": "Nuevas rutas de carga optimizan el transporte de insumos hacia el interior.", "link": "#" }
+                        ]
+                    }
+                ]
+            },
+            "US": {
+                "pais_nombre": "Estados Unidos",
+                "clusteres": [
+                    {
+                        "tema_principal": "Preparativos y Tarifas para la Copa Mundial FIFA 2026",
+                        "tiempo": "Hace 30 min",
+                        "fuentes": [
+                            { "fuente": "ESPN", "titulo": "FIFA revela la tabla oficial de costos para las fases eliminatorias del mundial.", "link": "#" },
+                            { "fuente": "Fox Sports", "titulo": "Ciudades sede en EE.UU. afinan la logística hotelera para los partidos inaugurales.", "link": "#" },
+                            { "fuente": "Sovereign Sports", "titulo": "Mapeo completo de boletos desde la Categoría 1 hasta la 4 indexado en el Hub.", "link": "#" }
+                        ]
+                    }
+                ]
+            },
+            "ES": {
+                "pais_nombre": "España",
+                "clusteres": [
+                    {
+                        "tema_principal": "Avances en Inteligencia Artificial y Regulación en la Unión Europea",
+                        "tiempo": "Hace 1 hora",
+                        "fuentes": [
+                            { "fuente": "El País", "titulo": "Modelos analíticos locales demuestran mayor eficiencia en servidores distribuidos.", "link": "#" },
+                            { "fuente": "El Mundo", "titulo": "Empresas de tecnología optimizan el uso de memoria flash para no desperdiciar código.", "link": "#" }
+                        ]
+                    }
+                ]
+            },
+            "CO": {
+                "pais_nombre": "Colombia",
+                "clusteres": [
+                    {
+                        "tema_principal": "Monitoreo de Redes de Datos y Conectividad en Sudamérica",
+                        "tiempo": "Hace 3 horas",
+                        "fuentes": [
+                            { "fuente": "El Tiempo", "titulo": "Inversión en infraestructura de fibra óptica incrementa la velocidad de carga.", "link": "#" },
+                            { "fuente": "Portafolio", "titulo": "Plataformas Web3 ganan adopción en los sistemas de pasarelas multidivisa.", "link": "#" }
+                        ]
+                    }
+                ]
+            },
+            "AR": {
+                "pais_nombre": "Argentina",
+                "clusteres": [
+                    {
+                        "tema_principal": "Ecosistema de Desarrolladores Independientes y Soluciones en la Nube",
+                        "tiempo": "Hace 4 horas",
+                        "fuentes": [
+                            { "fuente": "La Nación", "titulo": "Crecimiento de despliegues en proxies como Render impulsan APIs locales.", "link": "#" },
+                            { "fuente": "Infobae", "titulo": "Uso de microservicios con FastAPI reduce la tasa de errores de servidor.", "link": "#" }
+                        ]
+                    }
+                ]
+            }
+        };
+
+        // FUNCIÓN PRINCIPAL DE RENDERIZADO POR CLÚSTER (GOOGLE NEWS LOOK)
+        function renderizarFeed(codigoPais) {
+            const dataPais = baseDeDatosNoticias[codigoPais] || baseDeDatosNoticias["PA"];
+            const contenedor = document.getElementById("contenedor-noticias");
+            
+            document.getElementById("region-display").innerText = `${dataPais.pais_nombre} (${codigoPais})`;
+            
+            let html = "";
+            
+            dataPais.clusteres.forEach(cluster => {
+                const principal = cluster.fuentes[0];
+                const secundarias = cluster.fuentes.slice(1);
+                
+                html += `
+                    <div class="glass-panel rounded-2xl p-6 border border-slate-800/80 hover:border-oro/30 transition-all space-y-4">
+                        <div class="flex justify-between items-center text-[10px] uppercase font-mono tracking-wider border-b border-slate-900 pb-2">
+                            <span class="text-oro font-bold">🎯 Tema Agrupado: ${cluster.tema_principal}</span>
+                            <span class="text-slate-400">${cluster.tiempo}</span>
+                        </div>
+                        
+                        <div class="space-y-1.5">
+                            <div class="flex items-center gap-2 text-xs font-mono text-slate-400">
+                                <span class="w-1.5 h-1.5 bg-rose-500 rounded-full"></span>
+                                <span>${principal.fuente}</span>
+                            </div>
+                            <h3 class="font-serif text-lg text-white font-bold leading-snug hover:text-oro transition-colors">
+                                <a href="${principal.link}">${principal.titulo}</a>
+                            </h3>
+                        </div>
+                        
+                        ${secundarias.length > 0 ? `
+                            <div class="pt-2 space-y-3">
+                                <div class="text-[10px] font-mono text-slate-500 uppercase tracking-widest pl-2">Cobertura completa del hecho:</div>
+                                <div class="space-y-2 pl-2">
+                                    ${secundarias.map(sec => `
+                                        <div class="cobertura-completa p-3 rounded-r-lg space-y-1">
+                                            <div class="text-[10px] font-mono text-oro">${sec.fuente}</div>
+                                            <h4 class="text-xs text-slate-200 font-medium hover:underline">
+                                                <a href="${sec.link}">${sec.titulo}</a>
+                                            </h4>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+            });
+            
+            contenedor.innerHTML = html;
+        }
+
+        // ALGORITMO DE GEOLOCALIZACIÓN POR IP PÚBLICA
+        async function detectarUbicacionPorIP() {
+            const statusText = document.getElementById("geo-status");
+            const ipDisplay = document.getElementById("ip-display");
+            const selectorPais = document.getElementById("selector-pais");
+
+            try {
+                const response = await fetch("https://ipapi.co/json/");
+                if (!response.ok) throw new Error("Falla de respuesta en el gateway de IP");
+                
+                const data = await response.json();
+                console.log("Datos de geolocalización por IP resueltos:", data);
+                
+                if (data.country) {
+                    const paisDetectado = data.country;
+                    ipDisplay.innerText = data.ip || "IP Pública";
+                    statusText.innerText = `IP Localizada: ${paisDetectado}`;
+                    
+                    if (baseDeDatosNoticias[paisDetectado]) {
+                        selectorPais.value = paisDetectado;
+                        renderizarFeed(paisDetectado);
+                    } else {
+                        selectorPais.value = "PA";
+                        renderizarFeed("PA");
+                    }
+                } else {
+                    throw new Error("No se extrajo código de país válido");
+                }
+            } catch (error) {
+                console.warn("Falla en la API de rastreo geográfico. Activando contingencia base (PA):", error);
+                statusText.innerText = "IP Modo Respaldo (PA)";
+                ipDisplay.innerText = "190.140.X.X";
+                selectorPais.value = "PA";
+                renderizarFeed("PA");
+            }
+        }
+
+        function cambiarPaisManual(codigoPais) {
+            console.log(`Cambio manual de algoritmo de cobertura hacia: ${codigoPais}`);
+            renderizarFeed(codigoPais);
+        }
+
+        window.onload = function() {
+            detectarUbicacionPorIP();
+        };
+    </script>
+</body>
+</html>
