@@ -1,5 +1,5 @@
 # Estructura básica de inferencia con TripoSR
-from tsr.system import TSR
+# from tsr.system import TSR
 import torch
 
 model = TSR.from_pretrained("stabilityai/TripoSR", torch_dtype=torch.float16)
