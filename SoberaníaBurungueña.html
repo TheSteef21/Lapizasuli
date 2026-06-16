@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sovereign Hub | SADV41, Miss Mundo Latina & Monitoreo Sísmico</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.jsdelivr.net/npm/@web3auth/modal@8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.0/ethers.umd.min.js"></script>
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#020617',
+                        oro: '#eab308',
+                        blanco: '#f8fafc',
+                        borgona: '#4a0010',
+                        neonPink: '#ff2a74',
+                        neonBlue: '#00f3ff',
+                        renderRed: '#da3637',
+                        cardBg: '#161616',
+                        borderBg: '#262626',
+                        primaryNeon: '#00e676'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #020617;
+            background-image: radial-gradient(#1e293b 0.5px, transparent 0.5px);
+            background-size: 24px 24px;
+            color: #f8fafc;
+        }
+        .glass {
+            background: rgba(2, 6, 23, 0.75);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(234, 179, 8, 0.2);
+        }
+        .glass-sismico {
+            background: #161b22;
+            border: 1px solid #30363d;
+        }
+        .text-shadow-oro {
+            text-shadow: 0 0 10px rgba(234, 179, 8, 0.5);
+        }
+        .text-shadow-pink {
+            text-shadow: 0 0 10px rgba(255, 42, 116, 0.6);
+        }
+        .text-shadow-blue {
+            text-shadow: 0 0 10px rgba(0, 243, 255, 0.6);
+        }
+        .sismo-card {
+            background-color: #1f242c;
+            border-left: 5px solid #ff6b81;
+        }
+        .rainbow-border {
+            position: relative;
+            background: rgba(2, 6, 23, 0.65);
+            backdrop-filter: blur(14px);
+            border: 2px solid transparent;
+            border-image: linear-gradient(45deg, #ff007f, #7f00ff, #00f3ff, #00ff7f, #ffea00, #ff007f) 1;
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.15);
+        }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-oro selection:text-navy">
+
+    <header class="fixed w-full z-50 glass border-b border-oro/30 px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+            <span class="text-2xl">🛡️</span>
+            <div>
+                <h1 class="font-serif text-xl tracking-wider text-oro font-bold">SOVEREIGN HUB</h1>
+                <p class="text-[9px] text-slate-400 font-mono tracking-widest">SADV41 DIGITAL ARCHITECTURE</p>
+            </div>
+        </div>
+        
+        <nav class="flex flex-wrap justify-center gap-6 text-sm uppercase tracking-wider font-medium">
+            <a href="#embassy-story" class="hover:text-pink-400 transition-colors text-pink-300">Embassy Story</a>
+            <a href="#monitor-sismico-seccion" class="hover:text-red-400 transition-colors text-red-300 font-bold">⚠️ Telemetría SADV41T</a>
+            <a href="#meson-image3d" class="hover:text-emerald-400 transition-colors text-emerald-300 font-bold">📷 Módulo IMAGE23D</a>
+            <a href="#fifa-seccion" class="hover:text-cyan-400 transition-colors text-cyan-300">Boletos FIFA 2026</a>
+            <a href="#mision" class="hover:text-oro transition-colors">Mayordomía</a>
+        </nav>
+
+        <div class="flex flex-wrap gap-2 justify-center">
+            <button onclick="loginSocial('google')" class="bg-white hover:bg-slate-200 text-slate-900 font-semibold text-xs px-3 py-2 rounded transition-all flex items-center gap-1.5 shadow cursor-pointer">
+                🌐 Google Connect
+            </button>
+            <button onclick="loginSocial('github')" class="bg-slate-800 hover:bg-slate-700 text-white font-semibold text-xs px-3 py-2 rounded transition-all flex items-center gap-1.5 border border-slate-700 cursor-pointer">
+                💻 GitHub Access
+            </button>
+            <button onclick="connectBinance()" class="bg-oro hover:bg-amber-600 text-navy font-bold text-xs px-3 py-2 rounded transition-all flex items-center gap-1.5 shadow-lg shadow-oro/20 cursor-pointer">
+                ⚡ Binance Web3 Wallet
+            </button>
+        </div>
+    </header>
+
+    <main class="pt-44 pb-12 px-6 max-w-6xl mx-auto space-y-16">
+        
+        <section class="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-4xl mx-auto">
+            <a href="https://thesteef21.github.io/Lapizasuli/" target="_blank" class="glass rounded-xl p-3 text-center transition-all hover:scale-105 border-slate-700 flex flex-col items-center justify-center gap-1 cursor-pointer">
+                <span class="text-lg">🌐</span>
+                <span class="text-[10px] font-bold tracking-wider text-slate-200 uppercase font-mono">StevenDior.Digital</span>
+            </a>
+            <a href="https://take.app/es/stevendior" target="_blank" class="glass rounded-xl p-3 text-center transition-all hover:scale-105 border-oro/30 flex flex-col items-center justify-center gap-1 cursor-pointer">
+                <span class="text-lg">🏦</span>
+                <span class="text-[10px] font-bold tracking-wider text-oro uppercase font-mono">Multi Bank Payments</span>
+            </a>
+            <a href="https://thesteef21.github.io/Lapizasuli/IMAGE23D.html" target="_blank" class="glass rounded-xl p-3 text-center transition-all hover:scale-105 border-emerald-500/30 flex flex-col items-center justify-center gap-1 cursor-pointer">
+                <span class="text-lg">🔮</span>
+                <span class="text-[10px] font-bold tracking-wider text-emerald-400 uppercase font-mono">Visor Lab 3D</span>
+            </a>
+            <a href="https://thesteef21.github.io/Lapizasuli/FIFA2026.html" target="_blank" class="glass rounded-xl p-3 text-center transition-all hover:scale-105 border-cyan-500/30 flex flex-col items-center justify-center gap-1 cursor-pointer">
+                <span class="text-lg">🎟️</span>
+                <span class="text-[10px] font-bold tracking-wider text-cyan-400 uppercase font-mono">Portal FIFA 2026</span>
+            </a>
+        </section>
+        
+        <section class="max-w-lg mx-auto rainbow-border rounded-xl p-6 text-center transition-transform hover:scale-[1.01]">
+            <div class="flex items-center justify-center gap-2 mb-2">
+                <span class="text-xl">⚽</span>
+                <h3 class="font-bold text-sm tracking-widest text-white uppercase font-mono">PANINI FIFA 2026 × TIKTOK</h3>
+                <span class="text-xl">📱</span>
+            </div>
+            <p class="text-xs text-slate-300 leading-relaxed px-2 mb-4">
+                ¡La colección digital oficial ha comenzado! Descubre y colecciona las cartas exclusivas de los jugadores del Mundial directamente desde la plataforma de entretenimiento global.
+            </p>
+            <div class="inline-block bg-white/10 px-4 py-1.5 rounded-full text-[11px] font-extrabold text-white tracking-widest uppercase mb-4 animate-pulse">
+                ✨ CONSIGUE LA TUYA ✨
+            </div>
+            <div>
+                <a href="https://vt.tiktok.com/ZS9jSnGRqbtuf-qfUyV/" target="_blank" class="inline-flex bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-400 hover:to-purple-500 text-white font-bold text-xs px-6 py-2.5 rounded-lg transition-all shadow-md tracking-wider uppercase cursor-pointer">
+                    Abrir Sobres en TikTok
+                </a>
+            </div>
+        </section>
+
+        <section id="embassy-story" class="glass rounded-2xl overflow-hidden border border-pink-500/30 shadow-2xl max-w-lg mx-auto">
+            <div class="p-8 text-center border-b border-white/5 bg-gradient-to-b from-pink-500/10 to-transparent">
+                <h2 class="font-serif text-2xl md:text-3xl text-white font-extrabold tracking-wider text-shadow-pink uppercase">GSADV41: EMBASSY OF BEAUTY</h2>
+                <p class="text-oro font-semibold text-sm tracking-widest mt-1 uppercase">6 Expressions of Sisterhood & Grace</p>
+                <p class="text-xs text-slate-400 mt-4 leading-relaxed">
+                    El santuario secreto donde la belleza no compite; se comparte, se restaura y se multiplica bajo la ley de gracia de Miss Mundo GSADV41.
+                </p>
+            </div>
+
+            <div class="p-6 space-y-4 bg-slate-950/40">
+                <div class="bg-white/[0.02] border-l-4 border-[#ff2a74] p-4 rounded-r-xl transition-all hover:translate-x-1 hover:bg-white/[0.04] cursor-pointer">
+                    <div class="flex justify-between items-center mb-1">
+                        <span class="text-sm font-bold text-white">The Emergency Therapist</span>
+                        <span class="text-[10px] text-oro uppercase tracking-wider font-semibold">Consuelo</span>
+                    </div>
+                    <p class="text-xs text-slate-400 leading-relaxed">Restoring Her Crown. Te recibe con empatía divina, te seca las lágrimas y te recuerda el valor real de tu corona.</p>
+                </div>
+
+                <div class="bg-white/[0.02] border-l-4 border-[#00f3ff] p-4 rounded-r-xl transition-all hover:translate-x-1 hover:bg-white/[0.04] cursor-pointer">
+                    <div class="flex justify-between items-center mb-1">
+                        <span class="text-sm font-bold text-white">The Beauty Ambassador</span>
+                        <span class="text-[10px] text-oro uppercase tracking-wider font-semibold">Generosidad</span>
+                    </div>
+                    <p class="text-xs text-slate-400 leading-relaxed">A Mirror of Generosity. Despliega un tocador impecable para ofrecer retoques de gracia y elegancia sin costo.</p>
+                </div>
+
+                <div class="bg-white/[0.02] border-l-4 border-[#ff2a74] p-4 rounded-r-xl transition-all hover:translate-x-1 hover:bg-white/[0.04] cursor-pointer">
+                    <div class="flex justify-between items-center mb-1">
+                        <span class="text-sm font-bold text-white">The 5-Minute Sister</span>
+                        <span class="text-[10px] text-oro uppercase tracking-wider font-semibold">Conexión</span>
+                    </div>
+                    <p class="text-xs text-slate-400 leading-relaxed">Instant Connection. Admiración mutua y genuina de pasarela; un choque de palmas y un lazo digital instantáneo.</p>
+                </div>
+
+                <div class="bg-white/[0.02] border-l-4 border-[#00f3ff] p-4 rounded-r-xl transition-all hover:translate-x-1 hover:bg-white/[0.04] cursor-pointer">
+                    <div class="flex justify-between items-center mb-1">
+                        <span class="text-sm font-bold text-white">The Search Squadron</span>
+                        <span class="text-[10px] text-oro uppercase tracking-wider font-semibold">Resguardo</span>
+                    </div>
+                    <p class="text-xs text-slate-400 leading-relaxed">No Woman Left Behind. Activación inmediata y solidaria ante el llamado de alerta para proteger a la compañera.</p>
+                </div>
+
+                <div class="bg-white/[0.02] border-l-4 border-[#ff2a74] p-4 rounded-r-xl transition-all hover:translate-x-1 hover:bg-white/[0.04] cursor-pointer">
+                    <div class="flex justify-between items-center mb-1">
+                        <span class="text-sm font-bold text-white">The Mirror Visionary</span>
+                        <span class="text-[10px] text-oro uppercase tracking-wider font-semibold">Esencia</span>
+                    </div>
+                    <p class="text-xs text-slate-400 leading-relaxed">Perfecting the Reflection. Captura la luz, la sofisticación y el encuadre perfecto de la hermandad en el espejo.</p>
+                </div>
+
+                <div class="bg-white/[0.02] border-l-4 border-[#00f3ff] p-4 rounded-r-xl transition-all hover:translate-x-1 hover:bg-white/[0.04] cursor-pointer">
+                    <div class="flex justify-between items-center mb-1">
+                        <span class="text-sm font-bold text-white">The Dancefloor Philosopher</span>
+                        <span class="text-[10px] text-oro uppercase tracking-wider font-semibold">Propósito</span>
+                    </div>
+                    <p class="text-xs text-slate-400 leading-relaxed">Live with Purpose. Sabiduría pura de pista que inspira a levantar la frente y celebrar la vida con plenitud absoluta.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="monitor-sismico-seccion" class="max-w-3xl mx-auto p-1 md:p-6 bg-[#0d1117] border border-slate-800 rounded-2xl shadow-xl">
+            <div class="text-center py-4">
+                <h2 class="text-renderRed font-bold text-2xl md:text-3xl tracking-tight uppercase">Módulo SADV41T</h2>
+                <p class="text-slate-400 text-xs md:text-sm mt-1 border-b border-slate-800 pb-4">
+                    Detección y Clasificación de Familias Sísmicas Repetitivas (REDPy / USGS)
+                </p>
+            </div>
+
+            <div class="flex justify-center items-center gap-4 my-4">
+                <button id="btn-refrescar" class="bg-[#ff6b81] hover:bg-[#ff4757] text-white font-bold text-sm px-5 py-2.5 rounded-lg transition-all active:scale-95 cursor-pointer" onclick="refrescarMonitor()">
+                    Refrescar Monitor
+                </button>
+                <div id="badge-estado" class="bg-renderRed/10 text-renderRed border border-renderRed/40 px-4 py-1.5 rounded-full font-bold text-xs tracking-wide">
+                    Sincronizando...
+                </div>
+            </div>
+
+            <div id="contenedor-error" class="bg-red-500/10 border border-red-500 rounded-xl p-4 text-sm text-left space-y-1 hidden">
+                <span class="font-bold text-red-500 flex items-center gap-1">⚠️ Modo Respaldo Activado:</span> 
+                <p class="text-slate-300 text-xs">No se pudo conectar con el servidor dinámico a través de la ruta proxy de Render. Mostrando el último registro almacenado de la estación local.</p>
+            </div>
+
+            <div id="monitor-salida" class="space-y-4 mt-6"></div>
+        </section>
+
+        <section id="meson-image3d" class="max-w-3xl mx-auto p-6 bg-[#0b0f17] border border-emerald-500/20 rounded-2xl shadow-xl space-y-6">
+            <div class="text-center">
+                <h2 class="text-emerald-400 font-bold text-2xl md:text-3xl tracking-tight uppercase">Mesón IMAGE23D</h2>
+                <p class="text-slate-400 text-xs md:text-sm mt-1">
+                    Procesamiento de Relieve Estructural a partir de Matrices 2D en Vivo
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-slate-900/50 border border-slate-800 rounded-xl p-4 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-sm font-bold text-white mb-2 flex items-center gap-2">
+                            <span class="w-2 h-2 rounded-full bg-emerald-400"></span> 1. Entrada de Imagen (2D)
+                        </h3>
+                        <p class="text-[11px] text-slate-400 mb-4">Sube la captura de la vitrina comunitaria para iniciar el esculpido dinámico de vértices.</p>
+                    </div>
+                    
+                    <div class="relative border-2 dashed border-slate-700 hover:border-emerald-500/50 rounded-lg p-6 text-center bg-black/20 cursor-pointer transition-all">
+                        <span class="text-2xl block mb-1">📷</span>
+                        <span id="label-text-3d" class="text-xs text-slate-300 block font-mono truncate">Seleccionar imagen base</span>
+                        <input type="file" id="input-file-3d" accept="image/*" class="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer">
+                        <img id="img-preview-3d" class="max-h-28 mx-auto mt-2 rounded hidden border border-slate-800">
+                    </div>
+
+                    <button id="btn-procesar-3d" onclick="ejecutarInferencia3D()" class="bg-emerald-500 hover:bg-emerald-400 text-navy font-bold text-xs px-4 py-3 rounded-lg transition-all mt-4 w-full cursor-pointer uppercase tracking-wider">
+                        Procesar en Servidor Python
+                    </button>
+
+                    <div id="terminal-3d" class="bg-black border border-slate-900 p-2.5 rounded font-mono text-[10px] text-emerald-400 mt-3 max-h-24 overflow-y-auto h-24 h-24 whitespace-pre-wrap">
+                        [SADV41_LOG] Puerto geométrico listo. Esperando matriz de entrada...
+                    </div>
+                </div>
+
+                <div class="bg-slate-900/50 border border-slate-800 rounded-xl p-4 flex flex-col">
+                    <h3 class="text-sm font-bold text-white mb-2 flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400"></span> 2. Render y Topología (3D)
+                    </h3>
+                    <div class="relative bg-black/40 border border-slate-800 rounded-lg overflow-hidden flex-grow h-64 md:h-full min-h-[240px]">
+                        <div id="overlay-3d" class="absolute inset-0 flex items-center justify-center text-[11px] text-slate-500 pointer-events-none bg-slate-950/80 transition-opacity duration-300">
+                            Esperando transmisión de datos...
+                        </div>
+                        <model-viewer 
+                            id="viewer-3d-obj"
+                            src="" 
+                            alt="Modelo 3D SADV41" 
+                            auto-rotate 
+                            camera-controls
+                            shadow-intensity="1"
+                            environment-image="neutral"
+                            class="w-full h-full">
+                        </model-viewer>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="fifa-seccion" class="max-w-3xl mx-auto p-6 bg-[#090d16] border border-cyan-500/20 rounded-2xl shadow-xl space-y-4">
+            <div class="text-center">
+                <h2 class="text-cyan-400 font-bold text-2xl md:text-3xl tracking-tight uppercase">Estructura Tarifaria FIFA 2026</h2>
+                <p class="text-slate-400 text-xs md:text-sm mt-1">
+                    Mapeo de costos oficiales distribuidos por categorías en el Sovereign Hub
+                </p>
+            </div>
+            <div class="overflow-x-auto rounded-xl border border-slate-800 bg-slate-950/60">
+                <table class="w-full text-left border-collapse text-xs">
+                    <thead>
+                        <tr class="border-b border-slate-800 bg-slate-900/50 font-mono text-cyan-400 uppercase tracking-wider">
+                            <th class="p-3.5 font-bold">Fase del Torneo</th>
+                            <th class="p-3.5 font-bold text-center">Categoría 1</th>
+                            <th class="p-3.5 font-bold text-center">Categoría 2</th>
+                            <th class="p-3.5 font-bold text-center">Categoría 3</th>
+                            <th class="p-3.5 font-bold text-center">Categoría 4</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-800/60 font-mono text-slate-300">
+                        <tr class="hover:bg-white/[0.02] transition-colors">
+                            <td class="p-3.5 font-sans font-semibold text-white">Partido Inaugural</td>
+                            <td class="p-3.5 text-center">$575.00</td>
+                            <td class="p-3.5 text-center">$450.00</td>
+                            <td class="p-3.5 text-center">$325.00</td>
+                            <td class="p-3.5 text-center">$120.00</td>
+                        </tr>
+                        <tr class="hover:bg-white/[0.02] transition-colors">
+                            <td class="p-3.5 font-sans font-semibold text-white">Fase de Grupos</td>
+                            <td class="p-3.5 text-center">$250.00</td>
+                            <td class="p-3.5 text-center">$185.00</td>
+                            <td class="p-3.5 text-center">$135.00</td>
+                            <td class="p-3.5 text-center">$50.00</td>
+                        </tr>
+                        <tr class="hover:bg-white/[0.02] transition-colors">
+                            <td class="p-3.5 font-sans font-semibold text-white">Dieciseisavos de Final</td>
+                            <td class="p-3.5 text-center">$295.00</td>
+                            <td class="p-3.5 text-center">$220.00</td>
+                            <td class="p-3.5 text-center">$165.00</td>
+                            <td class="p-3.5 text-center">$65.00</td>
+                        </tr>
+                        <tr class="hover:bg-white/[0.02] transition-colors">
+                            <td class="p-3.5 font-sans font-semibold text-white">Octavos de Final</td>
+                            <td class="p-3.5 text-center">$350.00</td>
+                            <td class="p-3.5 text-center">$270.00</td>
+                            <td class="p-3.5 text-center">$195.00</td>
+                            <td class="p-3.5 text-center">$80.00</td>
+                        </tr>
+                        <tr class="hover:bg-white/[0.02] transition-colors">
+                            <td class="p-3.5 font-sans font-semibold text-white">Cuartos de Final</td>
+                            <td class="p-3.5 text-center">$510.00</td>
+                            <td class="p-3.5 text-center">$405.00</td>
+                            <td class="p-3.5 text-center">$305.00</td>
+                            <td class="p-3.5 text-center">$150.00</td>
+                        </tr>
+                        <tr class="hover:bg-white/[0.02] transition-colors">
+                            <td class="p-3.5 font-sans font-semibold text-white">Semifinales</td>
+                            <td class="p-3.5 text-center">$895.00</td>
+                            <td class="p-3.5 text-center">$710.00</td>
+                            <td class="p-3.5 text-center">$525.00</td>
+                            <td class="p-3.5 text-center">$240.00</td>
+                        </tr>
+                        <tr class="hover:bg-white/[0.02] transition-colors bg-cyan-950/10">
+                            <td class="p-3.5 font-sans font-bold text-cyan-400">Gran Final Mundial</td>
+                            <td class="p-3.5 text-center text-cyan-300 font-bold">$1,500.00</td>
+                            <td class="p-3.5 text-center text-cyan-300 font-bold">$1,150.00</td>
+                            <td class="p-3.5 text-center text-cyan-300 font-bold">$850.00</td>
+                            <td class="p-3.5 text-center text-cyan-300 font-bold">$350.00</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="mision" class="glass rounded-2xl max-w-lg mx-auto overflow-hidden border border-cyan-500/30">
+            <div class="p-6 bg-black/30 flex flex-col items-center gap-4 text-center">
+                <div class="border border-[#00f3ff]/40 px-4 py-1.5 rounded-full text-xs font-bold text-[#00f3ff] tracking-wide text-shadow-blue shadow-[0_0_10px_rgba(0,243,255,0.15)] uppercase">
+                    CONFESIONARIO DE GRACIA & ALERTAS GLOBALES
+                </div>
+                
+                <p class="text-xs text-slate-400 leading-relaxed px-4">
+                    Monitoreo constante e interconexión soberana. Canales oficiales sincronizados minuto a minuto bajo los parámetros de la ley de gracia.
+                </p>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full pt-2 px-4">
+                    <a href="https://wa.me/+15556670579" target="_blank" class="bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs px-4 py-2.5 rounded-lg transition-all shadow flex items-center justify-center gap-1.5 cursor-pointer col-span-2 sm:col-span-1">
+                        💬 Contactar IA SADV41
+                    </a>
+                    <a href="https://www.instagram.com/reel/DZNKr6Sla4M/?igsh=bDUzODcwanlyZWp6" target="_blank" class="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-semibold text-xs px-4 py-2.5 rounded-lg transition-all shadow flex items-center justify-center gap-1.5 cursor-pointer col-span-2 sm:col-span-1">
+                        📸 Ver Reel Instagram
+                    </a>
+                    <a href="https://www.meta.ai/@stevendioroficial/post/MG4xH5QUPGu?open_in_meta_ai=true&song_id=1887147568642873&utm_source=android_meta_ai_sl" target="_blank" class="bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs px-4 py-2.5 rounded-lg transition-all shadow flex items-center justify-center gap-1.5 cursor-pointer col-span-2">
+                        🤖 Leer Arquitectura en Meta AI
+                    </a>
+                </div>
+
+                <div class="text-2xl mt-2 animate-[pulse_2s_infinite]">🎚</div>
+            </div>
+        </section>
+
+        <div id="connectionPanel" class="hidden p-5 bg-slate-900/90 border border-oro/40 rounded-2xl shadow-2xl">
+            <div class="flex items-center gap-3 mb-2">
+                <span class="relative flex h-3 w-3">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                </span>
+                <span class="text-xs text-slate-300 font-mono">Web3 Pipeline Active</span>
+            </div>
+        </div>
+
+Main Map Tracker Active.</main>
+
+    <script>
+        const API_URL = "https://lapizasuli.onrender.com/api/sismos";
+        const RENDER_3D_URL = "https://image23d.onrender.com/generate-3d/";
+
+        const datosRespaldoLocal = {
+            "analisis_ia": "Análisis en modo local (Respaldo del Sistema). Telemetría base registrada con acumulado de eventos estable en la red de estaciones.",
+            "acumulado_total": 24,
+            "eventos": [
+                {
+                    "id": "SADV41-2026-A",
+                    "ubicacion": "Zona de Subducción / Red de Estaciones USGS",
+                    "pais_region": "Panamá",
+                    "latitud": 7.0000,
+                    "longitud": -82.5000,
+                    "google_maps_url": "https://maps.google.com/?q=7.0000,-82.5000",
+                    "magnitud": 5.1,
+                    "profundidad_km": 26.2,
+                    "familia_redpy": "Familia Volcánica #04",
+                    "coeficiente_correlacion": 0.89,
+                    "fecha_hora": "2026-06-08 04:48:30"
+                }
+            ]
+        };
+
+        // LÓGICA DE TELEMETRÍA SÍSMICA ORIGINAL
+        function renderizarDatos(data) {
+            const monitorSalida = document.getElementById("monitor-salida");
+            let htmlContenido = `
+                <div class="glass-sismico border border-slate-800 rounded-xl p-5 text-left shadow-inner">
+                    <div class="flex justify-between items-center mb-2">
+                        <h4 class="text-[#58a6ff] font-bold text-sm flex items-center gap-1.5">🤖 Diagnóstico del Motor de IA:</h4>
+                        <span class="text-[10px] bg-slate-800 px-2 py-0.5 rounded font-mono text-slate-400">Acumulado Total: ${data.acumulado_total || 24}</span>
+                    </div>
+                    <p class="text-xs text-slate-300 leading-relaxed font-mono">${data.analisis_ia || "Procesando firmas sísmicas detectadas..."}</p>
+                </div>
+            `;
+
+            data.eventos.forEach(sismo => {
+                htmlContenido += `
+                    <div class="sismo-card border-l-4 border-rose-500 p-4 rounded-r-xl text-left bg-slate-950/50 border border-y-slate-800 border-r-slate-800">
+                        <div class="text-xs text-slate-200 font-semibold mb-1 flex justify-between items-center">
+                            <span>📍 Ubicación: <span class="text-white">${sismo.ubicacion} (${sismo.pais_region || 'Panamá'})</span></span>
+                            <a href="${sismo.google_maps_url}" target="_blank" class="text-blue-400 hover:underline text-[10px] font-mono">📍 Ver en Mapa</a>
+                        </div>
+                        <div class="text-xs text-slate-400 grid grid-cols-2 gap-y-1 font-mono">
+                            <div>📊 Magnitud: <span class="text-rose-400 font-bold">M ${sismo.magnitud}</span></div>
+                            <div>📉 Profundidad: <span class="text-cyan-400 font-bold">${sismo.profundidad_km} km</span></div>
+                            <div class="col-span-2">🧬 Análisis REDPy: <span class="text-amber-400">${sismo.familia_redpy}</span> (CC: ${sismo.coeficiente_correlacion})</div>
+                        </div>
+                        <div class="text-[10px] text-slate-500 mt-2 flex justify-between border-t border-white/5 pt-1 font-mono">
+                            <span>ID: ${sismo.id}</span>
+                            <span>Hora: ${sismo.fecha_hora}</span>
+                        </div>
+                    </div>
+                `;
+            });
+            monitorSalida.innerHTML = htmlContenido;
+        }
+
+        async function refrescarMonitor() {
+            const botonRefrescar = document.getElementById("btn-refrescar");
+            const contenedorError = document.getElementById("contenedor-error");
+            const badgeEstado = document.getElementById("badge-estado");
+
+            try {
+                console.log("Conectando con el entorno analítico protegido SADV41T...");
+                if (botonRefrescar) botonRefrescar.innerText = "Sincronizando...";
+                
+                const response = await fetch(API_URL);
+                if (!response.ok) throw new Error(`Error de respuesta: ${response.status}`);
+                
+                const data = await response.json();
+                if (contenedorError) contenedorError.classList.add("hidden");
+                if (badgeEstado) {
+                    badgeEstado.innerText = "Sincronizado";
+                    badgeEstado.style.borderColor = "#238636";
+                    badgeEstado.style.color = "#2ea44f";
+                    badgeEstado.style.background = "rgba(46, 164, 79, 0.1)";
+                }
+                renderizarDatos(data);
+            } catch (error) {
+                console.warn("Falla en transmisión. Activando local:", error);
+                if (contenedorError) contenedorError.classList.remove("hidden");
+                if (badgeEstado) {
+                    badgeEstado.innerText = "Modo Respaldo";
+                    badgeEstado.style.borderColor = "rgba(218, 54, 55, 0.4)";
+                    badgeEstado.style.color = "#da3637";
+                    badgeEstado.style.background = "rgba(218, 54, 55, 0.1)";
+                }
+                renderizarDatos(datosRespaldoLocal);
+            } finally {
+                if (botonRefrescar) botonRefrescar.innerText = "Refrescar Monitor";
+            }
+        }
+
+        // LÓGICA DEL PUERTO GEOMÉTRICO INTEGRADO (IMAGE23D)
+        const inputFile3D = document.getElementById('input-file-3d');
+        const imgPreview3D = document.getElementById('img-preview-3d');
+        const labelText3D = document.getElementById('label-text-3d');
+        const terminal3D = document.getElementById('terminal-3d');
+        const viewer3DObj = document.getElementById('viewer-3d-obj');
+        const overlay3D = document.getElementById('overlay-3d');
+
+        function printLog3D(msg) {
+            const time = new Date().toLocaleTimeString();
+            terminal3D.innerText += `\n[${time}] ${msg}`;
+            terminal3D.scrollTop = terminal3D.scrollHeight;
+        }
+
+        inputFile3D.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(evt) {
+                    imgPreview3D.src = evt.target.result;
+                    imgPreview3D.classList.remove('hidden');
+                    labelText3D.innerText = file.name;
+                    printLog3D(`Recurso cargado: ${file.name} (${Math.round(file.size/1024)} KB).`);
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        async function ejecutarInferencia3D() {
+            if (!inputFile3D.files[0]) {
+                printLog3D("ERROR: Ingrese una matriz 2D válida para continuar.");
+                return;
+            }
+
+            printLog3D("Empaquetando datos binarios...");
+            const formData = new FormData();
+            formData.append("file", inputFile3D.files[0]);
+            printLog3D("Enviando flujo POST a Render...");
+
+            try {
+                const response = await fetch(RENDER_3D_URL, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (response.ok) {
+                    printLog3D("Respuesta 200 OK del servidor recibida.");
+                    printLog3D("Cargando buffer de malla indexada...");
+                    const blob = await response.blob();
+                    const modelUrl = URL.createObjectURL(blob);
+                    
+                    viewer3DObj.src = modelUrl;
+                    if (overlay3D) overlay3D.classList.add('opacity-0', 'pointer-events-none');
+                    printLog3D("¡Topología dinámica desplegada con éxito!");
+                } else {
+                    printLog3D(`ERROR: Código de estado de red ${response.status}`);
+                }
+            } catch (err) {
+                printLog3D("ERROR: Falla de enlace con la API de Render.");
+            }
+        }
+
+        function loginSocial(provider) { console.log("Iniciando auth social con " + provider); }
+        function connectBinance() { console.log("Conectando wallet de Binance"); }
+
+        window.onload = function() {
+            refrescarMonitor();
+        };
+    </script>
+</body>
+</html>
