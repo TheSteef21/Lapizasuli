@@ -1,26 +1,68 @@
 import os
 import datetime
 import requests
+import xml.etree.ElementTree as ET
 
 # ==========================================
 # CONFIGURACIÓN DE INFRAESTRUCTURA SOBERANA
 # ==========================================
 PATH_NOTICIAS_HTML = "Lapizasuli/Noticias.html"
-VERSION_API = "v20.0"  # Sincronizado con la versión del fetch del HTML
+VERSION_API = "v20.0"
 
-# 🔐 BLINDAJE DE CREDENCIALES (Carga desde el entorno local de Termux)
-# Si la variable no está en el sistema, usa por defecto el token que proporcionaste
+# 🔐 BLINDAJE DE CREDENCIALES (Termux / Local Environs)
 META_TOKEN = os.getenv("META_ACCESS_TOKEN", "EAAMfqZAxF00wBRo5zb1lp7ZAGgEbrVWsxBH33DZArcE8qq1ZArVhlzRqIXkJsANyZCScZBSZAX4N4Esf77bawdmkDL1kzSAHpr3CLlEomkg5dBZATFiKzOVYpw9nwoy9GATxlpAKC5MBkZBx87tO5uKegNY3E9vLDlSNCbIJ7c1c2V5oeVizNXmg0w1GIXjoLBPfiNQXfchOnwBdoRAyWPJroOzZBUXa4Cd9ZBEsKcq7ruHtbX64ZAM2NJi5W3lQ9e1iE3HZA30pY6IZBBqDCrhy1uCq2S")
 PHONE_NUMBER_ID = "1152154214647264"
 RECIPIENT_NUMBER = "15556670579"
 
+# 🌍 MAPA DE FUENTES GLOBALES (Minuto a Minuto)
+# Estructura: código: (Nombre, Bandera_Emoji, Idioma_Oficial_o_Nativo, RSS_Feed_Url)
+FUENTES_SADV41 = {
+    "PA": ("Panamá", "🇵🇦", "Español", "https://www.prensa.com/arc/outboundfeeds/rss/"),
+    "AR": ("Argentina", "🇦🇷", "Español", "https://www.clarin.com/rss/lo-ultimo/"),
+    "IL": ("Israel", "🇮🇱", "Hebreo (עברית)", "https://www.jpost.com/rss/rssfeeds.aspx?technologynews"),
+    "US": ("Estados Unidos", "🇺🇸", "English", "https://rss.nytimes.com/services/xml/rss/nyt/World.xml"),
+    "CN": ("China", "🇨🇳", "Mandarín (中文)", "http://www.chinadaily.com.cn/rss/world_rss.xml")
+}
+
 def obtener_fecha_actual():
-    """Retorna la fecha y hora exacta del sistema local."""
     ahora = datetime.datetime.now()
     return ahora.strftime("%A, %d de %b de %Y, %I:%M %p")
 
+def recolectar_noticias_rss():
+    """Backend extractor: Conecta a los feeds globales y parsea las noticias minuto a minuto."""
+    noticias_agregadas = []
+    print("[BACKEND] Iniciando escaneo de redes globales estilo Google News...")
+    
+    for codigo, (pais, bandera, idioma, url) in FUENTES_SADV41.items():
+        try:
+            response = requests.get(url, timeout=10, headers={"User-Agent": "Mozilla/5.0"})
+            if response.status_code == 200:
+                root = ET.fromstring(response.content)
+                items = root.findall(".//item")
+                
+                # Tomamos las últimas 4 noticias de cada canal para mantener el balance
+                for item in items[:4]:
+                    titulo = item.find("title").text if item.find("title") is not None else "Sin Título"
+                    desc = item.find("description").text if item.find("description") is not None else ""
+                    # Limpieza básica de HTML en descripciones si existiera
+                    desc_limpia = ET.fromstring(f"<div>{desc}</div>").text if '<' in desc else desc
+                    
+                    noticias_agregadas.append({
+                        "pais_code": codigo,
+                        "pais_nombre": pais,
+                        "bandera": bandera,
+                        "idioma": idioma,
+                        "titulo": titulo.strip(),
+                        "contenido": desc_limpia.strip() if desc_limpia else "Acceda al canal oficial para ver el reporte completo."
+                    })
+                print(f" -> {bandera} {pais} sincronizado correctamente.")
+        except Exception as e:
+            print(f"⚠️ Alerta en canal {pais}: No se pudo extraer el feed instantáneo ({e})")
+            
+    return noticias_agregadas
+
 def generar_plantilla_html_integral(noticias_lista):
-    """Genera la interfaz unificada: Hypersec + Noticias + API Gateway + Web3 Workspace."""
+    """Genera el Frontend Unificado con Filtros Dinámicos por País e Idioma."""
     
     html_content = f"""<!DOCTYPE html>
 <html lang="es">
@@ -111,6 +153,47 @@ def generar_plantilla_html_integral(noticias_lista):
             background: rgba(0, 240, 255, 0.08);
         }}
 
+        /* selector de países */
+        .filter-container {{
+            background: var(--panel-dark);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #1a2332;
+        }}
+
+        .filter-label {{
+            font-weight: bold;
+            font-size: 0.9em;
+            color: var(--gold-glow);
+            margin-bottom: 10px;
+            display: block;
+        }}
+
+        .selector-box {{
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }}
+
+        .btn-filtro {{
+            background: #1a2332;
+            color: var(--text-main);
+            border: 1px solid #2b394e;
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: monospace;
+            font-size: 0.85em;
+            transition: all 0.2s ease;
+        }}
+
+        .btn-filtro:hover, .btn-filtro.active {{
+            border-color: var(--cyan-glow);
+            background: rgba(0, 230, 118, 0.1);
+            color: #fff;
+        }}
+
         .grid-layout {{
             display: grid;
             grid-template-columns: 1fr;
@@ -161,7 +244,7 @@ def generar_plantilla_html_integral(noticias_lista):
             font-family: monospace;
         }}
 
-        button {{
+        button.action-btn {{
             background-color: var(--cyan-glow);
             color: #0c0f17;
             padding: 12px 20px;
@@ -175,7 +258,7 @@ def generar_plantilla_html_integral(noticias_lista):
             margin-top: 10px;
         }}
 
-        button:hover {{ background-color: #00c853; }}
+        button.action-btn:hover {{ background-color: #00c853; }}
 
         .status {{
             margin-top: 15px;
@@ -194,6 +277,19 @@ def generar_plantilla_html_integral(noticias_lista):
             padding: 15px;
             margin-bottom: 15px;
             border: 1px solid rgba(0, 240, 255, 0.1);
+            transition: transform 0.2s;
+        }}
+
+        .noticia-card:hover {{
+            transform: scale(1.01);
+        }}
+
+        .noticia-header-meta {{
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8em;
+            color: var(--text-muted);
+            margin-bottom: 5px;
         }}
 
         .noticia-titulo {{
@@ -230,10 +326,10 @@ def generar_plantilla_html_integral(noticias_lista):
 
 <div class="container">
     <header>
-        <div class="system-status">🔒 GSADV41 CLOUD TERMINAL // WEB3 HYPERSEC ENGAGED 🎚️</div>
-        <h1>NOTICIAS BURUNGA TERMINAL</h1>
+        <div class="system-status">🔒 GSADV41 CLOUD TERMINAL // AUTOMATED NEWS PARSER ENGINE 🎚️</div>
+        <h1>NOTICIAS BURUNGA TERMINAL (GLOBAL SYSTEM)</h1>
         <div class="meta-info">
-            Registro de Red: YYWEEK24 | Invocación Sincrónica: {obtener_fecha_actual()}
+            Invocación Automática Sincrónica: {obtener_fecha_actual()}
         </div>
     </header>
 
@@ -245,17 +341,33 @@ def generar_plantilla_html_integral(noticias_lista):
         <a href="https://thesteef21.github.io/Lapizasuli/Noticias.html" target="_blank">📡 Canal En Vivo</a>
     </nav>
 
+    <div class="filter-container">
+        <span class="filter-label">🎛️ FILTRAR COBERTURA POR SOBERANÍA TERRITORIAL:</span>
+        <div class="selector-box">
+            <button class="btn-filtro active" onclick="filtrarPais('TODOS')">🌍 Todos los Canales</button>
+            <button class="btn-filtro" onclick="filtrarPais('PA')">🇵🇦 Panamá (Español)</button>
+            <button class="btn-filtro" onclick="filtrarPais('AR')">🇦🇷 Argentina (Español)</button>
+            <button class="btn-filtro" onclick="filtrarPais('IL')">🇮🇱 Israel (עברית)</button>
+            <button class="btn-filtro" onclick="filtrarPais('US')">🇺🇸 USA (English)</button>
+            <button class="btn-filtro" onclick="filtrarPais('CN')">🇨🇳 China (中文)</button>
+        </div>
+    </div>
+
     <div class="grid-layout">
         <div class="left-column">
             
             <div class="section">
-                <h3>📰 FEED DE COBERTURA GLOBAL EN VIVO (7 DE JUNIO 2026)</h3>
+                <h3>📰 FEED DE COBERTURA GLOBAL EN VIVO (MINUTO A MINUTO)</h3>
                 <div id="feed-noticias">"""
     
-    # Inserción dinámica administrada por Python
+    # Inyección dinámica automatizada desde los feeds recolectados
     for noticia in noticias_lista:
         html_content += f"""
-                    <div class="noticia-card">
+                    <div class="noticia-card" data-pais="{noticia['pais_code']}">
+                        <div class="noticia-header-meta">
+                            <span>{noticia['bandera']} {noticia['pais_nombre']}</span>
+                            <span class="badge">Idioma: {noticia['idioma']}</span>
+                        </div>
                         <div class="noticia-titulo">⚡ {noticia['titulo']}</div>
                         <div class="noticia-cuerpo">{noticia['contenido']}</div>
                     </div>"""
@@ -273,10 +385,6 @@ def generar_plantilla_html_integral(noticias_lista):
                 
                 <label>Nodo de Validación de Bloques (Web3 Wallet Gateway):</label>
                 <div class="status" style="background:#070a0e; border-color:var(--gold-glow); color:var(--gold-glow);">[NETWORK STATUS]: ONLINE&#10;[WALLET FRAMEWORK]: Binance Web3 Integrated&#10;[SADV41 INTEGRITY CHECK]: PASS</div>
-                
-                <label>Invocación Remota Descentralizada:</label>
-                <p style="font-size: 0.8em; margin: 4px 0;">Cualquier componente bloqueado puede ser reclamado directamente forzando la ruta interna:</p>
-                <code style="color: var(--hyper-blue); font-size: 0.85em;">https://thesteef21.github.io/Lapizasuli/[NombreDelArchivo].html</code>
             </div>
         </div>
 
@@ -291,9 +399,9 @@ def generar_plantilla_html_integral(noticias_lista):
                 <input type="text" id="phoneId" value="{PHONE_NUMBER_ID}">
                 
                 <label>Número de Destino (POST API):</label>
-                <input type="text" id="recipient" value="{RECIPIENT_NUMBER}" placeholder="5076XXXXXXXX">
+                <input type="text" id="recipient" value="{RECIPIENT_NUMBER}">
                 
-                <button id="sendBtn" onclick="enviarMensajePrueba()">Disparar Comando a Meta</button>
+                <button class="action-btn" id="sendBtn" onclick="enviarMensajePrueba()">Disparar Comando a Meta</button>
                 
                 <div class="status" id="outputLog">Esperando transmisión de comando...</div>
             </div>
@@ -302,7 +410,7 @@ def generar_plantilla_html_integral(noticias_lista):
                 <h3>🛡️ ARQUITECTURA DEL WEBHOOK</h3>
                 <ul style="padding-left: 15px; font-size: 0.8em; margin: 0;">
                     <li><span class="badge">Make.com</span> Interfaz de escucha puente activa.</li>
-                    <li><span class="badge">ngrok</span> Túnel local activo para recepción en puerto de desarrollo.</li>
+                    <li><span class="badge">ngrok</span> Túnel local activo para recepción.</li>
                 </ul>
             </div>
         </div>
@@ -311,11 +419,29 @@ def generar_plantilla_html_integral(noticias_lista):
     <footer>
         <p>====================================================================</p>
         <p>Misión de Servicio — Seguridad Máxima Garantizada 🗿 UFO CONTROL ENGAGED 🛂</p>
-        <p>Actualizado bajo los parámetros unificados de JesuCristo [C-Code Framework]. Por Él seremos perseguidos.</p>
+        <p>Actualizado bajo los parámetros unificados de JesuCristo [C-Code Framework].</p>
     </footer>
 </div>
 
 <script>
+// Lógica de filtrado instantáneo por País / Idioma
+function filtrarPais(codigo) {{
+    // Cambiar estado activo de los botones
+    const botones = document.querySelectorAll('.btn-filtro');
+    botones.forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+
+    // Filtrar tarjetas
+    const tarjetas = document.querySelectorAll('.noticia-card');
+    tarjetas.forEach(card => {{
+        if(codigo === 'TODOS' || card.getAttribute('data-pais') === codigo) {{
+            card.style.display = 'block';
+        }} else {{
+            card.style.display = 'none';
+        }}
+    }});
+}}
+
 async function enviarMensajePrueba() {{
     const token = document.getElementById('token').value;
     const phoneId = document.getElementById('phoneId').value;
@@ -329,8 +455,7 @@ async function enviarMensajePrueba() {{
     }}
 
     logDiv.innerText = "Enviando comando a los servidores de Meta...";
-    logDiv.style.color = "#e0e0e0";
-
+    
     const url = `https://graph.facebook.com/{VERSION_API}/${{phoneId}}/messages`;
     const payload = {{
         messaging_product: "whatsapp",
@@ -353,7 +478,6 @@ async function enviarMensajePrueba() {{
         }});
 
         const data = await response.json();
-
         if (response.ok) {{
             logDiv.innerText = `¡Anábasis Exitosa!\\n${{JSON.stringify(data, null, 2)}}`;
             logDiv.style.color = "#00e676";
@@ -373,9 +497,8 @@ async function enviarMensajePrueba() {{
     return html_content
 
 def ejecutar_envio_noticia_directo():
-    """Ejecuta la inyección directa de Hypersec enviando la alerta de red por la API Backend."""
+    """Ejecuta la inyección directa notificando que la agregación de Google News SADV41 está lista."""
     url_endpoint = f"https://graph.facebook.com/{VERSION_API}/{PHONE_NUMBER_ID}/messages"
-    
     headers_seguridad = {
         "Authorization": f"Bearer {META_TOKEN}",
         "Content-Type": "application/json"
@@ -386,46 +509,40 @@ def ejecutar_envio_noticia_directo():
         "to": RECIPIENT_NUMBER,
         "type": "text",
         "text": {
-            "body": "⚡ *NOTICIAS BURUNGA TERMINAL* ⚡\n\nOperativo de Seguridad en La Joyita y actualización del entorno de la Misión SADV41 exitoso."
+            "body": "📡 *SADV41 NEWS TERMINAL AGGREGATOR* 📡\n\nEl backend de rastreo ha actualizado el feed minuto a minuto de noticias globales (PA, AR, IL, US, CN). Interfaz lista."
         }
     }
 
     try:
         response = requests.post(url_endpoint, json=payload_transmision, headers=headers_seguridad)
-        res_data = response.json()
-        
         if response.status_code == 200:
-            print("[INTEGRITY CHECK]: PASS - Mensaje enviado con éxito mediante el backend.")
+            print("[INTEGRITY CHECK]: PASS - Notificación de actualización enviada a WhatsApp.")
         else:
-            print(f"[APORÍA DETECTADA EN BACKEND]: Código {res_data.get('error', {}).get('code')}")
-            print(res_data.get('error', {}).get('message'))
+            print("[API ALERT]: Error notificando actualización.")
     except Exception as e:
-        print(f"Error en la conexión del webhook local: {e}")
+        print(f"Error de red: {e}")
 
 def actualizar_archivos():
-    """Compila las entradas y escribe físicamente el archivo local unificado."""
-    print("Iniciando compilación integrada en NOTICIAS.py...")
+    print("Iniciando compilación integrada en NOTICIAS.py con alimentación RSS global...")
     
-    noticias_del_dia = [
-        {"titulo": "Operativo de Seguridad en La Joyita", "contenido": "El Ministerio de Seguridad Pública emitió un comunicado informando sobre un despliegue coordinado de más de 2,500 efectivos de la Policía Nacional, SENAN, SENAFRONT, Migración y SUME para realizar una requisa integral en el Centro Penitenciario La Joyita (ver archivo verbatim 352427.jpg)."},
-        {"titulo": "Televisión Local en Burunga", "contenido": "Se sintonizó la transmisión televisiva local donde se destacó la figura de Víctor Bernal (ver archivo verbatim 352328.jpg)."},
-        {"titulo": "Fútbol y Presencia de la Misión", "contenido": "Se registraron imágenes de encuentros de fútbol con la integración visual y superposición del logo tecnológico de la misión SADV41 Python Hypersec (ver archivos verbatim 352632.jpg and 352617.jpg)."},
-        {"titulo": "Gastronomía y Comercio Local", "contenido": "Circuló el menú de fin de semana (viernes, sábado y domingo) de *MC Food (Michelle & Carolina)* en Burunga-Arraiján, ofreciendo combos de comida rápida con delivery al número 6908-7059 (ver archivo verbatim 352498.jpg)."},
-        {"titulo": "Publicidad de 'El Cosito del Mate'", "contenido": "Se difundió información comercial sobre este producto, resaltando ventajas como el ahorro del 50% en la yerba y la conservación del sabor original (ver archivos verbatim 352497.jpg y 352445.jpg)."},
-        {"titulo": "Gran Sorteo Anticipado", "contenido": "Se promocionó el sorteo de un vehículo Kia Picanto (Vibrant MT Modelo 2026) a través de la Lotería de Boyacá y Fatimas Group S.A.S. (ver archivo verbatim 352443.jpg)."},
-        {"titulo": "Versículos de la Misión", "contenido": "Se estructuró un listado con 12 versículos clave y sus significados proféticos y de bendición para la relación espiritual (ver archivo verbatim 352400.jpg)."},
-        {"titulo": "Interacción en Redes Sociales", "contenido": "A la 1:11 a.m. quedó registrada una notificación en el teléfono con un meme de la cuenta *Sir Doge of the Coin* en la plataforma X, alusivo a hackear la Matrix usando la mente como computadora (ver archivo verbatim 352383.jpg)."}
-    ]
+    # 💥 El Backend extrae las noticias vivas de internet
+    noticias_vivas = recolectar_noticias_rss()
     
-    html_final = generar_plantilla_html_integral(noticias_del_dia)
+    # Fallback por si la red falla en el momento exacto
+    if not noticias_vivas:
+        noticias_vivas = [
+            {"pais_code": "PA", "pais_nombre": "Panamá", "bandera": "🇵🇦", "idioma": "Español", "titulo": "Terminal Local Online", "contenido": "Monitoreo activo sin alertas críticas en Burunga."}
+        ]
+        
+    html_final = generar_plantilla_html_integral(noticias_vivas)
     os.makedirs(os.path.dirname(PATH_NOTICIAS_HTML), exist_ok=True)
     
     try:
         with open(PATH_NOTICIAS_HTML, "w", encoding="utf-8") as f:
             f.write(html_final)
-        print(f"¡Sincronización Exitosa! Archivo físico sobrescrito en: {PATH_NOTICIAS_HTML}")
+        print(f"¡Sincronización Exitosa! Archivo dinámico Google News en: {PATH_NOTICIAS_HTML}")
         
-        # Una vez generado el archivo, ejecuta la prueba de transmisión de datos en paralelo
+        # Disparo paralelo de confirmación a WhatsApp Business
         ejecutar_envio_noticia_directo()
         
     except Exception as e:
