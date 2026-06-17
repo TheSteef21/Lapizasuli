@@ -1,34 +1,48 @@
 import express from "express";
 import cors from "cors";
 import crypto from "crypto";
-import fetch from "node-fetch"; // Asegúrate de tenerlo en tu package.json si usas Node clásico
+import fetch from "node-fetch";
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-// ==========================================
-// CONFIGURACIÓN DE PARÁMETROS Y LLAVES SECRETAS
-// ==========================================
-const WHATSAPP_TOKEN = process.env.WHATSAPP_TOKEN || "";
-const PHONE_NUMBER_ID = process.env.PHONE_NUMBER_ID || "1152154214647264";
-const VERIFY_TOKEN = process.env.VERIFY_TOKEN || "SADV41_VERIFY_TOKEN";
-const API_VERSION = process.env.META_API_VERSION || "v20.0";
+// ====================================================================
+// DESESTRUCTURACIÓN Y CONFIGURACIÓN SEGURA DE VARIABLES DE ENTORNO
+// ====================================================================
+const {
+    // Componentes de Redes y Bóvedas Cripto (Nuevas)
+    SADV41_ETHEREUM_PUBLIC,
+    SADV41_ETHEREUM_PRIVATE,
+    SADV41_SOLANA_PUBLIC,
+    SADV41_SOLANA_PRIVATE,
+    SADV41_TON_PUBLIC,
+    SADV41_TON_PRIVATE,
+    SADV41_BITCOIN_PUBLIC,
+    SADV41_BITCOIN_PRIVATE,
 
-// 🔐 CREDENCIALES BINANCE API (Firmado Ed25519)
-const BINANCE_API_KEY = process.env.BINANCE_API_KEY || "TU_PUBLIC_API_KEY_DE_BINANCE";
-// Inserta tu llave privada en formato PEM (asegúrate de incluir los saltos de línea correctamente en tu .env)
-const BINANCE_PRIVATE_KEY_PEM = process.env.BINANCE_PRIVATE_KEY || `-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEINT...tu_clave_privada_aqui...\n-----END PRIVATE KEY-----`;
+    // Pasarelas Comerciales e Integraciones Web3
+    WCPAYID,
+    WTC_BINANCE,
+    BINANCE_API_KEY,
+    BINANCE_PRIVATE_KEY, // Formato PEM directo desde Render
 
-// ==========================================
-// GATEWAY CORE: VERIFICACIÓN Y RECEPCIÓN META
-// ==========================================
+    // Infraestructura Meta / WhatsApp
+    WHATSAPP_TOKEN,
+    PHONE_NUMBER_ID = "1152154214647264",
+    VERIFY_TOKEN = "SADV41_VERIFY_TOKEN",
+    META_API_VERSION = "v20.0"
+} = process.env;
+
+// ====================================================================
+// GATEWAY CORE: RUTAS RAÍZ Y RECEPCIÓN META (WHATSAPP WEBHOOK)
+// ====================================================================
 
 app.get("/", (req, res) => {
-    res.send("🚀 Backend SADV41 Multi-Módulo Activo en Render (Meta + Binance Ed25519 Loaded)");
+    res.send("🚀 Backend SADV41 Multi-Módulo Activo en Render (Meta, Binance Ed25519 & Matriz Multired Sincronizada)");
 });
 
-// Verificación del Webhook de Meta
+// Verificación de autenticidad del Webhook de Meta
 app.get("/webhook", (req, res) => {
     const mode = req.query["hub.mode"];
     const token = req.query["hub.verify_token"];
@@ -41,18 +55,17 @@ app.get("/webhook", (req, res) => {
     res.sendStatus(403);
 });
 
-// Recepción Activa de Mensajes e Interacciones
+// Captura de eventos e interacciones de usuarios en tiempo real
 app.post("/webhook", (req, res) => {
     console.log("[META INBOUND]:", JSON.stringify(req.body, null, 2));
-    // Aquí puedes capturar las interacciones o respuestas de WhatsApp en tiempo real
     res.sendStatus(200);
 });
 
-// Despacho de Mensajes Salientes de WhatsApp
-app.post("/send-whatsapp", async (req, res) => {
+// Notificaciones y alertas automáticas salientes vía WhatsApp
+app.post("/api/v1/send-whatsapp", async (req, res) => {
     try {
         const { to, message } = req.body;
-        const url = `https://graph.facebook.com/${API_VERSION}/${PHONE_NUMBER_ID}/messages`;
+        const url = `https://graph.facebook.com/${META_API_VERSION}/${PHONE_NUMBER_ID}/messages`;
         
         const response = await fetch(url, {
             method: "POST",
@@ -75,16 +88,20 @@ app.post("/send-whatsapp", async (req, res) => {
     }
 });
 
-// ==========================================
-// CRIPTO-MÓDULO: FIRMA DIGITAL ED25519 (BINANCE)
-// ==========================================
+// ====================================================================
+// CRIPTO-MÓDULO 1: FIRMA ASIMÉTRICA ED25519 (BINANCE MERCHANT)
+// ====================================================================
 
 /**
- * Genera la firma Ed25519 requerida por Binance usando la llave privada PEM
+ * Cripto-firma nativa usando la llave privada cargada en Render
  */
 function firmarQueryEd25519(queryString) {
+    if (!BINANCE_PRIVATE_KEY) {
+        throw new Error("La clave BINANCE_PRIVATE_KEY no está configurada en el entorno.");
+    }
+
     const privateKey = crypto.createPrivateKey({
-        key: BINANCE_PRIVATE_KEY_PEM,
+        key: BINANCE_PRIVATE_KEY,
         format: 'pem',
         type: 'pkcs8'
     });
@@ -93,13 +110,11 @@ function firmarQueryEd25519(queryString) {
     return signer.toString('base64');
 }
 
-// Endpoint Seguro para consultar balances firmados sin exponer tus llaves en el Frontend
-app.get("/api/binance/account", async (req, res) => {
+// Interrogación de balances corporativos de Binance sin fugas de Front
+app.get("/api/v1/binance/account", async (req, res) => {
     try {
         const timestamp = Date.now();
         const queryString = `timestamp=${timestamp}`;
-        
-        // Firma la cadena de parámetros usando criptografía asimétrica Ed25519
         const signature = firmarQueryEd25519(queryString);
         
         const url = `https://api.binance.com/api/v3/account?${queryString}&signature=${encodeURIComponent(signature)}`;
@@ -107,7 +122,7 @@ app.get("/api/binance/account", async (req, res) => {
         const response = await fetch(url, {
             method: "GET",
             headers: {
-                "X-MBX-APIKEY": BINANCE_API_KEY
+                "X-MBX-APIKEY": BINANCE_API_KEY || ""
             }
         });
 
@@ -115,17 +130,51 @@ app.get("/api/binance/account", async (req, res) => {
         res.status(response.status).json(data);
     } catch (error) {
         console.error("[CRITICAL CRYPTO ERROR]:", error);
-        res.status(500).json({ error: "Falla en la firma asimétrica: " + error.message });
+        res.status(500).json({ error: "Falla en procesamiento Ed25519: " + error.message });
     }
 });
 
-// ==========================================
+// ====================================================================
+// CRIPTO-MÓDULO 2: RESOLUCIÓN Y ENRUTAMIENTO MULTIRED SEGURO (NUEVO)
+// ====================================================================
+
+/**
+ * Retorna las llaves públicas del comercio para pintarse en el panel Web3
+ * Protege estrictamente los fragmentos privados evitando fugas de memoria.
+ */
+app.get("/api/v1/networks/config", (req, res) => {
+    // Verificación de salud interna del llavero criptográfico
+    const key Check = {
+        evmReady: !!SADV41_ETHEREUM_PRIVATE,
+        solanaReady: !!SADV41_SOLANA_PRIVATE,
+        tonReady: !!SADV41_TON_PRIVATE,
+        bitcoinReady: !!SADV41_BITCOIN_PRIVATE,
+    };
+
+    res.json({
+        success: true,
+        status: "Llavero operacional inyectado",
+        gatewaysActive: {
+            wtcPayIdConnected: !!WCPAYID,
+            binanceMerchantLinked: !!WTC_BINANCE
+        },
+        publicKeys: {
+            evm: SADV41_ETHEREUM_PUBLIC || "No inyectada",
+            solana: SADV41_SOLANA_PUBLIC || "No inyectada",
+            ton: SADV41_TON_PUBLIC || "No inyectada",
+            bitcoin: SADV41_BITCOIN_PUBLIC || "No inyectada"
+        },
+        integrity: keyCheck
+    });
+});
+
+// ====================================================================
 // INICIALIZACIÓN DEL PUERTO SOBERANO
-// ==========================================
+// ====================================================================
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
     console.log(`\n==================================================`);
-    console.log(`🎚️  SERVIDOR CORRIENDO EN PUERTO: ${port}`);
-    console.log(`🔒 ED25519 Cripto-Firmado Integrado`);
+    console.log(`🎚️  SERVIDOR DE PRODUCCIÓN CONFIGURADO EN PUERTO: ${port}`);
+    console.log(`🔒 Matriz de Variables SADV41 Totalmente Vinculada`);
     console.log(`==================================================\n`);
 });
