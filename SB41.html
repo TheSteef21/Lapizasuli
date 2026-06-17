@@ -69,10 +69,22 @@
             border-image: linear-gradient(45deg, #ff007f, #7f00ff, #00f3ff, #00ff7f, #ffea00, #ff007f) 1;
             box-shadow: 0 0 20px rgba(0, 243, 255, 0.15);
         }
+        /* Estilos nativos adaptados para la sección de Noticias */
+        .news-container { display: flex; flex-direction: column; gap: 1.5rem; }
+        .news-card { background: #0d1117; border: 1px solid #1e293b; padding: 1.5rem; rounded-radius: 1rem; border-radius: 0.75rem; }
+        .highlight-card { border: 1px solid rgba(234, 179, 8, 0.4); box-shadow: 0 0 15px rgba(234, 179, 8, 0.05); }
+        .alert-card { border-left: 4px solid #ef4444; }
+        .tech-card { border-left: 4px solid #eab308; }
+        .card-tag { display: inline-block; font-size: 10px; font-family: monospace; font-weight: bold; padding: 0.25rem 0.5rem; border-radius: 0.25rem; margin-between: 0.5rem; margin-bottom: 0.75rem;}
+        .tag-worldcup { background: rgba(234, 179, 8, 0.1); color: #eab308; }
+        .tag-operations { background: rgba(59, 130, 246, 0.1); color: #3b82f6; }
+        .tag-alert { background: rgba(239, 44, 68, 0.1); color: #ef4444; }
+        .tag-crypto { background: rgba(16, 185, 129, 0.1); color: #10b981; }
     </style>
 </head>
 <body class="font-sans antialiased selection:bg-oro selection:text-navy">
 
+    <!-- NAV PRINCIPAL CON TAB NAVIGATION INTEGRADO -->
     <header class="fixed w-full z-50 glass border-b border-oro/30 px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
         <div class="flex items-center gap-3">
             <span class="text-2xl">🛡️</span>
@@ -82,12 +94,13 @@
             </div>
         </div>
         
+        <!-- Tab Navigation unificado con las secciones del feed y redirecciones externas -->
         <nav class="flex flex-wrap justify-center gap-6 text-sm uppercase tracking-wider font-medium">
             <a href="#embassy-story" class="hover:text-pink-400 transition-colors text-pink-300">Embassy Story</a>
-            <a href="#global-news-section" class="hover:text-oro transition-colors text-yellow-400 font-bold">📡 Global News</a>
+            <a href="#global-news-section" class="hover:text-oro transition-colors text-yellow-400 font-bold">📡 Global News Feed</a>
             <a href="#panini-section" class="hover:text-cyan-400 transition-colors text-cyan-300">⚽ Panini 2026</a>
             <a href="#monitor-sismico-seccion" class="hover:text-red-400 transition-colors text-red-300 font-bold">⚠️ Telemetría SADV41T</a>
-            <a href="#miss-mundo" class="hover:text-oro transition-colors text-amber-200">Mayordomía & Gracia</a>
+            <a href="https://thesteef21.github.io/Lapizasuli/GSADV41.html" class="hover:text-oro transition-colors text-amber-200" target="_blank">Embassy of Beauty (GSADV41)</a>
         </nav>
 
         <div class="flex flex-wrap gap-2 justify-center">
@@ -105,6 +118,7 @@
 
     <main class="pt-44 pb-12 px-6 max-w-6xl mx-auto space-y-16">
         
+        <!-- SECCIÓN PANINI FIFA 2026 -->
         <section id="panini-section" class="max-w-lg mx-auto rainbow-border rounded-xl p-6 text-center transition-transform hover:scale-[1.01]">
             <div class="flex items-center justify-center gap-2 mb-2">
                 <span class="text-xl">⚽</span>
@@ -124,6 +138,7 @@
             </div>
         </section>
 
+        <!-- GSADV41: EMBASSY OF BEAUTY -->
         <section id="embassy-story" class="glass rounded-2xl overflow-hidden border border-pink-500/30 shadow-2xl max-w-lg mx-auto">
             <div class="p-8 text-center border-b border-white/5 bg-gradient-to-b from-pink-500/10 to-transparent">
                 <h2 class="font-serif text-2xl md:text-3xl text-white font-extrabold tracking-wider text-shadow-pink uppercase">GSADV41: EMBASSY OF BEAUTY</h2>
@@ -179,21 +194,101 @@
             </div>
         </section>
 
-        <section id="global-news-section" class="max-w-3xl mx-auto p-6 bg-[#0d1117] border border-slate-800 rounded-2xl shadow-xl space-y-6">
+        <!-- SECCIÓN CONTENEDORA: GLOBAL NEWS FEED COMPLETO -->
+        <section id="global-news-section" class="max-w-4xl mx-auto p-6 bg-[#0d1117] border border-slate-800 rounded-2xl shadow-xl space-y-6">
             <div class="flex justify-between items-center border-b border-slate-800 pb-4">
                 <div class="text-left">
-                    <h2 class="text-oro font-bold text-2xl tracking-tight uppercase">GSADV41 Global Aggregator</h2>
-                    <p class="text-[10px] text-slate-500 font-mono mt-1">ID: srv-d8p6clk8aovs73b2le50</p>
+                    <h2 class="text-oro font-bold text-2xl tracking-tight uppercase">📡 Global News Feed</h2>
+                    <p class="text-[10px] text-slate-500 font-mono mt-1">ID: srv-d8p6clk8aovs73b2le50 | SADV41 Aggregator</p>
                 </div>
                 <button onclick="cargarNoticias()" class="bg-amber-500/10 hover:bg-amber-500/20 text-oro border border-oro/30 text-xs px-3 py-1.5 rounded transition-all font-mono">
-                    🔄 Sincronizar News
+                    🔄 Sincronizar API News
                 </button>
             </div>
-            <div id="contenedor-noticias-feed" class="space-y-4">
-                <div class="animate-pulse text-xs text-slate-500 font-mono">Conectando con la matriz de noticias...</div>
+
+            <!-- Estructura del Global News Feed Inyectada -->
+            <div class="news-container text-left">
+                
+                <!-- BLOQUE 1: MUNDIAL FIFA 2026 & JOGA BONITO -->
+                <div class="news-card highlight-card">
+                    <div class="card-tag tag-worldcup">MUNDIAL 2026 x SADV41</div>
+                    <div class="card-body">
+                        <h2 class="text-oro font-bold text-lg mb-2">UNIDOS EN LA GLORIA: DEBUT HISTÓRICO Y FUSIÓN JOGA BONITO</h2>
+                        <p class="text-[11px] text-slate-500 mb-4">Sincronizado vía La Estrella de Panamá & TikTok Panini 2026</p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="space-y-3">
+                                <h3 class="text-white font-semibold text-sm">¡Histórico! Decreto de Cierre de Oficinas Públicas</h3>
+                                <p class="text-xs text-slate-300 leading-relaxed">El Gobierno Nacional ha decretado oficialmente el cierre de las oficinas públicas a partir de las 2:00 p.m. con motivo del debut histórico de la Selección de Panamá en el Mundial de la FIFA 2026. La expectativa soberana se toma el país entero ante esta cita con la historia mundialista (Ref: 364722.jpg).</p>
+                                
+                                <h3 class="text-white font-semibold text-sm">Debut Soñado de Argentina: Triplete de Messi</h3>
+                                <p class="text-xs text-slate-300 leading-relaxed">En el plano deportivo internacional, Argentina inició con firmeza la defensa de su título mundial al golear 3–0 a Argelia en su debut. El astro Lionel Messi firma una noche perfecta con un triplete histórico que lo consolida en su sexta Copa del Mundo (Ref: 365119.jpg, 365131.jpg).</p>
+                            </div>
+                            <div class="bg-amber-500/5 border border-oro/20 p-4 rounded-xl flex flex-col justify-center text-center">
+                                <h4 class="text-oro font-bold text-xs tracking-widest uppercase mb-1">SADV41: FUSIÓN JOGA BONITO</h4>
+                                <p class="text-xs text-slate-200 italic">"La Corona es para Cristo" — Conectando el fútbol mundial con la gran red del 4+1 (Ref: 365134.webp, 365147.png).</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BLOQUE 2: OPERACIONES LOCALES & MAYORDOMÍA -->
+                <div class="news-card">
+                    <div class="card-tag tag-operations">OPERACIONES Y MAYORDOMÍA</div>
+                    <div class="card-body">
+                        <h2 class="text-white font-bold text-lg mb-2">SADB41TT & DELEGACIÓN EMPRESARIAL INDEPENDIENTE (DEI)</h2>
+                        <p class="text-[11px] text-slate-500 mb-4">Monitoreo Interno de Infraestructura y Finanzas Locales</p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div class="bg-white/[0.02] border border-slate-800 p-3 rounded-lg">
+                                <h3 class="text-cyan-400 font-semibold text-xs uppercase mb-1">SADB41TT: Turbo Tire</h3>
+                                <p class="text-xs text-slate-400">Mapeo de inventario y transacciones directas verificadas. Flujo de caja en tiempo real procesado bajo el esquema de validación digital a través de Yappy hacia la base de administración de operaciones (Ref: 365165.jpg).</p>
+                            </div>
+                            <div class="bg-white/[0.02] border border-slate-800 p-3 rounded-lg">
+                                <h3 class="text-cyan-400 font-semibold text-xs uppercase mb-1">Infraestructura DEI</h3>
+                                <p class="text-xs text-slate-400">Monitoreo y despliegue técnico del personal de la Delegación Empresarial Independiente (DEI de la SADV41) en el cuartel general operativo, garantizando la continuidad del soporte 24/7 (Ref: 365104.jpg).</p>
+                            </div>
+                            <div class="bg-white/[0.02] border border-slate-800 p-3 rounded-lg">
+                                <h3 class="text-cyan-400 font-semibold text-xs uppercase mb-1">Red Eléctrica</h3>
+                                <p class="text-xs text-slate-400">Completada con éxito la supervisión del despliegue técnico nocturno para la habilitación y reparación del tendido de iluminación en las vías de acceso principales de la comunidad (Ref: 364974.jpg).</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BLOQUE 3: ALERTAS DE SEGURIDAD LOCAL -->
+                <div class="news-card alert-card">
+                    <div class="card-tag tag-alert">ALERTA DE SEGURIDAD CIUDADANA</div>
+                    <div class="card-body">
+                        <h2 class="text-red-400 font-bold text-lg mb-1">REPORTE CRÍTICO: SUCESO VIOLENTO EN GUNA NEGA</h2>
+                        <p class="text-[11px] text-slate-500 mb-3">Sincronizado vía El Siglo (Ref: 364834.jpg)</p>
+                        <p class="text-xs text-slate-300 leading-relaxed">
+                            Se registra un incidente de alta gravedad en el sector de Las 400, Guna Nega. Una mujer de 32 años fue hallada sin vida dentro de una residencia tras registrarse múltiples detonaciones de arma de fuego durante la madrugada. El Ministerio Público y los estamentos de seguridad mantienen acordonada la zona para iniciar las investigaciones correspondientes. El Módulo SADV41T incorpora este evento dentro de la bitácora de incidencias perimetrales.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- BLOQUE 4: INTEGRACIÓN DE INFRAESTRUCTURA WEB3 -->
+                <div class="news-card tech-card">
+                    <div class="card-tag tag-crypto">WEB3 & INTEGRACIÓN API</div>
+                    <div class="card-body">
+                        <h2 class="text-oro font-bold text-lg mb-1">BINANCE WALLET: AN API TO RULE THEM ALL</h2>
+                        <p class="text-[11px] text-slate-500 mb-3">Estructura Base del Binance Web3 Wallet Hub (Ref: 365134.webp)</p>
+                        <p class="text-xs text-slate-300 font-mono leading-relaxed">
+                            Despliegue de la API Web3 diseñada para extraer de forma centralizada y unificada todos los flujos de datos transaccionales críticos. Cero comisiones (zero fees) y soporte automatizado continuo 24/7 para garantizar la estabilidad financiera de la RAÍZ DE ORIGEN de la misión.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Feed asincrónico secundario de la API -->
+            <div id="contenedor-noticias-feed" class="space-y-4 pt-4 border-t border-slate-800/60">
+                <div class="animate-pulse text-xs text-slate-500 font-mono">Conectando con la matriz de noticias secundarias...</div>
             </div>
         </section>
 
+        <!-- SECCIÓN TELEMETRÍA SÍSMICA: MÓDULO SADV41T -->
         <section id="monitor-sismico-seccion" class="max-w-3xl mx-auto p-1 md:p-6 bg-[#0d1117] border border-slate-800 rounded-2xl shadow-xl">
             <div class="text-center py-4">
                 <h2 class="text-renderRed font-bold text-2xl md:text-3xl tracking-tight uppercase">Módulo SADV41T</h2>
@@ -219,6 +314,7 @@
             <div id="monitor-salida" class="space-y-4 mt-6"></div>
         </section>
 
+        <!-- CONFESIONARIO DE GRACIA, ALERTAS GLOBALES Y ENLACES SOBERANOS -->
         <section id="miss-mundo" class="glass rounded-2xl max-w-lg mx-auto overflow-hidden border border-cyan-500/30">
             <div class="p-6 bg-black/30 flex flex-col items-center gap-4 text-center">
                 <div class="border border-[#00f3ff]/40 px-4 py-1.5 rounded-full text-xs font-bold text-[#00f3ff] tracking-wide text-shadow-blue shadow-[0_0_10px_rgba(0,243,255,0.15)] uppercase">
@@ -226,14 +322,24 @@
                 </div>
                 
                 <p class="text-xs text-slate-400 leading-relaxed px-4">
-                    Monitoreo constante, mayordomía e interconexión soberana. Canales oficiales sincronizados minuto a minuto bajo los parámetros de la ley de gracia de Miss Mundo Latina.
+                    Monitoreo constante, mayordomía e interconexión soberana. Canales oficiales sincronizados minuto a minuto bajo los parámetros de la ley de gracia de Miss Mundo Latina y la pasarela extendida.
                 </p>
 
+                <!-- Matriz de Enlaces de Infraestructura y Pasarelas de Pago -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full pt-2 px-4">
-                    <a href="https://sadv41-webhook.onrender.com" target="_blank" class="bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs px-4 py-2.5 rounded-lg transition-all shadow flex items-center justify-center gap-1.5 cursor-pointer col-span-2 sm:col-span-1">
-                        💬 Webhook Gateway (srv-d8idi9mq1p3s73ejpu2g)
+                    <a href="https://thesteef21.github.io/Lapizasuli/FGSADV41M.html" target="_blank" class="bg-gradient-to-r from-pink-600 to-purple-700 hover:from-pink-500 hover:to-purple-600 text-white font-bold text-xs px-4 py-2.5 rounded-lg transition-all shadow flex items-center justify-center gap-1.5 cursor-pointer col-span-2">
+                        👑 Pasarela Extendida GSADV41 (FGSADV41M.html)
                     </a>
-                    <a href="https://www.instagram.com/reel/DZNKr6Sla4M/?igsh=bDUzODcwanlyZWp6" target="_blank" class="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-semibold text-xs px-4 py-2.5 rounded-lg transition-all shadow flex items-center justify-center gap-1.5 cursor-pointer col-span-2 sm:col-span-1">
+                    <a href="https://rareevo.io/?coupon=STEVENDIOR" target="_blank" class="bg-amber-600 hover:bg-amber-500 text-white font-semibold text-xs px-4 py-2.5 rounded-lg transition-all shadow flex items-center justify-center gap-1.5 cursor-pointer col-span-2 sm:col-span-1">
+                        🎟️ Cupón RareEvo: STEVENDIOR
+                    </a>
+                    <a href="https://take.app/stevendior/pay?ref=SADV41" target="_blank" class="bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs px-4 py-2.5 rounded-lg transition-all shadow flex items-center justify-center gap-1.5 cursor-pointer col-span-2 sm:col-span-1">
+                        📦 Take App Gateway Payment
+                    </a>
+                    <a href="https://sadv41-webhook.onrender.com" target="_blank" class="bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs px-4 py-2.5 rounded-lg transition-all shadow flex items-center justify-center gap-1.5 cursor-pointer col-span-2 sm:col-span-1">
+                        💬 Webhook (srv-d8idi9mq1p3s73ejpu2g)
+                    </a>
+                    <a href="https://www.instagram.com/reel/DZNKr6Sla4M/?igsh=bDUzODcwanlyZWp6" target="_blank" class="bg-[#24292e] hover:bg-slate-700 text-white font-semibold text-xs px-4 py-2.5 rounded-lg transition-all shadow flex items-center justify-center gap-1.5 cursor-pointer col-span-2 sm:col-span-1">
                         📸 Ver Reel Instagram
                     </a>
                     <a href="https://image23d.onrender.com" target="_blank" class="bg-cyan-600 hover:bg-cyan-500 text-white font-semibold text-xs px-4 py-2.5 rounded-lg transition-all shadow flex items-center justify-center gap-1.5 cursor-pointer col-span-2">
@@ -265,7 +371,7 @@
 
         // Hard-coded local fallbacks (Datos seguros de respaldo)
         const datosRespaldoLocal = {
-            "analisis_ia": "Análisis en modo local (Respaldo del Sistema). Telemetría base registrada con acumulado de eventos estable en la red de estaciones.",
+            "analisis_ia": "Análisis en modo local (Respaldo del Sistema). Telemetría base registrada con acumulado de eventos stable en la red de estaciones.",
             "acumulado_total": 24,
             "eventos": [
                 {
