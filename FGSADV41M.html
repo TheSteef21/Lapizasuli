@@ -74,6 +74,7 @@
 </head>
 <body class="font-sans antialiased selection:bg-oro selection:text-navy">
 
+    <!-- HEADER SOBERANO INTEGRADO -->
     <header class="fixed w-full z-50 glass border-b border-oro/30 px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
         <div class="flex items-center gap-3">
             <span class="text-2xl">🛡️</span>
@@ -83,11 +84,12 @@
             </div>
         </div>
         
-        <nav class="flex gap-6 text-sm uppercase tracking-wider font-medium">
+        <nav class="flex flex-wrap justify-center gap-6 text-sm uppercase tracking-wider font-medium">
             <a href="#embassy-story" class="hover:text-pink-400 transition-colors text-pink-300">Embassy Story</a>
+            <a href="#global-news-section" class="hover:text-oro transition-colors text-yellow-400 font-bold">📡 Global News</a>
+            <a href="#panini-section" class="hover:text-cyan-400 transition-colors text-cyan-300">⚽ Panini 2026</a>
             <a href="#monitor-sismico-seccion" class="hover:text-red-400 transition-colors text-red-300 font-bold">⚠️ Telemetría SADV41T</a>
-            <a href="#mision" class="hover:text-oro transition-colors">Mayordomía</a>
-            <a href="#miss-mundo" class="hover:text-oro transition-colors text-amber-200">Miss Mundo Latina</a>
+            <a href="#miss-mundo" class="hover:text-oro transition-colors text-amber-200">Mayordomía & Gracia</a>
         </nav>
 
         <div class="flex flex-wrap gap-2 justify-center">
@@ -103,10 +105,10 @@
         </div>
     </header>
 
-    <main class="pt-36 pb-12 px-6 max-w-6xl mx-auto space-y-16">
+    <main class="pt-44 pb-12 px-6 max-w-6xl mx-auto space-y-16">
         
-        <!-- SECCIÓN DE NUEVA INICIATIVA: PANINI FIFA 2026 & TIKTOK (RECUADRO TRANSPARENTE ARCOÍRIS) -->
-        <section class="max-w-lg mx-auto rainbow-border rounded-xl p-6 text-center transition-transform hover:scale-[1.01]">
+        <!-- SECCIÓN: PANINI FIFA 2026 & TIKTOK (RECUADRO TRANSPARENTE ARCOÍRIS) -->
+        <section id="panini-section" class="max-w-lg mx-auto rainbow-border rounded-xl p-6 text-center transition-transform hover:scale-[1.01]">
             <div class="flex items-center justify-center gap-2 mb-2">
                 <span class="text-xl">⚽</span>
                 <h3 class="font-bold text-sm tracking-widest text-white uppercase font-mono">PANINI FIFA 2026 × TIKTOK</h3>
@@ -125,6 +127,7 @@
             </div>
         </section>
 
+        <!-- SECCIÓN: EMBASSY OF BEAUTY -->
         <section id="embassy-story" class="glass rounded-2xl overflow-hidden border border-pink-500/30 shadow-2xl max-w-lg mx-auto">
             <div class="p-8 text-center border-b border-white/5 bg-gradient-to-b from-pink-500/10 to-transparent">
                 <h2 class="font-serif text-2xl md:text-3xl text-white font-extrabold tracking-wider text-shadow-pink uppercase">GSADV41: EMBASSY OF BEAUTY</h2>
@@ -185,7 +188,25 @@
             </div>
         </section>
 
+        <!-- SECCIÓN: GLOBAL NEWS FEED -->
+        <section id="global-news-section" class="max-w-3xl mx-auto p-6 bg-[#0d1117] border border-slate-800 rounded-2xl shadow-xl space-y-6">
+            <div class="text-center">
+                <h2 class="text-oro font-bold text-2xl tracking-tight uppercase">GSADV41 Global Aggregator</h2>
+                <p class="text-[10px] text-slate-500 font-mono mt-1">Canal Sincronizado Activo</p>
+            </div>
+            <div id="contenedor-noticias-feed" class="space-y-4">
+                <div class="noticia-tarjeta-item bg-[#1f242c] p-4 rounded-xl border border-slate-800/60">
+                    <div class="flex justify-between items-center text-[11px] text-slate-400 font-mono mb-2">
+                        <span>🇵🇦 Panamá</span>
+                        <span class="text-cyan-400 text-[10px]">Español</span>
+                    </div>
+                    <h4 class="text-cyan-400 font-bold text-sm">⚡ Arquitectura Soberana Online</h4>
+                    <p class="text-xs text-slate-300 mt-2 font-sans">El Hub Digital SADV41 se encuentra desplegado de forma segura. Listo para recibir la telemetría sísmica y las transmisiones globales de la embajada.</p>
+                </div>
+            </div>
+        </section>
 
+        <!-- SECCIÓN: TELEMETRÍA SÍSMICA SADV41T -->
         <section id="monitor-sismico-seccion" class="max-w-3xl mx-auto p-1 md:p-6 bg-[#0d1117] border border-slate-800 rounded-2xl shadow-xl">
             <div class="text-center py-4">
                 <h2 class="text-renderRed font-bold text-2xl md:text-3xl tracking-tight uppercase">Módulo SADV41T</h2>
@@ -211,15 +232,15 @@
             <div id="monitor-salida" class="space-y-4 mt-6"></div>
         </section>
 
-
-        <section class="glass rounded-2xl max-w-lg mx-auto overflow-hidden border border-cyan-500/30">
+        <!-- SECCIÓN: CONFESIONARIO, MAYORDOMÍA & GRACIA -->
+        <section id="miss-mundo" class="glass rounded-2xl max-w-lg mx-auto overflow-hidden border border-cyan-500/30">
             <div class="p-6 bg-black/30 flex flex-col items-center gap-4 text-center">
                 <div class="border border-[#00f3ff]/40 px-4 py-1.5 rounded-full text-xs font-bold text-[#00f3ff] tracking-wide text-shadow-blue shadow-[0_0_10px_rgba(0,243,255,0.15)] uppercase">
                     CONFESIONARIO DE GRACIA & ALERTAS GLOBALES
                 </div>
                 
                 <p class="text-xs text-slate-400 leading-relaxed px-4">
-                    Monitoreo constante e interconexión soberana. Canales oficiales sincronizados minuto a minuto bajo los parámetros de la ley de gracia.
+                    Monitoreo constante, mayordomía e interconexión soberana. Canales oficiales sincronizados minuto a minuto bajo los parámetros de la ley de gracia de Miss Mundo Latina.
                 </p>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full pt-2 px-4">
@@ -238,6 +259,7 @@
             </div>
         </section>
 
+        <!-- STATUS PIPELINE DE CONEXIÓN WEB3 -->
         <div id="connectionPanel" class="hidden p-5 bg-slate-900/90 border border-oro/40 rounded-2xl shadow-2xl">
             <div class="flex items-center gap-3 mb-2">
                 <span class="relative flex h-3 w-3">
@@ -250,6 +272,7 @@
 
     </main>
 
+    <!-- MOTOR LÓGICO INTEGRADO -->
     <script>
         const API_URL = "https://lapizasuli.onrender.com/api/sismos";
 
