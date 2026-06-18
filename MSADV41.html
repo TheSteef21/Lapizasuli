@@ -62,7 +62,7 @@
             border-left: 5px solid #ff6b81;
         }
 
-        /* --- INTEGRACIÓN DE INYECTORES DE TESTER-CORE.CSS --- */
+        /* --- INTEGRACIÓN DE ENTORNO SOBERANO (TESTER-CORE.CSS) --- */
         .scanline {
             width: 100%;
             height: 2px;
@@ -183,7 +183,7 @@
             <a href="#embassy-story" class="hover:text-pink-400 transition-colors text-pink-300">Embassy Story</a>
             <a href="#monitor-sismico-seccion" class="hover:text-red-400 transition-colors text-red-300 font-bold">⚠️ Telemetría SADV41T</a>
             <a href="#probador-llantas-seccion" class="hover:text-neonBlue transition-colors text-cyan-300">🛞 Turbo Tire</a>
-            <a href="#mision" class="hover:text-oro transition-colors">Mayordomía</a>
+            <a href="#mayordomia-seccion" class="hover:text-oro transition-colors text-amber-200">Mayordomía</a>
         </nav>
 
         <div class="flex flex-wrap gap-2 justify-center">
@@ -193,7 +193,7 @@
             <button onclick="loginSocial('github')" class="bg-slate-800 hover:bg-slate-700 text-white font-semibold text-xs px-3 py-2 rounded transition-all flex items-center gap-1.5 border border-slate-700 cursor-pointer">
                 💻 GitHub Access
             </button>
-            <button onclick="connectBinance()" class="bg-oro hover:bg-amber-600 text-navy font-bold text-xs px-3 py-2 rounded transition-all flex items-center gap-1.5 shadow-lg shadow-oro/20 cursor-pointer">
+            <button id="btnConnect" onclick="connectBinance()" class="bg-oro hover:bg-amber-600 text-navy font-bold text-xs px-3 py-2 rounded transition-all flex items-center gap-1.5 shadow-lg shadow-oro/20 cursor-pointer">
                 ⚡ Binance Web3 Wallet
             </button>
         </div>
@@ -201,6 +201,17 @@
 
     <main class="pt-36 pb-12 px-6 max-w-6xl mx-auto space-y-16">
         
+        <div id="walletStatus" class="hidden max-w-lg mx-auto p-4 bg-gray-900/90 border border-oro/40 rounded-xl font-mono shadow-2xl">
+            <div class="flex items-center gap-2 mb-1">
+                <span class="relative flex h-2 w-2">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                </span>
+                <p class="text-[10px] text-slate-400 uppercase tracking-widest">Web3 Pipeline Active</p>
+            </div>
+            <p class="text-xs text-slate-300 break-all">Dirección: <span id="walletAddress" class="text-oro font-bold select-all"></span></p>
+        </div>
+
         <section id="embassy-story" class="glass rounded-2xl overflow-hidden border border-pink-500/30 shadow-2xl max-w-lg mx-auto">
             <div class="p-8 text-center border-b border-white/5 bg-gradient-to-b from-pink-500/10 to-transparent">
                 <h2 class="font-serif text-2xl md:text-3xl text-white font-extrabold tracking-wider text-shadow-pink uppercase">GSADV41: EMBASSY OF BEAUTY</h2>
@@ -218,7 +229,6 @@
                     </div>
                     <p class="text-xs text-slate-400 leading-relaxed">Restoring Her Crown. Te recibe con empatía divina, te seca las lágrimas y te recuerda el valor real de tu corona.</p>
                 </div>
-
                 <div class="bg-white/[0.02] border-l-4 border-[#00f3ff] p-4 rounded-r-xl transition-all hover:translate-x-1 hover:bg-white/[0.04] cursor-pointer">
                     <div class="flex justify-between items-center mb-1">
                         <span class="text-sm font-bold text-white">The Beauty Ambassador</span>
@@ -226,7 +236,6 @@
                     </div>
                     <p class="text-xs text-slate-400 leading-relaxed">A Mirror of Generosity. Despliega un tocador impecable para ofrecer retoques de gracia y elegancia sin costo.</p>
                 </div>
-
                 <div class="bg-white/[0.02] border-l-4 border-[#ff2a74] p-4 rounded-r-xl transition-all hover:translate-x-1 hover:bg-white/[0.04] cursor-pointer">
                     <div class="flex justify-between items-center mb-1">
                         <span class="text-sm font-bold text-white">The 5-Minute Sister</span>
@@ -234,7 +243,6 @@
                     </div>
                     <p class="text-xs text-slate-400 leading-relaxed">Instant Connection. Admiración mutua y genuina de pasarela; un choque de palmas y un lazo digital instantáneo.</p>
                 </div>
-
                 <div class="bg-white/[0.02] border-l-4 border-[#00f3ff] p-4 rounded-r-xl transition-all hover:translate-x-1 hover:bg-white/[0.04] cursor-pointer">
                     <div class="flex justify-between items-center mb-1">
                         <span class="text-sm font-bold text-white">The Search Squadron</span>
@@ -242,7 +250,6 @@
                     </div>
                     <p class="text-xs text-slate-400 leading-relaxed">No Woman Left Behind. Activación inmediata y solidaria ante el llamado de alerta para proteger a la compañera.</p>
                 </div>
-
                 <div class="bg-white/[0.02] border-l-4 border-[#ff2a74] p-4 rounded-r-xl transition-all hover:translate-x-1 hover:bg-white/[0.04] cursor-pointer">
                     <div class="flex justify-between items-center mb-1">
                         <span class="text-sm font-bold text-white">The Mirror Visionary</span>
@@ -250,7 +257,6 @@
                     </div>
                     <p class="text-xs text-slate-400 leading-relaxed">Perfecting the Reflection. Captura la luz, la sofisticación y el encuadre perfecto de la hermandad en el espejo.</p>
                 </div>
-
                 <div class="bg-white/[0.02] border-l-4 border-[#00f3ff] p-4 rounded-r-xl transition-all hover:translate-x-1 hover:bg-white/[0.04] cursor-pointer">
                     <div class="flex justify-between items-center mb-1">
                         <span class="text-sm font-bold text-white">The Dancefloor Philosopher</span>
@@ -286,7 +292,7 @@
             <div id="monitor-salida" class="space-y-4 mt-6"></div>
         </section>
 
-        <section id="probador-llantas-seccion" class="max-w-md mx-auto class-panel glass-panel p-6 rounded-2xl shadow-xl">
+        <section id="probador-llantas-seccion" class="max-w-md mx-auto glass-panel p-6 rounded-2xl shadow-xl">
             <div class="text-center mb-4">
                 <h3 class="bloom-text-blue font-mono text-sm uppercase tracking-widest font-bold text-neonBlue">SADV41 Turbo Tire Viewport</h3>
                 <p class="text-[10px] text-slate-400 font-mono mt-1">Simulación y Escala Geométrica en Caliente</p>
@@ -294,12 +300,8 @@
             
             <div id="viewportBg" class="chassis-viewport rounded-xl flex items-center justify-center gap-8 overflow-hidden rotating-mesh">
                 <div id="hologramWrapper" class="flex gap-12 transition-opacity duration-300">
-                    <div id="tire-front" class="tire-profile tire-slick w-12 h-12">
-                        <div class="rim-lines"></div>
-                    </div>
-                    <div id="tire-rear" class="tire-profile tire-slick w-12 h-12">
-                        <div class="rim-lines"></div>
-                    </div>
+                    <div id="tire-front" class="tire-profile tire-slick w-12 h-12"><div class="rim-lines"></div></div>
+                    <div id="tire-rear" class="tire-profile tire-slick w-12 h-12"><div class="rim-lines"></div></div>
                 </div>
             </div>
 
@@ -326,48 +328,42 @@
             </div>
         </section>
 
+        <section id="mayordomia-seccion" class="max-w-3xl mx-auto p-6 bg-[#0a0f1d] border border-gray-800 rounded-2xl shadow-xl space-y-6">
+            <h2 class="text-2xl font-bold border-l-4 border-oro pl-3 text-white font-serif">Administración Espiritual y Provisión</h2>
+            <p class="text-xs text-slate-300 leading-relaxed font-sans">
+                La verdadera riqueza de la <strong>SADV41</strong> radica en la alineación entre la tecnología de vanguardia y un propósito eterno. Al integrar herramientas Web3 con una visión clara de mayordomía, nos posicionamos fuera de las presiones de escasez.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                <div class="bg-black p-4 rounded-xl border border-gray-800 font-mono text-[11px] text-green-400 shadow-inner">
+                    <p class="text-gray-500"># Repositorio de Habilidades Activas</p>
+                    <p class="text-white"><span class="text-oro">$</span> npx skills add binance-web3</p>
+                </div>
+                <div class="bg-gray-950 p-4 rounded-xl border border-gray-800 flex flex-col justify-center">
+                    <h4 class="text-[10px] font-semibold uppercase tracking-wider text-slate-400 mb-1">Gobernanza Oficial (StevenDiorOficial)</h4>
+                    <p class="font-mono text-xs text-oro break-all select-all">0x59cB5992c35d6cD0fE6Ea94436c6AAE41F6E5fDD</p>
+                </div>
+            </div>
+        </section>
+
         <section class="glass rounded-2xl max-w-lg mx-auto overflow-hidden border border-cyan-500/30">
             <div class="p-6 bg-black/30 flex flex-col items-center gap-4 text-center">
                 <div class="border border-[#00f3ff]/40 px-4 py-1.5 rounded-full text-xs font-bold text-[#00f3ff] tracking-wide text-shadow-blue shadow-[0_0_10px_rgba(0,243,255,0.15)] uppercase">
                     CONFESIONARIO DE GRACIA & ALERTAS GLOBALES
                 </div>
-                
-                <p class="text-xs text-slate-400 leading-relaxed px-4">
-                    Monitoreo constante e interconexión soberana. Canales oficiales sincronizados minuto a minuto bajo los parámetros de la ley de gracia.
-                </p>
-
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full pt-2 px-4">
-                    <a href="https://wa.me/+15556670579" target="_blank" class="bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs px-4 py-2.5 rounded-lg transition-all shadow flex items-center justify-center gap-1.5 cursor-pointer col-span-2 sm:col-span-1">
-                        💬 Contactar IA SADV41
-                    </a>
-                    <a href="https://www.instagram.com/reel/DZNKr6Sla4M/?igsh=bDUzODcwanlyZWp6" target="_blank" class="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-semibold text-xs px-4 py-2.5 rounded-lg transition-all shadow flex items-center justify-center gap-1.5 cursor-pointer col-span-2 sm:col-span-1">
-                        📸 Ver Reel Instagram
-                    </a>
-                    <a href="https://www.meta.ai/@stevendioroficial/post/MG4xH5QUPGu?open_in_meta_ai=true&song_id=1887147568642873&utm_source=android_meta_ai_sl" target="_blank" class="bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs px-4 py-2.5 rounded-lg transition-all shadow flex items-center justify-center gap-1.5 cursor-pointer col-span-2">
-                        🤖 Leer Arquitectura en Meta AI
-                    </a>
+                    <a href="https://wa.me/+15556670579" target="_blank" class="bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs px-4 py-2.5 rounded-lg transition-all shadow flex items-center justify-center gap-1.5 cursor-pointer">💬 Contactar IA SADV41</a>
+                    <a href="https://www.instagram.com/reel/DZNKr6Sla4M/?igsh=bDUzODcwanlyZWp6" target="_blank" class="bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold text-xs px-4 py-2.5 rounded-lg transition-all shadow flex items-center justify-center gap-1.5 cursor-pointer">📸 Ver Reel Instagram</a>
+                    <a href="https://www.meta.ai/@stevendioroficial/post/MG4xH5QUPGu?open_in_meta_ai=true&song_id=1887147568642873&utm_source=android_meta_ai_sl" target="_blank" class="bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs px-4 py-2.5 rounded-lg transition-all shadow flex items-center justify-center gap-1.5 cursor-pointer col-span-2">🤖 Leer Arquitectura en Meta AI</a>
                 </div>
-
                 <div class="text-2xl mt-2 animate-[pulse_2s_infinite]">🎚</div>
             </div>
         </section>
-
-        <div id="connectionPanel" class="hidden p-5 bg-slate-900/90 border border-oro/40 rounded-2xl shadow-2xl">
-            <div class="flex items-center gap-3 mb-2">
-                <span class="relative flex h-3 w-3">
-                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                    <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
-                </span>
-                <span class="text-xs text-slate-300 font-mono">Web3 Pipeline Active</span>
-            </div>
-        </div>
 
     </main>
 
     <script>
         const API_URL = "https://lapizasuli.onrender.com/api/sismos";
 
-        // Fallback estático unificado del JSON local del Hub
         const datosRespaldoLocal = {
             "analisis_ia": "Análisis en modo local (Respaldo del Sistema). Telemetría base registrada con acumulado de eventos estable en la red de estaciones.",
             "acumulado_total": 24,
@@ -388,20 +384,18 @@
             ]
         };
 
-        // --- MANEJO DE TELEMETRÍA SÍSMICA ---
+        // --- PIPELINE DE RENDERIZADO SÍSMICO ---
         function renderizarDatos(data) {
             const monitorSalida = document.getElementById("monitor-salida");
-            
             let htmlContenido = `
                 <div class="glass-sismico border border-slate-800 rounded-xl p-5 text-left shadow-inner">
                     <div class="flex justify-between items-center mb-2">
                         <h4 class="text-[#58a6ff] font-bold text-sm flex items-center gap-1.5">🤖 Diagnóstico del Motor de IA:</h4>
-                        <span class="text-[10px] bg-slate-800 px-2 py-0.5 rounded font-mono text-slate-400">Acumulado Total: ${data.acumulado_total || 24}</span>
+                        <span class="text-[10px] bg-slate-800 px-2 py-0.5 rounded font-mono text-slate-400">Acumulado: ${data.acumulado_total || 24}</span>
                     </div>
-                    <p class="text-xs text-slate-300 leading-relaxed font-mono">${data.analisis_ia || "Procesando firmas sísmicas detectadas..."}</p>
+                    <p class="text-xs text-slate-300 leading-relaxed font-mono">${data.analisis_ia || "Procesando firmas..."}</p>
                 </div>
             `;
-
             data.eventos.forEach(sismo => {
                 htmlContenido += `
                     <div class="sismo-card border-l-4 border-rose-500 p-4 rounded-r-xl text-left bg-slate-950/50 border border-y-slate-800 border-r-slate-800">
@@ -414,14 +408,9 @@
                             <div>📉 Profundidad: <span class="text-cyan-400 font-bold">${sismo.profundidad_km} km</span></div>
                             <div class="col-span-2">🧬 Análisis REDPy: <span class="text-amber-400">${sismo.familia_redpy}</span> (CC: ${sismo.coeficiente_correlacion})</div>
                         </div>
-                        <div class="text-[10px] text-slate-500 mt-2 flex justify-between border-t border-white/5 pt-1 font-mono">
-                            <span>ID: ${sismo.id}</span>
-                            <span>Hora: ${sismo.fecha_hora}</span>
-                        </div>
                     </div>
                 `;
             });
-
             monitorSalida.innerHTML = htmlContenido;
         }
 
@@ -431,17 +420,10 @@
             const badgeEstado = document.getElementById("badge-estado");
 
             try {
-                console.log("Conectando con el entorno analítico protegido SADV41T...");
                 if (botonRefrescar) botonRefrescar.innerText = "Sincronizando...";
-                
                 const response = await fetch(API_URL);
-                if (!response.ok) {
-                    throw new Error(`Error de respuesta en el servidor: ${response.status}`);
-                }
-                
+                if (!response.ok) throw new Error(`Status: ${response.status}`);
                 const data = await response.json();
-                console.log("Datos del flujo sísmico sincronizados con éxito desde Render:", data);
-                
                 if (contenedorError) contenedorError.classList.add("hidden");
                 if (badgeEstado) {
                     badgeEstado.innerText = "Sincronizado";
@@ -449,11 +431,8 @@
                     badgeEstado.style.color = "#2ea44f";
                     badgeEstado.style.background = "rgba(46, 164, 79, 0.1)";
                 }
-                
                 renderizarDatos(data);
-
             } catch (error) {
-                console.warn("Falla en la transmisión dinámica. Activando JSON de respaldo:", error);
                 if (contenedorError) contenedorError.classList.remove("hidden");
                 if (badgeEstado) {
                     badgeEstado.innerText = "Modo Respaldo";
@@ -467,7 +446,7 @@
             }
         }
 
-        // --- INTEGRACIÓN COMPLETA DE TIRE-ENGINE.JS ---
+        // --- KINEMATIC TIRE ENGINE ---
         let currentStyleClass = 'tire-slick';
 
         function changeTire(tireClass) {
@@ -478,21 +457,14 @@
 
         function tuneTireSize(size) {
             document.getElementById('metricDisplay').innerText = size + '"';
-            
             const front = document.getElementById('tire-front');
             const rear = document.getElementById('tire-rear');
-            
             if (front && rear) {
-                // Mapeo matemático preciso basado en constante pi
                 const calculatedPixels = 42 + ((size - 15) * 3.14);
-                
-                // Ajustar dimensiones geométricas de ambos neumáticos
                 front.style.width = calculatedPixels + 'px';
                 front.style.height = calculatedPixels + 'px';
                 rear.style.width = calculatedPixels + 'px';
                 rear.style.height = calculatedPixels + 'px';
-                
-                // Conservar clase de rendimiento seleccionada sin romper animación de rotación
                 front.className = 'tire-profile ' + currentStyleClass;
                 rear.className = 'tire-profile ' + currentStyleClass;
             }
@@ -505,23 +477,40 @@
                 reader.onload = function(e) {
                     const viewport = document.getElementById('viewportBg');
                     const hologram = document.getElementById('hologramWrapper');
-                    
-                    if (viewport) {
-                        viewport.style.backgroundImage = "url('" + e.target.result + "')";
-                    }
-                    if (hologram) {
-                        hologram.style.opacity = "0.15";
-                    }
+                    if (viewport) viewport.style.backgroundImage = "url('" + e.target.result + "')";
+                    if (hologram) hologram.style.opacity = "0.15";
                 };
                 reader.readAsDataURL(file);
             }
         }
 
-        // Opciones Web3 Complementarias
-        function loginSocial(provider) { console.log("Iniciando auth social con " + provider); }
-        function connectBinance() { console.log("Conectando wallet de Binance"); }
+        // --- WEB3 AUTH INTEGRATION (REAL DE ENTORNO) ---
+        async function connectBinance() {
+            const btn = document.getElementById('btnConnect');
+            const statusDiv = document.getElementById('walletStatus');
+            const addressP = document.getElementById('walletAddress');
 
-        // Inicializador Maestro Unificado
+            if (typeof window.ethereum !== 'undefined') {
+                try {
+                    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                    const account = accounts[0];
+                    
+                    addressP.innerText = account;
+                    statusDiv.classList.remove('hidden');
+                    btn.innerText = "🌐 Connected";
+                    btn.className = "bg-green-600 text-white font-bold text-xs px-3 py-2 rounded transition-all shadow-md cursor-pointer";
+                } catch (error) {
+                    console.error("Conexión denegada", error);
+                }
+            } else {
+                alert("No se detectó un proveedor Web3 (Binance Wallet). Si estás en móvil, accede desde el dApp browser interno de tu wallet app.");
+                window.open('https://web3.binance.com/en/referral?ref=ORCZSDLK', '_blank');
+            }
+        }
+
+        function loginSocial(provider) { console.log("Social Auth: " + provider); }
+
+        // Inicializador Sincrónico
         document.addEventListener("DOMContentLoaded", () => {
             refrescarMonitor();
             tuneTireSize(19);
