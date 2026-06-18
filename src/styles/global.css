@@ -1,8 +1,14 @@
+/* --- VARIABLES BASE Y PALETA SAGRADA --- */
 :root {
   --oro-celestial: #c5a059;
   --oscuro-profundo: #0a0a0f;
   --azul-sistema: #1a1a2e;
   --blanco-puro: #e0d5b0;
+  
+  /* Extensiones de Red Cromática SADV41 */
+  --neon-pink: #ff2a74;
+  --neon-blue: #00f3ff;
+  --render-red: #da3637;
 }
 
 body {
@@ -18,16 +24,116 @@ body {
   flex-direction: column;
   min-height: 100vh;
   align-items: center;
-  justify-content: center;
   background: radial-gradient(circle at center, var(--azul-sistema) 0%, var(--oscuro-profundo) 100%);
 }
 
 h1 {
   font-family: 'Cinzel', serif;
-  font-size: 4rem;
   color: var(--oro-celestial);
-  letter-spacing: 10px;
   text-shadow: 0 0 20px rgba(197, 160, 89, 0.5);
+}
+
+/* --- BARRIDO DE LÍNEA DE ESCANEO ESPECTRAL --- */
+.scanline {
+  width: 100%;
+  height: 2px;
+  background: rgba(0, 209, 255, 0.1);
+  position: fixed;
+  z-index: 50;
+  top: 0;
+  pointer-events: none;
+  animation: scanlineAnimation 8s linear infinite;
+}
+
+@keyframes scanlineAnimation {
+  0% { top: 0; }
+  100% { top: 100%; }
+}
+
+/* --- BLOOM TEXT EFFECTS --- */
+.bloom-text-oro { text-shadow: 0 0 8px rgba(197, 160, 89, 0.8), 0 0 15px rgba(197, 160, 89, 0.4); }
+.bloom-text-magenta { text-shadow: 0 0 8px rgba(255, 0, 229, 0.8), 0 0 15px rgba(255, 0, 229, 0.5); }
+.bloom-text-blue { text-shadow: 0 0 8px rgba(0, 209, 255, 0.8), 0 0 15px rgba(0, 209, 255, 0.5); }
+
+/* --- CONTENEDORES HOLOGRÁFICOS --- */
+.glass-panel {
+  background: rgba(10, 10, 20, 0.75);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 209, 255, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+.glass-panel::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; width: 4px; height: 100%;
+  background: #00D1FF;
+  box-shadow: 0 0 10px #00D1FF;
+}
+
+.sismo-card {
+  background-color: #1f242c;
+  border-left: 5px solid #ff6b81;
+}
+
+/* --- CINEMÁTICA TURBO TIRE --- */
+.chassis-viewport {
+  position: relative;
+  width: 100%;
+  height: 170px;
+  background: rgba(5, 5, 10, 0.6);
+  border: 1px dashed rgba(0, 209, 255, 0.25);
+}
+
+.tire-profile {
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,0,0,0.85) 30%, rgba(20,20,30,0.95) 70%);
+  box-shadow: 0 0 12px rgba(0, 209, 255, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: tireSpin 3s linear infinite;
+}
+
+@keyframes tireSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.tire-slick { border: 4px solid #00D1FF; }
+.tire-semi { border: 5px double #FF00E5; }
+.tire-wet { border: 4px dashed #FFB800; }
+
+.rim-lines {
+  width: 80%; height: 80%;
+  border-radius: 50%;
+  border: 1px dashed rgba(0, 255, 255, 0.5);
+  position: relative;
+}
+.rim-lines::before, .rim-lines::after {
+  content: ''; position: absolute; background: rgba(0, 255, 255, 0.4);
+  top: 50%; left: 50%; transform: translate(-50%, -50%);
+}
+.rim-lines::before { width: 100%; height: 1px; }
+.rim-lines::after { width: 1px; height: 100%; }
+
+/* --- PERILLA DE CONTROL (KNOB SLIDER) --- */
+.knob-slider {
+  -webkit-appearance: none;
+  width: 100%;
+  background: transparent;
+}
+.knob-slider::-webkit-slider-runnable-track {
+  width: 100%; height: 6px;
+  background: rgba(0, 209, 255, 0.15);
+  border-radius: 3px;
+  border: 1px solid rgba(0, 209, 255, 0.3);
+}
+.knob-slider::-webkit-slider-thumb {
+  height: 16px; width: 16px; border-radius: 50%;
+  background: #FF00E5; cursor: pointer;
+  -webkit-appearance: none; margin-top: -5px;
+  box-shadow: 0 0 8px #FF00E5; border: 2px solid #FFF;
 }
 
 .symbol-vocal {
