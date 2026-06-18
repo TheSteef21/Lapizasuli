@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SADV41 | Sovereign Hub - Global Command Center</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { navy: '#020617', oro: '#eab308', neonPink: '#ff2a74', neonBlue: '#00f3ff', renderRed: '#da3637' }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #020617; background-image: radial-gradient(#1e293b 0.5px, transparent 0.5px); background-size: 24px 24px; color: #f8fafc; }
+        .glass { background: rgba(2, 6, 23, 0.75); backdrop-filter: blur(12px); border: 1px solid rgba(234, 179, 8, 0.2); }
+        .sismo-card { background-color: #1f242c; border-left: 5px solid #ff6b81; }
+    </style>
+</head>
+<body class="font-sans antialiased">
+
+    <!-- HEADER MAESTRO -->
+    <header class="fixed w-full z-50 glass border-b border-oro/30 px-6 py-4 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+            <span class="text-2xl">🎚️</span>
+            <div>
+                <h1 class="font-serif text-xl text-oro font-bold">SADV41 HUB</h1>
+                <p class="text-[9px] text-slate-400 font-mono">CORE SYSTEM ONLINE</p>
+            </div>
+        </div>
+        <nav class="hidden md:flex gap-6 text-xs uppercase tracking-widest font-bold">
+            <a href="#monitor-sismico-seccion" class="text-red-400">Telemetría</a>
+            <a href="#modulo-3d" class="text-cyan-400">Escultor 3D</a>
+            <a href="#modulo-facturacion" class="text-oro">Facturación</a>
+            <a href="#bridge-ia" class="text-white">Bridge IA</a>
+        </nav>
+    </header>
+
+    <main class="pt-32 pb-12 px-6 max-w-6xl mx-auto space-y-12">
+        
+        <!-- SECCIÓN 1: TELEMETRÍA SÍSMICA (Conectado a procesador_api.py) -->
+        <section id="monitor-sismico-seccion" class="glass p-6 rounded-2xl border border-slate-800">
+            <h2 class="text-renderRed font-bold text-xl uppercase mb-4">⚠️ Módulo SADV41T (Sísmica)</h2>
+            <div id="monitor-salida" class="space-y-4">Cargando telemetría...</div>
+        </section>
+
+        <!-- SECCIÓN 2: ESCULTOR 3D (Conectado a IMAGE23D.py) -->
+        <section id="modulo-3d" class="glass p-6 rounded-2xl border border-cyan-500/30">
+            <h2 class="text-cyan-400 font-bold text-xl uppercase mb-4">🛸 Motor IMAGE23D</h2>
+            <input type="file" id="imageInput" class="hidden" accept="image/*">
+            <button onclick="document.getElementById('imageInput').click()" class="bg-cyan-900 border border-cyan-500 text-white px-4 py-2 rounded text-sm hover:bg-cyan-800">
+                Subir Imagen para Escultura 3D
+            </button>
+            <div id="status-3d" class="mt-4 text-xs text-slate-400">Esperando entrada de píxeles...</div>
+        </section>
+
+        <!-- SECCIÓN 3: FACTURACIÓN (Conectado a Factura.py) -->
+        <section id="modulo-facturacion" class="glass p-6 rounded-2xl border border-oro/30">
+            <h2 class="text-oro font-bold text-xl uppercase mb-4">🧾 Sistema de Facturación</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <input type="text" id="cliente" placeholder="Cliente" class="bg-navy border border-slate-700 p-2 text-sm rounded">
+                <input type="number" id="cantidad" placeholder="Cantidad" class="bg-navy border border-slate-700 p-2 text-sm rounded">
+                <button onclick="generarFactura()" class="col-span-full bg-oro text-navy font-bold py-2 rounded uppercase text-sm">Generar Factura SADV41</button>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 4: BRIDGE IA (Conectado a Bridge.py) -->
+        <section id="bridge-ia" class="glass p-6 rounded-2xl border border-white/10">
+            <h2 class="text-white font-bold text-xl uppercase mb-4">🤖 Bridge IA (Misión SADV41)</h2>
+            <textarea id="aiInput" class="w-full bg-navy border border-slate-700 p-3 text-sm rounded text-white" rows="3" placeholder="Pregunta a la misión..."></textarea>
+            <button onclick="consultarIA()" class="mt-2 bg-slate-700 text-white px-4 py-2 rounded text-sm w-full">Consultar Oracle</button>
+            <div id="aiResponse" class="mt-4 p-4 bg-black/50 rounded text-xs text-slate-300 font-mono"></div>
+        </section>
+
+    </main>
+
+    <script>
+        // ENDPOINTS CONECTADOS A TU RENDERING DE RENDER
+        const BASE_URL = "https://lapizasuli.onrender.com";
+
+        // MÓDULO SÍSMICO
+        async function refrescarMonitor() {
+            try {
+                const res = await fetch(`${BASE_URL}/api/sismos`);
+                const data = await res.json();
+                let html = `<p class='text-xs text-slate-400'>${data.analisis_ia}</p>`;
+                data.eventos.forEach(s => {
+                    html += `<div class="sismo-card p-3 text-xs">📍 ${s.ubicacion} | M ${s.magnitud}</div>`;
+                });
+                document.getElementById("monitor-salida").innerHTML = html;
+            } catch (e) { document.getElementById("monitor-salida").innerHTML = "Error de conexión nodo."; }
+        }
+
+        // MÓDULO IA BRIDGE
+        async function consultarIA() {
+            const msg = document.getElementById("aiInput").value;
+            const resDiv = document.getElementById("aiResponse");
+            resDiv.innerText = "Consultando...";
+            // Asumiendo que has desplegado Bridge.py en una ruta /chat o similar en tu API
+            const res = await fetch(`${BASE_URL}/chat`, { 
+                method: 'POST', 
+                body: JSON.stringify({mensaje: msg}) 
+            });
+            const data = await res.json();
+            resDiv.innerText = data.respuesta + " 🎚️";
+        }
+
+        window.onload = refrescarMonitor;
+    </script>
+</body>
+</html>
