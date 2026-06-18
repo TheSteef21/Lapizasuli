@@ -61,9 +61,114 @@
             background-color: #1f242c;
             border-left: 5px solid #ff6b81;
         }
+
+        /* --- INTEGRACIÓN DE INYECTORES DE TESTER-CORE.CSS --- */
+        .scanline {
+            width: 100%;
+            height: 2px;
+            background: rgba(0, 209, 255, 0.1);
+            position: fixed;
+            z-index: 50;
+            top: 0;
+            pointer-events: none;
+            animation: scanline 8s linear infinite;
+        }
+        @keyframes scanline {
+            0% { top: 0; }
+            100% { top: 100%; }
+        }
+
+        .bloom-text-blue { text-shadow: 0 0 8px rgba(0, 209, 255, 0.8), 0 0 15px rgba(0, 209, 255, 0.5); }
+        .bloom-text-magenta { text-shadow: 0 0 8px rgba(255, 0, 229, 0.8), 0 0 15px rgba(255, 0, 229, 0.5); }
+
+        .glass-panel {
+            background: rgba(10, 10, 20, 0.75);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 209, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        .glass-panel::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 4px; height: 100%;
+            background: #00D1FF;
+            box-shadow: 0 0 10px #00D1FF;
+        }
+
+        .rotating-mesh {
+            animation: holographicRotation 10s linear infinite alternate;
+            transform-origin: center;
+        }
+        @keyframes holographicRotation {
+            0% { transform: scaleX(1) skewY(0deg); filter: brightness(1) drop-shadow(0 0 2px rgba(0,255,255,0.3)); }
+            50% { transform: scaleX(0.95) skewY(0.5deg); filter: brightness(1.2) drop-shadow(0 0 8px rgba(0,255,255,0.6)); }
+            100% { transform: scaleX(1) skewY(0deg); filter: brightness(1) drop-shadow(0 0 2px rgba(0,255,255,0.3)); }
+        }
+
+        .chassis-viewport {
+            position: relative;
+            width: 100%;
+            height: 170px;
+            background: rgba(5, 5, 10, 0.6);
+            border: 1px dashed rgba(0, 209, 255, 0.25);
+            background-size: cover;
+            background-position: center;
+        }
+
+        .tire-profile {
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0,0,0,0.85) 30%, rgba(20,20,30,0.95) 70%);
+            box-shadow: 0 0 12px rgba(0, 209, 255, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: tireSpin 3s linear infinite;
+        }
+        @keyframes tireSpin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .tire-slick { border: 4px solid #00D1FF; }
+        .tire-semi { border: 5px double #FF00E5; }
+        .tire-wet { border: 4px dashed #FFB800; }
+
+        .rim-lines {
+            width: 80%; height: 80%;
+            border-radius: 50%;
+            border: 1px dashed rgba(0, 255, 255, 0.5);
+            position: relative;
+        }
+        .rim-lines::before, .rim-lines::after {
+            content: ''; position: absolute; background: rgba(0, 255, 255, 0.4);
+            top: 50%; left: 50%; transform: translate(-50%, -50%);
+        }
+        .rim-lines::before { width: 100%; height: 1px; }
+        .rim-lines::after { width: 1px; height: 100%; }
+
+        .knob-slider {
+            -webkit-appearance: none;
+            width: 100%;
+            background: transparent;
+        }
+        .knob-slider::-webkit-slider-runnable-track {
+            width: 100%; height: 6px;
+            background: rgba(0, 209, 255, 0.15);
+            border-radius: 3px;
+            border: 1px solid rgba(0, 209, 255, 0.3);
+        }
+        .knob-slider::-webkit-slider-thumb {
+            height: 16px; width: 16px; border-radius: 50%;
+            background: #FF00E5; cursor: pointer;
+            -webkit-appearance: none; margin-top: -5px;
+            box-shadow: 0 0 8px #FF00E5; border: 2px solid #FFF;
+        }
     </style>
 </head>
 <body class="font-sans antialiased selection:bg-oro selection:text-navy">
+
+    <div class="scanline"></div>
 
     <header class="fixed w-full z-50 glass border-b border-oro/30 px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
         <div class="flex items-center gap-3">
@@ -77,8 +182,8 @@
         <nav class="flex gap-6 text-sm uppercase tracking-wider font-medium">
             <a href="#embassy-story" class="hover:text-pink-400 transition-colors text-pink-300">Embassy Story</a>
             <a href="#monitor-sismico-seccion" class="hover:text-red-400 transition-colors text-red-300 font-bold">⚠️ Telemetría SADV41T</a>
+            <a href="#probador-llantas-seccion" class="hover:text-neonBlue transition-colors text-cyan-300">🛞 Turbo Tire</a>
             <a href="#mision" class="hover:text-oro transition-colors">Mayordomía</a>
-            <a href="#miss-mundo" class="hover:text-oro transition-colors text-amber-200">Miss Mundo Latina</a>
         </nav>
 
         <div class="flex flex-wrap gap-2 justify-center">
@@ -156,7 +261,6 @@
             </div>
         </section>
 
-
         <section id="monitor-sismico-seccion" class="max-w-3xl mx-auto p-1 md:p-6 bg-[#0d1117] border border-slate-800 rounded-2xl shadow-xl">
             <div class="text-center py-4">
                 <h2 class="text-renderRed font-bold text-2xl md:text-3xl tracking-tight uppercase">Módulo SADV41T</h2>
@@ -182,6 +286,45 @@
             <div id="monitor-salida" class="space-y-4 mt-6"></div>
         </section>
 
+        <section id="probador-llantas-seccion" class="max-w-md mx-auto class-panel glass-panel p-6 rounded-2xl shadow-xl">
+            <div class="text-center mb-4">
+                <h3 class="bloom-text-blue font-mono text-sm uppercase tracking-widest font-bold text-neonBlue">SADV41 Turbo Tire Viewport</h3>
+                <p class="text-[10px] text-slate-400 font-mono mt-1">Simulación y Escala Geométrica en Caliente</p>
+            </div>
+            
+            <div id="viewportBg" class="chassis-viewport rounded-xl flex items-center justify-center gap-8 overflow-hidden rotating-mesh">
+                <div id="hologramWrapper" class="flex gap-12 transition-opacity duration-300">
+                    <div id="tire-front" class="tire-profile tire-slick w-12 h-12">
+                        <div class="rim-lines"></div>
+                    </div>
+                    <div id="tire-rear" class="tire-profile tire-slick w-12 h-12">
+                        <div class="rim-lines"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-4 space-y-4">
+                <div class="flex justify-between items-center text-xs font-mono px-1">
+                    <span class="text-slate-400">Dimensión de Rin Evaluada:</span>
+                    <span id="metricDisplay" class="text-oro font-bold text-shadow-oro text-sm">19"</span>
+                </div>
+                
+                <input type="range" id="sizeKnob" min="15" max="22" value="19" class="knob-slider" oninput="tuneTireSize(parseInt(this.value))">
+                
+                <div class="grid grid-cols-3 gap-2 pt-2">
+                    <button onclick="changeTire('tire-slick')" class="bg-slate-950 border border-[#00D1FF] text-[#00D1FF] hover:bg-cyan-950/30 text-[10px] font-mono py-1.5 rounded transition-all">Slick (Seco)</button>
+                    <button onclick="changeTire('tire-semi')" class="bg-slate-950 border border-[#FF00E5] text-[#FF00E5] hover:bg-magenta-950/30 text-[10px] font-mono py-1.5 rounded transition-all">Semi-Slick</button>
+                    <button onclick="changeTire('tire-wet')" class="bg-slate-950 border border-[#FFB800] text-[#FFB800] hover:bg-amber-950/30 text-[10px] font-mono py-1.5 rounded transition-all">Wet (Lluvia)</button>
+                </div>
+
+                <div class="pt-1">
+                    <label class="bg-slate-900 border border-slate-700 hover:border-neonBlue text-slate-300 text-center text-xs font-mono py-2 px-4 rounded block cursor-pointer transition-all">
+                        📷 Proyectar Chasis Externo
+                        <input type="file" class="hidden" accept="image/*" onchange="loadCustomCar(event)">
+                    </label>
+                </div>
+            </div>
+        </section>
 
         <section class="glass rounded-2xl max-w-lg mx-auto overflow-hidden border border-cyan-500/30">
             <div class="p-6 bg-black/30 flex flex-col items-center gap-4 text-center">
@@ -245,6 +388,7 @@
             ]
         };
 
+        // --- MANEJO DE TELEMETRÍA SÍSMICA ---
         function renderizarDatos(data) {
             const monitorSalida = document.getElementById("monitor-salida");
             
@@ -291,7 +435,6 @@
                 if (botonRefrescar) botonRefrescar.innerText = "Sincronizando...";
                 
                 const response = await fetch(API_URL);
-                
                 if (!response.ok) {
                     throw new Error(`Error de respuesta en el servidor: ${response.status}`);
                 }
@@ -311,7 +454,6 @@
 
             } catch (error) {
                 console.warn("Falla en la transmisión dinámica. Activando JSON de respaldo:", error);
-                
                 if (contenedorError) contenedorError.classList.remove("hidden");
                 if (badgeEstado) {
                     badgeEstado.innerText = "Modo Respaldo";
@@ -319,18 +461,71 @@
                     badgeEstado.style.color = "#da3637";
                     badgeEstado.style.background = "rgba(218, 54, 55, 0.1)";
                 }
-                
-                // Muestra los datos del objeto unificado local
                 renderizarDatos(datosRespaldoLocal);
             } finally {
                 if (botonRefrescar) botonRefrescar.innerText = "Refrescar Monitor";
             }
         }
 
+        // --- INTEGRACIÓN COMPLETA DE TIRE-ENGINE.JS ---
+        let currentStyleClass = 'tire-slick';
+
+        function changeTire(tireClass) {
+            currentStyleClass = tireClass;
+            const sizeValue = document.getElementById('sizeKnob').value;
+            tuneTireSize(parseInt(sizeValue));
+        }
+
+        function tuneTireSize(size) {
+            document.getElementById('metricDisplay').innerText = size + '"';
+            
+            const front = document.getElementById('tire-front');
+            const rear = document.getElementById('tire-rear');
+            
+            if (front && rear) {
+                // Mapeo matemático preciso basado en constante pi
+                const calculatedPixels = 42 + ((size - 15) * 3.14);
+                
+                // Ajustar dimensiones geométricas de ambos neumáticos
+                front.style.width = calculatedPixels + 'px';
+                front.style.height = calculatedPixels + 'px';
+                rear.style.width = calculatedPixels + 'px';
+                rear.style.height = calculatedPixels + 'px';
+                
+                // Conservar clase de rendimiento seleccionada sin romper animación de rotación
+                front.className = 'tire-profile ' + currentStyleClass;
+                rear.className = 'tire-profile ' + currentStyleClass;
+            }
+        }
+
+        function loadCustomCar(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const viewport = document.getElementById('viewportBg');
+                    const hologram = document.getElementById('hologramWrapper');
+                    
+                    if (viewport) {
+                        viewport.style.backgroundImage = "url('" + e.target.result + "')";
+                    }
+                    if (hologram) {
+                        hologram.style.opacity = "0.15";
+                    }
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Opciones Web3 Complementarias
         function loginSocial(provider) { console.log("Iniciando auth social con " + provider); }
         function connectBinance() { console.log("Conectando wallet de Binance"); }
 
-        window.onload = refrescarMonitor;
+        // Inicializador Maestro Unificado
+        document.addEventListener("DOMContentLoaded", () => {
+            refrescarMonitor();
+            tuneTireSize(19);
+        });
     </script>
 </body>
 </html>
