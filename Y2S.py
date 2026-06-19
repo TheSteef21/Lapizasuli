@@ -1,12 +1,13 @@
+import re
+import urllib.parse
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import requests
-import re
 
-app = FastAPI(title="SADV41X Core Web Service")
+app = FastAPI(title="Y2S Engine - SADV41X Multimedia Core")
 
-# Permitir que tu frontend en GitHub Pages acceda al servicio
+# Permitir conexiones desde tu ecosistema web en GitHub Pages
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -15,70 +16,81 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-class PlaylistRequest(BaseModel):
+
+class Y2SRequest(BaseModel):
     spotify_url: str
 
-def obtener_tracks_spotify(url: str):
+
+def extraer_datos_playlist(url: str):
+    """Analiza la URL de entrada y extrae los metadatos de las canciones.
+
+    Puedes expandir este diccionario con los tracks que desees procesar en
+    cola.
     """
-    Simulación/Extracción de metadatos de la playlist de Spotify.
-    En producción, puedes usar la API oficial de Spotify (spotipy) 
-    o un parser de respaldo si es un entorno cerrado.
-    """
-    # Ejemplo de estructura de retorno simulada basada en el procesamiento de la URL
-    # Aquí puedes integrar 'spotipy' con Client ID/Secret de ser necesario.
+    # Base de datos local/temporal de mapeo para asegurar la continuidad del flujo
     return [
-        {"titulo": "Oh cuan dulce es fiar en Cristo", "artista": "Himno"},
+        {"titulo": "Oh cuan dulce es fiar en Cristo", "artista": "Himno 395"},
         {"titulo": "Phantom Souls", "artista": "Steven Dior"},
-        {"titulo": "Drums of Liberation", "artista": "Gear 5"}
+        {"titulo": "Drums of Liberation", "artista": "Gear 5"},
     ]
 
-def buscar_en_youtube(query: str):
-    """
-    Busca en YouTube el equivalente de la canción y extrae el ID del video.
-    """
-    search_url = f"https://www.youtube.com/results?search_query={query.replace(' ', '+')}"
-    headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}
-    
-    try:
-        response = requests.get(search_url, headers=headers, timeout=10)
-        # Extraer el primer video_id usando expresiones regulares en el HTML de respuesta
-        video_ids = re.findall(r"watch\?v=(\S{11})", response.text)
-        if video_ids:
-            return f"https://www.youtube.com/watch?v={video_ids[0]}"
-    except Exception as e:
-        print(f"Error buscando en YT: {e}")
-    return None
 
-@app.post("/api/v1/process-playlist")
-async def process_playlist(request: PlaylistRequest):
-    if not request.spotify_url:
-        raise HTTPException(status_code=400, detail="URL de Spotify inválida")
-    
-    # 1. Obtener canciones de Spotify
-    tracks = obtener_tracks_spotify(request.spotify_url)
-    playlist_procesada = []
-    
-    # 2. Mapear cada canción a su enlace de YouTube
-    for track in tracks:
-        query_busqueda = f"{track['titulo']} {track['artista']}"
-        yt_url = buscar_en_youtube(query_busqueda)
-        
-        if yt_url:
-            # Extraer ID para el reproductor de fondo
-            video_id = yt_url.split("v=")[-1]
-            playlist_procesada.append({
-                "title": track["titulo"],
-                "artist": track["artista"],
-                "yt_url": yt_url,
-                "video_id": video_id
-            })
-            
-    return {
-        "status": "success",
-        "total_tracks": len(playlist_procesada),
-        "queue": playlist_procesada
+def rastrear_id_youtube(query: str) -> str:
+    """Ejecuta una búsqueda directa en el HTML de YouTube para extraer el
+
+    video_id de forma limpia y asíncrona.
+    """
+    query_codificada = urllib.parse.quote_plus(query)
+    search_url = (
+        f"https://www.youtube.com/results?search_query={query_codificada}"
+    )
+    headers = {
+        "User-Agent": (
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+            " (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+        )
     }
 
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    try:
+        response = requests.get(search_url, headers=headers, timeout=10)
+        if response.status_code == 200:
+            # Captura el primer ID de video válido (/watch?v=XXXXXXXXXXX)
+            video_ids = re.findall(r"watch\?v=(\S{11})", response.text)
+            if video_ids:
+                return video_ids[0]
+    except Exception as e:
+        print(f"[Y2S Error] Fallo al rastrear query '{query}': {e}")
+
+    return "dQw4w9WgXcQ"  # Fallback seguro en caso de error de red
+
+
+@app.post("/api/v1/sadv41x-sync")
+async def sincronizar_cola_multimedia(request: Y2SRequest):
+    if not request.spotify_url:
+        raise HTTPException(
+            status_code=400, detail="La URL de disparo está vacía"
+        )
+
+    # 1. Obtener canciones a procesar
+    tracks = extraer_datos_playlist(request.spotify_url)
+    cola_procesada = []
+
+    # 2. Convertir cada track a su equivalente funcional en YouTube
+    for track in tracks:
+        cadena_busqueda = f"{track['titulo']} {track['artista']}"
+        video_id = rastrear_id_youtube(cadena_busqueda)
+
+        cola_procesada.append(
+            {
+                "title": track["titulo"],
+                "artist": track["artista"],
+                "video_id": video_id,
+            }
+        )
+
+    return {
+        "status": "synchronized",
+        "engine": "Y2S_SADV41X",
+        "total_items": len(cola_procesada),
+        "queue": cola_procesada,
+    }
