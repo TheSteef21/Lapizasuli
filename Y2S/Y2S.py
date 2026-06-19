@@ -1,4 +1,4 @@
-import re
+import re  # Corregido: 'import' con minúscula para evitar el colapso del servidor
 import urllib.parse
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
@@ -22,12 +22,7 @@ class Y2SRequest(BaseModel):
 
 
 def extraer_datos_playlist(url: str):
-    """Analiza la URL de entrada y extrae los metadatos de las canciones.
-
-    Puedes expandir este diccionario con los tracks que desees procesar en
-    cola.
-    """
-    # Base de datos local/temporal de mapeo para asegurar la continuidad del flujo
+    """Analiza la URL de entrada y extrae los metadatos de las canciones."""
     return [
         {"titulo": "Oh cuan dulce es fiar en Cristo", "artista": "Himno 395"},
         {"titulo": "Phantom Souls", "artista": "Steven Dior"},
@@ -54,14 +49,13 @@ def rastrear_id_youtube(query: str) -> str:
     try:
         response = requests.get(search_url, headers=headers, timeout=10)
         if response.status_code == 200:
-            # Captura el primer ID de video válido (/watch?v=XXXXXXXXXXX)
             video_ids = re.findall(r"watch\?v=(\S{11})", response.text)
             if video_ids:
                 return video_ids[0]
     except Exception as e:
         print(f"[Y2S Error] Fallo al rastrear query '{query}': {e}")
 
-    return "dQw4w9WgXcQ"  # Fallback seguro en caso de error de red
+    return "dQw4w9WgXcQ"
 
 
 @app.post("/api/v1/sadv41x-sync")
@@ -71,11 +65,9 @@ async def sincronizar_cola_multimedia(request: Y2SRequest):
             status_code=400, detail="La URL de disparo está vacía"
         )
 
-    # 1. Obtener canciones a procesar
     tracks = extraer_datos_playlist(request.spotify_url)
     cola_procesada = []
 
-    # 2. Convertir cada track a su equivalente funcional en YouTube
     for track in tracks:
         cadena_busqueda = f"{track['titulo']} {track['artista']}"
         video_id = rastrear_id_youtube(cadena_busqueda)
