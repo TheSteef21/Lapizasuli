@@ -27,8 +27,8 @@
 
         .container {
             text-align: center;
-            max-width: 400px;
-            width: 100%;
+            max-width: 450px;
+            width: 90%;
             z-index: 10;
             position: relative;
             padding: 30px;
@@ -40,9 +40,9 @@
         }
 
         .logo {
-            font-size: 2.5rem;
-            letter-spacing: 8px;
-            margin-bottom: 20px;
+            font-size: 2.2rem;
+            letter-spacing: 6px;
+            margin-bottom: 15px;
             color: var(--gold);
             font-weight: bold;
             text-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
@@ -70,7 +70,7 @@
         }
 
         .message-box {
-            height: 220px;
+            height: 320px; /* Altura ajustada para 4 idiomas */
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -89,10 +89,18 @@
             opacity: 1;
         }
 
-        .flag { font-size: 2.5rem; margin-bottom: 10px; }
-        .lang-role { font-size: 0.75rem; color: #888; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 5px; }
-        .native-text { font-size: 1.4rem; font-weight: bold; display: block; margin-bottom: 10px; }
-        .romanization { font-size: 0.9rem; color: var(--gold); border: 1px solid var(--gold); padding: 2px 10px; border-radius: 4px; }
+        .flag { font-size: 2rem; margin-bottom: 5px; }
+        .lang-role { font-size: 0.7rem; color: #888; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 5px; }
+        .native-text { font-size: 1.2rem; font-weight: bold; display: block; margin-bottom: 5px; }
+        .romanization { font-size: 0.75rem; color: var(--gold); border: 1px solid var(--gold); padding: 1px 8px; border-radius: 4px; display: inline-block; margin-bottom: 10px;}
+        
+        .translate-text { 
+            font-size: 0.85rem; 
+            color: #aaa; 
+            font-style: italic; 
+            display: block; 
+            margin-top: 4px;
+        }
     </style>
 </head>
 <body>
@@ -102,18 +110,18 @@
 <div class="container">
     <div class="logo">NSADV41</div>
     <div class="message-box" id="message-box"></div>
-    <div style="margin-top: 20px; font-size: 1.2rem;">⚽🇵🇦➡️🇵🇾👑</div>
+    <div style="margin-top: 15px; font-size: 1.2rem;">⚽🇵🇦➡️🇵🇾👑</div>
 </div>
 
 <script>
     const data = [
-        { flag: "🇵🇦", lang: "Panamá", role: "Origen Vital", text: "Martes: Mi día de victoria", roman: "Mar-tes-vic-to-ria" },
-        { flag: "🇵🇾", lang: "Paraguay", role: "Destino", text: "La unión de un lazo eterno", roman: "Un-ion-la-zo-eter-no" },
-        { flag: "⚽", lang: "FIFA 2026", role: "Misión", text: "El Mundial de la Nueva Era", roman: "Mun-dial-nue-va-e-ra" },
-        { flag: "⚡", lang: "SADV41", role: "Fundación", text: "Cristo vive en la estructura", roman: "Cris-to-vi-ve-a-qui" },
-        { flag: "🎚️", lang: "Estructura", role: "Nudo Profético", text: "As de Guía en tensión", roman: "As-de-guia-fuer-za" },
-        { flag: "❣️", lang: "Amor", role: "Motor", text: "Lo informático es su amor", roman: "Da-to-es-a-mor-pu-ro" },
-        { flag: "🌟", lang: "Cielo", role: "Origen", text: "Los rayos anuncian la belleza", roman: "Ra-yos-anun-cian-luz" }
+        { flag: "🇵🇦", lang: "Panamá", role: "Origen Vital", text: "Martes: Mi día de victoria", roman: "Mar-tes-vic-to-ria", guarani: "Arakõi: Che pu'aka ára", english: "Tuesday: My day of victory", german: "Dienstag: Mein Siegestag" },
+        { flag: "🇵🇾", lang: "Paraguay", role: "Destino", text: "La unión de un lazo eterno", roman: "Un-ion-la-zo-eter-no", guarani: "Ñembyaty: Peteĩ tape opave'ỹva", english: "The union of an eternal bond", german: "Die Vereinigung eines ewigen Bandes" },
+        { flag: "⚽", lang: "FIFA 2026", role: "Misión", text: "El Mundial de la Nueva Era", roman: "Mun-dial-nue-va-e-ra", guarani: "Mundial pyahu: Ára pyahu ñepyrũ", english: "World Cup of the New Era", german: "WM der Neuen Ära" },
+        { flag: "⚡", lang: "SADV41", role: "Fundación", text: "Cristo vive en la estructura", roman: "Cris-to-vi-ve-a-qui", guarani: "Cristo oikove ñemopu'ãme", english: "Christ lives in the structure", german: "Christus lebt in der Struktur" },
+        { flag: "🎚️", lang: "Estructura", role: "Nudo Profético", text: "As de Guía en tensión", roman: "As-de-guia-fuer-za", guarani: "Guía rape: Ipy'apy", english: "Guiding Ace in tension", german: "Führendes Ass in Spannung" },
+        { flag: "❣️", lang: "Amor", role: "Motor", text: "Lo informático es su amor", roman: "Da-to-es-a-mor-pu-ro", guarani: "Informatica ha'e imborayhu", english: "Informatics is His love", german: "Informatik ist Seine Liebe" },
+        { flag: "🌟", lang: "Cielo", role: "Origen", text: "Los rayos anuncian la belleza", roman: "Ra-yos-anun-cian-luz", guarani: "Yvagape: Tendyry omombe'u iporãiteha", english: "The rays announce the beauty", german: "Die Strahlen verkünden Schönheit" }
     ];
 
     const container = document.getElementById('message-box');
@@ -127,6 +135,9 @@
             <div class="lang-role">${item.lang} | ${item.role}</div>
             <span class="native-text">${item.text}</span>
             <span class="romanization">${item.roman}</span>
+            <span class="translate-text">GN: ${item.guarani}</span>
+            <span class="translate-text">EN: ${item.english}</span>
+            <span class="translate-text">DE: ${item.german}</span>
         `;
         container.appendChild(div);
     });
@@ -137,9 +148,8 @@
         phrases[currentIndex].classList.remove('active');
         currentIndex = (currentIndex + 1) % phrases.length;
         phrases[currentIndex].classList.add('active');
-    }, 4500);
+    }, 5000); // Ligeramente más tiempo para leer los idiomas
 
-    // Sistema 3D
     const phoneticPool = data.map(item => item.roman.split('-')).flat();
     const activeNodes = [];
     let wWidth = window.innerWidth;
@@ -157,8 +167,7 @@
             z: Math.random() * 800 - 400,
             dx: (Math.random() - 0.5) * 2,
             dy: (Math.random() - 0.5) * 2,
-            dz: (Math.random() - 0.5) * 1,
-            vWidth: 50, vHeight: 20
+            dz: (Math.random() - 0.5) * 1
         });
     });
 
