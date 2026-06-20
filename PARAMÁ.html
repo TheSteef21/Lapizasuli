@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NSADV41 // Misión Panamá-Paraguay</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --gold: #d4af37;
+            --white: #ffffff;
+            --bg: #0a0a0a;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--white);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            perspective: 1000px;
+        }
+
+        .container {
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+            z-index: 10;
+            position: relative;
+            padding: 30px;
+            box-sizing: border-box;
+            background: rgba(10, 10, 10, 0.85);
+            border-radius: 20px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            letter-spacing: 8px;
+            margin-bottom: 20px;
+            color: var(--gold);
+            font-weight: bold;
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
+        }
+
+        .space-3d {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            pointer-events: none;
+        }
+
+        .floating-word {
+            position: absolute;
+            font-size: 0.9rem;
+            color: rgba(212, 175, 55, 0.3);
+            white-space: nowrap;
+            font-style: italic;
+            will-change: transform, color;
+        }
+
+        .message-box {
+            height: 220px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .phrase {
+            opacity: 0;
+            position: absolute;
+            transition: opacity 1.2s ease-in-out;
+            width: 100%;
+        }
+
+        .phrase.active {
+            opacity: 1;
+        }
+
+        .flag { font-size: 2.5rem; margin-bottom: 10px; }
+        .lang-role { font-size: 0.75rem; color: #888; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 5px; }
+        .native-text { font-size: 1.4rem; font-weight: bold; display: block; margin-bottom: 10px; }
+        .romanization { font-size: 0.9rem; color: var(--gold); border: 1px solid var(--gold); padding: 2px 10px; border-radius: 4px; }
+    </style>
+</head>
+<body>
+
+<div class="space-3d" id="space-3d"></div>
+
+<div class="container">
+    <div class="logo">NSADV41</div>
+    <div class="message-box" id="message-box"></div>
+    <div style="margin-top: 20px; font-size: 1.2rem;">⚽🇵🇦➡️🇵🇾👑</div>
+</div>
+
+<script>
+    const data = [
+        { flag: "🇵🇦", lang: "Panamá", role: "Origen Vital", text: "Martes: Mi día de victoria", roman: "Mar-tes-vic-to-ria" },
+        { flag: "🇵🇾", lang: "Paraguay", role: "Destino", text: "La unión de un lazo eterno", roman: "Un-ion-la-zo-eter-no" },
+        { flag: "⚽", lang: "FIFA 2026", role: "Misión", text: "El Mundial de la Nueva Era", roman: "Mun-dial-nue-va-e-ra" },
+        { flag: "⚡", lang: "SADV41", role: "Fundación", text: "Cristo vive en la estructura", roman: "Cris-to-vi-ve-a-qui" },
+        { flag: "🎚️", lang: "Estructura", role: "Nudo Profético", text: "As de Guía en tensión", roman: "As-de-guia-fuer-za" },
+        { flag: "❣️", lang: "Amor", role: "Motor", text: "Lo informático es su amor", roman: "Da-to-es-a-mor-pu-ro" },
+        { flag: "🌟", lang: "Cielo", role: "Origen", text: "Los rayos anuncian la belleza", roman: "Ra-yos-anun-cian-luz" }
+    ];
+
+    const container = document.getElementById('message-box');
+    const space3d = document.getElementById('space-3d');
+
+    data.forEach((item, index) => {
+        const div = document.createElement('div');
+        div.className = `phrase ${index === 0 ? 'active' : ''}`;
+        div.innerHTML = `
+            <div class="flag">${item.flag}</div>
+            <div class="lang-role">${item.lang} | ${item.role}</div>
+            <span class="native-text">${item.text}</span>
+            <span class="romanization">${item.roman}</span>
+        `;
+        container.appendChild(div);
+    });
+
+    let currentIndex = 0;
+    const phrases = document.querySelectorAll('.phrase');
+    setInterval(() => {
+        phrases[currentIndex].classList.remove('active');
+        currentIndex = (currentIndex + 1) % phrases.length;
+        phrases[currentIndex].classList.add('active');
+    }, 4500);
+
+    // Sistema 3D
+    const phoneticPool = data.map(item => item.roman.split('-')).flat();
+    const activeNodes = [];
+    let wWidth = window.innerWidth;
+    let wHeight = window.innerHeight;
+
+    phoneticPool.forEach(pho => {
+        const node = document.createElement('div');
+        node.className = 'floating-word';
+        node.innerText = pho;
+        space3d.appendChild(node);
+        activeNodes.push({
+            element: node,
+            x: Math.random() * wWidth,
+            y: Math.random() * wHeight,
+            z: Math.random() * 800 - 400,
+            dx: (Math.random() - 0.5) * 2,
+            dy: (Math.random() - 0.5) * 2,
+            dz: (Math.random() - 0.5) * 1,
+            vWidth: 50, vHeight: 20
+        });
+    });
+
+    function animateSpace() {
+        activeNodes.forEach(node => {
+            node.x += node.dx; node.y += node.dy; node.z += node.dz;
+            if (node.x < 0 || node.x > wWidth) node.dx *= -1;
+            if (node.y < 0 || node.y > wHeight) node.dy *= -1;
+            if (node.z < -400 || node.z > 400) node.dz *= -1;
+            node.element.style.transform = `translate3d(${node.x}px, ${node.y}px, ${node.z}px)`;
+        });
+        requestAnimationFrame(animateSpace);
+    }
+    animateSpace();
+</script>
+</body>
+</html>
