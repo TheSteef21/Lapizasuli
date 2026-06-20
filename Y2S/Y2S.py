@@ -39,12 +39,11 @@ def extraer_datos_playlist(url: str):
     # Detectar IDs de Spotify
     playlist_match = re.search(r"playlist/([a-zA-Z0-9]+)", url)
     track_match = re.search(r"track/([a-zA-Z0-9]+)", url)
-    album_match = re.search(r"album/([a-zA-Z0-9]+)", url)
 
     try:
         if playlist_match:
             playlist_id = playlist_match.group(1)
-            # URL de Embed oficial y pública de Spotify
+            # URL de Embed oficial de Spotify
             embed_url = f"https://open.spotify.com/embed/playlist/{playlist_id}"
             res = requests.get(embed_url, headers=headers, timeout=10)
 
@@ -75,7 +74,7 @@ def extraer_datos_playlist(url: str):
                 except KeyError:
                     pass
 
-            # Salvavidas por Regex si Spotify cambia las llaves del JSON incrustado
+            # Salvavidas por Regex si el JSON cambia de estructura
             if not tracks_encontrados:
                 matches = re.findall(
                     r'{"track":{"name":"([^"]+)","artists":\[([^\]]+)\]',
@@ -85,7 +84,7 @@ def extraer_datos_playlist(url: str):
                     artist_names = re.findall(r'"name":"([^"]+)"', artists_raw)
                     artistas = ", ".join(artist_names)
                     tracks_encontrados.append(
-                        {"titulo": track_name, "artista": "");"}
+                        {"titulo": track_name, "artista": artistas}
                     )
 
         elif track_match:
@@ -112,7 +111,7 @@ def extraer_datos_playlist(url: str):
     except Exception as e:
         print(f"[Y2S Engine Error] Fallo al parsear HTML de Spotify: {e}")
 
-    # Fallback definitivo y controlado: Si no lee nada, carga tu himno insignia en lugar de búsquedas raras
+    # Fallback definitivo y controlado (Tu himno insignia de respaldo si falla la red)
     if not tracks_encontrados:
         tracks_encontrados.append(
             {"titulo": "Oh cuan dulce es fiar en Cristo", "artista": "Himno 395"}
