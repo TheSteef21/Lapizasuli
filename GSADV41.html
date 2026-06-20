@@ -35,8 +35,11 @@
     <style>
         body {
             background-color: #020617;
-            background-image: radial-gradient(#1e293b 0.5px, transparent 0.5px);
-            background-size: 24px 24px;
+            /* El fondo generado por Pillow ahora cubre toda la página de manera fluida */
+            background-image: linear-gradient(rgba(2, 6, 23, 0.80), rgba(2, 6, 23, 0.95)), url('/static/mundial_bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
             color: #f8fafc;
         }
         .glass {
@@ -45,10 +48,8 @@
             border: 1px solid rgba(234, 179, 8, 0.2);
         }
         .glass-mundial {
-            /* Capa optimizada para recibir las imágenes procesadas por Pillow de fondo */
-            background: linear-gradient(rgba(2, 6, 23, 0.75), rgba(2, 6, 23, 0.95)), url('/static/mundial_bg.jpg');
-            background-size: cover;
-            background-position: center;
+            background: rgba(2, 6, 23, 0.60);
+            backdrop-filter: blur(8px);
             border: 1px solid rgba(16, 185, 129, 0.3);
         }
         .glass-sismico {
@@ -82,7 +83,7 @@
         </div>
         
         <nav class="flex gap-6 text-sm uppercase tracking-wider font-medium">
-            <a href="#world-cup-tracking" class="hover:text-emerald-400 transition-colors text-emerald-300 font-bold">⚽ Mundial 2026</a>
+            <a href="https://thesteef21.github.io/Lapizasuli/FIFA2026.html" target="_blank" class="hover:text-emerald-400 transition-colors text-emerald-300 font-bold flex items-center gap-1">⚽ Mundial 2026 ↗</a>
             <a href="#monitor-sismico-seccion" class="hover:text-red-400 transition-colors text-red-300 font-bold">⚠️ Telemetría SADV41T</a>
             <a href="#mision" class="hover:text-oro transition-colors">Mayordomía</a>
         </nav>
@@ -102,7 +103,6 @@
 
     <main class="pt-36 pb-12 px-6 max-w-6xl mx-auto space-y-16">
         
-        <!-- MÓDULO MUNDIAL FIFA 2026 (REEMPLAZO TOTAL) -->
         <section id="world-cup-tracking" class="glass-mundial rounded-2xl overflow-hidden shadow-2xl max-w-lg mx-auto">
             <div class="p-8 text-center border-b border-white/5 bg-gradient-to-b from-emerald-500/10 to-transparent">
                 <h2 class="font-serif text-2xl md:text-3xl text-white font-extrabold tracking-wider text-shadow-green uppercase">GSADV41: COBERTURA MUNDIAL 2026</h2>
@@ -139,7 +139,6 @@
             </div>
         </section>
 
-        <!-- MONITOREO SÍSMICO SADV41T -->
         <section id="monitor-sismico-seccion" class="max-w-3xl mx-auto p-1 md:p-6 bg-[#0d1117] border border-slate-800 rounded-2xl shadow-xl">
             <div class="text-center py-4">
                 <h2 class="text-renderRed font-bold text-2xl md:text-3xl tracking-tight uppercase">Módulo SADV41T</h2>
@@ -165,7 +164,6 @@
             <div id="monitor-salida" class="space-y-4 mt-6"></div>
         </section>
 
-        <!-- ACCESOS SOBERANOS Y ALERTAS -->
         <section class="glass rounded-2xl max-w-lg mx-auto overflow-hidden border border-cyan-500/30">
             <div class="p-6 bg-black/30 flex flex-col items-center gap-4 text-center">
                 <div class="border border-[#00f3ff]/40 px-4 py-1.5 rounded-full text-xs font-bold text-[#00f3ff] tracking-wide text-shadow-blue shadow-[0_0_10px_rgba(0,243,255,0.15)] uppercase">
