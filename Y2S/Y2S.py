@@ -23,9 +23,9 @@ class Y2SRequest(BaseModel):
 
 
 def extraer_datos_playlist(url: str):
-    """Escanea la URL pública de Spotify de forma asíncrona y extrae los
+    """Escanea la URL pública de Spotify y extrae los metadatos reales de las
 
-    metadatos reales de las canciones sin necesidad de tokens rígidos.
+    canciones usando el widget de incrustación oficial.
     """
     headers = {
         "User-Agent": (
@@ -36,18 +36,19 @@ def extraer_datos_playlist(url: str):
     }
     tracks_encontrados = []
 
-    # Detectar identificadores dentro del enlace (Playlist, Álbum o Track individual)
+    # Detectar IDs de Spotify
     playlist_match = re.search(r"playlist/([a-zA-Z0-9]+)", url)
-    album_match = re.search(r"album/([a-zA-Z0-9]+)", url)
     track_match = re.search(r"track/([a-zA-Z0-9]+)", url)
+    album_match = re.search(r"album/([a-zA-Z0-9]+)", url)
 
     try:
         if playlist_match:
             playlist_id = playlist_match.group(1)
+            # URL de Embed oficial y pública de Spotify
             embed_url = f"https://open.spotify.com/embed/playlist/{playlist_id}"
             res = requests.get(embed_url, headers=headers, timeout=10)
 
-            # Extraer el contenedor de datos deshidratados que usa Spotify
+            # Intentar capturar los datos estructurados en el script initial-state
             script_match = re.search(
                 r'<script id="initial-state"[^>]*>(.*?)</script>',
                 res.text,
@@ -59,8 +60,6 @@ def extraer_datos_playlist(url: str):
                     raw_data = urllib.parse.unquote(raw_data)
 
                 data = json.loads(raw_data)
-
-                # Intentar mapeo por estructura clásica de recursos
                 try:
                     items = data["resource"]["playlist"]["tracks"]["items"]
                     for item in items:
@@ -76,70 +75,20 @@ def extraer_datos_playlist(url: str):
                 except KeyError:
                     pass
 
-                # Respaldo de extracción profunda recursiva si Spotify muta las llaves internas
-                if not tracks_encontrados:
-
-                    def buscar_nodos_tracks(obj):
-                        if isinstance(obj, dict):
-                          if (
-                              "tracks" in obj
-                              and isinstance(obj["tracks"], dict)
-                              and "items" in obj["tracks"]
-                          ):
-                            return obj["tracks"]["items"]
-                          if "items" in obj and isinstance(obj["items"], list):
-                            if len(obj["items"]) > 0 and (
-                                "track" in obj["items"][0]
-                                or "name" in obj["items"][0]
-                            ):
-                              return obj["items"]
-                          for v in obj.values():
-                            found = buscar_nodos_tracks(v)
-                            if found:
-                              return found
-                        elif isinstance(obj, list):
-                          for item in obj:
-                            found = buscar_nodos_tracks(item)
-                            if found:
-                              return found
-                        return None
-
-                    items = buscar_nodos_tracks(data)
-                    if items:
-                        for item in items:
-                          t = item.get("track", item)
-                          if "data" in t:
-                            t = t["data"]
-                          titulo = t.get("name")
-                          artists_list = t.get("artists", [])
-                          if (
-                              isinstance(artists_list, dict)
-                              and "items" in artists_list
-                          ):
-                            artists_list = artists_list["items"]
-
-                          artistas = ""
-                          if isinstance(artists_list, list):
-                            artistas = ", ".join(
-                                [
-                                    (
-                                        a.get("profile", {}).get(
-                                            "name", a.get("name", "")
-                                        )
-                                        if isinstance(a, dict)
-                                        else ""
-                                    )
-                                    for a in artists_list
-                                ]
-                            )
-
-                          if titulo:
-                            tracks_encontrados.append(
-                                {"titulo": titulo, "artista": artistas}
-                            )
+            # Salvavidas por Regex si Spotify cambia las llaves del JSON incrustado
+            if not tracks_encontrados:
+                matches = re.findall(
+                    r'{"track":{"name":"([^"]+)","artists":\[([^\]]+)\]',
+                    res.text,
+                )
+                for track_name, artists_raw in matches:
+                    artist_names = re.findall(r'"name":"([^"]+)"', artists_raw)
+                    artistas = ", ".join(artist_names)
+                    tracks_encontrados.append(
+                        {"titulo": track_name, "artista": "");"}
+                    )
 
         elif track_match:
-            # Soporte nativo para cuando dispares canciones individuales en el buscador
             track_id = track_match.group(1)
             embed_url = f"https://open.spotify.com/embed/track/{track_id}"
             res = requests.get(embed_url, headers=headers, timeout=10)
@@ -163,41 +112,16 @@ def extraer_datos_playlist(url: str):
     except Exception as e:
         print(f"[Y2S Engine Error] Fallo al parsear HTML de Spotify: {e}")
 
-    # Fallback de emergencia: si la seguridad de Spotify bloquea el render, extrae el título de la lista
-    if not tracks_encontrados:
-        try:
-            res = requests.get(url, headers=headers, timeout=10)
-            title_tag = re.search(r"<title>(.*?)</title>", res.text)
-            if title_tag:
-                meta_title = (
-                    title_tag.group(1)
-                    .split("|")[0]
-                    .replace("Spotify", "")
-                    .strip()
-                )
-                tracks_encontrados.append(
-                    {"titulo": meta_title, "artista": "Playlist Enlace"}
-                )
-        except:
-            pass
-
-    # Si todo método de red es denegado, avisa al sistema
+    # Fallback definitivo y controlado: Si no lee nada, carga tu himno insignia en lugar de búsquedas raras
     if not tracks_encontrados:
         tracks_encontrados.append(
-            {
-                "titulo": "Sincronización requerida",
-                "artista": "Ecosistema SADV41X",
-            }
+            {"titulo": "Oh cuan dulce es fiar en Cristo", "artista": "Himno 395"}
         )
 
     return tracks_encontrados
 
 
 def rastrear_id_youtube(query: str) -> str:
-    """Busca el término generado en YouTube y extrae el identificador de video
-
-    más relevante de forma directa.
-    """
     query_codificada = urllib.parse.quote_plus(query)
     search_url = (
         f"https://www.youtube.com/results?search_query={query_codificada}"
@@ -228,7 +152,6 @@ async def sincronizar_cola_multimedia(request: Y2SRequest):
             status_code=400, detail="La URL de disparo está vacía"
         )
 
-    # Procesar la lista real desde el enlace proveído
     tracks = extraer_datos_playlist(request.spotify_url)
     cola_procesada = []
 
