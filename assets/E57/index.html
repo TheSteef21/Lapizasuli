@@ -3,32 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Esquina 57 | Misión SADV41</title>
-    <!-- Asegúrate de que tu CSS principal esté aquí -->
-    <link rel="stylesheet" href="../css/styles.css">
+    <title>Esquina 57 | Tómbolas SADV41</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+    <style>
+        body { font-family: sans-serif; text-align: center; background-color: #0d0d0d; color: #fff; padding: 20px; }
+        .promo-card { background: #1a1a1a; padding: 20px; border-radius: 15px; max-width: 600px; margin: auto; }
+        .btn-participar { background: #e50914; color: white; padding: 15px 30px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block; margin-top: 20px; }
+        
+        /* Gallery Styles */
+        .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 40px; padding: 0 20px; }
+        .media-item { background: #1a1a1a; padding: 10px; border-radius: 10px; }
+        .media-item img, .media-item video { width: 100%; height: auto; border-radius: 5px; }
+    </style>
 </head>
 <body>
 
     <header>
         <h1>Esquina 57</h1>
-        <p>Promociones exclusivas para Colombia</p>
+        <p>Misión SADV41 - Colombia</p>
     </header>
 
     <main>
-        <section id="hero-promotion">
-            <h2>Nuestra oferta del día</h2>
-            <!-- Integración del archivo que mencionaste -->
-            <img src="../assets/1782008021403.jpeg" alt="Promoción especial Colombia" style="max-width: 100%; height: auto;">
-        </section>
+        <div class="promo-card">
+            <!-- Using IMG-20260620-WA0079.jpg as the featured image -->
+            <img src="IMG-20260620-WA0079.jpg" alt="Tómbola" style="width: 100%; border-radius: 10px;">
+            <h2>Gana Motos y Autos</h2>
+            <p>Participa en la tómbola oficial. Valor: <strong>$14.99</strong></p>
+            <a href="#" class="btn-participar">Participar Ahora</a>
+        </div>
 
-        <section id="contacto">
-            <h3>¿Interesado en esta promoción?</h3>
-            <p>Contáctanos para más información sobre el servicio en Colombia.</p>
-        </section>
+        <!-- Gallery of assets from E57 -->
+        <div class="gallery">
+            <div class="media-item"><img src="IMG-20260620-WA0078.jpg" alt="Asset 78"></div>
+            <div class="media-item"><img src="IMG-20260620-WA0081.jpg" alt="Asset 81"></div>
+            <div class="media-item">
+                <video controls>
+                    <source src="VID-20260620-WA0076.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="media-item">
+                <video controls>
+                    <source src="VID-20260620-WA0080.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="media-item">
+                <video controls>
+                    <source src="VID-20260620-WA0082.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
     </main>
 
     <footer>
-        <p>Misión SADV41 © 2026</p>
+        <p><a href="../../index.html" style="color: #aaa;">Volver al Inicio</a></p>
     </footer>
 
 </body>
