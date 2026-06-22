@@ -1,17 +1,30 @@
 import os
-from fastapi import FastAPI
 import requests
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
-# He cambiado AINFT_API_KEY por AI_API_KEY para que coincida con tu configuración en Render
-API_KEY = os.getenv("AI_API_KEY") 
+# Configuración de CORS para permitir que tu frontend hable con el backend
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # En producción, podrías cambiar "*" por la URL de tu web
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Esto lee la variable configurada en Render
+API_KEY = os.getenv("AI_API_KEY")
 
 @app.post("/api/ask-ia")
 async def ask_ia(data: dict):
-    # Asegúrate de que el frontend envíe 'pregunta' en el JSON
+    # Capturamos la pregunta enviada desde aib.js
     pregunta = data.get("pregunta")
     
+    if not pregunta:
+        return {"error": "No se recibió ninguna pregunta."}
+
+    # Hacemos la petición a la API de AINFT
     response = requests.post(
         "https://api.ainft.com/v1/chat/completions",
         headers={
@@ -25,4 +38,6 @@ async def ask_ia(data: dict):
             "max_tokens": 1000
         },
     )
+    
+    # Devolvemos la respuesta tal cual llega de la API
     return response.json()
