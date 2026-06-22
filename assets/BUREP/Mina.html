@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MINA: Guía CEPADEM, Sostenibilidad y Desarrollo Panameño</title>
+    <title>BUREP: Sostenibilidad, Conservación y Desarrollo en Panamá</title>
     <style>
         :root {
-            --primary-color: #003366;
-            --secondary-color: #4CAF50;
+            --primary-color: #004d40; /* Verde oscuro para reflejar naturaleza y sostenibilidad */
+            --secondary-color: #ffb300; /* Tono cálido para contraste */
             --text-color: #333333;
-            --bg-color: #f9f9f9;
+            --bg-color: #f4f7f6;
         }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -22,25 +22,57 @@
         header {
             background-color: var(--primary-color);
             color: white;
-            padding: 20px 0;
+            padding: 30px 0;
             text-align: center;
+            position: relative;
+        }
+        
+        /* Estilos para el botón HOME */
+        .nav-home {
+            margin-bottom: 20px;
+        }
+        .nav-home a {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: #333;
+            padding: 10px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1em;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            transition: transform 0.2s, background-color 0.3s;
+        }
+        .nav-home a:hover {
+            background-color: #ffa000;
+            transform: scale(1.05);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            color: white;
+        }
+        header p {
+            font-size: 1.2em;
+            margin-top: 10px;
         }
         .container {
             width: 90%;
             max-width: 1000px;
             margin: 20px auto;
             background: white;
-            padding: 30px;
+            padding: 40px;
             border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
         }
-        h1, h2, h3 {
+        h2, h3 {
             color: var(--primary-color);
         }
         h2 {
-            border-bottom: 2px solid var(--secondary-color);
-            padding-bottom: 5px;
-            margin-top: 30px;
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 10px;
+            margin-top: 40px;
         }
         ul {
             padding-left: 20px;
@@ -49,178 +81,176 @@
             margin-bottom: 10px;
         }
         .highlight-box {
-            background-color: #e8f4f8;
+            background-color: #e8f5e9;
             border-left: 5px solid var(--primary-color);
-            padding: 15px;
+            padding: 20px;
             margin: 20px 0;
+            border-radius: 0 5px 5px 0;
         }
         table {
             width: 100%;
             border-collapse: collapse;
-            margin: 20px 0;
+            margin: 25px 0;
+            background-color: #fff;
         }
         th, td {
-            border: 1px solid #ddd;
-            padding: 12px;
+            border: 1px solid #e0e0e0;
+            padding: 15px;
             text-align: left;
         }
         th {
             background-color: var(--primary-color);
             color: white;
+            font-size: 1.1em;
         }
-        img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 5px;
-            margin: 15px 0;
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
         }
         .image-gallery {
             display: flex;
             flex-wrap: wrap;
-            gap: 15px;
+            gap: 20px;
             justify-content: center;
+            margin: 30px 0;
         }
         .image-gallery img {
-            max-width: 45%;
+            max-width: 30%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
-        a {
-            color: var(--primary-color);
-            text-decoration: none;
-            font-weight: bold;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-        .btn {
+        a.btn {
             display: inline-block;
             background-color: var(--secondary-color);
-            color: white;
-            padding: 10px 20px;
+            color: #333;
+            padding: 12px 25px;
             border-radius: 5px;
-            margin: 10px 0;
-        }
-        .btn:hover {
-            background-color: #45a049;
+            margin: 15px 0;
             text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        a.btn:hover {
+            background-color: #ffa000;
         }
         footer {
             text-align: center;
-            margin-top: 40px;
-            padding: 20px;
-            background-color: #333;
-            color: white;
+            margin-top: 50px;
+            padding: 30px;
+            background-color: #263238;
+            color: #b0bec5;
+        }
+        footer a {
+            color: #81c784;
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Espaciado adicional en footer para el enlace home */
+        .footer-home {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #37474f;
         }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>Portal Informativo de Panamá</h1>
-        <p>Pagos del CEPADEM, Conservación del Istmo y Desarrollo Comunitario</p>
+        <!-- Menú de Navegación Home -->
+        <div class="nav-home">
+            <a href="https://thesteef21.github.io/Lapizasuli/GSADV41.html">🏠 Inicio - SADV41</a>
+        </div>
+        
+        <h1>Proyecto BUREP</h1>
+        <p>De Burunga a la República: Conservación, Sostenibilidad y Desarrollo Consensuado</p>
     </header>
 
     <div class="container">
         
-        <section id="guia-cepadem">
-            <h2>Guía MINA: Pago del CEPADEM y CEPANIM a Jubilados</h2>
-            <p>Como tu guía virtual, te informo que el pago de los intereses acumulados del CEPADEM (mediante los certificados CEPANIM) es una realidad que beneficiará a miles de panameños.</p>
+        <section id="sostenibilidad">
+            <h2>Visión de Desarrollo y Sostenibilidad del Istmo</h2>
+            <p>Para garantizar el futuro del istmo, es imperativo tener clara la conservación de la flora y fauna y la sostenibilidad ambiental. Cualquier proyecto extractivo o de minería en nuestro territorio debe estar estrictamente alineado con el ecosistema y ser el resultado de un consenso absoluto entre la República, el Estado y el Pueblo.</p>
             
             <div class="highlight-box">
-                <h3>Detalles de la Entrega</h3>
-                <ul>
-                    [span_0](start_span)<li>El pago de los intereses acumulados iniciará a partir del mes de junio, tras la sanción de la Ley 506[span_0](end_span).</li>
-                    [span_1](start_span)<li>La entrega se realizará bajo un plan organizado y escalonado para garantizar el orden[span_1](end_span).</li>
-                    [span_2](start_span)<li>Este mecanismo busca evitar aglomeraciones, tomando en cuenta que la mayoría de los beneficiarios son adultos mayores[span_2](end_span).</li>
-                    [span_3](start_span)<li>El Ministerio de Economía y Finanzas (MEF) coordinará y comunicará el calendario oficial[span_3](end_span).</li>
-                </ul>
+                <p><strong>Principio Fundamental:</strong> La verdadera riqueza de la nación reside en sus recursos naturales y en el bienestar integral de sus comunidades.</p>
             </div>
-
-            <h3>Requisitos y Características</h3>
-            <p>Para obtener el certificado, los beneficiarios deberán:</p>
-            <ul>
-                [span_4](start_span)<li>Registrarse previamente[span_4](end_span).</li>
-                [span_5](start_span)<li>Agendar una cita digital[span_5](end_span).</li>
-                [span_6](start_span)<li>Acudir en la fecha asignada para retirar su certificado[span_6](end_span).</li>
-            </ul>
-
-            <p>Características legales de los CEPANIM:</p>
-            <ul>
-                [span_7](start_span)<li>Son completamente transferibles[span_7](end_span).</li>
-                [span_8](start_span)<li>Están exentos del pago de impuestos[span_8](end_span).</li>
-                [span_9](start_span)<li>No pueden ser embargados bajo ninguna circunstancia[span_9](end_span).</li>
-            </ul>
-
-            [span_10](start_span)<p><strong>Atención a Herederos:</strong> Aquellos beneficiarios que han fallecido, sus herederos podrán retirar el cheque de los intereses acumulados del CEPADEM[span_10](end_span). [span_11](start_span)Podrán gestionar el cobro cumpliendo con los trámites legales correspondientes[span_11](end_span).</p>
             
-            [span_12](start_span)<p>La sanción de la Ley 506 por el presidente José Raúl Mulino honra una deuda histórica generada por la retención de la segunda partida del décimo tercer mes entre los años 1972 y 1983, beneficiando tanto a servidores públicos como a trabajadores del sector privado[span_12](end_span).</p>
-        </section>
-
-        <section id="sostenibilidad">
-            <h2>Sostenibilidad del Istmo: Conservación y Minería Consensuada</h2>
-            <p>Para garantizar el futuro del istmo, es imperativo tener clara la conservación de la flora y fauna y la sostenibilidad ambiental. Cualquier proyecto extractivo o de minería en nuestro territorio debe estar estrictamente alineado con el ecosistema y ser el resultado de un consenso absoluto entre la República, el Estado y el Pueblo. La verdadera riqueza de la nación reside en sus recursos naturales y en el bienestar integral de sus comunidades.</p>
-            
-            <a href="https://thesteef21.github.io/Lapizasuli/assets/BUREP/Sostenibilidad%20del%20Istmo_%20Conservaci%C3%B3n%20y%20Miner%C3%ADa%20Consensuada.pdf" target="_blank" class="btn">📄 Leer Documento PDF Completo</a>
+            <a href="https://thesteef21.github.io/Lapizasuli/assets/BUREP/Sostenibilidad%20del%20Istmo_%20Conservaci%C3%B3n%20y%20Miner%C3%ADa%20Consensuada.pdf" target="_blank" class="btn">📄 Leer Documento sobre Conservación y Minería Consensuada</a>
         </section>
 
         <section id="historia-ambiental">
-            <h2>Una mina a tajo abierto en las selvas del río Boquerón, 1980</h2>
-            <p><em>Por Stanley Heckadon Moreno | Publicado el 21 de junio de 2026 en <a href="https://www.prensa.com/historias/una-mina-a-tajo-abierto-en-las-selvas-del-rio-boqueron-1980/" target="_blank">La Prensa</a></em></p>
+            <h2>Memoria Histórica: Una mina a tajo abierto en el río Boquerón (1980)</h2>
+            <p><em>Investigación del Dr. Stanley Heckadon Moreno | Publicado en La Prensa</em></p>
+            
+            <p>Panamá, el país de la comunicación interoceánica, es un don del río Chagres. En su lluviosa cuenca de 3,330 Km², se genera y almacena el agua necesaria para operar las esclusas del Canal y suplir a las potabilizadoras de Panamá y Colón. Sin embargo, la historia ambiental del país ha estado plagada de proyectos ejecutados a espaldas de la ciudadanía.</p>
             
             <div class="image-gallery">
-                <img src="372754.jpg" alt="Artículo Digital La Prensa">
                 <img src="372776.jpg" alt="Vista del gran relleno de tierra en el Río Boquerón, 1980">
                 <img src="372775.webp" alt="Portada: La Cuenca del Canal de Panamá">
+                <img src="372754.jpg" alt="Artículo Digital La Prensa">
             </div>
 
-            <p>Cinco siglos antes de Cristo decía el historiador griego Herodoto que Egipto era un don del río Nilo. En el caso de Panamá, el país de la comunicación interoceánica es un don del río Chagres. En su lluviosa cuenca de 3,330 Km², se genera y almacena cantidades astronómicas de agua para operar las esclusas del Canal y suplir las potabilizadoras de las ciudades de Panamá y Colón.</p>
-            
-            <p>En 1980, durante una investigación sobre colonos en la cuenca del canal, el Dr. Heckadon Moreno documentó la presencia de una mina de manganeso a tajo abierto en el río Boquerón. La operación amenazaba con sedimentar los ríos y lagos debido a rellenos inestables sobre las quebradas de la selva. Esta crisis ambiental evidenció la importancia de salvaguardar los afluentes de Panamá, lo que finalmente motivó la creación del <strong>Parque Nacional Chagres</strong> como "un seguro de vida del canal y las potabilizadoras".</p>
+            <h3>El Impacto Minero de 1980</h3>
+            <ul>
+                <li><strong>El Proyecto:</strong> En 1980, se identificó una mina de manganeso operando con concesiones que databan de 1957. Extraían 800 toneladas mensuales de mineral a tajo abierto y luego mediante túneles.</li>
+                <li><strong>El Daño Ambiental:</strong> La minera construyó un enorme relleno de tierra sobre una quebrada. Las fuertes lluvias (3300 mm anuales) destruyeron este relleno varias veces, sedimentando incalculables toneladas de tierra en el río y los lagos.</li>
+                <li><strong>La Respuesta:</strong> Tras la severa sequía de 1982-1983, se formó un Grupo de Trabajo multidisciplinario para analizar la cuenca del Canal. Como resultado de este esfuerzo por salvar los bosques, el presidente Erik A. Delvalle firmó el decreto que creó el <strong>Parque Nacional Chagres</strong>.</li>
+            </ul>
+            <p>La creación de este parque representó la compra de un "seguro ambiental" a muy largo plazo, garantizando el agua del canal y de las potabilizadoras, el cual cada generación debe renovar.</p>
         </section>
 
         <section id="desarrollo-burunga">
-            <h2>Desarrollo Local Sostenible: El Caso de Burunga</h2>
-            <p>La conservación nacional debe ir de la mano con el desarrollo de nuestras propias comunidades. El corregimiento de Burunga en el distrito de Arraiján, con más de 51,000 habitantes, demuestra cómo el avance de infraestructura local forma el núcleo del progreso social.</p>
+            <h2>El Eje BUREP: Desarrollo Local Sostenible en Burunga</h2>
+            <p>La conservación nacional debe ir de la mano con el desarrollo de nuestras propias comunidades. El corregimiento de Burunga (distrito de Arraiján), con una creciente población de más de 51,000 habitantes, es el ejemplo vivo de cómo las necesidades humanas y la infraestructura balancean el entorno urbano y rural para generar progreso social.</p>
             
             <table>
                 <thead>
                     <tr>
                         <th>Área de Desarrollo</th>
-                        <th>Acciones y Logros en Burunga (Gestión de Lohannis Gaitán)</th>
+                        <th>Acciones y Logros Comunitarios (Gestión de Lohannis Gaitán)</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td><strong>Obras Públicas y Seguridad</strong></td>
-                        <td>Rehabilitación de calles, reparación de paradas y ampliación del sistema de iluminación para el bienestar vecinal.</td>
+                        <td>Rehabilitación de calles, reparación de paradas y ampliación del sistema de iluminación para el bienestar de todos los vecinos.</td>
                     </tr>
                     <tr>
                         <td><strong>Atención Integral</strong></td>
-                        <td>Inauguración del primer Centro Terapéutico Integral (estimulación temprana y fonoaudiología).</td>
+                        <td>Inauguración del primer Centro Terapéutico Integral, brindando estimulación temprana y fonoaudiología a niños.</td>
                     </tr>
                     <tr>
                         <td><strong>Deporte y Juventud</strong></td>
-                        <td>Primera escuela de fútbol institucional para la formación, recreación y alejamiento de riesgos en la calle.</td>
+                        <td>Creación de la primera escuela de fútbol institucional para ofrecer alternativas sanas de recreación y alejar a la juventud de los riesgos de la calle.</td>
                     </tr>
                     <tr>
-                        <td><strong>Vivienda y Servicios</strong></td>
-                        <td>Ayudas habitacionales y pronta apertura de tanques para garantizar un suministro de agua continuo.</td>
+                        <td><strong>Vivienda y Servicios Básicos</strong></td>
+                        <td>Ejecución de ayudas habitacionales y apertura de tanques para garantizar un suministro continuo y digno de agua ante el rápido crecimiento poblacional.</td>
                     </tr>
                 </tbody>
             </table>
 
             <div class="highlight-box">
-                <strong>Conclusión:</strong> El balance entre la protección de recursos naturales (como el río Boquerón) y el progreso sostenido de comunidades (como Burunga) es la clave de la sostenibilidad panameña.
+                <h3>Conclusión del Proyecto BUREP</h3>
+                <p>El balance entre la protección de nuestros recursos naturales (como las cabeceras del río Boquerón) y el progreso sostenido de comunidades (como Burunga), es la verdadera clave de la sostenibilidad panameña. Todo esto bajo un desarrollo urbano y minero que cuente siempre con la participación y el consenso de la república, el estado y el pueblo.</p>
             </div>
         </section>
 
     </div>
 
     <footer>
-        <p>Esta página se encuentra alojada de manera oficial en: <br>
-        <a href="https://github.com/TheSteef21/Lapizasuli/blob/main/assets/BUREP/Mina.html" target="_blank" style="color: #4CAF50;">Repositorio Oficial en GitHub</a></p>
-        <p>© 2026 MINA - Guía de Jubilados y Sostenibilidad.</p>
+        <p>Documentación alojada en el repositorio oficial:<br>
+        <a href="https://github.com/TheSteef21/Lapizasuli/blob/main/assets/BUREP/Mina.html" target="_blank">TheSteef21/Lapizasuli/BUREP/Mina.html</a></p>
+        
+        <div class="footer-home">
+            <a href="https://thesteef21.github.io/Lapizasuli/GSADV41.html">Volver a la Página Principal</a>
+        </div>
+
+        <p>© 2026 Proyecto BUREP - Conservación y Desarrollo Consensuado.</p>
     </footer>
 
 </body>
 </html>
-
