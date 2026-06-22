@@ -2,16 +2,19 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SADV41 - Suscripción</title>
     <link rel="stylesheet" href="css/suscribe.css">
 </head>
 <body>
 
     <div class="sadv41-subscribe">
-        <form id="subscribeForm">
-            <input type="email" id="emailInput" placeholder="Tu correo electrónico" required>
+        <form id="subscribeForm" action="https://formspree.io/f/mlgyebzz" method="POST">
+            <label for="email">Correo electrónico:</label>
+            <input type="email" id="emailInput" name="email" placeholder="steven507oficial@duck.com" required>
             <button type="submit">Suscribirse</button>
         </form>
+        
         <p id="message"></p>
     </div>
 
