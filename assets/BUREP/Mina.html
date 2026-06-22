@@ -27,23 +27,27 @@
             position: relative;
         }
         
-        /* Estilos para el botón HOME */
-        .nav-home {
-            margin-bottom: 20px;
+        /* Estilos para la barra de navegación superior */
+        .nav-container {
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
         }
-        .nav-home a {
+        .nav-container a {
             display: inline-block;
             background-color: var(--secondary-color);
             color: #333;
-            padding: 10px 25px;
+            padding: 10px 20px;
             border-radius: 25px;
             text-decoration: none;
             font-weight: bold;
-            font-size: 1.1em;
+            font-size: 0.95em;
             box-shadow: 0 2px 4px rgba(0,0,0,0.2);
             transition: transform 0.2s, background-color 0.3s;
         }
-        .nav-home a:hover {
+        .nav-container a:hover {
             background-color: #ffa000;
             transform: scale(1.05);
         }
@@ -148,20 +152,24 @@
             text-decoration: underline;
         }
         
-        /* Espaciado adicional en footer para el enlace home */
-        .footer-home {
+        .footer-nav {
             margin-top: 20px;
             padding-top: 20px;
             border-top: 1px solid #37474f;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
         }
     </style>
 </head>
 <body>
 
     <header>
-        <!-- Menú de Navegación Home -->
-        <div class="nav-home">
+        <div class="nav-container">
             <a href="https://thesteef21.github.io/Lapizasuli/GSADV41.html">🏠 Inicio - SADV41</a>
+            <a href="https://thesteef21.github.io/Lapizasuli/suscribe.html">🔔 Suscribirse</a>
+            <a href="https://thesteef21.github.io/Lapizasuli/aib.html">🤖 Inteligencia Artificial</a>
         </div>
         
         <h1>Proyecto BUREP</h1>
@@ -197,7 +205,7 @@
             <ul>
                 <li><strong>El Proyecto:</strong> En 1980, se identificó una mina de manganeso operando con concesiones que databan de 1957. Extraían 800 toneladas mensuales de mineral a tajo abierto y luego mediante túneles.</li>
                 <li><strong>El Daño Ambiental:</strong> La minera construyó un enorme relleno de tierra sobre una quebrada. Las fuertes lluvias (3300 mm anuales) destruyeron este relleno varias veces, sedimentando incalculables toneladas de tierra en el río y los lagos.</li>
-                <li><strong>La Respuesta:</strong> Tras la severa sequía de 1982-1983, se formó un Grupo de Trabajo multidisciplinario para analizar la cuenca del Canal. Como resultado de este esfuerzo por salvar los bosques, el presidente Erik A. Delvalle firmó el decreto que creó el <strong>Parque Nacional Chagres</strong>.</li>
+                <li><strong>La Respuesta:</strong> Tras la severa sequía de 1982-1983, se formó un Grupo de Trabajo multidisciplinario para analizar la cuenca del Canal. Como resultado de este effort por salvar los bosques, el presidente Erik A. Delvalle firmó el decreto que creó el <strong>Parque Nacional Chagres</strong>.</li>
             </ul>
             <p>La creación de este parque representó la compra de un "seguro ambiental" a muy largo plazo, garantizando el agua del canal y de las potabilizadoras, el cual cada generación debe renovar.</p>
         </section>
@@ -245,8 +253,10 @@
         <p>Documentación alojada en el repositorio oficial:<br>
         <a href="https://github.com/TheSteef21/Lapizasuli/blob/main/assets/BUREP/Mina.html" target="_blank">TheSteef21/Lapizasuli/BUREP/Mina.html</a></p>
         
-        <div class="footer-home">
-            <a href="https://thesteef21.github.io/Lapizasuli/GSADV41.html">Volver a la Página Principal</a>
+        <div class="footer-nav">
+            <a href="https://thesteef21.github.io/Lapizasuli/GSADV41.html">Volver al Inicio</a> | 
+            <a href="https://thesteef21.github.io/Lapizasuli/suscribe.html">Suscripción</a> | 
+            <a href="https://thesteef21.github.io/Lapizasuli/aib.html">Portal IA</a>
         </div>
 
         <p>© 2026 Proyecto BUREP - Conservación y Desarrollo Consensuado.</p>
