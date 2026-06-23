@@ -4,20 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Esquina 57 | Tómbolas SADV41</title>
-    <link rel="stylesheet" href="../../css/styles.css">
     <style>
         body { font-family: sans-serif; text-align: center; background-color: #0d0d0d; color: #fff; padding: 20px; }
-        .promo-card { background: #1a1a1a; padding: 20px; border-radius: 15px; max-width: 600px; margin: auto; }
+        .promo-card, .winners-box { background: #1a1a1a; padding: 20px; border-radius: 15px; max-width: 600px; margin: 20px auto; border: 2px solid #e50914; }
         .btn-participar { background: #e50914; color: white; padding: 15px 30px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block; margin-top: 20px; }
         
-        /* New highlight style for the remate */
-        .remate-box { background: #2a0000; border: 1px solid #e50914; padding: 15px; border-radius: 10px; margin: 15px 0; }
+        .oferta-box { background: #2a0000; padding: 15px; border-radius: 10px; margin: 15px 0; border: 1px solid #ffcc00; }
         .price { color: #ffcc00; font-size: 1.4em; font-weight: bold; }
         
-        /* Gallery Styles */
-        .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 40px; padding: 0 20px; }
-        .media-item { background: #1a1a1a; padding: 10px; border-radius: 10px; }
-        .media-item img, .media-item video { width: 100%; height: auto; border-radius: 5px; }
+        /* Winners Styles */
+        .winners-box { border-color: #ffcc00; }
+        .winner-number { color: #00ff00; font-size: 3em; font-weight: bold; margin: 10px 0; }
+        
+        /* Slideshow Styles */
+        .slideshow-container { max-width: 600px; position: relative; margin: 40px auto; }
+        .mySlides { display: none; padding: 10px; background: #1a1a1a; border-radius: 10px; }
+        .mySlides img, .mySlides video { width: 100%; height: auto; border-radius: 5px; }
+        .fade { animation-name: fade; animation-duration: 1.5s; }
+        @keyframes fade { from {opacity: .4} to {opacity: 1} }
     </style>
 </head>
 <body>
@@ -28,17 +32,25 @@
     </header>
 
     <main>
+        <!-- Tarjeta Principal -->
         <div class="promo-card">
             <img src="IMG-20260620-WA0079.jpg" alt="Tómbola" style="width: 100%; border-radius: 10px;">
-            <h2>Gana Motos y Autos</h2>
-            
-            <div class="remate-box">
-                <h3>¡REMATE DE BOLETAS!</h3>
-                <p>Llévate 3 boletas para la Rifa del Carro por solo:</p>
+            <h2>Tómbolas Activas</h2>
+            <p><strong>Premios: Motos y Carros</strong></p>
+
+            <div class="oferta-box">
+                <h3>REMATE DE BOLETAS</h3>
+                <p>3 Boletas para Rifa del Carro:</p>
                 <p class="price">$85.000</p>
             </div>
 
-            <p><strong>Información de contacto:</strong></p>
+            <div class="oferta-box">
+                <h3>BOLETAS DE VUELTA</h3>
+                <p>2 Boletas:</p>
+                <p class="price">$50.000</p>
+            </div>
+
+            <p><strong>Información y ventas:</strong></p>
             <p>
                 <a href="https://wa.me/573183434492" style="color: #fff; text-decoration: underline;">318 343 4492</a> | 
                 <a href="https://wa.me/573054110879" style="color: #fff; text-decoration: underline;">305 411 0879</a>
@@ -47,27 +59,42 @@
             <a href="https://wa.me/573183434492" class="btn-participar">Contactar por WhatsApp</a>
         </div>
 
-        <!-- Gallery of assets from E57 -->
-        <div class="gallery">
-            <div class="media-item"><img src="IMG-20260620-WA0078.jpg" alt="Asset 78"></div>
-            <div class="media-item"><img src="IMG-20260620-WA0081.jpg" alt="Asset 81"></div>
-            <div class="media-item">
-                <video controls>
-                    <source src="VID-20260620-WA0076.mp4" type="video/mp4">
-                </video>
-            </div>
-            <div class="media-item">
-                <video controls>
-                    <source src="VID-20260620-WA0080.mp4" type="video/mp4">
-                </video>
-            </div>
-            <div class="media-item">
-                <video controls>
-                    <source src="VID-20260620-WA0082.mp4" type="video/mp4">
-                </video>
-            </div>
+        <!-- Resultados -->
+        <div class="winners-box">
+            <h2>Resultados Oficiales</h2>
+            <img src="373959.jpg" alt="Ganadores" style="width: 100%; border-radius: 10px; margin-bottom: 20px;">
+            <p><strong>Número Ganador (Lotería de Cundinamarca):</strong></p>
+            <p class="winner-number">0623</p>
+            <p>Premio: Moto Honda XR 190</p>
+        </div>
+
+        <!-- Slideshow Container -->
+        <div class="slideshow-container">
+            <div class="mySlides fade"><img src="IMG-20260620-WA0078.jpg" alt="Asset 78"></div>
+            <div class="mySlides fade"><img src="IMG-20260620-WA0081.jpg" alt="Asset 81"></div>
+            <div class="mySlides fade"><video controls><source src="VID-20260620-WA0076.mp4" type="video/mp4"></video></div>
+            <div class="mySlides fade"><video controls><source src="VID-20260620-WA0080.mp4" type="video/mp4"></video></div>
+            <div class="mySlides fade"><video controls><source src="VID-20260620-WA0082.mp4" type="video/mp4"></video></div>
+            <div class="mySlides fade"><img src="IMG-20260623-WA0025.jpg" alt="Asset 25"></div>
+            <div class="mySlides fade"><img src="IMG-20260623-WA0026.jpg" alt="Asset 26"></div>
+            <div class="mySlides fade"><video controls><source src="VID-20260623-WA0027.mp4" type="video/mp4"></video></div>
+            <div class="mySlides fade"><video controls><source src="VID-20260623-WA0028.mp4" type="video/mp4"></video></div>
         </div>
     </main>
+
+    <script>
+        let slideIndex = 0;
+        showSlides();
+        function showSlides() {
+            let i;
+            let slides = document.getElementsByClassName("mySlides");
+            for (i = 0; i < slides.length; i++) { slides[i].style.display = "none"; }
+            slideIndex++;
+            if (slideIndex > slides.length) { slideIndex = 1 }
+            slides[slideIndex-1].style.display = "block";
+            setTimeout(showSlides, 4000);
+        }
+    </script>
 
     <footer>
         <p><a href="../../index.html" style="color: #aaa;">Volver al Inicio</a></p>
