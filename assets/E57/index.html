@@ -5,12 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Esquina 57 | Tómbolas SADV41</title>
     <style>
-        body { font-family: sans-serif; text-align: center; background-color: #0d0d0d; color: #fff; padding: 20px; }
-        .promo-card { background: #1a1a1a; padding: 20px; border-radius: 15px; max-width: 600px; margin: 20px auto; border: 2px solid #e50914; }
+        body { font-family: sans-serif; background-color: #0d0d0d; color: #fff; margin: 0; padding: 0; }
+        
+        /* Sidebar (Estilo Cascada) */
+        .sidebar { height: 100%; width: 160px; position: fixed; top: 0; left: 0; background-color: #1a1a1a; border-right: 2px solid #e50914; padding-top: 60px; z-index: 100; }
+        .sidebar a { padding: 15px 25px; text-decoration: none; font-size: 18px; color: #aaa; display: block; transition: 0.3s; border-left: 3px solid transparent; }
+        .sidebar a:hover { color: #fff; background-color: #2a0000; border-left: 3px solid #e50914; }
+
+        /* Main Content Adjustment */
+        .main-content { margin-left: 180px; padding: 20px; text-align: center; }
+
+        .promo-card, .winners-box { background: #1a1a1a; padding: 20px; border-radius: 15px; max-width: 600px; margin: 20px auto; border: 2px solid #e50914; }
         .btn-participar { background: #e50914; color: white; padding: 15px 30px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block; margin-top: 20px; }
         
         .oferta-box { background: #2a0000; padding: 15px; border-radius: 10px; margin: 15px 0; border: 1px solid #ffcc00; }
         .price { color: #ffcc00; font-size: 1.4em; font-weight: bold; }
+        
+        /* Winners Styles */
+        .winners-box { border-color: #ffcc00; }
+        .winner-number { color: #00ff00; font-size: 3em; font-weight: bold; margin: 10px 0; }
         
         /* Slideshow Styles */
         .slideshow-container { max-width: 600px; position: relative; margin: 40px auto; }
@@ -24,27 +37,48 @@
 </head>
 <body>
 
-    <header>
-        <h1>Esquina 57</h1>
-        <p>Misión SADV41 - Colombia</p>
-    </header>
+    <!-- Menú Lateral -->
+    <div class="sidebar">
+        <a href="#inicio">Inicio</a>
+        <a href="#ganadores">Ganadores</a>
+        <a href="#info">Info</a>
+    </div>
 
-    <main>
+    <main class="main-content">
+        <header id="inicio">
+            <h1>Esquina 57</h1>
+            <p>Misión SADV41 - Colombia</p>
+        </header>
+
+        <!-- Tarjeta Principal -->
         <div class="promo-card">
             <img src="IMG-20260620-WA0079.jpg" alt="Tómbola" style="width: 100%; border-radius: 10px;">
             <h2>Tómbolas Activas</h2>
+            <p><strong>Premios: Motos y Carros</strong></p>
+
             <div class="oferta-box">
                 <h3>REMATE DE BOLETAS</h3>
                 <p>3 Boletas para Rifa del Carro: <span class="price">$85.000</span></p>
             </div>
+
             <div class="oferta-box">
                 <h3>BOLETAS DE VUELTA</h3>
                 <p>2 Boletas: <span class="price">$50.000</span></p>
             </div>
+
             <a href="https://wa.me/573183434492" class="btn-participar">Contactar por WhatsApp</a>
         </div>
 
-        <!-- Slideshow Integrado -->
+        <!-- Resultados -->
+        <div id="ganadores" class="winners-box">
+            <h2>Resultados Oficiales</h2>
+            <img src="373959.jpg" alt="Ganadores" style="width: 100%; border-radius: 10px; margin-bottom: 20px;">
+            <p><strong>Número Ganador (Lotería de Cundinamarca):</strong></p>
+            <p class="winner-number">0623</p>
+            <p>Premio: Moto Honda XR 190</p>
+        </div>
+
+        <!-- Slideshow Container -->
         <div class="slideshow-container">
             <!-- Ganadores Acumulados -->
             <div class="mySlides fade">
