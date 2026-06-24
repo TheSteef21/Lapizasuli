@@ -12,7 +12,6 @@
         .sidebar a { padding: 15px 25px; text-decoration: none; font-size: 18px; color: #aaa; display: block; transition: 0.3s; border-left: 3px solid transparent; }
         .sidebar a:hover { color: #fff; background-color: #2a0000; border-left: 3px solid #e50914; }
 
-        /* Main Content Adjustment */
         .main-content { margin-left: 180px; padding: 20px; text-align: center; }
 
         .promo-card, .winners-box { background: #1a1a1a; padding: 20px; border-radius: 15px; max-width: 600px; margin: 20px auto; border: 2px solid #e50914; }
@@ -22,8 +21,9 @@
         .price { color: #ffcc00; font-size: 1.4em; font-weight: bold; }
         
         /* Winners Styles */
-        .winners-box { border-color: #ffcc00; }
-        .winner-number { color: #00ff00; font-size: 3em; font-weight: bold; margin: 10px 0; }
+        .winners-box { border-color: #ffcc00; text-align: center; }
+        .winner-number { color: #00ff00; font-size: 2.5em; font-weight: bold; margin: 10px 0; }
+        .winner-entry { border-bottom: 1px solid #444; padding: 20px 0; }
         
         /* Slideshow Styles */
         .slideshow-container { max-width: 600px; position: relative; margin: 40px auto; }
@@ -37,7 +37,6 @@
 </head>
 <body>
 
-    <!-- Menú Lateral -->
     <div class="sidebar">
         <a href="#inicio">Inicio</a>
         <a href="#ganadores">Ganadores</a>
@@ -50,60 +49,50 @@
             <p>Misión SADV41 - Colombia</p>
         </header>
 
-        <!-- Tarjeta Principal -->
         <div class="promo-card">
             <img src="IMG-20260620-WA0079.jpg" alt="Tómbola" style="width: 100%; border-radius: 10px;">
             <h2>Tómbolas Activas</h2>
-            <p><strong>Premios: Motos y Carros</strong></p>
-
             <div class="oferta-box">
                 <h3>REMATE DE BOLETAS</h3>
                 <p>3 Boletas para Rifa del Carro: <span class="price">$85.000</span></p>
             </div>
-
-            <div class="oferta-box">
-                <h3>BOLETAS DE VUELTA</h3>
-                <p>2 Boletas: <span class="price">$50.000</span></p>
-            </div>
-
             <a href="https://wa.me/573183434492" class="btn-participar">Contactar por WhatsApp</a>
         </div>
 
-        <!-- Resultados -->
         <div id="ganadores" class="winners-box">
-            <h2>Resultados Oficiales</h2>
-            <img src="373959.jpg" alt="Ganadores" style="width: 100%; border-radius: 10px; margin-bottom: 20px;">
-            <p><strong>Número Ganador (Lotería de Cundinamarca):</strong></p>
-            <p class="winner-number">0623</p>
-            <p>Premio: Moto Honda XR 190</p>
+            <h2>Resultados Oficiales Acumulados</h2>
+            
+            <!-- Ganador 1 -->
+            <div class="winner-entry">
+                <img src="373959.jpg" alt="Ganador Lunes" style="width: 100%; border-radius: 10px;">
+                <p><strong>Lunes 22 Junio:</strong></p>
+                <p class="winner-number">0623</p>
+            </div>
+
+            <!-- Ganador 2 -->
+            <div class="winner-entry">
+                <img src="374741.jpg" alt="Ganador Martes" style="width: 100%; border-radius: 10px;">
+                <p><strong>Martes 23 Junio:</strong></p>
+                <p class="winner-number">1608</p>
+            </div>
+
+            <!-- Ganador 3 -->
+            <div class="winner-entry" style="border-bottom: none;">
+                <img src="IMG-20260624-WA0000.jpg" alt="Ganador Miércoles" style="width: 100%; border-radius: 10px;">
+                <p><strong>Miércoles 24 Junio:</strong></p>
+                <p class="winner-number">1623</p>
+            </div>
         </div>
 
-        <!-- Slideshow Container -->
         <div class="slideshow-container">
-            <!-- Ganadores Acumulados -->
-            <div class="mySlides fade">
-                <img src="373959.jpg" alt="Ganador 1">
-                <div class="date-label">Registrado: Lunes 22 Junio 2026</div>
-            </div>
-            <div class="mySlides fade">
-                <img src="374741.jpg" alt="Ganador 2">
-                <div class="date-label">Registrado: Martes 23 Junio 2026</div>
-            </div>
-            <div class="mySlides fade">
-                <img src="IMG-20260624-WA0000.jpg" alt="Ganador 3">
-                <div class="date-label">Registrado: Miércoles 24 Junio 2026</div>
-            </div>
-
-            <!-- Assets -->
-            <div class="mySlides fade"><img src="IMG-20260620-WA0078.jpg" alt="Asset"></div>
-            <div class="mySlides fade"><img src="IMG-20260620-WA0081.jpg" alt="Asset"></div>
-            <div class="mySlides fade"><img src="IMG-20260623-WA0025.jpg" alt="Asset"></div>
-            <div class="mySlides fade"><img src="IMG-20260623-WA0026.jpg" alt="Asset"></div>
-            <div class="mySlides fade"><video controls><source src="VID-20260620-WA0076.mp4" type="video/mp4"></video></div>
-            <div class="mySlides fade"><video controls><source src="VID-20260620-WA0080.mp4" type="video/mp4"></video></div>
-            <div class="mySlides fade"><video controls><source src="VID-20260620-WA0082.mp4" type="video/mp4"></video></div>
-            <div class="mySlides fade"><video controls><source src="VID-20260623-WA0027.mp4" type="video/mp4"></video></div>
-            <div class="mySlides fade"><video controls><source src="VID-20260623-WA0028.mp4" type="video/mp4"></video></div>
+            <!-- Ganadores en Slideshow -->
+            <div class="mySlides fade"><img src="373959.jpg"><div class="date-label">Lunes 22/06/2026</div></div>
+            <div class="mySlides fade"><img src="374741.jpg"><div class="date-label">Martes 23/06/2026</div></div>
+            <div class="mySlides fade"><img src="IMG-20260624-WA0000.jpg"><div class="date-label">Miércoles 24/06/2026</div></div>
+            
+            <!-- Otros Assets -->
+            <div class="mySlides fade"><img src="IMG-20260620-WA0078.jpg"></div>
+            <div class="mySlides fade"><img src="IMG-20260623-WA0025.jpg"></div>
         </div>
     </main>
 
