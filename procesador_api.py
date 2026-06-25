@@ -17,7 +17,6 @@ app = FastAPI(
     description="Servicio unificado bajo la ley SADV41 que integra el núcleo analítico en tiempo real (USGS), proxy seguro y Webhook activo."
 )
 
-# Configuración de CORS total para evitar bloqueos en tu Frontend (GitHub Pages)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -41,7 +40,6 @@ except (ValueError, TypeError):
 def procesar_flujo_sísmico():
     """Conecta en tiempo real con la API del USGS para capturar sismos reales bajo la Ley SADV41."""
     try:
-        # Obtenemos TODOS los sismos globales del último día
         url = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson"
         
         req = urllib.request.Request(url)
@@ -50,20 +48,17 @@ def procesar_flujo_sísmico():
         
         eventos_reales = []
         
-        # Iteramos sobre los sismos detectados
         for feature in datos["features"]:
             props = feature["properties"]
-            coords = feature["geometry"]["coordinates"] # [longitud, latitud, profundidad]
+            coords = feature["geometry"]["coordinates"]
             lugar = props["place"] if props["place"] else "Ubicación Desconocida"
-            
-            # FILTRO SADV41: Descomenta las siguientes 2 líneas si SOLO quieres atrapar los de Panamá
-            # if "Panama" not in lugar: 
-            #     continue
 
-            # Empaquetamos el sismo real bajo tu estructura de variables
+            # Empaquetamos el sismo real con AMBAS zonas horarias
             evento = {
                 "id": feature["id"],
-                "fecha_hora": datetime.fromtimestamp(props["time"] / 1000).strftime("%Y-%m-%d %H:%M:%S"),
+                "fecha_hora": datetime.fromtimestamp((props["time"] / 1000) - 18000).strftime("%Y-%m-%d %H:%M:%S"), # Mantiene compatibilidad con tu vista actual
+                "fecha_hora_local": datetime.fromtimestamp((props["time"] / 1000) - 18000).strftime("%Y-%m-%d %H:%M:%S"), # UTC-5 (Panamá/Bogotá/Lima)
+                "fecha_hora_utc": datetime.fromtimestamp(props["time"] / 1000).strftime("%Y-%m-%d %H:%M:%S"), # UTC (Meridiano 0)
                 "magnitud": round(props["mag"], 1) if props["mag"] else 0.0,
                 "profundidad_km": round(coords[2], 1),
                 "ubicacion": lugar,
@@ -72,27 +67,23 @@ def procesar_flujo_sísmico():
                 "longitud": coords[0],
                 "google_maps_url": f"https://maps.google.com/?q={coords[1]},{coords[0]}",
                 "familia_redpy": "Familia Tectónica (USGS Real)", 
-                "coeficiente_correlacion": 0.99, # Al ser un dato real y confirmado
+                "coeficiente_correlacion": 0.99,
                 "ondas_coincidentes": 1 
             }
             
             eventos_reales.append(evento)
             
-            # Limitamos la salida a los 10 más recientes para no saturar la RAM ni tu frontend
             if len(eventos_reales) >= 10:
                 break
                 
         return eventos_reales
 
     except urllib.error.URLError as e:
-        # Prevención estricta: Controlamos un Error 14 de red para que no escale a un Error 41 en la lógica de la misión
         print(f"[ERROR DE RED - INTERCEPTADO] Falla al conectar con el entorno sísmico global: {e}")
-        return [] # Retorna vacío para mantener el monitoreo estable y no tumbar la API
+        return [] 
 
 
 def generar_diagnostico_ia(eventos, umbral):
-    """Interpreta los multipletes repetitivos frente al umbral dinámico de la ley de gracia."""
-    # Escudo protector: Si no hay eventos (por error de red o falta de sismos), evitamos el Error 41.
     if not eventos:
         return "[MONITOREO ESTABLE]: Sin registros sísmicos recientes o en espera de telemetría."
 
@@ -115,72 +106,41 @@ def generar_diagnostico_ia(eventos, umbral):
 
 
 # 4. GESTIÓN DE ENDPOINTS (RUTAS DE LA API)
-
-# Ruta 4.1: Raíz (Verificación de estado online en Render)
 @app.get("/")
 def read_root():
-    return {
-        "status": "online",
-        "mision": "SADV41",
-        "servicio": "Procesador Analítico de Sismos Activo",
-        "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    }
+    return {"status": "online", "mision": "SADV41", "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
 
-
-# Ruta 4.2: Endpoint Proxy Unificado (Sirve los datos en tiempo real compatibles con el Frontend)
 @app.get("/api/sismos")
 async def obtener_sismos():
-    print("\n==================================================")
-    print("INICIANDO PROCESAMIENTO SÍSMICO - ENTORNO SADV41 (PROXY SECURE)")
-    print("==================================================")
-    
     eventos = procesar_flujo_sísmico()
     analisis_ia = generar_diagnostico_ia(eventos, UMBRAL_ALERTA)
     
-    print("[ÉXITO] Análisis dinámico finalizado. Flujo empaquetado de forma segura.")
     return {
         "status": "Sincronizado con el entorno analítico protegido",
-        "acumulado_total": len(eventos), # Ajustado para reflejar los capturados reales
+        "acumulado_total": len(eventos),
         "conteo_eventos": len(eventos),
         "umbral_aplicado": UMBRAL_ALERTA,
         "eventos": eventos,
         "analisis_ia": analisis_ia
     }
 
-
-# Ruta 4.3: Webhook de Entrada
 @app.post("/webhook")
 async def recibir_sismos(request: Request):
-    print("\n==================================================")
-    print("WEBHOOK RECEPTOR - ENTORNO ANALÍTICO SADV41 SISMOS")
-    print("==================================================")
     try:
         payload = await request.json()
-        print(f"-> Alerta de sismo externa interceptada con éxito: {payload}")
-        
-        return {
-            "status": "success", 
-            "message": "Alerta procesada y registrada bajo los parámetros de la ley SADV41"
-        }
+        return {"status": "success", "message": "Alerta procesada y registrada bajo los parámetros de la ley SADV41"}
     except Exception as e:
-        print(f"[ERROR WEBHOOK] Falla al decodificar la transmisión: {e}")
         raise HTTPException(status_code=400, detail=f"Error procesando datos: {str(e)}")
 
 
-# 5. EJECUCIÓN SCRIPT LOCAL (COMPATIBILIDAD CON TERMUX / UVICORN)
+# 5. EJECUCIÓN SCRIPT LOCAL
 if __name__ == "__main__":
-    print("==================================================")
-    print("INICIANDO PROCESAMIENTO SÍSMICO - ENTORNO LOCAL SADV41")
-    print("==================================================")
-    
     eventos_locales = procesar_flujo_sísmico()
     try:
         with open(ARCHIVO_DATOS, "w", encoding="utf-8") as f:
             json.dump(eventos_locales, f, indent=4, ensure_ascii=False)
-        print(f"[ÉXITO LOCAL] Datos respaldados correctamente en '{ARCHIVO_DATOS}'.")
     except Exception as e:
         print(f"[FALLA DETECTADA] No se pudo escribir el archivo local: {e}")
 
     import uvicorn
-    print("\nLevantando servidor de desarrollo local...")
     uvicorn.run("procesador_api:app", host="127.0.0.1", port=8000, reload=True)
