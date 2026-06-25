@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sovereign Hub | SADV41, FIFA World Cup 2026 & Monitoreo Sísmico</title>
+    <title>Sovereign Hub | SADV41, FIFA World Cup 2026, OECS & Monitoreo Sísmico</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght=300;400;600&family=Playfair+Display:ital,wght=0,700;1,700&display=swap" rel="stylesheet">
     
@@ -41,152 +41,41 @@
             background-attachment: fixed;
             color: #f8fafc;
         }
-        .glass {
-            background: rgba(2, 6, 23, 0.85);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(234, 179, 8, 0.2);
-        }
-        .glass-mundial {
-            background: rgba(2, 6, 23, 0.60);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(16, 185, 129, 0.3);
-        }
-        .glass-sismico {
-            background: #161b22;
-            border: 1px solid #30363d;
-        }
-        .text-shadow-oro {
-            text-shadow: 0 0 10px rgba(234, 179, 8, 0.5);
-        }
-        .text-shadow-green {
-            text-shadow: 0 0 10px rgba(16, 185, 129, 0.6);
-        }
-        .text-shadow-blue {
-            text-shadow: 0 0 10px rgba(0, 243, 255, 0.6);
-        }
-        .sismo-card {
-            background-color: #1f242c;
-            border-left: 5px solid #ff6b81;
-        }
+        .glass { background: rgba(2, 6, 23, 0.85); backdrop-filter: blur(12px); border: 1px solid rgba(234, 179, 8, 0.2); }
+        .glass-mundial { background: rgba(2, 6, 23, 0.60); backdrop-filter: blur(8px); border: 1px solid rgba(16, 185, 129, 0.3); }
+        .glass-sismico { background: #161b22; border: 1px solid #30363d; }
+        .text-shadow-oro { text-shadow: 0 0 10px rgba(234, 179, 8, 0.5); }
+        .text-shadow-green { text-shadow: 0 0 10px rgba(16, 185, 129, 0.6); }
+        .text-shadow-blue { text-shadow: 0 0 10px rgba(0, 243, 255, 0.6); }
+        .sismo-card { background-color: #1f242c; border-left: 5px solid #ff6b81; }
 
         /* --- ENTORNO SOBERANO ADICIONAL --- */
-        .scanline {
-            width: 100%;
-            height: 2px;
-            background: rgba(0, 209, 255, 0.1);
-            position: fixed;
-            z-index: 50;
-            top: 0;
-            pointer-events: none;
-            animation: scanline 8s linear infinite;
-        }
-        @keyframes scanline {
-            0% { top: 0; }
-            100% { top: 100%; }
-        }
-
+        .scanline { width: 100%; height: 2px; background: rgba(0, 209, 255, 0.1); position: fixed; z-index: 50; top: 0; pointer-events: none; animation: scanline 8s linear infinite; }
+        @keyframes scanline { 0% { top: 0; } 100% { top: 100%; } }
         .bloom-text-blue { text-shadow: 0 0 8px rgba(0, 209, 255, 0.8), 0 0 15px rgba(0, 209, 255, 0.5); }
         
-        .glass-panel {
-            background: rgba(10, 10, 20, 0.75);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(0, 209, 255, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-        .glass-panel::before {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; width: 4px; height: 100%;
-            background: #00D1FF;
-            box-shadow: 0 0 10px #00D1FF;
-        }
+        .glass-panel { background: rgba(10, 10, 20, 0.75); backdrop-filter: blur(12px); border: 1px solid rgba(0, 209, 255, 0.3); position: relative; overflow: hidden; }
+        .glass-panel::before { content: ""; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: #00D1FF; box-shadow: 0 0 10px #00D1FF; }
 
-        .rotating-mesh {
-            animation: holographicRotation 10s linear infinite alternate;
-            transform-origin: center;
-        }
-        @keyframes holographicRotation {
-            0% { transform: scaleX(1) skewY(0deg); filter: brightness(1) drop-shadow(0 0 2px rgba(0,255,255,0.3)); }
-            50% { transform: scaleX(0.95) skewY(0.5deg); filter: brightness(1.2) drop-shadow(0 0 8px rgba(0,255,255,0.6)); }
-            100% { transform: scaleX(1) skewY(0deg); filter: brightness(1) drop-shadow(0 0 2px rgba(0,255,255,0.3)); }
-        }
+        .rotating-mesh { animation: holographicRotation 10s linear infinite alternate; transform-origin: center; }
+        @keyframes holographicRotation { 0% { transform: scaleX(1) skewY(0deg); filter: brightness(1) drop-shadow(0 0 2px rgba(0,255,255,0.3)); } 50% { transform: scaleX(0.95) skewY(0.5deg); filter: brightness(1.2) drop-shadow(0 0 8px rgba(0,255,255,0.6)); } 100% { transform: scaleX(1) skewY(0deg); filter: brightness(1) drop-shadow(0 0 2px rgba(0,255,255,0.3)); } }
 
-        .chassis-viewport {
-            position: relative;
-            width: 100%;
-            height: 170px;
-            background: rgba(5, 5, 10, 0.6);
-            border: 1px dashed rgba(0, 209, 255, 0.25);
-            background-size: cover;
-            background-position: center;
-        }
-
-        .tire-profile {
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(0,0,0,0.85) 30%, rgba(20,20,30,0.95) 70%);
-            box-shadow: 0 0 12px rgba(0, 209, 255, 0.3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            animation: tireSpin 3s linear infinite;
-        }
-        @keyframes tireSpin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
+        .chassis-viewport { position: relative; width: 100%; height: 170px; background: rgba(5, 5, 10, 0.6); border: 1px dashed rgba(0, 209, 255, 0.25); background-size: cover; background-position: center; }
+        .tire-profile { border-radius: 50%; background: radial-gradient(circle, rgba(0,0,0,0.85) 30%, rgba(20,20,30,0.95) 70%); box-shadow: 0 0 12px rgba(0, 209, 255, 0.3); display: flex; align-items: center; justify-content: center; animation: tireSpin 3s linear infinite; }
+        @keyframes tireSpin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         .tire-slick { border: 4px solid #00D1FF; }
         .tire-semi { border: 5px double #FF00E5; }
         .tire-wet { border: 4px dashed #FFB800; }
+        .rim-lines { width: 80%; height: 80%; border-radius: 50%; border: 1px dashed rgba(0, 255, 255, 0.5); position: relative; }
+        .rim-lines::before, .rim-lines::after { content: ''; position: absolute; background: rgba(0, 255, 255, 0.4); top: 50%; left: 50%; transform: translate(-50%, -50%); }
+        .rim-lines::before { width: 100%; height: 1px; } .rim-lines::after { width: 1px; height: 100%; }
 
-        .rim-lines {
-            width: 80%; height: 80%;
-            border-radius: 50%;
-            border: 1px dashed rgba(0, 255, 255, 0.5);
-            position: relative;
-        }
-        .rim-lines::before, .rim-lines::after {
-            content: ''; position: absolute; background: rgba(0, 255, 255, 0.4);
-            top: 50%; left: 50%; transform: translate(-50%, -50%);
-        }
-        .rim-lines::before { width: 100%; height: 1px; }
-        .rim-lines::after { width: 1px; height: 100%; }
+        .knob-slider { -webkit-appearance: none; width: 100%; background: transparent; }
+        .knob-slider::-webkit-slider-runnable-track { width: 100%; height: 6px; background: rgba(0, 209, 255, 0.15); border-radius: 3px; border: 1px solid rgba(0, 209, 255, 0.3); }
+        .knob-slider::-webkit-slider-thumb { height: 16px; width: 16px; border-radius: 50%; background: #FF00E5; cursor: pointer; -webkit-appearance: none; margin-top: -5px; box-shadow: 0 0 8px #FF00E5; border: 2px solid #FFF; }
 
-        .knob-slider {
-            -webkit-appearance: none;
-            width: 100%;
-            background: transparent;
-        }
-        .knob-slider::-webkit-slider-runnable-track {
-            width: 100%; height: 6px;
-            background: rgba(0, 209, 255, 0.15);
-            border-radius: 3px;
-            border: 1px solid rgba(0, 209, 255, 0.3);
-        }
-        .knob-slider::-webkit-slider-thumb {
-            height: 16px; width: 16px; border-radius: 50%;
-            background: #FF00E5; cursor: pointer;
-            -webkit-appearance: none; margin-top: -5px;
-            box-shadow: 0 0 8px #FF00E5; border: 2px solid #FFF;
-        }
-
-        /* --- ESTILOS DE MÓDULOS DE IA Y SUSCRIPCIÓN --- */
-        .module-card {
-            background: rgba(10, 15, 25, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            padding: 1.5rem;
-            border-radius: 1rem;
-        }
-        .input-dark {
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(0, 209, 255, 0.3);
-            color: white;
-            padding: 0.75rem;
-            border-radius: 0.5rem;
-            width: 100%;
-        }
+        .module-card { background: rgba(10, 15, 25, 0.8); border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); padding: 1.5rem; border-radius: 1rem; }
+        .input-dark { background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(0, 209, 255, 0.3); color: white; padding: 0.75rem; border-radius: 0.5rem; width: 100%; }
     </style>
 </head>
 <body class="font-sans antialiased selection:bg-oro selection:text-navy">
@@ -211,19 +100,13 @@
         </nav>
 
         <div class="flex flex-wrap gap-2 justify-center">
-            <button onclick="loginSocial('google')" class="bg-white hover:bg-slate-200 text-slate-900 font-semibold text-xs px-3 py-2 rounded transition-all flex items-center gap-1.5 shadow cursor-pointer">
-                🌐 Google Connect
-            </button>
-            <button onclick="loginSocial('github')" class="bg-slate-800 hover:bg-slate-700 text-white font-semibold text-xs px-3 py-2 rounded transition-all flex items-center gap-1.5 border border-slate-700 cursor-pointer">
-                💻 GitHub Access
-            </button>
-            <button id="btnConnect" onclick="connectBinance()" class="bg-oro hover:bg-amber-600 text-navy font-bold text-xs px-3 py-2 rounded transition-all flex items-center gap-1.5 shadow-lg shadow-oro/20 cursor-pointer">
-                ⚡ Binance Web3 Wallet
-            </button>
+            <button onclick="loginSocial('google')" class="bg-white hover:bg-slate-200 text-slate-900 font-semibold text-xs px-3 py-2 rounded transition-all flex items-center gap-1.5 shadow cursor-pointer">🌐 Google Connect</button>
+            <button onclick="loginSocial('github')" class="bg-slate-800 hover:bg-slate-700 text-white font-semibold text-xs px-3 py-2 rounded transition-all flex items-center gap-1.5 border border-slate-700 cursor-pointer">💻 GitHub Access</button>
+            <button id="btnConnect" onclick="connectBinance()" class="bg-oro hover:bg-amber-600 text-navy font-bold text-xs px-3 py-2 rounded transition-all flex items-center gap-1.5 shadow-lg shadow-oro/20 cursor-pointer">⚡ Binance Web3 Wallet</button>
         </div>
     </header>
 
-    <main class="pt-36 pb-12 px-6 max-w-6xl mx-auto space-y-16">
+    <main class="pt-36 pb-12 px-6 max-w-6xl mx-auto space-y-12">
         
         <div id="walletStatus" class="hidden max-w-lg mx-auto p-4 bg-gray-900/90 border border-oro/40 rounded-xl font-mono shadow-2xl">
             <div class="flex items-center gap-2 mb-1">
@@ -256,6 +139,28 @@
             </section>
         </div>
 
+        <section id="oecs-noticia-ampliada" class="glass-panel p-6 md:p-8 rounded-2xl shadow-2xl max-w-4xl mx-auto border-t-4 border-oro">
+            <div class="mb-6">
+                <div class="flex items-center gap-2 mb-2">
+                    <span class="text-[10px] text-oro uppercase tracking-widest font-mono bg-oro/10 px-2 py-0.5 rounded border border-oro/30">Inteligencia Comercial</span>
+                    <span class="text-[10px] text-emerald-400 uppercase tracking-widest font-mono bg-emerald-400/10 px-2 py-0.5 rounded border border-emerald-400/30">OECS Strategy</span>
+                </div>
+                <h2 class="text-2xl md:text-3xl font-bold text-white font-serif mb-3 flex items-center gap-2 text-shadow-oro">Estrategia OECS para Abaratar Importaciones</h2>
+                <p class="text-sm text-slate-300 leading-relaxed max-w-2xl">La Organización de Estados del Caribe Oriental (OECS) ha propuesto priorizar comercialmente a Panamá y República Dominicana, combatiendo la inflación regional mediante la suspensión del Arancel Externo Común (CET) y evitando rutas logísticas intermediarias.</p>
+            </div>
+            
+            <button onclick="document.getElementById('suscribeModal').style.display='flex'" class="w-full bg-oro hover:bg-amber-500 text-navy font-extrabold py-3.5 px-6 rounded-xl transition-all shadow-[0_0_15px_rgba(234,179,8,0.3)] active:scale-95 flex justify-center items-center gap-2 uppercase tracking-wide text-sm">
+                🎙️ Ver Detalle Estratégico (Requiere Suscripción)
+            </button>
+
+            <div class="mt-8 border-t border-white/10 pt-6">
+                <h3 class="bloom-text-blue font-mono text-sm uppercase tracking-widest font-bold text-neonBlue mb-4 flex items-center gap-2">📺 Slideshow de Inteligencia Analítica</h3>
+                <div class="rounded-xl overflow-hidden border border-cyan-500/30 bg-black shadow-lg relative">
+                    <iframe src="https://notebooklm.google.com/notebook/f285a4d4-9d36-4896-b103-8c3b85e52d9c/artifact/01be5d68-da86-4530-aa4f-2383598463a2?utm_source=nlmm_share" width="100%" height="450px" frameborder="0" class="w-full"></iframe>
+                </div>
+            </div>
+        </section>
+
         <section id="world-cup-tracking" class="glass-mundial rounded-2xl overflow-hidden shadow-2xl max-w-lg mx-auto">
             <div class="p-8 text-center border-b border-white/5 bg-gradient-to-b from-emerald-500/10 to-transparent">
                 <h2 class="font-serif text-2xl md:text-3xl text-white font-extrabold tracking-wider text-shadow-green uppercase">GSADV41 FEED GLOBAL</h2>
@@ -266,19 +171,6 @@
             </div>
 
             <div class="p-6 space-y-4 bg-slate-950/60">
-                
-                <!-- NEW CARD: OECS Macroeconomía -->
-                <div class="bg-gradient-to-r from-amber-900/30 to-slate-900 border-l-4 border-oro p-4 rounded-r-xl transition-all hover:translate-x-1 hover:bg-amber-900/40 cursor-pointer shadow-[0_0_15px_rgba(234,179,8,0.1)]">
-                    <div class="flex justify-between items-center mb-2">
-                        <span class="text-sm font-bold text-white flex items-center gap-1.5">🌐 Alerta OECS: Prioridad Comercial</span>
-                        <span class="text-[10px] text-oro uppercase tracking-wider font-mono bg-oro/10 px-2 py-0.5 rounded">Macroeconomía</span>
-                    </div>
-                    <p class="text-xs text-slate-300 leading-relaxed font-sans">
-                        La Organización de Estados del Caribe Oriental propone suspender el Arancel Externo Común (CET) y utilizar a <strong class="text-white">Panamá</strong> y RD como ejes directos para combatir la inflación, evitando intermediarios para abaratar importaciones logísticas.
-                    </p>
-                </div>
-
-                <!-- NEW CARD: Messi & Cristo -->
                 <div class="bg-gradient-to-r from-blue-900/40 to-slate-900 border-l-4 border-[#00f3ff] p-4 rounded-r-xl transition-all hover:translate-x-1 hover:bg-blue-900/60 cursor-pointer shadow-[0_0_15px_rgba(0,243,255,0.15)]">
                     <div class="flex justify-between items-center mb-1">
                         <span class="text-sm font-bold text-white flex items-center gap-2">👑 Z-Score: 5.9σ Above Average</span>
@@ -295,14 +187,6 @@
                         <span class="text-[10px] text-emerald-400 uppercase tracking-wider font-semibold">Finalizado</span>
                     </div>
                     <p class="text-xs text-slate-400 leading-relaxed">Panamá vs. Ghana. El regreso de la selección absoluta a la cita mundialista de la FIFA tras 8 años de espera.</p>
-                </div>
-
-                <div class="bg-white/[0.02] border-l-4 border-amber-500 p-4 rounded-r-xl transition-all hover:translate-x-1 hover:bg-white/[0.04] cursor-pointer hidden md:block">
-                    <div class="flex justify-between items-center mb-1">
-                        <span class="text-sm font-bold text-white">Procesamiento de Gráficos</span>
-                        <span class="text-[10px] text-amber-400 font-mono">Pillow Layer Active</span>
-                    </div>
-                    <p class="text-xs text-slate-400 leading-relaxed">Generación de fondos automatizados y assets de imagen renderizados dinámicamente según estadísticas de la FIFA.</p>
                 </div>
             </div>
         </section>
@@ -400,6 +284,22 @@
         </section>
 
     </main>
+
+    <div id="suscribeModal" class="fixed inset-0 z-[1000] hidden items-center justify-center bg-black/80 backdrop-blur-md">
+        <div class="bg-slate-900 border border-oro/50 rounded-2xl p-8 max-w-sm w-[90%] text-center shadow-[0_0_30px_rgba(234,179,8,0.2)]">
+            <div class="text-4xl mb-4">🔐</div>
+            <h2 class="text-xl font-serif text-white font-bold mb-3 tracking-wide">¡Acceso Restringido!</h2>
+            <p class="text-xs text-slate-300 mb-6 leading-relaxed">Para escuchar el audio de las noticias y visualizar el detalle completo de la estrategia de la OECS, es <strong>obligatorio</strong> suscribirse a la plataforma.</p>
+            
+            <a href="https://notebooklm.google.com/notebook/f285a4d4-9d36-4896-b103-8c3b85e52d9c/artifact/d51baa17-1d77-4c52-b506-a5d52b54681f?utm_source=nlmm_share" target="_blank" class="block w-full bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-white font-bold py-3 rounded-xl transition-all mb-4 shadow-lg active:scale-95 text-sm uppercase tracking-wider">
+                Ir a Suscribirse
+            </a>
+            
+            <button onclick="document.getElementById('suscribeModal').style.display='none'" class="text-[10px] font-mono text-slate-500 hover:text-slate-300 underline transition-colors cursor-pointer">
+                Cerrar y Volver
+            </button>
+        </div>
+    </div>
 
     <script>
         const API_URL = "https://lapizasuli.onrender.com/api/sismos";
@@ -528,7 +428,7 @@
             }
         }
 
-        // --- PIPELINE DE CONEXIÓN WEB3 AUTH (BINANCE / METAMASK) ---
+        // --- PIPELINE DE CONEXIÓN WEB3 AUTH ---
         async function connectBinance() {
             const btn = document.getElementById('btnConnect');
             const statusDiv = document.getElementById('walletStatus');
@@ -545,23 +445,21 @@
                         btn.innerText = "🌐 Connected";
                         btn.className = "bg-green-600 text-white font-bold text-xs px-3 py-2 rounded transition-all shadow-md cursor-pointer flex items-center gap-1.5";
                     }
-                    console.log("Sincronización Web3 establecida con cuenta:", account);
                 } catch (error) {
                     console.error("Conexión denegada por el usuario o fallo en handshake", error);
                 }
             } else {
-                alert("No se detectó un proveedor Web3 (Binance Wallet / Inyección Provider). Si estás en tu smartphone, accede desde el dApp browser interno de la aplicación.");
+                alert("No se detectó un proveedor Web3 (Binance Wallet / Inyección Provider).");
                 window.open('https://web3.binance.com/en/referral?ref=ORCZSDLK', '_blank');
             }
         }
 
         function loginSocial(provider) { console.log("Social Auth Request: " + provider); }
 
-        // --- LÓGICA CONSOLIDADA DE MÓDULOS DE IA Y SUSCRIPCIÓN ---
+        // --- LÓGICA CONSOLIDADA (IA, Formulario y Modal) ---
         const subForm = document.getElementById('subscribeForm');
         if(subForm) {
             subForm.addEventListener('submit', async (e) => {
-                // Formspree maneja el action, aquí solo damos aviso visual
                 document.getElementById('message').innerText = "Enviando solicitud...";
             });
         }
@@ -573,7 +471,6 @@
                 const responseDiv = document.getElementById('aiResponse');
                 
                 if(!userInput) return;
-
                 responseDiv.innerText = "Consultando base de datos...";
 
                 try {
@@ -582,13 +479,20 @@
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ pregunta: userInput }),
                     });
-
                     const data = await response.json();
                     responseDiv.innerText = data.choices ? data.choices[0].message.content : "Error de respuesta.";
                 } catch (error) {
                     responseDiv.innerText = "Error: El servidor IA SADV41 no responde.";
                 }
             });
+        }
+
+        // --- CIERRE DEL MODAL AL HACER CLIC FUERA DE ÉL ---
+        window.onclick = function(event) {
+            let modal = document.getElementById('suscribeModal');
+            if (event.target == modal) { 
+                modal.style.display = "none"; 
+            }
         }
 
         // Inicializador Sincrónico Unificado
