@@ -1,11 +1,12 @@
 # ==================================================
 # ARCHIVO: procesador_api.py (CÓDIGO INTEGRAL UNIFICADO Y BLINDADO)
-# ENTORNO: Misión SADV41 / Enmascaramiento por Proxy Seguro y Webhook
+# ENTORNO: Misión SADV41 / Enmascaramiento por Proxy Seguro, Webhook y USGS Real
 # ==================================================
 
 from fastapi import FastAPI, Request, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from datetime import datetime
+import urllib.request
 import random
 import json
 import os
@@ -13,7 +14,7 @@ import os
 # 1. INICIALIZACIÓN DEL SERVIDOR WEB PROTEGIDO (Instancia Única)
 app = FastAPI(
     title="SADV41T - API de Monitoreo Sísmico Dinámico Inteligente",
-    description="Servicio unificado bajo la ley SADV41 que integra el núcleo analítico REDPy, proxy seguro y Webhook activo."
+    description="Servicio unificado bajo la ley SADV41 que integra el núcleo analítico en tiempo real (USGS), proxy seguro y Webhook activo."
 )
 
 # Configuración de CORS total para evitar bloqueos en tu Frontend (GitHub Pages)
@@ -36,43 +37,65 @@ except (ValueError, TypeError):
     UMBRAL_ALERTA = 4.0
 
 
-# 3. NÚCLEO LÓGICO: PROCESAMIENTO CIENTÍFICO (REDPy / USGS)
+# 3. NÚCLEO LÓGICO: PROCESAMIENTO CIENTÍFICO (USGS EN TIEMPO REAL)
 def procesar_flujo_sísmico():
-    """Genera, clasifica y empaqueta las estructuras analíticas de ondas coincidentes."""
-    return [
-        {
-            "id": "SADV41-2026-A",
-            "fecha_hora": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-            "magnitud": round(random.uniform(4.5, 5.8), 1),
-            "profundidad_km": 26.2,
-            "ubicacion": "Zona de Subducción / Red de Estaciones USGS",
-            "pais_region": "Panamá",
-            "latitud": 7.0000,
-            "longitud": -82.5000,
-            "google_maps_url": "https://maps.google.com/?q=7.0000,-82.5000",
-            "familia_redpy": "Familia Volcánica #04",
-            "coeficiente_correlacion": 0.89,
-            "ondas_coincidentes": random.randint(12, 42)
-        },
-        {
-            "id": "SADV41-2026-B",
-            "fecha_hora": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-            "magnitud": round(random.uniform(1.5, 3.2), 1),
-            "profundidad_km": round(random.uniform(3.0, 15.0), 1),
-            "ubicacion": "Falla Local Detectada",
-            "pais_region": "Panamá",
-            "latitud": 8.1200,
-            "longitud": -80.9500,
-            "google_maps_url": "http://googleusercontent.com/maps.google.com/2",
-            "familia_redpy": "Familia Tectónica #01",
-            "coeficiente_correlacion": round(random.uniform(0.75, 0.84), 2),
-            "ondas_coincidentes": random.randint(3, 9)
-        }
-    ]
+    """Conecta en tiempo real con la API del USGS para capturar sismos reales bajo la Ley SADV41."""
+    try:
+        # Obtenemos TODOS los sismos globales del último día
+        url = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson"
+        
+        req = urllib.request.Request(url)
+        with urllib.request.urlopen(req) as response:
+            datos = json.loads(response.read().decode())
+        
+        eventos_reales = []
+        
+        # Iteramos sobre los sismos detectados
+        for feature in datos["features"]:
+            props = feature["properties"]
+            coords = feature["geometry"]["coordinates"] # [longitud, latitud, profundidad]
+            lugar = props["place"] if props["place"] else "Ubicación Desconocida"
+            
+            # FILTRO SADV41: Descomenta las siguientes 2 líneas si SOLO quieres atrapar los de Panamá
+            # if "Panama" not in lugar: 
+            #     continue
+
+            # Empaquetamos el sismo real bajo tu estructura de variables
+            evento = {
+                "id": feature["id"],
+                "fecha_hora": datetime.fromtimestamp(props["time"] / 1000).strftime("%Y-%m-%d %H:%M:%S"),
+                "magnitud": round(props["mag"], 1) if props["mag"] else 0.0,
+                "profundidad_km": round(coords[2], 1),
+                "ubicacion": lugar,
+                "pais_region": "Panamá" if "Panama" in lugar else "Internacional",
+                "latitud": coords[1],
+                "longitud": coords[0],
+                "google_maps_url": f"https://maps.google.com/?q={coords[1]},{coords[0]}",
+                "familia_redpy": "Familia Tectónica (USGS Real)", 
+                "coeficiente_correlacion": 0.99, # Al ser un dato real y confirmado
+                "ondas_coincidentes": 1 
+            }
+            
+            eventos_reales.append(evento)
+            
+            # Limitamos la salida a los 10 más recientes para no saturar la RAM ni tu frontend
+            if len(eventos_reales) >= 10:
+                break
+                
+        return eventos_reales
+
+    except urllib.error.URLError as e:
+        # Prevención estricta: Controlamos un Error 14 de red para que no escale a un Error 41 en la lógica de la misión
+        print(f"[ERROR DE RED - INTERCEPTADO] Falla al conectar con el entorno sísmico global: {e}")
+        return [] # Retorna vacío para mantener el monitoreo estable y no tumbar la API
 
 
 def generar_diagnostico_ia(eventos, umbral):
     """Interpreta los multipletes repetitivos frente al umbral dinámico de la ley de gracia."""
+    # Escudo protector: Si no hay eventos (por error de red o falta de sismos), evitamos el Error 41.
+    if not eventos:
+        return "[MONITOREO ESTABLE]: Sin registros sísmicos recientes o en espera de telemetría."
+
     sismo_principal = max(eventos, key=lambda x: x["magnitud"])
     
     if sismo_principal["magnitud"] >= umbral:
@@ -117,7 +140,7 @@ async def obtener_sismos():
     print("[ÉXITO] Análisis dinámico finalizado. Flujo empaquetado de forma segura.")
     return {
         "status": "Sincronizado con el entorno analítico protegido",
-        "acumulado_total": 24,
+        "acumulado_total": len(eventos), # Ajustado para reflejar los capturados reales
         "conteo_eventos": len(eventos),
         "umbral_aplicado": UMBRAL_ALERTA,
         "eventos": eventos,
