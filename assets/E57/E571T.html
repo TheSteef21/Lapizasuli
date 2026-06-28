@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esquina 57 | Tómbolas SADV41</title>
+    <style>
+        body { font-family: sans-serif; background-color: #0d0d0d; color: #fff; margin: 0; padding: 0; }
+        
+        /* Sidebar */
+        .sidebar { height: 100%; width: 160px; position: fixed; top: 0; left: 0; background-color: #1a1a1a; border-right: 2px solid #e50914; padding-top: 60px; z-index: 100; }
+        .sidebar a { padding: 15px 25px; text-decoration: none; font-size: 18px; color: #aaa; display: block; transition: 0.3s; border-left: 3px solid transparent; }
+        .sidebar a:hover { color: #fff; background-color: #2a0000; border-left: 3px solid #e50914; }
+
+        .main-content { margin-left: 180px; padding: 20px; text-align: center; }
+
+        .promo-card, .winners-box { background: #1a1a1a; padding: 20px; border-radius: 15px; max-width: 600px; margin: 20px auto; border: 2px solid #e50914; }
+        .btn-participar { background: #e50914; color: white; padding: 15px 30px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block; margin-top: 20px; }
+        
+        .oferta-box { background: #2a0000; padding: 15px; border-radius: 10px; margin: 15px 0; border: 1px solid #ffcc00; }
+        .price { color: #ffcc00; font-size: 1.4em; font-weight: bold; }
+        
+        /* Winners Styles */
+        .winners-box { border-color: #ffcc00; text-align: center; }
+        .winner-number { color: #00ff00; font-size: 2.5em; font-weight: bold; margin: 10px 0; }
+        .winner-entry { border-bottom: 1px solid #444; padding: 20px 0; }
+        .winner-entry:last-child { border-bottom: none; }
+        
+        /* Slideshow & Swipe Navigation */
+        #swipe-zone { overflow: hidden; touch-action: pan-y; cursor: grab; }
+        #swipe-zone:active { cursor: grabbing; }
+        .mySlides { display: none; background: #1a1a1a; border-radius: 10px; position: relative; width: 100%; }
+        .mySlides img, .mySlides video { width: 100%; height: auto; border-radius: 10px; display: block; }
+        .date-label { background: rgba(0,0,0,0.8); color: #ffcc00; padding: 8px 12px; position: absolute; bottom: 20px; left: 20px; border-radius: 5px; font-size: 0.9em; font-weight: bold; border: 1px solid #ffcc00; }
+        .swipe-hint { color: #aaa; font-size: 0.9em; margin-top: 10px; font-style: italic; }
+
+        /* EFECTO CASINO */
+        .casino-box {
+            position: relative;
+            background: #111;
+            padding: 15px;
+            border-radius: 20px;
+            max-width: 600px;
+            margin: 40px auto;
+            border: 6px dotted #ffcc00; /* Simulación de focos */
+            box-shadow: 0 0 20px #ffaa00, inset 0 0 20px #ffaa00;
+            animation: casino-lights 0.7s infinite alternate;
+        }
+
+        .casino-title {
+            color: #fff;
+            text-shadow: 0 0 10px #ff0055, 0 0 20px #ff0055;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        @keyframes casino-lights {
+            0% { border-color: #ffcc00; box-shadow: 0 0 15px #ffcc00, inset 0 0 15px #ffcc00; }
+            33% { border-color: #ff0055; box-shadow: 0 0 25px #ff0055, inset 0 0 25px #ff0055; }
+            66% { border-color: #00ffcc; box-shadow: 0 0 20px #00ffcc, inset 0 0 20px #00ffcc; }
+            100% { border-color: #cc00ff; box-shadow: 0 0 30px #cc00ff, inset 0 0 30px #cc00ff; }
+        }
+
+        .fade { animation-name: fade; animation-duration: 0.8s; }
+        @keyframes fade { from {opacity: .4} to {opacity: 1} }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <a href="#inicio">Inicio</a>
+        <a href="#preliminar">Preliminares</a>
+        <a href="#ganadores">Ganadores</a>
+        <a href="#info">Info</a>
+    </div>
+
+    <main class="main-content">
+        <header id="inicio">
+            <h1>Esquina 57</h1>
+            <p>Misión SADV41 - Colombia</p>
+        </header>
+
+        <div class="promo-card">
+            <img src="IMG-20260620-WA0079.jpg" alt="Tómbola" style="width: 100%; border-radius: 10px;">
+            <h2>Tómbolas Activas</h2>
+            <div class="oferta-box">
+                <h3>REMATE DE BOLETAS</h3>
+                <p>3 Boletas para Rifa del Carro: <span class="price">$85.000</span></p>
+            </div>
+            <a href="https://wa.me/573183434492" class="btn-participar">Contactar por WhatsApp</a>
+        </div>
+
+        <div id="preliminar" class="casino-box">
+            <div class="casino-title">🎰 Avances Preliminares 🎰</div>
+            
+            <div id="swipe-zone">
+                <div class="mySlides fade" style="display: block;">
+                    <video controls muted autoplay loop>
+                        <source src="VID-20260625-WA0027.mp4" type="video/mp4">
+                        Tu navegador no soporta el video.
+                    </video>
+                    <div class="date-label">Video - 25/06/2026</div>
+                </div>
+                
+                <div class="mySlides fade">
+                    <video controls muted autoplay loop>
+                        <source src="VID-20260625-WA0028.mp4" type="video/mp4">
+                        Tu navegador no soporta el video.
+                    </video>
+                    <div class="date-label">Video - 25/06/2026</div>
+                </div>
+
+                <div class="mySlides fade">
+                    <img src="IMG-20260625-WA0025.jpg">
+                    <div class="date-label">Foto - 25/06/2026</div>
+                </div>
+                <div class="mySlides fade">
+                    <img src="IMG-20260625-WA0026.jpg">
+                    <div class="date-label">Foto - 25/06/2026</div>
+                </div>
+                <div class="mySlides fade">
+                    <img src="IMG-20260625-WA0030.jpg">
+                    <div class="date-label">Foto - 25/06/2026</div>
+                </div>
+                <div class="mySlides fade">
+                    <img src="IMG-20260625-WA0032.jpg">
+                    <div class="date-label">Foto - 25/06/2026</div>
+                </div>
+            </div>
+            
+            <p class="swipe-hint">← Desliza hacia la izquierda o derecha para ver más →</p>
+        </div>
+
+        <div id="ganadores" class="winners-box">
+            <h2>Resultados Oficiales Acumulados</h2>
+            
+            <div class="winner-entry">
+                <p><strong>Lunes 22 Junio:</strong></p>
+                <p class="winner-number">0623</p>
+            </div>
+
+            <div class="winner-entry">
+                <p><strong>Martes 23 Junio:</strong></p>
+                <p class="winner-number">1608</p>
+            </div>
+
+            <div class="winner-entry">
+                <p><strong>Miércoles 24 Junio:</strong></p>
+                <p class="winner-number">1623</p>
+            </div>
+            
+            <div class="winner-entry">
+                <p><strong>Jueves 25 Junio:</strong></p>
+                <p class="winner-number" style="color: #fff; font-size: 1.5em; font-style: italic;">Pendiente...</p>
+            </div>
+        </div>
+
+        <div id="info" class="promo-card">
+            <h3>Información de Registro</h3>
+            <p>Referencia de archivo técnico: 1782412023725.jpeg</p>
+        </div>
+    </main>
+
+    <script>
+        let slideIndex = 0;
+        const slides = document.getElementsByClassName("mySlides");
+        
+        function showSlide(n) {
+            // Pausar todos los videos antes de cambiar
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+                let vid = slides[i].querySelector('video');
+                if(vid) vid.pause();
+            }
+            
+            if (n >= slides.length) slideIndex = 0;
+            if (n < 0) slideIndex = slides.length - 1;
+            
+            slides[slideIndex].style.display = "block";
+            
+            // Reproducir automáticamente el video si el slide actual tiene uno
+            let activeVid = slides[slideIndex].querySelector('video');
+            if(activeVid) activeVid.play();
+        }
+
+        // --- SISTEMA DE SWIPE NATIVO (SIN LIBRERÍAS) ---
+        let touchstartX = 0;
+        let touchendX = 0;
+        const swipeZone = document.getElementById('swipe-zone');
+
+        swipeZone.addEventListener('touchstart', function(event) {
+            touchstartX = event.changedTouches[0].screenX;
+        }, false);
+
+        swipeZone.addEventListener('touchend', function(event) {
+            touchendX = event.changedTouches[0].screenX;
+            handleGesture();
+        }, false);
+
+        function handleGesture() {
+            // Se requiere un deslizamiento mínimo de 40px para que se registre el cambio
+            if (touchendX < touchstartX - 40) {
+                showSlide(++slideIndex); // Deslizó hacia la izquierda (Siguiente)
+            }
+            if (touchendX > touchstartX + 40) {
+                showSlide(--slideIndex); // Deslizó hacia la derecha (Anterior)
+            }
+        }
+    </script>
+</body>
+</html>
