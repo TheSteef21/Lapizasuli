@@ -24,12 +24,48 @@
         .winners-box { border-color: #ffcc00; text-align: center; }
         .winner-number { color: #00ff00; font-size: 2.5em; font-weight: bold; margin: 10px 0; }
         .winner-entry { border-bottom: 1px solid #444; padding: 20px 0; }
+        .winner-entry:last-child { border-bottom: none; }
         
-        /* Slideshow */
+        /* Slideshow & Swipe Navigation */
         #swipe-zone { overflow: hidden; touch-action: pan-y; cursor: grab; }
+        #swipe-zone:active { cursor: grabbing; }
         .mySlides { display: none; background: #1a1a1a; border-radius: 10px; position: relative; width: 100%; }
         .mySlides img, .mySlides video { width: 100%; height: auto; border-radius: 10px; display: block; }
-        .date-label { background: rgba(0,0,0,0.8); color: #ffcc00; padding: 8px; position: absolute; bottom: 20px; left: 20px; border-radius: 5px; font-size: 0.8em; }
+        .date-label { background: rgba(0,0,0,0.8); color: #ffcc00; padding: 8px 12px; position: absolute; bottom: 20px; left: 20px; border-radius: 5px; font-size: 0.9em; font-weight: bold; border: 1px solid #ffcc00; }
+        .swipe-hint { color: #aaa; font-size: 0.9em; margin-top: 10px; font-style: italic; }
+
+        /* EFECTO CASINO */
+        .casino-box {
+            position: relative;
+            background: #111;
+            padding: 15px;
+            border-radius: 20px;
+            max-width: 600px;
+            margin: 40px auto;
+            border: 6px dotted #ffcc00;
+            box-shadow: 0 0 20px #ffaa00, inset 0 0 20px #ffaa00;
+            animation: casino-lights 0.7s infinite alternate;
+        }
+
+        .casino-title {
+            color: #fff;
+            text-shadow: 0 0 10px #ff0055, 0 0 20px #ff0055;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        @keyframes casino-lights {
+            0% { border-color: #ffcc00; box-shadow: 0 0 15px #ffcc00, inset 0 0 15px #ffcc00; }
+            33% { border-color: #ff0055; box-shadow: 0 0 25px #ff0055, inset 0 0 25px #ff0055; }
+            66% { border-color: #00ffcc; box-shadow: 0 0 20px #00ffcc, inset 0 0 20px #00ffcc; }
+            100% { border-color: #cc00ff; box-shadow: 0 0 30px #cc00ff, inset 0 0 30px #cc00ff; }
+        }
+
+        .fade { animation-name: fade; animation-duration: 0.8s; }
+        @keyframes fade { from {opacity: .4} to {opacity: 1} }
     </style>
 </head>
 <body>
@@ -38,6 +74,7 @@
         <a href="#inicio">Inicio</a>
         <a href="#preliminar">Galería</a>
         <a href="#ganadores">Ganadores</a>
+        <a href="#info">Info</a>
     </div>
 
     <main class="main-content">
@@ -55,7 +92,7 @@
             <div class="oferta-box">
                 <h3>VALOR BOLETA</h3>
                 <p class="price">$300.000 COP</p>
-                <hr>
+                <hr style="border: 1px solid #444;">
                 <p><strong>Plan de Premios:</strong></p>
                 <ul style="text-align: left; font-size: 0.9em;">
                     <li>Abona $30.000: Participa por $1.000.000 todos los miércoles (Lotería del Valle).</li>
@@ -65,47 +102,78 @@
             <a href="https://wa.me/573183434492" class="btn-participar">Adquirir Boleta</a>
         </div>
 
-        <!-- Galería actualizada con nuevos assets -->
-        <div id="preliminar" class="promo-card">
-            <h3>Galería de Inversión</h3>
+        <div id="preliminar" class="casino-box">
+            <div class="casino-title">🎰 Galería de Inversión 🎰</div>
+            
             <div id="swipe-zone">
-                <!-- Nuevos Assets añadidos -->
+                <!-- Nuevos Assets Añadidos -->
                 <div class="mySlides fade" style="display: block;">
-                    <img src="IMG-20260627-WA0090.jpg" alt="Asset">
+                    <img src="IMG-20260627-WA0090.jpg" alt="Casa Campestre">
+                    <div class="date-label">Foto - 27/06/2026</div>
                 </div>
+                
                 <div class="mySlides fade">
-                    <img src="IMG-20260627-WA0091.jpg" alt="Asset">
+                    <img src="IMG-20260627-WA0091.jpg" alt="Casa Campestre">
+                    <div class="date-label">Foto - 27/06/2026</div>
                 </div>
+
                 <div class="mySlides fade">
-                    <img src="IMG-20260627-WA0092.jpg" alt="Asset">
+                    <img src="IMG-20260627-WA0092.jpg" alt="Casa Campestre">
+                    <div class="date-label">Foto - 27/06/2026</div>
                 </div>
+                
                 <div class="mySlides fade">
-                    <img src="IMG-20260627-WA0093.jpg" alt="Asset">
+                    <img src="IMG-20260627-WA0093.jpg" alt="Casa Campestre">
+                    <div class="date-label">Foto - 27/06/2026</div>
                 </div>
+                
                 <div class="mySlides fade">
-                    <video controls><source src="VID-20260627-WA0094.mp4" type="video/mp4"></video>
+                    <video controls muted autoplay loop>
+                        <source src="VID-20260627-WA0094.mp4" type="video/mp4">
+                        Tu navegador no soporta el video.
+                    </video>
+                    <div class="date-label">Video - 27/06/2026</div>
                 </div>
+                
                 <div class="mySlides fade">
-                    <video controls><source src="VID-20260627-WA0095.mp4" type="video/mp4"></video>
+                    <video controls muted autoplay loop>
+                        <source src="VID-20260627-WA0095.mp4" type="video/mp4">
+                        Tu navegador no soporta el video.
+                    </video>
+                    <div class="date-label">Video - 27/06/2026</div>
                 </div>
             </div>
+            
+            <p class="swipe-hint">← Desliza hacia la izquierda o derecha para ver más →</p>
         </div>
 
-        <!-- Resultados -->
         <div id="ganadores" class="winners-box">
             <h2>Resultados Oficiales Acumulados</h2>
+            
             <div class="winner-entry">
                 <p><strong>Lunes 22 Junio:</strong></p>
                 <p class="winner-number">0623</p>
             </div>
+
             <div class="winner-entry">
                 <p><strong>Martes 23 Junio:</strong></p>
                 <p class="winner-number">1608</p>
             </div>
+
             <div class="winner-entry">
                 <p><strong>Miércoles 24 Junio:</strong></p>
                 <p class="winner-number">1623</p>
             </div>
+            
+            <div class="winner-entry">
+                <p><strong>Jueves 25 Junio:</strong></p>
+                <p class="winner-number" style="color: #fff; font-size: 1.5em; font-style: italic;">Pendiente...</p>
+            </div>
+        </div>
+
+        <div id="info" class="promo-card">
+            <h3>Información de Registro</h3>
+            <p>Referencia de archivo técnico: 1782412023725.jpeg</p>
         </div>
     </main>
 
@@ -114,26 +182,46 @@
         const slides = document.getElementsByClassName("mySlides");
         
         function showSlide(n) {
+            // Pausar todos los videos antes de cambiar
             for (let i = 0; i < slides.length; i++) {
                 slides[i].style.display = "none";
                 let vid = slides[i].querySelector('video');
                 if(vid) vid.pause();
             }
+            
             if (n >= slides.length) slideIndex = 0;
             if (n < 0) slideIndex = slides.length - 1;
+            
             slides[slideIndex].style.display = "block";
+            
+            // Reproducir automáticamente el video si el slide actual tiene uno
             let activeVid = slides[slideIndex].querySelector('video');
             if(activeVid) activeVid.play();
         }
 
-        let touchstartX = 0, touchendX = 0;
-        document.getElementById('swipe-zone').addEventListener('touchstart', e => touchstartX = e.changedTouches[0].screenX);
-        document.getElementById('swipe-zone').addEventListener('touchend', e => {
-            touchendX = e.changedTouches[0].screenX;
-            if (touchendX < touchstartX - 40) showSlide(++slideIndex);
-            if (touchendX > touchstartX + 40) showSlide(--slideIndex);
-        });
+        // --- SISTEMA DE SWIPE NATIVO (SIN LIBRERÍAS) ---
+        let touchstartX = 0;
+        let touchendX = 0;
+        const swipeZone = document.getElementById('swipe-zone');
+
+        swipeZone.addEventListener('touchstart', function(event) {
+            touchstartX = event.changedTouches[0].screenX;
+        }, false);
+
+        swipeZone.addEventListener('touchend', function(event) {
+            touchendX = event.changedTouches[0].screenX;
+            handleGesture();
+        }, false);
+
+        function handleGesture() {
+            // Se requiere un deslizamiento mínimo de 40px para que se registre el cambio
+            if (touchendX < touchstartX - 40) {
+                showSlide(++slideIndex); // Deslizó hacia la izquierda (Siguiente)
+            }
+            if (touchendX > touchstartX + 40) {
+                showSlide(--slideIndex); // Deslizó hacia la derecha (Anterior)
+            }
+        }
     </script>
 </body>
 </html>
-
