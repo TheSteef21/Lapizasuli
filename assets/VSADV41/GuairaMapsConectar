@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VSADV41 | Mapa de Resiliencia Estructural</title>
+    <script src="https://maps.googleapis.com/maps/api/js?key=TU_API_KEY_AQUI"></script>
+    <style>
+        :root { --primary: #d32f2f; --secondary: #333; }
+        body { font-family: sans-serif; line-height: 1.6; color: #333; margin: 0; padding: 20px; }
+        .container { max-width: 900px; margin: auto; }
+        #map { height: 500px; width: 100%; border: 3px solid var(--primary); margin-bottom: 20px; border-radius: 8px; }
+        table { width: 100%; border-collapse: collapse; font-size: 0.8em; }
+        th, td { padding: 8px; border: 1px solid #ddd; }
+        th { background-color: var(--secondary); color: white; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>VSADV41: Localizador de Estructuras</h1>
+    <div id="map"></div>
+
+    <h3>Registro de Intervención (La Guaira)</h3>
+    <table id="tablaEdificios">
+        <thead><tr><th>#</th><th>Edificio / Residencia</th></tr></thead>
+        <tbody>
+            </tbody>
+    </table>
+</div>
+
+<script>
+    // Base de datos de edificios (Completa las coordenadas lat/lng)
+    const edificios = [
+        { lat: 10.6033, lng: -66.9388, nombre: "Residencias Mariola y Maribel" },
+        { lat: 10.6050, lng: -66.9350, nombre: "Residencias Gran Terraza" },
+        // ... Agrega aquí los 45 edificios con sus coordenadas reales
+    ];
+
+    function initMap() {
+        const laGuaira = { lat: 10.6033, lng: -66.9388 };
+        const map = new google.maps.Map(document.getElementById("map"), {
+            zoom: 13,
+            center: laGuaira,
+        });
+
+        const tableBody = document.querySelector("#tablaEdificios tbody");
+
+        edificios.forEach((edificio, index) => {
+            // Añadir marcador
+            new google.maps.Marker({
+                position: { lat: edificio.lat, lng: edificio.lng },
+                map: map,
+                title: edificio.nombre
+            });
+
+            // Añadir fila a la tabla
+            const row = `<tr><td>${index + 1}</td><td>${edificio.nombre}</td></tr>`;
+            tableBody.innerHTML += row;
+        });
+    }
+
+    // Inicializar al cargar la página
+    window.onload = initMap;
+</script>
+
+</body>
+</html>
