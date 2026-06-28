@@ -83,6 +83,7 @@
             <p>Misión SADV41 - Colombia</p>
         </header>
 
+        <!-- Nueva Rifa Valencia & Asociados -->
         <div class="promo-card">
             <h2>🏡 INVERSIONES VALENCIA & ASOCIADOS</h2>
             <p>Casa campestre, rodeada de naturaleza, a solo 10 minutos de Buga.</p>
@@ -90,6 +91,12 @@
             <div class="oferta-box">
                 <h3>VALOR BOLETA</h3>
                 <p class="price">$300.000 COP</p>
+                <hr style="border: 1px solid #444;">
+                <p><strong>Plan de Premios:</strong></p>
+                <ul style="text-align: left; font-size: 0.9em;">
+                    <li>Abona $30.000: Participa por $1.000.000 todos los miércoles (Lotería del Valle).</li>
+                    <li>Al terminar de cancelar: Empiezas a jugar por $2.000.000 todos los miércoles hasta que culmine la rifa.</li>
+                </ul>
             </div>
             <a href="https://wa.me/573183434492" class="btn-participar">Adquirir Boleta</a>
         </div>
@@ -103,8 +110,8 @@
                     <div class="date-label">Foto - 27/06/2026</div>
                 </div>
                 <div class="mySlides fade">
-                    <img src="IMG-20260627-WA0091.jpg" alt="Asset 91">
-                    <div class="date-label">Foto (Ganador) - 27/06/2026</div>
+                    <img src="IMG-20260627-WA0091.jpg" alt="Ganador Viernes 26 Julio">
+                    <div class="date-label">Foto (Ganador 26/07) - 27/06/2026</div>
                 </div>
                 <div class="mySlides fade">
                     <img src="IMG-20260627-WA0092.jpg" alt="Asset 92">
@@ -132,10 +139,24 @@
 
         <div id="ganadores" class="winners-box">
             <h2>Resultados Oficiales Acumulados</h2>
+            
             <div class="winner-entry"><p><strong>Lunes 22 Junio:</strong></p><p class="winner-number">0623</p></div>
             <div class="winner-entry"><p><strong>Martes 23 Junio:</strong></p><p class="winner-number">1608</p></div>
             <div class="winner-entry"><p><strong>Miércoles 24 Junio:</strong></p><p class="winner-number">1623</p></div>
-            <div class="winner-entry"><p><strong>Sábado 27 Junio (Último Ganador):</strong></p><p class="winner-number">1723</p></div>
+            
+            <!-- Nuevo Ganador -->
+            <div class="winner-entry">
+                <p><strong>Viernes 26 Julio:</strong></p>
+                <p class="winner-number">3656</p>
+                <p><em>Ganador: Gildardo Barona Velez</em></p>
+                <p><em>Líder: Lucely Sanclemente</em></p>
+                <p><em>Lotería de Medellín</em></p>
+            </div>
+        </div>
+
+        <div id="info" class="promo-card">
+            <h3>Información de Registro</h3>
+            <p>Referencia de archivo técnico: 1782412023725.jpeg</p>
         </div>
     </main>
 
@@ -163,25 +184,6 @@
             if (touchendX < touchstartX - 40) showSlide(++slideIndex);
             if (touchendX > touchstartX + 40) showSlide(--slideIndex);
         });
-    </script>
-</body>
-</html>
-        }, false);
-
-        swipeZone.addEventListener('touchend', function(event) {
-            touchendX = event.changedTouches[0].screenX;
-            handleGesture();
-        }, false);
-
-        function handleGesture() {
-            // Se requiere un deslizamiento mínimo de 40px para que se registre el cambio
-            if (touchendX < touchstartX - 40) {
-                showSlide(++slideIndex); // Deslizó hacia la izquierda (Siguiente)
-            }
-            if (touchendX > touchstartX + 40) {
-                showSlide(--slideIndex); // Deslizó hacia la derecha (Anterior)
-            }
-        }
     </script>
 </body>
 </html>
