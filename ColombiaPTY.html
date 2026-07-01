@@ -1,0 +1,56 @@
+html_content = """<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSADV41 - Microcréditos Rápidos</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7f6; color: #333; line-height: 1.6; padding: 20px; }
+        .container { max-width: 600px; margin: auto; background: #fff; padding: 30px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        h1 { color: #2c3e50; text-align: center; }
+        h2 { color: #27ae60; border-bottom: 2px solid #27ae60; padding-bottom: 10px; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        table, th, td { border: 1px solid #ddd; }
+        th, td { padding: 12px; text-align: left; }
+        th { background-color: #f8f9fa; }
+        .requirements { background: #e8f6ef; padding: 15px; border-radius: 5px; }
+        .cta { text-align: center; margin-top: 30px; }
+        .btn { display: inline-block; background: #25d366; color: white; padding: 15px 25px; text-decoration: none; border-radius: 5px; font-weight: bold; }
+        .btn:hover { background: #128c7e; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Microcréditos CSADV41</h1>
+        <p>Tu impulso diario para emprendedores y necesidades urgentes.</p>
+        
+        <h2>Detalles del Servicio</h2>
+        <table>
+            <tr><th>Concepto</th><th>Especificación</th></tr>
+            <tr><td>Monto de Inicio</td><td>$30.00 - $50.00</td></tr>
+            <tr><td>Plazo de Pago</td><td>13 cuotas diarias</td></tr>
+            <tr><td>Disponibilidad</td><td>Desde $30.00 en adelante</td></tr>
+        </table>
+
+        <h2>Requisitos para Aplicar</h2>
+        <div class="requirements">
+            <ul>
+                <li><strong>Identificación:</strong> Foto legible de tu cédula.</li>
+                <li><strong>Comprobante de domicilio:</strong> Foto de factura (Internet, luz, gas o agua).</li>
+                <li><strong>Verificación comercial:</strong> Foto de tu negocio actual.</li>
+            </ul>
+        </div>
+
+        <div class="cta">
+            <p>¿Listo para solicitar?</p>
+            <a href="https://wa.me/50760916555" class="btn">Contactar por WhatsApp: +507 6091-6555</a>
+        </div>
+    </div>
+</body>
+</html>
+"""
+
+with open("ColombiaPTY.html", "w", encoding="utf-8") as f:
+    f.write(html_content)
+
+
