@@ -102,75 +102,6 @@
             box-shadow: 0 0 10px #00D1FF;
         }
 
-        .rotating-mesh {
-            animation: holographicRotation 10s linear infinite alternate;
-            transform-origin: center;
-        }
-        @keyframes holographicRotation {
-            0% { transform: scaleX(1) skewY(0deg); filter: brightness(1) drop-shadow(0 0 2px rgba(0,255,255,0.3)); }
-            50% { transform: scaleX(0.95) skewY(0.5deg); filter: brightness(1.2) drop-shadow(0 0 8px rgba(0,255,255,0.6)); }
-            100% { transform: scaleX(1) skewY(0deg); filter: brightness(1) drop-shadow(0 0 2px rgba(0,255,255,0.3)); }
-        }
-
-        .chassis-viewport {
-            position: relative;
-            width: 100%;
-            height: 170px;
-            background: rgba(5, 5, 10, 0.6);
-            border: 1px dashed rgba(0, 209, 255, 0.25);
-            background-size: cover;
-            background-position: center;
-        }
-
-        .tire-profile {
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(0,0,0,0.85) 30%, rgba(20,20,30,0.95) 70%);
-            box-shadow: 0 0 12px rgba(0, 209, 255, 0.3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            animation: tireSpin 3s linear infinite;
-        }
-        @keyframes tireSpin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .tire-slick { border: 4px solid #00D1FF; }
-        .tire-semi { border: 5px double #FF00E5; }
-        .tire-wet { border: 4px dashed #FFB800; }
-
-        .rim-lines {
-            width: 80%; height: 80%;
-            border-radius: 50%;
-            border: 1px dashed rgba(0, 255, 255, 0.5);
-            position: relative;
-        }
-        .rim-lines::before, .rim-lines::after {
-            content: ''; position: absolute; background: rgba(0, 255, 255, 0.4);
-            top: 50%; left: 50%; transform: translate(-50%, -50%);
-        }
-        .rim-lines::before { width: 100%; height: 1px; }
-        .rim-lines::after { width: 1px; height: 100%; }
-
-        .knob-slider {
-            -webkit-appearance: none;
-            width: 100%;
-            background: transparent;
-        }
-        .knob-slider::-webkit-slider-runnable-track {
-            width: 100%; height: 6px;
-            background: rgba(0, 209, 255, 0.15);
-            border-radius: 3px;
-            border: 1px solid rgba(0, 209, 255, 0.3);
-        }
-        .knob-slider::-webkit-slider-thumb {
-            height: 16px; width: 16px; border-radius: 50%;
-            background: #FF00E5; cursor: pointer;
-            -webkit-appearance: none; margin-top: -5px;
-            box-shadow: 0 0 8px #FF00E5; border: 2px solid #FFF;
-        }
-
         /* --- ESTILOS DE MÓDULOS DE IA Y SUSCRIPCIÓN --- */
         .module-card {
             background: rgba(10, 15, 25, 0.8);
@@ -205,7 +136,7 @@
         <nav class="flex gap-6 text-sm uppercase tracking-wider font-medium">
             <a href="https://thesteef21.github.io/Lapizasuli/FIFA2026.html" target="_blank" class="hover:text-emerald-400 transition-colors text-emerald-300 font-bold flex items-center gap-1">⚽ Mundial 2026 ↗</a>
             <a href="#monitor-sismico-seccion" class="hover:text-red-400 transition-colors text-red-300 font-bold">⚠️ Telemetría SADV41T</a>
-            <a href="#probador-llantas-seccion" class="hover:text-neonBlue transition-colors text-cyan-300">🛞 Turbo Tire</a>
+            <a href="#noticias-seccion" class="hover:text-neonBlue transition-colors text-cyan-300">📰 Boletín de Misión</a>
             <a href="#mayordomia-seccion" class="hover:text-oro transition-colors text-amber-200">Mayordomía</a>
         </nav>
 
@@ -234,6 +165,70 @@
             </div>
             <p class="text-xs text-slate-300 break-all">Dirección: <span id="walletAddress" class="text-oro font-bold select-all"></span></p>
         </div>
+
+        <section id="noticias-seccion" class="glass rounded-2xl p-6 md:p-8 shadow-2xl border border-cyan-500/30">
+            <div class="flex items-center gap-3 mb-6 border-b border-white/10 pb-4">
+                <span class="text-3xl">📡</span>
+                <div>
+                    <h2 class="font-serif text-2xl text-oro font-bold tracking-wider uppercase text-shadow-oro">Boletín de Misión SADV41</h2>
+                    <p class="text-xs text-slate-400 font-mono">Recepción de datos: madcom21@gmail.com</p>
+                </div>
+            </div>
+            
+            <div class="space-y-6 text-sm text-slate-300 leading-relaxed font-sans">
+                <p>No cuento con un enlace directo a la aplicación o al feed externo de Google Noticias, pero puedo procesar y estructurar todos los boletines, alertas y reportes informativos que llegan directamente a la bandeja de entrada de <strong>madcom21@gmail.com</strong>, el cual funciona como el centro principal para las ideas técnicas y los datos de la misión.</p>
+                
+                <p>Las actualizaciones globales más recientes que han ingresado se centran en dos vertientes clave:</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+                    <div class="bg-black/50 p-5 rounded-xl border border-slate-700 hover:border-cyan-500/50 transition-colors">
+                        <h3 class="text-neonBlue font-bold text-base mb-4 flex items-center gap-2 bloom-text-blue">
+                            🤖 Inteligencia Artificial y Desarrollo Tecnológico:
+                        </h3>
+                        <ul class="space-y-4">
+                            <li class="flex gap-3 items-start">
+                                <span class="text-cyan-400 mt-1">▹</span>
+                                <span class="text-xs text-slate-300 leading-relaxed"><strong class="text-white">Avances en modelos de lenguaje y código:</strong> Destaca el lanzamiento de Claude Opus 4.5 de Anthropic, que ha superado las expectativas rompiendo récords en pruebas de programación (SWE) y posicionándose fuertemente en el ecosistema de IA.</span>
+                            </li>
+                            <li class="flex gap-3 items-start">
+                                <span class="text-cyan-400 mt-1">▹</span>
+                                <span class="text-xs text-slate-300 leading-relaxed"><strong class="text-white">Infraestructura a gran escala:</strong> Figuran los movimientos estratégicos de Google, incluyendo la expansión de sus TPU (con posibles acuerdos masivos) y el ambicioso Proyecto Suncatcher, una iniciativa orientada a operar centros de datos en el espacio para aprovechar la energía solar ininterrumpida.</span>
+                            </li>
+                            <li class="flex gap-3 items-start">
+                                <span class="text-cyan-400 mt-1">▹</span>
+                                <span class="text-xs text-slate-300 leading-relaxed"><strong class="text-white">Agentes autónomos e inferencia local:</strong> Se analiza el enfoque de Apple hacia la inferencia de IA de manera local para mantener el dominio del mercado. Paralelamente, el sector de la IA descentralizada (DeAI) muestra un alto dinamismo con el despliegue del Open Alpha de Wayfinder y el auge del token $PROMPT.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-black/50 p-5 rounded-xl border border-slate-700 hover:border-oro/50 transition-colors">
+                        <h3 class="text-oro font-bold text-base mb-4 flex items-center gap-2 text-shadow-oro">
+                            ⚡ Web3 y Ecosistema de Criptomonedas:
+                        </h3>
+                        <ul class="space-y-4">
+                            <li class="flex gap-3 items-start">
+                                <span class="text-amber-400 mt-1">▹</span>
+                                <span class="text-xs text-slate-300 leading-relaxed"><strong class="text-white">Evolución de las Stablecoins:</strong> El mercado experimenta un cambio importante con el lanzamiento de la nueva stablecoin Open USD, respaldada por un consorcio de más de 140 empresas (incluyendo gigantes financieros), lo que ha generado un impacto directo y rápido en competidores como Circle.</span>
+                            </li>
+                            <li class="flex gap-3 items-start">
+                                <span class="text-amber-400 mt-1">▹</span>
+                                <span class="text-xs text-slate-300 leading-relaxed"><strong class="text-white">Regulación y adopción institucional:</strong> La SEC ha iniciado un periodo de revisión para las reglas de aprobación de ETFs de criptomonedas. Por otro lado, destaca el masivo apoyo de Solana al desarrollo de Alatau City en Kazajistán, una megaciudad impulsada por infraestructura blockchain con un potencial de inversión de 6 mil millones de dólares.</span>
+                            </li>
+                            <li class="flex gap-3 items-start">
+                                <span class="text-amber-400 mt-1">▹</span>
+                                <span class="text-xs text-slate-300 leading-relaxed"><strong class="text-white">DeFi y actualizaciones de red:</strong> MetaMask ha integrado funciones para generar rendimientos automáticos (APY) sobre balances de stablecoins a través de protocolos de préstamos DeFi. Además, persisten los análisis técnicos sobre la red Ethereum, la acumulación de ETH por parte de tesorerías y las discusiones sobre la actualización EIP-7702.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900/50 border-l-4 border-emerald-500 p-4 rounded-r-lg mt-6">
+                    <p class="text-xs text-slate-300 italic">
+                        Si deseas que desglosemos alguna de estas noticias puntuales para conectarla con los desarrollos técnicos actuales o evaluar su viabilidad dentro de la infraestructura de SADV41, podemos indagar en los detalles de inmediato.
+                    </p>
+                </div>
+            </div>
+        </section>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             <section id="suscription-module" class="module-card">
@@ -314,42 +309,6 @@
             </div>
 
             <div id="monitor-salida" class="space-y-4 mt-6"></div>
-        </section>
-
-        <section id="probador-llantas-seccion" class="max-w-md mx-auto glass-panel p-6 rounded-2xl shadow-xl">
-            <div class="text-center mb-4">
-                <h3 class="bloom-text-blue font-mono text-sm uppercase tracking-widest font-bold text-neonBlue">SADV41 Turbo Tire Viewport</h3>
-                <p class="text-[10px] text-slate-400 font-mono mt-1">Simulación y Escala Geométrica en Caliente</p>
-            </div>
-            
-            <div id="viewportBg" class="chassis-viewport rounded-xl flex items-center justify-center gap-8 overflow-hidden rotating-mesh">
-                <div id="hologramWrapper" class="flex gap-12 transition-opacity duration-300">
-                    <div id="tire-front" class="tire-profile tire-slick w-12 h-12"><div class="rim-lines"></div></div>
-                    <div id="tire-rear" class="tire-profile tire-slick w-12 h-12"><div class="rim-lines"></div></div>
-                </div>
-            </div>
-
-            <div class="mt-4 space-y-4">
-                <div class="flex justify-between items-center text-xs font-mono px-1">
-                    <span class="text-slate-400">Dimensión de Rin Evaluada:</span>
-                    <span id="metricDisplay" class="text-oro font-bold text-shadow-oro text-sm">19"</span>
-                </div>
-                
-                <input type="range" id="sizeKnob" min="15" max="22" value="19" class="knob-slider" oninput="tuneTireSize(parseInt(this.value))">
-                
-                <div class="grid grid-cols-3 gap-2 pt-2">
-                    <button onclick="changeTire('tire-slick')" class="bg-slate-950 border border-[#00D1FF] text-[#00D1FF] hover:bg-cyan-950/30 text-[10px] font-mono py-1.5 rounded transition-all">Slick (Seco)</button>
-                    <button onclick="changeTire('tire-semi')" class="bg-slate-950 border border-[#FF00E5] text-[#FF00E5] hover:bg-magenta-950/30 text-[10px] font-mono py-1.5 rounded transition-all">Semi-Slick</button>
-                    <button onclick="changeTire('tire-wet')" class="bg-slate-950 border border-[#FFB800] text-[#FFB800] hover:bg-amber-950/30 text-[10px] font-mono py-1.5 rounded transition-all">Wet (Lluvia)</button>
-                </div>
-
-                <div class="pt-1">
-                    <label class="bg-slate-900 border border-slate-700 hover:border-neonBlue text-slate-300 text-center text-xs font-mono py-2 px-4 rounded block cursor-pointer transition-all">
-                        📷 Proyectar Chasis Externo
-                        <input type="file" class="hidden" accept="image/*" onchange="loadCustomCar(event)">
-                    </label>
-                </div>
-            </div>
         </section>
 
         <section id="mayordomia-seccion" class="max-w-3xl mx-auto p-6 bg-[#0a0f1d] border border-gray-800 rounded-2xl shadow-xl space-y-6">
@@ -474,44 +433,6 @@
             }
         }
 
-        // --- KINEMATIC TIRE ENGINE ---
-        let currentStyleClass = 'tire-slick';
-
-        function changeTire(tireClass) {
-            currentStyleClass = tireClass;
-            const sizeValue = document.getElementById('sizeKnob').value;
-            tuneTireSize(parseInt(sizeValue));
-        }
-
-        function tuneTireSize(size) {
-            document.getElementById('metricDisplay').innerText = size + '"';
-            const front = document.getElementById('tire-front');
-            const rear = document.getElementById('tire-rear');
-            if (front && rear) {
-                const calculatedPixels = 42 + ((size - 15) * 3.14);
-                front.style.width = calculatedPixels + 'px';
-                front.style.height = calculatedPixels + 'px';
-                rear.style.width = calculatedPixels + 'px';
-                rear.style.height = calculatedPixels + 'px';
-                front.className = 'tire-profile ' + currentStyleClass;
-                rear.className = 'tire-profile ' + currentStyleClass;
-            }
-        }
-
-        function loadCustomCar(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const viewport = document.getElementById('viewportBg');
-                    const hologram = document.getElementById('hologramWrapper');
-                    if (viewport) viewport.style.backgroundImage = "url('" + e.target.result + "')";
-                    if (hologram) hologram.style.opacity = "0.15";
-                };
-                reader.readAsDataURL(file);
-            }
-        }
-
         // --- PIPELINE DE CONEXIÓN WEB3 AUTH (BINANCE / METAMASK) ---
         async function connectBinance() {
             const btn = document.getElementById('btnConnect');
@@ -578,7 +499,6 @@
         // Inicializador Sincrónico Unificado
         document.addEventListener("DOMContentLoaded", () => {
             refrescarMonitor();
-            tuneTireSize(19);
         });
     </script>
 </body>
