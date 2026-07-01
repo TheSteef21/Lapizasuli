@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sovereign Hub | SADV41, FIFA World Cup 2026 & Monitoreo Sísmico</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght=300;400;600&family=Playfair+Display:ital,wght=0,700;1,700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.jsdelivr.net/npm/@web3auth/modal@8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.0/ethers.umd.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: { extend: { colors: { navy: '#020617', oro: '#eab308', neonGreen: '#10b981', neonBlue: '#00f3ff', renderRed: '#da3637' } } }
+        }
+    </script>
+    <style>
+        body { background-color: #020617; color: #f8fafc; }
+        .glass { background: rgba(2, 6, 23, 0.85); backdrop-filter: blur(12px); border: 1px solid rgba(234, 179, 8, 0.2); }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .active-tab { border-bottom: 2px solid #eab308; color: #eab308; }
+    </style>
+</head>
+<body class="font-sans antialiased">
+
+    <header class="fixed w-full z-50 glass border-b border-oro/30 px-6 py-4 flex justify-between items-center">
+        <div>
+            <h1 class="font-serif text-xl tracking-wider text-oro font-bold">SOVEREIGN HUB</h1>
+            <p class="text-[9px] text-slate-400 font-mono tracking-widest">SADV41 DIGITAL ARCHITECTURE</p>
+        </div>
+        <nav class="flex gap-6 text-sm uppercase font-bold">
+            <a href="#noticias-seccion" class="hover:text-neonBlue">Boletín</a>
+            <a href="#agroferias-seccion" class="hover:text-oro">Agroferias</a>
+        </nav>
+    </header>
+
+    <main class="pt-36 pb-12 px-6 max-w-6xl mx-auto space-y-16">
+
+        <!-- BOLETÍN DE MISIÓN -->
+        <section id="noticias-seccion" class="glass rounded-2xl p-6 border border-cyan-500/30">
+            <h2 class="text-2xl text-oro font-bold mb-6">📡 Boletín de Misión SADV41</h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-black/50 p-5 rounded-xl border border-slate-700">
+                    <h3 class="text-neonBlue font-bold mb-4">🤖 Inteligencia Artificial:</h3>
+                    <ul class="text-xs space-y-2 text-slate-300">
+                        <li>• Claude Opus 4.5: Récord en pruebas SWE.</li>
+                        <li>• Google Proyecto Suncatcher: Centros de datos espaciales.</li>
+                        <li>• DeAI: Auge en Wayfinder ($PROMPT).</li>
+                    </ul>
+                </div>
+                <div class="bg-black/50 p-5 rounded-xl border border-slate-700">
+                    <h3 class="text-oro font-bold mb-4">⚡ Web3 y Cripto:</h3>
+                    <ul class="text-xs space-y-2 text-slate-300">
+                        <li>• Open USD: Nueva stablecoin institucional.</li>
+                        <li>• Solana: Inversión masiva en Alatau City.</li>
+                        <li>• MetaMask: Yields DeFi integrados.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- AGROFERIAS SLIDESHOW -->
+        <section id="agroferias-seccion" class="glass rounded-2xl p-6 border border-emerald-500/30">
+            <h2 class="text-2xl text-emerald-400 font-bold mb-6">🥬 Agroferias IMA (03 Julio 2026)</h2>
+            
+            <div class="flex gap-4 mb-4 border-b border-slate-700">
+                <button onclick="showTab('panama')" class="py-2 px-4 active-tab" id="btn-panama">Panamá / Oeste</button>
+                <button onclick="showTab('interior')" class="py-2 px-4" id="btn-interior">Interior</button>
+            </div>
+
+            <div id="tab-panama" class="tab-content active">
+                <table class="w-full text-xs text-left">
+                    <tr class="border-b border-slate-700"> <th class="p-2">Región</th> <th class="p-2">Ubicación</th> </tr>
+                    <tr> <td class="p-2 font-bold">Panamá Oeste</td> <td class="p-2">Plaza La Marquesa, Nuevo Emperador, Arraiján</td> </tr>
+                    <tr> <td class="p-2 font-bold">Panamá</td> <td class="p-2">Cancha La 18, Veranillo, San Miguelito</td> </tr>
+                    <tr> <td class="p-2 font-bold">Panamá Este</td> <td class="p-2">Martinambo, Santa Cruz de Chinina, Chepo</td> </tr>
+                </table>
+            </div>
+
+            <div id="tab-interior" class="tab-content">
+                <table class="w-full text-xs text-left">
+                    <tr class="border-b border-slate-700"> <th class="p-2">Provincia</th> <th class="p-2">Lugar</th> </tr>
+                    <tr> <td class="p-2 font-bold">Chiriquí</td> <td class="p-2">Cancha Los Limones, Barú</td> </tr>
+                    <tr> <td class="p-2 font-bold">Coclé</td> <td class="p-2">Casa Comunal Pagua, La Pintada</td> </tr>
+                    <tr> <td class="p-2 font-bold">Veraguas</td> <td class="p-2">Urbanización San Antonio, Santiago</td> </tr>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        function showTab(tab) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('button').forEach(el => el.classList.remove('active-tab'));
+            document.getElementById('tab-' + tab).classList.add('active');
+            document.getElementById('btn-' + tab).classList.add('active-tab');
+        }
+    </script>
+</body>
+</html>
