@@ -1,28 +1,29 @@
-html_content = """<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CSADV41 - Microcréditos Rápidos</title>
+    <title>CSADV41 - Microcréditos ColombiaPTY</title>
     <style>
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7f6; color: #333; line-height: 1.6; padding: 20px; }
         .container { max-width: 600px; margin: auto; background: #fff; padding: 30px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
         h1 { color: #2c3e50; text-align: center; }
-        h2 { color: #27ae60; border-bottom: 2px solid #27ae60; padding-bottom: 10px; }
+        h2 { color: #27ae60; border-bottom: 2px solid #27ae60; padding-bottom: 10px; margin-top: 25px; }
         table { width: 100%; border-collapse: collapse; margin: 20px 0; }
         table, th, td { border: 1px solid #ddd; }
         th, td { padding: 12px; text-align: left; }
         th { background-color: #f8f9fa; }
-        .requirements { background: #e8f6ef; padding: 15px; border-radius: 5px; }
+        .requirements, .process { background: #e8f6ef; padding: 15px; border-radius: 5px; margin-bottom: 15px; }
         .cta { text-align: center; margin-top: 30px; }
-        .btn { display: inline-block; background: #25d366; color: white; padding: 15px 25px; text-decoration: none; border-radius: 5px; font-weight: bold; }
+        .btn { display: inline-block; background: #25d366; color: white; padding: 15px 25px; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 1.1em; }
         .btn:hover { background: #128c7e; }
+        .footer { text-align: center; font-size: 0.8em; color: #7f8c8d; margin-top: 40px; }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Microcréditos CSADV41</h1>
-        <p>Tu impulso diario para emprendedores y necesidades urgentes.</p>
+        <p style="text-align: center;">Tu impulso diario para emprendedores y necesidades urgentes en ColombiaPTY.</p>
         
         <h2>Detalles del Servicio</h2>
         <table>
@@ -31,6 +32,15 @@ html_content = """<!DOCTYPE html>
             <tr><td>Plazo de Pago</td><td>13 cuotas diarias</td></tr>
             <tr><td>Disponibilidad</td><td>Desde $30.00 en adelante</td></tr>
         </table>
+
+        <h2>Proceso de Solicitud</h2>
+        <div class="process">
+            <ol>
+                <li>Prepara tus documentos (Cédula, Factura, Negocio).</li>
+                <li>Envía tus fotos al contacto verificado.</li>
+                <li>Recibe validación y respuesta rápida.</li>
+            </ol>
+        </div>
 
         <h2>Requisitos para Aplicar</h2>
         <div class="requirements">
@@ -42,15 +52,13 @@ html_content = """<!DOCTYPE html>
         </div>
 
         <div class="cta">
-            <p>¿Listo para solicitar?</p>
-            <a href="https://wa.me/50760916555" class="btn">Contactar por WhatsApp: +507 6091-6555</a>
+            <p>¿Listo para solicitar? Escríbenos:</p>
+            <a href="https://wa.me/50760916555" class="btn">WhatsApp: +507 6091-6555</a>
+        </div>
+
+        <div class="footer">
+            <p>SADV41 - Compromiso y Sinceridad al Servicio del Emprendedor.</p>
         </div>
     </div>
 </body>
 </html>
-"""
-
-with open("ColombiaPTY.html", "w", encoding="utf-8") as f:
-    f.write(html_content)
-
-
