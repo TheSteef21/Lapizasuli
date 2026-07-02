@@ -61,9 +61,24 @@
             </div>
         </section>
 
-        <!-- AGROFERIAS SLIDESHOW -->
+        <!-- AGROFERIAS SLIDESHOW & REPORTE OFICIAL -->
         <section id="agroferias-seccion" class="glass rounded-2xl p-6 border border-emerald-500/30">
-            <h2 class="text-2xl text-emerald-400 font-bold mb-6">🥬 Agroferias IMA (03 Julio 2026)</h2>
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
+                <h2 class="text-2xl text-emerald-400 font-bold">🥬 Agroferias IMA</h2>
+                
+                <!-- Insignia de Fuente Oficial -->
+                <div class="bg-emerald-900/30 border border-emerald-500/50 rounded-lg p-3 text-right">
+                    <span class="text-emerald-300 text-[10px] uppercase tracking-widest font-bold flex items-center gap-2 justify-end">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                        Fuente Oficial Confirmada
+                    </span>
+                    <p class="text-xs text-slate-300 mt-2">
+                        <strong class="text-white">Récord IMA:</strong> 1.6M quintales de arroz<br>
+                        <strong class="text-white">Impacto:</strong> 54% ahorro para 560k familias<br>
+                        <strong class="text-white">Alcance:</strong> +2,800 eventos realizados
+                    </p>
+                </div>
+            </div>
             
             <div class="flex gap-4 mb-4 border-b border-slate-700">
                 <button onclick="showTab('panama')" class="py-2 px-4 active-tab" id="btn-panama">Panamá / Oeste</button>
@@ -72,19 +87,19 @@
 
             <div id="tab-panama" class="tab-content active">
                 <table class="w-full text-xs text-left">
-                    <tr class="border-b border-slate-700"> <th class="p-2">Región</th> <th class="p-2">Ubicación</th> </tr>
-                    <tr> <td class="p-2 font-bold">Panamá Oeste</td> <td class="p-2">Plaza La Marquesa, Nuevo Emperador, Arraiján</td> </tr>
-                    <tr> <td class="p-2 font-bold">Panamá</td> <td class="p-2">Cancha La 18, Veranillo, San Miguelito</td> </tr>
-                    <tr> <td class="p-2 font-bold">Panamá Este</td> <td class="p-2">Martinambo, Santa Cruz de Chinina, Chepo</td> </tr>
+                    <tr class="border-b border-slate-700 text-slate-400"> <th class="p-2">Región</th> <th class="p-2">Ubicación (03 Julio 2026)</th> </tr>
+                    <tr class="hover:bg-white/5 transition-colors"> <td class="p-2 font-bold text-oro">Panamá Oeste</td> <td class="p-2">Plaza La Marquesa, Nuevo Emperador, Arraiján</td> </tr>
+                    <tr class="hover:bg-white/5 transition-colors"> <td class="p-2 font-bold text-oro">Panamá</td> <td class="p-2">Cancha La 18, Veranillo, San Miguelito</td> </tr>
+                    <tr class="hover:bg-white/5 transition-colors"> <td class="p-2 font-bold text-oro">Panamá Este</td> <td class="p-2">Martinambo, Santa Cruz de Chinina, Chepo</td> </tr>
                 </table>
             </div>
 
             <div id="tab-interior" class="tab-content">
                 <table class="w-full text-xs text-left">
-                    <tr class="border-b border-slate-700"> <th class="p-2">Provincia</th> <th class="p-2">Lugar</th> </tr>
-                    <tr> <td class="p-2 font-bold">Chiriquí</td> <td class="p-2">Cancha Los Limones, Barú</td> </tr>
-                    <tr> <td class="p-2 font-bold">Coclé</td> <td class="p-2">Casa Comunal Pagua, La Pintada</td> </tr>
-                    <tr> <td class="p-2 font-bold">Veraguas</td> <td class="p-2">Urbanización San Antonio, Santiago</td> </tr>
+                    <tr class="border-b border-slate-700 text-slate-400"> <th class="p-2">Provincia</th> <th class="p-2">Lugar (03 Julio 2026)</th> </tr>
+                    <tr class="hover:bg-white/5 transition-colors"> <td class="p-2 font-bold text-oro">Chiriquí</td> <td class="p-2">Cancha Los Limones, Barú</td> </tr>
+                    <tr class="hover:bg-white/5 transition-colors"> <td class="p-2 font-bold text-oro">Coclé</td> <td class="p-2">Casa Comunal Pagua, La Pintada</td> </tr>
+                    <tr class="hover:bg-white/5 transition-colors"> <td class="p-2 font-bold text-oro">Veraguas</td> <td class="p-2">Urbanización San Antonio, Santiago</td> </tr>
                 </table>
             </div>
         </section>
