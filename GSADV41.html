@@ -118,11 +118,69 @@
             border-radius: 0.5rem;
             width: 100%;
         }
+
+        /* --- ESTILOS PESTAÑAS VERTICALES IZQUIERDAS --- */
+        .sidebar-tabs {
+            position: fixed;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 45;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .vertical-tab {
+            display: flex;
+            align-items: center;
+            background: rgba(2, 6, 23, 0.95);
+            padding: 12px 15px;
+            border-radius: 0 15px 15px 0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            width: 60px;
+            overflow: hidden;
+            white-space: nowrap;
+            box-shadow: 4px 4px 15px rgba(0,0,0,0.5);
+            cursor: pointer;
+        }
+        .vertical-tab:hover {
+            width: 280px;
+            padding-left: 20px;
+        }
+        .vertical-tab span.icon { font-size: 1.5rem; min-width: 30px; }
+        .vertical-tab span.text { margin-left: 15px; font-weight: bold; opacity: 0; transition: opacity 0.3s; font-size: 0.85rem; letter-spacing: 0.05em; }
+        .vertical-tab:hover span.text { opacity: 1; transition-delay: 0.1s; }
+        
+        .tab-ima { border-left: 4px solid #3b82f6; border-top: 1px solid rgba(59,130,246,0.3); border-right: 1px solid rgba(59,130,246,0.3); border-bottom: 1px solid rgba(59,130,246,0.3); }
+        .tab-ima:hover { background: rgba(30, 58, 138, 0.4); }
+        
+        .tab-col { border-left: 4px solid #10b981; border-top: 1px solid rgba(16,185,129,0.3); border-right: 1px solid rgba(16,185,129,0.3); border-bottom: 1px solid rgba(16,185,129,0.3); }
+        .tab-col:hover { background: rgba(6, 78, 59, 0.4); }
+        
+        @media (max-width: 768px) {
+            .sidebar-tabs { top: 85%; transform: translateY(0); gap: 8px; }
+            .vertical-tab { width: 50px; padding: 10px; border-radius: 0 10px 10px 0; }
+            .vertical-tab span.icon { font-size: 1.2rem; }
+            .vertical-tab:hover { width: 240px; }
+            .vertical-tab span.text { font-size: 0.75rem; }
+        }
     </style>
 </head>
-<body class="font-sans antialiased selection:bg-oro selection:text-navy">
+<body class="font-sans antialiased selection:bg-oro selection:text-navy overflow-x-hidden">
 
     <div class="scanline"></div>
+
+    <!-- PESTAÑAS VERTICALES IZQUIERDAS (COMUNIDAD / RED DE APOYO) -->
+    <div class="sidebar-tabs">
+        <a href="https://thesteef21.github.io/Lapizasuli/IMA.html" target="_blank" class="vertical-tab tab-ima">
+            <span class="icon">🍚</span>
+            <span class="text text-blue-200">Arroz barato cerca de ti! 🇵🇦</span>
+        </a>
+        <a href="https://thesteef21.github.io/Lapizasuli/ColombiaPTY.html" target="_blank" class="vertical-tab tab-col">
+            <span class="icon">💸</span>
+            <span class="text text-emerald-300">PRÉSTAMOS FÁCILES! 🇵🇦🇨🇴</span>
+        </a>
+    </div>
 
     <header class="fixed w-full z-50 glass border-b border-oro/30 px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
         <div class="flex items-center gap-3">
@@ -133,10 +191,10 @@
             </div>
         </div>
         
-        <nav class="flex gap-6 text-sm uppercase tracking-wider font-medium">
+        <nav class="flex gap-6 text-sm uppercase tracking-wider font-medium flex-wrap justify-center">
             <a href="https://thesteef21.github.io/Lapizasuli/FIFA2026.html" target="_blank" class="hover:text-emerald-400 transition-colors text-emerald-300 font-bold flex items-center gap-1">⚽ Mundial 2026 ↗</a>
             <a href="#monitor-sismico-seccion" class="hover:text-red-400 transition-colors text-red-300 font-bold">⚠️ Telemetría SADV41T</a>
-            <a href="#noticias-seccion" class="hover:text-neonBlue transition-colors text-cyan-300">📰 Boletín de Misión</a>
+            <a href="#noticias-seccion" class="hover:text-neonBlue transition-colors text-cyan-300">📰 Boletín</a>
             <a href="#mayordomia-seccion" class="hover:text-oro transition-colors text-amber-200">Mayordomía</a>
         </nav>
 
@@ -153,7 +211,8 @@
         </div>
     </header>
 
-    <main class="pt-36 pb-12 px-6 max-w-6xl mx-auto space-y-16">
+    <!-- Se ajustó un poco el pl-4 md:pl-12 para dar espacio visual al sidebar izquierdo si está expandido -->
+    <main class="pt-40 pb-12 px-4 md:px-12 max-w-6xl mx-auto space-y-16">
         
         <div id="walletStatus" class="hidden max-w-lg mx-auto p-4 bg-gray-900/90 border border-oro/40 rounded-xl font-mono shadow-2xl">
             <div class="flex items-center gap-2 mb-1">
@@ -250,7 +309,7 @@
             </section>
         </div>
 
-        <section id="world-cup-tracking" class="glass-mundial rounded-2xl overflow-hidden shadow-2xl max-w-lg mx-auto">
+        <section id="world-cup-tracking" class="glass-mundial rounded-2xl overflow-hidden shadow-2xl max-w-2xl mx-auto">
             <div class="p-8 text-center border-b border-white/5 bg-gradient-to-b from-emerald-500/10 to-transparent">
                 <h2 class="font-serif text-2xl md:text-3xl text-white font-extrabold tracking-wider text-shadow-green uppercase">GSADV41: COBERTURA MUNDIAL 2026</h2>
                 <p class="text-oro font-semibold text-sm tracking-widest mt-1 uppercase">Mundial de la FIFA — Grupo L</p>
@@ -286,7 +345,83 @@
             </div>
         </section>
 
-        <section id="monitor-sismico-seccion" class="max-w-3xl mx-auto p-1 md:p-6 bg-[#0d1117] border border-slate-800 rounded-2xl shadow-xl">
+        <!-- ========================================== -->
+        <!-- NUEVA SECCIÓN: ENTRETENIMIENTO Y JUEGOS    -->
+        <!-- ========================================== -->
+        <section id="entretenimiento-juegos" class="glass-mundial rounded-2xl overflow-hidden shadow-2xl max-w-4xl mx-auto border border-rose-500/40 relative">
+            <!-- Efecto Glow Fondo -->
+            <div class="absolute top-0 right-0 w-64 h-64 bg-rose-600/10 rounded-full blur-[100px] pointer-events-none"></div>
+            
+            <div class="p-8 text-center border-b border-rose-500/20 bg-gradient-to-b from-rose-900/40 to-transparent">
+                <h2 class="font-serif text-2xl md:text-3xl text-white font-extrabold tracking-wider uppercase text-shadow-blue flex justify-center items-center gap-3">
+                    🎮 Entretenimiento y Juegos
+                </h2>
+                <p class="text-rose-400 font-semibold text-sm tracking-widest mt-2 uppercase">FIFA 2026 DESDE TIKTOK</p>
+            </div>
+
+            <div class="p-6 md:p-8 bg-slate-950/80">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    
+                    <!-- Columna de Texto y Botones -->
+                    <div class="flex flex-col justify-center space-y-5 z-10">
+                        <p class="text-sm text-slate-200 leading-relaxed font-sans">
+                            ¡Obtengamos más comodines para esta fiesta mundialista! ⚽️🔥 Ya estamos calentando motores para el evento más grande del planeta y quiero que todos sean parte de esta visión.
+                        </p>
+                        
+                        <p class="text-sm text-slate-200 leading-relaxed font-sans bg-black/40 p-4 rounded-xl border border-white/5">
+                            🌐 Para más información sobre la recolección de cartas y todo lo relacionado con TIKTOK FIFA 2026, visita el hub oficial de nuestra misión:<br>
+                            <a href="https://thesteef21.github.io/Lapizasuli/GSADV41.html" class="text-neonBlue hover:text-cyan-300 font-semibold hover:underline transition-colors mt-2 inline-block break-all">
+                                https://thesteef21.github.io/Lapizasuli/GSADV41.html
+                            </a>
+                        </p>
+
+                        <div class="bg-gradient-to-r from-emerald-900/40 to-black/60 p-4 rounded-xl border-l-4 border-emerald-500 shadow-lg">
+                            <p class="text-sm text-emerald-300 font-bold leading-relaxed">
+                                ⚡️ Recuerda utilizar el Cupón Consciente: <span class="text-white">@StevenDiorOficial</span> para beneficios exclusivos y apoyo a emprendedores con CSADV41. ¡Seguimos sumando victorias! 🗿🇵🇦💯
+                            </p>
+                        </div>
+
+                        <p class="text-xs text-slate-400 font-mono italic">
+                            #FIFAWorldCup #TikTokFIFA2026 #Comodines #StevenDiorOficial #SADV41 #Mundial2026 #InteligenciaArtificial #Emprendedores #Panama
+                        </p>
+
+                        <div class="flex flex-col gap-3 pt-2">
+                            <a href="https://vt.tiktok.com/ZS96v7ydKsvuk-MrwH6/" target="_blank" class="bg-[#0f0f11] hover:bg-[#1a1a1e] border border-[#00f3ff]/50 hover:border-[#00f3ff] text-white text-sm font-bold py-3 px-5 rounded-xl flex items-center justify-between transition-all group shadow-[0_0_10px_rgba(0,243,255,0.1)]">
+                                <span class="flex items-center gap-3"><span>🃏</span> Cartas de PANINI TIKTOK</span>
+                                <span class="text-[#00f3ff] transform group-hover:translate-x-1 transition-transform">↗</span>
+                            </a>
+                            <a href="https://vt.tiktok.com/ZS96vWGAuy3Gn-5vD4q/" target="_blank" class="bg-[#0f0f11] hover:bg-[#1a1a1e] border border-rose-500/50 hover:border-rose-500 text-white text-sm font-bold py-3 px-5 rounded-xl flex items-center justify-between transition-all group shadow-[0_0_10px_rgba(244,63,94,0.1)]">
+                                <span class="flex items-center gap-3"><span>🌍</span> Países FIFA 2026</span>
+                                <span class="text-rose-400 transform group-hover:translate-x-1 transition-transform">↗</span>
+                            </a>
+                            <a href="https://m.me/ch/Abbtb3PGmoN6tJ6d/" target="_blank" class="bg-blue-600/90 hover:bg-blue-500 border border-blue-400 text-white text-sm font-bold py-3 px-5 rounded-xl flex items-center justify-between transition-all shadow-[0_4px_15px_rgba(37,99,235,0.4)]">
+                                <span class="flex items-center gap-3"><span>👥</span> Canal de Facebook Oficial</span>
+                                <span class="text-blue-200">↗</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Columna de Assets Visuales -->
+                    <div class="grid grid-cols-2 gap-4 items-center z-10">
+                        <a href="https://vt.tiktok.com/ZS96v7ydKsvuk-MrwH6/" target="_blank" class="aspect-[3/4] rounded-xl overflow-hidden border border-slate-700 relative group shadow-2xl block cursor-pointer">
+                            <img src="https://thesteef21.github.io/Lapizasuli/assets/GSADV41/166a67a4ef96127111f6dad081ae4922_0.jpeg" alt="Panini TikTok Asset" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-center pb-4">
+                                <span class="bg-[#00f3ff] text-black text-[10px] font-bold px-3 py-1 rounded-full uppercase">Abrir en TikTok</span>
+                            </div>
+                        </a>
+                        <a href="https://vt.tiktok.com/ZS96vWGAuy3Gn-5vD4q/" target="_blank" class="aspect-[3/4] rounded-xl overflow-hidden border border-slate-700 relative group shadow-2xl block cursor-pointer">
+                            <img src="https://thesteef21.github.io/Lapizasuli/assets/GSADV41/Screenshot_20260702_212941_Brave.jpg" alt="Mundial Visionario AI Asset" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-center pb-4">
+                                <span class="bg-rose-500 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase">Abrir en TikTok</span>
+                            </div>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="monitor-sismico-seccion" class="max-w-3xl mx-auto p-1 md:p-6 bg-[#0d1117] border border-slate-800 rounded-2xl shadow-xl mt-8">
             <div class="text-center py-4">
                 <h2 class="text-renderRed font-bold text-2xl md:text-3xl tracking-tight uppercase">Módulo SADV41T</h2>
                 <p class="text-slate-400 text-xs md:text-sm mt-1 border-b border-slate-800 pb-4">
