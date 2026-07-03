@@ -3,304 +3,259 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Eventos y Precios - 16avos de Final</title>
+    <title>FIFA World Cup 2026 - 16avos de Final | Sovereign Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght=300;400;600&family=Playfair+Display:ital,wght=0,700;1,700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.jsdelivr.net/npm/@web3auth/modal@8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.0/ethers.umd.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#020617',
+                        oro: '#eab308',
+                        blanco: '#f8fafc',
+                        borgona: '#4a0010',
+                        neonGreen: '#10b981',
+                        neonBlue: '#00f3ff',
+                        renderRed: '#da3637',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f6f9;
-            color: #333;
-            margin: 0;
-            padding: 20px;
+            background-color: #020617;
+            background-image: linear-gradient(rgba(2, 6, 23, 0.80), rgba(2, 6, 23, 0.95)), url('https://y2s.onrender.com/api/graphics/mundial_bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #f8fafc;
         }
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        .glass {
+            background: rgba(2, 6, 23, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(234, 179, 8, 0.2);
         }
-        h1 {
-            text-align: center;
-            color: #2c3e50;
-            margin-bottom: 25px;
+        .glass-table {
+            background: rgba(10, 15, 30, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
         }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
+        .text-shadow-oro { text-shadow: 0 0 10px rgba(234, 179, 8, 0.5); }
+        .text-shadow-green { text-shadow: 0 0 10px rgba(16, 185, 129, 0.6); }
+        
+        .scanline {
+            width: 100%; height: 2px;
+            background: rgba(0, 209, 255, 0.1);
+            position: fixed; z-index: 50; top: 0; pointer-events: none;
+            animation: scanline 8s linear infinite;
         }
-        th, td {
-            padding: 12px 15px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
+        @keyframes scanline { 0% { top: 0; } 100% { top: 100%; } }
+
+        /* Pestañas Laterales */
+        .sidebar-tabs {
+            position: fixed; left: 0; top: 50%; transform: translateY(-50%); z-index: 45;
+            display: flex; flex-direction: column; gap: 12px;
         }
-        th {
-            background-color: #2c3e50;
-            color: white;
-            font-weight: bold;
+        .vertical-tab {
+            display: flex; align-items: center; background: rgba(2, 6, 23, 0.95);
+            padding: 12px 15px; border-radius: 0 15px 15px 0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            width: 60px; overflow: hidden; white-space: nowrap; cursor: pointer;
+            box-shadow: 4px 4px 15px rgba(0,0,0,0.5);
         }
-        tr:hover {
-            background-color: #f9f9f9;
+        .vertical-tab:hover { width: 280px; padding-left: 20px; }
+        .vertical-tab span.icon { font-size: 1.5rem; min-width: 30px; }
+        .vertical-tab span.text { margin-left: 15px; font-weight: bold; opacity: 0; transition: opacity 0.3s; font-size: 0.85rem; letter-spacing: 0.05em; }
+        .vertical-tab:hover span.text { opacity: 1; transition-delay: 0.1s; }
+        
+        .tab-ima { border-left: 4px solid #3b82f6; border-top: 1px solid rgba(59,130,246,0.3); border-right: 1px solid rgba(59,130,246,0.3); border-bottom: 1px solid rgba(59,130,246,0.3); }
+        .tab-ima:hover { background: rgba(30, 58, 138, 0.4); }
+        
+        .tab-col { border-left: 4px solid #10b981; border-top: 1px solid rgba(16,185,129,0.3); border-right: 1px solid rgba(16,185,129,0.3); border-bottom: 1px solid rgba(16,185,129,0.3); }
+        .tab-col:hover { background: rgba(6, 78, 59, 0.4); }
+
+        @media (max-width: 768px) {
+            .sidebar-tabs { top: 85%; transform: translateY(0); gap: 8px; }
+            .vertical-tab { width: 50px; padding: 10px; border-radius: 0 10px 10px 0; }
+            .vertical-tab span.icon { font-size: 1.2rem; }
+            .vertical-tab:hover { width: 240px; }
+            .vertical-tab span.text { font-size: 0.75rem; }
         }
-        .btn-container {
-            display: flex;
-            gap: 10px;
-        }
-        .btn-info {
-            display: inline-block;
-            padding: 8px 12px;
-            color: #fff;
-            background-color: #25d366;
-            text-decoration: none;
-            border-radius: 4px;
-            font-weight: bold;
-            font-size: 0.9em;
-            text-align: center;
-        }
-        .btn-info:hover {
-            background-color: #128c7e;
-        }
-        .btn-link {
-            display: inline-block;
-            padding: 8px 12px;
-            color: #fff;
-            background-color: #3498db;
-            text-decoration: none;
-            border-radius: 4px;
-            font-weight: bold;
-            font-size: 0.9em;
-            text-align: center;
-        }
-        .btn-link:hover {
-            background-color: #2980b9;
-        }
-        .price {
-            font-weight: bold;
-            color: #2c3e50;
-        }
-        .status {
-            font-style: italic;
-        }
+
+        /* Ocultar barra de desplazamiento en tabla */
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
-<body>
+<body class="font-sans antialiased selection:bg-emerald-500 selection:text-navy overflow-x-hidden">
 
-<div class="container">
-    <h1>Calendario Oficial de Eventos y Disponibilidad - 16avos de Final</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Día</th>
-                <th>Evento / Partido</th>
-                <th>Sede</th>
-                <th>Precio</th>
-                <th>Estado</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>04</td>
-                <td>TBD vs. TBD (M86 - Round of 16)</td>
-                <td>Miami</td>
-                <td class="price">US$2600.00</td>
-                <td class="status">CAT 1</td>
-                <td class="btn-container">
-                    <a href="https://wa.me/50769362166" class="btn-info" target="_blank">Para más información</a>
-                    <a href="https://thesteef21.github.io/Lapizasuli/GSADV41.html" class="btn-link" target="_blank">GSADV41</a>
-                </td>
-            </tr>
-            <tr>
-                <td>04</td>
-                <td>TBD vs. TBD (M86 - Round of 16)</td>
-                <td>Miami</td>
-                <td class="price">US$2246.00</td>
-                <td class="status">CAT 2</td>
-                <td class="btn-container">
-                    <a href="https://wa.me/50769362166" class="btn-info" target="_blank">Para más información</a>
-                    <a href="https://thesteef21.github.io/Lapizasuli/GSADV41.html" class="btn-link" target="_blank">GSADV41</a>
-                </td>
-            </tr>
-            <tr>
-                <td>04</td>
-                <td>TBD vs. TBD (M87 - Round of 16)</td>
-                <td>Kansas City</td>
-                <td class="price">US$1100.00</td>
-                <td class="status">CAT 1</td>
-                <td class="btn-container">
-                    <a href="https://wa.me/50769362166" class="btn-info" target="_blank">Para más información</a>
-                    <a href="https://thesteef21.github.io/Lapizasuli/GSADV41.html" class="btn-link" target="_blank">GSADV41</a>
-                </td>
-            </tr>
-            <tr>
-                <td>04</td>
-                <td>TBD vs. TBD (M87 - Round of 16)</td>
-                <td>Kansas City</td>
-                <td class="price">US$899.00</td>
-                <td class="status">CAT 2</td>
-                <td class="btn-container">
-                    <a href="https://wa.me/50769362166" class="btn-info" target="_blank">Para más información</a>
-                    <a href="https://thesteef21.github.io/Lapizasuli/GSADV41.html" class="btn-link" target="_blank">GSADV41</a>
-                </td>
-            </tr>
-            <tr>
-                <td>04</td>
-                <td>TBD vs. TBD (M90 - Round of 16)</td>
-                <td>Houston</td>
-                <td class="price">US$1358.00</td>
-                <td class="status">CAT 1</td>
-                <td class="btn-container">
-                    <a href="https://wa.me/50769362166" class="btn-info" target="_blank">Para más información</a>
-                    <a href="https://thesteef21.github.io/Lapizasuli/GSADV41.html" class="btn-link" target="_blank">GSADV41</a>
-                </td>
-            </tr>
-            <tr>
-                <td>04</td>
-                <td>TBD vs. TBD (M90 - Round of 16)</td>
-                <td>Houston</td>
-                <td class="price">US$1199.00</td>
-                <td class="status">CAT 2</td>
-                <td class="btn-container">
-                    <a href="https://wa.me/50769362166" class="btn-info" target="_blank">Para más información</a>
-                    <a href="https://thesteef21.github.io/Lapizasuli/GSADV41.html" class="btn-link" target="_blank">GSADV41</a>
-                </td>
-            </tr>
-            <tr>
-                <td>04</td>
-                <td>TBD vs. TBD (M89 - Round of 16)</td>
-                <td>Philadelphia</td>
-                <td class="price">US$1600.00</td>
-                <td class="status">CAT 1</td>
-                <td class="btn-container">
-                    <a href="https://wa.me/50769362166" class="btn-info" target="_blank">Para más información</a>
-                    <a href="https://thesteef21.github.io/Lapizasuli/GSADV41.html" class="btn-link" target="_blank">GSADV41</a>
-                </td>
-            </tr>
-            <tr>
-                <td>04</td>
-                <td>TBD vs. TBD (M89 - Round of 16)</td>
-                <td>Philadelphia</td>
-                <td class="price">US$1599.00</td>
-                <td class="status">Stock limitado - CAT 2</td>
-                <td class="btn-container">
-                    <a href="https://wa.me/50769362166" class="btn-info" target="_blank">Para más información</a>
-                    <a href="https://thesteef21.github.io/Lapizasuli/GSADV41.html" class="btn-link" target="_blank">GSADV41</a>
-                </td>
-            </tr>
-            <tr>
-                <td>05</td>
-                <td>TBD vs. TBD (M91 - Round of 16)</td>
-                <td>New York / New Jersey</td>
-                <td class="price">US$2499.00</td>
-                <td class="status">CAT 1</td>
-                <td class="btn-container">
-                    <a href="https://wa.me/50769362166" class="btn-info" target="_blank">Para más información</a>
-                    <a href="https://thesteef21.github.io/Lapizasuli/GSADV41.html" class="btn-link" target="_blank">GSADV41</a>
-                </td>
-            </tr>
-            <tr>
-                <td>05</td>
-                <td>TBD vs. TBD (M91 - Round of 16)</td>
-                <td>New York / New Jersey</td>
-                <td class="price">US$1650.00</td>
-                <td class="status">CAT 2</td>
-                <td class="btn-container">
-                    <a href="https://wa.me/50769362166" class="btn-info" target="_blank">Para más información</a>
-                    <a href="https://thesteef21.github.io/Lapizasuli/GSADV41.html" class="btn-link" target="_blank">GSADV41</a>
-                </td>
-            </tr>
-            <tr>
-                <td>06</td>
-                <td>TBD vs. TBD (M93 - Round of 16)</td>
-                <td>Dallas</td>
-                <td class="price">US$1900.00</td>
-                <td class="status">CAT 1</td>
-                <td class="btn-container">
-                    <a href="https://wa.me/50769362166" class="btn-info" target="_blank">Para más información</a>
-                    <a href="https://thesteef21.github.io/Lapizasuli/GSADV41.html" class="btn-link" target="_blank">GSADV41</a>
-                </td>
-            </tr>
-            <tr>
-                <td>06</td>
-                <td>TBD vs. TBD (M93 - Round of 16)</td>
-                <td>Dallas</td>
-                <td class="price">US$1500.00</td>
-                <td class="status">CAT 2</td>
-                <td class="btn-container">
-                    <a href="https://wa.me/50769362166" class="btn-info" target="_blank">Para más información</a>
-                    <a href="https://thesteef21.github.io/Lapizasuli/GSADV41.html" class="btn-link" target="_blank">GSADV41</a>
-                </td>
-            </tr>
-            <tr>
-                <td>07</td>
-                <td>TBD vs. TBD (M94 - Round of 16)</td>
-                <td>Seattle</td>
-                <td class="price">US$1950.00</td>
-                <td class="status">CAT 1</td>
-                <td class="btn-container">
-                    <a href="https://wa.me/50769362166" class="btn-info" target="_blank">Para más información</a>
-                    <a href="https://thesteef21.github.io/Lapizasuli/GSADV41.html" class="btn-link" target="_blank">GSADV41</a>
-                </td>
-            </tr>
-            <tr>
-                <td>07</td>
-                <td>TBD vs. TBD (M94 - Round of 16)</td>
-                <td>Seattle</td>
-                <td class="price">US$2500.00</td>
-                <td class="status">Stock limitado - CAT 2</td>
-                <td class="btn-container">
-                    <a href="https://wa.me/50769362166" class="btn-info" target="_blank">Para más información</a>
-                    <a href="https://thesteef21.github.io/Lapizasuli/GSADV41.html" class="btn-link" target="_blank">GSADV41</a>
-                </td>
-            </tr>
-            <tr>
-                <td>07</td>
-                <td>TBD vs. TBD (M95 - Round of 16)</td>
-                <td>Atlanta</td>
-                <td class="price">US$1988.00</td>
-                <td class="status">CAT 1</td>
-                <td class="btn-container">
-                    <a href="https://wa.me/50769362166" class="btn-info" target="_blank">Para más información</a>
-                    <a href="https://thesteef21.github.io/Lapizasuli/GSADV41.html" class="btn-link" target="_blank">GSADV41</a>
-                </td>
-            </tr>
-            <tr>
-                <td>07</td>
-                <td>TBD vs. TBD (M95 - Round of 16)</td>
-                <td>Atlanta</td>
-                <td class="price">US$2999.00</td>
-                <td class="status">Stock limitado - CAT 2</td>
-                <td class="btn-container">
-                    <a href="https://wa.me/50769362166" class="btn-info" target="_blank">Para más información</a>
-                    <a href="https://thesteef21.github.io/Lapizasuli/GSADV41.html" class="btn-link" target="_blank">GSADV41</a>
-                </td>
-            </tr>
-            <tr>
-                <td>07</td>
-                <td>TBD vs. TBD (M96 - Round of 16)</td>
-                <td>Vancouver</td>
-                <td class="price">US$1700.00</td>
-                <td class="status">CAT 1</td>
-                <td class="btn-container">
-                    <a href="https://wa.me/50769362166" class="btn-info" target="_blank">Para más información</a>
-                    <a href="https://thesteef21.github.io/Lapizasuli/GSADV41.html" class="btn-link" target="_blank">GSADV41</a>
-                </td>
-            </tr>
-            <tr>
-                <td>07</td>
-                <td>TBD vs. TBD (M96 - Round of 16)</td>
-                <td>Vancouver</td>
-                <td class="price">US$1200.00</td>
-                <td class="status">CAT 2</td>
-                <td class="btn-container">
-                    <a href="https://wa.me/50769362166" class="btn-info" target="_blank">Para más información</a>
-                    <a href="https://thesteef21.github.io/Lapizasuli/GSADV41.html" class="btn-link" target="_blank">GSADV41</a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+    <div class="scanline"></div>
 
+    <!-- PESTAÑAS VERTICALES IZQUIERDAS -->
+    <div class="sidebar-tabs">
+        <a href="https://thesteef21.github.io/Lapizasuli/IMA.html" target="_blank" class="vertical-tab tab-ima">
+            <span class="icon">🍚</span>
+            <span class="text text-blue-200">Arroz barato cerca de ti! 🇵🇦</span>
+        </a>
+        <a href="https://thesteef21.github.io/Lapizasuli/ColombiaPTY.html" target="_blank" class="vertical-tab tab-col">
+            <span class="icon">💸</span>
+            <span class="text text-emerald-300">PRÉSTAMOS FÁCILES! 🇵🇦🇨🇴</span>
+        </a>
+    </div>
+
+    <!-- ENCABEZADO PRINCIPAL -->
+    <header class="fixed w-full z-50 glass border-b border-emerald-500/30 px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+            <span class="text-2xl">⚽</span>
+            <div>
+                <h1 class="font-serif text-xl tracking-wider text-emerald-400 font-bold text-shadow-green">FIFA 2026 HUB</h1>
+                <p class="text-[9px] text-slate-400 font-mono tracking-widest">SADV41 TICKET ARCHITECTURE</p>
+            </div>
+        </div>
+        
+        <nav class="flex gap-6 text-sm uppercase tracking-wider font-medium flex-wrap justify-center">
+            <a href="https://thesteef21.github.io/Lapizasuli/GSADV41.html" class="hover:text-oro transition-colors text-amber-300 font-bold flex items-center gap-1">🛡️ Volver a GSADV41</a>
+        </nav>
+
+        <div class="flex flex-wrap gap-2 justify-center">
+            <button id="btnConnect" onclick="connectBinance()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs px-4 py-2 rounded transition-all flex items-center gap-1.5 shadow-lg shadow-emerald-500/20 cursor-pointer border border-emerald-400/50">
+                ⚡ Connect Web3 Wallet
+            </button>
+        </div>
+    </header>
+
+    <main class="pt-40 pb-12 px-4 md:px-12 max-w-7xl mx-auto space-y-10">
+        
+        <div id="walletStatus" class="hidden max-w-lg mx-auto p-4 bg-gray-900/90 border border-emerald-500/40 rounded-xl font-mono shadow-2xl">
+            <div class="flex items-center gap-2 mb-1">
+                <span class="relative flex h-2 w-2">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                </span>
+                <p class="text-[10px] text-slate-400 uppercase tracking-widest">Web3 Pipeline Active</p>
+            </div>
+            <p class="text-xs text-slate-300 break-all">Dirección: <span id="walletAddress" class="text-emerald-400 font-bold select-all"></span></p>
+        </div>
+
+        <!-- SECCIÓN DE LA TABLA (16AVOS DE FINAL) -->
+        <section class="glass-table rounded-2xl overflow-hidden relative">
+            <div class="p-8 text-center border-b border-emerald-500/20 bg-gradient-to-b from-emerald-900/40 to-transparent">
+                <h2 class="font-serif text-2xl md:text-4xl text-white font-extrabold tracking-wider uppercase text-shadow-green">
+                    Calendario de Eventos y Disponibilidad
+                </h2>
+                <p class="text-emerald-400 font-semibold text-sm md:text-base tracking-widest mt-2 uppercase">16avos de Final - Precios Oficiales</p>
+                <div class="mt-4 inline-block bg-slate-900/80 border border-slate-700 px-4 py-2 rounded-full text-xs font-mono text-slate-300">
+                    Soporte oficial vía WhatsApp: <span class="text-white font-bold">@StevenDiorOficial</span>
+                </div>
+            </div>
+
+            <div class="overflow-x-auto hide-scrollbar">
+                <table class="w-full text-sm text-left text-slate-300 whitespace-nowrap">
+                    <thead class="text-xs text-emerald-100 uppercase bg-emerald-900/60 border-b border-emerald-500/50">
+                        <tr>
+                            <th scope="col" class="px-6 py-4 font-bold tracking-wider">Día</th>
+                            <th scope="col" class="px-6 py-4 font-bold tracking-wider">Evento / Partido</th>
+                            <th scope="col" class="px-6 py-4 font-bold tracking-wider">Sede</th>
+                            <th scope="col" class="px-6 py-4 font-bold tracking-wider">Precio (USD)</th>
+                            <th scope="col" class="px-6 py-4 font-bold tracking-wider text-center">Categoría</th>
+                            <th scope="col" class="px-6 py-4 font-bold tracking-wider text-center">Acciones y Reserva</th>
+                        </tr>
+                    </thead>
+                    <tbody class="font-sans divide-y divide-slate-700/50">
+                        <!-- DATOS DE LA TABLA -->
+                        <script>
+                            const partidos = [
+                                { dia: "04", evento: "TBD vs. TBD (M86 - Round of 16)", sede: "Miami", precio: "$2,600.00", cat: "CAT 1" },
+                                { dia: "04", evento: "TBD vs. TBD (M86 - Round of 16)", sede: "Miami", precio: "$2,246.00", cat: "CAT 2" },
+                                { dia: "04", evento: "TBD vs. TBD (M87 - Round of 16)", sede: "Kansas City", precio: "$1,100.00", cat: "CAT 1" },
+                                { dia: "04", evento: "TBD vs. TBD (M87 - Round of 16)", sede: "Kansas City", precio: "$899.00", cat: "CAT 2" },
+                                { dia: "04", evento: "TBD vs. TBD (M90 - Round of 16)", sede: "Houston", precio: "$1,358.00", cat: "CAT 1" },
+                                { dia: "04", evento: "TBD vs. TBD (M90 - Round of 16)", sede: "Houston", precio: "$1,199.00", cat: "CAT 2" },
+                                { dia: "04", evento: "TBD vs. TBD (M89 - Round of 16)", sede: "Philadelphia", precio: "$1,600.00", cat: "CAT 1" },
+                                { dia: "04", evento: "TBD vs. TBD (M89 - Round of 16)", sede: "Philadelphia", precio: "$1,599.00", cat: "Stock limitado - CAT 2", limitado: true },
+                                { dia: "05", evento: "TBD vs. TBD (M91 - Round of 16)", sede: "New York / New Jersey", precio: "$2,499.00", cat: "CAT 1" },
+                                { dia: "05", evento: "TBD vs. TBD (M91 - Round of 16)", sede: "New York / New Jersey", precio: "$1,650.00", cat: "CAT 2" },
+                                { dia: "06", evento: "TBD vs. TBD (M93 - Round of 16)", sede: "Dallas", precio: "$1,900.00", cat: "CAT 1" },
+                                { dia: "06", evento: "TBD vs. TBD (M93 - Round of 16)", sede: "Dallas", precio: "$1,500.00", cat: "CAT 2" },
+                                { dia: "07", evento: "TBD vs. TBD (M94 - Round of 16)", sede: "Seattle", precio: "$1,950.00", cat: "CAT 1" },
+                                { dia: "07", evento: "TBD vs. TBD (M94 - Round of 16)", sede: "Seattle", precio: "$2,500.00", cat: "Stock limitado - CAT 2", limitado: true },
+                                { dia: "07", evento: "TBD vs. TBD (M95 - Round of 16)", sede: "Atlanta", precio: "$1,988.00", cat: "CAT 1" },
+                                { dia: "07", evento: "TBD vs. TBD (M95 - Round of 16)", sede: "Atlanta", precio: "$2,999.00", cat: "Stock limitado - CAT 2", limitado: true },
+                                { dia: "07", evento: "TBD vs. TBD (M96 - Round of 16)", sede: "Vancouver", precio: "$1,700.00", cat: "CAT 1" },
+                                { dia: "07", evento: "TBD vs. TBD (M96 - Round of 16)", sede: "Vancouver", precio: "$1,200.00", cat: "CAT 2" }
+                            ];
+
+                            document.write(partidos.map(p => `
+                                <tr class="hover:bg-white/[0.03] transition-colors group">
+                                    <td class="px-6 py-4 font-mono text-emerald-400 font-bold">${p.dia}</td>
+                                    <td class="px-6 py-4 font-bold text-white group-hover:text-emerald-300 transition-colors">${p.evento}</td>
+                                    <td class="px-6 py-4 flex items-center gap-2"><span class="text-[10px]">📍</span> ${p.sede}</td>
+                                    <td class="px-6 py-4 font-mono font-bold text-oro tracking-wide">${p.precio}</td>
+                                    <td class="px-6 py-4 text-center">
+                                        <span class="px-3 py-1 text-[10px] font-bold uppercase rounded-full border ${p.limitado ? 'bg-rose-900/30 text-rose-400 border-rose-500/50' : (p.cat === 'CAT 1' ? 'bg-amber-900/30 text-amber-400 border-amber-500/50' : 'bg-blue-900/30 text-blue-400 border-blue-500/50')}">
+                                            ${p.cat}
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 flex justify-center gap-3">
+                                        <a href="https://wa.me/50769362166?text=Hola,%20busco%20informaci%C3%B3n%20para%20los%2016avos%20del%20Mundial%202026%20(%40StevenDiorOficial)" target="_blank" class="bg-[#25d366]/90 hover:bg-[#128c7e] text-white font-bold py-2 px-4 rounded-lg shadow-lg flex items-center gap-2 text-xs transition-transform hover:scale-105">
+                                            💬 Info WhatsApp
+                                        </a>
+                                        <a href="https://thesteef21.github.io/Lapizasuli/GSADV41.html" target="_blank" class="bg-blue-600/90 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded-lg shadow-lg flex items-center gap-2 text-xs border border-blue-400/50 transition-transform hover:scale-105">
+                                            🛡️ Hub GSADV41
+                                        </a>
+                                    </td>
+                                </tr>
+                            `).join(''));
+                        </script>
+                    </tbody>
+                </table>
+            </div>
+            <div class="bg-black/40 p-4 text-center text-xs text-slate-500 font-mono border-t border-emerald-500/20">
+                Datos sincronizados con la disponibilidad oficial. Los precios están sujetos a variaciones del mercado global.
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // --- CONEXIÓN WEB3 AUTH ---
+        async function connectBinance() {
+            const btn = document.getElementById('btnConnect');
+            const statusDiv = document.getElementById('walletStatus');
+            const addressP = document.getElementById('walletAddress');
+
+            if (typeof window.ethereum !== 'undefined') {
+                try {
+                    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                    const account = accounts[0];
+                    
+                    if (addressP) addressP.innerText = account;
+                    if (statusDiv) statusDiv.classList.remove('hidden');
+                    if (btn) {
+                        btn.innerHTML = "✅ Conectado";
+                        btn.className = "bg-emerald-600 text-white font-bold text-xs px-4 py-2 rounded transition-all shadow-md border border-emerald-400";
+                    }
+                    console.log("Sincronización Web3 establecida (FIFA 2026):", account);
+                } catch (error) {
+                    console.error("Conexión denegada", error);
+                }
+            } else {
+                alert("No se detectó un proveedor Web3. Utiliza el dApp browser de Binance.");
+                window.open('https://web3.binance.com/en/referral?ref=ORCZSDLK', '_blank');
+            }
+        }
+    </script>
 </body>
 </html>
