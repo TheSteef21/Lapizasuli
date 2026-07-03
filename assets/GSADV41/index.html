@@ -1,1 +1,641 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sovereign Hub | SADV41, FIFA World Cup 2026 & Monitoreo Sísmico</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght=300;400;600&family=Playfair+Display:ital,wght=0,700;1,700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.jsdelivr.net/npm/@web3auth/modal@8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.0/ethers.umd.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#020617',
+                        oro: '#eab308',
+                        blanco: '#f8fafc',
+                        borgona: '#4a0010',
+                        neonGreen: '#10b981',
+                        neonBlue: '#00f3ff',
+                        renderRed: '#da3637',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #020617;
+            background-image: linear-gradient(rgba(2, 6, 23, 0.80), rgba(2, 6, 23, 0.95)), url('https://y2s.onrender.com/api/graphics/mundial_bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #f8fafc;
+        }
+        .glass {
+            background: rgba(2, 6, 23, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(234, 179, 8, 0.2);
+        }
+        .glass-mundial {
+            background: rgba(2, 6, 23, 0.60);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+        .glass-sismico {
+            background: #161b22;
+            border: 1px solid #30363d;
+        }
+        .text-shadow-oro {
+            text-shadow: 0 0 10px rgba(234, 179, 8, 0.5);
+        }
+        .text-shadow-green {
+            text-shadow: 0 0 10px rgba(16, 185, 129, 0.6);
+        }
+        .text-shadow-blue {
+            text-shadow: 0 0 10px rgba(0, 243, 255, 0.6);
+        }
+        .sismo-card {
+            background-color: #1f242c;
+            border-left: 5px solid #ff6b81;
+        }
+
+        /* --- ENTORNO SOBERANO ADICIONAL --- */
+        .scanline {
+            width: 100%;
+            height: 2px;
+            background: rgba(0, 209, 255, 0.1);
+            position: fixed;
+            z-index: 50;
+            top: 0;
+            pointer-events: none;
+            animation: scanline 8s linear infinite;
+        }
+        @keyframes scanline {
+            0% { top: 0; }
+            100% { top: 100%; }
+        }
+
+        .bloom-text-blue { text-shadow: 0 0 8px rgba(0, 209, 255, 0.8), 0 0 15px rgba(0, 209, 255, 0.5); }
+        
+        .glass-panel {
+            background: rgba(10, 10, 20, 0.75);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 209, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        .glass-panel::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 4px; height: 100%;
+            background: #00D1FF;
+            box-shadow: 0 0 10px #00D1FF;
+        }
+
+        /* --- ESTILOS DE MÓDULOS DE IA Y SUSCRIPCIÓN --- */
+        .module-card {
+            background: rgba(10, 15, 25, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem;
+            border-radius: 1rem;
+        }
+        .input-dark {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(0, 209, 255, 0.3);
+            color: white;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            width: 100%;
+        }
+
+        /* --- ESTILOS PESTAÑAS VERTICALES IZQUIERDAS --- */
+        .sidebar-tabs {
+            position: fixed;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 45;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .vertical-tab {
+            display: flex;
+            align-items: center;
+            background: rgba(2, 6, 23, 0.95);
+            padding: 12px 15px;
+            border-radius: 0 15px 15px 0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            width: 60px;
+            overflow: hidden;
+            white-space: nowrap;
+            box-shadow: 4px 4px 15px rgba(0,0,0,0.5);
+            cursor: pointer;
+        }
+        .vertical-tab:hover {
+            width: 280px;
+            padding-left: 20px;
+        }
+        .vertical-tab span.icon { font-size: 1.5rem; min-width: 30px; }
+        .vertical-tab span.text { margin-left: 15px; font-weight: bold; opacity: 0; transition: opacity 0.3s; font-size: 0.85rem; letter-spacing: 0.05em; }
+        .vertical-tab:hover span.text { opacity: 1; transition-delay: 0.1s; }
+        
+        .tab-ima { border-left: 4px solid #3b82f6; border-top: 1px solid rgba(59,130,246,0.3); border-right: 1px solid rgba(59,130,246,0.3); border-bottom: 1px solid rgba(59,130,246,0.3); }
+        .tab-ima:hover { background: rgba(30, 58, 138, 0.4); }
+        
+        .tab-col { border-left: 4px solid #10b981; border-top: 1px solid rgba(16,185,129,0.3); border-right: 1px solid rgba(16,185,129,0.3); border-bottom: 1px solid rgba(16,185,129,0.3); }
+        .tab-col:hover { background: rgba(6, 78, 59, 0.4); }
+        
+        @media (max-width: 768px) {
+            .sidebar-tabs { top: 85%; transform: translateY(0); gap: 8px; }
+            .vertical-tab { width: 50px; padding: 10px; border-radius: 0 10px 10px 0; }
+            .vertical-tab span.icon { font-size: 1.2rem; }
+            .vertical-tab:hover { width: 240px; }
+            .vertical-tab span.text { font-size: 0.75rem; }
+        }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-oro selection:text-navy overflow-x-hidden">
+
+    <div class="scanline"></div>
+
+    <!-- PESTAÑAS VERTICALES IZQUIERDAS (COMUNIDAD / RED DE APOYO) -->
+    <div class="sidebar-tabs">
+        <a href="https://thesteef21.github.io/Lapizasuli/IMA.html" target="_blank" class="vertical-tab tab-ima">
+            <span class="icon">🍚</span>
+            <span class="text text-blue-200">Arroz barato cerca de ti! 🇵🇦</span>
+        </a>
+        <a href="https://thesteef21.github.io/Lapizasuli/ColombiaPTY.html" target="_blank" class="vertical-tab tab-col">
+            <span class="icon">💸</span>
+            <span class="text text-emerald-300">PRÉSTAMOS FÁCILES! 🇵🇦🇨🇴</span>
+        </a>
+    </div>
+
+    <header class="fixed w-full z-50 glass border-b border-oro/30 px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+            <span class="text-2xl">🛡️</span>
+            <div>
+                <h1 class="font-serif text-xl tracking-wider text-oro font-bold">SOVEREIGN HUB</h1>
+                <p class="text-[9px] text-slate-400 font-mono tracking-widest">SADV41 DIGITAL ARCHITECTURE</p>
+            </div>
+        </div>
+        
+        <nav class="flex gap-6 text-sm uppercase tracking-wider font-medium flex-wrap justify-center">
+            <a href="https://thesteef21.github.io/Lapizasuli/FIFA2026.html" target="_blank" class="hover:text-emerald-400 transition-colors text-emerald-300 font-bold flex items-center gap-1">⚽ Mundial 2026 ↗</a>
+            <a href="#monitor-sismico-seccion" class="hover:text-red-400 transition-colors text-red-300 font-bold">⚠️ Telemetría SADV41T</a>
+            <a href="#noticias-seccion" class="hover:text-neonBlue transition-colors text-cyan-300">📰 Boletín</a>
+            <a href="#mayordomia-seccion" class="hover:text-oro transition-colors text-amber-200">Mayordomía</a>
+        </nav>
+
+        <div class="flex flex-wrap gap-2 justify-center">
+            <button onclick="loginSocial('google')" class="bg-white hover:bg-slate-200 text-slate-900 font-semibold text-xs px-3 py-2 rounded transition-all flex items-center gap-1.5 shadow cursor-pointer">
+                🌐 Google Connect
+            </button>
+            <button onclick="loginSocial('github')" class="bg-slate-800 hover:bg-slate-700 text-white font-semibold text-xs px-3 py-2 rounded transition-all flex items-center gap-1.5 border border-slate-700 cursor-pointer">
+                💻 GitHub Access
+            </button>
+            <button id="btnConnect" onclick="connectBinance()" class="bg-oro hover:bg-amber-600 text-navy font-bold text-xs px-3 py-2 rounded transition-all flex items-center gap-1.5 shadow-lg shadow-oro/20 cursor-pointer">
+                ⚡ Binance Web3 Wallet
+            </button>
+        </div>
+    </header>
+
+    <!-- Se ajustó un poco el pl-4 md:pl-12 para dar espacio visual al sidebar izquierdo si está expandido -->
+    <main class="pt-40 pb-12 px-4 md:px-12 max-w-6xl mx-auto space-y-16">
+        
+        <div id="walletStatus" class="hidden max-w-lg mx-auto p-4 bg-gray-900/90 border border-oro/40 rounded-xl font-mono shadow-2xl">
+            <div class="flex items-center gap-2 mb-1">
+                <span class="relative flex h-2 w-2">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                </span>
+                <p class="text-[10px] text-slate-400 uppercase tracking-widest">Web3 Pipeline Active</p>
+            </div>
+            <p class="text-xs text-slate-300 break-all">Dirección: <span id="walletAddress" class="text-oro font-bold select-all"></span></p>
+        </div>
+
+        <section id="noticias-seccion" class="glass rounded-2xl p-6 md:p-8 shadow-2xl border border-cyan-500/30">
+            <div class="flex items-center gap-3 mb-6 border-b border-white/10 pb-4">
+                <span class="text-3xl">📡</span>
+                <div>
+                    <h2 class="font-serif text-2xl text-oro font-bold tracking-wider uppercase text-shadow-oro">Boletín de Misión SADV41</h2>
+                    <p class="text-xs text-slate-400 font-mono">Recepción de datos: madcom21@gmail.com</p>
+                </div>
+            </div>
+            
+            <div class="space-y-6 text-sm text-slate-300 leading-relaxed font-sans">
+                <p>No cuento con un enlace directo a la aplicación o al feed externo de Google Noticias, pero puedo procesar y estructurar todos los boletines, alertas y reportes informativos que llegan directamente a la bandeja de entrada de <strong>madcom21@gmail.com</strong>, el cual funciona como el centro principal para las ideas técnicas y los datos de la misión.</p>
+                
+                <p>Las actualizaciones globales más recientes que han ingresado se centran en dos vertientes clave:</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+                    <div class="bg-black/50 p-5 rounded-xl border border-slate-700 hover:border-cyan-500/50 transition-colors">
+                        <h3 class="text-neonBlue font-bold text-base mb-4 flex items-center gap-2 bloom-text-blue">
+                            🤖 Inteligencia Artificial y Desarrollo Tecnológico:
+                        </h3>
+                        <ul class="space-y-4">
+                            <li class="flex gap-3 items-start">
+                                <span class="text-cyan-400 mt-1">▹</span>
+                                <span class="text-xs text-slate-300 leading-relaxed"><strong class="text-white">Avances en modelos de lenguaje y código:</strong> Destaca el lanzamiento de Claude Opus 4.5 de Anthropic, que ha superado las expectativas rompiendo récords en pruebas de programación (SWE) y posicionándose fuertemente en el ecosistema de IA.</span>
+                            </li>
+                            <li class="flex gap-3 items-start">
+                                <span class="text-cyan-400 mt-1">▹</span>
+                                <span class="text-xs text-slate-300 leading-relaxed"><strong class="text-white">Infraestructura a gran escala:</strong> Figuran los movimientos estratégicos de Google, incluyendo la expansión de sus TPU (con posibles acuerdos masivos) y el ambicioso Proyecto Suncatcher, una iniciativa orientada a operar centros de datos en el espacio para aprovechar la energía solar ininterrumpida.</span>
+                            </li>
+                            <li class="flex gap-3 items-start">
+                                <span class="text-cyan-400 mt-1">▹</span>
+                                <span class="text-xs text-slate-300 leading-relaxed"><strong class="text-white">Agentes autónomos e inferencia local:</strong> Se analiza el enfoque de Apple hacia la inferencia de IA de manera local para mantener el dominio del mercado. Paralelamente, el sector de la IA descentralizada (DeAI) muestra un alto dinamismo con el despliegue del Open Alpha de Wayfinder y el auge del token $PROMPT.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-black/50 p-5 rounded-xl border border-slate-700 hover:border-oro/50 transition-colors">
+                        <h3 class="text-oro font-bold text-base mb-4 flex items-center gap-2 text-shadow-oro">
+                            ⚡ Web3 y Ecosistema de Criptomonedas:
+                        </h3>
+                        <ul class="space-y-4">
+                            <li class="flex gap-3 items-start">
+                                <span class="text-amber-400 mt-1">▹</span>
+                                <span class="text-xs text-slate-300 leading-relaxed"><strong class="text-white">Evolución de las Stablecoins:</strong> El mercado experimenta un cambio importante con el lanzamiento de la nueva stablecoin Open USD, respaldada por un consorcio de más de 140 empresas (incluyendo gigantes financieros), lo que ha generado un impacto directo y rápido en competidores como Circle.</span>
+                            </li>
+                            <li class="flex gap-3 items-start">
+                                <span class="text-amber-400 mt-1">▹</span>
+                                <span class="text-xs text-slate-300 leading-relaxed"><strong class="text-white">Regulación y adopción institucional:</strong> La SEC ha iniciado un periodo de revisión para las reglas de aprobación de ETFs de criptomonedas. Por otro lado, destaca el masivo apoyo de Solana al desarrollo de Alatau City en Kazajistán, una megaciudad impulsada por infraestructura blockchain con un potencial de inversión de 6 mil millones de dólares.</span>
+                            </li>
+                            <li class="flex gap-3 items-start">
+                                <span class="text-amber-400 mt-1">▹</span>
+                                <span class="text-xs text-slate-300 leading-relaxed"><strong class="text-white">DeFi y actualizaciones de red:</strong> MetaMask ha integrado funciones para generar rendimientos automáticos (APY) sobre balances de stablecoins a través de protocolos de préstamos DeFi. Además, persisten los análisis técnicos sobre la red Ethereum, la acumulación de ETH por parte de tesorerías y las discusiones sobre la actualización EIP-7702.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900/50 border-l-4 border-emerald-500 p-4 rounded-r-lg mt-6">
+                    <p class="text-xs text-slate-300 italic">
+                        Si deseas que desglosemos alguna de estas noticias puntuales para conectarla con los desarrollos técnicos actuales o evaluar su viabilidad dentro de la infraestructura de SADV41, podemos indagar en los detalles de inmediato.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <section id="suscription-module" class="module-card">
+                <h2 class="text-oro font-serif text-xl mb-4">📧 Únete a la Misión</h2>
+                <form id="subscribeForm" action="https://formspree.io/f/mlgyebzz" method="POST" class="space-y-4">
+                    <input type="email" name="email" class="input-dark" placeholder="steven507oficial@duck.com" required>
+                    <button type="submit" class="w-full bg-oro hover:bg-amber-600 text-navy font-bold py-2 rounded">Suscribirse</button>
+                </form>
+                <p id="message" class="text-xs mt-3 text-cyan-400"></p>
+            </section>
+
+            <section id="aib-module" class="module-card">
+                <h2 class="text-neonBlue font-serif text-xl mb-4">🤖 Asistente SADV41</h2>
+                <div class="space-y-4">
+                    <input type="text" id="userInput" class="input-dark" placeholder="¿Qué necesitas saber?">
+                    <button id="sendBtn" class="w-full bg-neonBlue hover:bg-cyan-500 text-navy font-bold py-2 rounded">Preguntar a la IA</button>
+                    <p id="aiResponse" class="text-sm italic text-slate-300 border-l-2 border-neonBlue pl-3"></p>
+                </div>
+            </section>
+        </div>
+
+        <section id="world-cup-tracking" class="glass-mundial rounded-2xl overflow-hidden shadow-2xl max-w-2xl mx-auto">
+            <div class="p-8 text-center border-b border-white/5 bg-gradient-to-b from-emerald-500/10 to-transparent">
+                <h2 class="font-serif text-2xl md:text-3xl text-white font-extrabold tracking-wider text-shadow-green uppercase">GSADV41: COBERTURA MUNDIAL 2026</h2>
+                <p class="text-oro font-semibold text-sm tracking-widest mt-1 uppercase">Mundial de la FIFA — Grupo L</p>
+                <p class="text-xs text-slate-300 mt-4 leading-relaxed">
+                    Mapeo técnico del avance de la Selección Mayor de Fútbol de Panamá y el flujo de analíticas deportivas procesadas en tiempo real.
+                </p>
+            </div>
+
+            <div class="p-6 space-y-4 bg-slate-950/60">
+                <div class="bg-white/[0.02] border-l-4 border-emerald-500 p-4 rounded-r-xl transition-all hover:translate-x-1 hover:bg-white/[0.04] cursor-pointer">
+                    <div class="flex justify-between items-center mb-1">
+                        <span class="text-sm font-bold text-white">Debut en Toronto Stadium</span>
+                        <span class="text-[10px] text-oro uppercase tracking-wider font-semibold">Finalizado</span>
+                    </div>
+                    <p class="text-xs text-slate-400 leading-relaxed">Panamá vs. Ghana. El regreso de la selección absoluta a la cita mundialista de la FIFA tras 8 años de espera.</p>
+                </div>
+
+                <div class="bg-white/[0.02] border-l-4 border-amber-500 p-4 rounded-r-xl transition-all hover:translate-x-1 hover:bg-white/[0.04] cursor-pointer">
+                    <div class="flex justify-between items-center mb-1">
+                        <span class="text-sm font-bold text-white">Próximo Compromiso</span>
+                        <span class="text-[10px] text-cyan-400 uppercase tracking-wider font-semibold">Fase de Grupos</span>
+                    </div>
+                    <p class="text-xs text-slate-400 leading-relaxed">Panamá vs. Croacia. Análisis táctico del segundo duelo crucial del Grupo L. Monitoreo de alineaciones en el backend.</p>
+                </div>
+
+                <div class="bg-white/[0.02] border-l-4 border-emerald-500 p-4 rounded-r-xl transition-all hover:translate-x-1 hover:bg-white/[0.04] cursor-pointer">
+                    <div class="flex justify-between items-center mb-1">
+                        <span class="text-sm font-bold text-white">Procesamiento de Gráficos</span>
+                        <span class="text-[10px] text-emerald-400 font-mono">Pillow Layer Active</span>
+                    </div>
+                    <p class="text-xs text-slate-400 leading-relaxed">Generación de fondos automatizados y assets de imagen renderizados dinámicamente según estadísticas de la FIFA.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- NUEVA SECCIÓN: ENTRETENIMIENTO Y JUEGOS    -->
+        <!-- ========================================== -->
+        <section id="entretenimiento-juegos" class="glass-mundial rounded-2xl overflow-hidden shadow-2xl max-w-4xl mx-auto border border-rose-500/40 relative">
+            <!-- Efecto Glow Fondo -->
+            <div class="absolute top-0 right-0 w-64 h-64 bg-rose-600/10 rounded-full blur-[100px] pointer-events-none"></div>
+            
+            <div class="p-8 text-center border-b border-rose-500/20 bg-gradient-to-b from-rose-900/40 to-transparent">
+                <h2 class="font-serif text-2xl md:text-3xl text-white font-extrabold tracking-wider uppercase text-shadow-blue flex justify-center items-center gap-3">
+                    🎮 Entretenimiento y Juegos
+                </h2>
+                <p class="text-rose-400 font-semibold text-sm tracking-widest mt-2 uppercase">FIFA 2026 DESDE TIKTOK</p>
+            </div>
+
+            <div class="p-6 md:p-8 bg-slate-950/80">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    
+                    <!-- Columna de Texto y Botones -->
+                    <div class="flex flex-col justify-center space-y-5 z-10">
+                        <p class="text-sm text-slate-200 leading-relaxed font-sans">
+                            ¡Obtengamos más comodines para esta fiesta mundialista! ⚽️🔥 Ya estamos calentando motores para el evento más grande del planeta y quiero que todos sean parte de esta visión.
+                        </p>
+                        
+                        <p class="text-sm text-slate-200 leading-relaxed font-sans bg-black/40 p-4 rounded-xl border border-white/5">
+                            🌐 Para más información sobre la recolección de cartas y todo lo relacionado con TIKTOK FIFA 2026, visita el hub oficial de nuestra misión:<br>
+                            <a href="https://thesteef21.github.io/Lapizasuli/GSADV41.html" class="text-neonBlue hover:text-cyan-300 font-semibold hover:underline transition-colors mt-2 inline-block break-all">
+                                https://thesteef21.github.io/Lapizasuli/GSADV41.html
+                            </a>
+                        </p>
+
+                        <div class="bg-gradient-to-r from-emerald-900/40 to-black/60 p-4 rounded-xl border-l-4 border-emerald-500 shadow-lg">
+                            <p class="text-sm text-emerald-300 font-bold leading-relaxed">
+                                ⚡️ Recuerda utilizar el Cupón Consciente: <span class="text-white">@StevenDiorOficial</span> para beneficios exclusivos y apoyo a emprendedores con CSADV41. ¡Seguimos sumando victorias! 🗿🇵🇦💯
+                            </p>
+                        </div>
+
+                        <p class="text-xs text-slate-400 font-mono italic">
+                            #FIFAWorldCup #TikTokFIFA2026 #Comodines #StevenDiorOficial #SADV41 #Mundial2026 #InteligenciaArtificial #Emprendedores #Panama
+                        </p>
+
+                        <div class="flex flex-col gap-3 pt-2">
+                            <a href="https://vt.tiktok.com/ZS96v7ydKsvuk-MrwH6/" target="_blank" class="bg-[#0f0f11] hover:bg-[#1a1a1e] border border-[#00f3ff]/50 hover:border-[#00f3ff] text-white text-sm font-bold py-3 px-5 rounded-xl flex items-center justify-between transition-all group shadow-[0_0_10px_rgba(0,243,255,0.1)]">
+                                <span class="flex items-center gap-3"><span>🃏</span> Cartas de PANINI TIKTOK</span>
+                                <span class="text-[#00f3ff] transform group-hover:translate-x-1 transition-transform">↗</span>
+                            </a>
+                            <a href="https://vt.tiktok.com/ZS96vWGAuy3Gn-5vD4q/" target="_blank" class="bg-[#0f0f11] hover:bg-[#1a1a1e] border border-rose-500/50 hover:border-rose-500 text-white text-sm font-bold py-3 px-5 rounded-xl flex items-center justify-between transition-all group shadow-[0_0_10px_rgba(244,63,94,0.1)]">
+                                <span class="flex items-center gap-3"><span>🌍</span> Países FIFA 2026</span>
+                                <span class="text-rose-400 transform group-hover:translate-x-1 transition-transform">↗</span>
+                            </a>
+                            <a href="https://m.me/ch/Abbtb3PGmoN6tJ6d/" target="_blank" class="bg-blue-600/90 hover:bg-blue-500 border border-blue-400 text-white text-sm font-bold py-3 px-5 rounded-xl flex items-center justify-between transition-all shadow-[0_4px_15px_rgba(37,99,235,0.4)]">
+                                <span class="flex items-center gap-3"><span>👥</span> Canal de Facebook Oficial</span>
+                                <span class="text-blue-200">↗</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Columna de Assets Visuales -->
+                    <div class="grid grid-cols-2 gap-4 items-center z-10">
+                        <a href="https://vt.tiktok.com/ZS96v7ydKsvuk-MrwH6/" target="_blank" class="aspect-[3/4] rounded-xl overflow-hidden border border-slate-700 relative group shadow-2xl block cursor-pointer">
+                            <img src="https://thesteef21.github.io/Lapizasuli/assets/GSADV41/166a67a4ef96127111f6dad081ae4922_0.jpeg" alt="Panini TikTok Asset" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-center pb-4">
+                                <span class="bg-[#00f3ff] text-black text-[10px] font-bold px-3 py-1 rounded-full uppercase">Abrir en TikTok</span>
+                            </div>
+                        </a>
+                        <a href="https://vt.tiktok.com/ZS96vWGAuy3Gn-5vD4q/" target="_blank" class="aspect-[3/4] rounded-xl overflow-hidden border border-slate-700 relative group shadow-2xl block cursor-pointer">
+                            <img src="https://thesteef21.github.io/Lapizasuli/assets/GSADV41/Screenshot_20260702_212941_Brave.jpg" alt="Mundial Visionario AI Asset" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-center pb-4">
+                                <span class="bg-rose-500 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase">Abrir en TikTok</span>
+                            </div>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="monitor-sismico-seccion" class="max-w-3xl mx-auto p-1 md:p-6 bg-[#0d1117] border border-slate-800 rounded-2xl shadow-xl mt-8">
+            <div class="text-center py-4">
+                <h2 class="text-renderRed font-bold text-2xl md:text-3xl tracking-tight uppercase">Módulo SADV41T</h2>
+                <p class="text-slate-400 text-xs md:text-sm mt-1 border-b border-slate-800 pb-4">
+                    Detección y Clasificación de Familias Sísmicas Repetitivas (REDPy / USGS)
+                </p>
+            </div>
+
+            <div class="flex justify-center items-center gap-4 my-4">
+                <button id="btn-refrescar" class="bg-[#ff6b81] hover:bg-[#ff4757] text-white font-bold text-sm px-5 py-2.5 rounded-lg transition-all active:scale-95 cursor-pointer" onclick="refrescarMonitor()">
+                    Refrescar Monitor
+                </button>
+                <div id="badge-estado" class="bg-renderRed/10 text-renderRed border border-renderRed/40 px-4 py-1.5 rounded-full font-bold text-xs tracking-wide">
+                    Sincronizando...
+                </div>
+            </div>
+
+            <div id="contenedor-error" class="bg-red-500/10 border border-red-500 rounded-xl p-4 text-sm text-left space-y-1 hidden">
+                <span class="font-bold text-red-500 flex items-center gap-1">⚠️ Modo Respaldo Activado:</span> 
+                <p class="text-slate-300 text-xs">No se pudo conectar con el servidor dinámico a través de la ruta proxy de Render. Mostrando el último registro almacenado de la estación local.</p>
+            </div>
+
+            <div id="monitor-salida" class="space-y-4 mt-6"></div>
+        </section>
+
+        <section id="mayordomia-seccion" class="max-w-3xl mx-auto p-6 bg-[#0a0f1d] border border-gray-800 rounded-2xl shadow-xl space-y-6">
+            <h2 class="text-2xl font-bold border-l-4 border-oro pl-3 text-white font-serif">Administración Espiritual y Provisión</h2>
+            <p class="text-xs text-slate-300 leading-relaxed font-sans">
+                La verdadera riqueza de la <strong>SADV41</strong> radica en la alineación entre la tecnología de vanguardia y un propósito eterno. Al integrar herramientas Web3 con una visión clara de mayordomía, nos posicionamos fuera de las presiones de escasez.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                <div class="bg-black p-4 rounded-xl border border-gray-800 font-mono text-[11px] text-green-400 shadow-inner">
+                    <p class="text-gray-500"># Repositorio de Habilidades Activas</p>
+                    <p class="text-white"><span class="text-oro">$</span> npx skills add binance-web3</p>
+                </div>
+                <div class="bg-gray-950 p-4 rounded-xl border border-gray-800 flex flex-col justify-center">
+                    <h4 class="text-[10px] font-semibold uppercase tracking-wider text-slate-400 mb-1">Gobernanza Oficial (StevenDiorOficial)</h4>
+                    <p class="font-mono text-xs text-oro break-all select-all">0x59cB5992c35d6cD0fE6Ea94436c6AAE41F6E5fDD</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="glass rounded-2xl max-w-lg mx-auto overflow-hidden border border-cyan-500/30">
+            <div class="p-6 bg-black/30 flex flex-col items-center gap-4 text-center">
+                <div class="border border-[#00f3ff]/40 px-4 py-1.5 rounded-full text-xs font-bold text-[#00f3ff] tracking-wide text-shadow-blue shadow-[0_0_10px_rgba(0,243,255,0.15)] uppercase">
+                    CONFESIONARIO DE GRACIA & ALERTAS GLOBALES
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full pt-2 px-4">
+                    <a href="https://wa.me/+15556670579" target="_blank" class="bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs px-4 py-2.5 rounded-lg transition-all shadow flex items-center justify-center gap-1.5 cursor-pointer">💬 Contactar IA SADV41</a>
+                    <a href="https://www.instagram.com/reel/DZNKr6Sla4M/?igsh=bDUzODcwanlyZWp6" target="_blank" class="bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold text-xs px-4 py-2.5 rounded-lg transition-all shadow flex items-center justify-center gap-1.5 cursor-pointer">📸 Ver Reel Instagram</a>
+                    <a href="https://www.meta.ai/@stevendioroficial/post/MG4xH5QUPGu?open_in_meta_ai=true&song_id=1887147568642873&utm_source=android_meta_ai_sl" target="_blank" class="bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs px-4 py-2.5 rounded-lg transition-all shadow flex items-center justify-center gap-1.5 cursor-pointer col-span-2">🤖 Leer Arquitectura en Meta AI</a>
+                </div>
+                <div class="text-2xl mt-2 animate-[pulse_2s_infinite]">🎚</div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        const API_URL = "https://lapizasuli.onrender.com/api/sismos";
+
+        const datosRespaldoLocal = {
+            "analisis_ia": "Análisis en modo local (Respaldo del Sistema). Telemetría base registrada con acumulado de eventos estable en la red de estaciones.",
+            "acumulado_total": 24,
+            "eventos": [
+                {
+                    "id": "SADV41-2026-A",
+                    "ubicacion": "Zona de Subducción / Red de Estaciones USGS",
+                    "pais_region": "Panamá",
+                    "latitud": 7.0000,
+                    "longitud": -82.5000,
+                    "google_maps_url": "https://maps.google.com/?q=7.0000,-82.5000",
+                    "magnitud": 5.1,
+                    "profundidad_km": 26.2,
+                    "familia_redpy": "Familia Volcánica #04",
+                    "coeficiente_correlacion": 0.89,
+                    "fecha_hora": "2026-06-20 12:09:00"
+                }
+            ]
+        };
+
+        // --- PIPELINE DE RENDERIZADO SÍSMICO ---
+        function renderizarDatos(data) {
+            const monitorSalida = document.getElementById("monitor-salida");
+            let htmlContenido = `
+                <div class="glass-sismico border border-slate-800 rounded-xl p-5 text-left shadow-inner">
+                    <div class="flex justify-between items-center mb-2">
+                        <h4 class="text-[#58a6ff] font-bold text-sm flex items-center gap-1.5">🤖 Diagnóstico del Motor de IA:</h4>
+                        <span class="text-[10px] bg-slate-800 px-2 py-0.5 rounded font-mono text-slate-400">Acumulado: ${data.acumulado_total || 24}</span>
+                    </div>
+                    <p class="text-xs text-slate-300 leading-relaxed font-mono">${data.analisis_ia || "Procesando firmas..."}</p>
+                </div>
+            `;
+            data.eventos.forEach(sismo => {
+                htmlContenido += `
+                    <div class="sismo-card border-l-4 border-rose-500 p-4 rounded-r-xl text-left bg-slate-950/50 border border-y-slate-800 border-r-slate-800">
+                        <div class="text-xs text-slate-200 font-semibold mb-1 flex justify-between items-center">
+                            <span>📍 Ubicación: <span class="text-white">${sismo.ubicacion} (${sismo.pais_region || 'Panamá'})</span></span>
+                            <a href="${sismo.google_maps_url}" target="_blank" class="text-blue-400 hover:underline text-[10px] font-mono">📍 Ver en Mapa</a>
+                        </div>
+                        <div class="text-xs text-slate-400 grid grid-cols-2 gap-y-1 font-mono">
+                            <div>📊 Magnitud: <span class="text-rose-400 font-bold">M ${sismo.magnitud}</span></div>
+                            <div>📉 Profundidad: <span class="text-cyan-400 font-bold">${sismo.profundidad_km} km</span></div>
+                            <div class="col-span-2">🧬 Análisis REDPy: <span class="text-amber-400">${sismo.familia_redpy}</span> (CC: ${sismo.coeficiente_correlacion})</div>
+                        </div>
+                        <div class="text-[10px] text-slate-500 mt-2 flex justify-between border-t border-white/5 pt-1 font-mono">
+                            <span>ID: ${sismo.id}</span>
+                            <span>Hora: ${sismo.fecha_hora}</span>
+                        </div>
+                    </div>
+                `;
+            });
+            monitorSalida.innerHTML = htmlContenido;
+        }
+
+        async function refrescarMonitor() {
+            const botonRefrescar = document.getElementById("btn-refrescar");
+            const contenedorError = document.getElementById("contenedor-error");
+            const badgeEstado = document.getElementById("badge-estado");
+
+            try {
+                if (botonRefrescar) botonRefrescar.innerText = "Sincronizando...";
+                const response = await fetch(API_URL);
+                if (!response.ok) throw new Error(`Status: ${response.status}`);
+                const data = await response.json();
+                if (contenedorError) contenedorError.classList.add("hidden");
+                if (badgeEstado) {
+                    badgeEstado.innerText = "Sincronizado";
+                    badgeEstado.style.borderColor = "#238636";
+                    badgeEstado.style.color = "#2ea44f";
+                    badgeEstado.style.background = "rgba(46, 164, 79, 0.1)";
+                }
+                renderizarDatos(data);
+            } catch (error) {
+                if (contenedorError) contenedorError.classList.remove("hidden");
+                if (badgeEstado) {
+                    badgeEstado.innerText = "Modo Respaldo";
+                    badgeEstado.style.borderColor = "rgba(218, 54, 55, 0.4)";
+                    badgeEstado.style.color = "#da3637";
+                    badgeEstado.style.background = "rgba(218, 54, 55, 0.1)";
+                }
+                renderizarDatos(datosRespaldoLocal);
+            } finally {
+                if (botonRefrescar) botonRefrescar.innerText = "Refrescar Monitor";
+            }
+        }
+
+        // --- PIPELINE DE CONEXIÓN WEB3 AUTH (BINANCE / METAMASK) ---
+        async function connectBinance() {
+            const btn = document.getElementById('btnConnect');
+            const statusDiv = document.getElementById('walletStatus');
+            const addressP = document.getElementById('walletAddress');
+
+            if (typeof window.ethereum !== 'undefined') {
+                try {
+                    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                    const account = accounts[0];
+                    
+                    if (addressP) addressP.innerText = account;
+                    if (statusDiv) statusDiv.classList.remove('hidden');
+                    if (btn) {
+                        btn.innerText = "🌐 Connected";
+                        btn.className = "bg-green-600 text-white font-bold text-xs px-3 py-2 rounded transition-all shadow-md cursor-pointer flex items-center gap-1.5";
+                    }
+                    console.log("Sincronización Web3 establecida con cuenta:", account);
+                } catch (error) {
+                    console.error("Conexión denegada por el usuario o fallo en handshake", error);
+                }
+            } else {
+                alert("No se detectó un proveedor Web3 (Binance Wallet / Inyección Provider). Si estás en tu smartphone, accede desde el dApp browser interno de la aplicación.");
+                window.open('https://web3.binance.com/en/referral?ref=ORCZSDLK', '_blank');
+            }
+        }
+
+        function loginSocial(provider) { console.log("Social Auth Request: " + provider); }
+
+        // --- LÓGICA CONSOLIDADA DE MÓDULOS DE IA Y SUSCRIPCIÓN ---
+        const subForm = document.getElementById('subscribeForm');
+        if(subForm) {
+            subForm.addEventListener('submit', async (e) => {
+                // Formspree maneja el action, aquí solo damos aviso visual
+                document.getElementById('message').innerText = "Enviando solicitud...";
+            });
+        }
+
+        const sendBtn = document.getElementById('sendBtn');
+        if(sendBtn) {
+            sendBtn.addEventListener('click', async () => {
+                const userInput = document.getElementById('userInput').value;
+                const responseDiv = document.getElementById('aiResponse');
+                
+                if(!userInput) return;
+
+                responseDiv.innerText = "Consultando base de datos...";
+
+                try {
+                    const response = await fetch('https://lapizasuli.onrender.com/api/ask-ia', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ pregunta: userInput }),
+                    });
+
+                    const data = await response.json();
+                    responseDiv.innerText = data.choices ? data.choices[0].message.content : "Error de respuesta.";
+                } catch (error) {
+                    responseDiv.innerText = "Error: El servidor IA SADV41 no responde.";
+                }
+            });
+        }
+
+        // Inicializador Sincrónico Unificado
+        document.addEventListener("DOMContentLoaded", () => {
+            refrescarMonitor();
+        });
+    </script>
+</body>
+</html>
 
