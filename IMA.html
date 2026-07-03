@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sovereign Hub | SADV41, FIFA World Cup 2026 & Monitoreo Sísmico</title>
+    <title>IMA Agroferias | Sovereign Hub</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght=300;400;600&family=Playfair+Display:ital,wght=0,700;1,700&display=swap" rel="stylesheet">
     
@@ -12,105 +12,298 @@
 
     <script>
         tailwind.config = {
-            theme: { extend: { colors: { navy: '#020617', oro: '#eab308', neonGreen: '#10b981', neonBlue: '#00f3ff', renderRed: '#da3637' } } }
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#020617', oro: '#eab308', blanco: '#f8fafc',
+                        borgona: '#4a0010', neonGreen: '#10b981', neonBlue: '#00f3ff', renderRed: '#da3637'
+                    },
+                    fontFamily: { sans: ['Inter', 'sans-serif'], serif: ['Playfair Display', 'serif'] }
+                }
+            }
         }
     </script>
+
     <style>
-        body { background-color: #020617; color: #f8fafc; }
-        .glass { background: rgba(2, 6, 23, 0.85); backdrop-filter: blur(12px); border: 1px solid rgba(234, 179, 8, 0.2); }
-        .tab-content { display: none; }
-        .tab-content.active { display: block; }
-        .active-tab { border-bottom: 2px solid #eab308; color: #eab308; }
+        body {
+            background-color: #020617;
+            background-image: linear-gradient(rgba(2, 6, 23, 0.85), rgba(2, 6, 23, 0.98)), url('https://y2s.onrender.com/api/graphics/mundial_bg.jpg');
+            background-size: cover; background-position: center; background-attachment: fixed; color: #f8fafc;
+        }
+        .glass { background: rgba(2, 6, 23, 0.85); backdrop-filter: blur(12px); border: 1px solid rgba(16, 185, 129, 0.3); }
+        .glass-table { background: rgba(10, 15, 30, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(16, 185, 129, 0.4); box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5); }
+        
+        .text-shadow-oro { text-shadow: 0 0 10px rgba(234, 179, 8, 0.5); }
+        .text-shadow-green { text-shadow: 0 0 10px rgba(16, 185, 129, 0.6); }
+
+        .scanline {
+            width: 100%; height: 2px; background: rgba(16, 185, 129, 0.2);
+            position: fixed; z-index: 50; top: 0; pointer-events: none; animation: scanline 8s linear infinite;
+        }
+        @keyframes scanline { 0% { top: 0; } 100% { top: 100%; } }
+
+        /* Pestañas Laterales */
+        .sidebar-tabs { position: fixed; left: 0; top: 50%; transform: translateY(-50%); z-index: 45; display: flex; flex-direction: column; gap: 12px; }
+        .vertical-tab {
+            display: flex; align-items: center; background: rgba(2, 6, 23, 0.95);
+            padding: 12px 15px; border-radius: 0 15px 15px 0; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            width: 60px; overflow: hidden; white-space: nowrap; cursor: pointer; box-shadow: 4px 4px 15px rgba(0,0,0,0.5);
+        }
+        .vertical-tab:hover { width: 280px; padding-left: 20px; }
+        .vertical-tab span.icon { font-size: 1.5rem; min-width: 30px; }
+        .vertical-tab span.text { margin-left: 15px; font-weight: bold; opacity: 0; transition: opacity 0.3s; font-size: 0.85rem; letter-spacing: 0.05em; }
+        .vertical-tab:hover span.text { opacity: 1; transition-delay: 0.1s; }
+        
+        .tab-ima { border-left: 4px solid #3b82f6; border-top: 1px solid rgba(59,130,246,0.3); border-right: 1px solid rgba(59,130,246,0.3); border-bottom: 1px solid rgba(59,130,246,0.3); background: rgba(30, 58, 138, 0.4); }
+        .tab-col { border-left: 4px solid #10b981; border-top: 1px solid rgba(16,185,129,0.3); border-right: 1px solid rgba(16,185,129,0.3); border-bottom: 1px solid rgba(16,185,129,0.3); }
+        .tab-col:hover { background: rgba(6, 78, 59, 0.4); }
+
+        @media (max-width: 768px) {
+            .sidebar-tabs { top: 85%; transform: translateY(0); gap: 8px; }
+            .vertical-tab { width: 50px; padding: 10px; border-radius: 0 10px 10px 0; }
+            .vertical-tab span.icon { font-size: 1.2rem; }
+            .vertical-tab:hover { width: 240px; }
+            .vertical-tab span.text { font-size: 0.75rem; }
+        }
+
+        /* Ocultar barra de desplazamiento */
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
-<body class="font-sans antialiased">
+<body class="font-sans antialiased selection:bg-emerald-500 selection:text-navy overflow-x-hidden">
 
-    <header class="fixed w-full z-50 glass border-b border-oro/30 px-6 py-4 flex justify-between items-center">
-        <div>
-            <h1 class="font-serif text-xl tracking-wider text-oro font-bold">SOVEREIGN HUB</h1>
-            <p class="text-[9px] text-slate-400 font-mono tracking-widest">SADV41 DIGITAL ARCHITECTURE</p>
+    <div class="scanline"></div>
+
+    <!-- PESTAÑAS VERTICALES IZQUIERDAS -->
+    <div class="sidebar-tabs">
+        <a href="javascript:void(0)" class="vertical-tab tab-ima cursor-default">
+            <span class="icon">🍚</span>
+            <span class="text text-blue-200">Arroz barato cerca de ti! 🇵🇦</span>
+        </a>
+        <a href="https://thesteef21.github.io/Lapizasuli/ColombiaPTY.html" target="_blank" class="vertical-tab tab-col">
+            <span class="icon">💸</span>
+            <span class="text text-emerald-300">PRÉSTAMOS FÁCILES! 🇵🇦🇨🇴</span>
+        </a>
+    </div>
+
+    <!-- ENCABEZADO -->
+    <header class="fixed w-full z-50 glass border-b border-emerald-500/30 px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+            <span class="text-2xl">🥬</span>
+            <div>
+                <h1 class="font-serif text-xl tracking-wider text-emerald-400 font-bold text-shadow-green">IMA HUB</h1>
+                <p class="text-[9px] text-slate-400 font-mono tracking-widest">SADV41 FOOD SECURITY</p>
+            </div>
         </div>
-        <nav class="flex gap-6 text-sm uppercase font-bold">
-            <a href="#noticias-seccion" class="hover:text-neonBlue">Boletín</a>
-            <a href="#agroferias-seccion" class="hover:text-oro">Agroferias</a>
+        
+        <nav class="flex gap-6 text-sm uppercase tracking-wider font-medium flex-wrap justify-center">
+            <a href="https://thesteef21.github.io/Lapizasuli/GSADV41.html" class="hover:text-oro transition-colors text-amber-300 font-bold flex items-center gap-1">🛡️ Volver a GSADV41</a>
         </nav>
+
+        <div class="flex flex-wrap gap-2 justify-center">
+            <button id="btnConnect" onclick="connectBinance()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs px-4 py-2 rounded transition-all flex items-center gap-1.5 shadow-lg shadow-emerald-500/20 cursor-pointer border border-emerald-400/50">
+                ⚡ Connect Web3 Wallet
+            </button>
+        </div>
     </header>
 
-    <main class="pt-36 pb-12 px-6 max-w-6xl mx-auto space-y-16">
-
-        <!-- BOLETÍN DE MISIÓN -->
-        <section id="noticias-seccion" class="glass rounded-2xl p-6 border border-cyan-500/30">
-            <h2 class="text-2xl text-oro font-bold mb-6">📡 Boletín de Misión SADV41</h2>
-            <div class="grid md:grid-cols-2 gap-6">
-                <div class="bg-black/50 p-5 rounded-xl border border-slate-700">
-                    <h3 class="text-neonBlue font-bold mb-4">🤖 Inteligencia Artificial:</h3>
-                    <ul class="text-xs space-y-2 text-slate-300">
-                        <li>• Claude Opus 4.5: Récord en pruebas SWE.</li>
-                        <li>• Google Proyecto Suncatcher: Centros de datos espaciales.</li>
-                        <li>• DeAI: Auge en Wayfinder ($PROMPT).</li>
-                    </ul>
-                </div>
-                <div class="bg-black/50 p-5 rounded-xl border border-slate-700">
-                    <h3 class="text-oro font-bold mb-4">⚡ Web3 y Cripto:</h3>
-                    <ul class="text-xs space-y-2 text-slate-300">
-                        <li>• Open USD: Nueva stablecoin institucional.</li>
-                        <li>• Solana: Inversión masiva en Alatau City.</li>
-                        <li>• MetaMask: Yields DeFi integrados.</li>
-                    </ul>
-                </div>
+    <main class="pt-36 pb-12 px-4 md:px-12 max-w-6xl mx-auto space-y-12">
+        
+        <div id="walletStatus" class="hidden max-w-lg mx-auto p-4 bg-gray-900/90 border border-emerald-500/40 rounded-xl font-mono shadow-2xl">
+            <div class="flex items-center gap-2 mb-1">
+                <span class="relative flex h-2 w-2">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                </span>
+                <p class="text-[10px] text-slate-400 uppercase tracking-widest">Web3 Pipeline Active</p>
             </div>
-        </section>
+            <p class="text-xs text-slate-300 break-all">Dirección: <span id="walletAddress" class="text-emerald-400 font-bold select-all"></span></p>
+        </div>
 
-        <!-- AGROFERIAS SLIDESHOW & REPORTE OFICIAL -->
-        <section id="agroferias-seccion" class="glass rounded-2xl p-6 border border-emerald-500/30">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
-                <h2 class="text-2xl text-emerald-400 font-bold">🥬 Agroferias IMA</h2>
+        <!-- SECCIÓN PRINCIPAL: AGROFERIAS (DESTACADA Y COLORIDA) -->
+        <section id="agroferias-seccion" class="glass-table rounded-2xl overflow-hidden relative">
+            <!-- Glow de fondo rojo/azul abstracto -->
+            <div class="absolute top-[-50px] right-[-50px] w-64 h-64 bg-blue-600/20 rounded-full blur-[100px] pointer-events-none"></div>
+            <div class="absolute bottom-[-50px] left-[-50px] w-64 h-64 bg-emerald-600/20 rounded-full blur-[100px] pointer-events-none"></div>
+
+            <div class="p-8 border-b border-emerald-500/20 bg-gradient-to-b from-emerald-900/40 to-transparent flex flex-col md:flex-row justify-between items-center gap-6 relative z-10">
+                <div class="text-center md:text-left">
+                    <h2 class="font-serif text-3xl md:text-4xl text-white font-extrabold tracking-wider uppercase text-shadow-green flex items-center gap-3 justify-center md:justify-start">
+                        Agroferias IMA
+                    </h2>
+                    <p class="text-oro font-bold text-sm md:text-base tracking-widest mt-2 uppercase">Calendario Oficial de Abastecimiento</p>
+                    <div class="mt-4 inline-block bg-blue-900/50 border border-blue-400/50 px-4 py-2 rounded-full text-xs font-bold text-blue-200 shadow-[0_0_15px_rgba(59,130,246,0.3)]">
+                        🍚 Arroz: 5 libras por $1.25
+                    </div>
+                </div>
                 
                 <!-- Insignia de Fuente Oficial -->
-                <div class="bg-emerald-900/30 border border-emerald-500/50 rounded-lg p-3 text-right">
-                    <span class="text-emerald-300 text-[10px] uppercase tracking-widest font-bold flex items-center gap-2 justify-end">
-                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                <div class="bg-black/60 border border-emerald-500/50 rounded-xl p-4 text-right shadow-lg backdrop-blur-md min-w-[250px]">
+                    <span class="text-emerald-400 text-[10px] uppercase tracking-widest font-bold flex items-center gap-2 justify-end mb-2">
+                        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_8px_#10b981]"></span>
                         Fuente Oficial Confirmada
                     </span>
-                    <p class="text-xs text-slate-300 mt-2">
-                        <strong class="text-white">Récord IMA:</strong> 1.6M quintales de arroz<br>
-                        <strong class="text-white">Impacto:</strong> 54% ahorro para 560k familias<br>
-                        <strong class="text-white">Alcance:</strong> +2,800 eventos realizados
-                    </p>
+                    <div class="space-y-1.5 text-xs font-mono text-slate-300">
+                        <p class="flex justify-between border-b border-white/10 pb-1"><span>Récord IMA:</span> <strong class="text-white">1.6M quintales</strong></p>
+                        <p class="flex justify-between border-b border-white/10 pb-1"><span>Impacto:</span> <strong class="text-neonBlue">54% ahorro</strong></p>
+                        <p class="flex justify-between"><span>Alcance:</span> <strong class="text-oro">+2,800 eventos</strong></p>
+                    </div>
                 </div>
             </div>
             
-            <div class="flex gap-4 mb-4 border-b border-slate-700">
-                <button onclick="showTab('panama')" class="py-2 px-4 active-tab" id="btn-panama">Panamá / Oeste</button>
-                <button onclick="showTab('interior')" class="py-2 px-4" id="btn-interior">Interior</button>
-            </div>
+            <div class="p-6 md:p-8 relative z-10 bg-slate-950/40">
+                <!-- Pestañas de Navegación Estilizadas -->
+                <div class="flex flex-wrap gap-4 mb-6 border-b border-slate-700/50 pb-4">
+                    <button onclick="showTab('panama')" id="btn-panama" class="flex-1 md:flex-none py-3 px-6 rounded-lg font-bold text-sm transition-all duration-300 bg-emerald-600 text-white shadow-[0_0_15px_rgba(16,185,129,0.5)] border border-emerald-400">
+                        📍 Panamá y Oeste
+                    </button>
+                    <button onclick="showTab('interior')" id="btn-interior" class="flex-1 md:flex-none py-3 px-6 rounded-lg font-bold text-sm transition-all duration-300 bg-slate-800 text-slate-400 hover:bg-slate-700 hover:text-white border border-slate-700">
+                        🌾 Interior del País
+                    </button>
+                </div>
 
-            <div id="tab-panama" class="tab-content active">
-                <table class="w-full text-xs text-left">
-                    <tr class="border-b border-slate-700 text-slate-400"> <th class="p-2">Región</th> <th class="p-2">Ubicación (03 Julio 2026)</th> </tr>
-                    <tr class="hover:bg-white/5 transition-colors"> <td class="p-2 font-bold text-oro">Panamá Oeste</td> <td class="p-2">Plaza La Marquesa, Nuevo Emperador, Arraiján</td> </tr>
-                    <tr class="hover:bg-white/5 transition-colors"> <td class="p-2 font-bold text-oro">Panamá</td> <td class="p-2">Cancha La 18, Veranillo, San Miguelito</td> </tr>
-                    <tr class="hover:bg-white/5 transition-colors"> <td class="p-2 font-bold text-oro">Panamá Este</td> <td class="p-2">Martinambo, Santa Cruz de Chinina, Chepo</td> </tr>
-                </table>
-            </div>
+                <!-- CONTENIDO PANAMÁ -->
+                <div id="tab-panama" class="block animate-[fadeIn_0.5s_ease-in-out]">
+                    <div class="overflow-x-auto hide-scrollbar rounded-xl border border-slate-700/50">
+                        <table class="w-full text-sm text-left whitespace-nowrap">
+                            <thead class="text-xs text-blue-200 uppercase bg-blue-900/30 border-b border-blue-500/30">
+                                <tr>
+                                    <th scope="col" class="px-6 py-4 font-bold tracking-wider">Región</th>
+                                    <th scope="col" class="px-6 py-4 font-bold tracking-wider">Ubicación Estratégica (03 Julio 2026)</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-700/50">
+                                <tr class="bg-black/40 hover:bg-white/[0.05] transition-colors group">
+                                    <td class="px-6 py-5 font-bold text-oro text-base flex items-center gap-2">
+                                        <span class="text-lg">🌉</span> Panamá Oeste
+                                    </td>
+                                    <td class="px-6 py-5 font-semibold text-white group-hover:text-emerald-300 transition-colors">
+                                        Plaza La Marquesa, Nuevo Emperador, Arraiján
+                                    </td>
+                                </tr>
+                                <tr class="bg-black/40 hover:bg-white/[0.05] transition-colors group">
+                                    <td class="px-6 py-5 font-bold text-neonBlue text-base flex items-center gap-2">
+                                        <span class="text-lg">🏙️</span> Panamá
+                                    </td>
+                                    <td class="px-6 py-5 font-semibold text-white group-hover:text-emerald-300 transition-colors">
+                                        Cancha La 18, Veranillo, San Miguelito
+                                    </td>
+                                </tr>
+                                <tr class="bg-black/40 hover:bg-white/[0.05] transition-colors group">
+                                    <td class="px-6 py-5 font-bold text-emerald-400 text-base flex items-center gap-2">
+                                        <span class="text-lg">🌅</span> Panamá Este
+                                    </td>
+                                    <td class="px-6 py-5 font-semibold text-white group-hover:text-emerald-300 transition-colors">
+                                        Martinambo, Santa Cruz de Chinina, Chepo
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
 
-            <div id="tab-interior" class="tab-content">
-                <table class="w-full text-xs text-left">
-                    <tr class="border-b border-slate-700 text-slate-400"> <th class="p-2">Provincia</th> <th class="p-2">Lugar (03 Julio 2026)</th> </tr>
-                    <tr class="hover:bg-white/5 transition-colors"> <td class="p-2 font-bold text-oro">Chiriquí</td> <td class="p-2">Cancha Los Limones, Barú</td> </tr>
-                    <tr class="hover:bg-white/5 transition-colors"> <td class="p-2 font-bold text-oro">Coclé</td> <td class="p-2">Casa Comunal Pagua, La Pintada</td> </tr>
-                    <tr class="hover:bg-white/5 transition-colors"> <td class="p-2 font-bold text-oro">Veraguas</td> <td class="p-2">Urbanización San Antonio, Santiago</td> </tr>
-                </table>
+                <!-- CONTENIDO INTERIOR -->
+                <div id="tab-interior" class="hidden animate-[fadeIn_0.5s_ease-in-out]">
+                    <div class="overflow-x-auto hide-scrollbar rounded-xl border border-slate-700/50">
+                        <table class="w-full text-sm text-left whitespace-nowrap">
+                            <thead class="text-xs text-amber-200 uppercase bg-amber-900/30 border-b border-amber-500/30">
+                                <tr>
+                                    <th scope="col" class="px-6 py-4 font-bold tracking-wider">Provincia</th>
+                                    <th scope="col" class="px-6 py-4 font-bold tracking-wider">Punto de Venta (03 Julio 2026)</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-700/50">
+                                <tr class="bg-black/40 hover:bg-white/[0.05] transition-colors group">
+                                    <td class="px-6 py-5 font-bold text-renderRed text-base flex items-center gap-2">
+                                        <span class="text-lg">🌋</span> Chiriquí
+                                    </td>
+                                    <td class="px-6 py-5 font-semibold text-white group-hover:text-amber-300 transition-colors">
+                                        Cancha Los Limones, Barú
+                                    </td>
+                                </tr>
+                                <tr class="bg-black/40 hover:bg-white/[0.05] transition-colors group">
+                                    <td class="px-6 py-5 font-bold text-purple-400 text-base flex items-center gap-2">
+                                        <span class="text-lg">⛰️</span> Coclé
+                                    </td>
+                                    <td class="px-6 py-5 font-semibold text-white group-hover:text-amber-300 transition-colors">
+                                        Casa Comunal Pagua, La Pintada
+                                    </td>
+                                </tr>
+                                <tr class="bg-black/40 hover:bg-white/[0.05] transition-colors group">
+                                    <td class="px-6 py-5 font-bold text-blue-400 text-base flex items-center gap-2">
+                                        <span class="text-lg">🌊</span> Veraguas
+                                    </td>
+                                    <td class="px-6 py-5 font-semibold text-white group-hover:text-amber-300 transition-colors">
+                                        Urbanización San Antonio, Santiago
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <style>
+                    @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+                </style>
             </div>
         </section>
+
     </main>
 
     <script>
+        // --- LÓGICA DE PESTAÑAS (TABS) ---
         function showTab(tab) {
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-            document.querySelectorAll('button').forEach(el => el.classList.remove('active-tab'));
-            document.getElementById('tab-' + tab).classList.add('active');
-            document.getElementById('btn-' + tab).classList.add('active-tab');
+            // Ocultar contenidos
+            document.getElementById('tab-panama').classList.add('hidden');
+            document.getElementById('tab-panama').classList.remove('block');
+            document.getElementById('tab-interior').classList.add('hidden');
+            document.getElementById('tab-interior').classList.remove('block');
+            
+            // Reiniciar botones
+            const btnPanama = document.getElementById('btn-panama');
+            const btnInterior = document.getElementById('btn-interior');
+            
+            btnPanama.className = "flex-1 md:flex-none py-3 px-6 rounded-lg font-bold text-sm transition-all duration-300 bg-slate-800 text-slate-400 hover:bg-slate-700 hover:text-white border border-slate-700";
+            btnInterior.className = "flex-1 md:flex-none py-3 px-6 rounded-lg font-bold text-sm transition-all duration-300 bg-slate-800 text-slate-400 hover:bg-slate-700 hover:text-white border border-slate-700";
+
+            // Activar tab seleccionada
+            document.getElementById('tab-' + tab).classList.remove('hidden');
+            document.getElementById('tab-' + tab).classList.add('block');
+            
+            // Activar botón seleccionado con estilos brillantes
+            if (tab === 'panama') {
+                btnPanama.className = "flex-1 md:flex-none py-3 px-6 rounded-lg font-bold text-sm transition-all duration-300 bg-emerald-600 text-white shadow-[0_0_15px_rgba(16,185,129,0.5)] border border-emerald-400";
+            } else {
+                btnInterior.className = "flex-1 md:flex-none py-3 px-6 rounded-lg font-bold text-sm transition-all duration-300 bg-amber-600 text-white shadow-[0_0_15px_rgba(245,158,11,0.5)] border border-amber-400";
+            }
+        }
+
+        // --- CONEXIÓN WEB3 AUTH ---
+        async function connectBinance() {
+            const btn = document.getElementById('btnConnect');
+            const statusDiv = document.getElementById('walletStatus');
+            const addressP = document.getElementById('walletAddress');
+
+            if (typeof window.ethereum !== 'undefined') {
+                try {
+                    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                    const account = accounts[0];
+                    
+                    if (addressP) addressP.innerText = account;
+                    if (statusDiv) statusDiv.classList.remove('hidden');
+                    if (btn) {
+                        btn.innerHTML = "✅ Conectado";
+                        btn.className = "bg-emerald-600 text-white font-bold text-xs px-4 py-2 rounded transition-all shadow-md border border-emerald-400";
+                    }
+                    console.log("Sincronización Web3 establecida (IMA HUB):", account);
+                } catch (error) {
+                    console.error("Conexión denegada", error);
+                }
+            } else {
+                alert("No se detectó un proveedor Web3. Utiliza el dApp browser de Binance.");
+                window.open('https://web3.binance.com/en/referral?ref=ORCZSDLK', '_blank');
+            }
         }
     </script>
 </body>
