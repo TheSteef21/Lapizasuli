@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Proyector SADV41 | Modo Ultra</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-navy text-white min-h-screen p-8">
+    <div class="max-w-4xl mx-auto">
+        <header class="mb-10 text-center">
+            <h1 class="text-4xl font-bold text-oro uppercase tracking-widest animate-pulse">SADV41 PROYECTOR</h1>
+            <p class="text-neonBlue text-sm font-mono mt-2" id="timestamp">Sincronizando con el motor...</p>
+        </header>
+
+        <div id="pantalla-proyeccion" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            </div>
+
+        <footer class="mt-12 text-center border-t border-oro/30 pt-6">
+            <p class="text-lg font-bold text-emerald-400">¿Dudas? La misión requiere precisión.</p>
+            <p class="text-oro font-mono text-2xl font-bold" id="contacto-output"></p>
+        </footer>
+    </div>
+
+    <script>
+        async function proyectarDatos() {
+            try {
+                // Aquí el navegador lee el archivo que tu Python generó
+                const response = await fetch('datos_mision.json'); 
+                const data = await response.json();
+
+                document.getElementById('timestamp').innerText = `Última actualización: ${data.timestamp}`;
+                document.getElementById('contacto-output').innerText = `Misión: +507 ${data.contacto_oficial}`;
+
+                const contenedor = document.getElementById('pantalla-proyeccion');
+                contenedor.innerHTML = data.resultados.map(m => `
+                    <div class="bg-black/50 border border-emerald-500/30 p-6 rounded-xl hover:border-oro transition-all">
+                        <p class="text-slate-400 text-xs mb-2 uppercase">${m.encuentro}</p>
+                        <p class="text-xl font-bold text-white">Ganador: <span class="text-oro">${m.ganador}</span></p>
+                    </div>
+                `).join('');
+
+            } catch (e) {
+                console.error("Esperando datos del motor SADV41...");
+            }
+        }
+        proyectarDatos();
+    </script>
+</body>
+</html>
