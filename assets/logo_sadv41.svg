@@ -1,0 +1,13 @@
+<svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+    <rect width="400" height="400" fill="#020617"/>
+    
+    <circle cx="200" cy="200" r="160" stroke="#eab308" stroke-width="8" fill="none" stroke-dasharray="800" stroke-dashoffset="0">
+        <animate attributeName="stroke-dashoffset" from="800" to="0" dur="4s" repeatCount="indefinite" />
+    </circle>
+    
+    <path d="M120 120 L280 120 L200 280 Z" fill="none" stroke="#00f3ff" stroke-width="6"/>
+    <text x="200" y="210" font-family="Arial" font-size="80" fill="white" text-anchor="middle" font-weight="bold">BV</text>
+    
+    <text x="200" y="340" font-family="monospace" font-size="20" fill="#eab308" text-anchor="middle" letter-spacing="2">HYPERSEC CIENCIAS</text>
+    <text x="200" y="370" font-family="monospace" font-size="14" fill="#10b981" text-anchor="middle" letter-spacing="4">SADV41 :: ALIANZA</text>
+</svg>
