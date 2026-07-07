@@ -69,7 +69,6 @@
             border-left: 5px solid #ff6b81;
         }
 
-        /* --- ENTORNO SOBERANO ADICIONAL --- */
         .scanline {
             width: 100%;
             height: 2px;
@@ -87,21 +86,6 @@
 
         .bloom-text-blue { text-shadow: 0 0 8px rgba(0, 209, 255, 0.8), 0 0 15px rgba(0, 209, 255, 0.5); }
         
-        .glass-panel {
-            background: rgba(10, 10, 20, 0.75);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(0, 209, 255, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-        .glass-panel::before {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; width: 4px; height: 100%;
-            background: #00D1FF;
-            box-shadow: 0 0 10px #00D1FF;
-        }
-
         /* --- ESTILOS DE MÓDULOS DE IA Y SUSCRIPCIÓN --- */
         .module-card {
             background: rgba(10, 15, 25, 0.8);
@@ -119,7 +103,7 @@
             width: 100%;
         }
 
-        /* --- ESTILOS PESTAÑAS VERTICALES IZQUIERDAS --- */
+        /* --- ESTILOS PESTAÑAS VERTICALES BILATERALES --- */
         .sidebar-tabs {
             position: fixed;
             left: 0;
@@ -129,6 +113,7 @@
             display: flex;
             flex-direction: column;
             gap: 12px;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .vertical-tab {
             display: flex;
@@ -143,14 +128,12 @@
             box-shadow: 4px 4px 15px rgba(0,0,0,0.5);
             cursor: pointer;
         }
-        .vertical-tab:hover {
-            width: 280px;
-            padding-left: 20px;
-        }
-        .vertical-tab span.icon { font-size: 1.5rem; min-width: 30px; }
+        .vertical-tab:hover { width: 280px; padding-left: 20px; }
+        .vertical-tab span.icon { font-size: 1.5rem; min-width: 30px; display: flex; justify-content: center; }
         .vertical-tab span.text { margin-left: 15px; font-weight: bold; opacity: 0; transition: opacity 0.3s; font-size: 0.85rem; letter-spacing: 0.05em; }
         .vertical-tab:hover span.text { opacity: 1; transition-delay: 0.1s; }
         
+        /* Colores y bordes base (Izquierda) */
         .tab-ima { border-left: 4px solid #3b82f6; border-top: 1px solid rgba(59,130,246,0.3); border-right: 1px solid rgba(59,130,246,0.3); border-bottom: 1px solid rgba(59,130,246,0.3); }
         .tab-ima:hover { background: rgba(30, 58, 138, 0.4); }
         
@@ -159,13 +142,48 @@
 
         .tab-ven { border-left: 4px solid #facc15; border-top: 1px solid rgba(250,204,21,0.3); border-right: 1px solid rgba(250,204,21,0.3); border-bottom: 1px solid rgba(250,204,21,0.3); }
         .tab-ven:hover { background: rgba(161, 98, 7, 0.4); }
+
+        .tab-cristo { border-left: 4px solid #c084fc; border-top: 1px solid rgba(192,132,252,0.3); border-right: 1px solid rgba(192,132,252,0.3); border-bottom: 1px solid rgba(192,132,252,0.3); }
+        .tab-cristo:hover { background: rgba(107, 33, 168, 0.4); }
+
+        .tab-toggle { border-left: 4px solid #94a3b8; border-top: 1px solid rgba(148,163,184,0.3); border-right: 1px solid rgba(148,163,184,0.3); border-bottom: 1px solid rgba(148,163,184,0.3); }
+        .tab-toggle:hover { background: rgba(71, 85, 105, 0.4); }
+
+        /* --- MODIFICADOR DE ALINEACIÓN DERECHA --- */
+        .sidebar-tabs.right-aligned {
+            left: auto;
+            right: 0;
+        }
+        .sidebar-tabs.right-aligned .vertical-tab {
+            border-radius: 15px 0 0 15px;
+            flex-direction: row-reverse;
+            padding: 12px 15px;
+            box-shadow: -4px 4px 15px rgba(0,0,0,0.5);
+        }
+        .sidebar-tabs.right-aligned .vertical-tab:hover {
+            padding-right: 20px;
+            padding-left: 15px;
+        }
+        .sidebar-tabs.right-aligned .vertical-tab span.text {
+            margin-left: 0;
+            margin-right: 15px;
+            text-align: right;
+        }
+
+        /* Inversión de bordes para la derecha */
+        .sidebar-tabs.right-aligned .tab-ima { border-left: 1px solid rgba(59,130,246,0.3); border-right: 4px solid #3b82f6; }
+        .sidebar-tabs.right-aligned .tab-col { border-left: 1px solid rgba(16,185,129,0.3); border-right: 4px solid #10b981; }
+        .sidebar-tabs.right-aligned .tab-ven { border-left: 1px solid rgba(250,204,21,0.3); border-right: 4px solid #facc15; }
+        .sidebar-tabs.right-aligned .tab-cristo { border-left: 1px solid rgba(192,132,252,0.3); border-right: 4px solid #c084fc; }
+        .sidebar-tabs.right-aligned .tab-toggle { border-left: 1px solid rgba(148,163,184,0.3); border-right: 4px solid #94a3b8; }
         
         @media (max-width: 768px) {
             .sidebar-tabs { top: 85%; transform: translateY(0); gap: 8px; }
             .vertical-tab { width: 50px; padding: 10px; border-radius: 0 10px 10px 0; }
+            .sidebar-tabs.right-aligned .vertical-tab { border-radius: 10px 0 0 10px; }
             .vertical-tab span.icon { font-size: 1.2rem; }
-            .vertical-tab:hover { width: 240px; }
-            .vertical-tab span.text { font-size: 0.75rem; }
+            .vertical-tab:hover, .sidebar-tabs.right-aligned .vertical-tab:hover { width: 240px; }
+            .vertical-tab span.text { font-size: 0.70rem; }
         }
     </style>
 </head>
@@ -173,19 +191,28 @@
 
     <div class="scanline"></div>
 
-    <div class="sidebar-tabs">
+    <div id="main-sidebar" class="sidebar-tabs">
         <a href="https://thesteef21.github.io/Lapizasuli/IMA.html" target="_blank" class="vertical-tab tab-ima">
             <span class="icon">🍚</span>
             <span class="text text-blue-200">Arroz barato cerca de ti! 🇵🇦</span>
         </a>
         <a href="https://thesteef21.github.io/Lapizasuli/ColombiaPTY.html" target="_blank" class="vertical-tab tab-col">
             <span class="icon">💸</span>
-            <span class="text text-emerald-300">PRÉSTAMOS FÁCILES! 🇵🇦🇨🇴</span>
+            <span class="text text-emerald-300">Préstamos 🇵🇦🇨🇴🇺🇸💯⚡️✨️</span>
         </a>
         <a href="https://thesteef21.github.io/Lapizasuli/VSADV41.html" target="_blank" class="vertical-tab tab-ven">
             <span class="icon">🇻🇪</span>
             <span class="text text-yellow-300">Por Venezuela 🇻🇪</span>
         </a>
+        <a href="https://thesteef21.github.io/Lapizasuli/CristoTeAma.html" target="_blank" class="vertical-tab tab-cristo">
+            <span class="icon">☦️</span>
+            <span class="text text-purple-300">Cristo Te Ama 🎚</span>
+        </a>
+        <!-- Botón para alternar la posición del menú -->
+        <div onclick="toggleSidebar()" class="vertical-tab tab-toggle" title="Cambiar lado del menú">
+            <span class="icon">⇋</span>
+            <span class="text text-slate-300">Alternar Menú</span>
+        </div>
     </div>
 
     <header class="fixed w-full z-50 glass border-b border-oro/30 px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
@@ -506,6 +533,16 @@
             ]
         };
 
+        // --- LÓGICA DE MENÚ BILATERAL ---
+        function toggleSidebar() {
+            const sidebar = document.getElementById('main-sidebar');
+            sidebar.classList.toggle('right-aligned');
+            
+            // Guardar preferencia en localStorage
+            const isRight = sidebar.classList.contains('right-aligned');
+            localStorage.setItem('sidebarPosition', isRight ? 'right' : 'left');
+        }
+
         // --- PIPELINE DE RENDERIZADO SÍSMICO ---
         function renderizarDatos(data) {
             const monitorSalida = document.getElementById("monitor-salida");
@@ -605,7 +642,6 @@
         const subForm = document.getElementById('subscribeForm');
         if(subForm) {
             subForm.addEventListener('submit', async (e) => {
-                // Formspree maneja el action, aquí solo damos aviso visual
                 document.getElementById('message').innerText = "Enviando solicitud...";
             });
         }
@@ -638,6 +674,12 @@
         // Inicializador Sincrónico Unificado
         document.addEventListener("DOMContentLoaded", () => {
             refrescarMonitor();
+            
+            // Cargar preferencia del menú bilateral
+            const savedPos = localStorage.getItem('sidebarPosition');
+            if(savedPos === 'right') {
+                document.getElementById('main-sidebar').classList.add('right-aligned');
+            }
         });
     </script>
 </body>
