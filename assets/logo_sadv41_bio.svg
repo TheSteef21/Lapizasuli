@@ -1,0 +1,29 @@
+<svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <pattern id="bioTexture" patternUnits="userSpaceOnUse" width="400" height="400">
+            <image href="395468.jpg" width="400" height="400" preserveAspectRatio="xMidYMid slice" />
+        </pattern>
+        
+        <filter id="glow">
+            <feGaussianBlur stdDeviation="2.5" result="coloredBlur"/>
+            <feMerge>
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+    </defs>
+
+    <rect width="400" height="400" fill="#020617"/>
+    
+    <circle cx="200" cy="200" r="160" stroke="url(#bioTexture)" stroke-width="10" fill="none" opacity="0.8">
+        <animateTransform attributeName="transform" type="rotate" from="0 200 200" to="360 200 200" dur="20s" repeatCount="indefinite"/>
+    </circle>
+    
+    <text x="200" y="235" font-family="Arial Black" font-size="140" fill="url(#bioTexture)" text-anchor="middle" font-weight="bold" filter="url(#glow)">BV</text>
+    
+    <line x1="80" y1="200" x2="130" y2="200" stroke="#00f3ff" stroke-width="4"/>
+    <line x1="270" y1="200" x2="320" y2="200" stroke="#00f3ff" stroke-width="4"/>
+    
+    <text x="200" y="340" font-family="monospace" font-size="20" fill="#eab308" text-anchor="middle" letter-spacing="4">HYPERSEC CIENCIAS</text>
+    <text x="200" y="370" font-family="monospace" font-size="14" fill="#10b981" text-anchor="middle" letter-spacing="8">SADV41 :: ALIANZA</text>
+</svg>
