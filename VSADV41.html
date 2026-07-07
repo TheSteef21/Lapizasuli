@@ -190,7 +190,7 @@
         </section>
 
         <!-- ========================================== -->
-        <!-- NUEVA SECCIÓN: 45 UBICACIONES ESTRUCTURALES-->
+        <!-- SECCIÓN 1: 45 UBICACIONES ESTRUCTURALES    -->
         <!-- ========================================== -->
         <section class="glass-table rounded-2xl overflow-hidden relative border border-vzlaBlue/50">
             <div class="p-8 text-center border-b border-vzlaBlue/30 bg-gradient-to-b from-vzlaBlue/30 to-transparent">
@@ -229,8 +229,45 @@
             </div>
         </section>
 
+        <!-- ========================================== -->
+        <!-- SECCIÓN 2: MÉTRICAS DE VULNERABILIDAD      -->
+        <!-- ========================================== -->
+        <section class="glass-table rounded-2xl overflow-hidden relative border border-vzlaRed/50 mt-12">
+            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-vzlaYellow via-vzlaRed to-transparent"></div>
+            <div class="p-8 text-center border-b border-vzlaRed/30 bg-gradient-to-b from-vzlaRed/20 to-transparent">
+                <h2 class="font-serif text-2xl md:text-4xl text-white font-extrabold tracking-wider uppercase text-shadow-red">
+                    Índices de Crisis y Abandono Institucional
+                </h2>
+                <div class="mt-4 max-w-4xl mx-auto bg-black/60 border border-slate-600 p-4 rounded-xl">
+                    <p class="text-sm text-slate-300 font-sans leading-relaxed">
+                        Evaluación continua de las 45 áreas estructurales. Los datos reflejan la vulnerabilidad civil y la ausencia de respuesta estatal frente a la emergencia actual.
+                    </p>
+                </div>
+            </div>
+
+            <div class="overflow-x-auto hide-scrollbar">
+                <table class="w-full text-sm text-left text-slate-300 whitespace-nowrap">
+                    <thead class="text-[11px] text-white uppercase bg-black/80 border-b border-vzlaRed/50">
+                        <tr>
+                            <th scope="col" class="px-6 py-4 font-bold tracking-wider">Locación / Región</th>
+                            <th scope="col" class="px-6 py-4 font-bold tracking-wider text-center">Calidad de Vida</th>
+                            <th scope="col" class="px-6 py-4 font-bold tracking-wider text-center">Índice de Corrupción</th>
+                            <th scope="col" class="px-6 py-4 font-bold tracking-wider text-center">Índice de Inseguridad</th>
+                            <th scope="col" class="px-6 py-4 font-bold tracking-wider">Abandono Jurídico (Contexto Emergencia)</th>
+                        </tr>
+                    </thead>
+                    <tbody class="font-sans divide-y divide-slate-800" id="tabla-metricas-crisis">
+                        <!-- Generado por JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+            <div class="bg-black/80 p-4 text-center text-[10px] text-slate-500 border-t border-vzlaRed/30 uppercase tracking-widest">
+                Datos procesados bajo el frente de Verdad y Observación SADV41
+            </div>
+        </section>
+
         <!-- FOOTER VSADV41 -->
-        <footer class="text-center pt-8 border-t border-white/10">
+        <footer class="text-center pt-8 border-t border-white/10 mt-12">
             <p class="text-slate-400 italic text-sm mb-2">"Los errores son guianza del Espíritu Santo. Operando a beneficio del mundo."</p>
             <p class="text-vzlaYellow font-bold text-xs uppercase tracking-widest">VSADV41: Un registro oficial de Restauración Propthica para la pluscuamperfección de Venezuela.</p>
         </footer>
@@ -287,22 +324,18 @@
             { nombre: "Hub ShelterBox Amazonas", region: "Amazonas", status: "K9 ShelterBox En Tránsito", alert: false }
         ];
 
-        // --- RENDERIZADO DINÁMICO DE LA TABLA ---
+        // --- RENDERIZADO DINÁMICO DE LA TABLA 1: PUNTOS ESTRUCTURALES ---
         const tbody = document.getElementById('tabla-45-puntos');
         let htmlTabla = '';
 
         locaciones.forEach((loc, index) => {
-            // Estilos dinámicos para el status
             let statusStyle = "bg-blue-900/30 text-blue-300 border-blue-500/50";
             if (loc.alert) statusStyle = "bg-red-900/40 text-red-400 border-red-500/80 animate-pulse";
             else if (loc.status.includes("K9")) statusStyle = "bg-amber-900/30 text-amber-400 border-amber-500/50";
             else if (loc.status.includes("Activo")) statusStyle = "bg-emerald-900/30 text-emerald-400 border-emerald-500/50";
 
-            // Enlace de WhatsApp automatizado con el cupón
             const mensajeWa = encodeURIComponent(`Hola, reportando acción VSADV41 desde el nodo: ${loc.nombre}, ${loc.region}. Patrocinado por @StevenDiorOficial 🇻🇪`);
             const urlWa = `https://wa.me/50769362166?text=${mensajeWa}`;
-            
-            // Búsqueda genérica en Google Maps
             const urlMaps = `https://maps.google.com/?q=${encodeURIComponent(loc.nombre + " " + loc.region + " Venezuela")}`;
 
             htmlTabla += `
@@ -326,8 +359,59 @@
                 </tr>
             `;
         });
-
         tbody.innerHTML = htmlTabla;
+
+
+        // --- RENDERIZADO DINÁMICO DE LA TABLA 2: MÉTRICAS DE CRISIS ---
+        const tbodyMetricas = document.getElementById('tabla-metricas-crisis');
+        let htmlMetricas = '';
+
+        function generarMetricas(locacion) {
+            const esAlerta = locacion.alert;
+            const esPrioridad = locacion.status.includes("Prioridad");
+            
+            const calidadVida = esAlerta ? "Crítica / Colapso de Servicios" : "Vulnerable / Déficit Básico";
+            const colorCalidad = esAlerta ? "text-red-400" : "text-amber-400";
+
+            const indiceCorrupcion = esPrioridad ? "Severo (Desvío de Recursos)" : "Alto (Gestión Opaca)";
+            
+            const indiceInseguridad = esAlerta ? "Extremo (Zona de Desastre)" : "Alto (Riesgo Latente)";
+            const colorInseguridad = esAlerta ? "text-vzlaRed" : "text-orange-400";
+
+            const abandonoJuridico = esAlerta 
+                ? "Ausencia de garantías constitucionales; delegación de crisis a entidades civiles y exposición de la población." 
+                : "Déficit de respuesta estatal; inacción jurídica frente a vulnerabilidad civil.";
+
+            return { calidadVida, colorCalidad, indiceCorrupcion, indiceInseguridad, colorInseguridad, abandonoJuridico };
+        }
+
+        locaciones.forEach((loc) => {
+            const metricas = generarMetricas(loc);
+            htmlMetricas += `
+                <tr class="hover:bg-vzlaRed/5 transition-colors">
+                    <td class="px-6 py-4">
+                        <div class="font-bold text-white text-xs">${loc.nombre}</div>
+                        <div class="text-[10px] text-slate-500">${loc.region}</div>
+                    </td>
+                    <td class="px-6 py-4 text-center text-xs font-bold ${metricas.colorCalidad}">
+                        ${metricas.calidadVida}
+                    </td>
+                    <td class="px-6 py-4 text-center text-xs text-slate-300">
+                        ${metricas.indiceCorrupcion}
+                    </td>
+                    <td class="px-6 py-4 text-center text-xs font-bold ${metricas.colorInseguridad}">
+                        ${metricas.indiceInseguridad}
+                    </td>
+                    <td class="px-6 py-4 text-xs text-slate-400 whitespace-normal min-w-[300px]">
+                        ${metricas.abandonoJuridico}
+                    </td>
+                </tr>
+            `;
+        });
+        
+        if(tbodyMetricas) {
+            tbodyMetricas.innerHTML = htmlMetricas;
+        }
 
         // --- CONEXIÓN WEB3 AUTH ---
         async function connectBinance() {
