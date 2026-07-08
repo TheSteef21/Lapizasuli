@@ -72,7 +72,7 @@
         .module-card { background: rgba(10, 15, 25, 0.8); border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); padding: 1.5rem; border-radius: 1rem; }
         .input-dark { background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(0, 209, 255, 0.3); color: white; padding: 0.75rem; border-radius: 0.5rem; width: 100%; }
 
-        /* --- PESTAÑAS VERTICALES BILATERALES (Estilo GSADV41) --- */
+        /* --- PESTAÑAS VERTICALES BILATERALES --- */
         .sidebar-tabs { position: fixed; left: 0; top: 50%; transform: translateY(-50%); z-index: 45; display: flex; flex-direction: column; gap: 12px; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
         .vertical-tab { display: flex; align-items: center; background: rgba(2, 6, 23, 0.95); padding: 12px 15px; border-radius: 0 15px 15px 0; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); width: 60px; overflow: hidden; white-space: nowrap; box-shadow: 4px 4px 15px rgba(0,0,0,0.5); cursor: pointer; }
         .vertical-tab:hover { width: 340px; padding-left: 20px; }
@@ -80,8 +80,14 @@
         .vertical-tab span.text { margin-left: 15px; font-weight: bold; opacity: 0; transition: opacity 0.3s; font-size: 0.85rem; letter-spacing: 0.05em; }
         .vertical-tab:hover span.text { opacity: 1; transition-delay: 0.1s; }
         
-        .tab-gsadv { border-left: 4px solid #facc15; border-top: 1px solid rgba(250,204,21,0.3); border-right: 1px solid rgba(250,204,21,0.3); border-bottom: 1px solid rgba(250,204,21,0.3); }
-        .tab-gsadv:hover { background: rgba(161, 98, 7, 0.4); }
+        /* GSADV41 - Modo OVNI Pluscuamperfecto */
+        .tab-gsadv { border-left: 4px solid #34d399; border-top: 1px solid rgba(52,211,153,0.5); border-right: 1px solid rgba(52,211,153,0.5); border-bottom: 1px solid rgba(52,211,153,0.5); box-shadow: 0 0 15px rgba(52, 211, 153, 0.5); }
+        .tab-gsadv:hover { background: rgba(5, 150, 105, 0.5); box-shadow: 0 0 25px rgba(52, 211, 153, 0.8); }
+        
+        /* BSADV41 - Botón Especial */
+        .tab-bsadv { border-left: 4px solid #d946ef; border-top: 1px solid rgba(217,70,239,0.3); border-right: 1px solid rgba(217,70,239,0.3); border-bottom: 1px solid rgba(217,70,239,0.3); }
+        .tab-bsadv:hover { background: rgba(192, 38, 211, 0.4); box-shadow: 0 0 20px rgba(217, 70, 239, 0.5); }
+
         .tab-ima { border-left: 4px solid #3b82f6; border-top: 1px solid rgba(59,130,246,0.3); border-right: 1px solid rgba(59,130,246,0.3); border-bottom: 1px solid rgba(59,130,246,0.3); }
         .tab-ima:hover { background: rgba(30, 58, 138, 0.4); }
         .tab-col { border-left: 4px solid #10b981; border-top: 1px solid rgba(16,185,129,0.3); border-right: 1px solid rgba(16,185,129,0.3); border-bottom: 1px solid rgba(16,185,129,0.3); }
@@ -100,7 +106,8 @@
         .sidebar-tabs.right-aligned .vertical-tab:hover { padding-right: 20px; padding-left: 15px; }
         .sidebar-tabs.right-aligned .vertical-tab span.text { margin-left: 0; margin-right: 15px; text-align: right; }
         
-        .sidebar-tabs.right-aligned .tab-gsadv { border-left: 1px solid rgba(250,204,21,0.3); border-right: 4px solid #facc15; }
+        .sidebar-tabs.right-aligned .tab-gsadv { border-left: 1px solid rgba(52,211,153,0.3); border-right: 4px solid #34d399; }
+        .sidebar-tabs.right-aligned .tab-bsadv { border-left: 1px solid rgba(217,70,239,0.3); border-right: 4px solid #d946ef; }
         .sidebar-tabs.right-aligned .tab-ima { border-left: 1px solid rgba(59,130,246,0.3); border-right: 4px solid #3b82f6; }
         .sidebar-tabs.right-aligned .tab-col { border-left: 1px solid rgba(16,185,129,0.3); border-right: 4px solid #10b981; }
         .sidebar-tabs.right-aligned .tab-ven { border-left: 1px solid rgba(244,63,94,0.3); border-right: 4px solid #f43f5e; }
@@ -133,8 +140,13 @@
         <div onclick="toggleSidebar()" class="vertical-tab tab-toggle" title="Cambiar lado">
             <span class="icon">⇋</span><span class="text text-slate-300">Cambiar Lado</span>
         </div>
-        <a href="https://thesteef21.github.io/Lapizasuli/GSADV41.html" class="vertical-tab tab-gsadv">
-            <span class="icon">🛡️</span><span class="text text-amber-300">Volver a GSADV41</span>
+        <a href="https://thesteef21.github.io/Lapizasuli/GSADV41.html" class="vertical-tab tab-gsadv group">
+            <span class="icon animate-pulse text-emerald-400">🛸</span>
+            <span class="text text-emerald-300 group-hover:text-emerald-200">Home Pluscuamperfecto ⚽️💯</span>
+        </a>
+        <a href="https://thesteef21.github.io/Lapizasuli/BSADV41.html" class="vertical-tab tab-bsadv group">
+            <span class="icon">💎</span>
+            <span class="text text-fuchsia-300 group-hover:text-fuchsia-200">Misión Especial BSADV41 ✨</span>
         </a>
         <a href="https://thesteef21.github.io/Lapizasuli/IMA.html" target="_blank" class="vertical-tab tab-ima">
             <span class="icon">🍚</span><span class="text text-blue-200">Arroz barato cerca! 🇵🇦</span>
@@ -410,7 +422,7 @@
             </section>
         </div>
 
-        <footer class="mt-8 pt-8 flex flex-col items-center gap-8">
+        <footer class="mt-8 pt-8 flex flex-col items-center gap-8 pb-12">
             <section class="glass rounded-2xl max-w-lg mx-auto overflow-hidden border border-cyan-500/30 w-full">
                 <div class="p-6 bg-black/30 flex flex-col items-center gap-4 text-center">
                     <div class="border border-[#00f3ff]/40 px-4 py-1.5 rounded-full text-xs font-bold text-[#00f3ff] tracking-wide text-shadow-blue shadow-[0_0_10px_rgba(0,243,255,0.15)] uppercase">
@@ -432,6 +444,39 @@
                     <span>Misión SADV41</span>
                     <span class="text-sm">🎚️</span>
                 </div>
+            </div>
+
+            <div class="w-full max-w-2xl mx-auto mt-10">
+                <svg viewBox="0 0 800 200" xmlns="http://www.w3.org/2000/svg" class="w-full drop-shadow-[0_0_15px_rgba(255,255,255,0.15)]">
+                    <defs>
+                        <linearGradient id="glowG" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stop-color="#10b981"/> <stop offset="50%" stop-color="#ffffff"/> <stop offset="100%" stop-color="#ef4444"/> </linearGradient>
+                        <filter id="neon" x="-50%" y="-50%" width="200%" height="200%">
+                            <feGaussianBlur stdDeviation="4" result="blur"/>
+                            <feMerge>
+                                <feMergeNode in="blur"/>
+                                <feMergeNode in="SourceGraphic"/>
+                            </feMerge>
+                        </filter>
+                    </filter>
+                    </defs>
+                    
+                    <path d="M 150 100 Q 400 30 650 100" fill="none" stroke="url(#glowG)" stroke-width="2" filter="url(#neon)" opacity="0.5"/>
+                    <path d="M 200 130 Q 400 80 600 130" fill="none" stroke="#facc15" stroke-width="1" filter="url(#neon)" opacity="0.3"/>
+
+                    <g filter="url(#neon)">
+                        <polygon points="250,60 255,75 270,75 258,84 262,99 250,90 238,99 242,84 230,75 245,75" fill="#10b981"/>
+                        <polygon points="400,40 406,58 425,58 410,69 416,87 400,76 384,87 390,69 375,58 394,58" fill="#3b82f6"/>
+                        <polygon points="550,60 555,75 570,75 558,84 562,99 550,90 538,99 542,84 530,75 545,75" fill="#ef4444"/>
+                    </g>
+
+                    <text x="400" y="145" font-family="Playfair Display, serif" font-size="24" font-weight="bold" fill="white" text-anchor="middle" filter="url(#neon)" letter-spacing="3">
+                        DIOS BENDIGA EE.UU. • CANADÁ • MÉXICO
+                    </text>
+                    <text x="400" y="175" font-family="Inter, sans-serif" font-size="12" fill="#94a3b8" text-anchor="middle" letter-spacing="5" text-transform="uppercase">
+                        UNIDOS POR LA GRACIA DIVINA — FIFA 2026
+                    </text>
+                </svg>
             </div>
         </footer>
 
