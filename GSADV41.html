@@ -146,7 +146,6 @@
         .tab-cristo { border-left: 4px solid #c084fc; border-top: 1px solid rgba(192,132,252,0.3); border-right: 1px solid rgba(192,132,252,0.3); border-bottom: 1px solid rgba(192,132,252,0.3); }
         .tab-cristo:hover { background: rgba(107, 33, 168, 0.4); }
         
-        /* Nuevos Botones: FIFA y Brave */
         .tab-fifa { border-left: 4px solid #22c55e; border-top: 1px solid rgba(34,197,94,0.3); border-right: 1px solid rgba(34,197,94,0.3); border-bottom: 1px solid rgba(34,197,94,0.3); }
         .tab-fifa:hover { background: rgba(21, 128, 61, 0.4); }
 
@@ -164,7 +163,6 @@
         .sidebar-tabs.right-aligned .vertical-tab:hover { padding-right: 20px; padding-left: 15px; }
         .sidebar-tabs.right-aligned .vertical-tab span.text { margin-left: 0; margin-right: 15px; text-align: right; }
 
-        /* Inversión de bordes para la derecha */
         .sidebar-tabs.right-aligned .tab-ima { border-left: 1px solid rgba(59,130,246,0.3); border-right: 4px solid #3b82f6; }
         .sidebar-tabs.right-aligned .tab-col { border-left: 1px solid rgba(16,185,129,0.3); border-right: 4px solid #10b981; }
         .sidebar-tabs.right-aligned .tab-ven { border-left: 1px solid rgba(250,204,21,0.3); border-right: 4px solid #facc15; }
@@ -212,7 +210,6 @@
             <span class="icon">🦁</span>
             <span class="text text-orange-400">Navegador seguro = Brave</span>
         </a>
-        <!-- Botón para alternar la posición del menú -->
         <div onclick="toggleSidebar()" class="vertical-tab tab-toggle" title="Cambiar lado del menú">
             <span class="icon">⇋</span>
             <span class="text text-slate-300">Alternar Menú</span>
@@ -267,6 +264,113 @@
         </div>
 
         <section id="noticias-seccion" class="glass rounded-2xl p-6 md:p-8 shadow-2xl border border-cyan-500/30">
+            <div class="w-full max-w-lg mx-auto mb-10 mt-2 rounded-2xl overflow-hidden shadow-[0_0_30px_rgba(0,243,255,0.15)] border border-white/10 bg-black">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="100%" height="100%">
+                  <defs>
+                    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#facc15" />
+                      <stop offset="50%" stop-color="#a16207" />
+                      <stop offset="100%" stop-color="#fef08a" />
+                    </linearGradient>
+                    <linearGradient id="blueNeon" x1="0%" y1="0%" x2="100%" y2="0%">
+                      <stop offset="0%" stop-color="#00f3ff" />
+                      <stop offset="100%" stop-color="#3b82f6" />
+                    </linearGradient>
+                    <linearGradient id="emeraldWater" x1="0%" y1="0%" x2="0%" y2="100%">
+                      <stop offset="0%" stop-color="#10b981" stop-opacity="0.8"/>
+                      <stop offset="100%" stop-color="#064e3b" stop-opacity="0.9"/>
+                    </linearGradient>
+                    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+                      <stop offset="0%" stop-color="#facc15" stop-opacity="0.4" />
+                      <stop offset="100%" stop-color="#020617" stop-opacity="0" />
+                    </radialGradient>
+                    <radialGradient id="globeGlow" cx="50%" cy="50%" r="50%">
+                      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9" />
+                      <stop offset="70%" stop-color="#3b82f6" stop-opacity="0.8" />
+                      <stop offset="100%" stop-color="#020617" stop-opacity="0" />
+                    </radialGradient>
+                  </defs>
+
+                  <circle cx="400" cy="500" r="400" fill="url(#glow)" />
+
+                  <g id="trophy-base">
+                    <path d="M280,900 L520,900 C520,900 550,850 500,750 C450,650 580,500 560,350 C540,200 400,200 400,200 C400,200 260,200 240,350 C220,500 350,650 300,750 C250,850 280,900 280,900 Z" fill="none" stroke="url(#goldGrad)" stroke-width="12" opacity="0.3" />
+                    <path d="M300,900 L500,900 C480,800 530,700 520,600 C510,500 480,400 460,350 C440,450 490,550 480,650 C470,750 400,850 400,850 C400,850 330,750 320,650 C310,550 360,450 340,350 C320,400 290,500 280,600 C270,700 320,800 300,900 Z" fill="url(#goldGrad)" />
+                  </g>
+
+                  <g id="canal-locks" transform="translate(0, 50)">
+                    <polygon points="340,650 460,650 500,800 300,800" fill="url(#emeraldWater)" />
+                    <line x1="330" y1="680" x2="400" y2="700" stroke="#00f3ff" stroke-width="4" />
+                    <line x1="470" y1="680" x2="400" y2="700" stroke="#00f3ff" stroke-width="4" />
+                    <line x1="315" y1="740" x2="400" y2="760" stroke="#00f3ff" stroke-width="5" />
+                    <line x1="485" y1="740" x2="400" y2="760" stroke="#00f3ff" stroke-width="5" />
+                    <polygon points="370,720 430,720 440,700 360,700" fill="#f8fafc" opacity="0.9" />
+                    <rect x="380" y="685" width="40" height="15" fill="#da3637" />
+                  </g>
+
+                  <g id="bridge-americas">
+                    <path d="M 200,600 Q 400,450 600,600" fill="none" stroke="url(#blueNeon)" stroke-width="8" opacity="0.9" />
+                    <line x1="150" y1="600" x2="650" y2="600" stroke="url(#blueNeon)" stroke-width="6" />
+                    <line x1="280" y1="600" x2="280" y2="535" stroke="#00f3ff" stroke-width="3" opacity="0.6"/>
+                    <line x1="340" y1="600" x2="340" y2="485" stroke="#00f3ff" stroke-width="3" opacity="0.6"/>
+                    <line x1="400" y1="600" x2="400" y2="450" stroke="#00f3ff" stroke-width="3" opacity="0.6"/>
+                    <line x1="460" y1="600" x2="460" y2="485" stroke="#00f3ff" stroke-width="3" opacity="0.6"/>
+                    <line x1="520" y1="600" x2="520" y2="535" stroke="#00f3ff" stroke-width="3" opacity="0.6"/>
+                    <rect x="270" y="600" width="10" height="80" fill="#3b82f6" opacity="0.7"/>
+                    <rect x="520" y="600" width="10" height="80" fill="#3b82f6" opacity="0.7"/>
+                  </g>
+
+                  <circle cx="400" cy="280" r="130" fill="url(#globeGlow)" />
+                  <path d="M370,160 L430,160 L460,210 L400,240 L340,210 Z" fill="none" stroke="#020617" stroke-width="3" opacity="0.3"/>
+                  <path d="M400,240 L400,310 L460,340 L500,290 L460,210" fill="none" stroke="#020617" stroke-width="3" opacity="0.3"/>
+                  <path d="M400,240 L340,210 L300,290 L340,340 L400,310" fill="none" stroke="#020617" stroke-width="3" opacity="0.3"/>
+
+                  <g id="flags-integration">
+                    <g transform="translate(450, 200)">
+                      <line x1="-30" y1="-15" x2="30" y2="-15" stroke="#3b82f6" stroke-width="4" />
+                      <line x1="-30" y1="15" x2="30" y2="15" stroke="#3b82f6" stroke-width="4" />
+                      <polygon points="0,-10 8,5 -8,5" fill="none" stroke="#3b82f6" stroke-width="2"/>
+                      <polygon points="0,10 8,-5 -8,-5" fill="none" stroke="#3b82f6" stroke-width="2"/>
+                    </g>
+                    <g transform="translate(350, 200)">
+                      <rect x="-30" y="-15" width="60" height="30" fill="#f8fafc" />
+                      <line x1="-30" y1="-10" x2="30" y2="-10" stroke="#da3637" stroke-width="3" />
+                      <line x1="-30" y1="0" x2="30" y2="0" stroke="#da3637" stroke-width="3" />
+                      <line x1="-30" y1="10" x2="30" y2="10" stroke="#da3637" stroke-width="3" />
+                      <rect x="-30" y="-15" width="25" height="15" fill="#3b82f6" />
+                      <circle cx="-25" cy="-11" r="1" fill="#fff"/><circle cx="-15" cy="-11" r="1" fill="#fff"/>
+                      <circle cx="-20" cy="-7" r="1" fill="#fff"/><circle cx="-10" cy="-7" r="1" fill="#fff"/>
+                    </g>
+                    <g transform="translate(400, 310)">
+                      <rect x="-30" y="-20" width="30" height="20" fill="#f8fafc" />
+                      <rect x="0" y="-20" width="30" height="20" fill="#da3637" />
+                      <rect x="-30" y="0" width="30" height="20" fill="#3b82f6" />
+                      <rect x="0" y="0" width="30" height="20" fill="#f8fafc" />
+                      <polygon points="-15,-15 -12,-8 -18,-11 -12,-11 -18,-8" fill="#3b82f6" />
+                      <polygon points="15,5 18,12 12,9 18,9 12,12" fill="#da3637" />
+                    </g>
+                  </g>
+
+                  <g id="youth-society" fill="#f8fafc" opacity="0.9">
+                    <circle cx="370" cy="840" r="10" /> 
+                    <path d="M365,855 C360,865 350,875 355,890 L360,890 C360,880 370,870 375,855 Z" /> 
+                    <path d="M375,855 C385,865 390,870 405,860 L410,865 C390,880 380,870 375,855 Z" /> 
+                    <path d="M370,855 C360,850 350,855 345,860 L350,865 C355,860 365,860 370,855 Z" /> 
+                    <ellipse cx="370" cy="850" rx="6" ry="12" /> <circle cx="420" cy="855" r="5" fill="#facc15" />
+                    <circle cx="440" cy="845" r="9" /> 
+                    <ellipse cx="440" cy="860" rx="5" ry="10" /> 
+                    <path d="M435,870 L430,890 L435,890 L440,870 Z" />
+                    <path d="M445,870 L450,890 L455,890 L445,870 Z" />
+                  </g>
+
+                  <text x="210" y="280" font-family="Inter, sans-serif" font-size="60" font-weight="900" fill="#00f3ff" opacity="0.8">1</text>
+                  <text x="550" y="280" font-family="Inter, sans-serif" font-size="60" font-weight="900" fill="#facc15" opacity="0.8">4</text>
+                  
+                  <text x="400" y="960" font-family="Playfair Display, serif" font-size="28" font-weight="bold" fill="#f8fafc" text-anchor="middle" letter-spacing="4">M I S I Ó N   S A D V 4 1</text>
+                  <text x="400" y="985" font-family="Inter, sans-serif" font-size="12" font-weight="300" fill="#10b981" text-anchor="middle" letter-spacing="2">SOVEREIGN HUB 2026 • JUVENTUD • INFRAESTRUCTURA</text>
+                </svg>
+            </div>
+
             <div class="flex items-center gap-3 mb-6 border-b border-white/10 pb-4">
                 <span class="text-3xl">📡</span>
                 <div>
@@ -278,12 +382,28 @@
             <div class="space-y-6 text-sm text-slate-300 leading-relaxed font-sans">
                 <p>Feed de noticias enrutado y activo. Procesando y estructurando los boletines, alertas y reportes informativos que ingresan a la bandeja de <strong>claw-2d47a15714664330832ced31ea336499@kiloclaw.ai</strong>, establecida como nodo central para el cruce de ideas técnicas y telemetría de la misión.</p>
                 
-                <p>Las actualizaciones globales más recientes clasificadas en el sistema se centran en dos vertientes clave:</p>
+                <p>Las actualizaciones globales más recientes clasificadas en el sistema se centran en las siguientes vertientes clave:</p>
+
+                <div class="bg-black/60 p-5 rounded-xl border border-cyan-500/40 shadow-[0_0_15px_rgba(0,243,255,0.1)] mb-6">
+                    <div class="flex justify-between items-start mb-3">
+                        <h3 class="text-white font-bold text-lg flex items-center gap-2">
+                            🚢 Expansión Soberana: Canal de Panamá
+                        </h3>
+                        <span class="bg-cyan-900/50 text-cyan-300 border border-cyan-500/30 px-2 py-0.5 rounded text-[10px] font-mono uppercase">Infraestructura 2026</span>
+                    </div>
+                    <p class="text-sm text-slate-300 leading-relaxed mb-4">
+                        La Autoridad del Canal de Panamá (ACP) asume un rol directo y protagónico en la gestión de infraestructura de transbordo. Se proyecta una inversión superior a los <strong>2,600 millones de dólares</strong> para la construcción de dos nuevas terminales portuarias estratégicas: el puerto de <strong>Corozal</strong> en el Pacífico y el puerto de <strong>Telfers</strong> en el Atlántico. Este desarrollo busca incrementar la capacidad logística nacional y generará miles de empleos directos, marcando un paso firme en la mayordomía de nuestros recursos.
+                    </p>
+                    <a href="https://www.swissinfo.ch/spa/el-canal-de-panam%C3%A1-recibe-documentos-de-las-empresas-interesadas-en-construir-dos-puertos/91717788" target="_blank" class="text-xs text-neonBlue font-mono hover:text-white transition-colors border border-neonBlue/40 hover:bg-neonBlue/10 px-4 py-2 rounded-lg inline-flex items-center gap-2">
+                        <span>🔗 Fuente Oficial: SWI swissinfo.ch</span>
+                        <span>↗</span>
+                    </a>
+                </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
                     <div class="bg-black/50 p-5 rounded-xl border border-slate-700 hover:border-cyan-500/50 transition-colors">
                         <h3 class="text-neonBlue font-bold text-base mb-4 flex items-center gap-2 bloom-text-blue">
-                            🤖 Inteligencia Artificial y Desarrollo Tecnológico:
+                            🤖 Inteligencia Artificial y Desarrollo:
                         </h3>
                         <ul class="space-y-4">
                             <li class="flex gap-3 items-start">
@@ -294,16 +414,12 @@
                                 <span class="text-cyan-400 mt-1">▹</span>
                                 <span class="text-xs text-slate-300 leading-relaxed"><strong class="text-white">Infraestructura a gran escala:</strong> Figuran los movimientos estratégicos de Google, incluyendo la expansión de sus TPU (con posibles acuerdos masivos) y el ambicioso Proyecto Suncatcher, una iniciativa orientada a operar centros de datos en el espacio para aprovechar la energía solar ininterrumpida.</span>
                             </li>
-                            <li class="flex gap-3 items-start">
-                                <span class="text-cyan-400 mt-1">▹</span>
-                                <span class="text-xs text-slate-300 leading-relaxed"><strong class="text-white">Agentes autónomos e inferencia local:</strong> Se analiza el enfoque de Apple hacia la inferencia de IA de manera local para mantener el dominio del mercado. Paralelamente, el sector de la IA descentralizada (DeAI) muestra un alto dinamismo con el despliegue del Open Alpha de Wayfinder y el auge del token $PROMPT.</span>
-                            </li>
                         </ul>
                     </div>
 
                     <div class="bg-black/50 p-5 rounded-xl border border-slate-700 hover:border-oro/50 transition-colors">
                         <h3 class="text-oro font-bold text-base mb-4 flex items-center gap-2 text-shadow-oro">
-                            ⚡ Web3 y Ecosistema de Criptomonedas:
+                            ⚡ Web3 y Ecosistema Cripto:
                         </h3>
                         <ul class="space-y-4">
                             <li class="flex gap-3 items-start">
@@ -312,11 +428,7 @@
                             </li>
                             <li class="flex gap-3 items-start">
                                 <span class="text-amber-400 mt-1">▹</span>
-                                <span class="text-xs text-slate-300 leading-relaxed"><strong class="text-white">Regulación y adopción institucional:</strong> La SEC ha iniciado un periodo de revisión para las reglas de aprobación de ETFs de criptomonedas. Por otro lado, destaca el masivo apoyo de Solana al desarrollo de Alatau City en Kazajistán, una megaciudad impulsada por infraestructura blockchain con un potencial de inversión de 6 mil millones de dólares.</span>
-                            </li>
-                            <li class="flex gap-3 items-start">
-                                <span class="text-amber-400 mt-1">▹</span>
-                                <span class="text-xs text-slate-300 leading-relaxed"><strong class="text-white">DeFi y actualizaciones de red:</strong> MetaMask ha integrado funciones para generar rendimientos automáticos (APY) sobre balances de stablecoins a través de protocolos de préstamos DeFi. Además, persisten los análisis técnicos sobre la red Ethereum, la acumulación de ETH por parte de tesorerías y las discusiones sobre la actualización EIP-7702.</span>
+                                <span class="text-xs text-slate-300 leading-relaxed"><strong class="text-white">Regulación y adopción institucional:</strong> La SEC ha iniciado un periodo de revisión para las reglas de aprobación de ETFs de criptomonedas. Por otro lado, destaca el masivo apoyo de Solana al desarrollo de Alatau City en Kazajistán.</span>
                             </li>
                         </ul>
                     </div>
@@ -376,13 +488,28 @@
                     <p class="text-xs text-slate-400 leading-relaxed">Panamá vs. Croacia. Análisis táctico del segundo duelo crucial del Grupo L. Monitoreo de alineaciones en el backend.</p>
                 </div>
 
-                <div class="bg-white/[0.02] border-l-4 border-emerald-500 p-4 rounded-r-xl transition-all hover:translate-x-1 hover:bg-white/[0.04] cursor-pointer">
-                    <div class="flex justify-between items-center mb-1">
-                        <span class="text-sm font-bold text-white">Procesamiento de Gráficos</span>
-                        <span class="text-[10px] text-emerald-400 font-mono">Pillow Layer Active</span>
+                <div class="mt-8 border-t border-emerald-500/20 pt-6">
+                    <h3 class="text-sm font-bold text-emerald-400 mb-4 uppercase tracking-wider flex items-center gap-2">
+                        <span>🌍</span> Impacto Social y Recursos FIFA
+                    </h3>
+                    <div class="flex flex-col gap-3">
+                        <a href="https://inside.fifa.com/?&intcmp=(p_fta)(d_fifacom)(c_sidemenu)_(sc_insidefifa)" target="_blank" class="bg-black/40 hover:bg-black/60 border border-emerald-500/30 hover:border-emerald-500/60 p-4 rounded-xl flex justify-between items-center transition-all group">
+                            <div class="flex flex-col">
+                                <span class="text-sm text-white font-bold mb-1">Inside FIFA</span>
+                                <span class="text-[11px] text-slate-400">Iniciativas oficiales en apoyo a la sociedad, la niñez y el desarrollo global.</span>
+                            </div>
+                            <span class="text-emerald-400 text-xl transform group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform">↗</span>
+                        </a>
+                        <a href="https://www.plus.fifa.com/es/showcase/fifa-club-world-cup-2025tm/b2a1d90c-bc89-463a-a15e-adff3644e37f?&intcmp=(p_fta)(d_plusfifa)(c_sidemenu)" target="_blank" class="bg-black/40 hover:bg-black/60 border border-emerald-500/30 hover:border-emerald-500/60 p-4 rounded-xl flex justify-between items-center transition-all group">
+                            <div class="flex flex-col">
+                                <span class="text-sm text-white font-bold mb-1">FIFA+ Showcase</span>
+                                <span class="text-[11px] text-slate-400">Acceso a eventos mundiales, torneos de clubes y documentales exclusivos.</span>
+                            </div>
+                            <span class="text-emerald-400 text-xl transform group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform">↗</span>
+                        </a>
                     </div>
-                    <p class="text-xs text-slate-400 leading-relaxed">Generación de fondos automatizados y assets de imagen renderizados dinámicamente según estadísticas de la FIFA.</p>
                 </div>
+
             </div>
         </section>
 
