@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FIFA 2026 - Fase Final & Sovereign Hub | SADV41</title>
+    <title>FIFA 2026 - Sovereign Hub | SADV41</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
     
@@ -56,17 +56,6 @@
         .text-shadow-oro { text-shadow: 0 0 10px rgba(250, 204, 21, 0.5); }
         .text-shadow-green { text-shadow: 0 0 10px rgba(16, 185, 129, 0.6); }
         .bloom-text-blue { text-shadow: 0 0 8px rgba(0, 209, 255, 0.8), 0 0 15px rgba(0, 209, 255, 0.5); }
-
-        /* --- UI DE LAS LLAVES --- */
-        .match-card { background-color: #161b22; border: 1px solid #30363d; border-radius: 16px; padding: 12px 16px; transition: transform 0.2s, border-color 0.2s; }
-        .match-card:hover { border-color: rgba(250, 204, 21, 0.4); transform: translateY(-2px); }
-        .team-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; }
-        .team-info { display: flex; align-items: center; gap: 12px; font-weight: 600; font-size: 0.9rem; }
-        .score { font-weight: 700; font-size: 0.95rem; }
-        .score.winner { color: #facc15; }
-        .score.loser { color: #64748b; }
-        .match-date { font-size: 0.7rem; color: #8b949e; margin-bottom: 8px; font-weight: 600; text-transform: lowercase; }
-        .divider { height: 1px; background-color: #30363d; margin: 4px 0; }
 
         /* --- UI MÓDULOS --- */
         .module-card { background: rgba(10, 15, 25, 0.8); border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); padding: 1.5rem; border-radius: 1rem; }
@@ -158,7 +147,7 @@
             <span class="icon">🇻🇪</span><span class="text text-rose-300">Por Venezuela 🇻🇪</span>
         </a>
         <a href="https://thesteef21.github.io/Lapizasuli/CristoTeAma.html" target="_blank" class="vertical-tab tab-cristo">
-            <span class="icon">☦️</span><span class="text text-purple-300">Cristo Te Ama 🎚</span>
+            <span class="icon">☦️</span><span class="text text-purple-300"><a href="https://thesteef21.github.io/Lapizasuli/CristoTeAma.html" target="_blank" class="text-inherit no-underline cursor-text outline-none">Cristo</a> Te Ama 🎚</span>
         </a>
         <a href="https://brave.com/evi088" target="_blank" class="vertical-tab tab-brave">
             <span class="icon">🦁</span><span class="text text-orange-400">Navegador seguro = Brave</span>
@@ -216,74 +205,6 @@
                 </div>
             </div>
         </section>
-
-        <div>
-            <div class="flex justify-between items-end mb-6 max-w-5xl mx-auto px-2">
-                <h2 class="text-xl font-bold text-white tracking-wide">Fase Final</h2>
-                <span class="text-xs text-oro font-mono tracking-widest uppercase bg-oro/10 px-3 py-1 rounded-full border border-oro/30">Simulación SADV41</span>
-            </div>
-
-            <div class="overflow-x-auto hide-scrollbar pb-8">
-                <div class="flex gap-8 min-w-max max-w-5xl mx-auto px-2 relative">
-                    <div class="flex flex-col gap-6 w-72 z-10">
-                        <div class="match-card relative">
-                            <div class="match-date">sáb, 4 jul, 16:00</div>
-                            <div class="team-row"><div class="team-info"><span class="text-lg">🇫🇷</span> Francia</div><div class="score winner">1</div></div>
-                            <div class="divider"></div>
-                            <div class="team-row"><div class="team-info"><span class="text-lg">🇲🇦</span> Marruecos</div><div class="score loser">0</div></div>
-                        </div>
-                        <div class="match-card relative">
-                            <div class="match-date">lun, 6 jul, 14:00</div>
-                            <div class="team-row"><div class="team-info"><span class="text-lg">🇪🇸</span> España</div><div class="score winner">2</div></div>
-                            <div class="divider"></div>
-                            <div class="team-row"><div class="team-info"><span class="text-lg">🇧🇪</span> Bélgica</div><div class="score loser">1</div></div>
-                        </div>
-                        <div class="match-card relative mt-4">
-                            <div class="match-date">dom, 5 jul, 15:00</div>
-                            <div class="team-row"><div class="team-info"><span class="text-lg">🇳🇴</span> Noruega</div><div class="score loser">1</div></div>
-                            <div class="divider"></div>
-                            <div class="team-row"><div class="team-info"><span class="text-lg">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span> Inglaterra</div><div class="score winner">3</div></div>
-                        </div>
-                        <div class="match-card relative">
-                            <div class="match-date">mar, 7 jul, 19:00</div>
-                            <div class="team-row"><div class="team-info"><span class="text-lg">🇵🇹</span> Portugal</div><div class="score winner">2</div></div>
-                            <div class="divider"></div>
-                            <div class="team-row"><div class="team-info"><span class="text-lg">🇧🇷</span> Brasil</div><div class="score loser">1</div></div>
-                        </div>
-                    </div>
-                    <div class="hidden md:flex flex-col justify-around py-12 w-8">
-                        <div class="h-px bg-slate-700 w-full"></div>
-                        <div class="h-px bg-slate-700 w-full"></div>
-                    </div>
-                    <div class="flex flex-col justify-around w-72 z-10 py-10">
-                        <div class="match-card border-slate-700/80">
-                            <div class="match-date">mié, 15 jul, 14:00</div>
-                            <div class="team-row"><div class="team-info"><span class="text-lg">🇫🇷</span> Francia</div><div class="score text-slate-500">-</div></div>
-                            <div class="divider"></div>
-                            <div class="team-row"><div class="team-info"><span class="text-lg">🇪🇸</span> España</div><div class="score text-slate-500">-</div></div>
-                        </div>
-                        <div class="match-card border-slate-700/80">
-                            <div class="match-date">jue, 16 jul, 14:00</div>
-                            <div class="team-row"><div class="team-info"><span class="text-lg">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span> Inglaterra</div><div class="score text-slate-500">-</div></div>
-                            <div class="divider"></div>
-                            <div class="team-row"><div class="team-info"><span class="text-lg">🇵🇹</span> Portugal</div><div class="score text-slate-500">-</div></div>
-                        </div>
-                    </div>
-                    <div class="hidden md:flex flex-col justify-center w-8">
-                        <div class="h-px bg-slate-700 w-full"></div>
-                    </div>
-                    <div class="flex flex-col justify-center w-72 z-10">
-                        <div class="match-card border-oro/50 shadow-[0_0_20px_rgba(250,204,21,0.15)] relative overflow-hidden">
-                            <div class="absolute top-0 right-0 w-24 h-24 bg-oro/10 rounded-full blur-2xl"></div>
-                            <div class="match-date text-oro">Gran Final • dom, 19 jul, 14:00</div>
-                            <div class="team-row"><div class="team-info text-slate-400 font-normal text-xs uppercase tracking-widest">Ganador Semi 1</div><div class="score"></div></div>
-                            <div class="divider border-oro/20"></div>
-                            <div class="team-row"><div class="team-info text-slate-400 font-normal text-xs uppercase tracking-widest">Ganador Semi 2</div><div class="score"></div></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <section class="glass-table rounded-2xl overflow-hidden relative max-w-5xl mx-auto w-full">
             <div class="p-6 md:p-8 text-center border-b border-emerald-500/20 bg-gradient-to-b from-[#0f172a] to-transparent">
