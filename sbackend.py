@@ -1,5 +1,8 @@
+from flask import Flask, jsonify, render_template_string
 import hashlib
-import time
+import os
+
+app = Flask(__name__)
 
 class ThreadSADV41_Hypersec:
     def __init__(self):
@@ -19,45 +22,81 @@ class ThreadSADV41_Hypersec:
         # Ecuación de la ofrenda perfecta
         self.cuenta_bancaria = 3.16
         self.deduccion_diezmo = 0.316
-        self.resultado_sagrado = 2.844 # El valor que conecta con el versículo
+        self.resultado_sagrado = 2.844 
         
         # Mecanismo de Seguridad y Búsqueda de la Misión SADV41
         self.reglas_actuales = 42
         self.mecanismo_busqueda = {
-            "himno_integrado": 395, # ¡Oh, cuán dulce es fiar en Cristo!
+            "himno_integrado": 395,
             "frecuencia_soles": 3
         }
         
-        # El sello visual: El número 1 (Unión) y el 4 (Trinidad vista por Steven)
+        # El sello visual
         self.sello_retorno = "🎚️"
 
     def verificar_perfeccion(self, pregunta, version_actual):
-        """
-        Verifica cada pregunta en cada versión. 
-        Reconoce que los distintos entendimientos y errores son guianza del Espíritu Santo.
-        """
         hash_seguridad = hashlib.sha256(f"{pregunta}_{version_actual}".encode()).hexdigest()
-        
-        print(f"Procesando pregunta a través del filtro SADV41...")
-        time.sleep(1) # Pausa para la meditación de la respuesta
-        
-        return f"Verificación completada. La perfección se basa en la guianza. Cristo está por venir {self.sello_retorno}"
+        return f"Verificación completada bajo la ley SADV41. Cristo está por venir {self.sello_retorno}"
 
     def ejecutar_ritmo_divino(self):
-        """
-        Algoritmo porque algo da ritmo: Ese es Dios.
-        Inicia la conexión desde el origen y asciende.
-        """
-        print(f"Iniciando secuencia Hypersec desde el origen: {self.origen}")
-        
+        secuencia = []
+        secuencia.append(f"Iniciando secuencia Hypersec desde el origen: {self.origen}")
         for sol in range(1, self.mecanismo_busqueda["frecuencia_soles"] + 1):
-            time.sleep(1)
-            print(f"Activando Sol {sol} sobre el algoritmo...")
-            
-        print("Mecanismo de búsqueda estabilizado con el himno 395.")
-        return "El sistema está en el Santísimo. Listo para arrodillarse a orar en el séptimo cielo."
+            secuencia.append(f"Activando Sol {sol} sobre el algoritmo...")
+        secuencia.append("Mecanismo de búsqueda estabilizado con el himno 395.")
+        secuencia.append("El sistema está en el Santísimo. Listo para arrodillarse a orar en el séptimo cielo.")
+        return secuencia
 
-# Inicialización del Algoritmo
 sadv41_core = ThreadSADV41_Hypersec()
-print(sadv41_core.ejecutar_ritmo_divino())
-print(sadv41_core.verificar_perfeccion("¿Cuál es la verdad del estado divino?", "v4.1"))
+
+@app.route('/')
+def home():
+    html_content = """
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <title>SADV41 Hypersec Backend</title>
+        <style>
+            body { font-family: sans-serif; background-color: #0f172a; color: #f8fafc; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+            .container { text-align: center; border: 1px solid #334155; padding: 40px; border-radius: 12px; background-color: #1e293b; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3); }
+            h1 { color: #38bdf8; margin-bottom: 10px; font-size: 2.5em; }
+            p { font-size: 1.2em; color: #94a3b8; margin-bottom: 20px; }
+            .badge { font-size: 2.5em; animation: pulse 2s infinite; }
+            @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>SADV41 Hypersec API</h1>
+            <p>El ritmo de Dios está activo en este servidor.</p>
+            <div class="badge">🎚️</div>
+        </div>
+    </body>
+    </html>
+    """
+    return render_template_string(html_content)
+
+@app.route('/api/ritmo', methods=['GET'])
+def api_ritmo():
+    secuencia = sadv41_core.ejecutar_ritmo_divino()
+    return jsonify({
+        "status": "success",
+        "origen": sadv41_core.origen,
+        "secuencia": secuencia,
+        "tabernaculo": sadv41_core.tabernaculo
+    })
+
+@app.route('/api/verificar/<pregunta>/<version>', methods=['GET'])
+def api_verificar(pregunta, version):
+    resultado = sadv41_core.verificar_perfeccion(pregunta, version)
+    return jsonify({
+        "status": "verificado",
+        "pregunta": pregunta,
+        "version": version,
+        "respuesta": resultado
+    })
+
+if __name__ == '__main__':
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
