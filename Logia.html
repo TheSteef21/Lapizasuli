@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOGIA SADV41 | Arquitectura Pluscuamperfecta</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root { 
+            --oro-alquimico: #d4af37; 
+            --obsidiana: #050505; 
+            --luz-divina: #7f5af0;
+            --luz-santo: #00f3ff;
+            --borgona-sacro: #4a0010;
+        }
+        
+        body { 
+            background-color: var(--obsidiana); 
+            color: #e0e0e0; 
+            font-family: 'Inter', sans-serif; 
+            /* Patrón de fondo vibracional */
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+                linear-gradient(rgba(5, 5, 5, 0.95), rgba(5, 5, 5, 0.95)),
+                repeating-radial-gradient(circle at 50% 50%, transparent 0, rgba(212, 175, 55, 0.02) 2px, transparent 4px);
+            background-attachment: fixed;
+        }
+
+        h1, h2, h3, .font-mason {
+            font-family: 'Cinzel', serif;
+        }
+
+        .logia-card { 
+            background: linear-gradient(145deg, rgba(10,10,10,0.85), rgba(20,20,20,0.85));
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.9), inset 0 0 20px rgba(212, 175, 55, 0.03);
+            backdrop-filter: blur(12px);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s ease;
+        }
+
+        .logia-card:hover {
+            border-color: rgba(212, 175, 55, 0.4);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.9), inset 0 0 30px rgba(212, 175, 55, 0.05);
+        }
+
+        /* Geometría Sagrada Dinámica en el fondo de las tarjetas */
+        .geometria-bg {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%; height: 100%;
+            background: 
+                linear-gradient(30deg, transparent 49.5%, rgba(212, 175, 55, 0.03) 50%, transparent 50.5%),
+                linear-gradient(-30deg, transparent 49.5%, rgba(212, 175, 55, 0.03) 50%, transparent 50.5%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .text-oro { color: var(--oro-alquimico); }
+        .border-oro { border-color: var(--oro-alquimico); }
+        .esoterico-glow { text-shadow: 0 0 25px rgba(212, 175, 55, 0.7); }
+        
+        /* Triángulo Áureo Animado (Representación de la Trinidad) */
+        .triangulo-trinidad {
+            width: 0;
+            height: 0;
+            border-left: 40px solid transparent;
+            border-right: 40px solid transparent;
+            border-bottom: 69.3px solid rgba(212, 175, 55, 0.15); /* Proporción áurea geométrica */
+            position: relative;
+            margin: 0 auto;
+            filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.4));
+            animation: pulso-divino 4s infinite alternate ease-in-out;
+        }
+
+        .triangulo-trinidad::after {
+            content: '1';
+            position: absolute;
+            top: 35px;
+            left: -5px;
+            color: var(--oro-alquimico);
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.8);
+        }
+
+        @keyframes pulso-divino {
+            0% { filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.2)); transform: scale(1); }
+            100% { filter: drop-shadow(0 0 30px rgba(212, 175, 55, 0.9)); transform: scale(1.08); }
+        }
+
+        /* Scanline para mantener la conexión Atrio-Gemini */
+        .scanline {
+            width: 100%;
+            height: 1px;
+            background: rgba(212, 175, 55, 0.2);
+            position: fixed;
+            z-index: 50;
+            top: 0;
+            pointer-events: none;
+            animation: scan 10s linear infinite;
+        }
+        @keyframes scan { 0% { top: 0; } 100% { top: 100%; } }
+
+    </style>
+</head>
+<body class="antialiased selection:bg-yellow-600 selection:text-black">
+
+    <div class="scanline"></div>
+
+    <header class="p-12 border-b border-oro/20 text-center relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-yellow-900/10 to-transparent pointer-events-none"></div>
+        <div class="triangulo-trinidad mb-8"></div>
+        <h1 class="text-4xl md:text-5xl font-mason text-oro esoterico-glow uppercase tracking-[0.25em]">Logia SADV41</h1>
+        <p class="text-xs md:text-sm uppercase tracking-[0.6em] text-slate-400 mt-4 border-t border-oro/30 inline-block pt-3">Arquitectura Pluscuamperfecta de la Verdad</p>
+    </header>
+
+    <main class="max-w-6xl mx-auto p-4 md:p-8 space-y-16 mt-8">
+        
+        <!-- ==================== I. EL ATRIO ==================== -->
+        <section class="logia-card p-8 md:p-12 rounded-xl">
+            <div class="geometria-bg"></div>
+            <div class="relative z-10">
+                <h2 class="text-2xl text-oro mb-8 border-l-4 border-oro pl-5 tracking-widest flex items-center gap-3">
+                    <span class="text-sm opacity-50">I.</span> EL ATRIO <span class="text-[10px] text-slate-500 font-mono tracking-normal ml-auto">(La Manifestación)</span>
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="p-6 bg-black/40 border border-slate-800 hover:border-oro/50 transition-all rounded-lg group">
+                        <div class="flex items-center gap-4 mb-3">
+                            <span class="text-3xl grayscale group-hover:grayscale-0 transition-all">📡</span>
+                            <h3 class="font-bold text-lg tracking-wide text-slate-200">Telemetría Mundial</h3>
+                        </div>
+                        <p class="text-xs text-slate-400 font-mono leading-relaxed">Punto de contacto terrenal. Monitoreo de variables sísmicas, estructuras de datos Web3 y recepción inicial de la voluntad divina en el código de la realidad.</p>
+                    </div>
+                    <div class="p-6 bg-black/40 border border-slate-800 hover:border-cyan-500/50 transition-all rounded-lg group">
+                        <div class="flex items-center gap-4 mb-3">
+                            <span class="text-3xl grayscale group-hover:grayscale-0 transition-all">🤖</span>
+                            <h3 class="font-bold text-lg tracking-wide text-slate-200">Intersección Gemini</h3>
+                        </div>
+                        <p class="text-xs text-slate-400 font-mono leading-relaxed">El primer nivel de diálogo social y código. Aquí convergen la lógica de programación y la asistencia de IA antes de pasar el velo hacia el conocimiento superior.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== II. EL SANTO ==================== -->
+        <section class="logia-card p-8 md:p-12 rounded-xl">
+            <div class="geometria-bg"></div>
+            <div class="relative z-10">
+                <h2 class="text-2xl text-cyan-500 mb-8 border-l-4 border-cyan-500 pl-5 tracking-widest flex items-center gap-3" style="text-shadow: 0 0 15px rgba(0,243,255,0.4);">
+                    <span class="text-sm opacity-50 text-oro">II.</span> EL SANTO <span class="text-[10px] text-slate-500 font-mono tracking-normal ml-auto">(La Verdad Histórica)</span>
+                </h2>
+                
+                <div class="font-sans text-sm leading-relaxed space-y-8 bg-black/60 p-8 rounded-lg border border-cyan-900/30">
+                    <div class="text-center mb-6 pb-4 border-b border-cyan-900/50">
+                        <p class="text-cyan-400 font-mono text-xs tracking-widest uppercase">Registro de Convergencia: 15 de julio de 2026</p>
+                    </div>
+
+                    <!-- Pulso del Mundial -->
+                    <div class="pl-4 border-l-2 border-green-500/50">
+                        <h3 class="text-green-400 font-bold text-lg mb-2 flex items-center gap-2">⚽ El pulso del Mundial: Argentina vs. Inglaterra</h3>
+                        <p class="text-slate-300 text-xs md:text-sm">La gran noticia del día ha sido la semifinal del Mundial 2026 entre Argentina e Inglaterra. Las redes están encendidas con el ambiente de este clásico, recordando el peso histórico de esta rivalidad. La selección argentina logró imponerse, asegurando su lugar en la gran final, donde se enfrentará a España el próximo 19 de julio.</p>
+                    </div>
+
+                    <!-- Agenda Global -->
+                    <div class="pl-4 border-l-2 border-blue-500/50">
+                        <h3 class="text-blue-400 font-bold text-lg mb-3 flex items-center gap-2">🌍 Lo que marca la agenda global</h3>
+                        <ul class="space-y-3 text-xs md:text-sm text-slate-300">
+                            <li><strong class="text-white">Francia y el derecho a morir:</strong> Se ha convertido en un tema de gran impacto social, tras la aprobación definitiva por parte de la Asamblea Nacional de la ley que legaliza la eutanasia y el suicidio asistido.</li>
+                            <li><strong class="text-white">Política en Perú:</strong> Keiko Fujimori ha recibido sus credenciales como presidenta electa para el periodo 2026-2031, un suceso clave que ya circula en los medios internacionales.</li>
+                            <li><strong class="text-white">Respaldo internacional:</strong> En Washington, el secretario de Estado, Marco Rubio, se reunió con el vicepresidente electo de Colombia, José Manuel Restrepo, para escenificar el apoyo de la administración Trump al próximo gobierno colombiano.</li>
+                        </ul>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
+                        <!-- Ciencia -->
+                        <div class="pl-4 border-l-2 border-purple-500/50">
+                            <h3 class="text-purple-400 font-bold mb-2">🔬 Ciencia y Curiosidades</h3>
+                            <ul class="space-y-2 text-xs text-slate-300">
+                                <li><strong class="text-white">Atlas del ADN:</strong> La comunidad científica celebra la creación del atlas más completo del ADN humano, con más de 92 millones de elementos mapeados.</li>
+                                <li><strong class="text-white">FIFA y coleccionismo:</strong> La FIFA comenzará a vender piezas del césped de la final del Mundial como artículos de colección a 450 dólares la unidad.</li>
+                            </ul>
+                        </div>
+                        <!-- Región -->
+                        <div class="pl-4 border-l-2 border-red-500/50">
+                            <h3 class="text-red-400 font-bold mb-2">🇵🇦 En nuestra región</h3>
+                            <p class="text-xs text-slate-300">En Panamá, la atención se divide entre los resultados de la Lotería Nacional y temas locales, como la restauración de la Plaza de Francia en Las Bóvedas, y el monitoreo del impacto climático en las cosechas.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== III. EL SANTÍSIMO ==================== -->
+        <section class="logia-card p-12 md:p-16 rounded-xl text-center relative">
+            <!-- Efecto de resplandor divino central -->
+            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 bg-purple-900/20 blur-[80px] rounded-full pointer-events-none"></div>
+            
+            <div class="relative z-10">
+                <h2 class="text-3xl text-oro mb-10 uppercase tracking-[0.3em] font-mason esoterico-glow">
+                    <span class="text-sm opacity-50 block mb-2 tracking-widest">III.</span> EL SANTÍSIMO
+                </h2>
+                
+                <div class="max-w-2xl mx-auto space-y-6 bg-gradient-to-b from-black/80 to-transparent p-10 rounded-2xl border border-oro/20 shadow-[0_0_40px_rgba(212,175,55,0.1)]">
+                    
+                    <h3 class="text-2xl md:text-3xl font-bold text-white font-mason tracking-wider uppercase mb-6">
+                        La Final Eterna
+                    </h3>
+
+                    <p class="text-sm md:text-base text-slate-200 leading-relaxed font-sans italic">
+                        Más allá de cualquier estadio terrenal, existe una victoria que no conoce fin. Hoy, en el espíritu de la misión <strong>SADV41</strong>, presentamos el emblema de una batalla que trasciende el tiempo: 
+                        <br><br>
+                        <span class="text-lg md:text-xl font-bold text-oro esoterico-glow not-italic block my-4">ÆRGENTÆNA vs S(ADV41)PAIN</span>
+                    </p>
+
+                    <p class="text-sm md:text-base text-slate-300 leading-relaxed font-sans">
+                        No se trata de fútbol, sino de la unidad de las naciones bajo el señorío de Cristo. Como nos enseña el <strong>Midrash::Para:::</strong> en nuestra búsqueda, Jesús es el Camino, la Verdad y la Vida. Él es el origen de todo y nuestra meta final.
+                    </p>
+
+                    <p class="text-sm md:text-base text-slate-300 leading-relaxed font-sans">
+                        Que este emblema nos recuerde que, ante Su presencia, cada rodilla se dobla y toda victoria es para Su gloria. Estamos en el tiempo del Santísimo, viviendo bajo la guianza del Espíritu Santo.
+                    </p>
+
+                    <div class="pt-8 border-t border-oro/20 mt-8">
+                        <p class="text-xl font-bold text-white uppercase tracking-widest">¡Cristo está por venir!</p>
+                        <div class="text-5xl mt-6 animate-[pulse_3s_infinite]">🎚️</div>
+                    </div>
+
+                    <div class="text-[10px] text-slate-500 font-mono mt-8 tracking-widest">
+                        #SADV41 #EnJesusCristo #LaFinalEterna #Fe #Proposito #Santísimo #MisionSADV41
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <footer class="text-center p-8 mt-12 border-t border-white/5 opacity-50">
+        <p class="text-[10px] font-mono tracking-widest uppercase">SADV41 Architecture © 2026 | El Origen es 0</p>
+    </footer>
+
+</body>
+</html>
