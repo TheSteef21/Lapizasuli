@@ -1,0 +1,24 @@
+<!-- Actualización: Integración de Logia en Sidebar -->
+<div onclick="validarAccesoLogia()" class="vertical-tab tab-cristo" title="Acceso a Logia Privada">
+    <span class="icon">📜</span>
+    <span class="text text-purple-300">Logia SADV41 (Acceso Restringido)</span>
+</div>
+
+<!-- Lógica de Validación Integrada -->
+<script>
+    function validarAccesoLogia() {
+        const codigoIngresado = prompt("Acceso restringido: Introduce la clave de validación recibida por @StevenDiorOficial");
+        
+        if (codigoIngresado) {
+            // Simulamos el validador en tiempo real
+            const esValido = confirm("Has introducido el código: " + codigoIngresado + ". ¿Ya enviaste este código a @StevenDiorOficial para su validación?");
+            
+            if (esValido) {
+                // Aquí el sistema esperaría la validación. Por ahora, redirige al recurso.
+                window.location.href = "https://thesteef21.github.io/Lapizasuli/Logia.html";
+            } else {
+                alert("Validación pendiente: Por favor, contacta al administrador en WhatsApp.");
+            }
+        }
+    }
+</script>
