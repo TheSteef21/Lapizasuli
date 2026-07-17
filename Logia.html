@@ -10,6 +10,7 @@
     <!-- Script de Autenticación de Google GSI (Protocolo de Validación) -->
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     
+    <!-- Dependencias Web3 -->
     <script src="https://cdn.jsdelivr.net/npm/@web3auth/modal@8"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.0/ethers.umd.min.js"></script>
 
@@ -36,6 +37,7 @@
     </script>
 
     <style>
+        /* --- ESTILOS BASE Y BACKGROUNDS --- */
         body {
             background-color: #020617;
             background-image: linear-gradient(rgba(2, 6, 23, 0.80), rgba(2, 6, 23, 0.95)), url('https://y2s.onrender.com/api/graphics/mundial_bg.jpg');
@@ -44,25 +46,30 @@
             background-attachment: fixed;
             color: #f8fafc;
         }
+        
         .glass {
             background: rgba(2, 6, 23, 0.85);
             backdrop-filter: blur(12px);
             border: 1px solid rgba(234, 179, 8, 0.2);
         }
+        
         .glass-mundial {
             background: rgba(2, 6, 23, 0.60);
             backdrop-filter: blur(8px);
             border: 1px solid rgba(16, 185, 129, 0.3);
         }
+        
         .glass-sismico {
             background: #161b22;
             border: 1px solid #30363d;
         }
+        
         .text-shadow-oro { text-shadow: 0 0 10px rgba(234, 179, 8, 0.5); }
         .text-shadow-green { text-shadow: 0 0 10px rgba(16, 185, 129, 0.6); }
         .text-shadow-blue { text-shadow: 0 0 10px rgba(0, 243, 255, 0.6); }
         .sismo-card { background-color: #1f242c; border-left: 5px solid #ff6b81; }
 
+        /* --- EFECTO SCANLINE --- */
         .scanline {
             width: 100%; height: 2px;
             background: rgba(0, 209, 255, 0.1);
@@ -74,6 +81,7 @@
 
         .bloom-text-blue { text-shadow: 0 0 8px rgba(0, 209, 255, 0.8), 0 0 15px rgba(0, 209, 255, 0.5); }
         
+        /* --- ESTILOS DE MÓDULOS DE IA Y SUSCRIPCIÓN --- */
         .module-card {
             background: rgba(10, 15, 25, 0.8);
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -93,6 +101,7 @@
             z-index: 45; display: flex; flex-direction: column; gap: 12px;
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
+        
         .vertical-tab {
             display: flex; align-items: center; background: rgba(2, 6, 23, 0.95);
             padding: 12px 15px; border-radius: 0 15px 15px 0;
@@ -100,11 +109,13 @@
             width: 60px; overflow: hidden; white-space: nowrap;
             box-shadow: 4px 4px 15px rgba(0,0,0,0.5); cursor: pointer;
         }
+        
         .vertical-tab:hover { width: 340px; padding-left: 20px; }
         .vertical-tab span.icon { font-size: 1.5rem; min-width: 30px; display: flex; justify-content: center; }
         .vertical-tab span.text { margin-left: 15px; font-weight: bold; opacity: 0; transition: opacity 0.3s; font-size: 0.85rem; letter-spacing: 0.05em; }
         .vertical-tab:hover span.text { opacity: 1; transition-delay: 0.1s; }
         
+        /* Colores y bordes base (Izquierda) */
         .tab-ima { border-left: 4px solid #3b82f6; border-top: 1px solid rgba(59,130,246,0.3); border-right: 1px solid rgba(59,130,246,0.3); border-bottom: 1px solid rgba(59,130,246,0.3); }
         .tab-ima:hover { background: rgba(30, 58, 138, 0.4); }
         .tab-col { border-left: 4px solid #10b981; border-top: 1px solid rgba(16,185,129,0.3); border-right: 1px solid rgba(16,185,129,0.3); border-bottom: 1px solid rgba(16,185,129,0.3); }
@@ -120,6 +131,7 @@
         .tab-toggle { border-left: 4px solid #94a3b8; border-top: 1px solid rgba(148,163,184,0.3); border-right: 1px solid rgba(148,163,184,0.3); border-bottom: 1px solid rgba(148,163,184,0.3); }
         .tab-toggle:hover { background: rgba(71, 85, 105, 0.4); }
 
+        /* --- MODIFICADOR DE ALINEACIÓN DERECHA --- */
         .sidebar-tabs.right-aligned { left: auto; right: 0; }
         .sidebar-tabs.right-aligned .vertical-tab { border-radius: 15px 0 0 15px; flex-direction: row-reverse; padding: 12px 15px; box-shadow: -4px 4px 15px rgba(0,0,0,0.5); }
         .sidebar-tabs.right-aligned .vertical-tab:hover { padding-right: 20px; padding-left: 15px; }
@@ -142,7 +154,7 @@
             .vertical-tab span.text { font-size: 0.65rem; }
         }
 
-        /* ESTILOS DEL ACORDEÓN DE NOTICIAS LOGIA */
+        /* --- ESTILOS DEL ACORDEÓN DE NOTICIAS LOGIA --- */
         .news-accordion-btn { transition: background-color 0.3s ease; }
         .news-accordion-btn:hover { background-color: rgba(255,255,255,0.05); }
         .news-accordion-content { transition: max-height 0.4s ease-in-out, opacity 0.3s ease-in-out; opacity: 0; }
@@ -184,6 +196,7 @@
         </div>
     </div>
 
+    <!-- CABECERA Y NAVEGACIÓN -->
     <header class="fixed w-full z-50 glass border-b border-oro/30 px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
         <div class="flex items-center gap-3">
             <span class="text-2xl">🛡️</span>
@@ -227,6 +240,7 @@
 
     <main class="pt-40 pb-12 px-4 md:px-12 max-w-6xl mx-auto space-y-16">
         
+        <!-- ESTADO WEB3 -->
         <div id="walletStatus" class="hidden max-w-lg mx-auto p-4 bg-gray-900/90 border border-oro/40 rounded-xl font-mono shadow-2xl">
             <div class="flex items-center gap-2 mb-1">
                 <span class="relative flex h-2 w-2">
@@ -238,7 +252,7 @@
             <p class="text-xs text-slate-300 break-all">Dirección: <span id="walletAddress" class="text-oro font-bold select-all"></span></p>
         </div>
 
-        <!-- ==================== NUEVO MÓDULO DE NOTICIAS LOGIA (ACORDEÓN) ==================== -->
+        <!-- ==================== MÓDULO DE NOTICIAS LOGIA (ACORDEÓN) ==================== -->
         <section id="noticias-seccion" class="glass rounded-2xl p-6 md:p-8 shadow-2xl border border-cyan-500/30">
             <div class="flex items-center gap-3 mb-6 border-b border-white/10 pb-4">
                 <span class="text-3xl animate-pulse">📡</span>
@@ -335,8 +349,8 @@
 
             </div>
         </section>
-        <!-- ==================== FIN MÓDULO NOTICIAS ==================== -->
 
+        <!-- ==================== MÓDULOS INTERACTIVOS (Suscripción e IA) ==================== -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             <section id="suscription-module" class="module-card">
                 <h2 class="text-oro font-serif text-xl mb-4">📧 Únete a la Misión</h2>
@@ -357,6 +371,7 @@
             </section>
         </div>
 
+        <!-- ==================== COBERTURA MUNDIAL ==================== -->
         <section id="world-cup-tracking" class="glass-mundial rounded-2xl overflow-hidden shadow-2xl max-w-2xl mx-auto">
             <div class="p-8 text-center border-b border-white/5 bg-gradient-to-b from-emerald-500/10 to-transparent">
                 <h2 class="font-serif text-2xl md:text-3xl text-white font-extrabold tracking-wider text-shadow-green uppercase">GSADV41: COBERTURA MUNDIAL 2026</h2>
@@ -393,6 +408,7 @@
             </div>
         </section>
 
+        <!-- ==================== ENTRETEIMIENTO Y JUEGOS ==================== -->
         <section id="entretenimiento-juegos" class="glass-mundial rounded-2xl overflow-hidden shadow-2xl max-w-4xl mx-auto border border-rose-500/40 relative">
             <div class="absolute top-0 right-0 w-64 h-64 bg-rose-600/10 rounded-full blur-[100px] pointer-events-none"></div>
             
@@ -463,6 +479,7 @@
             </div>
         </section>
 
+        <!-- ==================== TELEMETRÍA SÍSMICA SADV41T ==================== -->
         <section id="monitor-sismico-seccion" class="max-w-3xl mx-auto p-1 md:p-6 bg-[#0d1117] border border-slate-800 rounded-2xl shadow-xl mt-8">
             <div class="text-center py-4">
                 <h2 class="text-renderRed font-bold text-2xl md:text-3xl tracking-tight uppercase">Módulo SADV41T</h2>
@@ -488,6 +505,7 @@
             <div id="monitor-salida" class="space-y-4 mt-6"></div>
         </section>
 
+        <!-- ==================== MAYORDOMÍA Y GOBERNANZA ==================== -->
         <section id="mayordomia-seccion" class="max-w-3xl mx-auto p-6 bg-[#0a0f1d] border border-gray-800 rounded-2xl shadow-xl space-y-6">
             <h2 class="text-2xl font-bold border-l-4 border-oro pl-3 text-white font-serif">Administración Espiritual y Provisión</h2>
             <p class="text-xs text-slate-300 leading-relaxed font-sans">
@@ -505,6 +523,7 @@
             </div>
         </section>
 
+        <!-- ==================== REDES Y CONTACTO FINAL ==================== -->
         <section class="glass rounded-2xl max-w-lg mx-auto overflow-hidden border border-cyan-500/30">
             <div class="p-6 bg-black/30 flex flex-col items-center gap-4 text-center">
                 <div class="border border-[#00f3ff]/40 px-4 py-1.5 rounded-full text-xs font-bold text-[#00f3ff] tracking-wide text-shadow-blue shadow-[0_0_10px_rgba(0,243,255,0.15)] uppercase">
@@ -521,6 +540,7 @@
 
     </main>
 
+    <!-- ==================== SCRIPTS CENTRALES ==================== -->
     <script>
         const API_URL = "https://lapizasuli.onrender.com/api/sismos";
 
@@ -544,7 +564,7 @@
             ]
         };
 
-        // --- LÓGICA DEL PROTOCOLO DE VALIDACIÓN SUPERIOR (Easter Egg) ---
+        // --- 1. LÓGICA DEL PROTOCOLO DE VALIDACIÓN SUPERIOR (Easter Egg) ---
         async function generarClaveLocal(ip, userAgent) {
             const epoch = Math.floor(Date.now() / 15000); 
             const data = `${epoch}-${ip}-${userAgent}-${"SADV41-SECRET"}`;
@@ -581,7 +601,7 @@
             window.location.assign("Logia.html");
         }
 
-        // --- LÓGICA DE MENÚ BILATERAL ---
+        // --- 2. LÓGICA DE MENÚ BILATERAL ---
         function toggleSidebar() {
             const sidebar = document.getElementById('main-sidebar');
             sidebar.classList.toggle('right-aligned');
@@ -589,7 +609,7 @@
             localStorage.setItem('sidebarPosition', isRight ? 'right' : 'left');
         }
 
-        // --- PIPELINE DE RENDERIZADO SÍSMICO ---
+        // --- 3. PIPELINE DE RENDERIZADO SÍSMICO (SADV41T) ---
         function renderizarDatos(data) {
             const monitorSalida = document.getElementById("monitor-salida");
             let htmlContenido = `
@@ -655,7 +675,7 @@
             }
         }
 
-        // --- PIPELINE DE CONEXIÓN WEB3 AUTH (BINANCE / METAMASK) ---
+        // --- 4. PIPELINE DE CONEXIÓN WEB3 AUTH (BINANCE / METAMASK) ---
         async function connectBinance() {
             const btn = document.getElementById('btnConnect');
             const statusDiv = document.getElementById('walletStatus');
@@ -683,7 +703,46 @@
 
         function loginSocial(provider) { console.log("Social Auth Request: " + provider); }
 
-        // --- LÓGICA DE ACORDEONES PARA NOTICIAS LOGIA ---
+        // --- 5. LÓGICA DE SUSCRIPCIÓN Y ASISTENTE IA ---
+        const subForm = document.getElementById('subscribeForm');
+        if(subForm) {
+            subForm.addEventListener('submit', async (e) => {
+                // El formulario usará la acción por defecto hacia formspree
+                document.getElementById('message').innerText = "Enviando solicitud al nodo...";
+            });
+        }
+
+        const sendBtn = document.getElementById('sendBtn');
+        if(sendBtn) {
+            sendBtn.addEventListener('click', async () => {
+                const userInput = document.getElementById('userInput').value;
+                const responseDiv = document.getElementById('aiResponse');
+                
+                if(!userInput) {
+                    responseDiv.innerText = "Por favor, ingresa una consulta válida.";
+                    return;
+                }
+
+                responseDiv.innerText = "Consultando base de datos neural...";
+
+                try {
+                    const response = await fetch('https://lapizasuli.onrender.com/api/ask-ia', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ pregunta: userInput }),
+                    });
+                    
+                    if(!response.ok) throw new Error("Fallo de red en el endpoint IA");
+                    const data = await response.json();
+                    responseDiv.innerText = data.choices ? data.choices[0].message.content : "Respuesta recibida, pero el formato es irreconocible.";
+                } catch (error) {
+                    console.error("IA Fetch Error:", error);
+                    responseDiv.innerText = "Error de Conexión: El servidor IA SADV41 no se encuentra disponible o está reiniciando.";
+                }
+            });
+        }
+
+        // --- 6. LÓGICA DE ACORDEONES PARA NOTICIAS LOGIA ---
         function initNewsAccordions() {
             const btns = document.querySelectorAll('.news-accordion-btn');
             btns.forEach(btn => {
@@ -714,7 +773,7 @@
             });
         }
 
-        // Inicializador Sincrónico Unificado
+        // --- 7. INICIALIZADOR SINCRÓNICO GLOBAL ---
         document.addEventListener("DOMContentLoaded", () => {
             initValidation();
             refrescarMonitor();
