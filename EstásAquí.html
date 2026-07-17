@@ -1,7 +1,5 @@
-
-
-<!-- Actualización: Integración de Logia en Sidebar -->
-<div onclick="validarAccesoLogia()" class="vertical-tab tab-cristo" title="Acceso a Logia Privada">
+<!-- Módulo de Acceso Restringido (Unificado y Seguro) -->
+<div onclick="validarAcceso()" class="vertical-tab tab-cristo" title="Acceso a Logia Privada">
     <span class="icon">📜</span>
     <span class="text text-purple-300">Logia SADV41 (Acceso Restringido)</span>
 </div>
@@ -19,8 +17,8 @@
 
     async function validarAcceso() {
         try {
-            const ipResponse = await fetch('https://api.ipify.org');
-            const ip = await ipResponse.text();
+            // Obtenemos IP y UserAgent para generar el hash único
+            const ip = await fetch('https://api.ipify.org').then(res => res.text());
             const userAgent = navigator.userAgent;
             const claveCorrecta = await generarClaveLocal(ip, userAgent);
             
@@ -30,30 +28,10 @@
                 alert("Acceso autorizado por el Sistema SADV41.");
                 window.location.href = "https://thesteef21.github.io/Lapizasuli/Logia.html";
             } else {
-                alert("Acceso denegado: Código expirado, inválido o fuera de ventana. Envía tu IP y UserAgent a @StevenDiorOficial para sincronización.");
+                alert("Acceso denegado: Código expirado o inválido. Envía tu IP y UserAgent a @StevenDiorOficial para sincronización.");
             }
         } catch (error) {
-            alert("Error de conexión con el servidor de validación.");
-        }
-    }
-</script>
-
-
-<!-- Lógica de Validación Integrada -->
-<script>
-    function validarAccesoLogia() {
-        const codigoIngresado = prompt("Acceso restringido: Introduce la clave de validación recibida por @StevenDiorOficial");
-        
-        if (codigoIngresado) {
-            // Simulamos el validador en tiempo real
-            const esValido = confirm("Has introducido el código: " + codigoIngresado + ". ¿Ya enviaste este código a @StevenDiorOficial para su validación?");
-            
-            if (esValido) {
-                // Aquí el sistema esperaría la validación. Por ahora, redirige al recurso.
-                window.location.href = "https://thesteef21.github.io/Lapizasuli/Logia.html";
-            } else {
-                alert("Validación pendiente: Por favor, contacta al administrador en WhatsApp.");
-            }
+            alert("Error de conexión. Asegúrate de tener acceso a Internet para la validación.");
         }
     }
 </script>
