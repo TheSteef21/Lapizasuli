@@ -7,6 +7,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght=300;400;600&family=Playfair+Display:ital,wght=0,700;1,700&display=swap" rel="stylesheet">
     
+    <!-- Script de Autenticación de Google GSI (Protocolo de Validación) -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    
     <script src="https://cdn.jsdelivr.net/npm/@web3auth/modal@8"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.0/ethers.umd.min.js"></script>
 
@@ -240,16 +243,23 @@
             </a>
         </div>
 
-        <div class="flex flex-wrap gap-2 justify-center">
-            <button onclick="loginSocial('google')" class="bg-white hover:bg-slate-200 text-slate-900 font-semibold text-xs px-3 py-2 rounded transition-all flex items-center gap-1.5 shadow cursor-pointer">
-                🌐 Google Connect
-            </button>
-            <button onclick="loginSocial('github')" class="bg-slate-800 hover:bg-slate-700 text-white font-semibold text-xs px-3 py-2 rounded transition-all flex items-center gap-1.5 border border-slate-700 cursor-pointer">
-                💻 GitHub Access
-            </button>
-            <button id="btnConnect" onclick="connectBinance()" class="bg-oro hover:bg-amber-600 text-navy font-bold text-xs px-3 py-2 rounded transition-all flex items-center gap-1.5 shadow-lg shadow-oro/20 cursor-pointer">
-                ⚡ Binance Web3 Wallet
-            </button>
+        <!-- INTEGRACIÓN PROTOCOLO DE ACCESO Y EASTER EGG -->
+        <div class="flex flex-col items-center justify-center gap-2">
+            <div id="status" class="text-[10px] text-oro font-mono text-center tracking-widest uppercase">Protocolo de validación iniciado...</div>
+            
+            <div id="auth-container" style="display: none; justify-content: center; width: 100%;">
+                <div id="g_id_onload" data-client_id="328306412185-lumsfeg3eclqq72blifegpog41rk5tl6.apps.googleusercontent.com" data-callback="handleCredentialResponse"></div>
+                <div class="g_id_signin" data-type="standard"></div>
+            </div>
+
+            <div class="flex flex-wrap gap-2 justify-center">
+                <button onclick="loginSocial('github')" class="bg-slate-800 hover:bg-slate-700 text-white font-semibold text-xs px-3 py-2 rounded transition-all flex items-center gap-1.5 border border-slate-700 cursor-pointer">
+                    💻 GitHub Access
+                </button>
+                <button id="btnConnect" onclick="connectBinance()" class="bg-oro hover:bg-amber-600 text-navy font-bold text-xs px-3 py-2 rounded transition-all flex items-center gap-1.5 shadow-lg shadow-oro/20 cursor-pointer">
+                    ⚡ Binance Web3 Wallet
+                </button>
+            </div>
         </div>
     </header>
 
@@ -537,6 +547,45 @@
             ]
         };
 
+        // --- LÓGICA DEL PROTOCOLO DE VALIDACIÓN SUPERIOR (Easter Egg) ---
+        async function generarClaveLocal(ip, userAgent) {
+            const epoch = Math.floor(Date.now() / 15000); 
+            const data = `${epoch}-${ip}-${userAgent}-${"SADV41-SECRET"}`;
+            const encoder = new TextEncoder();
+            const bytes = encoder.encode(data);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', bytes);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('').substring(0, 12).toUpperCase();
+        }
+
+        async function initValidation() {
+            try {
+                const ip = await fetch('https://api.ipify.org').then(res => res.text());
+                const userAgent = navigator.userAgent;
+                const token = await generarClaveLocal(ip, userAgent);
+                
+                const statusEl = document.getElementById('status');
+                if (statusEl) {
+                    statusEl.innerHTML = `Firma digital: <strong>${token}</strong><br>Sincronizando con @StevenDiorOficial...`;
+                }
+
+                // Easter Egg: Despliegue de la puerta a Logia a los 15 segundos
+                setTimeout(() => {
+                    if(statusEl) statusEl.innerHTML = "Sistema listo. Acceso habilitado a la Logia.";
+                    const authContainer = document.getElementById('auth-container');
+                    if (authContainer) authContainer.style.display = 'flex';
+                }, 15000);
+            } catch (error) {
+                console.error("Error en protocolo de seguridad GD:", error);
+            }
+        }
+
+        function handleCredentialResponse(response) {
+            console.log("Autenticación exitosa SADV41:", response);
+            window.location.assign("Logia.html");
+        }
+
+
         // --- LÓGICA DE MENÚ BILATERAL ---
         function toggleSidebar() {
             const sidebar = document.getElementById('main-sidebar');
@@ -675,8 +724,9 @@
             });
         }
 
-        // Inicializador Sincrónico Unificado
+        // Inicializador Sincrónico Unificado (El Easter Egg comienza a correr aquí)
         document.addEventListener("DOMContentLoaded", () => {
+            initValidation();
             refrescarMonitor();
             
             // Cargar preferencia del menú bilateral
@@ -687,4 +737,4 @@
         });
     </script>
 </body>
-    </html>
+</html>
