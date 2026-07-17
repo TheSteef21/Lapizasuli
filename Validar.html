@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>SADV41 | Protocolo de Validación</title>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body style="background:#050505; color:#d4af37; font-family: sans-serif; text-align: center; padding-top: 50px;">
+    <h1>Protocolo de Acceso SADV41</h1>
+    <div id="status">Obteniendo datos de seguridad...</div>
+    
+    <div id="g_id_onload" data-client_id="TU_CLIENT_ID.apps.googleusercontent.com" data-callback="handleCredentialResponse"></div>
+    <div class="g_id_signin" data-type="standard"></div>
+
+    <script>
+        async function generarClaveLocal(ip, userAgent) {
+            const epoch = Math.floor(Date.now() / 15000); 
+            const data = `${epoch}-${ip}-${userAgent}-${"SADV41-SECRET"}`;
+            const encoder = new TextEncoder();
+            const bytes = encoder.encode(data);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', bytes);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('').substring(0, 12).toUpperCase();
+        }
+
+        async function init() {
+            const ip = await fetch('https://api.ipify.org').then(res => res.text());
+            const userAgent = navigator.userAgent;
+            const token = await generarClaveLocal(ip, userAgent);
+            document.getElementById('status').innerHTML = `Tu firma digital actual es: <strong>${token}</strong><br>Valida este token con @StevenDiorOficial`;
+        }
+
+        function handleCredentialResponse(response) {
+            // Aquí integras la lógica post-Google Auth
+            console.log("Autenticación exitosa:", response);
+            window.location.href = "Logia.html";
+        }
+
+        init();
+    </script>
+</body>
+</html>
