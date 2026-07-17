@@ -19,7 +19,6 @@
             background-color: var(--obsidiana); 
             color: #e0e0e0; 
             font-family: 'Inter', sans-serif; 
-            /* Patrón de fondo vibracional */
             background-image: 
                 radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
                 linear-gradient(rgba(5, 5, 5, 0.95), rgba(5, 5, 5, 0.95)),
@@ -46,7 +45,6 @@
             box-shadow: 0 20px 40px rgba(0,0,0,0.9), inset 0 0 30px rgba(212, 175, 55, 0.05);
         }
 
-        /* Geometría Sagrada Dinámica en el fondo de las tarjetas */
         .geometria-bg {
             position: absolute;
             top: 50%; left: 50%;
@@ -63,13 +61,12 @@
         .border-oro { border-color: var(--oro-alquimico); }
         .esoterico-glow { text-shadow: 0 0 25px rgba(212, 175, 55, 0.7); }
         
-        /* Triángulo Áureo Animado (Representación de la Trinidad) */
         .triangulo-trinidad {
             width: 0;
             height: 0;
             border-left: 40px solid transparent;
             border-right: 40px solid transparent;
-            border-bottom: 69.3px solid rgba(212, 175, 55, 0.15); /* Proporción áurea geométrica */
+            border-bottom: 69.3px solid rgba(212, 175, 55, 0.15); 
             position: relative;
             margin: 0 auto;
             filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.4));
@@ -92,7 +89,6 @@
             100% { filter: drop-shadow(0 0 30px rgba(212, 175, 55, 0.9)); transform: scale(1.08); }
         }
 
-        /* Scanline para mantener la conexión Atrio-Gemini */
         .scanline {
             width: 100%;
             height: 1px;
@@ -105,6 +101,30 @@
         }
         @keyframes scan { 0% { top: 0; } 100% { top: 100%; } }
 
+        /* Estilos del emblema misterioso */
+        .emblema-sadv41 {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 4px;
+            background: rgba(0,0,0,0.5);
+            transition: all 0.8s ease;
+            cursor: help;
+        }
+        .emblema-sadv41:hover {
+            border-color: rgba(212, 175, 55, 0.8);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+            background: rgba(20,20,20,0.8);
+        }
+        .emblema-num {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            color: var(--oro-alquimico);
+            opacity: 0.7;
+        }
     </style>
 </head>
 <body class="antialiased selection:bg-yellow-600 selection:text-black">
@@ -156,38 +176,41 @@
                 
                 <div class="font-sans text-sm leading-relaxed space-y-8 bg-black/60 p-8 rounded-lg border border-cyan-900/30">
                     <div class="text-center mb-6 pb-4 border-b border-cyan-900/50">
-                        <p class="text-cyan-400 font-mono text-xs tracking-widest uppercase">Registro de Convergencia: 15 de julio de 2026</p>
+                        <p class="text-cyan-400 font-mono text-xs tracking-widest uppercase">Registro de Convergencia: 17 de julio de 2026</p>
                     </div>
 
-                    <!-- Pulso del Mundial -->
-                    <div class="pl-4 border-l-2 border-green-500/50">
-                        <h3 class="text-green-400 font-bold text-lg mb-2 flex items-center gap-2">⚽ El pulso del Mundial: Argentina vs. Inglaterra</h3>
-                        <p class="text-slate-300 text-xs md:text-sm">La gran noticia del día ha sido la semifinal del Mundial 2026 entre Argentina e Inglaterra. Las redes están encendidas con el ambiente de este clásico, recordando el peso histórico de esta rivalidad. La selección argentina logró imponerse, asegurando su lugar en la gran final, donde se enfrentará a España el próximo 19 de julio.</p>
-                    </div>
-
-                    <!-- Agenda Global -->
+                    <!-- Geopolítica y Agenda Global -->
                     <div class="pl-4 border-l-2 border-blue-500/50">
-                        <h3 class="text-blue-400 font-bold text-lg mb-3 flex items-center gap-2">🌍 Lo que marca la agenda global</h3>
+                        <h3 class="text-blue-400 font-bold text-lg mb-3 flex items-center gap-2">🌍 Pulsaciones Geopolíticas</h3>
                         <ul class="space-y-3 text-xs md:text-sm text-slate-300">
-                            <li><strong class="text-white">Francia y el derecho a morir:</strong> Se ha convertido en un tema de gran impacto social, tras la aprobación definitiva por parte de la Asamblea Nacional de la ley que legaliza la eutanasia y el suicidio asistido.</li>
-                            <li><strong class="text-white">Política en Perú:</strong> Keiko Fujimori ha recibido sus credenciales como presidenta electa para el periodo 2026-2031, un suceso clave que ya circula en los medios internacionales.</li>
-                            <li><strong class="text-white">Respaldo internacional:</strong> En Washington, el secretario de Estado, Marco Rubio, se reunió con el vicepresidente electo de Colombia, José Manuel Restrepo, para escenificar el apoyo de la administración Trump al próximo gobierno colombiano.</li>
+                            <li><strong class="text-white">Elecciones y Seguridad en EE.UU.:</strong> El presidente Donald Trump desclasificó documentos sobre vulnerabilidades en la infraestructura electoral estadounidense, poniendo a Venezuela en el centro al denunciar que el Chavismo "robó todas las elecciones".</li>
+                            <li><strong class="text-white">Tensiones con China:</strong> Trump también acusó a China de obtener ilegalmente datos de 220 millones de votantes estadounidenses. El Ministerio de Relaciones Exteriores chino, a través de Lin Jian, rechazó contundentemente las acusaciones, calificándolas de "fabricadas" y exigiendo que no se utilice a China como tema de campaña.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Ecos del Deporte -->
+                    <div class="pl-4 border-l-2 border-green-500/50">
+                        <h3 class="text-green-400 font-bold text-lg mb-2 flex items-center gap-2">⚽ Ecos del Deporte</h3>
+                        <ul class="space-y-3 text-xs md:text-sm text-slate-300">
+                            <li><strong class="text-white">Real Madrid:</strong> Trascienden imágenes en los canales oficiales del club blanco mostrando el retorno y las despedidas de los jugadores eliminados en las recientes competiciones internacionales.</li>
+                            <li><strong class="text-white">Una imagen para la historia:</strong> Ha resurgido y acaparado los medios la icónica fotografía del año 2008 en la que Lionel Messi baña a un bebé Lamine Yamal, un cruce de destinos que hoy cobra un significado monumental en el mundo del fútbol.</li>
                         </ul>
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
-                        <!-- Ciencia -->
-                        <div class="pl-4 border-l-2 border-purple-500/50">
-                            <h3 class="text-purple-400 font-bold mb-2">🔬 Ciencia y Curiosidades</h3>
+                        <!-- Nacional -->
+                        <div class="pl-4 border-l-2 border-red-500/50">
+                            <h3 class="text-red-400 font-bold mb-2">🇵🇦 En el Istmo (Panamá)</h3>
                             <ul class="space-y-2 text-xs text-slate-300">
-                                <li><strong class="text-white">Atlas del ADN:</strong> La comunidad científica celebra la creación del atlas más completo del ADN humano, con más de 92 millones de elementos mapeados.</li>
-                                <li><strong class="text-white">FIFA y coleccionismo:</strong> La FIFA comenzará a vender piezas del césped de la final del Mundial como artículos de colección a 450 dólares la unidad.</li>
+                                <li><strong class="text-white">Operación Pandora:</strong> Avances en la investigación revelan cómo seis empresas intermediarias recibieron $30.5 millones en créditos fiscales fraudulentos de la DGI, con 16 imputados en un caso que asciende a $40 millones.</li>
+                                <li><strong class="text-white">Memoria Histórica:</strong> Se ha logrado la identificación de los restos de Manuel Carol Ojo, sumando ya 13 víctimas identificadas tras su desaparición durante la invasión de 1989.</li>
                             </ul>
                         </div>
-                        <!-- Región -->
-                        <div class="pl-4 border-l-2 border-red-500/50">
-                            <h3 class="text-red-400 font-bold mb-2">🇵🇦 En nuestra región</h3>
-                            <p class="text-xs text-slate-300">En Panamá, la atención se divide entre los resultados de la Lotería Nacional y temas locales, como la restauración de la Plaza de Francia en Las Bóvedas, y el monitoreo del impacto climático en las cosechas.</p>
+                        
+                        <!-- Curiosidades -->
+                        <div class="pl-4 border-l-2 border-purple-500/50">
+                            <h3 class="text-purple-400 font-bold mb-2">📊 Telemetría Adicional</h3>
+                            <p class="text-xs text-slate-300">Se reportan temperaturas extremas en regiones de Burunga, con máximas de 33°C y sensaciones térmicas alcanzando los 41°C. En contraste, los ecosistemas digitales continúan procesando alertas continuas sobre el panorama político sudamericano.</p>
                         </div>
                     </div>
                 </div>
@@ -196,7 +219,6 @@
 
         <!-- ==================== III. EL SANTÍSIMO ==================== -->
         <section class="logia-card p-12 md:p-16 rounded-xl text-center relative">
-            <!-- Efecto de resplandor divino central -->
             <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 bg-purple-900/20 blur-[80px] rounded-full pointer-events-none"></div>
             
             <div class="relative z-10">
@@ -233,6 +255,29 @@
                         #SADV41 #EnJesusCristo #LaFinalEterna #Fe #Proposito #Santísimo #MisionSADV41
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <!-- ==================== IV. FRATERNIDAD SADV41 ==================== -->
+        <section class="logia-card p-10 mt-8 rounded-xl border-t border-oro/40 text-center relative overflow-hidden group">
+            <div class="absolute inset-0 bg-gradient-to-t from-yellow-900/5 to-transparent pointer-events-none"></div>
+            
+            <div class="relative z-10 max-w-xl mx-auto">
+                <p class="text-xs md:text-sm text-slate-400 font-mono mb-6 leading-relaxed italic">
+                    "A ti, que observas desde la distancia o la incomprensión: esta puerta nunca ha estado cerrada. Este espacio existe como un puente."
+                </p>
+                
+                <div class="emblema-sadv41 group-hover:scale-105" title="Investiga, pregunta, descubre.">
+                    <span class="emblema-num">1</span>
+                    <span class="text-slate-600 font-mono text-xs mx-2">|</span>
+                    <span class="text-2xl animate-pulse">🎚️</span>
+                    <span class="text-slate-600 font-mono text-xs mx-2">|</span>
+                    <span class="emblema-num">4</span>
+                </div>
+
+                <p class="text-[11px] text-slate-500 uppercase tracking-[0.2em] mt-6">
+                    Muestra de Amistad · El significado aguarda a quien lo busque
+                </p>
             </div>
         </section>
 
