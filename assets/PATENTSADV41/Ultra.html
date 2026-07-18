@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SADV41 | Ultra Instincto Logia</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root { --oro: #d4af37; --obsidiana: #050505; --neon: #00f3ff; }
+        body { background: var(--obsidiana); color: #fff; font-family: 'Inter', sans-serif; }
+        
+        /* Animación del Modo Turbología */
+        @keyframes pulso-divino {
+            0% { filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.2)) hue-rotate(0deg); transform: scale(1); }
+            100% { filter: drop-shadow(0 0 30px rgba(212, 175, 55, 0.9)) hue-rotate(90deg); transform: scale(1.02); }
+        }
+
+        .bloqueo-activo { filter: blur(8px) grayscale(50%); pointer-events: none; }
+    </style>
+</head>
+<body>
+
+    <div id="bloqueo-popup" class="fixed inset-0 bg-black/90 z-[9999] flex items-center justify-center">
+        <div class="bg-slate-900 border border-oro/50 p-8 rounded-2xl text-center max-w-sm">
+            <div id="emoji-status" class="text-6xl mb-4">🔒</div>
+            <h2 class="text-oro font-bold text-xl uppercase tracking-widest mb-4">Acceso Reservado</h2>
+            <p class="text-slate-300 text-sm mb-6">La arquitectura SADV41 está sintonizada en 432Hz. ¿Buscando crédito o buscando propósito?</p>
+            
+            <input type="password" id="clave-acceso" placeholder="Clave de propósito..." class="w-full bg-black/50 border border-slate-600 rounded-lg p-2 text-white text-center mb-4">
+            <button onclick="verificarClave()" class="w-full bg-oro text-black font-bold py-2 rounded-lg hover:bg-yellow-500">Desbloquear Propósito</button>
+        </div>
+    </div>
+
+    <div id="main-content" class="bloqueo-activo p-12 text-center">
+        <h1 class="text-5xl text-oro font-bold uppercase tracking-[0.3em]">Logia SADV41</h1>
+        <p class="mt-4 text-slate-400">El orden natural cósmico ha sido restaurado.</p>
+    </div>
+
+    <script>
+        let intentosFallidos = 0;
+
+        function verificarClave() {
+            const claveInput = document.getElementById("clave-acceso").value;
+            const feedback = document.querySelector(".text-slate-300");
+            
+            if (claveInput === "SADV41-2026") {
+                alert("Acceso autorizado. La Logia reconoce tu propósito.");
+                document.getElementById("main-content").classList.remove("bloqueo-activo");
+                document.getElementById("bloqueo-popup").classList.add("hidden");
+            } else {
+                intentosFallidos++;
+                if (intentosFallidos === 1) {
+                    feedback.innerText = "Error. El sistema está observando tus intenciones...";
+                } else if (intentosFallidos === 2) {
+                    feedback.innerText = "Error. Estás intentando forzar un sistema que ya sabe quién eres. Mejor habla con Steven.";
+                    feedback.classList.add("text-red-500");
+                } else if (intentosFallidos >= 3) {
+                    feedback.innerHTML = "Intento fallido. El sistema ha activado el <strong>Modo Turbología 432Hz</strong>. ¡La música empieza a sonar!";
+                    activarModoTurbologia();
+                }
+            }
+        }
+
+        function activarModoTurbologia() {
+            document.body.style.animation = "pulso-divino 0.5s infinite alternate";
+            document.getElementById("bloqueo-popup").style.background = "rgba(212, 175, 55, 0.3)";
+            document.getElementById("emoji-status").innerText = "🫪";
+            console.log("Modo Turbología: Iniciado. La realidad es maleable.");
+        }
+
+        function desbloquearInterfaz() {
+            document.getElementById("main-content").classList.remove("bloqueo-activo");
+        }
+
+        function cerrarPopup() {
+            document.getElementById("bloqueo-popup").classList.add("hidden");
+        }
+    </script>
+</body>
+</html>
+
