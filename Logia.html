@@ -228,7 +228,6 @@
 </head>
 <body class="font-sans antialiased selection:bg-oro selection:text-navy overflow-x-hidden">
 
-    <!-- ==================== POPUP DE BLOQUEO ULTRA INSTINCTO ==================== -->
     <div id="bloqueo-popup" class="fixed inset-0 bg-black/90 backdrop-blur-md z-[9999] flex items-center justify-center transition-opacity duration-500 hidden opacity-0">
         <div class="bg-slate-900 border border-oro/50 p-8 rounded-2xl text-center max-w-sm relative shadow-[0_0_30px_rgba(212,175,55,0.15)]">
             <div id="emoji-status" class="text-6xl mb-4 drop-shadow-[0_0_15px_rgba(212,175,55,0.5)]">🔒</div>
@@ -242,8 +241,6 @@
             </button>
         </div>
     </div>
-    <!-- ========================================================================== -->
-
     <div class="scanline"></div>
 
     <div id="main-sidebar" class="sidebar-tabs transition-all duration-500">
@@ -303,6 +300,18 @@
 
     <main id="main-content" class="pt-40 pb-12 px-4 md:px-12 max-w-6xl mx-auto space-y-16 transition-all duration-500">
 
+        <div class="relative w-full bg-black/60 border-y border-oro/30 py-6 mb-8 flex flex-col items-center justify-center overflow-hidden rounded-xl shadow-[0_0_20px_rgba(0,243,255,0.1)]">
+            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-900/20 to-transparent animate-pulse"></div>
+            <h2 class="text-neonBlue font-mason text-xl md:text-2xl tracking-[0.4em] uppercase esoterico-glow relative z-10 text-center flex items-center justify-center gap-3">
+                <span class="text-xl">🎚️</span> PaloVertical <span class="text-white text-sm mx-1">|</span> Isaías 43:19
+            </h2>
+            <p class="text-xs md:text-sm text-slate-200 font-serif italic mt-3 max-w-2xl text-center relative z-10 px-4 leading-relaxed">
+                "He aquí, yo hago cosa nueva; pronto saldrá a luz; ¿no la conoceréis? Otra vez abriré camino en el desierto, y ríos en la soledad."
+            </p>
+            <div class="text-[10px] text-oro font-mono tracking-widest mt-4 relative z-10 border border-oro/40 px-4 py-1 rounded-full bg-black/50 shadow-inner">
+                LÍNEAS: 1018 ➞ ORIGEN: 10 ➞ [ 1 + 0 + 1 + 8 ]
+            </div>
+        </div>
         <header class="p-12 border border-oro/20 text-center relative overflow-hidden rounded-2xl logia-card">
             <div class="absolute inset-0 bg-gradient-to-b from-yellow-900/10 to-transparent pointer-events-none"></div>
             <div class="triangulo-trinidad mb-8"></div>
@@ -785,7 +794,7 @@
                 const data = await response.json();
 
                 if (data.status === "success") {
-                    alert("Acceso autorizado. La Logia reconoce tu propósito.");
+                    alert("Acceso autorizado. La Logia reconoce tu propósito.\n\n" + data.verse);
                     desbloquearInterfaz();
                 } else {
                     gestionarFallo(feedback);
@@ -797,7 +806,7 @@
                 
                 // --- FALLBACK LOCAL TEMPORAL PARA QUE PUEDAS ENTRAR MIENTRAS MONTAS RENDER ---
                 if (claveInput === "SADV41-2026") {
-                    alert("Acceso autorizado (Modo Local). La Logia reconoce tu propósito.");
+                    alert("Acceso autorizado (Modo Local). La Logia reconoce tu propósito.\n\nIsaías 43:19");
                     desbloquearInterfaz();
                 } else {
                     gestionarFallo(feedback);
