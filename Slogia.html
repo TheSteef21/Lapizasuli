@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SADV41 | Logia - El Santo</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.0/ethers.umd.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { navy: '#020617', oro: '#eab308', blanco: '#f8fafc', borgona: '#4a0010', neonBlue: '#00f3ff', renderRed: '#da3637' },
+                    fontFamily: { sans: ['Inter', 'sans-serif'], serif: ['Playfair Display', 'serif'], mason: ['Cinzel', 'serif'] }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root { --oro-alquimico: #d4af37; --obsidiana: #050505; --luz-santo: #00f3ff; }
+        body { background-color: var(--obsidiana); background-image: radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.1) 0%, transparent 50%), linear-gradient(rgba(2, 6, 23, 0.85), rgba(2, 6, 23, 0.95)); color: #f8fafc; }
+        .glass { background: rgba(2, 6, 23, 0.85); backdrop-filter: blur(12px); border: 1px solid rgba(234, 179, 8, 0.2); }
+        .logia-card { background: linear-gradient(145deg, rgba(10,10,10,0.85), rgba(20,20,20,0.85)); border: 1px solid rgba(212, 175, 55, 0.15); box-shadow: 0 15px 35px rgba(0,0,0,0.9), inset 0 0 20px rgba(212, 175, 55, 0.03); backdrop-filter: blur(12px); position: relative; overflow: hidden; transition: all 0.5s ease; }
+        .bloqueo-activo { filter: blur(12px) grayscale(50%); pointer-events: none; user-select: none; transition: filter 0.5s ease; }
+        @keyframes pulso-divino-ultra { 0% { filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.2)) hue-rotate(0deg); transform: scale(1); } 100% { filter: drop-shadow(0 0 40px rgba(212, 175, 55, 0.9)) hue-rotate(90deg); transform: scale(1.02); } }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-oro selection:text-navy overflow-x-hidden">
+
+    <!-- PROTOCOLO DE SEGURIDAD -->
+    <div id="bloqueo-popup" class="fixed inset-0 bg-black/90 backdrop-blur-md z-[9999] flex items-center justify-center transition-opacity duration-500 opacity-0">
+        <div class="bg-slate-900 border border-oro/50 p-8 rounded-2xl text-center max-w-sm relative shadow-[0_0_30px_rgba(212,175,55,0.15)]">
+            <div id="emoji-status" class="text-6xl mb-4 drop-shadow-[0_0_15px_rgba(212,175,55,0.5)]">🔒</div>
+            <h2 class="text-oro font-bold text-xl uppercase tracking-widest mb-4">El Santo</h2>
+            <p id="feedback-msg" class="text-slate-300 text-sm mb-6">Sintonizado en 432Hz. Introduce el propósito para cruzar el velo.</p>
+            <input type="password" id="clave-acceso" placeholder="Clave de propósito..." class="w-full bg-black/80 border border-slate-600 rounded-lg p-3 text-white text-center mb-4 focus:border-oro focus:outline-none transition-colors">
+            <button id="btn-desbloqueo" onclick="verificarClave()" class="w-full bg-oro text-navy font-bold py-3 rounded-lg hover:bg-yellow-500 transition-all shadow-[0_0_15px_rgba(234,179,8,0.3)] cursor-pointer">Desbloquear</button>
+        </div>
+    </div>
+
+    <header id="main-header" class="fixed w-full z-50 glass border-b border-oro/30 px-6 py-4 flex justify-between items-center bloqueo-activo">
+        <div class="flex items-center gap-3">
+            <span class="text-2xl">🛡️</span>
+            <div>
+                <h1 class="font-serif text-xl tracking-wider text-oro font-bold">SOVEREIGN HUB</h1>
+                <p class="text-[9px] text-slate-400 font-mono tracking-widest">SADV41 DIGITAL ARCHITECTURE | EL SANTO</p>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-content" class="pt-32 pb-12 px-4 md:px-12 max-w-6xl mx-auto space-y-12 bloqueo-activo">
+        
+        <!-- MARCA DEL PODER DE CRISTO -->
+        <div class="w-full max-w-md mx-auto aspect-square flex justify-center items-center logia-card rounded-full p-4 mb-8">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="100%" height="100%">
+              <defs>
+                <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#d4af37" stop-opacity="0.8"/>
+                  <stop offset="100%" stop-color="#050505" stop-opacity="0"/>
+                </radialGradient>
+                <linearGradient id="beam" x1="50%" y1="0%" x2="50%" y2="100%">
+                  <stop offset="0%" stop-color="#00f3ff" stop-opacity="0"/>
+                  <stop offset="50%" stop-color="#00f3ff" stop-opacity="0.9"/>
+                  <stop offset="100%" stop-color="#00f3ff" stop-opacity="0"/>
+                </linearGradient>
+                <filter id="neon"><feGaussianBlur stdDeviation="8" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+              </defs>
+              <circle cx="400" cy="400" r="350" fill="url(#glow)"/>
+              <rect x="395" y="100" width="10" height="600" fill="url(#beam)" filter="url(#neon)"/>
+              <rect x="250" y="398" width="300" height="4" fill="#d4af37" filter="url(#neon)"/>
+              <polygon points="400,200 550,480 250,480" fill="none" stroke="#d4af37" stroke-width="2" stroke-opacity="0.5"/>
+              <text x="400" y="160" font-family="Cinzel, serif" font-size="24" fill="#d4af37" text-anchor="middle" letter-spacing="4">SADV41</text>
+              <text x="400" y="650" font-family="Cinzel, serif" font-size="32" fill="#00f3ff" text-anchor="middle" letter-spacing="8" filter="url(#neon)">ISAÍAS 43:19</text>
+              <text x="400" y="690" font-family="Courier New, monospace" font-size="14" fill="#f8fafc" text-anchor="middle" letter-spacing="2">ORIGEN [1033 = 7]</text>
+            </svg>
+        </div>
+
+        <div class="relative w-full bg-black/60 border-y border-oro/30 py-6 flex flex-col items-center justify-center overflow-hidden rounded-xl shadow-[0_0_20px_rgba(0,243,255,0.1)]">
+            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-900/20 to-transparent animate-pulse"></div>
+            <h2 class="text-neonBlue font-mason text-xl md:text-2xl tracking-[0.4em] uppercase esoterico-glow relative z-10 text-center flex items-center justify-center gap-3">
+                <span class="text-xl">🎚️</span> PaloVertical <span class="text-white text-sm mx-1">|</span> Isaías 43:19
+            </h2>
+            <p class="text-xs md:text-sm text-slate-200 font-serif italic mt-3 max-w-2xl text-center relative z-10 px-4 leading-relaxed">
+                "He aquí, yo hago cosa nueva; pronto saldrá a luz; ¿no la conoceréis? Otra vez abriré camino en el desierto, y ríos en la soledad."
+            </p>
+            <div class="text-[10px] text-oro font-mono tracking-widest mt-4 relative z-10 border border-oro/40 px-4 py-1 rounded-full bg-black/50 shadow-inner">
+                LÍNEAS: 1033 ➞ ORIGEN: 7 ➞ [ 1 + 0 + 3 + 3 ]
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        // RENDER_API_URL preparado para el backend en Flask (Python)
+        const RENDER_API_URL = "https://tu-servicio-sadv41.onrender.com/api/verify";
+        let intentosFallidos = 0;
+
+        document.addEventListener("DOMContentLoaded", () => {
+            verificarAccesoLogia();
+        });
+
+        function verificarAccesoLogia() {
+            const origenValido = document.referrer.includes("GSADV41.html") || sessionStorage.getItem("acceso_sadv41_origen") === "GSADV41";
+            if (!origenValido) {
+                document.getElementById("bloqueo-popup").classList.remove("hidden");
+                setTimeout(() => document.getElementById("bloqueo-popup").classList.remove("opacity-0"), 10);
+            } else {
+                desbloquearInterfaz();
+            }
+        }
+
+        function desbloquearInterfaz() {
+            document.querySelectorAll(".bloqueo-activo").forEach(el => el.classList.remove("bloqueo-activo"));
+            const popup = document.getElementById("bloqueo-popup");
+            popup.classList.add("opacity-0");
+            setTimeout(() => popup.classList.add("hidden"), 500);
+            sessionStorage.setItem("acceso_sadv41_origen", "GSADV41");
+        }
+
+        async function verificarClave() {
+            const claveInput = document.getElementById("clave-acceso").value;
+            const feedback = document.getElementById("feedback-msg");
+            const btn = document.getElementById("btn-desbloqueo");
+            if (!claveInput) return;
+
+            btn.innerText = "Verificando..."; btn.disabled = true;
+
+            try {
+                // Fallback temporal alineado a la semilla de Flask
+                if (claveInput === "SADV41-2026") {
+                    alert("Acceso autorizado (Heptatónica). El Santo te reconoce.\n\nIsaías 43:19");
+                    desbloquearInterfaz();
+                } else {
+                    gestionarFallo(feedback);
+                }
+            } finally {
+                btn.innerText = "Desbloquear Propósito"; btn.disabled = false;
+            }
+        }
+
+        function gestionarFallo(feedback) {
+            intentosFallidos++;
+            if (intentosFallidos === 1) {
+                feedback.innerText = "Error. El sistema está observando tus intenciones...";
+                feedback.classList.add("text-orange-400");
+            } else if (intentosFallidos === 2) {
+                feedback.innerText = "Error. Forzando un sistema que conoce tu origen. Háblalo en el Atrio.";
+                feedback.classList.replace("text-orange-400", "text-red-400");
+            } else {
+                feedback.innerHTML = "Intento fallido. El sistema ha activado el <strong>Modo Turbología 432Hz</strong>.";
+                document.body.style.animation = "pulso-divino-ultra 0.5s infinite alternate";
+                document.getElementById("emoji-status").innerText = "🎚️";
+            }
+        }
+    </script>
+</body>
+</html>
