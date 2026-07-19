@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>SADV41 | Reloj de Ciclos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .reloj-gradiente { background: radial-gradient(circle, rgba(212,175,55,0.1) 0%, #000 80%); }
+    </style>
+</head>
+<body class="bg-black text-white font-sans reloj-gradiente min-h-screen flex flex-col items-center justify-center">
+
+    <div class="border border-oro/30 p-12 rounded-full w-80 h-80 flex flex-col items-center justify-center shadow-[0_0_50px_rgba(212,175,55,0.1)]">
+        <h1 class="text-oro font-serif text-sm uppercase tracking-[0.5em] mb-4">Ciclo Génesis</h1>
+        <div id="reloj" class="text-5xl font-mono text-white mb-2">00:00</div>
+        <div id="suma-numerica" class="text-cyan-400 font-mono text-xs tracking-widest">ORIGEN: 0</div>
+    </div>
+
+    <div class="mt-12 text-center max-w-md px-6">
+        <p class="text-slate-400 text-xs italic font-serif">
+            "De 00:00 a 11:59: La arquitectura del tiempo bajo la ley SADV41."
+        </p>
+    </div>
+
+    <script>
+        function actualizarReloj() {
+            const ahora = new Date();
+            const horas = ahora.getHours();
+            const minutos = ahora.getMinutes();
+            
+            // Lógica SADV41: Ajustar al ciclo 0:00 - 11:59
+            const h = horas % 12;
+            const m = minutos;
+            
+            const display = `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}`;
+            document.getElementById('reloj').innerText = display;
+            
+            // Cálculo de suma numérica
+            const suma = h + m;
+            let sumaString = suma.toString();
+            
+            // Si es 11:59, suma = 11+59 = 70 -> 7
+            let valorFinal = suma;
+            if(h === 11 && m === 59) {
+                valorFinal = 7;
+            }
+
+            document.getElementById('suma-numerica').innerText = `VIBRACIÓN: ${valorFinal}`;
+        }
+
+        setInterval(actualizarReloj, 1000);
+        actualizarReloj();
+    </script>
+</body>
+</html>
