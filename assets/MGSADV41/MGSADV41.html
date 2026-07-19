@@ -1,0 +1,48 @@
+<!-- MÓDULO: CONTADOR DE MISIÓN SADV41 -->
+<div class="logia-card p-6 mt-8 rounded-xl border border-oro/30">
+    <h2 class="text-xl font-mason text-oro mb-4 text-center tracking-widest">PROGRESIÓN DE MISIÓN</h2>
+    
+    <div class="grid grid-cols-2 gap-4 text-center mb-6">
+        <div class="bg-black/50 p-4 rounded-lg border border-slate-700">
+            <span class="block text-[10px] text-slate-500 uppercase">Inicio (4)</span>
+            <span class="text-2xl font-bold text-white">922</span>
+        </div>
+        <div class="bg-black/50 p-4 rounded-lg border border-slate-700">
+            <span class="block text-[10px] text-slate-500 uppercase">Destino (5)</span>
+            <span class="text-2xl font-bold text-cyan-400">977</span>
+        </div>
+    </div>
+
+    <!-- Barra de progreso -->
+    <div class="relative w-full h-4 bg-slate-900 rounded-full overflow-hidden border border-slate-700">
+        <div id="progreso-mision" class="absolute h-full bg-gradient-to-r from-oro to-cyan-500 transition-all duration-1000" style="width: 0%;"></div>
+    </div>
+    
+    <p id="texto-estado" class="text-[10px] text-center mt-3 font-mono text-slate-400">
+        Calculando avance hacia la gracia de Cristo...
+    </p>
+</div>
+
+<script>
+    function actualizarContador() {
+        const inicio = 922;
+        const destino = 977;
+        const actual = 948; // Puedes conectar esto a tu base de datos si deseas dinamismo
+        
+        const porcentaje = ((actual - inicio) / (destino - inicio)) * 100;
+        const barra = document.getElementById('progreso-mision');
+        const texto = document.getElementById('texto-estado');
+        
+        barra.style.width = `${Math.min(porcentaje, 100)}%`;
+        
+        if (actual < destino) {
+            texto.innerText = `Misión en curso: ${actual} (Avanzando hacia la revelación 977)`;
+        } else {
+            texto.innerText = "Misión cumplida: La gracia de Cristo se ha manifestado.";
+            texto.classList.add("text-oro");
+        }
+    }
+
+    // Ejecutar al cargar
+    document.addEventListener("DOMContentLoaded", actualizarContador);
+</script>
