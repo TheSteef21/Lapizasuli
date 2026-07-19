@@ -56,6 +56,7 @@
             background-position: center;
             background-attachment: fixed;
             color: #f8fafc;
+            position: relative;
         }
         
         .glass { background: rgba(2, 6, 23, 0.85); backdrop-filter: blur(12px); border: 1px solid rgba(234, 179, 8, 0.2); }
@@ -90,6 +91,10 @@
         .vertical-tab span.text { margin-left: 15px; font-weight: bold; opacity: 0; transition: opacity 0.3s; font-size: 0.85rem; letter-spacing: 0.05em; }
         .vertical-tab:hover span.text { opacity: 1; transition-delay: 0.1s; }
         
+        /* Pestaña SLogia */
+        .tab-slogia { border-left: 4px solid #00f3ff; border-top: 1px solid rgba(0,243,255,0.3); border-right: 1px solid rgba(0,243,255,0.3); border-bottom: 1px solid rgba(0,243,255,0.3); }
+        .tab-slogia:hover { background: rgba(0, 243, 255, 0.2); }
+
         .tab-ima { border-left: 4px solid #3b82f6; border-top: 1px solid rgba(59,130,246,0.3); border-right: 1px solid rgba(59,130,246,0.3); border-bottom: 1px solid rgba(59,130,246,0.3); }
         .tab-ima:hover { background: rgba(30, 58, 138, 0.4); }
         .tab-col { border-left: 4px solid #10b981; border-top: 1px solid rgba(16,185,129,0.3); border-right: 1px solid rgba(16,185,129,0.3); border-bottom: 1px solid rgba(16,185,129,0.3); }
@@ -110,6 +115,7 @@
         .sidebar-tabs.right-aligned .vertical-tab:hover { padding-right: 20px; padding-left: 15px; }
         .sidebar-tabs.right-aligned .vertical-tab span.text { margin-left: 0; margin-right: 15px; text-align: right; }
         
+        .sidebar-tabs.right-aligned .tab-slogia { border-left: 1px solid rgba(0,243,255,0.3); border-right: 4px solid #00f3ff; }
         .sidebar-tabs.right-aligned .tab-ima { border-left: 1px solid rgba(59,130,246,0.3); border-right: 4px solid #3b82f6; }
         .sidebar-tabs.right-aligned .tab-col { border-left: 1px solid rgba(16,185,129,0.3); border-right: 4px solid #10b981; }
         .sidebar-tabs.right-aligned .tab-ven { border-left: 1px solid rgba(250,204,21,0.3); border-right: 4px solid #facc15; }
@@ -211,13 +217,62 @@
             color: var(--oro-alquimico);
             opacity: 0.7;
         }
+        
+        /* Contenedor del fondo SVG */
+        .marca-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0.15; /* Intensidad de la marca de agua */
+            pointer-events: none;
+        }
     </style>
 </head>
 <body class="font-sans antialiased selection:bg-oro selection:text-navy overflow-x-hidden">
 
+    <!-- FONDO DE MARCA VECTORIAL -->
+    <div class="marca-background">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="100%" height="100%">
+          <defs>
+            <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#d4af37" stop-opacity="0.8"/>
+              <stop offset="100%" stop-color="#050505" stop-opacity="0"/>
+            </radialGradient>
+            <linearGradient id="beam" x1="50%" y1="0%" x2="50%" y2="100%">
+              <stop offset="0%" stop-color="#00f3ff" stop-opacity="0"/>
+              <stop offset="50%" stop-color="#00f3ff" stop-opacity="0.9"/>
+              <stop offset="100%" stop-color="#00f3ff" stop-opacity="0"/>
+            </linearGradient>
+            <filter id="neon">
+              <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+              <feMerge>
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+          </defs>
+          <circle cx="400" cy="400" r="350" fill="url(#glow)"/>
+          <rect x="395" y="100" width="10" height="600" fill="url(#beam)" filter="url(#neon)"/>
+          <rect x="250" y="398" width="300" height="4" fill="#d4af37" filter="url(#neon)"/>
+          <polygon points="400,200 550,480 250,480" fill="none" stroke="#d4af37" stroke-width="2" stroke-opacity="0.5"/>
+          <text x="400" y="160" font-family="Cinzel, serif" font-size="24" fill="#d4af37" text-anchor="middle" letter-spacing="4">SADV41</text>
+          <text x="400" y="650" font-family="Cinzel, serif" font-size="32" fill="#00f3ff" text-anchor="middle" letter-spacing="8" filter="url(#neon)">ISAÍAS 43:19</text>
+          <text x="400" y="690" font-family="Courier New, monospace" font-size="14" fill="#f8fafc" text-anchor="middle" letter-spacing="2">ORIGEN [1027 = 10 = 1]</text>
+        </svg>
+    </div>
+
     <div class="scanline"></div>
 
     <div id="main-sidebar" class="sidebar-tabs">
+        <a href="https://thesteef21.github.io/Lapizasuli/SLogia.html?fbclid=PAT01DUATJEadleHRuA2FlbQIxMABzcnRjBmFwcF9pZA81NjcwNjczNDMzNTI0MjcAAaeznj0QVmI_GCPkfaP9U6FWWw-Mi3eNWkh-LDByAoaPNrDIgbONSu2tpSHLVw_aem_QZi9cK5dbQo42xldpuW0qw" target="_blank" class="vertical-tab tab-slogia">
+            <span class="icon">🎚️</span><span class="text text-cyan-300">SLogia | Conexión SADV41</span>
+        </a>
         <a href="https://thesteef21.github.io/Lapizasuli/IMA.html" target="_blank" class="vertical-tab tab-ima">
             <span class="icon">🍚</span><span class="text text-blue-200">Arroz barato cerca de ti! 🇵🇦</span>
         </a>
