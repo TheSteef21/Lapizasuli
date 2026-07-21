@@ -8,7 +8,7 @@ import os
 import json
 from datetime import datetime
 
-app = FastAPI(title="SADV41 Expedientes Engine", version="2.2.0")
+app = FastAPI(title="SADV41 Expedientes Engine", version="2.3.0")
 
 app.add_middleware(
     CORSMiddleware,
@@ -25,6 +25,9 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 app.mount("/expedientes_assets", StaticFiles(directory=BASE_DIR), name="expedientes_assets")
 
 MASTER_FEED_FILE = os.path.join(BASE_DIR, "master_feed.json")
+
+# Clave secreta obtenida desde las variables de entorno de Render (`CLAVE_SECRETA_LOGIA`)
+CLAVE_LOGIA_SERVER = os.getenv("CLAVE_SECRETA_LOGIA", "SADV41-DEFAULT-KEY")
 
 def load_db() -> List[dict]:
     if os.path.exists(MASTER_FEED_FILE):
@@ -81,3 +84,22 @@ def get_feed(target: Optional[str] = None):
         filtered = [item for item in db if item["target"] == target or item["target"] == "Ambos"]
         return filtered
     return db
+
+@app.post("/api/delete-source")
+async def delete_source(record_id: str = Form(...), key: str = Form(...)):
+    if key != CLAVE_LOGIA_SERVER:
+        raise HTTPException(status_code=403, detail="Clave incorrecta. Acceso denegado por la Logia.")
+    
+    db = load_db()
+    updated = False
+    for item in db:
+        if item["id"] == record_id:
+            item["source_url"] = None
+            updated = True
+            break
+            
+    if updated:
+        save_db(db)
+        return {"status": "success", "message": "Fuente eliminada correctamente del registro"}
+    
+    raise HTTPException(status_code=404, detail="Registro no encontrado")
