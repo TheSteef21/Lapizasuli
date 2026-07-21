@@ -1,1 +1,263 @@
+html_content = """<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FIFA 2026 - Campeón España | Ventas Oficiales SADV41</title>
+    <style>
+        :root {
+            --primary-color: #aa151b; /* Rojo España */
+            --secondary-color: #f1bf00; /* Amarillo España */
+            --dark-bg: #0b0f19;
+            --card-bg: #131b2e;
+            --text-color: #f8fafc;
+            --accent-glow: rgba(241, 191, 0, 0.3);
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-color);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1a0505 0%, #0b0f19 100%);
+            border-bottom: 3px solid var(--secondary-color);
+            padding: 2rem 1rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .badge-sadv41 {
+            display: inline-block;
+            background: var(--secondary-color);
+            color: #000;
+            font-weight: 800;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+            box-shadow: 0 0 15px var(--accent-glow);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(90deg, #ffffff, var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        p.subtitle {
+            font-size: 1.1rem;
+            color: #94a3b8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .hero-banner {
+            background: linear-gradient(rgba(170, 21, 27, 0.85), rgba(11, 15, 25, 0.9)), url('Assets/Screenshot_20260720_131908_FIFA World Cup.jpg');
+            background-size: cover;
+            background-position: center;
+            border-radius: 16px;
+            padding: 4rem 2rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            border: 1px solid rgba(241, 191, 0, 0.3);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+
+        .hero-banner h2 {
+            font-size: 3rem;
+            color: #fff;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+        }
+
+        .hero-banner p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            color: #f1f5f9;
+        }
+
+        .btn-official {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: #0b0f19;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 1rem 2.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(241, 191, 0, 0.4);
+        }
+
+        .btn-official:hover {
+            transform: translateY(-3px);
+            background-color: #fff;
+            box-shadow: 0 6px 25px rgba(241, 191, 0, 0.6);
+        }
+
+        .grid-assets {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.08);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--secondary-color);
+        }
+
+        .card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card-content h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .card-content p {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .clock-section {
+            background: linear-gradient(180deg, var(--dark-bg) 0%, #161f33 100%);
+            border-top: 2px solid var(--secondary-color);
+            padding: 3rem 1rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .clock-section h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--secondary-color);
+            letter-spacing: 1px;
+        }
+
+        .iframe-container {
+            max-width: 800px;
+            margin: 0 auto;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            background: #000;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        iframe {
+            width: 100%;
+            height: 220px;
+            border: none;
+            display: block;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #64748b;
+            font-size: 0.85rem;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="badge-sadv41">SADV41 🎚️ Misión Oficial</div>
+        <h1>España Campeón FIFA 2026</h1>
+        <p class="subtitle">Colección Exclusiva e Impresiones de Edición Limitada</p>
+    </header>
+
+    <div class="container">
+        <section class="hero-banner">
+            <h2>La Gloria Eterna</h2>
+            <p>Consigue la indumentaria oficial de los ganadores del Mundial FIFA 2026. Calidad garantizada para impresión y coleccionistas.</p>
+            <a href="https://store.fifa.com/es/collections/nations-spain?utm_source=email&utm_medium=email&utm_campaign=WK30_WC26WinnersRangeSolus_210726%3F&cid=%28p_email%29%28c_store%29%28sc_fwc26-store-merch%29%28ssc_fwc-2026%29%28l_es%29%28da_210726%29%28id_fifa-store-solus-merch-&-winner-range-es-210726-email-final%29%28cc_fifa-store%29=&ua_linkname=Header+Block+%7C+Button+1+%7C+FIFA+Store+%7C+FWC26+%7C+Merch+%26+Winner+Range" target="_blank" class="btn-official">Tienda Oficial FIFA</a>
+        </section>
+
+        <div class="grid-assets">
+            <div class="card">
+                <img src="Assets/IMG-20260721-WA0023.jpg" alt="Asset España 1">
+                <div class="card-content">
+                    <h3>Edición Campeones 2026</h3>
+                    <p>Diseño exclusivo para impresiones de alta resolución y estampa conmemorativa de España.</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="Assets/IMG-20260721-WA0024.jpg" alt="Asset España 2">
+                <div class="card-content">
+                    <h3>Colección Winner Range</h3>
+                    <p>Activos gráficos oficiales listos para producción y soporte de indumentaria de campeones.</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="Assets/unnamed.jpg" alt="Asset España 3">
+                <div class="card-content">
+                    <h3>Sello de Triunfo Impress</h3>
+                    <p>Detalle dinámico de la selección española en la cumbre del fútbol mundial.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="clock-section">
+        <h3>SADV41 TIME SYNC</h3>
+        <div class="iframe-container">
+            <iframe src="https://thesteef21.github.io/Lapizasuli/SADV41Time.html" title="SADV41 Time"></iframe>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 SADV41 Mission &mdash; Todos los derechos reservados para la gloria del Campeón.</p>
+    </footer>
+
+</body>
+</html>
+"""
+
+with open("index.html", "w", encoding="utf-8") as f:
+    f.write(html_content)
+
+print("HTML file created successfully.")
+
 
