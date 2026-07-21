@@ -16,6 +16,7 @@
             --border: #334155;
             --whatsapp: #25d366;
             --crop-btn: #f59e0b;
+            --delete-btn: #ef4444;
             --oro-alquimico: #d4af37;
         }
         body {
@@ -108,6 +109,11 @@
             color: var(--accent);
             word-break: break-all;
             margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 5px;
         }
         .media-preview {
             max-width: 100%;
@@ -117,13 +123,14 @@
             display: block;
         }
         
-        /* Contenedor de Botones de Acción (WhatsApp Pluscuamperfecto y Recorte) */
+        /* Contenedor de Botones de Acción Unificados */
         .action-buttons {
             display: flex;
             gap: 10px;
             margin-top: 1rem;
             border-top: 1px solid rgba(255,255,255,0.1);
             padding-top: 0.75rem;
+            flex-wrap: wrap;
         }
         .btn-whatsapp-plus {
             background: linear-gradient(135deg, #25d366, #128c7e);
@@ -169,6 +176,18 @@
             box-shadow: 0 6px 16px rgba(245, 158, 11, 0.4);
             opacity: 1;
         }
+        .btn-delete-source {
+            background-color: var(--delete-btn);
+            color: #fff;
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+        .btn-delete-source:hover { opacity: 0.8; }
     </style>
 </head>
 <body>
@@ -176,7 +195,7 @@
     <div class="container">
         <header>
             <h1>SADV41 & Logia Engine</h1>
-            <p>Panel de acumulación, expedientes diarios y herramientas de recorte</p>
+            <p>Panel de acumulación, expedientes diarios y herramientas de seguridad</p>
         </header>
 
         <!-- Caja de Notas / Entrada de Datos -->
@@ -262,7 +281,7 @@
                 items.forEach((item, index) => {
                     const card = document.createElement('div');
                     card.className = 'feed-item';
-                    card.id = `feed-card-${index}`; // ID único para el recorte limpio
+                    card.id = `feed-card-${index}`;
 
                     let mediaHtml = '';
                     if (item.media_path) {
@@ -278,9 +297,13 @@
                         }
                     }
 
-                    let sourceHtml = item.source_url ? `<div class="feed-source">Fuente: <a href="${item.source_url}" target="_blank" style="color: var(--accent);">${item.source_url}</a></div>` : '';
+                    // Renderizado condicional de la fuente con botón de borrado protegido por clave
+                    let sourceHtml = item.source_url ? `
+                        <div class="feed-source">
+                            <span>Fuente: <a href="${item.source_url}" target="_blank" style="color: var(--accent);">${item.source_url}</a></span>
+                            <button onclick="borrarFuente('${item.id}')" class="btn-delete-source" title="Eliminar fuente con clave de Logia">🗑️ Borrar Fuente</button>
+                        </div>` : '';
 
-                    // Mensaje estructurado de alta precisión apuntando al número oficial 50769362166 (StevenDiorOficial)
                     const textoMensaje = `🛡️ *SADV41 EXPEDIENTE OFICIAL* 🛡️\n\n📌 *Destino:* ${item.target}\n📅 *Fecha:* ${item.timestamp}\n\n${item.content}\n\n🔗 *Fuente:* ${item.source_url || 'N/A'}\n\n✨ _Enviado desde la Central de Expedientes LoDeHoy_`;
                     const mensajeWa = encodeURIComponent(textoMensaje);
                     const linkWhatsappPlus = `https://wa.me/50769362166?text=${mensajeWa}`;
@@ -294,7 +317,6 @@
                         <div class="feed-content">${item.content.replace(/\n/g, '<br>')}</div>
                         ${mediaHtml}
                         
-                        <!-- Botones de Acción: WhatsApp Pluscuamperfecto y Recorte -->
                         <div class="action-buttons">
                             <a href="${linkWhatsappPlus}" target="_blank" class="btn-whatsapp-plus">
                                 💬 Enviar a WhatsApp
@@ -311,17 +333,45 @@
             }
         }
 
+        // --- Función Segura para Borrar Fuente validando con el Servidor ---
+        async function borrarFuente(recordId) {
+            const claveIngresada = prompt("⚠️ Acción protegida por la Logia.\nIngresa la clave secreta para autorizar la eliminación de la fuente:");
+            
+            if (claveIngresada === null) return;
+
+            try {
+                const formData = new FormData();
+                formData.append("record_id", recordId);
+                formData.append("key", claveIngresada);
+
+                const response = await fetch(`${API_URL}/api/delete-source`, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    alert("✨ " + result.message);
+                    loadFeed();
+                } else {
+                    alert("❌ " + (result.detail || "Error de validación."));
+                }
+            } catch (error) {
+                console.error("Error de red:", error);
+                alert("No se pudo conectar con el servidor de seguridad.");
+            }
+        }
+
         // --- Función de Recorte Limpio con html2canvas ---
         function recortarNoticia(cardId) {
             const cardElement = document.getElementById(cardId);
-            // Ocultar temporalmente los botones de acción para que el recorte salga limpio (sin los botones)
             const actionButtons = cardElement.querySelector('.action-buttons');
             actionButtons.style.display = 'none';
 
             html2canvas(cardElement, { backgroundColor: '#1e293b', scale: 2 }).then(canvas => {
-                actionButtons.style.display = 'flex'; // Restaurar botones
+                actionButtons.style.display = 'flex';
                 
-                // Generar enlace de descarga automática de la imagen recortada
                 const link = document.createElement('a');
                 link.download = `SADV41-Expediente-${Date.now()}.png`;
                 link.href = canvas.toDataURL('image/png');
@@ -333,7 +383,6 @@
             });
         }
 
-        // Cargar feed inicial al abrir la página
         loadFeed();
     </script>
 </body>
