@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SADV41 & Logia - Central de Expedientes</title>
+    <!-- Importación de html2canvas para la herramienta de recorte limpia -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
         :root {
             --bg-color: #0b0f19;
@@ -12,6 +14,9 @@
             --text: #f8fafc;
             --muted: #94a3b8;
             --border: #334155;
+            --whatsapp: #25d366;
+            --crop-btn: #f59e0b;
+            --oro-alquimico: #d4af37;
         }
         body {
             font-family: system-ui, -apple-system, sans-serif;
@@ -80,7 +85,8 @@
             border-left: 4px solid var(--accent);
             border-radius: 8px;
             padding: 1.25rem;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            position: relative;
         }
         .feed-header {
             display: flex;
@@ -110,6 +116,59 @@
             margin-top: 0.5rem;
             display: block;
         }
+        
+        /* Contenedor de Botones de Acción (WhatsApp Pluscuamperfecto y Recorte) */
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 1rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 0.75rem;
+        }
+        .btn-whatsapp-plus {
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            color: #fff;
+            padding: 0.6rem 1rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            flex: 1;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        .btn-whatsapp-plus:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(37, 211, 102, 0.5);
+            opacity: 1;
+        }
+        .btn-crop {
+            background-color: var(--crop-btn);
+            color: #0f172a;
+            padding: 0.6rem 1rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            flex: 1;
+            justify-content: center;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.2);
+            transition: all 0.3s ease;
+        }
+        .btn-crop:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(245, 158, 11, 0.4);
+            opacity: 1;
+        }
     </style>
 </head>
 <body>
@@ -117,7 +176,7 @@
     <div class="container">
         <header>
             <h1>SADV41 & Logia Engine</h1>
-            <p>Panel de acumulación y expedientes diarios</p>
+            <p>Panel de acumulación, expedientes diarios y herramientas de recorte</p>
         </header>
 
         <!-- Caja de Notas / Entrada de Datos -->
@@ -161,7 +220,6 @@
     </div>
 
     <script>
-        // Apunta directamente a tu backend desplegado en Render
         const API_URL = 'https://lodehoy.onrender.com';
 
         document.getElementById('noteForm').addEventListener('submit', async (e) => {
@@ -201,9 +259,10 @@
                     return;
                 }
 
-                items.forEach(item => {
+                items.forEach((item, index) => {
                     const card = document.createElement('div');
                     card.className = 'feed-item';
+                    card.id = `feed-card-${index}`; // ID único para el recorte limpio
 
                     let mediaHtml = '';
                     if (item.media_path) {
@@ -221,6 +280,11 @@
 
                     let sourceHtml = item.source_url ? `<div class="feed-source">Fuente: <a href="${item.source_url}" target="_blank" style="color: var(--accent);">${item.source_url}</a></div>` : '';
 
+                    // Mensaje estructurado de alta precisión apuntando al número oficial 50769362166 (StevenDiorOficial)
+                    const textoMensaje = `🛡️ *SADV41 EXPEDIENTE OFICIAL* 🛡️\n\n📌 *Destino:* ${item.target}\n📅 *Fecha:* ${item.timestamp}\n\n${item.content}\n\n🔗 *Fuente:* ${item.source_url || 'N/A'}\n\n✨ _Enviado desde la Central de Expedientes LoDeHoy_`;
+                    const mensajeWa = encodeURIComponent(textoMensaje);
+                    const linkWhatsappPlus = `https://wa.me/50769362166?text=${mensajeWa}`;
+
                     card.innerHTML = `
                         <div class="feed-header">
                             <span>Carpeta: ${item.date_folder} | ${item.timestamp}</span>
@@ -229,12 +293,44 @@
                         ${sourceHtml}
                         <div class="feed-content">${item.content.replace(/\n/g, '<br>')}</div>
                         ${mediaHtml}
+                        
+                        <!-- Botones de Acción: WhatsApp Pluscuamperfecto y Recorte -->
+                        <div class="action-buttons">
+                            <a href="${linkWhatsappPlus}" target="_blank" class="btn-whatsapp-plus">
+                                💬 Enviar a WhatsApp
+                            </a>
+                            <button onclick="recortarNoticia('feed-card-${index}')" class="btn-crop">
+                                ✂️ Recortar Tarjeta
+                            </button>
+                        </div>
                     `;
                     container.appendChild(card);
                 });
             } catch (error) {
                 console.error('Error al cargar el feed:', error);
             }
+        }
+
+        // --- Función de Recorte Limpio con html2canvas ---
+        function recortarNoticia(cardId) {
+            const cardElement = document.getElementById(cardId);
+            // Ocultar temporalmente los botones de acción para que el recorte salga limpio (sin los botones)
+            const actionButtons = cardElement.querySelector('.action-buttons');
+            actionButtons.style.display = 'none';
+
+            html2canvas(cardElement, { backgroundColor: '#1e293b', scale: 2 }).then(canvas => {
+                actionButtons.style.display = 'flex'; // Restaurar botones
+                
+                // Generar enlace de descarga automática de la imagen recortada
+                const link = document.createElement('a');
+                link.download = `SADV41-Expediente-${Date.now()}.png`;
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            }).catch(err => {
+                actionButtons.style.display = 'flex';
+                console.error('Error al recortar:', err);
+                alert('No se pudo generar el recorte automático.');
+            });
         }
 
         // Cargar feed inicial al abrir la página
