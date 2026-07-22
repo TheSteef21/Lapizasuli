@@ -1,0 +1,1372 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GSADV41 | Sovereign Hub & Logia Pluscuamperfecta</title>
+    
+    <!-- Fuentes y Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    
+    <!-- Herramientas y Web3 -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@web3auth/modal@8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.0/ethers.umd.min.js"></script>
+    
+    <!-- Importación de html2canvas para la herramienta de recorte de expedientes -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#020617',
+                        oro: '#eab308',
+                        blanco: '#f8fafc',
+                        borgona: '#4a0010',
+                        neonGreen: '#10b981',
+                        neonBlue: '#00f3ff',
+                        renderRed: '#da3637',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                        mason: ['Cinzel', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root { 
+            --oro-alquimico: #d4af37; 
+            --obsidiana: #050505; 
+            --luz-divina: #7f5af0;
+            --luz-santo: #00f3ff;
+            --borgona-sacro: #4a0010;
+        }
+
+        /* --- ESTILOS BASE Y BACKGROUNDS --- */
+        body {
+            background-color: var(--obsidiana);
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+                linear-gradient(rgba(2, 6, 23, 0.85), rgba(2, 6, 23, 0.95)), 
+                url('https://y2s.onrender.com/api/graphics/mundial_bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #f8fafc;
+        }
+        
+        .glass { background: rgba(2, 6, 23, 0.85); backdrop-filter: blur(12px); border: 1px solid rgba(234, 179, 8, 0.2); }
+        .glass-mundial { background: rgba(2, 6, 23, 0.60); backdrop-filter: blur(8px); border: 1px solid rgba(16, 185, 129, 0.3); }
+        .glass-sismico { background: #161b22; border: 1px solid #30363d; }
+        
+        .text-shadow-oro { text-shadow: 0 0 10px rgba(234, 179, 8, 0.5); }
+        .text-shadow-green { text-shadow: 0 0 10px rgba(16, 185, 129, 0.6); }
+        .text-shadow-blue { text-shadow: 0 0 10px rgba(0, 243, 255, 0.6); }
+        .esoterico-glow { text-shadow: 0 0 25px rgba(212, 175, 55, 0.7); }
+        .sismo-card { background-color: #1f242c; border-left: 5px solid #ff6b81; }
+
+        /* --- EFECTO SCANLINE --- */
+        .scanline {
+            width: 100%; height: 2px;
+            background: rgba(0, 209, 255, 0.15);
+            position: fixed; z-index: 50; top: 0;
+            pointer-events: none;
+            animation: scanline 8s linear infinite;
+        }
+        @keyframes scanline { 0% { top: 0; } 100% { top: 100%; } }
+        
+        /* --- ESTILOS DE MÓDULOS --- */
+        .module-card { background: rgba(10, 15, 25, 0.8); border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); padding: 1.5rem; border-radius: 1rem; }
+        .input-dark { background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(0, 209, 255, 0.3); color: white; padding: 0.75rem; border-radius: 0.5rem; width: 100%; }
+
+        /* --- PESTAÑAS VERTICALES BILATERALES --- */
+        .sidebar-tabs { position: fixed; left: 0; top: 50%; transform: translateY(-50%); z-index: 45; display: flex; flex-direction: column; gap: 12px; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+        .vertical-tab { display: flex; align-items: center; background: rgba(2, 6, 23, 0.95); padding: 12px 15px; border-radius: 0 15px 15px 0; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); width: 60px; overflow: hidden; white-space: nowrap; box-shadow: 4px 4px 15px rgba(0,0,0,0.5); cursor: pointer; }
+        .vertical-tab:hover { width: 340px; padding-left: 20px; }
+        .vertical-tab span.icon { font-size: 1.5rem; min-width: 30px; display: flex; justify-content: center; }
+        .vertical-tab span.text { margin-left: 15px; font-weight: bold; opacity: 0; transition: opacity 0.3s; font-size: 0.85rem; letter-spacing: 0.05em; }
+        .vertical-tab:hover span.text { opacity: 1; transition-delay: 0.1s; }
+        
+        @keyframes pulse-neon {
+            0% { box-shadow: 0 0 10px rgba(0, 243, 255, 0.6), inset 0 0 10px rgba(0, 243, 255, 0.4); border-color: rgba(0, 243, 255, 0.6); }
+            50% { box-shadow: 0 0 25px rgba(0, 243, 255, 1), inset 0 0 20px rgba(0, 243, 255, 0.8); border-color: #fff; }
+            100% { box-shadow: 0 0 10px rgba(0, 243, 255, 0.6), inset 0 0 10px rgba(0, 243, 255, 0.4); border-color: rgba(0, 243, 255, 0.6); }
+        }
+        .tab-lodehoy { border-left: 4px solid #00f3ff; background: rgba(0, 243, 255, 0.1); animation: pulse-neon 2s infinite; }
+        .tab-lodehoy:hover { background: rgba(0, 243, 255, 0.3); width: 360px; }
+        .tab-ima { border-left: 4px solid #3b82f6; border-top: 1px solid rgba(59,130,246,0.3); border-right: 1px solid rgba(59,130,246,0.3); border-bottom: 1px solid rgba(59,130,246,0.3); }
+        .tab-ima:hover { background: rgba(30, 58, 138, 0.4); }
+        .tab-col { border-left: 4px solid #10b981; border-top: 1px solid rgba(16,185,129,0.3); border-right: 1px solid rgba(16,185,129,0.3); border-bottom: 1px solid rgba(16,185,129,0.3); }
+        .tab-col:hover { background: rgba(6, 78, 59, 0.4); }
+        .tab-ven { border-left: 4px solid #facc15; border-top: 1px solid rgba(250,204,21,0.3); border-right: 1px solid rgba(250,204,21,0.3); border-bottom: 1px solid rgba(250,204,21,0.3); }
+        .tab-ven:hover { background: rgba(161, 98, 7, 0.4); }
+        .tab-cristo { border-left: 4px solid #c084fc; border-top: 1px solid rgba(192,132,252,0.3); border-right: 1px solid rgba(192,132,252,0.3); border-bottom: 1px solid rgba(192,132,252,0.3); }
+        .tab-cristo:hover { background: rgba(107, 33, 168, 0.4); }
+        .tab-fifa { border-left: 4px solid #22c55e; border-top: 1px solid rgba(34,197,94,0.3); border-right: 1px solid rgba(34,197,94,0.3); border-bottom: 1px solid rgba(34,197,94,0.3); }
+        .tab-fifa:hover { background: rgba(21, 128, 61, 0.4); }
+        .tab-brave { border-left: 4px solid #f97316; border-top: 1px solid rgba(249,115,22,0.3); border-right: 1px solid rgba(249,115,22,0.3); border-bottom: 1px solid rgba(249,115,22,0.3); }
+        .tab-brave:hover { background: rgba(124, 45, 18, 0.4); }
+        .tab-toggle { border-left: 4px solid #94a3b8; border-top: 1px solid rgba(148,163,184,0.3); border-right: 1px solid rgba(148,163,184,0.3); border-bottom: 1px solid rgba(148,163,184,0.3); }
+        .tab-toggle:hover { background: rgba(71, 85, 105, 0.4); }
+
+        .sidebar-tabs.right-aligned { left: auto; right: 0; }
+        .sidebar-tabs.right-aligned .vertical-tab { border-radius: 15px 0 0 15px; flex-direction: row-reverse; padding: 12px 15px; box-shadow: -4px 4px 15px rgba(0,0,0,0.5); }
+        .sidebar-tabs.right-aligned .vertical-tab:hover { padding-right: 20px; padding-left: 15px; }
+        .sidebar-tabs.right-aligned .vertical-tab span.text { margin-left: 0; margin-right: 15px; text-align: right; }
+        
+        .sidebar-tabs.right-aligned .tab-lodehoy { border-left: 1px solid rgba(0,243,255,0.3); border-right: 4px solid #00f3ff; }
+        .sidebar-tabs.right-aligned .tab-ima { border-left: 1px solid rgba(59,130,246,0.3); border-right: 4px solid #3b82f6; }
+        .sidebar-tabs.right-aligned .tab-col { border-left: 1px solid rgba(16,185,129,0.3); border-right: 4px solid #10b981; }
+        .sidebar-tabs.right-aligned .tab-ven { border-left: 1px solid rgba(250,204,21,0.3); border-right: 4px solid #facc15; }
+        .sidebar-tabs.right-aligned .tab-cristo { border-left: 1px solid rgba(192,132,252,0.3); border-right: 4px solid #c084fc; }
+        .sidebar-tabs.right-aligned .tab-fifa { border-left: 1px solid rgba(34,197,94,0.3); border-right: 4px solid #22c55e; }
+        .sidebar-tabs.right-aligned .tab-brave { border-left: 1px solid rgba(249,115,22,0.3); border-right: 4px solid #f97316; }
+        .sidebar-tabs.right-aligned .tab-toggle { border-left: 1px solid rgba(148,163,184,0.3); border-right: 4px solid #94a3b8; }
+        
+        @media (max-width: 768px) {
+            .sidebar-tabs { top: 85%; transform: translateY(0); gap: 8px; }
+            .vertical-tab { width: 50px; padding: 10px; border-radius: 0 10px 10px 0; }
+            .sidebar-tabs.right-aligned .vertical-tab { border-radius: 10px 0 0 10px; }
+            .vertical-tab span.icon { font-size: 1.2rem; }
+            .vertical-tab:hover, .sidebar-tabs.right-aligned .vertical-tab:hover { width: 280px; }
+            .vertical-tab span.text { font-size: 0.65rem; }
+        }
+
+        .news-accordion-btn { transition: background-color 0.3s ease; }
+        .news-accordion-btn:hover { background-color: rgba(255,255,255,0.05); }
+        .news-accordion-content { transition: max-height 0.4s ease-in-out, opacity 0.3s ease-in-out; opacity: 0; }
+        .news-accordion-content.expanded { opacity: 1; }
+
+        /* --- ESTILOS ESOTÉRICOS LOGIA SADV41 --- */
+        .logia-card { 
+            background: linear-gradient(145deg, rgba(10,10,10,0.85), rgba(20,20,20,0.85));
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.9), inset 0 0 20px rgba(212, 175, 55, 0.03);
+            backdrop-filter: blur(12px);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s ease;
+        }
+
+        .logia-card:hover {
+            border-color: rgba(212, 175, 55, 0.4);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.9), inset 0 0 30px rgba(212, 175, 55, 0.05);
+        }
+
+        .geometria-bg {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%; height: 100%;
+            background: 
+                linear-gradient(30deg, transparent 49.5%, rgba(212, 175, 55, 0.03) 50%, transparent 50.5%),
+                linear-gradient(-30deg, transparent 49.5%, rgba(212, 175, 55, 0.03) 50%, transparent 50.5%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .triangulo-trinidad {
+            width: 0;
+            height: 0;
+            border-left: 40px solid transparent;
+            border-right: 40px solid transparent;
+            border-bottom: 69.3px solid rgba(212, 175, 55, 0.15); 
+            position: relative;
+            margin: 0 auto;
+            filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.4));
+            animation: pulso-divino-trinidad 4s infinite alternate ease-in-out;
+        }
+
+        .triangulo-trinidad::after {
+            content: '1';
+            position: absolute;
+            top: 35px;
+            left: -5px;
+            color: var(--oro-alquimico);
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.8);
+        }
+
+        @keyframes pulso-divino-trinidad {
+            0% { filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.2)); transform: scale(1); }
+            100% { filter: drop-shadow(0 0 30px rgba(212, 175, 55, 0.9)); transform: scale(1.08); }
+        }
+
+        .emblema-sadv41 {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 4px;
+            background: rgba(0,0,0,0.5);
+            transition: all 0.8s ease;
+            cursor: help;
+        }
+        .emblema-sadv41:hover {
+            border-color: rgba(212, 175, 55, 0.8);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+            background: rgba(20,20,20,0.8);
+        }
+        .emblema-num {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            color: var(--oro-alquimico);
+            opacity: 0.7;
+        }
+
+        /* --- CLASES DE BLOQUEO ULTRA INSTINCTO --- */
+        .bloqueo-activo {
+            filter: blur(12px) grayscale(50%);
+            pointer-events: none;
+            user-select: none;
+            transition: filter 0.5s ease;
+        }
+        
+        @keyframes pulso-divino-ultra {
+            0% { filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.2)) hue-rotate(0deg); transform: scale(1); }
+            100% { filter: drop-shadow(0 0 40px rgba(212, 175, 55, 0.9)) hue-rotate(90deg); transform: scale(1.02); }
+        }
+
+        /* --- LODEHOY SLIDESHOW & FEED --- */
+        .slideshow-viewport { position: relative; width: 100%; height: 500px; background-color: #000; display: flex; align-items: center; justify-content: center; overflow: hidden; border-radius: 12px; }
+        .slide-item { position: absolute; width: 100%; height: 100%; opacity: 0; transition: opacity 0.6s ease-in-out; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; }
+        .slide-item.active { opacity: 1; }
+        .slide-item img, .slide-item video { max-width: 100%; max-height: 80%; object-fit: contain; }
+        .slide-audio-container, .slide-doc-container { display: flex; flex-direction: column; align-items: center; gap: 15px; color: var(--blanco); text-align: center; }
+        .slide-doc-container a { background-color: var(--luz-santo); color: var(--obsidiana); padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: 500; transition: background-color 0.2s; }
+        .slide-caption { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(0,0,0,0.85), transparent); padding: 25px 24px 15px; color: #fff; font-size: 0.95rem; z-index: 10; text-align: center; }
+        .nav-btn { background-color: #334155; color: var(--blanco); border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: 500; transition: background-color 0.2s; }
+        .nav-btn:hover { background-color: var(--luz-santo); color: var(--obsidiana); }
+        .indicators { display: flex; gap: 6px; }
+        .indicator { width: 8px; height: 8px; border-radius: 50%; background-color: #475569; cursor: pointer; transition: background-color 0.2s; }
+        .indicator.active { background-color: var(--luz-santo); width: 24px; border-radius: 4px; }
+
+        .form-input { width: 100%; background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(0, 243, 255, 0.3); color: var(--blanco); padding: 0.75rem; border-radius: 6px; margin-bottom: 1rem; font-family: inherit; box-sizing: border-box; transition: border-color 0.3s; }
+        .form-input:focus { border-color: #00f3ff; outline: none; }
+        .btn-submit { background: linear-gradient(90deg, #00f3ff, #0284c7); color: #000; font-weight: bold; border: none; padding: 0.75rem 1.5rem; border-radius: 6px; cursor: pointer; transition: opacity 0.2s; width: 100%; text-transform: uppercase; letter-spacing: 1px; }
+        .btn-submit:hover { opacity: 0.9; }
+
+        .feed-item { background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(8px); border-left: 4px solid #00f3ff; border-top: 1px solid rgba(255,255,255,0.05); border-right: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05); border-radius: 8px; padding: 1.25rem; margin-bottom: 1.5rem; position: relative; box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
+        .feed-header { display: flex; justify-content: space-between; font-size: 0.8rem; color: #94a3b8; margin-bottom: 0.5rem; }
+        .feed-badge { background: rgba(0, 243, 255, 0.15); color: #00f3ff; padding: 0.2rem 0.5rem; border-radius: 4px; font-weight: bold; }
+        .feed-content { font-size: 1rem; line-height: 1.5; margin-bottom: 0.75rem; color: #e2e8f0; }
+        .feed-source { font-size: 0.85rem; color: #00f3ff; word-break: break-all; margin-bottom: 0.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 5px; border-bottom: 1px solid rgba(0,243,255,0.2); padding-bottom: 5px; }
+        .media-preview { max-width: 100%; max-height: 300px; border-radius: 6px; margin-top: 0.5rem; display: block; border: 1px solid rgba(255,255,255,0.1); }
+        
+        .action-buttons { display: flex; gap: 10px; margin-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 0.75rem; flex-wrap: wrap; }
+        .btn-whatsapp-plus { background: linear-gradient(135deg, #25d366, #128c7e); color: #fff; padding: 0.6rem 1rem; border-radius: 8px; font-size: 0.85rem; text-decoration: none; font-weight: bold; display: inline-flex; align-items: center; gap: 8px; flex: 1; justify-content: center; box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3); border: 1px solid rgba(255, 255, 255, 0.2); transition: all 0.3s ease; }
+        .btn-whatsapp-plus:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(37, 211, 102, 0.5); opacity: 1; }
+        .btn-crop { background-color: #f59e0b; color: #0f172a; padding: 0.6rem 1rem; border-radius: 8px; font-size: 0.85rem; font-weight: bold; display: inline-flex; align-items: center; gap: 6px; flex: 1; justify-content: center; border: none; cursor: pointer; box-shadow: 0 4px 12px rgba(245, 158, 11, 0.2); transition: all 0.3s ease; }
+        .btn-crop:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(245, 158, 11, 0.4); opacity: 1; }
+        .btn-delete-source { background-color: #ef4444; color: #fff; padding: 0.3rem 0.6rem; border-radius: 4px; font-size: 0.75rem; font-weight: bold; border: none; cursor: pointer; transition: opacity 0.2s; }
+        .btn-delete-source:hover { opacity: 0.8; }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-oro selection:text-navy overflow-x-hidden">
+
+    <div id="bloqueo-popup" class="fixed inset-0 bg-black/90 backdrop-blur-md z-[9999] flex items-center justify-center transition-opacity duration-500 hidden opacity-0">
+        <div class="bg-slate-900 border border-oro/50 p-8 rounded-2xl text-center max-w-sm relative shadow-[0_0_30px_rgba(212,175,55,0.15)]">
+            <div id="emoji-status" class="text-6xl mb-4 drop-shadow-[0_0_15px_rgba(212,175,55,0.5)]">🔒</div>
+            <h2 class="text-oro font-bold text-xl uppercase tracking-widest mb-4">Acceso Reservado</h2>
+            <p id="feedback-msg" class="text-slate-300 text-sm mb-6">La arquitectura SADV41 está sintonizada en 432Hz. ¿Buscando crédito o buscando propósito?</p>
+            
+            <input type="password" id="clave-acceso" placeholder="Clave de propósito..." class="w-full bg-black/80 border border-slate-600 rounded-lg p-3 text-white text-center mb-4 focus:border-oro focus:outline-none transition-colors">
+            
+            <button id="btn-desbloqueo" onclick="verificarClave()" class="w-full bg-oro text-navy font-bold py-3 rounded-lg hover:bg-yellow-500 transition-all shadow-[0_0_15px_rgba(234,179,8,0.3)] cursor-pointer">
+                Desbloquear Propósito
+            </button>
+        </div>
+    </div>
+    
+    <div class="scanline"></div>
+
+    <div id="main-sidebar" class="sidebar-tabs transition-all duration-500">
+        <a href="#central-lodehoy" class="vertical-tab tab-lodehoy">
+            <span class="icon text-shadow-blue">📰</span><span class="text text-[#00f3ff] text-shadow-blue">LO DE HOY / EXPEDIENTES</span>
+        </a>
+        <a href="https://thesteef21.github.io/Lapizasuli/IMA.html" target="_blank" class="vertical-tab tab-ima">
+            <span class="icon">🍚</span><span class="text text-blue-200">Arroz barato cerca de ti! 🇵🇦</span>
+        </a>
+        <a href="https://thesteef21.github.io/Lapizasuli/ColombiaPTY.html" target="_blank" class="vertical-tab tab-col">
+            <span class="icon">💸</span><span class="text text-emerald-300">Préstamos 🇵🇦🇨🇴🇺🇸💯⚡️✨️</span>
+        </a>
+        <a href="https://thesteef21.github.io/Lapizasuli/VSADV41.html" target="_blank" class="vertical-tab tab-ven">
+            <span class="icon">🇻🇪</span><span class="text text-yellow-300">Por Venezuela 🇻🇪</span>
+        </a>
+        <a href="https://thesteef21.github.io/Lapizasuli/CristoTeAma.html" target="_blank" class="vertical-tab tab-cristo">
+            <span class="icon">☦️</span><span class="text text-purple-300">Cristo Te Ama 🎚</span>
+        </a>
+        <a href="https://thesteef21.github.io/Lapizasuli/FIFA2026.html" target="_blank" class="vertical-tab tab-fifa">
+            <span class="icon">⚽</span><span class="text text-green-300">Las final se aproximan! ⚽️🇵🇦🇺🇸🇮🇱⚡️✨️💯</span>
+        </a>
+        <a href="https://brave.com/evi088" target="_blank" class="vertical-tab tab-brave">
+            <span class="icon">🦁</span><span class="text text-orange-400">Navegador seguro = Brave</span>
+        </a>
+        <div onclick="toggleSidebar()" class="vertical-tab tab-toggle" title="Cambiar lado del menú">
+            <span class="icon">⇋</span><span class="text text-slate-300">Alternar Menú</span>
+        </div>
+    </div>
+
+    <header id="main-header" class="fixed w-full z-50 glass border-b border-oro/30 px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-4 transition-all duration-500">
+        <div class="flex items-center gap-3">
+            <span class="text-2xl">🛡️</span>
+            <div>
+                <h1 class="font-serif text-xl tracking-wider text-oro font-bold">SOVEREIGN HUB</h1>
+                <p class="text-[9px] text-slate-400 font-mono tracking-widest">SADV41 DIGITAL ARCHITECTURE</p>
+            </div>
+        </div>
+        
+        <div class="flex flex-col items-center gap-2">
+            <nav class="flex gap-6 text-sm uppercase tracking-wider font-medium flex-wrap justify-center">
+                <a href="#central-lodehoy" class="hover:text-neonBlue transition-colors text-[#00f3ff] font-bold text-shadow-blue">📰 Central de Expedientes</a>
+                <a href="https://thesteef21.github.io/Lapizasuli/FIFA2026.html" target="_blank" class="hover:text-emerald-400 transition-colors text-emerald-300 font-bold flex items-center gap-1">⚽ Mundial 2026 ↗</a>
+                <a href="#monitor-sismico-seccion" class="hover:text-red-400 transition-colors text-red-300 font-bold">⚠️ Telemetría SADV41T</a>
+                <a href="#noticias-seccion" class="hover:text-cyan-300 transition-colors text-slate-300">Boletín Logia</a>
+                <a href="#mayordomia-seccion" class="hover:text-oro transition-colors text-amber-200">Mayordomía</a>
+            </nav>
+        </div>
+
+        <div class="flex flex-col items-center justify-center gap-2">
+            <div id="status" class="text-[10px] text-oro font-mono text-center tracking-widest uppercase">Protocolo de validación iniciado...</div>
+            <div class="flex flex-wrap gap-2 justify-center">
+                <button onclick="loginSocial('github')" class="bg-slate-800 hover:bg-slate-700 text-white font-semibold text-xs px-3 py-2 rounded transition-all flex items-center gap-1.5 border border-slate-700 cursor-pointer">
+                    💻 GitHub Access
+                </button>
+                <button id="btnConnect" onclick="connectBinance()" class="bg-oro hover:bg-amber-600 text-navy font-bold text-xs px-3 py-2 rounded transition-all flex items-center gap-1.5 shadow-lg shadow-oro/20 cursor-pointer">
+                    ⚡ Binance Web3
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-content" class="pt-40 pb-12 px-4 md:px-12 max-w-6xl mx-auto space-y-16 transition-all duration-500">
+
+        <div class="relative w-full bg-black/60 border-y border-oro/30 py-6 mb-8 flex flex-col items-center justify-center overflow-hidden rounded-xl shadow-[0_0_20px_rgba(0,243,255,0.1)]">
+            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-900/20 to-transparent animate-pulse"></div>
+            <h2 class="text-neonBlue font-mason text-xl md:text-2xl tracking-[0.4em] uppercase esoterico-glow relative z-10 text-center flex items-center justify-center gap-3">
+                <span class="text-xl">🎚️</span> PaloVertical <span class="text-white text-sm mx-1">|</span> Isaías 43:19
+            </h2>
+            <p class="text-xs md:text-sm text-slate-200 font-serif italic mt-3 max-w-2xl text-center relative z-10 px-4 leading-relaxed">
+                "He aquí, yo hago cosa nueva; pronto saldrá a luz; ¿no la conoceréis? Otra vez abriré camino en el desierto, y ríos en la soledad."
+            </p>
+            <div class="text-[10px] text-oro font-mono tracking-widest mt-4 relative z-10 border border-oro/40 px-4 py-1 rounded-full bg-black/50 shadow-inner">
+                LÍNEAS: 1018 ➞ ORIGEN: 10 ➞ [ 1 + 0 + 1 + 8 ]
+            </div>
+        </div>
+
+        <!-- HEADER LOGIA SVG -->
+        <header class="p-12 border border-oro/20 text-center relative overflow-hidden rounded-2xl logia-card">
+            <div class="absolute inset-0 bg-gradient-to-b from-yellow-900/10 to-transparent pointer-events-none"></div>
+            
+            <div class="w-64 h-64 md:w-80 md:h-80 mx-auto relative z-10 -mt-6 -mb-6">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="100%" height="100%">
+                  <defs>
+                    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+                      <stop offset="0%" stop-color="#d4af37" stop-opacity="0.8"/>
+                      <stop offset="100%" stop-color="#050505" stop-opacity="0"/>
+                    </radialGradient>
+                    <linearGradient id="beam" x1="50%" y1="0%" x2="50%" y2="100%">
+                      <stop offset="0%" stop-color="#00f3ff" stop-opacity="0"/>
+                      <stop offset="50%" stop-color="#00f3ff" stop-opacity="0.9"/>
+                      <stop offset="100%" stop-color="#00f3ff" stop-opacity="0"/>
+                    </linearGradient>
+                    <filter id="neon">
+                      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+                      <feMerge>
+                        <feMergeNode in="coloredBlur"/>
+                        <feMergeNode in="SourceGraphic"/>
+                      </feMerge>
+                    </filter>
+                  </defs>
+                  <circle cx="400" cy="400" r="350" fill="url(#glow)"/>
+                  <rect x="395" y="100" width="10" height="600" fill="url(#beam)" filter="url(#neon)"/>
+                  <rect x="250" y="398" width="300" height="4" fill="#d4af37" filter="url(#neon)"/>
+                  <polygon points="400,200 550,480 250,480" fill="none" stroke="#d4af37" stroke-width="2" stroke-opacity="0.5"/>
+                  <text x="400" y="160" font-family="Cinzel, serif" font-size="24" fill="#d4af37" text-anchor="middle" letter-spacing="4">SADV41</text>
+                  <text x="400" y="650" font-family="Cinzel, serif" font-size="32" fill="#00f3ff" text-anchor="middle" letter-spacing="8" filter="url(#neon)">ISAÍAS 43:19</text>
+                  <text x="400" y="690" font-family="Courier New, monospace" font-size="14" fill="#f8fafc" text-anchor="middle" letter-spacing="2">ORIGEN [1027 = 10 = 1]</text>
+                </svg>
+            </div>
+
+            <h1 class="text-4xl md:text-5xl font-mason text-oro esoterico-glow uppercase tracking-[0.25em] relative z-10 mt-6">Logia SADV41</h1>
+            <p class="text-xs md:text-sm uppercase tracking-[0.6em] text-slate-400 mt-4 border-t border-oro/30 inline-block pt-3 relative z-10">Arquitectura Pluscuamperfecta de la Verdad</p>
+        </header>
+
+        <!-- ========================================== -->
+        <!-- NUEVA SECCIÓN UNIFICADA LODEHOY / EXPEDIENTES -->
+        <!-- ========================================== -->
+        <section id="central-lodehoy" class="logia-card p-6 md:p-10 rounded-xl border-2 relative" style="border-color: #00f3ff; box-shadow: 0 0 40px rgba(0, 243, 255, 0.2);">
+            <div class="absolute inset-0 bg-gradient-to-b from-[#00f3ff]/5 to-transparent pointer-events-none"></div>
+            
+            <div class="relative z-10">
+                <div class="flex justify-between items-center mb-8 border-b border-[#00f3ff]/30 pb-4">
+                    <h2 class="text-2xl md:text-3xl text-[#00f3ff] text-shadow-blue tracking-widest flex items-center gap-3 font-mason uppercase">
+                        <span class="text-3xl animate-pulse">📰</span> Central de Expedientes & LoDeHoy
+                    </h2>
+                    <span class="bg-[#00f3ff] text-black px-4 py-1 rounded-full text-xs font-bold uppercase tracking-wide shadow-[0_0_15px_rgba(0,243,255,0.8)] hidden md:block">
+                        SADV41 Live Engine
+                    </span>
+                </div>
+
+                <!-- 1. SLIDESHOW GITHUB (LO DE HOY) -->
+                <div class="mb-10">
+                    <h3 class="text-white text-lg font-bold mb-4 flex items-center gap-2"><span class="text-[#00f3ff]">📺</span> Visualizador de Assets (GitHub)</h3>
+                    <div class="slideshow-viewport border border-slate-700 shadow-[0_0_20px_rgba(0,0,0,0.8)]" id="viewport">
+                        <div class="slide-item active">
+                            <div class="slide-caption font-mono text-sm">Consultando la carpeta assets/NOTICIAS en GitHub...</div>
+                        </div>
+                    </div>
+                    <div class="slideshow-controls flex justify-between items-center mt-3 bg-black/80 p-3 rounded-xl border border-slate-800 shadow-inner">
+                        <button class="nav-btn text-xs" id="prevBtn">← Anterior</button>
+                        <div class="indicators" id="indicatorsContainer"></div>
+                        <button class="nav-btn text-xs" id="nextBtn">Siguiente →</button>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <!-- 2. FORMULARIO DE EXPEDIENTES (IZQUIERDA) -->
+                    <div class="lg:col-span-1">
+                        <div class="bg-black/50 border border-slate-700 rounded-xl p-6 shadow-xl sticky top-24">
+                            <h3 class="text-[#00f3ff] font-mason text-lg mb-4 border-b border-slate-700 pb-2">✍️ Ingrese Nuevo Asset</h3>
+                            <form id="noteForm">
+                                <textarea name="content" class="form-input" placeholder="Escribe información, pega texto o detalla los elementos del expediente..." required style="min-height: 120px;"></textarea>
+                                
+                                <input type="url" name="source_url" class="form-input" placeholder="URL de la Fuente (Opcional)">
+                                
+                                <select name="target" class="form-input">
+                                    <option value="GSADV41">Destino: GSADV41</option>
+                                    <option value="Logia">Destino: Logia</option>
+                                    <option value="Ambos">Destino: Ambos</option>
+                                </select>
+
+                                <div class="mb-4 bg-slate-900/80 p-3 rounded border border-slate-700">
+                                    <label class="text-xs text-slate-400 block mb-2 uppercase tracking-wide">Adjuntar Archivo (Img, Audio, Vid, Doc)</label>
+                                    <input type="file" name="file" class="w-full text-xs text-slate-300 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-[#00f3ff] file:text-black hover:file:bg-cyan-400 cursor-pointer">
+                                </div>
+
+                                <button type="submit" class="btn-submit">Registrar Expediente</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- 3. FEED DE EXPEDIENTES EN VIVO (DERECHA) -->
+                    <div class="lg:col-span-2">
+                        <div class="flex justify-between items-center mb-4 bg-slate-900/60 p-3 rounded-lg border border-slate-700">
+                            <h3 class="text-white font-bold text-lg flex items-center gap-2"><span class="text-oro">⚡</span> Feed Activo</h3>
+                            <select id="filterTarget" onchange="loadFeed()" class="form-input !mb-0 !w-auto !py-1 !px-3 text-xs bg-black">
+                                <option value="Todos">Mostrar Todos</option>
+                                <option value="GSADV41">GSADV41</option>
+                                <option value="Logia">Logia</option>
+                            </select>
+                        </div>
+                        
+                        <div id="feedContainer" class="space-y-4 max-h-[800px] overflow-y-auto pr-2 custom-scrollbar">
+                            <!-- Las notas/tarjetas se cargan aquí vía JS -->
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- RESTO DE LA ARQUITECTURA LOGIA -->
+        <!-- ========================================== -->
+        <section class="logia-card p-8 md:p-12 rounded-xl">
+            <div class="geometria-bg"></div>
+            <div class="relative z-10">
+                <h2 class="text-2xl text-oro mb-8 border-l-4 border-oro pl-5 tracking-widest flex items-center gap-3 font-mason">
+                    <span class="text-sm opacity-50">I.</span> EL ATRIO <span class="text-[10px] text-slate-500 font-mono tracking-normal ml-auto">(La Manifestación)</span>
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="p-6 bg-black/40 border border-slate-800 hover:border-oro/50 transition-all rounded-lg group">
+                        <div class="flex items-center gap-4 mb-3">
+                            <span class="text-3xl grayscale group-hover:grayscale-0 transition-all">📡</span>
+                            <h3 class="font-bold text-lg tracking-wide text-slate-200">Telemetría Mundial</h3>
+                        </div>
+                        <p class="text-xs text-slate-400 font-mono leading-relaxed">Punto de contacto terrenal. Monitoreo de variables sísmicas, estructuras de datos Web3 y recepción inicial de la voluntad divina en el código de la realidad.</p>
+                        
+                        <div class="mt-6 pt-4 border-t border-slate-800 flex flex-col items-start gap-3">
+                            <p class="text-[10px] text-oro tracking-widest uppercase font-mono">Solicitar Pase a Logia Interna:</p>
+                            <div id="auth-container" style="display: flex; justify-content: center; width: 100%;">
+                                <div id="g_id_onload" data-client_id="328306412185-lumsfeg3eclqq72blifegpog41rk5tl6.apps.googleusercontent.com" data-callback="handleCredentialResponse"></div>
+                                <div class="g_id_signin" data-type="standard" data-theme="filled_black" data-shape="rectangular"></div>
+                            </div>
+                            <button onclick="simularTransito()" class="text-xs bg-slate-900 border border-oro/30 hover:border-oro text-oro/70 hover:text-oro px-4 py-2 rounded transition-colors mt-2 cursor-pointer w-full text-center">
+                                🔑 Simular Acceso Directo (Prueba)
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-6 bg-black/40 border border-slate-800 hover:border-cyan-500/50 transition-all rounded-lg group flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center gap-4 mb-3">
+                                <span class="text-3xl grayscale group-hover:grayscale-0 transition-all">🤖</span>
+                                <h3 class="font-bold text-lg tracking-wide text-slate-200">Intersección Gemini</h3>
+                            </div>
+                            <p class="text-xs text-slate-400 font-mono leading-relaxed">El primer nivel de diálogo social y código. Aquí convergen la lógica de programación y la asistencia de IA antes de pasar el velo hacia el conocimiento superior.</p>
+                        </div>
+                        
+                        <div id="walletStatus" class="hidden mt-4 p-4 bg-gray-900/90 border border-oro/40 rounded-xl font-mono shadow-2xl w-full">
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="relative flex h-2 w-2">
+                                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                                    <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                                </span>
+                                <p class="text-[10px] text-slate-400 uppercase tracking-widest">Web3 Pipeline Active</p>
+                            </div>
+                            <p class="text-xs text-slate-300 break-all">Dirección: <span id="walletAddress" class="text-oro font-bold select-all"></span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="noticias-seccion" class="logia-card p-8 md:p-12 rounded-xl border border-cyan-500/30">
+            <div class="geometria-bg"></div>
+            <div class="relative z-10">
+                <h2 class="text-2xl text-cyan-500 mb-8 border-l-4 border-cyan-500 pl-5 tracking-widest flex items-center gap-3 font-mason" style="text-shadow: 0 0 15px rgba(0,243,255,0.4);">
+                    <span class="text-sm opacity-50 text-oro">II.</span> EL SANTO <span class="text-[10px] text-slate-500 font-mono tracking-normal ml-auto">(La Verdad Histórica)</span>
+                </h2>
+                
+                <p class="text-sm text-slate-300 leading-relaxed font-sans mb-6">
+                    Información procesada al golpe. Haz clic en las tarjetas para desplegar el análisis completo del nodo Logia.
+                </p>
+
+                <div class="space-y-4 font-sans">
+                    <div class="border border-slate-700 bg-black/60 rounded-xl overflow-hidden shadow-lg hover:border-blue-500/50 transition-colors">
+                        <button class="news-accordion-btn w-full text-left p-4 md:p-5 flex justify-between items-center focus:outline-none border-l-4 border-blue-500">
+                            <div class="flex items-center gap-4">
+                                <span class="text-2xl">🌍</span>
+                                <div>
+                                    <h3 class="text-blue-400 font-bold text-sm md:text-base uppercase tracking-wide">Pulsaciones Geopolíticas</h3>
+                                    <p class="text-xs text-slate-400 font-mono mt-1">Desclasificación en EE.UU., focos en Venezuela y tensión por datos con China.</p>
+                                </div>
+                            </div>
+                            <span class="text-slate-400 text-xl transform transition-transform duration-300 arrow-icon">↓</span>
+                        </button>
+                        <div class="news-accordion-content max-h-0 overflow-hidden bg-black/80">
+                            <div class="p-5 border-t border-slate-800 text-xs md:text-sm text-slate-300 space-y-3">
+                                <p><strong class="text-white">Elecciones y Seguridad en EE.UU.:</strong> El presidente Donald Trump desclasificó documentos sobre vulnerabilidades en la infraestructura electoral estadounidense, poniendo a Venezuela en el centro al denunciar que el Chavismo "robó todas las elecciones".</p>
+                                <p><strong class="text-white">Tensiones con China:</strong> Trump también acusó a China de obtener ilegalmente datos de 220 millones de votantes estadounidenses. El Ministerio de Relaciones Exteriores chino, a través de Lin Jian, rechazó contundentemente las acusaciones, calificándolas de "fabricadas" y exigiendo que no se utilice a China como tema de campaña.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border border-slate-700 bg-black/60 rounded-xl overflow-hidden shadow-lg hover:border-green-500/50 transition-colors">
+                        <button class="news-accordion-btn w-full text-left p-4 md:p-5 flex justify-between items-center focus:outline-none border-l-4 border-green-500">
+                            <div class="flex items-center gap-4">
+                                <span class="text-2xl">⚽</span>
+                                <div>
+                                    <h3 class="text-green-400 font-bold text-sm md:text-base uppercase tracking-wide">Ecos del Deporte</h3>
+                                    <p class="text-xs text-slate-400 font-mono mt-1">Regreso del Real Madrid y el resurgimiento de una foto histórica.</p>
+                                </div>
+                            </div>
+                            <span class="text-slate-400 text-xl transform transition-transform duration-300 arrow-icon">↓</span>
+                        </button>
+                        <div class="news-accordion-content max-h-0 overflow-hidden bg-black/80">
+                            <div class="p-5 border-t border-slate-800 text-xs md:text-sm text-slate-300 space-y-3">
+                                <p><strong class="text-white">Real Madrid:</strong> Trascienden imágenes en los canales oficiales del club blanco mostrando el retorno y las despedidas de los jugadores eliminados en las recientes competiciones internacionales.</p>
+                                <p><strong class="text-white">Una imagen para la historia:</strong> Ha resurgido y acaparado los medios la icónica fotografía del año 2008 en la que Lionel Messi baña a un bebé Lamine Yamal, un cruce de destinos que hoy cobra un significado monumental en el mundo del fútbol actual.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border border-slate-700 bg-black/60 rounded-xl overflow-hidden shadow-lg hover:border-red-500/50 transition-colors">
+                        <button class="news-accordion-btn w-full text-left p-4 md:p-5 flex justify-between items-center focus:outline-none border-l-4 border-red-500">
+                            <div class="flex items-center gap-4">
+                                <span class="text-2xl">🇵🇦</span>
+                                <div>
+                                    <h3 class="text-red-400 font-bold text-sm md:text-base uppercase tracking-wide">En el Istmo (Panamá)</h3>
+                                    <p class="text-xs text-slate-400 font-mono mt-1">Avances fiscales en Operación Pandora y memoria histórica.</p>
+                                </div>
+                            </div>
+                            <span class="text-slate-400 text-xl transform transition-transform duration-300 arrow-icon">↓</span>
+                        </button>
+                        <div class="news-accordion-content max-h-0 overflow-hidden bg-black/80">
+                            <div class="p-5 border-t border-slate-800 text-xs md:text-sm text-slate-300 space-y-3">
+                                <p><strong class="text-white">Operación Pandora:</strong> Avances en la investigación revelan cómo seis empresas intermediarias recibieron $30.5 millones en créditos fiscales fraudulentos de la DGI, con 16 imputados en un caso que asciende a $40 millones.</p>
+                                <p><strong class="text-white">Memoria Histórica:</strong> Se ha logrado la identificación de los restos de Manuel Carol Ojo, sumando ya 13 víctimas identificadas tras su desaparición durante la invasión de 1989.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border border-slate-700 bg-black/60 rounded-xl overflow-hidden shadow-lg hover:border-purple-500/50 transition-colors">
+                        <button class="news-accordion-btn w-full text-left p-4 md:p-5 flex justify-between items-center focus:outline-none border-l-4 border-purple-500">
+                            <div class="flex items-center gap-4">
+                                <span class="text-2xl">📊</span>
+                                <div>
+                                    <h3 class="text-purple-400 font-bold text-sm md:text-base uppercase tracking-wide">Telemetría Adicional</h3>
+                                    <p class="text-xs text-slate-400 font-mono mt-1">Olas de calor extremas registradas directamente en Burunga.</p>
+                                </div>
+                            </div>
+                            <span class="text-slate-400 text-xl transform transition-transform duration-300 arrow-icon">↓</span>
+                        </button>
+                        <div class="news-accordion-content max-h-0 overflow-hidden bg-black/80">
+                            <div class="p-5 border-t border-slate-800 text-xs md:text-sm text-slate-300">
+                                <p>Se reportan temperaturas extremas en regiones de Burunga, con máximas de 33°C y sensaciones térmicas alcanzando los 41°C. En contraste, los ecosistemas digitales continúan procesando alertas continuas sobre el panorama político sudamericano que fluye en la red.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="logia-card p-12 md:p-16 rounded-xl text-center relative">
+            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 bg-purple-900/20 blur-[80px] rounded-full pointer-events-none"></div>
+            
+            <div class="relative z-10">
+                <h2 class="text-3xl text-oro mb-10 uppercase tracking-[0.3em] font-mason esoterico-glow">
+                    <span class="text-sm opacity-50 block mb-2 tracking-widest">III.</span> EL SANTÍSIMO
+                </h2>
+                
+                <div class="max-w-2xl mx-auto space-y-6 bg-gradient-to-b from-black/80 to-transparent p-10 rounded-2xl border border-oro/20 shadow-[0_0_40px_rgba(212,175,55,0.1)]">
+                    
+                    <h3 class="text-2xl md:text-3xl font-bold text-white font-mason tracking-wider uppercase mb-6">
+                        La Final Eterna
+                    </h3>
+
+                    <p class="text-sm md:text-base text-slate-200 leading-relaxed font-sans italic">
+                        Más allá de cualquier estadio terrenal, existe una victoria que no conoce fin. Hoy, en el espíritu de la misión <strong>SADV41</strong>, presentamos el emblema de una batalla que trasciende el tiempo: 
+                        <br><br>
+                        <span class="text-lg md:text-xl font-bold text-oro esoterico-glow not-italic block my-4">ÆRGENTÆNA vs S(ADV41)PAIN</span>
+                    </p>
+
+                    <p class="text-sm md:text-base text-slate-300 leading-relaxed font-sans">
+                        No se trata de fútbol, sino de la unidad de las naciones bajo el señorío de Cristo. Como nos enseña el <strong>Midrash::Para:::</strong> en nuestra búsqueda, Jesús es el Camino, la Verdad y la Vida. Él es el origen de todo y nuestra meta final.
+                    </p>
+
+                    <p class="text-sm md:text-base text-slate-300 leading-relaxed font-sans">
+                        Que este emblema nos recuerde que, ante Su presencia, cada rodilla se dobla y toda victoria es para Su gloria. Estamos en el tiempo del Santísimo, viviendo bajo la guianza del Espíritu Santo.
+                    </p>
+
+                    <div class="pt-8 border-t border-oro/20 mt-8">
+                        <p class="text-xl font-bold text-white uppercase tracking-widest">¡Cristo está por venir!</p>
+                        <div class="text-5xl mt-6 animate-[pulse_3s_infinite]">🎚️</div>
+                    </div>
+
+                    <div class="text-[10px] text-slate-500 font-mono mt-8 tracking-widest">
+                        #SADV41 #EnJesusCristo #LaFinalEterna #Fe #Proposito #Santísimo #MisionSADV41
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <section id="suscription-module" class="module-card shadow-2xl">
+                <h2 class="text-oro font-mason text-xl mb-4 tracking-wider">📧 Únete a la Misión</h2>
+                <form id="subscribeForm" action="https://formspree.io/f/mlgyebzz" method="POST" class="space-y-4">
+                    <input type="email" name="email" class="input-dark" placeholder="steven507oficial@duck.com" required>
+                    <button type="submit" class="w-full bg-oro hover:bg-amber-600 text-navy font-bold py-2 rounded transition-colors cursor-pointer">Suscribirse</button>
+                </form>
+                <p id="message" class="text-xs mt-3 text-cyan-400"></p>
+            </section>
+
+            <section id="aib-module" class="module-card shadow-2xl">
+                <h2 class="text-neonBlue font-mason text-xl mb-4 tracking-wider">🤖 Asistente SADV41</h2>
+                <div class="space-y-4">
+                    <input type="text" id="userInput" class="input-dark" placeholder="¿Qué necesitas saber?">
+                    <button id="sendBtn" class="w-full bg-neonBlue hover:bg-cyan-500 text-navy font-bold py-2 rounded transition-colors cursor-pointer">Preguntar a la IA</button>
+                    <p id="aiResponse" class="text-sm italic text-slate-300 border-l-2 border-neonBlue pl-3"></p>
+                </div>
+            </section>
+        </div>
+
+        <section id="world-cup-tracking" class="glass-mundial rounded-2xl overflow-hidden shadow-2xl max-w-3xl mx-auto mt-12">
+            <div class="p-8 text-center border-b border-white/5 bg-gradient-to-b from-emerald-500/10 to-transparent">
+                <h2 class="font-mason text-2xl md:text-3xl text-white font-extrabold tracking-wider text-shadow-green uppercase">GSADV41: COBERTURA MUNDIAL 2026</h2>
+                <p class="text-oro font-semibold text-sm tracking-widest mt-1 uppercase">Mundial de la FIFA — Grupo L</p>
+                <p class="text-xs text-slate-300 mt-4 leading-relaxed font-sans">
+                    Mapeo técnico del avance de la Selección Mayor de Fútbol de Panamá y el flujo de analíticas deportivas procesadas en tiempo real.
+                </p>
+            </div>
+
+            <div class="p-6 space-y-4 bg-slate-950/60 font-sans">
+                <div class="bg-white/[0.02] border-l-4 border-emerald-500 p-4 rounded-r-xl transition-all hover:translate-x-1 hover:bg-white/[0.04] cursor-pointer">
+                    <div class="flex justify-between items-center mb-1">
+                        <span class="text-sm font-bold text-white">Debut en Toronto Stadium</span>
+                        <span class="text-[10px] text-oro uppercase tracking-wider font-semibold">Finalizado</span>
+                    </div>
+                    <p class="text-xs text-slate-400 leading-relaxed">Panamá vs. Ghana. El regreso de la selección absoluta a la cita mundialista de la FIFA tras 8 años de espera.</p>
+                </div>
+
+                <div class="bg-white/[0.02] border-l-4 border-amber-500 p-4 rounded-r-xl transition-all hover:translate-x-1 hover:bg-white/[0.04] cursor-pointer">
+                    <div class="flex justify-between items-center mb-1">
+                        <span class="text-sm font-bold text-white">Próximo Compromiso</span>
+                        <span class="text-[10px] text-cyan-400 uppercase tracking-wider font-semibold">Fase de Grupos</span>
+                    </div>
+                    <p class="text-xs text-slate-400 leading-relaxed">Panamá vs. Croacia. Análisis táctico del segundo duelo crucial del Grupo L. Monitoreo de alineaciones en el backend.</p>
+                </div>
+
+                <div class="bg-white/[0.02] border-l-4 border-emerald-500 p-4 rounded-r-xl transition-all hover:translate-x-1 hover:bg-white/[0.04] cursor-pointer">
+                    <div class="flex justify-between items-center mb-1">
+                        <span class="text-sm font-bold text-white">Procesamiento de Gráficos</span>
+                        <span class="text-[10px] text-emerald-400 font-mono">Pillow Layer Active</span>
+                    </div>
+                    <p class="text-xs text-slate-400 leading-relaxed">Generación de fondos automatizados y assets de imagen renderizados dinámicamente según estadísticas de la FIFA.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="entretenimiento-juegos" class="glass-mundial rounded-2xl overflow-hidden shadow-2xl max-w-4xl mx-auto border border-rose-500/40 relative mt-12">
+            <div class="absolute top-0 right-0 w-64 h-64 bg-rose-600/10 rounded-full blur-[100px] pointer-events-none"></div>
+            
+            <div class="p-8 text-center border-b border-rose-500/20 bg-gradient-to-b from-rose-900/40 to-transparent">
+                <h2 class="font-mason text-2xl md:text-3xl text-white font-extrabold tracking-wider uppercase text-shadow-blue flex justify-center items-center gap-3">
+                    🎮 Entretenimiento y Juegos
+                </h2>
+                <p class="text-rose-400 font-semibold text-sm tracking-widest mt-2 uppercase">FIFA 2026 DESDE TIKTOK</p>
+            </div>
+
+            <div class="p-6 md:p-8 bg-slate-950/80">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div class="flex flex-col justify-center space-y-5 z-10 font-sans">
+                        <p class="text-sm text-slate-200 leading-relaxed">
+                            ¡Obtengamos más comodines para esta fiesta mundialista! ⚽️🔥 Ya estamos calentando motores para el evento más grande del planeta y quiero que todos sean parte de esta visión.
+                        </p>
+                        
+                        <div class="bg-gradient-to-r from-emerald-900/40 to-black/60 p-4 rounded-xl border-l-4 border-emerald-500 shadow-lg">
+                            <p class="text-sm text-emerald-300 font-bold leading-relaxed">
+                                ⚡️ Recuerda utilizar el Cupón Consciente: <span class="text-white">@StevenDiorOficial</span> para beneficios exclusivos y apoyo a emprendedores con CSADV41. ¡Seguimos sumando victorias! 🗿🇵🇦💯
+                            </p>
+                        </div>
+
+                        <p class="text-xs text-slate-400 font-mono italic">
+                            #FIFAWorldCup #TikTokFIFA2026 #Comodines #StevenDiorOficial #SADV41 #Mundial2026 #InteligenciaArtificial #Emprendedores #Panama
+                        </p>
+
+                        <div class="flex flex-col gap-3 pt-2">
+                            <a href="https://vt.tiktok.com/ZS96v7ydKsvuk-MrwH6/" target="_blank" class="bg-[#0f0f11] hover:bg-[#1a1a1e] border border-[#00f3ff]/50 hover:border-[#00f3ff] text-white text-sm font-bold py-3 px-5 rounded-xl flex items-center justify-between transition-all group shadow-[0_0_10px_rgba(0,243,255,0.1)]">
+                                <span class="flex items-center gap-3"><span>🃏</span> Cartas de PANINI TIKTOK</span>
+                                <span class="text-[#00f3ff] transform group-hover:translate-x-1 transition-transform">↗</span>
+                            </a>
+                            <a href="https://vt.tiktok.com/ZS96vWGAuy3Gn-5vD4q/" target="_blank" class="bg-[#0f0f11] hover:bg-[#1a1a1e] border border-rose-500/50 hover:border-rose-500 text-white text-sm font-bold py-3 px-5 rounded-xl flex items-center justify-between transition-all group shadow-[0_0_10px_rgba(244,63,94,0.1)]">
+                                <span class="flex items-center gap-3"><span>🌍</span> Países FIFA 2026</span>
+                                <span class="text-rose-400 transform group-hover:translate-x-1 transition-transform">↗</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4 items-center z-10">
+                        <a href="https://vt.tiktok.com/ZS96v7ydKsvuk-MrwH6/" target="_blank" class="aspect-[3/4] rounded-xl overflow-hidden border border-slate-700 relative group shadow-2xl block cursor-pointer">
+                            <img src="https://thesteef21.github.io/Lapizasuli/assets/GSADV41/166a67a4ef96127111f6dad081ae4922_0.jpeg" alt="Panini TikTok Asset" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-center pb-4">
+                                <span class="bg-[#00f3ff] text-black text-[10px] font-bold px-3 py-1 rounded-full uppercase">Abrir en TikTok</span>
+                            </div>
+                        </a>
+                        <a href="https://vt.tiktok.com/ZS96vWGAuy3Gn-5vD4q/" target="_blank" class="aspect-[3/4] rounded-xl overflow-hidden border border-slate-700 relative group shadow-2xl block cursor-pointer">
+                            <img src="https://thesteef21.github.io/Lapizasuli/assets/GSADV41/Screenshot_20260702_212941_Brave.jpg" alt="Mundial Visionario AI Asset" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-center pb-4">
+                                <span class="bg-rose-500 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase">Abrir en TikTok</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="monitor-sismico-seccion" class="max-w-3xl mx-auto p-1 md:p-6 bg-[#0d1117] border border-slate-800 rounded-2xl shadow-xl mt-12">
+            <div class="text-center py-4">
+                <h2 class="text-renderRed font-bold text-2xl md:text-3xl tracking-tight uppercase font-mason">Módulo SADV41T</h2>
+                <p class="text-slate-400 text-xs md:text-sm mt-1 border-b border-slate-800 pb-4 font-sans">
+                    Detección y Clasificación de Familias Sísmicas Repetitivas (REDPy / USGS)
+                </p>
+            </div>
+
+            <div class="flex justify-center items-center gap-4 my-4">
+                <button id="btn-refrescar" class="bg-[#ff6b81] hover:bg-[#ff4757] text-white font-bold text-sm px-5 py-2.5 rounded-lg transition-all active:scale-95 cursor-pointer font-sans" onclick="refrescarMonitor()">
+                    Refrescar Monitor
+                </button>
+                <div id="badge-estado" class="bg-renderRed/10 text-renderRed border border-renderRed/40 px-4 py-1.5 rounded-full font-bold text-xs tracking-wide">
+                    Sincronizando...
+                </div>
+            </div>
+
+            <div id="contenedor-error" class="bg-red-500/10 border border-red-500 rounded-xl p-4 text-sm text-left space-y-1 hidden">
+                <span class="font-bold text-red-500 flex items-center gap-1">⚠️ Modo Respaldo Activado:</span> 
+                <p class="text-slate-300 text-xs font-sans">No se pudo conectar con el servidor dinámico a través de la ruta proxy de Render. Mostrando el último registro almacenado de la estación local.</p>
+            </div>
+
+            <div id="monitor-salida" class="space-y-4 mt-6"></div>
+        </section>
+
+        <section id="mayordomia-seccion" class="max-w-3xl mx-auto p-6 bg-[#0a0f1d] border border-gray-800 rounded-2xl shadow-xl space-y-6 mt-12 font-sans">
+            <h2 class="text-2xl font-bold border-l-4 border-oro pl-3 text-white font-mason tracking-wider">Administración Espiritual y Provisión</h2>
+            <p class="text-xs text-slate-300 leading-relaxed">
+                La verdadera riqueza de la <strong>SADV41</strong> radica en la alineación entre la tecnología de vanguardia y un propósito eterno. Al integrar herramientas Web3 con una visión clara de mayordomía, nos posicionamos fuera de las presiones de escasez.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                <div class="bg-black p-4 rounded-xl border border-gray-800 font-mono text-[11px] text-green-400 shadow-inner">
+                    <p class="text-gray-500"># Repositorio de Habilidades Activas</p>
+                    <p class="text-white"><span class="text-oro">$</span> npx skills add binance-web3</p>
+                </div>
+                <div class="bg-gray-950 p-4 rounded-xl border border-gray-800 flex flex-col justify-center">
+                    <h4 class="text-[10px] font-semibold uppercase tracking-wider text-slate-400 mb-1">Gobernanza Oficial (StevenDiorOficial)</h4>
+                    <p class="font-mono text-xs text-oro break-all select-all">0x59cB5992c35d6cD0fE6Ea94436c6AAE41F6E5fDD</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="logia-card p-10 mt-12 rounded-xl border-t border-oro/40 text-center relative overflow-hidden group">
+            <div class="absolute inset-0 bg-gradient-to-t from-yellow-900/5 to-transparent pointer-events-none"></div>
+            
+            <div class="relative z-10 max-w-xl mx-auto">
+                <p class="text-xs md:text-sm text-slate-400 font-mono mb-6 leading-relaxed italic">
+                    "A ti, que observas desde la distancia o la incomprensión: esta puerta nunca ha estado cerrada. Este espacio existe como un puente."
+                </p>
+                
+                <div class="emblema-sadv41 group-hover:scale-105" title="Investiga, pregunta, descubre.">
+                    <span class="emblema-num">1</span>
+                    <span class="text-slate-600 font-mono text-xs mx-2">|</span>
+                    <span class="text-2xl animate-pulse">🎚️</span>
+                    <span class="text-slate-600 font-mono text-xs mx-2">|</span>
+                    <span class="emblema-num">4</span>
+                </div>
+
+                <p class="text-[11px] text-slate-500 uppercase tracking-[0.2em] mt-6">
+                    Muestra de Amistad · El significado aguarda a quien lo busque
+                </p>
+            </div>
+        </section>
+
+        <section class="logia-card p-10 mt-8 rounded-xl border-t border-rose-900/40 text-center relative overflow-hidden group">
+            <div class="absolute inset-0 bg-gradient-to-t from-rose-900/10 to-transparent pointer-events-none"></div>
+            
+            <div class="relative z-10 max-w-2xl mx-auto space-y-6">
+                <div class="text-4xl animate-pulse drop-shadow-[0_0_15px_rgba(225,29,72,0.6)]">❤️</div>
+                <h3 class="text-2xl font-mason text-rose-400 tracking-widest uppercase">El Refugio de la Confianza</h3>
+                
+                <p class="text-sm text-slate-300 leading-relaxed font-sans italic">
+                    "Sé que el mundo exige garantías, pero aquí te pido fe. La verdadera seguridad no solo reside en la criptografía de esta arquitectura, sino en el corazón inmensamente cálido que custodia este recinto. Si sientes el llamado, confía y vuelve a casa."
+                </p>
+
+                <a href="index.html" class="inline-flex items-center justify-center gap-3 bg-gradient-to-r from-rose-900 to-borgona-sacro hover:from-rose-800 hover:to-red-900 text-white font-bold py-4 px-8 rounded-full border border-rose-500/50 hover:border-rose-400 transition-all shadow-[0_0_20px_rgba(225,29,72,0.3)] hover:shadow-[0_0_30px_rgba(225,29,72,0.5)] uppercase tracking-widest text-xs mt-4 cursor-pointer">
+                    <span class="text-lg">🕊️</span> Retornar al Origen (Casa)
+                </a>
+            </div>
+        </section>
+
+        <section class="glass rounded-2xl max-w-lg mx-auto overflow-hidden border border-cyan-500/30 mt-12">
+            <div class="p-6 bg-black/30 flex flex-col items-center gap-4 text-center">
+                <div class="border border-[#00f3ff]/40 px-4 py-1.5 rounded-full text-xs font-bold text-[#00f3ff] tracking-wide text-shadow-blue shadow-[0_0_10px_rgba(0,243,255,0.15)] uppercase">
+                    CONFESIONARIO DE GRACIA & ALERTAS GLOBALES
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full pt-2 px-4 font-sans">
+                    <a href="https://wa.me/+15556670579" target="_blank" class="bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs px-4 py-2.5 rounded-lg transition-all shadow flex items-center justify-center gap-1.5 cursor-pointer">💬 Contactar IA SADV41</a>
+                    <a href="https://www.instagram.com/reel/DZNKr6Sla4M/?igsh=bDUzODcwanlyZWp6" target="_blank" class="bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold text-xs px-4 py-2.5 rounded-lg transition-all shadow flex items-center justify-center gap-1.5 cursor-pointer">📸 Ver Reel Instagram</a>
+                    <a href="https://www.meta.ai/@stevendioroficial/post/MG4xH5QUPGu?open_in_meta_ai=true&song_id=1887147568642873&utm_source=android_meta_ai_sl" target="_blank" class="bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs px-4 py-2.5 rounded-lg transition-all shadow flex items-center justify-center gap-1.5 cursor-pointer col-span-2">🤖 Leer Arquitectura en Meta AI</a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <footer class="text-center p-8 mt-12 border-t border-white/5 opacity-50">
+        <p class="text-[10px] font-mono tracking-widest uppercase">SADV41 Architecture © 2026 | El Origen es 0</p>
+    </footer>
+
+    <script>
+        // ==========================================
+        // 1. CONFIGURACIÓN Y APIs
+        // ==========================================
+        const SISMOS_API_URL = "https://lapizasuli.onrender.com/api/sismos";
+        const RENDER_API_URL = "https://tu-servicio-sadv41.onrender.com/api/verify";
+        const EXPEDIENTES_API_URL = 'https://lodehoy.onrender.com';
+
+        const datosRespaldoLocal = {
+            "analisis_ia": "Análisis en modo local (Respaldo del Sistema). Telemetría base registrada con acumulado de eventos estable en la red de estaciones.",
+            "acumulado_total": 24,
+            "eventos": [
+                {
+                    "id": "SADV41-2026-A",
+                    "ubicacion": "Zona de Subducción / Red de Estaciones USGS",
+                    "pais_region": "Panamá",
+                    "latitud": 7.0000,
+                    "longitud": -82.5000,
+                    "google_maps_url": "https://maps.google.com/?q=7.0000,-82.5000",
+                    "magnitud": 5.1,
+                    "profundidad_km": 26.2,
+                    "familia_redpy": "Familia Volcánica #04",
+                    "coeficiente_correlacion": 0.89,
+                    "fecha_hora": "2026-06-20 12:09:00"
+                }
+            ]
+        };
+
+        // ==========================================
+        // 2. SEGURIDAD LOGIA (ULTRA INSTINTO)
+        // ==========================================
+        let intentosFallidos = 0;
+
+        function verificarAccesoLogia() {
+            const origenValido = document.referrer.includes("GSADV41.html") || sessionStorage.getItem("acceso_sadv41_origen") === "GSADV41";
+            if (!origenValido) {
+                bloquearInterfaz();
+            } else {
+                desbloquearInterfaz();
+            }
+        }
+
+        function bloquearInterfaz() {
+            const elementos = [document.getElementById("main-header"), document.getElementById("main-content"), document.getElementById("main-sidebar")];
+            elementos.forEach(el => { if(el) el.classList.add("bloqueo-activo"); });
+            document.getElementById("bloqueo-popup").classList.remove("hidden");
+            
+            setTimeout(() => {
+                document.getElementById("bloqueo-popup").classList.remove("opacity-0");
+            }, 10);
+        }
+
+        function desbloquearInterfaz() {
+            const elementos = [document.getElementById("main-header"), document.getElementById("main-content"), document.getElementById("main-sidebar")];
+            elementos.forEach(el => { if(el) el.classList.remove("bloqueo-activo"); });
+            
+            const popup = document.getElementById("bloqueo-popup");
+            popup.classList.add("opacity-0");
+            setTimeout(() => {
+                popup.classList.add("hidden");
+            }, 500);
+            
+            sessionStorage.setItem("acceso_sadv41_origen", "GSADV41");
+        }
+
+        async function verificarClave() {
+            const claveInput = document.getElementById("clave-acceso").value;
+            const feedback = document.getElementById("feedback-msg");
+            const btn = document.getElementById("btn-desbloqueo");
+            
+            if (!claveInput) return;
+
+            btn.innerText = "Verificando...";
+            btn.disabled = true;
+
+            try {
+                const response = await fetch(RENDER_API_URL, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ password: claveInput })
+                });
+                
+                const data = await response.json();
+
+                if (data.status === "success") {
+                    alert("Acceso autorizado. La Logia reconoce tu propósito.\n\n" + data.verse);
+                    desbloquearInterfaz();
+                } else {
+                    gestionarFallo(feedback);
+                }
+            } catch (error) {
+                console.error("Error de conexión con la arquitectura SADV41:", error);
+                
+                if (claveInput === "SADV41-2026" || claveInput === "SADV41") {
+                    alert("Acceso autorizado (Modo Local). La Logia reconoce tu propósito.\n\nIsaías 43:19");
+                    desbloquearInterfaz();
+                } else {
+                    gestionarFallo(feedback);
+                }
+            } finally {
+                btn.innerText = "Desbloquear Propósito";
+                btn.disabled = false;
+            }
+        }
+
+        function gestionarFallo(feedback) {
+            intentosFallidos++;
+            if (intentosFallidos === 1) {
+                feedback.innerText = "Error. El sistema está observando tus intenciones...";
+                feedback.classList.add("text-orange-400");
+            } else if (intentosFallidos === 2) {
+                feedback.innerText = "Error. Estás intentando forzar un sistema que ya sabe quién eres. Mejor habla con el administrador.";
+                feedback.classList.replace("text-orange-400", "text-red-400");
+            } else if (intentosFallidos >= 3) {
+                feedback.innerHTML = "Intento fallido. El sistema ha activado el <strong>Modo Turbología 432Hz</strong>. ¡La música empieza a sonar!";
+                activarModoTurbologia();
+            }
+        }
+
+        function activarModoTurbologia() {
+            document.body.style.animation = "pulso-divino-ultra 0.5s infinite alternate";
+            document.getElementById("bloqueo-popup").style.background = "rgba(212, 175, 55, 0.15)";
+            document.getElementById("emoji-status").innerText = "🎚️";
+            console.log("Modo Turbología 432Hz: Iniciado. La realidad es maleable.");
+        }
+
+        function handleCredentialResponse(response) {
+            console.log("Autenticación exitosa SADV41 mediante Google:", response);
+            desbloquearInterfaz();
+        }
+
+        function simularTransito() {
+            const mockResponse = { credential: "token_simulado_sadv41_gracia_divina" };
+            handleCredentialResponse(mockResponse);
+        }
+
+        // ==========================================
+        // 3. CENTRAL DE EXPEDIENTES Y LODEHOY (SLIDESHOW)
+        // ==========================================
+        let noticiasAssets = [];
+        let currentIndex = 0;
+        let slideInterval;
+        const viewport = document.getElementById('viewport');
+        const indicatorsContainer = document.getElementById('indicatorsContainer');
+
+        function getFileType(filename) {
+            const ext = filename.split('.').pop().toLowerCase();
+            if (['jpg', 'jpeg', 'png', 'gif', 'webp', 'svg'].includes(ext)) return 'image';
+            if (['mp4', 'webm', 'ogg', 'mov'].includes(ext)) return 'video';
+            if (['mp3', 'wav', 'aac', 'm4a'].includes(ext)) return 'audio';
+            if (['pdf', 'txt', 'doc', 'docx'].includes(ext)) return 'document';
+            return 'unknown';
+        }
+
+        async function fetchGitHubFolder() {
+            const apiUrl = 'https://api.github.com/repos/TheSteef21/Lapizasuli/contents/assets/NOTICIAS';
+            try {
+                if(!viewport) return;
+                const response = await fetch(apiUrl);
+                if (!response.ok) throw new Error('No se pudo conectar con GitHub');
+                const files = await response.json();
+                
+                noticiasAssets = files.filter(file => file.type === 'file').map(file => {
+                    const type = getFileType(file.name);
+                    const cleanTitle = file.name.substring(0, file.name.lastIndexOf('.')).replace(/[-_]/g, ' ');
+                    return { type, url: file.download_url, title: cleanTitle.charAt(0).toUpperCase() + cleanTitle.slice(1) };
+                }).filter(asset => asset.type !== 'unknown');
+
+                if (noticiasAssets.length > 0) { initSlideshow(); } 
+                else { viewport.innerHTML = `<div class="slide-item active"><div class="slide-caption">Carpeta vacía.</div></div>`; }
+            } catch (error) {
+                console.error("Error LoDeHoy:", error);
+                if(viewport) viewport.innerHTML = `<div class="slide-item active"><div class="slide-caption">Error cargando GitHub.</div></div>`;
+            }
+        }
+
+        function initSlideshow() {
+            viewport.innerHTML = ''; indicatorsContainer.innerHTML = '';
+            noticiasAssets.forEach((asset, index) => {
+                const slide = document.createElement('div');
+                slide.className = `slide-item ${index === 0 ? 'active' : ''}`;
+                
+                if (asset.type === 'video') {
+                    const video = document.createElement('video'); video.src = asset.url; video.controls = true; slide.appendChild(video);
+                } else if (asset.type === 'audio') {
+                    slide.innerHTML = `<div class="slide-audio-container"><div style="font-size:3rem;">🎵</div><audio src="${asset.url}" controls style="width:80%;max-width:400px;"></audio></div>`;
+                } else if (asset.type === 'document') {
+                    slide.innerHTML = `<div class="slide-doc-container"><div style="font-size:3rem;">📄</div><a href="${asset.url}" target="_blank">Abrir Archivo</a></div>`;
+                } else {
+                    const img = document.createElement('img'); img.src = asset.url; img.alt = asset.title; slide.appendChild(img);
+                }
+
+                if (asset.title) {
+                    const caption = document.createElement('div'); caption.className = 'slide-caption font-mono text-sm'; caption.textContent = asset.title; slide.appendChild(caption);
+                }
+                viewport.appendChild(slide);
+
+                const indicator = document.createElement('div');
+                indicator.className = `indicator ${index === 0 ? 'active' : ''}`;
+                indicator.addEventListener('click', () => goToSlide(index));
+                indicatorsContainer.appendChild(indicator);
+            });
+            startAutoplay();
+        }
+
+        function showSlide(index) {
+            const slides = document.querySelectorAll('.slide-item');
+            const indicators = document.querySelectorAll('.indicator');
+            if (slides.length === 0) return;
+            if (index >= slides.length) currentIndex = 0;
+            if (index < 0) currentIndex = slides.length - 1;
+            slides.forEach(s => s.classList.remove('active')); indicators.forEach(i => i.classList.remove('active'));
+            slides[currentIndex].classList.add('active'); indicators[currentIndex].classList.add('active');
+        }
+
+        function nextSlide() { currentIndex++; showSlide(currentIndex); }
+        function prevSlide() { currentIndex--; showSlide(currentIndex); }
+        function goToSlide(index) { currentIndex = index; showSlide(currentIndex); resetAutoplay(); }
+        function startAutoplay() { clearInterval(slideInterval); slideInterval = setInterval(nextSlide, 6000); }
+        function resetAutoplay() { clearInterval(slideInterval); startAutoplay(); }
+
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        if(prevBtn) prevBtn.addEventListener('click', () => { prevSlide(); resetAutoplay(); });
+        if(nextBtn) nextBtn.addEventListener('click', () => { nextSlide(); resetAutoplay(); });
+
+        // ==========================================
+        // 4. MANEJO DE FORMULARIO Y FEED
+        // ==========================================
+        const formExp = document.getElementById('noteForm');
+        if (formExp) {
+            formExp.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const formData = new FormData(e.target);
+                try {
+                    const response = await fetch(`${EXPEDIENTES_API_URL}/api/submit-note`, { method: 'POST', body: formData });
+                    if(response.ok) { alert('¡Expediente Registrado!'); e.target.reset(); loadFeed(); } 
+                    else { alert('Error al guardar el expediente.'); }
+                } catch (error) { alert('Error de red. No se pudo conectar con el servidor.'); }
+            });
+        }
+
+        async function loadFeed() {
+            const target = document.getElementById('filterTarget')?.value || 'Todos';
+            const container = document.getElementById('feedContainer');
+            if (!container) return;
+            
+            try {
+                const response = await fetch(`${EXPEDIENTES_API_URL}/api/feed?target=${target}`);
+                const items = await response.json();
+                container.innerHTML = '';
+                
+                if(!Array.isArray(items) || items.length === 0) {
+                    container.innerHTML = '<p style="color: var(--slate-400); text-align: center; font-size: 0.9rem;">No hay registros activos en los expedientes.</p>'; return;
+                }
+                
+                items.forEach((item, index) => {
+                    const card = document.createElement('div');
+                    card.className = 'feed-item'; card.id = `feed-card-${index}`;
+
+                    let mediaHtml = '';
+                    if (item.media_path) {
+                        const fullUrl = `${EXPEDIENTES_API_URL}${item.media_path}`;
+                        if (item.media_path.match(/\.(jpeg|jpg|gif|png)$/i)) mediaHtml = `<img src="${fullUrl}" class="media-preview">`;
+                        else if (item.media_path.match(/\.(mp4|webm)$/i)) mediaHtml = `<video controls class="media-preview"><source src="${fullUrl}"></video>`;
+                        else if (item.media_path.match(/\.(mp3|wav|ogg)$/i)) mediaHtml = `<audio controls style="width: 100%; margin-top: 0.5rem;"><source src="${fullUrl}"></audio>`;
+                        else mediaHtml = `<p><a href="${fullUrl}" target="_blank" style="color: #00f3ff;">Descargar Archivo Adjunto</a></p>`;
+                    }
+
+                    let sourceHtml = item.source_url ? `
+                        <div class="feed-source">
+                            <span>Fuente: <a href="${item.source_url}" target="_blank">${item.source_url}</a></span>
+                            <button onclick="borrarFuente('${item.id}')" class="btn-delete-source" title="Eliminar fuente con clave de Logia">🗑️ Borrar Fuente</button>
+                        </div>` : '';
+
+                    const textoMensaje = `🛡️ *SADV41 EXPEDIENTE OFICIAL* 🛡️\n\n📌 *Destino:* ${item.target}\n📅 *Fecha:* ${item.timestamp}\n\n${item.content}\n\n🔗 *Fuente:* ${item.source_url || 'N/A'}\n\n✨ _Enviado desde la Central de Expedientes LoDeHoy_`;
+                    const mensajeWa = encodeURIComponent(textoMensaje);
+                    const linkWhatsappPlus = `https://wa.me/50769362166?text=${mensajeWa}`;
+
+                    card.innerHTML = `
+                        <div class="feed-header"><span>Carpeta: ${item.date_folder} | ${item.timestamp}</span><span class="feed-badge">${item.target}</span></div>
+                        ${sourceHtml}
+                        <div class="feed-content">${item.content.replace(/\n/g, '<br>')}</div>
+                        ${mediaHtml}
+                        <div class="action-buttons">
+                            <a href="${linkWhatsappPlus}" target="_blank" class="btn-whatsapp-plus">💬 Enviar a WhatsApp</a>
+                            <button onclick="recortarNoticia('feed-card-${index}')" class="btn-crop">✂️ Recortar Tarjeta</button>
+                        </div>
+                    `;
+                    container.appendChild(card);
+                });
+            } catch (error) { console.error('Error cargando feed:', error); }
+        }
+
+        async function borrarFuente(recordId) {
+            const claveIngresada = prompt("⚠️ Acción protegida por la Logia.\nIngresa la clave secreta para autorizar la eliminación de la fuente:");
+            if (claveIngresada === null) return;
+            try {
+                const formData = new FormData(); formData.append("record_id", recordId); formData.append("key", claveIngresada);
+                const response = await fetch(`${EXPEDIENTES_API_URL}/api/delete-source`, { method: 'POST', body: formData });
+                const result = await response.json();
+                if (response.ok) { alert("✨ " + result.message); loadFeed(); } else { alert("❌ " + (result.detail || "Error.")); }
+            } catch (error) { alert("Error al contactar con el servidor."); }
+        }
+
+        function recortarNoticia(cardId) {
+            const cardElement = document.getElementById(cardId);
+            const actionButtons = cardElement.querySelector('.action-buttons');
+            actionButtons.style.display = 'none';
+            html2canvas(cardElement, { backgroundColor: '#0f172a', scale: 2 }).then(canvas => {
+                actionButtons.style.display = 'flex';
+                const link = document.createElement('a');
+                link.download = `SADV41-Expediente-${Date.now()}.png`; link.href = canvas.toDataURL('image/png'); link.click();
+            }).catch(err => { actionButtons.style.display = 'flex'; alert('Error en html2canvas.'); });
+        }
+
+        // ==========================================
+        // 5. MÓDULOS DE LOGIA Y SISMOLOGÍA
+        // ==========================================
+        function toggleSidebar() {
+            const sidebar = document.getElementById('main-sidebar');
+            sidebar.classList.toggle('right-aligned');
+            const isRight = sidebar.classList.contains('right-aligned');
+            localStorage.setItem('sidebarPosition', isRight ? 'right' : 'left');
+        }
+
+        function renderizarDatos(data) {
+            const monitorSalida = document.getElementById("monitor-salida");
+            if (!monitorSalida) return;
+            let htmlContenido = `
+                <div class="glass-sismico border border-slate-800 rounded-xl p-5 text-left shadow-inner">
+                    <div class="flex justify-between items-center mb-2">
+                        <h4 class="text-[#58a6ff] font-bold text-sm flex items-center gap-1.5 font-sans">🤖 Diagnóstico del Motor de IA:</h4>
+                        <span class="text-[10px] bg-slate-800 px-2 py-0.5 rounded font-mono text-slate-400">Acumulado: ${data.acumulado_total || 24}</span>
+                    </div>
+                    <p class="text-xs text-slate-300 leading-relaxed font-mono">${data.analisis_ia || "Procesando firmas..."}</p>
+                </div>
+            `;
+            data.eventos.forEach(sismo => {
+                htmlContenido += `
+                    <div class="sismo-card border-l-4 border-rose-500 p-4 rounded-r-xl text-left bg-slate-950/50 border border-y-slate-800 border-r-slate-800 font-sans">
+                        <div class="text-xs text-slate-200 font-semibold mb-1 flex justify-between items-center">
+                            <span>📍 Ubicación: <span class="text-white">${sismo.ubicacion} (${sismo.pais_region || 'Panamá'})</span></span>
+                            <a href="${sismo.google_maps_url}" target="_blank" class="text-blue-400 hover:underline text-[10px] font-mono">📍 Ver en Mapa</a>
+                        </div>
+                        <div class="text-xs text-slate-400 grid grid-cols-2 gap-y-1 font-mono">
+                            <div>📊 Magnitud: <span class="text-rose-400 font-bold">M ${sismo.magnitud}</span></div>
+                            <div>📉 Profundidad: <span class="text-cyan-400 font-bold">${sismo.profundidad_km} km</span></div>
+                            <div class="col-span-2">🧬 Análisis REDPy: <span class="text-amber-400">${sismo.familia_redpy}</span> (CC: ${sismo.coeficiente_correlacion})</div>
+                        </div>
+                        <div class="text-[10px] text-slate-500 mt-2 flex justify-between border-t border-white/5 pt-1 font-mono">
+                            <span>ID: ${sismo.id}</span>
+                            <span>Hora: ${sismo.fecha_hora}</span>
+                        </div>
+                    </div>
+                `;
+            });
+            monitorSalida.innerHTML = htmlContenido;
+        }
+
+        async function refrescarMonitor() {
+            const botonRefrescar = document.getElementById("btn-refrescar");
+            const contenedorError = document.getElementById("contenedor-error");
+            const badgeEstado = document.getElementById("badge-estado");
+
+            try {
+                if (botonRefrescar) botonRefrescar.innerText = "Sincronizando...";
+                const response = await fetch(SISMOS_API_URL);
+                if (!response.ok) throw new Error(`Status: ${response.status}`);
+                const data = await response.json();
+                if (contenedorError) contenedorError.classList.add("hidden");
+                if (badgeEstado) {
+                    badgeEstado.innerText = "Sincronizado";
+                    badgeEstado.style.borderColor = "#238636";
+                    badgeEstado.style.color = "#2ea44f";
+                    badgeEstado.style.background = "rgba(46, 164, 79, 0.1)";
+                }
+                renderizarDatos(data);
+            } catch (error) {
+                if (contenedorError) contenedorError.classList.remove("hidden");
+                if (badgeEstado) {
+                    badgeEstado.innerText = "Modo Respaldo";
+                    badgeEstado.style.borderColor = "rgba(218, 54, 55, 0.4)";
+                    badgeEstado.style.color = "#da3637";
+                    badgeEstado.style.background = "rgba(218, 54, 55, 0.1)";
+                }
+                renderizarDatos(datosRespaldoLocal);
+            } finally {
+                if (botonRefrescar) botonRefrescar.innerText = "Refrescar Monitor";
+            }
+        }
+
+        function initNewsAccordions() {
+            const btns = document.querySelectorAll('.news-accordion-btn');
+            btns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const content = this.nextElementSibling;
+                    const arrow = this.querySelector('.arrow-icon');
+                    
+                    document.querySelectorAll('.news-accordion-content').forEach(el => {
+                        if (el !== content) {
+                            el.style.maxHeight = null;
+                            el.classList.remove('expanded');
+                            el.previousElementSibling.querySelector('.arrow-icon').style.transform = 'rotate(0deg)';
+                        }
+                    });
+
+                    if (content.style.maxHeight) {
+                        content.style.maxHeight = null;
+                        content.classList.remove('expanded');
+                        arrow.style.transform = 'rotate(0deg)';
+                    } else {
+                        content.style.maxHeight = content.scrollHeight + "px";
+                        content.classList.add('expanded');
+                        arrow.style.transform = 'rotate(180deg)';
+                    }
+                });
+            });
+        }
+
+        // ==========================================
+        // 6. PIPELINE DE CONEXIÓN WEB3 & IA
+        // ==========================================
+        async function connectBinance() {
+            const btn = document.getElementById('btnConnect');
+            const statusDiv = document.getElementById('walletStatus');
+            const addressP = document.getElementById('walletAddress');
+
+            if (typeof window.ethereum !== 'undefined') {
+                try {
+                    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                    const account = accounts[0];
+                    
+                    if (addressP) addressP.innerText = account;
+                    if (statusDiv) statusDiv.classList.remove('hidden');
+                    if (btn) {
+                        btn.innerText = "🌐 Connected";
+                        btn.className = "bg-green-600 text-white font-bold text-xs px-3 py-2 rounded transition-all shadow-md cursor-pointer flex items-center gap-1.5";
+                    }
+                } catch (error) {
+                    console.error("Conexión denegada", error);
+                }
+            } else {
+                alert("No se detectó un proveedor Web3.");
+                window.open('https://web3.binance.com/en/referral?ref=ORCZSDLK', '_blank');
+            }
+        }
+
+        function loginSocial(provider) { console.log("Social Auth Request: " + provider); }
+
+        const subForm = document.getElementById('subscribeForm');
+        if(subForm) {
+            subForm.addEventListener('submit', async (e) => {
+                document.getElementById('message').innerText = "Enviando solicitud al nodo...";
+            });
+        }
+
+        const sendBtn = document.getElementById('sendBtn');
+        if(sendBtn) {
+            sendBtn.addEventListener('click', async () => {
+                const userInput = document.getElementById('userInput').value;
+                const responseDiv = document.getElementById('aiResponse');
+                if(!userInput) return;
+                responseDiv.innerText = "Consultando base de datos neural...";
+                try {
+                    const response = await fetch('https://lapizasuli.onrender.com/api/ask-ia', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ pregunta: userInput }),
+                    });
+                    const data = await response.json();
+                    responseDiv.innerText = data.choices ? data.choices[0].message.content : "Error de respuesta.";
+                } catch (error) {
+                    responseDiv.innerText = "Error: El servidor IA SADV41 no responde.";
+                }
+            });
+        }
+
+        // ==========================================
+        // 7. INICIALIZADOR SINCRÓNICO GLOBAL
+        // ==========================================
+        document.addEventListener("DOMContentLoaded", () => {
+            verificarAccesoLogia(); // Se dispara primero el protocolo de seguridad
+            fetchGitHubFolder();
+            loadFeed();
+            refrescarMonitor();
+            initNewsAccordions();
+            
+            const savedPos = localStorage.getItem('sidebarPosition');
+            if(savedPos === 'right') {
+                document.getElementById('main-sidebar').classList.add('right-aligned');
+            }
+        });
+    </script>
+</body>
+</html>
