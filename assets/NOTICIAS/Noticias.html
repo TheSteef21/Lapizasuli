@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SADV41 - LoDeHoy / Expedientes Slideshow</title>
+    <title>SADV41 - LoDeHoy / Noticias Automáticas</title>
     <style>
         :root {
             --bg-color: #0f172a;
@@ -84,8 +83,10 @@
             opacity: 0;
             transition: opacity 0.6s ease-in-out;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
+            padding: 20px;
         }
 
         .slide-item.active {
@@ -94,8 +95,31 @@
 
         .slide-item img, .slide-item video {
             max-width: 100%;
-            max-height: 100%;
+            max-height: 80%;
             object-fit: contain;
+        }
+
+        .slide-audio-container, .slide-doc-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            color: var(--text-color);
+            text-align: center;
+        }
+
+        .slide-doc-container a {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.2s;
+        }
+
+        .slide-doc-container a:hover {
+            background-color: #2563eb;
         }
 
         .slide-caption {
@@ -103,10 +127,11 @@
             bottom: 0;
             left: 0;
             right: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
-            padding: 20px 24px 12px;
+            background: linear-gradient(to top, rgba(0,0,0,0.85), transparent);
+            padding: 25px 24px 15px;
             color: #fff;
             font-size: 0.95rem;
+            z-index: 10;
         }
 
         .slideshow-controls {
@@ -158,14 +183,13 @@
 
     <div class="sadv41-container">
         <div class="sadv41-header">
-            <span class="sadv41-title">LoDeHoy / Expedientes</span>
+            <span class="sadv41-title">LoDeHoy / Noticias Automáticas</span>
             <span class="sadv41-badge">SADV41</span>
         </div>
 
         <div class="slideshow-viewport" id="viewport">
-            <!-- Los slides se inyectarán dinámicamente mediante JavaScript -->
             <div class="slide-item active">
-                <div class="slide-caption">Cargando expedientes desde assets/LoDeHoy/Expedientes...</div>
+                <div class="slide-caption">Consultando la carpeta assets/NOTICIAS en GitHub...</div>
             </div>
         </div>
 
@@ -177,14 +201,7 @@
     </div>
 
     <script>
-        // Configuración de rutas para SADV41 LoDeHoy/Expedientes
-        // Puedes actualizar este array manualmente o conectarlo a una API backend que escanee la carpeta.
-        const expedientesAssets = [
-            { type: 'image', url: 'assets/LoDeHoy/Expedientes/expediente_01.jpg', title: 'Expediente 01 - Registro Diario' },
-            { type: 'image', url: 'assets/LoDeHoy/Expedientes/expediente_02.png', title: 'Expediente 02 - Auditoría de Activos' },
-            { type: 'image', url: 'assets/LoDeHoy/Expedientes/expediente_03.jpg', title: 'Expediente 03 - Monitoreo Global' }
-        ];
-
+        let noticiasAssets = [];
         let currentIndex = 0;
         let slideInterval;
 
@@ -193,12 +210,59 @@
         const prevBtn = document.getElementById('prevBtn');
         const nextBtn = document.getElementById('nextBtn');
 
+        // Función para detectar el tipo de archivo según su extensión
+        function getFileType(filename) {
+            const ext = filename.split('.').pop().toLowerCase();
+            if (['jpg', 'jpeg', 'png', 'gif', 'webp', 'svg'].includes(ext)) return 'image';
+            if (['mp4', 'webm', 'ogg', 'mov'].includes(ext)) return 'video';
+            if (['mp3', 'wav', 'aac', 'm4a'].includes(ext)) return 'audio';
+            if (['pdf', 'txt', 'doc', 'docx'].includes(ext)) return 'document';
+            return 'unknown';
+        }
+
+        // Cargar automáticamente los archivos desde la API de GitHub
+        async function fetchGitHubFolder() {
+            const apiUrl = 'https://api.github.com/repos/TheSteef21/Lapizasuli/contents/assets/NOTICIAS';
+            
+            try {
+                const response = await fetch(apiUrl);
+                if (!response.ok) throw new Error('No se pudo conectar con el repositorio');
+                
+                const files = await response.json();
+                
+                // Filtrar y mapear los archivos encontrados
+                noticiasAssets = files
+                    .filter(file => file.type === 'file')
+                    .map(file => {
+                        const type = getFileType(file.name);
+                        // Limpiar el nombre para usarlo de título amigable (ej: "expediente_01.jpg" -> "Expediente 01")
+                        const cleanTitle = file.name.substring(0, file.name.lastIndexOf('.'))
+                            .replace(/[-_]/g, ' ');
+                        
+                        return {
+                            type: type,
+                            url: file.download_url,
+                            title: cleanTitle.charAt(0).toUpperCase() + cleanTitle.slice(1)
+                        };
+                    })
+                    .filter(asset => asset.type !== 'unknown'); // Ignorar archivos no compatibles
+
+                if (noticiasAssets.length > 0) {
+                    initSlideshow();
+                } else {
+                    viewport.innerHTML = `<div class="slide-item active"><div class="slide-caption">La carpeta assets/NOTICIAS está vacía.</div></div>`;
+                }
+            } catch (error) {
+                console.error(error);
+                viewport.innerHTML = `<div class="slide-item active"><div class="slide-caption">Error al cargar las noticias automáticamente.</div></div>`;
+            }
+        }
+
         function initSlideshow() {
             viewport.innerHTML = '';
             indicatorsContainer.innerHTML = '';
 
-            expedientesAssets.forEach((asset, index) => {
-                // Crear slide
+            noticiasAssets.forEach((asset, index) => {
                 const slide = document.createElement('div');
                 slide.className = `slide-item ${index === 0 ? 'active' : ''}`;
                 
@@ -208,6 +272,23 @@
                     video.controls = true;
                     video.muted = true;
                     slide.appendChild(video);
+                } else if (asset.type === 'audio') {
+                    const audioWrapper = document.createElement('div');
+                    audioWrapper.className = 'slide-audio-container';
+                    audioWrapper.innerHTML = `
+                        <div style="font-size: 3rem;">🎵</div>
+                        <audio src="${asset.url}" controls style="width: 80%; max-width: 400px;"></audio>
+                    `;
+                    slide.appendChild(audioWrapper);
+                } else if (asset.type === 'document') {
+                    const docWrapper = document.createElement('div');
+                    docWrapper.className = 'slide-doc-container';
+                    docWrapper.innerHTML = `
+                        <div style="font-size: 3rem;">📄</div>
+                        <p style="color: var(--text-secondary); margin-bottom: 10px;">Documento de Expediente</p>
+                        <a href="${asset.url}" target="_blank" rel="noopener noreferrer">Abrir / Descargar Archivo</a>
+                    `;
+                    slide.appendChild(docWrapper);
                 } else {
                     const img = document.createElement('img');
                     img.src = asset.url;
@@ -224,7 +305,6 @@
 
                 viewport.appendChild(slide);
 
-                // Crear indicador
                 const indicator = document.createElement('div');
                 indicator.className = `indicator ${index === 0 ? 'active' : ''}`;
                 indicator.addEventListener('click', () => goToSlide(index));
@@ -238,6 +318,8 @@
             const slides = document.querySelectorAll('.slide-item');
             const indicators = document.querySelectorAll('.indicator');
 
+            if (slides.length === 0) return;
+
             if (index >= slides.length) currentIndex = 0;
             if (index < 0) currentIndex = slides.length - 1;
 
@@ -249,18 +331,16 @@
         }
 
         function nextSlide() {
+            if (noticiasAssets.length === 0) return;
             currentIndex++;
-            if (currentIndex >= expedientesAssets.length) {
-                currentIndex = 0;
-            }
+            if (currentIndex >= noticiasAssets.length) currentIndex = 0;
             showSlide(currentIndex);
         }
 
         function prevSlide() {
+            if (noticiasAssets.length === 0) return;
             currentIndex--;
-            if (currentIndex < 0) {
-                currentIndex = expedientesAssets.length - 1;
-            }
+            if (currentIndex < 0) currentIndex = noticiasAssets.length - 1;
             showSlide(currentIndex);
         }
 
@@ -271,7 +351,8 @@
         }
 
         function startAutoplay() {
-            slideInterval = setInterval(nextSlide, 5000);
+            clearInterval(slideInterval);
+            slideInterval = setInterval(nextSlide, 6000);
         }
 
         function resetAutoplay() {
@@ -289,8 +370,8 @@
             resetAutoplay();
         });
 
-        // Inicializar al cargar
-        window.addEventListener('DOMContentLoaded', initSlideshow);
+        // Al cargar la página, consultamos a GitHub automáticamente
+        window.addEventListener('DOMContentLoaded', fetchGitHubFolder);
     </script>
 </body>
 </html>
