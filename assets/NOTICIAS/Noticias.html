@@ -1,1 +1,296 @@
 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SADV41 - LoDeHoy / Expedientes Slideshow</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --accent-color: #3b82f6;
+            --text-color: #f8fafc;
+            --text-secondary: #94a3b8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .sadv41-container {
+            width: 100%;
+            max-width: 900px;
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sadv41-header {
+            padding: 16px 24px;
+            border-bottom: 1px solid #334155;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .sadv41-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+
+        .sadv41-badge {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .slideshow-viewport {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            background-color: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .slide-item {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.6s ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slide-item.active {
+            opacity: 1;
+        }
+
+        .slide-item img, .slide-item video {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .slide-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            padding: 20px 24px 12px;
+            color: #fff;
+            font-size: 0.95rem;
+        }
+
+        .slideshow-controls {
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--card-bg);
+            border-top: 1px solid #334155;
+        }
+
+        .nav-btn {
+            background-color: #334155;
+            color: var(--text-color);
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.2s;
+        }
+
+        .nav-btn:hover {
+            background-color: var(--accent-color);
+        }
+
+        .indicators {
+            display: flex;
+            gap: 6px;
+        }
+
+        .indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #475569;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .indicator.active {
+            background-color: var(--accent-color);
+            width: 24px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="sadv41-container">
+        <div class="sadv41-header">
+            <span class="sadv41-title">LoDeHoy / Expedientes</span>
+            <span class="sadv41-badge">SADV41</span>
+        </div>
+
+        <div class="slideshow-viewport" id="viewport">
+            <!-- Los slides se inyectarán dinámicamente mediante JavaScript -->
+            <div class="slide-item active">
+                <div class="slide-caption">Cargando expedientes desde assets/LoDeHoy/Expedientes...</div>
+            </div>
+        </div>
+
+        <div class="slideshow-controls">
+            <button class="nav-btn" id="prevBtn">Anterior</button>
+            <div class="indicators" id="indicatorsContainer"></div>
+            <button class="nav-btn" id="nextBtn">Siguiente</button>
+        </div>
+    </div>
+
+    <script>
+        // Configuración de rutas para SADV41 LoDeHoy/Expedientes
+        // Puedes actualizar este array manualmente o conectarlo a una API backend que escanee la carpeta.
+        const expedientesAssets = [
+            { type: 'image', url: 'assets/LoDeHoy/Expedientes/expediente_01.jpg', title: 'Expediente 01 - Registro Diario' },
+            { type: 'image', url: 'assets/LoDeHoy/Expedientes/expediente_02.png', title: 'Expediente 02 - Auditoría de Activos' },
+            { type: 'image', url: 'assets/LoDeHoy/Expedientes/expediente_03.jpg', title: 'Expediente 03 - Monitoreo Global' }
+        ];
+
+        let currentIndex = 0;
+        let slideInterval;
+
+        const viewport = document.getElementById('viewport');
+        const indicatorsContainer = document.getElementById('indicatorsContainer');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+
+        function initSlideshow() {
+            viewport.innerHTML = '';
+            indicatorsContainer.innerHTML = '';
+
+            expedientesAssets.forEach((asset, index) => {
+                // Crear slide
+                const slide = document.createElement('div');
+                slide.className = `slide-item ${index === 0 ? 'active' : ''}`;
+                
+                if (asset.type === 'video') {
+                    const video = document.createElement('video');
+                    video.src = asset.url;
+                    video.controls = true;
+                    video.muted = true;
+                    slide.appendChild(video);
+                } else {
+                    const img = document.createElement('img');
+                    img.src = asset.url;
+                    img.alt = asset.title;
+                    slide.appendChild(img);
+                }
+
+                if (asset.title) {
+                    const caption = document.createElement('div');
+                    caption.className = 'slide-caption';
+                    caption.textContent = asset.title;
+                    slide.appendChild(caption);
+                }
+
+                viewport.appendChild(slide);
+
+                // Crear indicador
+                const indicator = document.createElement('div');
+                indicator.className = `indicator ${index === 0 ? 'active' : ''}`;
+                indicator.addEventListener('click', () => goToSlide(index));
+                indicatorsContainer.appendChild(indicator);
+            });
+
+            startAutoplay();
+        }
+
+        function showSlide(index) {
+            const slides = document.querySelectorAll('.slide-item');
+            const indicators = document.querySelectorAll('.indicator');
+
+            if (index >= slides.length) currentIndex = 0;
+            if (index < 0) currentIndex = slides.length - 1;
+
+            slides.forEach(slide => slide.classList.remove('active'));
+            indicators.forEach(ind => ind.classList.remove('active'));
+
+            slides[currentIndex].classList.add('active');
+            indicators[currentIndex].classList.add('active');
+        }
+
+        function nextSlide() {
+            currentIndex++;
+            if (currentIndex >= expedientesAssets.length) {
+                currentIndex = 0;
+            }
+            showSlide(currentIndex);
+        }
+
+        function prevSlide() {
+            currentIndex--;
+            if (currentIndex < 0) {
+                currentIndex = expedientesAssets.length - 1;
+            }
+            showSlide(currentIndex);
+        }
+
+        function goToSlide(index) {
+            currentIndex = index;
+            showSlide(currentIndex);
+            resetAutoplay();
+        }
+
+        function startAutoplay() {
+            slideInterval = setInterval(nextSlide, 5000);
+        }
+
+        function resetAutoplay() {
+            clearInterval(slideInterval);
+            startAutoplay();
+        }
+
+        prevBtn.addEventListener('click', () => {
+            prevSlide();
+            resetAutoplay();
+        });
+
+        nextBtn.addEventListener('click', () => {
+            nextSlide();
+            resetAutoplay();
+        });
+
+        // Inicializar al cargar
+        window.addEventListener('DOMContentLoaded', initSlideshow);
+    </script>
+</body>
+</html>
