@@ -3,79 +3,131 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SADV41 - LoDeHoy / Noticias Automáticas</title>
+    <title>SADV41 & Logia - Central de Expedientes y LoDeHoy</title>
+    <!-- Importación de html2canvas para la herramienta de recorte limpia -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
         :root {
-            --bg-color: #0f172a;
+            --bg-color: #0b0f19;
             --card-bg: #1e293b;
-            --accent-color: #3b82f6;
-            --text-color: #f8fafc;
-            --text-secondary: #94a3b8;
+            --accent: #38bdf8;
+            --text: #f8fafc;
+            --muted: #94a3b8;
+            --border: #334155;
+            --whatsapp: #25d366;
+            --crop-btn: #f59e0b;
+            --delete-btn: #ef4444;
+            --oro-alquimico: #d4af37;
         }
-
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
-
         body {
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-family: system-ui, -apple-system, sans-serif;
             background-color: var(--bg-color);
-            color: var(--text-color);
-            min-height: 100vh;
+            color: var(--text);
+            padding: 2rem;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        h1 { color: var(--accent); margin-bottom: 0.2rem; }
+        
+        .box-container {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.5);
+        }
+        textarea, input, select {
+            width: 100%;
+            background: #0f172a;
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+            font-family: inherit;
+        }
+        textarea { resize: vertical; min-height: 100px; }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        button {
+            background-color: var(--accent);
+            color: #0f172a;
+            font-weight: bold;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: opacity 0.2s;
+            width: 100%;
+        }
+        button:hover { opacity: 0.9; }
+
+        .filters {
             display: flex;
-            flex-direction: column;
+            justify-content: space-between;
             align-items: center;
-            justify-content: center;
-            padding: 20px;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
         }
 
+        /* --- Estilos del Módulo LoDeHoy / Slideshow Integrado --- */
         .sadv41-container {
             width: 100%;
-            max-width: 900px;
             background-color: var(--card-bg);
+            border: 1px solid var(--border);
             border-radius: 12px;
             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
             overflow: hidden;
             display: flex;
             flex-direction: column;
+            margin-bottom: 2.5rem;
         }
-
         .sadv41-header {
             padding: 16px 24px;
-            border-bottom: 1px solid #334155;
+            border-bottom: 1px solid var(--border);
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-
         .sadv41-title {
             font-size: 1.25rem;
             font-weight: 600;
             letter-spacing: 0.05em;
         }
-
         .sadv41-badge {
-            background-color: var(--accent-color);
-            color: white;
+            background-color: var(--accent);
+            color: #0f172a;
             padding: 4px 10px;
             border-radius: 20px;
             font-size: 0.8rem;
-            font-weight: 500;
+            font-weight: bold;
         }
-
         .slideshow-viewport {
             position: relative;
             width: 100%;
-            height: 500px;
+            height: 450px;
             background-color: #000;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
         }
-
         .slide-item {
             position: absolute;
             width: 100%;
@@ -88,81 +140,64 @@
             justify-content: center;
             padding: 20px;
         }
-
         .slide-item.active {
             opacity: 1;
         }
-
         .slide-item img, .slide-item video {
             max-width: 100%;
-            max-height: 80%;
+            max-height: 75%;
             object-fit: contain;
         }
-
         .slide-audio-container, .slide-doc-container {
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 15px;
-            color: var(--text-color);
+            color: var(--text);
             text-align: center;
         }
-
         .slide-doc-container a {
-            background-color: var(--accent-color);
-            color: white;
+            background-color: var(--accent);
+            color: #0f172a;
             padding: 10px 20px;
             border-radius: 6px;
             text-decoration: none;
-            font-weight: 500;
-            transition: background-color 0.2s;
+            font-weight: bold;
         }
-
-        .slide-doc-container a:hover {
-            background-color: #2563eb;
-        }
-
         .slide-caption {
             position: absolute;
             bottom: 0;
             left: 0;
             right: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.85), transparent);
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
             padding: 25px 24px 15px;
             color: #fff;
             font-size: 0.95rem;
             z-index: 10;
         }
-
         .slideshow-controls {
             padding: 16px 24px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             background-color: var(--card-bg);
-            border-top: 1px solid #334155;
+            border-top: 1px solid var(--border);
         }
-
         .nav-btn {
             background-color: #334155;
-            color: var(--text-color);
+            color: var(--text);
             border: none;
             padding: 8px 16px;
             border-radius: 6px;
             cursor: pointer;
             font-weight: 500;
-            transition: background-color 0.2s;
+            width: auto;
         }
-
-        .nav-btn:hover {
-            background-color: var(--accent-color);
-        }
-
+        .nav-btn:hover { background-color: var(--accent); color: #0f172a; }
         .indicators {
             display: flex;
             gap: 6px;
         }
-
         .indicator {
             width: 8px;
             height: 8px;
@@ -171,36 +206,323 @@
             cursor: pointer;
             transition: background-color 0.2s;
         }
-
         .indicator.active {
-            background-color: var(--accent-color);
+            background-color: var(--accent);
             width: 24px;
             border-radius: 4px;
         }
+
+        /* --- Estilos del Feed Activo --- */
+        .feed-item {
+            background-color: var(--card-bg);
+            border-left: 4px solid var(--accent);
+            border-radius: 8px;
+            padding: 1.25rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+        .feed-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: var(--muted);
+            margin-bottom: 0.5rem;
+        }
+        .badge {
+            background: rgba(56, 189, 248, 0.15);
+            color: var(--accent);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        .feed-content { font-size: 1rem; line-height: 1.5; margin-bottom: 0.75rem; }
+        .feed-source {
+            font-size: 0.85rem;
+            color: var(--accent);
+            word-break: break-all;
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+        .media-preview {
+            max-width: 100%;
+            max-height: 300px;
+            border-radius: 6px;
+            margin-top: 0.5rem;
+            display: block;
+        }
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 1rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 0.75rem;
+            flex-wrap: wrap;
+        }
+        .btn-whatsapp-plus {
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            color: #fff;
+            padding: 0.6rem 1rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            flex: 1;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        .btn-whatsapp-plus:hover { transform: translateY(-2px); opacity: 1; }
+        .btn-crop {
+            background-color: var(--crop-btn);
+            color: #0f172a;
+            padding: 0.6rem 1rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            flex: 1;
+            justify-content: center;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.2);
+            transition: all 0.3s ease;
+        }
+        .btn-crop:hover { transform: translateY(-2px); opacity: 1; }
+        .btn-delete-source {
+            background-color: var(--delete-btn);
+            color: #fff;
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-delete-source:hover { opacity: 0.8; }
     </style>
 </head>
 <body>
 
-    <div class="sadv41-container">
-        <div class="sadv41-header">
-            <span class="sadv41-title">LoDeHoy / Noticias Automáticas</span>
-            <span class="sadv41-badge">SADV41</span>
-        </div>
+    <div class="container">
+        <header>
+            <h1>SADV41 & Logia Engine</h1>
+            <p>Central de Expedientes, LoDeHoy Automático y Herramientas de Seguridad</p>
+        </header>
 
-        <div class="slideshow-viewport" id="viewport">
-            <div class="slide-item active">
-                <div class="slide-caption">Consultando la carpeta assets/NOTICIAS en GitHub...</div>
+        <!-- Módulo LoDeHoy: Slideshow Automático desde GitHub -->
+        <div class="sadv41-container">
+            <div class="sadv41-header">
+                <span class="sadv41-title">LoDeHoy / Noticias Automáticas</span>
+                <span class="sadv41-badge">SADV41</span>
+            </div>
+
+            <div class="slideshow-viewport" id="viewport">
+                <div class="slide-item active">
+                    <div class="slide-caption">Consultando la carpeta assets/NOTICIAS en GitHub...</div>
+                </div>
+            </div>
+
+            <div class="slideshow-controls">
+                <button class="nav-btn" id="prevBtn">Anterior</button>
+                <div class="indicators" id="indicatorsContainer"></div>
+                <button class="nav-btn" id="nextBtn">Siguiente</button>
             </div>
         </div>
 
-        <div class="slideshow-controls">
-            <button class="nav-btn" id="prevBtn">Anterior</button>
-            <div class="indicators" id="indicatorsContainer"></div>
-            <button class="nav-btn" id="nextBtn">Siguiente</button>
+        <!-- Caja de Notas / Entrada de Datos -->
+        <div class="box-container">
+            <h3>Nueva Nota / Asset del Día</h3>
+            <form id="noteForm">
+                <textarea name="content" placeholder="Escribe información, pega texto o detalla los elementos..." required></textarea>
+                
+                <div class="form-row">
+                    <input type="url" name="source_url" placeholder="URL de la Fuente (Opcional)">
+                    <select name="target">
+                        <option value="GSADV41">GSADV41</option>
+                        <option value="Logia">Logia</option>
+                        <option value="Ambos">Ambos</option>
+                    </select>
+                </div>
+
+                <div style="margin-bottom: 1rem;">
+                    <label style="font-size: 0.85rem; color: var(--muted); display: block; margin-bottom: 0.3rem;">Adjuntar Asset (Imagen, Audio, Video, Documento)</label>
+                    <input type="file" name="file" style="padding: 0.4rem;">
+                </div>
+
+                <button type="submit">Registrar en Expediente Diario</button>
+            </form>
+        </div>
+
+        <!-- Filtro de visualización del Feed -->
+        <div class="filters">
+            <h2>Expedientes - Feed Activo</h2>
+            <select id="filterTarget" onchange="loadFeed()" style="width: 200px; margin: 0;">
+                <option value="Todos">Mostrar Todos</option>
+                <option value="GSADV41">GSADV41</option>
+                <option value="Logia">Logia</option>
+            </select>
+        </div>
+
+        <!-- Contenedor del Feed Dinámico -->
+        <div id="feedContainer">
+            <!-- Las notas se cargan aquí -->
         </div>
     </div>
 
     <script>
+        const API_URL = 'https://lodehoy.onrender.com';
+
+        // --- Registro de Notas Nuevas ---
+        document.getElementById('noteForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+
+            try {
+                const response = await fetch(`${API_URL}/api/submit-note`, {
+                    method: 'POST',
+                    body: formData
+                });
+                const result = await response.json();
+                if(response.ok) {
+                    alert('¡Nota registrada y guardada en los expedientes!');
+                    e.target.reset();
+                    loadFeed();
+                } else {
+                    alert('Error al guardar: ' + (result.detail || 'Error desconocido'));
+                }
+            } catch (error) {
+                console.error('Error de red:', error);
+                alert('No se pudo conectar con el servidor en Render.');
+            }
+        });
+
+        // --- Carga del Feed Dinámico ---
+        async function loadFeed() {
+            const target = document.getElementById('filterTarget').value;
+            try {
+                const response = await fetch(`${API_URL}/api/feed?target=${target}`);
+                const items = await response.json();
+                
+                const container = document.getElementById('feedContainer');
+                container.innerHTML = '';
+
+                if(!Array.isArray(items) || items.length === 0) {
+                    container.innerHTML = '<p style="color: var(--muted); text-align: center;">No hay registros activos en los expedientes.</p>';
+                    return;
+                }
+
+                items.forEach((item, index) => {
+                    const card = document.createElement('div');
+                    card.className = 'feed-item';
+                    card.id = `feed-card-${index}`;
+
+                    let mediaHtml = '';
+                    if (item.media_path) {
+                        const fullUrl = `${API_URL}${item.media_path}`;
+                        if (item.media_path.match(/\.(jpeg|jpg|gif|png)$/i)) {
+                            mediaHtml = `<img src="${fullUrl}" class="media-preview">`;
+                        } else if (item.media_path.match(/\.(mp4|webm)$/i)) {
+                            mediaHtml = `<video controls class="media-preview"><source src="${fullUrl}"></video>`;
+                        } else if (item.media_path.match(/\.(mp3|wav|ogg)$/i)) {
+                            mediaHtml = `<audio controls style="width: 100%; margin-top: 0.5rem;"><source src="${fullUrl}"></audio>`;
+                        } else {
+                            mediaHtml = `<p><a href="${fullUrl}" target="_blank" style="color: var(--accent);">Descargar Archivo Adjunto</a></p>`;
+                        }
+                    }
+
+                    let sourceHtml = item.source_url ? `
+                        <div class="feed-source">
+                            <span>Fuente: <a href="${item.source_url}" target="_blank" style="color: var(--accent);">${item.source_url}</a></span>
+                            <button onclick="borrarFuente('${item.id}')" class="btn-delete-source" title="Eliminar fuente con clave de Logia">🗑️ Borrar Fuente</button>
+                        </div>` : '';
+
+                    const textoMensaje = `🛡️ *SADV41 EXPEDIENTE OFICIAL* 🛡️\n\n📌 *Destino:* ${item.target}\n📅 *Fecha:* ${item.timestamp}\n\n${item.content}\n\n🔗 *Fuente:* ${item.source_url || 'N/A'}\n\n✨ _Enviado desde la Central de Expedientes LoDeHoy_`;
+                    const mensajeWa = encodeURIComponent(textoMensaje);
+                    const linkWhatsappPlus = `https://wa.me/50769362166?text=${mensajeWa}`;
+
+                    card.innerHTML = `
+                        <div class="feed-header">
+                            <span>Carpeta: ${item.date_folder} | ${item.timestamp}</span>
+                            <span class="badge">${item.target}</span>
+                        </div>
+                        ${sourceHtml}
+                        <div class="feed-content">${item.content.replace(/\n/g, '<br>')}</div>
+                        ${mediaHtml}
+                        
+                        <div class="action-buttons">
+                            <a href="${linkWhatsappPlus}" target="_blank" class="btn-whatsapp-plus">
+                                💬 Enviar a WhatsApp
+                            </a>
+                            <button onclick="recortarNoticia('feed-card-${index}')" class="btn-crop">
+                                ✂️ Recortar Tarjeta
+                            </button>
+                        </div>
+                    `;
+                    container.appendChild(card);
+                });
+            } catch (error) {
+                console.error('Error al cargar el feed:', error);
+            }
+        }
+
+        // --- Borrado Seguro de Fuente ---
+        async function borrarFuente(recordId) {
+            const claveIngresada = prompt("⚠️ Acción protegida por la Logia.\nIngresa la clave secreta para autorizar la eliminación de la fuente:");
+            if (claveIngresada === null) return;
+
+            try {
+                const formData = new FormData();
+                formData.append("record_id", recordId);
+                formData.append("key", claveIngresada);
+
+                const response = await fetch(`${API_URL}/api/delete-source`, {
+                    method: 'POST',
+                    body: formData
+                });
+                const result = await response.json();
+
+                if (response.ok) {
+                    alert("✨ " + result.message);
+                    loadFeed();
+                } else {
+                    alert("❌ " + (result.detail || "Error de validación."));
+                }
+            } catch (error) {
+                console.error("Error de red:", error);
+                alert("No se pudo conectar con el servidor de seguridad.");
+            }
+        }
+
+        // --- Recorte con html2canvas ---
+        function recortarNoticia(cardId) {
+            const cardElement = document.getElementById(cardId);
+            const actionButtons = cardElement.querySelector('.action-buttons');
+            actionButtons.style.display = 'none';
+
+            html2canvas(cardElement, { backgroundColor: '#1e293b', scale: 2 }).then(canvas => {
+                actionButtons.style.display = 'flex';
+                const link = document.createElement('a');
+                link.download = `SADV41-Expediente-${Date.now()}.png`;
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            }).catch(err => {
+                actionButtons.style.display = 'flex';
+                console.error('Error al recortar:', err);
+                alert('No se pudo generar el recorte automático.');
+            });
+        }
+
+        // --- Lógica de LoDeHoy (Slideshow GitHub) ---
         let noticiasAssets = [];
         let currentIndex = 0;
         let slideInterval;
@@ -210,7 +532,6 @@
         const prevBtn = document.getElementById('prevBtn');
         const nextBtn = document.getElementById('nextBtn');
 
-        // Función para detectar el tipo de archivo según su extensión
         function getFileType(filename) {
             const ext = filename.split('.').pop().toLowerCase();
             if (['jpg', 'jpeg', 'png', 'gif', 'webp', 'svg'].includes(ext)) return 'image';
@@ -220,32 +541,26 @@
             return 'unknown';
         }
 
-        // Cargar automáticamente los archivos desde la API de GitHub
         async function fetchGitHubFolder() {
             const apiUrl = 'https://api.github.com/repos/TheSteef21/Lapizasuli/contents/assets/NOTICIAS';
-            
             try {
                 const response = await fetch(apiUrl);
                 if (!response.ok) throw new Error('No se pudo conectar con el repositorio');
                 
                 const files = await response.json();
-                
-                // Filtrar y mapear los archivos encontrados
                 noticiasAssets = files
                     .filter(file => file.type === 'file')
                     .map(file => {
                         const type = getFileType(file.name);
-                        // Limpiar el nombre para usarlo de título amigable (ej: "expediente_01.jpg" -> "Expediente 01")
                         const cleanTitle = file.name.substring(0, file.name.lastIndexOf('.'))
                             .replace(/[-_]/g, ' ');
-                        
                         return {
                             type: type,
                             url: file.download_url,
                             title: cleanTitle.charAt(0).toUpperCase() + cleanTitle.slice(1)
                         };
                     })
-                    .filter(asset => asset.type !== 'unknown'); // Ignorar archivos no compatibles
+                    .filter(asset => asset.type !== 'unknown');
 
                 if (noticiasAssets.length > 0) {
                     initSlideshow();
@@ -285,7 +600,7 @@
                     docWrapper.className = 'slide-doc-container';
                     docWrapper.innerHTML = `
                         <div style="font-size: 3rem;">📄</div>
-                        <p style="color: var(--text-secondary); margin-bottom: 10px;">Documento de Expediente</p>
+                        <p style="color: var(--muted); margin-bottom: 10px;">Documento de Expediente</p>
                         <a href="${asset.url}" target="_blank" rel="noopener noreferrer">Abrir / Descargar Archivo</a>
                     `;
                     slide.appendChild(docWrapper);
@@ -317,7 +632,6 @@
         function showSlide(index) {
             const slides = document.querySelectorAll('.slide-item');
             const indicators = document.querySelectorAll('.indicator');
-
             if (slides.length === 0) return;
 
             if (index >= slides.length) currentIndex = 0;
@@ -360,18 +674,14 @@
             startAutoplay();
         }
 
-        prevBtn.addEventListener('click', () => {
-            prevSlide();
-            resetAutoplay();
-        });
+        prevBtn.addEventListener('click', () => { prevSlide(); resetAutoplay(); });
+        nextBtn.addEventListener('click', () => { nextSlide(); resetAutoplay(); });
 
-        nextBtn.addEventListener('click', () => {
-            nextSlide();
-            resetAutoplay();
+        // Inicialización al cargar la página
+        window.addEventListener('DOMContentLoaded', () => {
+            fetchGitHubFolder();
+            loadFeed();
         });
-
-        // Al cargar la página, consultamos a GitHub automáticamente
-        window.addEventListener('DOMContentLoaded', fetchGitHubFolder);
     </script>
 </body>
 </html>
