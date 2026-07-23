@@ -4,6 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SADV41 | Render Placa FIFA 2026</title>
+    
+    <!-- ========================================== -->
+    <!-- PARÁMETROS MAESTROS SADV41 (LEÍDOS POR TROQUE.PY) -->
+    <!-- ========================================== -->
+    <meta name="sadv41-width" content="450">
+    <meta name="sadv41-height" content="280">
+    <meta name="sadv41-radius" content="5.0">
+    <meta name="sadv41-material" content="ALUM 2.5mm">
+
     <style>
         body { background-color: #050505; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
         .placa-container { filter: drop-shadow(0 20px 40px rgba(0, 243, 255, 0.15)); }
@@ -11,9 +20,19 @@
 </head>
 <body>
 
-    <div class="placa-container">
-        <!-- Render SVG de la placa (Proporción exacta 450x280) -->
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 450 280" width="100%" style="max-width: 900px;">
+    <div class="placa-container" id="render-box">
+        <!-- El SVG se inyectará aquí de forma dinámica leyendo las metaetiquetas -->
+    </div>
+
+    <script>
+        // Sincronización interna: El navegador lee los mismos datos que leerá Python
+        const width = parseFloat(document.querySelector('meta[name="sadv41-width"]').content);
+        const height = parseFloat(document.querySelector('meta[name="sadv41-height"]').content);
+        const radius = parseFloat(document.querySelector('meta[name="sadv41-radius"]').content);
+        const material = document.querySelector('meta[name="sadv41-material"]').content;
+
+        const svgContent = `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}" width="100%" style="max-width: 900px;">
             <defs>
                 <linearGradient id="aluminio" x1="0%" y1="0%" x2="100%" y2="100%">
                     <stop offset="0%" stop-color="#2a2a2a"/>
@@ -28,26 +47,22 @@
             </defs>
 
             <!-- Capa 01_SIL: Corte Exterior Rojo Simulado -->
-            <rect x="2" y="2" width="446" height="276" rx="5" fill="none" stroke="#FF0000" stroke-width="1.5" stroke-dasharray="8,4"/>
+            <rect x="2" y="2" width="${width - 4}" height="${height - 4}" rx="${radius}" fill="none" stroke="#FF0000" stroke-width="1.5" stroke-dasharray="8,4"/>
             <text x="10" y="15" fill="#FF0000" font-family="monospace" font-size="6">LAYER: 01_SIL (CUT LINE)</text>
 
             <!-- Base de Aluminio -->
-            <rect x="5" y="5" width="440" height="270" rx="5" fill="url(#aluminio)" stroke="#111" stroke-width="2"/>
-
-            <!-- Capa 02_CAL: Marco Interno -->
-            <rect x="15" y="15" width="420" height="250" rx="3" fill="none" stroke="url(#oro)" stroke-width="2" opacity="0.8"/>
+            <rect x="5" y="5" width="${width - 10}" height="${height - 10}" rx="${radius}" fill="url(#aluminio)" stroke="#111" stroke-width="2"/>
 
             <!-- Arte y Tipografía -->
-            <text x="225" y="110" fill="url(#oro)" font-family="'Cinzel', serif, system-ui" font-size="28" font-weight="bold" text-anchor="middle" letter-spacing="4">FIFA WORLD CUP</text>
-            <text x="225" y="180" fill="#ffffff" font-family="'Cinzel', serif, system-ui" font-size="64" font-weight="bold" text-anchor="middle" letter-spacing="8" style="text-shadow: 0 5px 15px rgba(0,0,0,0.8);">2026</text>
-            <text x="225" y="220" fill="#a0a0a0" font-family="'Inter', sans-serif" font-size="12" font-weight="300" text-anchor="middle" letter-spacing="2">EDICIÓN CONMEMORATIVA</text>
+            <text x="${width/2}" y="${height * 0.4}" fill="url(#oro)" font-family="'Cinzel', serif, system-ui" font-size="28" font-weight="bold" text-anchor="middle" letter-spacing="4">FIFA WORLD CUP</text>
+            <text x="${width/2}" y="${height * 0.65}" fill="#ffffff" font-family="'Cinzel', serif, system-ui" font-size="64" font-weight="bold" text-anchor="middle" letter-spacing="8" style="text-shadow: 0 5px 15px rgba(0,0,0,0.8);">2026</text>
 
             <!-- Datos Técnicos de Producción -->
-            <text x="15" y="260" fill="#00f3ff" font-family="monospace" font-size="7">PROD_OS v2.6 | DIMS: 450x280mm | MAT: ALUM 2.5mm</text>
-            <text x="435" y="260" fill="#d4af37" font-family="monospace" font-size="7" text-anchor="end">SADV41 ARCHITECTURE</text>
-            <text x="435" y="270" fill="#00f3ff" font-family="monospace" font-size="7" text-anchor="end">RAD: 5.0mm</text>
-        </svg>
-    </div>
+            <text x="15" y="${height - 20}" fill="#00f3ff" font-family="monospace" font-size="7">PROD_OS v2.6 | DIMS: ${width}x${height}mm | MAT: ${material}</text>
+            <text x="${width - 15}" y="${height - 20}" fill="#d4af37" font-family="monospace" font-size="7" text-anchor="end">SADV41 ARCHITECTURE</text>
+        </svg>`;
 
+        document.getElementById('render-box').innerHTML = svgContent;
+    </script>
 </body>
 </html>
