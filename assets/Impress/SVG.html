@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SADV41 | Render Placa FIFA 2026</title>
+    <style>
+        body { background-color: #050505; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .placa-container { filter: drop-shadow(0 20px 40px rgba(0, 243, 255, 0.15)); }
+    </style>
+</head>
+<body>
+
+    <div class="placa-container">
+        <!-- Render SVG de la placa (Proporción exacta 450x280) -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 450 280" width="100%" style="max-width: 900px;">
+            <defs>
+                <linearGradient id="aluminio" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#2a2a2a"/>
+                    <stop offset="50%" stop-color="#5a5a5a"/>
+                    <stop offset="100%" stop-color="#1a1a1a"/>
+                </linearGradient>
+                <linearGradient id="oro" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#d4af37"/>
+                    <stop offset="50%" stop-color="#f3e5ab"/>
+                    <stop offset="100%" stop-color="#aa820a"/>
+                </linearGradient>
+            </defs>
+
+            <!-- Capa 01_SIL: Corte Exterior Rojo Simulado -->
+            <rect x="2" y="2" width="446" height="276" rx="5" fill="none" stroke="#FF0000" stroke-width="1.5" stroke-dasharray="8,4"/>
+            <text x="10" y="15" fill="#FF0000" font-family="monospace" font-size="6">LAYER: 01_SIL (CUT LINE)</text>
+
+            <!-- Base de Aluminio -->
+            <rect x="5" y="5" width="440" height="270" rx="5" fill="url(#aluminio)" stroke="#111" stroke-width="2"/>
+
+            <!-- Capa 02_CAL: Marco Interno -->
+            <rect x="15" y="15" width="420" height="250" rx="3" fill="none" stroke="url(#oro)" stroke-width="2" opacity="0.8"/>
+
+            <!-- Arte y Tipografía -->
+            <text x="225" y="110" fill="url(#oro)" font-family="'Cinzel', serif, system-ui" font-size="28" font-weight="bold" text-anchor="middle" letter-spacing="4">FIFA WORLD CUP</text>
+            <text x="225" y="180" fill="#ffffff" font-family="'Cinzel', serif, system-ui" font-size="64" font-weight="bold" text-anchor="middle" letter-spacing="8" style="text-shadow: 0 5px 15px rgba(0,0,0,0.8);">2026</text>
+            <text x="225" y="220" fill="#a0a0a0" font-family="'Inter', sans-serif" font-size="12" font-weight="300" text-anchor="middle" letter-spacing="2">EDICIÓN CONMEMORATIVA</text>
+
+            <!-- Datos Técnicos de Producción -->
+            <text x="15" y="260" fill="#00f3ff" font-family="monospace" font-size="7">PROD_OS v2.6 | DIMS: 450x280mm | MAT: ALUM 2.5mm</text>
+            <text x="435" y="260" fill="#d4af37" font-family="monospace" font-size="7" text-anchor="end">SADV41 ARCHITECTURE</text>
+            <text x="435" y="270" fill="#00f3ff" font-family="monospace" font-size="7" text-anchor="end">RAD: 5.0mm</text>
+        </svg>
+    </div>
+
+</body>
+</html>
