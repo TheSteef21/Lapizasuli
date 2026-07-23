@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía Docente: Formatos de Diseño y Troquelado</title>
+    <style>
+        :root {
+            --bg-main: #0a0a0a;
+            --bg-card: #161616;
+            --accent-gold: #d4af37;
+            --accent-glow: rgba(212, 175, 55, 0.15);
+            --text-primary: #f0f0f0;
+            --text-secondary: #a0a0a0;
+            --border-color: #333;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            color: var(--accent-gold);
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+
+        .intro-text {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Grid de Tarjetas Tripartitas */
+        .tripartite-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            border-color: var(--accent-gold);
+            box-shadow: 0 10px 30px var(--accent-glow);
+            transform: translateY(-5px);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--accent-gold);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .step-number {
+            font-size: 0.9rem;
+            color: var(--accent-gold);
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .format-title {
+            font-size: 1.5rem;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .scope {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .purpose {
+            font-size: 1rem;
+        }
+
+        .purpose strong {
+            color: var(--accent-gold);
+        }
+
+        /* Sección de Síntesis */
+        .synthesis-section {
+            background: linear-gradient(145deg, #1a1a1a, #121212);
+            border: 1px solid var(--accent-gold);
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+        }
+
+        .synthesis-section h2 {
+            color: #fff;
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .synthesis-list {
+            list-style: none;
+        }
+
+        .synthesis-list li {
+            margin-bottom: 20px;
+            padding-left: 30px;
+            position: relative;
+            font-size: 1.1rem;
+        }
+
+        .synthesis-list li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            top: -2px;
+            color: var(--accent-gold);
+            font-size: 1.5rem;
+        }
+
+        .synthesis-list li strong {
+            color: var(--text-primary);
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .synthesis-section { padding: 25px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Modelo Tripartito de Formatos para Diseño y Troquelado</h1>
+            <p class="intro-text">Para estructurar una guía docente clara sobre cuándo y cómo utilizar cada formato en un flujo de trabajo que va desde la programación web hasta la fabricación física (troquelado), podemos unificar SVG, DXF/DWG y AI/EPS en un modelo tripartito enfocado en sus competencias técnicas y su propósito pedagógico:</p>
+        </header>
+
+        <div class="tripartite-grid">
+            <!-- Tarjeta 1 -->
+            <div class="card">
+                <span class="step-number">Componente 1: Visualización y Prototipado</span>
+                <h2 class="format-title">SVG <br><span style="font-size: 0.9rem; font-weight: normal; color: #888;">(Scalable Vector Graphics)</span></h2>
+                <div class="scope"><strong>Ámbito:</strong> Web, interfaces interactivas y despliegues digitales en HTML/TSX.</div>
+                <p class="purpose"><strong>Ideal para la fase digital:</strong> Se usa cuando necesitas renderizar el diseño en pantallas, probar maquetación web con CSS, mostrar datos dinámicos en tiempo real (como los marcadores o el usuario de Instagram) y asegurar que el gráfico escale sin perder calidad.</p>
+            </div>
+
+            <!-- Tarjeta 2 -->
+            <div class="card">
+                <span class="step-number">Componente 2: Fabricación y Corte Industrial</span>
+                <h2 class="format-title">DXF <br><span style="font-size: 0.9rem; font-weight: normal; color: #888;">(Drawing Exchange Format)</span></h2>
+                <div class="scope"><strong>Ámbito:</strong> Máquinas de corte láser, mesas CNC y trazado de cuchillas.</div>
+                <p class="purpose"><strong>Ideal para la fase estructural:</strong> Se usa exclusivamente cuando el archivo pasa del entorno visual al taller mecánico. Las máquinas de corte no interpretan estilos artísticos complejos, solo leen líneas geométricas puras para trazar el contorno físico de la placa.</p>
+            </div>
+
+            <!-- Tarjeta 3 -->
+            <div class="card">
+                <span class="step-number">Componente 3: Acabado Gráfico y Estampado</span>
+                <h2 class="format-title">AI / EPS <br><span style="font-size: 0.9rem; font-weight: normal; color: #888;">(Adobe Illustrator / Encapsulated PostScript)</span></h2>
+                <div class="scope"><strong>Ámbito:</strong> Imprentas, grabados con relieve, texturas metálicas y serigrafía.</div>
+                <p class="purpose"><strong>Ideal para la fase pre-prensa:</strong> Se usa cuando la placa requiere capas separadas para efectos especiales (como el relieve dorado de las insignias, tintas directas o texturas cepilladas antes de aplicar el troquel).</p>
+            </div>
+        </div>
+
+        <section class="synthesis-section">
+            <h2>Síntesis Didáctica para el Estudiante o Técnico</h2>
+            <ul class="synthesis-list">
+                <li><strong>Si estás programando la interfaz:</strong> Utiliza <strong>SVG</strong> para que el diseño viva en la web y sea dinámico.</li>
+                <li><strong>Si vas a cortar el material (metal, acrílico o madera):</strong> Exporta o convierte las líneas base a <strong>DXF</strong> para que el láser o la fresadora CNC sepan por dónde ejecutar el troquelado físico.</li>
+                <li><strong>Si vas a enviar a estampar los detalles visuales y grabados:</strong> Prepara el archivo en <strong>AI/EPS</strong> para garantizar que los colores, relieves y vectorizaciones cumplan con los estándares de imprenta industrial.</li>
+            </ul>
+        </section>
+    </div>
+
+</body>
+</html>
