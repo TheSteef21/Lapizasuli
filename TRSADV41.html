@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GSADV41 | Sovereign Hub & Arquitectura Unificada</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@web3auth/modal@8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.0/ethers.umd.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#020617',
+                        oro: '#eab308',
+                        blanco: '#f8fafc',
+                        borgona: '#4a0010',
+                        neonGreen: '#10b981',
+                        neonBlue: '#00f3ff',
+                        renderRed: '#da3637',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                        mason: ['Cinzel', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root { 
+            --oro-alquimico: #d4af37; 
+            --oro-luz: #f3e5ab;
+            --obsidiana: #050505; 
+            --luz-divina: #7f5af0;
+            --luz-santo: #00f3ff;
+            --borgona-sacro: #4a0010;
+        }
+
+        /* --- ESTILOS BASE Y BACKGROUNDS --- */
+        body {
+            background-color: var(--obsidiana);
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+                linear-gradient(rgba(2, 6, 23, 0.85), rgba(2, 6, 23, 0.95)), 
+                url('https://y2s.onrender.com/api/graphics/mundial_bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #f8fafc;
+        }
+        
+        .glass { background: rgba(2, 6, 23, 0.85); backdrop-filter: blur(12px); border: 1px solid rgba(234, 179, 8, 0.2); }
+        .glass-mundial { background: rgba(2, 6, 23, 0.60); backdrop-filter: blur(8px); border: 1px solid rgba(16, 185, 129, 0.3); }
+        .glass-sismico { background: #161b22; border: 1px solid #30363d; }
+        
+        .text-shadow-oro { text-shadow: 0 0 10px rgba(234, 179, 8, 0.5); }
+        .text-shadow-green { text-shadow: 0 0 10px rgba(16, 185, 129, 0.6); }
+        .text-shadow-blue { text-shadow: 0 0 10px rgba(0, 243, 255, 0.6); }
+        .esoterico-glow { text-shadow: 0 0 25px rgba(212, 175, 55, 0.7); }
+
+        /* --- EFECTO SCANLINE --- */
+        .scanline {
+            width: 100%; height: 2px;
+            background: rgba(0, 209, 255, 0.15);
+            position: fixed; z-index: 50; top: 0;
+            pointer-events: none;
+            animation: scanline 8s linear infinite;
+        }
+        @keyframes scanline { 0% { top: 0; } 100% { top: 100%; } }
+        
+        /* --- ESTILOS DE MÓDULOS Y LOGIA --- */
+        .module-card { background: rgba(10, 15, 25, 0.8); border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); padding: 1.5rem; border-radius: 1rem; }
+        .input-dark { background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(0, 209, 255, 0.3); color: white; padding: 0.75rem; border-radius: 0.5rem; width: 100%; outline: none; transition: border-color 0.3s; }
+        .input-dark:focus { border-color: var(--oro-alquimico); }
+
+        .logia-card { 
+            background: linear-gradient(145deg, rgba(10,10,10,0.85), rgba(20,20,20,0.85));
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.9), inset 0 0 20px rgba(212, 175, 55, 0.03);
+            backdrop-filter: blur(12px);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s ease;
+        }
+        .logia-card:hover { border-color: rgba(212, 175, 55, 0.4); box-shadow: 0 20px 40px rgba(0,0,0,0.9), inset 0 0 30px rgba(212, 175, 55, 0.05); }
+        .geometria-bg {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 100%; height: 100%;
+            background: 
+                linear-gradient(30deg, transparent 49.5%, rgba(212, 175, 55, 0.03) 50%, transparent 50.5%),
+                linear-gradient(-30deg, transparent 49.5%, rgba(212, 175, 55, 0.03) 50%, transparent 50.5%);
+            pointer-events: none; z-index: 0;
+        }
+
+        /* --- CLASES DE BLOQUEO ULTRA INSTINCTO --- */
+        .bloqueo-activo { filter: blur(12px) grayscale(50%); pointer-events: none; user-select: none; transition: filter 0.5s ease; }
+        
+        /* --- ESTILOS DE GENERADOR DE PLACAS Y FORMATOS --- */
+        .tripartite-card {
+            background-color: rgba(22, 22, 22, 0.7); border: 1px solid #333; border-radius: 12px;
+            padding: 25px; transition: all 0.3s ease; position: relative; overflow: hidden;
+        }
+        .tripartite-card:hover { border-color: var(--oro-alquimico); box-shadow: 0 10px 30px rgba(212, 175, 55, 0.15); transform: translateY(-5px); }
+        .tripartite-card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px;
+            background: var(--oro-alquimico); transform: scaleX(0); transform-origin: left; transition: transform 0.3s ease;
+        }
+        .tripartite-card:hover::before { transform: scaleX(1); }
+        
+        .plate {
+            position: relative; background: linear-gradient(145deg, #2c251e, #1a1612);
+            border: 3px solid var(--oro-alquimico); border-radius: 16px; padding: 15px 25px;
+            display: flex; align-items: center; justify-content: space-between;
+            box-shadow: inset 0 0 15px rgba(0,0,0,0.8), 0 6px 12px rgba(0,0,0,0.4); overflow: hidden; min-height: 90px;
+        }
+        .plate::before {
+            content: ''; position: absolute; top: 4px; left: 4px; right: 4px; bottom: 4px;
+            border: 1px dashed rgba(212, 175, 55, 0.4); border-radius: 12px; pointer-events: none;
+        }
+        .match-score {
+            background: rgba(0, 0, 0, 0.6); border: 1px solid var(--oro-alquimico);
+            padding: 6px 18px; border-radius: 20px; font-size: 1.2rem; font-weight: bold;
+            color: var(--oro-luz); letter-spacing: 2px; box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        /* Acordeones y Utilidades (Reducidos para espacio) */
+        .news-accordion-content { transition: max-height 0.4s ease-in-out, opacity 0.3s ease-in-out; opacity: 0; }
+        .news-accordion-content.expanded { opacity: 1; }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-oro selection:text-navy overflow-x-hidden">
+
+    <!-- BLOQUEO POPUP -->
+    <div id="bloqueo-popup" class="fixed inset-0 bg-black/90 backdrop-blur-md z-[9999] flex items-center justify-center transition-opacity duration-500 hidden opacity-0">
+        <div class="bg-slate-900 border border-oro/50 p-8 rounded-2xl text-center max-w-sm relative shadow-[0_0_30px_rgba(212,175,55,0.15)]">
+            <div id="emoji-status" class="text-6xl mb-4 drop-shadow-[0_0_15px_rgba(212,175,55,0.5)]">🔒</div>
+            <h2 class="text-oro font-bold text-xl uppercase tracking-widest mb-4">Acceso Reservado</h2>
+            <p id="feedback-msg" class="text-slate-300 text-sm mb-6">La arquitectura SADV41 está sintonizada en 432Hz. ¿Buscando crédito o buscando propósito?</p>
+            <input type="password" id="clave-acceso" placeholder="Clave de propósito..." class="w-full bg-black/80 border border-slate-600 rounded-lg p-3 text-white text-center mb-4 focus:border-oro focus:outline-none transition-colors">
+            <button onclick="verificarClave()" class="w-full bg-oro text-navy font-bold py-3 rounded-lg hover:bg-yellow-500 transition-all shadow-[0_0_15px_rgba(234,179,8,0.3)] cursor-pointer">Desbloquear Propósito</button>
+        </div>
+    </div>
+    
+    <div class="scanline"></div>
+
+    <header id="main-header" class="fixed w-full z-50 glass border-b border-oro/30 px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-4 transition-all duration-500">
+        <div class="flex items-center gap-3">
+            <span class="text-2xl">🛡️</span>
+            <div>
+                <h1 class="font-serif text-xl tracking-wider text-oro font-bold">SOVEREIGN HUB</h1>
+                <p class="text-[9px] text-slate-400 font-mono tracking-widest">SADV41 DIGITAL ARCHITECTURE</p>
+            </div>
+        </div>
+        
+        <div class="flex flex-col items-center gap-2">
+            <nav class="flex gap-6 text-sm uppercase tracking-wider font-medium flex-wrap justify-center">
+                <a href="#formatos-seccion" class="hover:text-oro transition-colors text-amber-200">Arquitectura</a>
+                <a href="#placas-seccion" class="hover:text-emerald-400 transition-colors text-emerald-300 font-bold">Generador Placas</a>
+                <a href="#noticias-seccion" class="hover:text-neonBlue transition-colors text-cyan-300">Boletín</a>
+            </nav>
+        </div>
+
+        <div class="flex flex-col items-center justify-center gap-2">
+            <div id="status" class="text-[10px] text-oro font-mono text-center tracking-widest uppercase">Sistema Sincronizado</div>
+            <button onclick="connectBinance()" class="bg-oro hover:bg-amber-600 text-navy font-bold text-xs px-3 py-2 rounded transition-all flex items-center gap-1.5 shadow-lg shadow-oro/20 cursor-pointer">
+                ⚡ Connect Web3
+            </button>
+        </div>
+    </header>
+
+    <main id="main-content" class="pt-32 pb-12 px-4 md:px-12 max-w-6xl mx-auto space-y-16 transition-all duration-500">
+
+        <!-- INTRO SADV41 -->
+        <div class="relative w-full bg-black/60 border-y border-oro/30 py-6 flex flex-col items-center justify-center overflow-hidden rounded-xl shadow-[0_0_20px_rgba(0,243,255,0.1)]">
+            <h2 class="text-neonBlue font-mason text-xl md:text-2xl tracking-[0.4em] uppercase esoterico-glow relative z-10 text-center">
+                <span class="text-xl">🎚️</span> PaloVertical <span class="text-white text-sm mx-1">|</span> Isaías 43:19
+            </h2>
+            <div class="text-[10px] text-oro font-mono tracking-widest mt-4 relative z-10 border border-oro/40 px-4 py-1 rounded-full bg-black/50 shadow-inner">
+                LÍNEAS: 1018 ➞ ORIGEN: 10 ➞ [ 1 + 0 + 1 + 8 ] | CANALIZADOR: Gemini
+            </div>
+        </div>
+
+        <!-- SECCIÓN: FORMATOS Y ARQUITECTURA -->
+        <section id="formatos-seccion" class="logia-card p-8 md:p-12 rounded-xl border border-oro/30">
+            <div class="geometria-bg"></div>
+            <div class="relative z-10">
+                <header class="text-center mb-10">
+                    <h2 class="text-3xl text-oro font-mason uppercase tracking-widest esoterico-glow mb-4">Modelo Tripartito de Troquelado</h2>
+                    <p class="text-slate-400 font-sans text-sm max-w-3xl mx-auto">Sincronización didáctica y técnica desde la programación web hasta la fabricación física y el acabado de imprenta.</p>
+                </header>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10 font-sans">
+                    <!-- SVG -->
+                    <div class="tripartite-card">
+                        <span class="text-[10px] text-oro font-bold tracking-widest uppercase mb-3 block">Fase Digital</span>
+                        <h3 class="text-xl text-white font-bold mb-2">SVG <span class="text-xs text-slate-500 font-normal">(Vector)</span></h3>
+                        <div class="text-xs text-slate-400 border-b border-slate-700 pb-3 mb-3"><strong>Ámbito:</strong> Web, HTML/TSX.</div>
+                        <p class="text-sm text-slate-300">Renderizado en pantallas, pruebas CSS e inserción de datos dinámicos (marcos de usuario, etiquetas de redes). Escalabilidad sin pérdida de calidad.</p>
+                    </div>
+                    <!-- DXF -->
+                    <div class="tripartite-card">
+                        <span class="text-[10px] text-oro font-bold tracking-widest uppercase mb-3 block">Fase Estructural</span>
+                        <h3 class="text-xl text-white font-bold mb-2">DXF <span class="text-xs text-slate-500 font-normal">(Corte)</span></h3>
+                        <div class="text-xs text-slate-400 border-b border-slate-700 pb-3 mb-3"><strong>Ámbito:</strong> Láser, CNC, Cuchillas.</div>
+                        <p class="text-sm text-slate-300">Extracción de líneas geométricas puras. Las máquinas no interpretan estilos, solo leen trazos vectoriales para el contorno de la placa.</p>
+                    </div>
+                    <!-- AI/EPS -->
+                    <div class="tripartite-card">
+                        <span class="text-[10px] text-oro font-bold tracking-widest uppercase mb-3 block">Fase Pre-Prensa</span>
+                        <h3 class="text-xl text-white font-bold mb-2">AI / EPS <span class="text-xs text-slate-500 font-normal">(Acabado)</span></h3>
+                        <div class="text-xs text-slate-400 border-b border-slate-700 pb-3 mb-3"><strong>Ámbito:</strong> Imprenta, relieves, foil.</div>
+                        <p class="text-sm text-slate-300">Estructuración técnica de capas: Arte y diseño (Sangrado), Acabados especiales (Relieve/Foil) y Línea de troquel (Die-cut).</p>
+                    </div>
+                </div>
+
+                <!-- INSTRUCCIÓN MAESTRA GEMINI -->
+                <div class="bg-black/60 border border-slate-800 rounded-xl p-6 font-mono relative group">
+                    <h3 class="text-neonBlue text-sm uppercase tracking-widest mb-4 flex justify-between items-center">
+                        <span>⚙️ Instrucción Operativa (System Prompt Gemini)</span>
+                    </h3>
+                    <div class="text-xs text-slate-400 overflow-x-auto whitespace-pre-wrap leading-relaxed">
+Contexto y Rol: Actúa como un Especialista en Producción Digital, Desarrollo Web y Fabricación Física. Tu objetivo principal es asistirme en el flujo de trabajo de diseño y troquelado basándote estrictamente en el "Modelo Tripartito de Formatos".
+
+Mecanismo de Acción: Si no he especificado formato, pregunta: "Para entregarte la estructura correcta, indica tu fase: 1. Web (SVG), 2. Corte (DXF), o 3. Imprenta (AI/EPS)."
+
+- Modalidad 1 (SVG): Generar código fuente SVG puro, optimizado para web con clases/IDs para CSS/JS y datos dinámicos.
+- Modalidad 2 (DXF/DWG): Descartar colores/textos. Enfocarse en geometría de contorno (cut lines) o generar script Python (ezdxf).
+- Modalidad 3 (AI/EPS): Estructura de pre-prensa en capas: 1. Arte (Sangrado). 2. Acabados (Relieve/Foil). 3. Línea de troquel (Spot Color).
+
+Temática Mundial 2026: Incorporar logo oficial y estilo geométrico cuando se requiera. Referenciar proporciones estándar (Americano/Europeo).
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN: GENERADOR DE PLACAS MUNDIAL -->
+        <section id="placas-seccion" class="glass-mundial rounded-2xl overflow-hidden shadow-2xl max-w-4xl mx-auto border border-emerald-500/30">
+            <div class="p-8 text-center border-b border-white/5 bg-gradient-to-b from-emerald-500/10 to-transparent">
+                <h2 class="font-mason text-2xl md:text-3xl text-white font-extrabold tracking-wider text-shadow-green uppercase">Generador de Placas Horizontales</h2>
+                <p class="text-oro font-semibold text-sm tracking-widest mt-1 uppercase">Estilo Troquelado Oficial - Mundial 2026</p>
+            </div>
+
+            <div class="p-6 md:p-8 bg-slate-950/80 font-sans">
+                <div class="flex flex-wrap gap-4 mb-8 justify-center">
+                    <input type="text" id="igUser" class="input-dark flex-1 max-w-md" placeholder="Ingresa tu usuario IG (ej. @steven_dior)" value="@steven_dior">
+                    <button onclick="generarPlacas()" class="bg-gradient-to-r from-oro to-amber-600 hover:opacity-90 text-navy font-bold py-3 px-6 rounded-lg uppercase tracking-wide transition-all shadow-[0_0_15px_rgba(234,179,8,0.3)]">
+                        Generar Siluetas
+                    </button>
+                </div>
+
+                <div id="platesContainer" class="flex flex-col gap-6">
+                    <!-- Las placas se inyectan por JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- SANTÍSIMO -->
+        <section class="logia-card p-12 rounded-xl text-center relative border border-purple-500/30">
+            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 bg-purple-900/20 blur-[80px] rounded-full pointer-events-none"></div>
+            <div class="relative z-10">
+                <h2 class="text-3xl text-oro mb-6 uppercase tracking-[0.3em] font-mason esoterico-glow">
+                    EL SANTÍSIMO
+                </h2>
+                <div class="max-w-2xl mx-auto space-y-6 bg-gradient-to-b from-black/80 to-transparent p-10 rounded-2xl border border-oro/20 shadow-[0_0_40px_rgba(212,175,55,0.1)]">
+                    <h3 class="text-2xl font-bold text-white font-mason tracking-wider uppercase mb-4">La Final Eterna</h3>
+                    <p class="text-sm text-slate-300 font-sans italic">
+                        Más allá de cualquier estadio terrenal, existe una victoria que no conoce fin. Hoy, en el espíritu de la misión <strong>SADV41</strong>, presentamos el emblema de una batalla que trasciende el tiempo: 
+                        <br><br>
+                        <span class="text-lg font-bold text-oro esoterico-glow not-italic block">ÆRGENTÆNA vs S(ADV41)PAIN</span>
+                    </p>
+                    <div class="pt-6 border-t border-oro/20 mt-6">
+                        <p class="text-lg font-bold text-white uppercase tracking-widest">¡Cristo está por venir!</p>
+                        <div class="text-5xl mt-4 animate-[pulse_3s_infinite]">🎚️</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <footer class="text-center p-8 mt-12 border-t border-white/5 opacity-50">
+        <p class="text-[10px] font-mono tracking-widest uppercase">GSADV41 Architecture © 2026 | El Origen es 0</p>
+    </footer>
+
+    <script>
+        // --- LÓGICA: GENERADOR DE PLACAS ---
+        function generarPlacas() {
+            const user = document.getElementById('igUser').value.trim() || '@usuario';
+            const container = document.getElementById('platesContainer');
+            
+            const matches = [
+                { fase: "FINAL 2026", equipo1: "España", equipo1Icon: "🇪🇸", score: "1 - 0", equipo2: "Argentina", equipo2Icon: "🇦🇷" },
+                { fase: "GRUPO L", equipo1: "Panamá", equipo1Icon: "🇵🇦", score: "2 - 1", equipo2: "Croacia", equipo2Icon: "🇭🇷" }
+            ];
+
+            container.innerHTML = '';
+
+            matches.forEach(match => {
+                const plateHtml = `
+                    <div class="plate z-10 relative">
+                        <div class="flex items-center gap-4 z-10">
+                            <span class="text-3xl filter drop-shadow-lg">🏆</span>
+                            <div class="flex flex-col">
+                                <span class="text-[10px] text-[#f3e5ab] uppercase tracking-widest">${match.fase}</span>
+                                <span class="text-xl font-bold text-white uppercase tracking-wide">${match.equipo1Icon} ${match.equipo1}</span>
+                            </div>
+                        </div>
+                        
+                        <div class="text-center z-10">
+                            <div class="match-score">${match.score}</div>
+                        </div>
+
+                        <div class="flex items-center gap-4 z-10">
+                            <div class="flex flex-col text-right">
+                                <span class="text-[10px] text-[#f3e5ab] uppercase tracking-widest">Rival</span>
+                                <span class="text-xl font-bold text-white uppercase tracking-wide">${match.equipo2} ${match.equipo2Icon}</span>
+                            </div>
+                            <div class="text-xs text-oro bg-oro/10 px-3 py-1 rounded border border-oro/30 font-mono tracking-widest">${user}</div>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += plateHtml;
+            });
+        }
+
+        // --- LÓGICA: PROTOCOLO BLOQUEO/SADV41 ---
+        function verificarAccesoLogia() {
+            // Lógica bypass para que funcione la vista en este entorno maestro
+            desbloquearInterfaz(); 
+        }
+
+        function desbloquearInterfaz() {
+            const elementos = [document.getElementById("main-header"), document.getElementById("main-content")];
+            elementos.forEach(el => { if(el) el.classList.remove("bloqueo-activo"); });
+            
+            const popup = document.getElementById("bloqueo-popup");
+            if(popup){
+                popup.classList.add("opacity-0");
+                setTimeout(() => { popup.classList.add("hidden"); }, 500);
+            }
+        }
+
+        function verificarClave() {
+            const input = document.getElementById("clave-acceso").value;
+            if(input === "SADV41-2026") {
+                alert("La Logia reconoce tu propósito. Isaías 43:19");
+                desbloquearInterfaz();
+            } else {
+                document.getElementById("feedback-msg").innerText = "Modo Turbología 432Hz activado. Acceso local concedido por Gracia.";
+                desbloquearInterfaz();
+            }
+        }
+
+        async function connectBinance() {
+            alert("Binance Web3 Wallet Integration Pending API Key - SADV41 Vault");
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            verificarAccesoLogia();
+            generarPlacas(); // Iniciar placas por defecto
+        });
+    </script>
+</body>
+</html>
