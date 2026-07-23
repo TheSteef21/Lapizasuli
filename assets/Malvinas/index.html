@@ -3,276 +3,359 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Las Malvinas - Evidencia y Verdad</title>
-    <style>
-        :root {
-            --arg-blue: #75AADB;
-            --arg-sun: #FCBF49;
-            --dark-bg: #121212;
-            --card-bg: #1E1E1E;
-            --text-main: #E0E0E0;
-            --text-muted: #A0A0A0;
+    <title>GSADV41 | Las Malvinas & Logia Pluscuamperfecta</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@web3auth/modal@8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.0/ethers.umd.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#020617',
+                        oro: '#eab308',
+                        blanco: '#f8fafc',
+                        borgona: '#4a0010',
+                        neonGreen: '#10b981',
+                        neonBlue: '#00f3ff',
+                        renderRed: '#da3637',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                        mason: ['Cinzel', 'serif'],
+                    }
+                }
+            }
         }
-        
-        * {
-            box-sizing: border-box;
+    </script>
+
+    <style>
+        :root { 
+            --oro-alquimico: #d4af37; 
+            --obsidiana: #050505; 
+            --luz-divina: #7f5af0;
+            --luz-santo: #00f3ff;
+            --borgona-sacro: #4a0010;
         }
 
         body {
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--dark-bg);
-            color: var(--text-main);
-            margin: 0;
-            padding: 0;
-            line-height: 1.6;
-        }
-
-        header {
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a365d 100%);
-            padding: 60px 20px;
-            text-align: center;
-            border-bottom: 4px solid var(--arg-blue);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.6);
-        }
-
-        h1 {
-            margin: 0;
-            font-size: 2.8em;
-            color: #ffffff;
-            text-transform: uppercase;
-            letter-spacing: 3px;
+            background-color: var(--obsidiana);
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+                linear-gradient(rgba(2, 6, 23, 0.85), rgba(2, 6, 23, 0.95)), 
+                url('https://y2s.onrender.com/api/graphics/mundial_bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #f8fafc;
         }
         
-        header p {
-            color: var(--arg-sun);
-            font-size: 1.2em;
-            margin-top: 10px;
-            font-weight: bold;
-        }
-
-        .container {
-            max-width: 1100px;
-            margin: 50px auto;
-            padding: 0 20px;
-        }
-
-        .section-title {
-            border-left: 5px solid var(--arg-blue);
-            padding-left: 15px;
-            margin-bottom: 30px;
-            font-size: 2em;
-            color: #ffffff;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            margin-bottom: 50px;
-        }
-
-        .card {
-            background: var(--card-bg);
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
-            border: 1px solid #333;
-            transition: transform 0.3s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            border-color: var(--arg-blue);
-        }
-
-        .card img, .card video {
-            width: 100%;
-            height: auto;
-            display: block;
-            border-bottom: 1px solid #333;
-        }
-
-        .card-body {
-            padding: 25px;
-        }
+        .glass { background: rgba(2, 6, 23, 0.85); backdrop-filter: blur(12px); border: 1px solid rgba(234, 179, 8, 0.2); }
+        .glass-mundial { background: rgba(2, 6, 23, 0.60); backdrop-filter: blur(8px); border: 1px solid rgba(16, 185, 129, 0.3); }
+        .glass-sismico { background: #161b22; border: 1px solid #30363d; }
         
-        .card-body h3 {
-            margin-top: 0;
-            color: var(--arg-blue);
-            font-size: 1.4em;
-        }
+        .text-shadow-oro { text-shadow: 0 0 10px rgba(234, 179, 8, 0.5); }
+        .text-shadow-green { text-shadow: 0 0 10px rgba(16, 185, 129, 0.6); }
+        .text-shadow-blue { text-shadow: 0 0 10px rgba(0, 243, 255, 0.6); }
+        .esoterico-glow { text-shadow: 0 0 25px rgba(212, 175, 55, 0.7); }
 
-        .card-body p {
-            color: var(--text-muted);
-            font-size: 0.95em;
+        .scanline {
+            width: 100%; height: 2px;
+            background: rgba(0, 209, 255, 0.15);
+            position: fixed; z-index: 50; top: 0;
+            pointer-events: none;
+            animation: scanline 8s linear infinite;
         }
-
-        .full-width {
-            grid-column: 1 / -1;
-        }
-
-        /* Sección Bre-B */
-        .support-section {
-            background: linear-gradient(145deg, #1a1a1a, #222222);
-            border: 2px dashed var(--arg-sun);
-            border-radius: 15px;
-            padding: 40px;
-            text-align: center;
-            margin-top: 60px;
-            box-shadow: 0 10px 30px rgba(252, 191, 73, 0.1);
-        }
-
-        .support-section h2 {
-            color: var(--arg-sun);
-            margin-top: 0;
-            font-size: 2.2em;
-            margin-bottom: 10px;
-        }
+        @keyframes scanline { 0% { top: 0; } 100% { top: 100%; } }
         
-        .support-section > p {
-            color: var(--text-muted);
-            margin-bottom: 30px;
-            font-size: 1.1em;
-        }
+        .module-card { background: rgba(10, 15, 25, 0.8); border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); padding: 1.5rem; border-radius: 1rem; }
+        .input-dark { background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(0, 209, 255, 0.3); color: white; padding: 0.75rem; border-radius: 0.5rem; width: 100%; }
 
-        .payment-card {
-            background: #000000;
-            border-radius: 10px;
-            padding: 30px;
-            max-width: 500px;
-            margin: 0 auto;
-            border: 1px solid #444;
-            text-align: left;
-        }
-
-        .payment-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 0;
-            border-bottom: 1px solid #333;
-        }
-
-        .payment-row:last-child {
-            border-bottom: none;
-        }
-
-        .payment-label {
-            color: var(--text-muted);
-            font-size: 0.9em;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .payment-value {
-            color: #ffffff;
-            font-size: 1.2em;
-            font-weight: bold;
-            text-align: right;
-        }
-
-        .payment-value.highlight {
-            color: var(--arg-blue);
-            font-size: 1.4em;
-        }
+        .sidebar-tabs { position: fixed; left: 0; top: 50%; transform: translateY(-50%); z-index: 45; display: flex; flex-direction: column; gap: 12px; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+        .vertical-tab { display: flex; align-items: center; background: rgba(2, 6, 23, 0.95); padding: 12px 15px; border-radius: 0 15px 15px 0; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); width: 60px; overflow: hidden; white-space: nowrap; box-shadow: 4px 4px 15px rgba(0,0,0,0.5); cursor: pointer; }
+        .vertical-tab:hover { width: 340px; padding-left: 20px; }
+        .vertical-tab span.icon { font-size: 1.5rem; min-width: 30px; display: flex; justify-content: center; }
+        .vertical-tab span.text { margin-left: 15px; font-weight: bold; opacity: 0; transition: opacity 0.3s; font-size: 0.85rem; letter-spacing: 0.05em; }
+        .vertical-tab:hover span.text { opacity: 1; transition-delay: 0.1s; }
         
-        .badge {
-            background-color: var(--arg-blue);
-            color: #000;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 0.8em;
-            font-weight: bold;
-            margin-left: 10px;
-            vertical-align: middle;
-        }
+        .tab-ima { border-left: 4px solid #3b82f6; border-top: 1px solid rgba(59,130,246,0.3); border-right: 1px solid rgba(59,130,246,0.3); border-bottom: 1px solid rgba(59,130,246,0.3); }
+        .tab-ima:hover { background: rgba(30, 58, 138, 0.4); }
+        .tab-col { border-left: 4px solid #10b981; border-top: 1px solid rgba(16,185,129,0.3); border-right: 1px solid rgba(16,185,129,0.3); border-bottom: 1px solid rgba(16,185,129,0.3); }
+        .tab-col:hover { background: rgba(6, 78, 59, 0.4); }
+        .tab-ven { border-left: 4px solid #facc15; border-top: 1px solid rgba(250,204,21,0.3); border-right: 1px solid rgba(250,204,21,0.3); border-bottom: 1px solid rgba(250,204,21,0.3); }
+        .tab-ven:hover { background: rgba(161, 98, 7, 0.4); }
+        .tab-cristo { border-left: 4px solid #c084fc; border-top: 1px solid rgba(192,132,252,0.3); border-right: 1px solid rgba(192,132,252,0.3); border-bottom: 1px solid rgba(192,132,252,0.3); }
+        .tab-cristo:hover { background: rgba(107, 33, 168, 0.4); }
+        .tab-fifa { border-left: 4px solid #22c55e; border-top: 1px solid rgba(34,197,94,0.3); border-right: 1px solid rgba(34,197,94,0.3); border-bottom: 1px solid rgba(34,197,94,0.3); }
+        .tab-fifa:hover { background: rgba(21, 128, 61, 0.4); }
+        .tab-brave { border-left: 4px solid #f97316; border-top: 1px solid rgba(249,115,22,0.3); border-right: 1px solid rgba(249,115,22,0.3); border-bottom: 1px solid rgba(249,115,22,0.3); }
+        .tab-brave:hover { background: rgba(124, 45, 18, 0.4); }
+        .tab-toggle { border-left: 4px solid #94a3b8; border-top: 1px solid rgba(148,163,184,0.3); border-right: 1px solid rgba(148,163,184,0.3); border-bottom: 1px solid rgba(148,163,184,0.3); }
+        .tab-toggle:hover { background: rgba(71, 85, 105, 0.4); }
 
-        footer {
-            text-align: center;
-            padding: 40px 20px;
-            margin-top: 50px;
-            border-top: 1px solid #333;
-            color: var(--text-muted);
-            font-size: 0.9em;
-        }
-
+        .sidebar-tabs.right-aligned { left: auto; right: 0; }
+        .sidebar-tabs.right-aligned .vertical-tab { border-radius: 15px 0 0 15px; flex-direction: row-reverse; padding: 12px 15px; box-shadow: -4px 4px 15px rgba(0,0,0,0.5); }
+        .sidebar-tabs.right-aligned .vertical-tab:hover { padding-right: 20px; padding-left: 15px; }
+        .sidebar-tabs.right-aligned .vertical-tab span.text { margin-left: 0; margin-right: 15px; text-align: right; }
+        
         @media (max-width: 768px) {
-            .grid {
-                grid-template-columns: 1fr;
-            }
+            .sidebar-tabs { top: 85%; transform: translateY(0); gap: 8px; }
+            .vertical-tab { width: 50px; padding: 10px; border-radius: 0 10px 10px 0; }
+            .sidebar-tabs.right-aligned .vertical-tab { border-radius: 10px 0 0 10px; }
+            .vertical-tab span.icon { font-size: 1.2rem; }
+            .vertical-tab:hover, .sidebar-tabs.right-aligned .vertical-tab:hover { width: 280px; }
+            .vertical-tab span.text { font-size: 0.65rem; }
+        }
+
+        .logia-card { 
+            background: linear-gradient(145deg, rgba(10,10,10,0.85), rgba(20,20,20,0.85));
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.9), inset 0 0 20px rgba(212, 175, 55, 0.03);
+            backdrop-filter: blur(12px);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s ease;
+        }
+
+        .logia-card:hover {
+            border-color: rgba(212, 175, 55, 0.4);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.9), inset 0 0 30px rgba(212, 175, 55, 0.05);
+        }
+
+        .geometria-bg {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%; height: 100%;
+            background: 
+                linear-gradient(30deg, transparent 49.5%, rgba(212, 175, 55, 0.03) 50%, transparent 50.5%),
+                linear-gradient(-30deg, transparent 49.5%, rgba(212, 175, 55, 0.03) 50%, transparent 50.5%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .triangulo-trinidad {
+            width: 0;
+            height: 0;
+            border-left: 40px solid transparent;
+            border-right: 40px solid transparent;
+            border-bottom: 69.3px solid rgba(212, 175, 55, 0.15); 
+            position: relative;
+            margin: 0 auto;
+            filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.4));
+            animation: pulso-divino-trinidad 4s infinite alternate ease-in-out;
+        }
+
+        .triangulo-trinidad::after {
+            content: '1';
+            position: absolute;
+            top: 35px;
+            left: -5px;
+            color: var(--oro-alquimico);
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.8);
+        }
+
+        @keyframes pulso-divino-trinidad {
+            0% { filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.2)); transform: scale(1); }
+            100% { filter: drop-shadow(0 0 30px rgba(212, 175, 55, 0.9)); transform: scale(1.08); }
         }
     </style>
 </head>
-<body>
+<body class="font-sans antialiased selection:bg-oro selection:text-navy overflow-x-hidden">
 
-    <header>
-        <h1>Las Malvinas</h1>
-        <p>Evidencia Cartográfica y la Verdad del Sistema</p>
-    </header>
+    <div class="scanline"></div>
 
-    <div class="container">
-        
-        <h2 class="section-title">Registros Cartográficos</h2>
-        
-        <div class="grid">
-            <!-- Primera Imagen -->
-            <div class="card">
-                <img src="https://raw.githubusercontent.com/TheSteef21/Lapizasuli/main/assets/Malvinas/1784830018682.jpeg" alt="Islas Malvinas sin referencias inglesas">
-                <div class="card-body">
-                    <h3>Mapa Original</h3>
-                    <p>Visualización cartográfica mostrando las Islas Malvinas con su denominación legítima, sin las referencias impuestas.</p>
-                </div>
-            </div>
-
-            <!-- Segunda Imagen -->
-            <div class="card">
-                <img src="https://raw.githubusercontent.com/TheSteef21/Lapizasuli/main/assets/Malvinas/421334.jpg" alt="Islas Malvinas enero 2019">
-                <div class="card-body">
-                    <h3>Registro Enero 2019</h3>
-                    <p>Evidencia del estado del mapa en enero de 2019, documentando los cambios en las denominaciones territoriales.</p>
-                </div>
-            </div>
-
-            <!-- Tercer Elemento: Vídeo -->
-            <div class="card full-width">
-                <video controls poster="https://raw.githubusercontent.com/TheSteef21/Lapizasuli/main/assets/Malvinas/421366.jpg">
-                    <!-- Asumiendo que el video está en el repo como mp4 o similar. Se usa la imagen 421366 como poster -->
-                    <source src="https://raw.githubusercontent.com/TheSteef21/Lapizasuli/main/assets/Malvinas/video.mp4" type="video/mp4">
-                    Tu navegador no soporta la reproducción de video.
-                </video>
-                <div class="card-body">
-                    <h3>Manipulación del Sistema</h3>
-                    <p>Material audiovisual que expone la manipulación corrupta de la información y las plataformas en relación al reconocimiento del territorio.</p>
-                </div>
-            </div>
+    <div id="main-sidebar" class="sidebar-tabs transition-all duration-500">
+        <a href="https://thesteef21.github.io/Lapizasuli/IMA.html" target="_blank" class="vertical-tab tab-ima">
+            <span class="icon">🍚</span><span class="text text-blue-200">Arroz barato cerca de ti! 🇵🇦</span>
+        </a>
+        <a href="https://thesteef21.github.io/Lapizasuli/ColombiaPTY.html" target="_blank" class="vertical-tab tab-col">
+            <span class="icon">💸</span><span class="text text-emerald-300">Préstamos 🇵🇦🇨🇴🇺🇸💯⚡️✨️</span>
+        </a>
+        <a href="https://thesteef21.github.io/Lapizasuli/VSADV41.html" target="_blank" class="vertical-tab tab-ven">
+            <span class="icon">🇻🇪</span><span class="text text-yellow-300">Por Venezuela 🇻🇪</span>
+        </a>
+        <a href="https://thesteef21.github.io/Lapizasuli/CristoTeAma.html" target="_blank" class="vertical-tab tab-cristo">
+            <span class="icon">☦️</span><span class="text text-purple-300">Cristo Te Ama 🎚</span>
+        </a>
+        <a href="https://thesteef21.github.io/Lapizasuli/FIFA2026.html" target="_blank" class="vertical-tab tab-fifa">
+            <span class="icon">⚽</span><span class="text text-green-300">Las final se aproximan! ⚽️🇵🇦🇺🇸🇮🇱⚡️✨️💯</span>
+        </a>
+        <a href="https://brave.com/evi088" target="_blank" class="vertical-tab tab-brave">
+            <span class="icon">🦁</span><span class="text text-orange-400">Navegador seguro = Brave</span>
+        </a>
+        <div onclick="toggleSidebar()" class="vertical-tab tab-toggle" title="Cambiar lado del menú">
+            <span class="icon">⇋</span><span class="text text-slate-300">Alternar Menú</span>
         </div>
-
-        <!-- Sección de Apoyo / Bre-B -->
-        <div class="support-section">
-            <h2>Apoyo y Transacciones</h2>
-            <p>Canal habilitado mediante Bre-B para transacciones colombianas seguras.</p>
-            
-            <div class="payment-card">
-                <div class="payment-row">
-                    <span class="payment-label">Beneficiario</span>
-                    <span class="payment-value">STEVEN GOMEZ SERRANO</span>
-                </div>
-                <div class="payment-row">
-                    <span class="payment-label">Moneda</span>
-                    <span class="payment-value">Peso colombiano (COP) <span class="badge">Bre-B</span></span>
-                </div>
-                <div class="payment-row">
-                    <span class="payment-label">Usuario / Alias</span>
-                    <span class="payment-value highlight">@CB3WPEGY3</span>
-                </div>
-            </div>
-        </div>
-
     </div>
 
-    <footer>
-        <p>Desarrollado para la integración de evidencias. SADV41.</p>
+    <header id="main-header" class="fixed w-full z-50 glass border-b border-oro/30 px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-4 transition-all duration-500">
+        <div class="flex items-center gap-3">
+            <span class="text-2xl">🛡️</span>
+            <div>
+                <h1 class="font-serif text-xl tracking-wider text-oro font-bold">SOVEREIGN HUB</h1>
+                <p class="text-[9px] text-slate-400 font-mono tracking-widest">SADV41 DIGITAL ARCHITECTURE</p>
+            </div>
+        </div>
+        
+        <div class="flex flex-col items-center gap-2">
+            <nav class="flex gap-6 text-sm uppercase tracking-wider font-medium flex-wrap justify-center">
+                <a href="#malvinas-seccion" class="hover:text-blue-400 transition-colors text-blue-300 font-bold flex items-center gap-1">🇦🇷 Islas Malvinas</a>
+                <a href="#monitor-sismico-seccion" class="hover:text-red-400 transition-colors text-red-300 font-bold">⚠️ Telemetría SADV41T</a>
+                <a href="#noticias-seccion" class="hover:text-neonBlue transition-colors text-cyan-300">📰 Boletín</a>
+                <a href="#mayordomia-seccion" class="hover:text-oro transition-colors text-amber-200">Mayordomía</a>
+            </nav>
+        </div>
+
+        <div class="flex flex-col items-center justify-center gap-2">
+            <div id="status" class="text-[10px] text-oro font-mono text-center tracking-widest uppercase">Protocolo activo...</div>
+            <div class="flex flex-wrap gap-2 justify-center">
+                <button onclick="loginSocial('github')" class="bg-slate-800 hover:bg-slate-700 text-white font-semibold text-xs px-3 py-2 rounded transition-all flex items-center gap-1.5 border border-slate-700 cursor-pointer">
+                    💻 GitHub Access
+                </button>
+                <button id="btnConnect" onclick="connectBinance()" class="bg-oro hover:bg-amber-600 text-navy font-bold text-xs px-3 py-2 rounded transition-all flex items-center gap-1.5 shadow-lg shadow-oro/20 cursor-pointer">
+                    ⚡ Binance Web3 Wallet
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-content" class="pt-40 pb-12 px-4 md:px-12 max-w-6xl mx-auto space-y-16 transition-all duration-500">
+
+        <!-- SECCIÓN DE LAS MALVINAS CON EL MEME / VÍDEO DE TIKTOK INTEGRADO -->
+        <section id="malvinas-seccion" class="logia-card p-8 md:p-12 rounded-xl border border-blue-500/30 shadow-2xl">
+            <div class="geometria-bg"></div>
+            <div class="relative z-10">
+                <div class="text-center mb-10">
+                    <span class="text-3xl">🇦🇷</span>
+                    <h2 class="font-mason text-3xl md:text-4xl text-white font-bold uppercase tracking-wider mt-2" style="color: #75AADB; text-shadow: 0 0 15px rgba(117,170,219,0.4);">
+                        Las Malvinas - Evidencia y Verdad
+                    </h2>
+                    <p class="text-xs md:text-sm text-slate-300 font-mono tracking-widest uppercase mt-2">
+                        Registro Cartográfico y Revelación del Sistema
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
+                    <!-- Primera Imagen: Mapa Original -->
+                    <div class="bg-black/60 border border-slate-800 rounded-xl overflow-hidden shadow-xl hover:border-blue-400/50 transition-all">
+                        <img src="https://raw.githubusercontent.com/TheSteef21/Lapizasuli/main/assets/Malvinas/Screenshot_20260723_115747_Maps.jpg" alt="Islas Malvinas Maps Actual" class="w-full h-auto object-cover border-b border-slate-800">
+                        <div class="p-6">
+                            <h3 class="text-blue-300 font-bold text-lg mb-2 flex items-center gap-2"><span>🗺️</span> Evidencia Actual en Maps</h3>
+                            <p class="text-xs text-slate-300 leading-relaxed font-sans">
+                                Visualización cartográfica reciente que documenta el reconocimiento oficial de la soberanía e identidad argentina en el territorio insular.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Segunda Imagen: Registro Histórico -->
+                    <div class="bg-black/60 border border-slate-800 rounded-xl overflow-hidden shadow-xl hover:border-blue-400/50 transition-all">
+                        <img src="https://raw.githubusercontent.com/TheSteef21/Lapizasuli/main/assets/Malvinas/Screenshot_20260723_121744_WhatsAppBusiness.jpg" alt="Registro Histórico" class="w-full h-auto object-cover border-b border-slate-800">
+                        <div class="p-6">
+                            <h3 class="text-blue-300 font-bold text-lg mb-2 flex items-center gap-2"><span>📅</span> Registro Histórico y Conexión</h3>
+                            <p class="text-xs text-slate-300 leading-relaxed font-sans">
+                                Captura de archivo y enlaces operativos de WhatsApp Business que respaldan el historial de trazabilidad de las coordenadas territoriales.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- VÍDEO / MEME DE TIKTOK: LA MANIPULACIÓN DEL SISTEMA -->
+                <div class="bg-black/60 border border-slate-800 rounded-xl overflow-hidden shadow-xl mb-10">
+                    <div class="p-6 border-b border-slate-800 bg-slate-900/50 flex flex-col md:flex-row justify-between items-center gap-4">
+                        <div>
+                            <h3 class="text-oro font-bold text-xl flex items-center gap-2 font-mason"><span>🎬</span> La Manipulación del Sistema</h3>
+                            <p class="text-xs text-slate-400 font-mono mt-1">El meme y análisis crítico sobre la narrativa oficial y los intereses geopolíticos.</p>
+                        </div>
+                        <a href="https://vt.tiktok.com/ZSXttFCr3/" target="_blank" class="bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-500 hover:to-purple-500 text-white font-bold text-xs py-2.5 px-5 rounded-xl shadow-md transition-all flex items-center gap-2">
+                            <span>🎵</span> Ver Meme en TikTok ↗
+                        </a>
+                    </div>
+                    <div class="p-6 flex flex-col items-center justify-center bg-black/80 space-y-4">
+                        <video controls poster="https://raw.githubusercontent.com/TheSteef21/Lapizasuli/main/assets/Malvinas/video.mp4" class="w-full max-w-3xl rounded-lg border border-slate-700 shadow-2xl">
+                            <source src="https://raw.githubusercontent.com/TheSteef21/Lapizasuli/main/assets/Malvinas/video.mp4" type="video/mp4">
+                            Tu navegador no soporta la reproducción de video.
+                        </video>
+                        <p class="text-xs text-slate-400 italic text-center font-mono">
+                            Acceso directo al meme oficial de revelación en TikTok: <a href="https://vt.tiktok.com/ZSXttFCr3/" target="_blank" class="text-cyan-400 hover:underline">https://vt.tiktok.com/ZSXttFCr3/</a>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- SECCIÓN DE APOYO Y TRANSACCIONES MULTIDIMENSIONALES (Bre-B + Airtm) -->
+                <div class="mt-12 bg-gradient-to-br from-slate-900 to-black border-2 border-dashed border-oro/40 rounded-2xl p-8 text-center shadow-xl">
+                    <h3 class="text-2xl font-mason text-oro mb-2 tracking-widest uppercase">Mayordomía y Transacciones</h3>
+                    <p class="text-xs text-slate-300 mb-8 font-sans">Canales oficiales habilitados para soporte internacional y transacciones seguras.</p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto text-left">
+                        <!-- Tarjeta Bre-B -->
+                        <div class="bg-black/80 border border-slate-700 rounded-xl p-6 shadow-inner flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center justify-between mb-3 border-b border-slate-800 pb-2">
+                                    <span class="text-emerald-400 font-bold text-sm">🇨🇴 Bre-B Colombia</span>
+                                    <span class="text-[10px] bg-emerald-950 text-emerald-300 px-2 py-0.5 rounded font-mono">Activo</span>
+                                </div>
+                                <p class="text-[11px] text-slate-400 uppercase tracking-widest mb-1">Beneficiario:</p>
+                                <p class="text-white font-bold text-sm mb-3">STEVEN GOMEZ SERRANO</p>
+                                <p class="text-[11px] text-slate-400 uppercase tracking-widest mb-1">Moneda / Alias:</p>
+                                <p class="font-mono text-xs text-emerald-300">Peso colombiano (COP)</p>
+                                <p class="font-mono text-base text-oro font-bold mt-1 select-all">@CB3WPEGY3</p>
+                            </div>
+                        </div>
+
+                        <!-- Tarjeta Airtm -->
+                        <div class="bg-black/80 border border-slate-700 rounded-xl p-6 shadow-inner flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center justify-between mb-3 border-b border-slate-800 pb-2">
+                                    <span class="text-cyan-400 font-bold text-sm">🌐 Airtm Global</span>
+                                    <span class="text-[10px] bg-cyan-950 text-cyan-300 px-2 py-0.5 rounded font-mono">Multidivisa</span>
+                                </div>
+                                <p class="text-[11px] text-slate-400 uppercase tracking-widest mb-1">Métodos permitidos:</p>
+                                <p class="text-white font-bold text-sm mb-3">Dólares, Euros o Pesos</p>
+                                <p class="text-[11px] text-slate-400 uppercase tracking-widest mb-1">Enlace directo de pago:</p>
+                                <a href="https://airtm.me/steven507oficial" target="_blank" class="inline-block mt-2 bg-cyan-600 hover:bg-cyan-500 text-white font-bold text-xs py-2.5 px-4 rounded-lg transition-all shadow-md text-center w-full">
+                                    Pagar vía Airtm ↗
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CABECERA Y PROPÓSITO -->
+        <div class="relative w-full bg-black/60 border-y border-oro/30 py-6 mb-8 flex flex-col items-center justify-center overflow-hidden rounded-xl shadow-[0_0_20px_rgba(0,243,255,0.1)]">
+            <h2 class="text-neonBlue font-mason text-xl md:text-2xl tracking-[0.4em] uppercase esoterico-glow relative z-10 text-center flex items-center justify-center gap-3">
+                <span class="text-xl">🎚️</span> PaloVertical <span class="text-white text-sm mx-1">|</span> Isaías 43:19
+            </h2>
+            <p class="text-xs md:text-sm text-slate-200 font-serif italic mt-3 max-w-2xl text-center relative z-10 px-4 leading-relaxed">
+                "He aquí, yo hago cosa nueva; pronto saldrá a luz; ¿no la conoceréis? Otra vez abriré camino en el desierto, y ríos en la soledad."
+            </p>
+        </div>
+
+    </main>
+    
+    <footer class="text-center p-8 mt-12 border-t border-white/5 opacity-50">
+        <p class="text-[10px] font-mono tracking-widest uppercase">SADV41 Architecture © 2026 | El Origen es 0</p>
     </footer>
 
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('main-sidebar');
+            sidebar.classList.toggle('right-aligned');
+            const isRight = sidebar.classList.contains('right-aligned');
+            localStorage.setItem('sidebarPosition', isRight ? 'right' : 'left');
+        }
+    </script>
 </body>
 </html>
+
