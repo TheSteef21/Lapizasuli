@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Las Malvinas - Evidencia y Verdad</title>
+    <style>
+        :root {
+            --arg-blue: #75AADB;
+            --arg-sun: #FCBF49;
+            --dark-bg: #121212;
+            --card-bg: #1E1E1E;
+            --text-main: #E0E0E0;
+            --text-muted: #A0A0A0;
+        }
+        
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a365d 100%);
+            padding: 60px 20px;
+            text-align: center;
+            border-bottom: 4px solid var(--arg-blue);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2.8em;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+        
+        header p {
+            color: var(--arg-sun);
+            font-size: 1.2em;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            border-left: 5px solid var(--arg-blue);
+            padding-left: 15px;
+            margin-bottom: 30px;
+            font-size: 2em;
+            color: #ffffff;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+            border: 1px solid #333;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--arg-blue);
+        }
+
+        .card img, .card video {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-bottom: 1px solid #333;
+        }
+
+        .card-body {
+            padding: 25px;
+        }
+        
+        .card-body h3 {
+            margin-top: 0;
+            color: var(--arg-blue);
+            font-size: 1.4em;
+        }
+
+        .card-body p {
+            color: var(--text-muted);
+            font-size: 0.95em;
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        /* Sección Bre-B */
+        .support-section {
+            background: linear-gradient(145deg, #1a1a1a, #222222);
+            border: 2px dashed var(--arg-sun);
+            border-radius: 15px;
+            padding: 40px;
+            text-align: center;
+            margin-top: 60px;
+            box-shadow: 0 10px 30px rgba(252, 191, 73, 0.1);
+        }
+
+        .support-section h2 {
+            color: var(--arg-sun);
+            margin-top: 0;
+            font-size: 2.2em;
+            margin-bottom: 10px;
+        }
+        
+        .support-section > p {
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+
+        .payment-card {
+            background: #000000;
+            border-radius: 10px;
+            padding: 30px;
+            max-width: 500px;
+            margin: 0 auto;
+            border: 1px solid #444;
+            text-align: left;
+        }
+
+        .payment-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #333;
+        }
+
+        .payment-row:last-child {
+            border-bottom: none;
+        }
+
+        .payment-label {
+            color: var(--text-muted);
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .payment-value {
+            color: #ffffff;
+            font-size: 1.2em;
+            font-weight: bold;
+            text-align: right;
+        }
+
+        .payment-value.highlight {
+            color: var(--arg-blue);
+            font-size: 1.4em;
+        }
+        
+        .badge {
+            background-color: var(--arg-blue);
+            color: #000;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: bold;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 50px;
+            border-top: 1px solid #333;
+            color: var(--text-muted);
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Las Malvinas</h1>
+        <p>Evidencia Cartográfica y la Verdad del Sistema</p>
+    </header>
+
+    <div class="container">
+        
+        <h2 class="section-title">Registros Cartográficos</h2>
+        
+        <div class="grid">
+            <!-- Primera Imagen -->
+            <div class="card">
+                <img src="https://raw.githubusercontent.com/TheSteef21/Lapizasuli/main/assets/Malvinas/1784830018682.jpeg" alt="Islas Malvinas sin referencias inglesas">
+                <div class="card-body">
+                    <h3>Mapa Original</h3>
+                    <p>Visualización cartográfica mostrando las Islas Malvinas con su denominación legítima, sin las referencias impuestas.</p>
+                </div>
+            </div>
+
+            <!-- Segunda Imagen -->
+            <div class="card">
+                <img src="https://raw.githubusercontent.com/TheSteef21/Lapizasuli/main/assets/Malvinas/421334.jpg" alt="Islas Malvinas enero 2019">
+                <div class="card-body">
+                    <h3>Registro Enero 2019</h3>
+                    <p>Evidencia del estado del mapa en enero de 2019, documentando los cambios en las denominaciones territoriales.</p>
+                </div>
+            </div>
+
+            <!-- Tercer Elemento: Vídeo -->
+            <div class="card full-width">
+                <video controls poster="https://raw.githubusercontent.com/TheSteef21/Lapizasuli/main/assets/Malvinas/421366.jpg">
+                    <!-- Asumiendo que el video está en el repo como mp4 o similar. Se usa la imagen 421366 como poster -->
+                    <source src="https://raw.githubusercontent.com/TheSteef21/Lapizasuli/main/assets/Malvinas/video.mp4" type="video/mp4">
+                    Tu navegador no soporta la reproducción de video.
+                </video>
+                <div class="card-body">
+                    <h3>Manipulación del Sistema</h3>
+                    <p>Material audiovisual que expone la manipulación corrupta de la información y las plataformas en relación al reconocimiento del territorio.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección de Apoyo / Bre-B -->
+        <div class="support-section">
+            <h2>Apoyo y Transacciones</h2>
+            <p>Canal habilitado mediante Bre-B para transacciones colombianas seguras.</p>
+            
+            <div class="payment-card">
+                <div class="payment-row">
+                    <span class="payment-label">Beneficiario</span>
+                    <span class="payment-value">STEVEN GOMEZ SERRANO</span>
+                </div>
+                <div class="payment-row">
+                    <span class="payment-label">Moneda</span>
+                    <span class="payment-value">Peso colombiano (COP) <span class="badge">Bre-B</span></span>
+                </div>
+                <div class="payment-row">
+                    <span class="payment-label">Usuario / Alias</span>
+                    <span class="payment-value highlight">@CB3WPEGY3</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>Desarrollado para la integración de evidencias. SADV41.</p>
+    </footer>
+
+</body>
+</html>
