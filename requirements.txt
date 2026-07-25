@@ -3,8 +3,8 @@ requests
 gunicorn
 fastapi
 uvicorn
-fastapi
-uvicorn
 python-multipart
 pydantic
 Pillow
+pandas
+numpy
