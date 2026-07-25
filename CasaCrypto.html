@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal Crypto - Referidos</title>
+    <title>Portal Crypto - Referidos y Transparencia</title>
     <style>
         :root {
             --bg-color: #0b0f19;
@@ -53,6 +53,7 @@
             gap: 1.5rem;
             width: 100%;
             max-width: 1000px;
+            margin-bottom: 2rem;
         }
 
         .card {
@@ -63,6 +64,10 @@
             transition: transform 0.2s, border-color 0.2s;
         }
 
+        .card.full-width {
+            grid-column: 1 / -1;
+        }
+
         .card:hover {
             transform: translateY(-5px);
             border-color: var(--accent);
@@ -71,13 +76,14 @@
         .card h2 {
             font-size: 1.5rem;
             margin-bottom: 0.5rem;
+            color: #fff;
         }
 
         .card p {
             color: var(--text-muted);
             margin-bottom: 1rem;
             font-size: 0.95rem;
-            line-height: 1.5;
+            line-height: 1.6;
         }
 
         .refer-box {
@@ -86,12 +92,13 @@
             border-radius: 6px;
             margin-bottom: 1.5rem;
             border: 1px dashed #475569;
+            word-wrap: break-word;
         }
 
         .refer-code {
             font-family: monospace;
             color: #10b981;
-            font-size: 1.1rem;
+            font-size: 0.9rem;
             user-select: all;
         }
 
@@ -117,13 +124,21 @@
         .btn:hover {
             background-color: var(--accent-hover);
         }
+
+        .divider {
+            width: 100%;
+            max-width: 1000px;
+            height: 1px;
+            background-color: #2d3748;
+            margin: 1rem 0 2rem 0;
+        }
     </style>
 </head>
 <body>
 
     <div class="header">
         <h1>Mi Ecosistema Crypto</h1>
-        <p>Enlaces de registro y códigos de referido</p>
+        <p>Enlaces de registro, transparencia on-chain y actualidad</p>
     </div>
 
     <div class="grid">
@@ -158,6 +173,27 @@
                 <span class="refer-code">dda76d</span>
             </div>
             <a href="https://app.allox.ai?r=dda76d" target="_blank" class="btn">Acceder a Allox AI</a>
+        </div>
+        
+        <!-- Tarjeta de Origen Web3 (Transparencia) -->
+        <div class="card">
+            <h2>Origen Web 3.0</h2>
+            <p>Para que se sepa de dónde sale todo mi conocimiento web3.0, puedes auditar mis interacciones directamente en la blockchain de Sepolia.</p>
+            <div class="refer-box">
+                <span class="refer-label">Dirección (Blockscan):</span>
+                <span class="refer-code">0x4cbf2db3838341becb185892c3af576dc04e2498</span>
+            </div>
+            <a href="https://blockscan.com/address/0x4cBf2DB3838341BeCB185892C3af576Dc04e2498" target="_blank" class="btn">Auditar en Blockscan</a>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="grid">
+        <!-- Tarjeta de Actualidad Nacional (Ancho completo) -->
+        <div class="card full-width">
+            <h2>Postura y Actualidad Panameña</h2>
+            <p>Recientemente se ha notificado que hay "al menos 20 panameños y un fallecido en la guerra entre Rusia y Ucrania". Ésto mueve el mercado panameño desde Minera Panamá, ésto no es pan y circo, ellos saben que cometieron un error al querer imponerse con la nefasta ley 406 que se peleó del 23 de octubre 2023 hasta el 28 de noviembre, ésto es para que respeten al pueblo porque en él está el máximo poder del Estado una vez el pueblo reconoce que Dios está con dicho pueblo que le respalda en fe y acción.</p>
         </div>
     </div>
 
