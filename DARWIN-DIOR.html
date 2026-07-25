@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SADV41 - Génesis de Esquemas y Despliegue</title>
+    <style>
+        :root {
+            --bg-color: #0e0e0e;
+            --panel-bg: #1a1a1a;
+            --border-color: #333;
+            --accent-color: #00c853; /* Verde estilo Render 'Deployed' */
+            --text-main: #e0e0e0;
+            --text-muted: #888;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 40px 20px;
+        }
+
+        .genesis-container {
+            background-color: var(--panel-bg);
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--border-color);
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 20px;
+        }
+
+        .header h1 {
+            color: var(--accent-color);
+            margin: 0 0 10px 0;
+            font-size: 24px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .header p {
+            color: var(--text-muted);
+            margin: 0;
+            font-size: 14px;
+        }
+
+        /* Estilos de la Tabla de Cruce */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed;
+            margin-bottom: 40px;
+        }
+
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #252525;
+            color: var(--accent-color);
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+
+        .eje-y {
+            background-color: #252525;
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        .esquina {
+            background-color: #151515;
+            color: var(--text-muted);
+            font-size: 12px;
+            font-style: italic;
+        }
+
+        td.cruce {
+            background-color: #121212;
+            transition: all 0.3s ease;
+            position: relative;
+            cursor: crosshair;
+        }
+
+        td.cruce:hover {
+            background-color: #1e2920;
+            border-color: var(--accent-color);
+            box-shadow: inset 0 0 10px rgba(0, 200, 83, 0.1);
+        }
+
+        .formula {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .resultado-esquema {
+            font-size: 18px;
+            font-weight: bold;
+            color: #fff;
+            letter-spacing: 1px;
+        }
+
+        .badge {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            background-color: #333;
+            color: #aaa;
+        }
+
+        /* Estilos de la Sección de Despliegue */
+        .deployment-section {
+            border-top: 1px dashed var(--border-color);
+            padding-top: 30px;
+        }
+
+        .deployment-section h2 {
+            color: var(--text-main);
+            font-size: 18px;
+            margin-bottom: 5px;
+            text-align: center;
+        }
+        
+        .deployment-section .subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 13px;
+            margin-bottom: 25px;
+        }
+
+        .deployment-card {
+            background-color: #121212;
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 6px;
+            transition: border-color 0.3s;
+        }
+
+        .deployment-card:hover {
+            border-color: var(--accent-color);
+        }
+
+        .deployment-title {
+            color: var(--accent-color);
+            font-weight: bold;
+            font-size: 15px;
+            margin-bottom: 10px;
+        }
+
+        .deployment-text {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .deployment-text strong {
+            color: #e0e0e0;
+        }
+
+        .prompt-box {
+            background-color: #1e2920;
+            border-left: 4px solid var(--accent-color);
+            padding: 15px;
+            margin-top: 25px;
+            font-size: 14px;
+            color: #fff;
+            border-radius: 0 4px 4px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="genesis-container">
+        <!-- SECCIÓN 1: MATRIZ DE CRUCE -->
+        <div class="header">
+            <h1>SADV41_Genesis</h1>
+            <p>Matriz de Cruce Estructural - Generación de Nuevos Esquemas</p>
+        </div>
+
+        <table>
+            <tr>
+                <th class="esquina">Evolución<br>(Y \ X)</th>
+                <th>Esquema Base Alfa (A)</th>
+                <th>Esquema Base Beta (a)</th>
+            </tr>
+            <tr>
+                <td class="eje-y">Atributo Dominante (B)</td>
+                <td class="cruce">
+                    <span class="formula">A + B</span>
+                    <div class="resultado-esquema">Esquema AB</div>
+                    <span class="badge">Puro Dominante</span>
+                </td>
+                <td class="cruce">
+                    <span class="formula">a + B</span>
+                    <div class="resultado-esquema">Esquema aB</div>
+                    <span class="badge">Híbrido Estructural</span>
+                </td>
+            </tr>
+            <tr>
+                <td class="eje-y">Atributo Recesivo (b)</td>
+                <td class="cruce">
+                    <span class="formula">A + b</span>
+                    <div class="resultado-esquema">Esquema Ab</div>
+                    <span class="badge">Híbrido Volátil</span>
+                </td>
+                <td class="cruce">
+                    <span class="formula">a + b</span>
+                    <div class="resultado-esquema">Esquema ab</div>
+                    <span class="badge">Puro Recesivo</span>
+                </td>
+            </tr>
+        </table>
+
+        <!-- SECCIÓN 2: CONFIGURACIÓN DE DESPLIEGUE EN RENDER -->
+        <div class="deployment-section">
+            <h2>Configuración de Despliegue en Render</h2>
+            <p class="subtitle">Análisis basado en la referencia 1785002071801.jpeg para SADV41_Genesis.py</p>
+
+            <div class="deployment-card">
+                <div class="deployment-title">1. Web Service (La Opción Más Probable)</div>
+                <div class="deployment-text">
+                    Si SADV41_Genesis.py está diseñado para ser una API (por ejemplo, estructurada con FastAPI), una aplicación web o si necesita estar escuchando peticiones de internet mediante webhooks para comunicarse con otras plataformas, esta es la opción indiscutible.
+                    <br><br><strong>Ventaja:</strong> Render le asignará una URL pública segura (HTTPS) para que el mundo exterior pueda interactuar con el sistema.
+                </div>
+            </div>
+
+            <div class="deployment-card">
+                <div class="deployment-title">2. Background Worker</div>
+                <div class="deployment-text">
+                    Si el script es un proceso que se ejecuta continuamente en segundo plano (como un bot que escucha eventos sin necesidad de recibir tráfico web directo o un procesador de colas de datos), esta es la alternativa correcta.
+                    <br><br><strong>Ventaja:</strong> Mantiene el script corriendo 24/7 de forma ininterrumpida sin requerir puertos abiertos hacia el exterior.
+                </div>
+            </div>
+
+            <div class="deployment-card">
+                <div class="deployment-title">3. Cron Job</div>
+                <div class="deployment-text">
+                    Si "Genesis" es un código diseñado para ejecutarse solo en momentos específicos o intervalos regulares (por ejemplo, actualizar una base de datos o enviar reportes cada 12 horas) y luego apagarse.
+                    <br><br><strong>Ventaja:</strong> Optimiza los recursos, ya que solo consume tiempo de cómputo cuando se activa el horario programado.
+                </div>
+            </div>
+
+            <div class="prompt-box">
+                <strong>Ingreso de Parámetros:</strong> Para asegurarnos de tomar la ruta correcta desde el principio, ¿qué tipo de arquitectura o librería principal (como FastAPI, Flask, o un bucle continuo) estás utilizando dentro de SADV41_Genesis.py?
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
