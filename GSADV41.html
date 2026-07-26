@@ -113,6 +113,12 @@
         .tab-cripto { border-left: 4px solid #f59e0b; border-top: 1px solid rgba(245,158,11,0.3); border-right: 1px solid rgba(245,158,11,0.3); border-bottom: 1px solid rgba(245,158,11,0.3); }
         .tab-cripto:hover { background: rgba(245, 158, 11, 0.4); }
 
+        /* Pestañas de Inversión y Boxeo */
+        .tab-box { border-left: 4px solid #ef4444; border-top: 1px solid rgba(239,68,68,0.3); border-right: 1px solid rgba(239,68,68,0.3); border-bottom: 1px solid rgba(239,68,68,0.3); }
+        .tab-box:hover { background: rgba(239, 68, 68, 0.4); }
+        .tab-funding { border-left: 4px solid #10b981; border-top: 1px solid rgba(16,185,129,0.3); border-right: 1px solid rgba(16,185,129,0.3); border-bottom: 1px solid rgba(16,185,129,0.3); }
+        .tab-funding:hover { background: rgba(16, 185, 129, 0.4); }
+
         .tab-toggle { border-left: 4px solid #94a3b8; border-top: 1px solid rgba(148,163,184,0.3); border-right: 1px solid rgba(148,163,184,0.3); border-bottom: 1px solid rgba(148,163,184,0.3); }
         .tab-toggle:hover { background: rgba(71, 85, 105, 0.4); }
 
@@ -130,6 +136,8 @@
         .sidebar-tabs.right-aligned .tab-brave { border-left: 1px solid rgba(249,115,22,0.3); border-right: 4px solid #f97316; }
         .sidebar-tabs.right-aligned .tab-arg { border-left: 1px solid rgba(96,165,250,0.3); border-right: 4px solid #60a5fa; }
         .sidebar-tabs.right-aligned .tab-cripto { border-left: 1px solid rgba(245,158,11,0.3); border-right: 4px solid #f59e0b; }
+        .sidebar-tabs.right-aligned .tab-box { border-left: 1px solid rgba(239,68,68,0.3); border-right: 4px solid #ef4444; }
+        .sidebar-tabs.right-aligned .tab-funding { border-left: 1px solid rgba(16,185,129,0.3); border-right: 4px solid #10b981; }
         .sidebar-tabs.right-aligned .tab-toggle { border-left: 1px solid rgba(148,163,184,0.3); border-right: 4px solid #94a3b8; }
         
         @media (max-width: 768px) {
@@ -244,7 +252,6 @@
 </head>
 <body class="font-sans antialiased selection:bg-oro selection:text-navy overflow-x-hidden">
 
-    <!-- FONDO DE MARCA VECTORIAL -->
     <div class="marca-background">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="100%" height="100%">
           <defs>
@@ -305,6 +312,14 @@
         <a href="#" class="vertical-tab tab-cripto">
             <span class="icon">🪙</span><span class="text text-amber-400">La Casa Cripto</span>
         </a>
+        
+        <a href="https://thesteef21.github.io/Lapizasuli/RubenGuerraBox.html" target="_blank" class="vertical-tab tab-box">
+            <span class="icon">🥊</span><span class="text text-red-400">Rubén Guerra Box</span>
+        </a>
+        <a href="https://thesteef21.github.io/Lapizasuli/FUNDING.html" target="_blank" class="vertical-tab tab-funding">
+            <span class="icon">💵</span><span class="text text-emerald-400">Invertir (FUNDING)</span>
+        </a>
+
         <div onclick="toggleSidebar()" class="vertical-tab tab-toggle" title="Cambiar lado del menú">
             <span class="icon">⇋</span><span class="text text-slate-300">Alternar Menú</span>
         </div>
@@ -323,6 +338,7 @@
             <nav class="flex gap-6 text-sm uppercase tracking-wider font-medium flex-wrap justify-center">
                 <a href="https://thesteef21.github.io/Lapizasuli/assets/Malvinas/GSADV41.html" target="_blank" class="hover:text-blue-400 transition-colors text-blue-300 font-bold flex items-center gap-1">🇦🇷 GSADV41 ↗</a>
                 <a href="https://thesteef21.github.io/Lapizasuli/FIFA2026.html" target="_blank" class="hover:text-emerald-400 transition-colors text-emerald-300 font-bold flex items-center gap-1">⚽ Mundial 2026 ↗</a>
+                <a href="https://thesteef21.github.io/Lapizasuli/FUNDING.html" target="_blank" class="hover:text-emerald-400 transition-colors text-emerald-300 font-bold flex items-center gap-1">💵 INVIERTE EN NOSOTROS</a>
                 <a href="#monitor-sismico-seccion" class="hover:text-red-400 transition-colors text-red-300 font-bold">⚠️ Telemetría SADV41T</a>
                 <a href="#noticias-seccion" class="hover:text-neonBlue transition-colors text-cyan-300">📰 Boletín</a>
                 <a href="#mayordomia-seccion" class="hover:text-oro transition-colors text-amber-200">Mayordomía</a>
@@ -676,6 +692,7 @@
             <p class="text-xs text-slate-300 leading-relaxed">
                 La verdadera riqueza de la <strong>SADV41</strong> radica en la alineación entre la tecnología de vanguardia y un propósito eterno. Al integrar herramientas Web3 con una visión clara de mayordomía, nos posicionamos fuera de las presiones de escasez.
             </p>
+            
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
                 <div class="bg-black p-4 rounded-xl border border-gray-800 font-mono text-[11px] text-green-400 shadow-inner">
                     <p class="text-gray-500"># Repositorio de Habilidades Activas</p>
@@ -684,6 +701,19 @@
                 <div class="bg-gray-950 p-4 rounded-xl border border-gray-800 flex flex-col justify-center">
                     <h4 class="text-[10px] font-semibold uppercase tracking-wider text-slate-400 mb-1">Gobernanza Oficial (StevenDiorOficial)</h4>
                     <p class="font-mono text-xs text-oro break-all select-all">0x59cB5992c35d6cD0fE6Ea94436c6AAE41F6E5fDD</p>
+                </div>
+                
+                <div class="bg-[#0d1117] p-4 rounded-xl border border-gray-700 shadow-inner md:col-span-2 mt-2">
+                    <div class="flex items-center gap-2 mb-2 border-b border-gray-800 pb-2">
+                        <span class="text-xs text-gray-400 font-mono">📄 .github/FUNDING.yml</span>
+                    </div>
+                    <pre class="font-mono text-[11px] text-green-300 overflow-x-auto"><code>github: [thesteef21]
+custom: ["https://thesteef21.github.io/Lapizasuli/FUNDING.html"]
+# Apoya el desarrollo del nodo SADV41
+# El origen es 0, toda inversión retorna en bendición multiplicada.</code></pre>
+                    <a href="https://thesteef21.github.io/Lapizasuli/FUNDING.html" target="_blank" class="mt-3 inline-block bg-emerald-600/20 hover:bg-emerald-600/40 text-emerald-400 border border-emerald-500/30 font-mono text-xs px-4 py-1.5 rounded transition-colors w-full text-center">
+                        > EJECUTAR PROTOCOLO DE INVERSIÓN
+                    </a>
                 </div>
             </div>
         </section>
