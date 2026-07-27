@@ -14,6 +14,7 @@
             --text-muted: #94a3b8;
             --success: #10b981;
             --warning: #f3ba2f;
+            --cyan: #00f3ff;
         }
 
         * {
@@ -121,6 +122,8 @@
             border-radius: 6px;
             font-weight: bold;
             transition: background 0.2s;
+            cursor: pointer;
+            border: none;
         }
 
         .btn:hover {
@@ -143,7 +146,7 @@
             margin: 1rem 0 2rem 0;
         }
 
-        /* Estilos específicos para el Dashboard de la Billetera */
+        /* Estilos Dashboard de la Billetera */
         .wallet-dashboard {
             background: #000;
             padding: 1.5rem;
@@ -213,6 +216,52 @@
             color: #fff;
             font-size: 1.1rem;
         }
+
+        /* Estilos Asistente IA */
+        .ai-module {
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(0, 243, 255, 0.3);
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.1);
+        }
+        
+        .ai-header {
+            color: var(--cyan);
+            text-shadow: 0 0 10px rgba(0, 243, 255, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .ai-input {
+            width: 100%;
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid #334155;
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .ai-input:focus {
+            outline: none;
+            border-color: var(--cyan);
+        }
+
+        .ai-btn {
+            background: linear-gradient(90deg, #0e7490, #1d4ed8);
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.2);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .ai-response-box {
+            margin-top: 1.5rem;
+            padding: 1.25rem;
+            background: #0d1117;
+            border-left: 4px solid var(--cyan);
+            border-radius: 0 8px 8px 0;
+            min-height: 100px;
+        }
     </style>
 </head>
 <body>
@@ -223,7 +272,6 @@
     </div>
 
     <div class="grid">
-        <!-- Tarjeta b.ai -->
         <div class="card">
             <h2>b.ai</h2>
             <p>Únete a la plataforma y crea tu primera IA.</p>
@@ -234,7 +282,6 @@
             <a href="https://chat.b.ai/chat?invite_code=38UL9X" target="_blank" class="btn">Crear tu primera IA</a>
         </div>
 
-        <!-- Tarjeta Binance RealGo -->
         <div class="card">
             <h2>RealGo (Binance)</h2>
             <p>Plataforma vinculada al ecosistema de Binance.</p>
@@ -245,7 +292,6 @@
             <a href="https://binance.realgo.game/" target="_blank" class="btn">Acceder a RealGo</a>
         </div>
 
-        <!-- Tarjeta GRVT -->
         <div class="card">
             <h2>GRVT</h2>
             <p>Exchange de contratos perpetuos híbrido (BTC-USDT).</p>
@@ -256,7 +302,6 @@
             <a href="https://grvt.io/exchange/perpetual/BTC-USDT?utm_source=partnerships&utm_campaign=binance_dev_portal" target="_blank" class="btn">Acceder a GRVT</a>
         </div>
 
-        <!-- Tarjeta Allox AI -->
         <div class="card">
             <h2>Allox AI</h2>
             <p>Herramientas de inteligencia artificial para el entorno crypto.</p>
@@ -268,17 +313,17 @@
         </div>
     </div>
 
-    <!-- Sección de Transparencia de Billetera (Ancho Completo) -->
     <div class="grid">
         <div class="card full-width" style="border-color: var(--success); box-shadow: 0 4px 20px rgba(16, 185, 129, 0.1);">
             <h2>Transparencia On-Chain: Origen Web 3.0</h2>
-            <p>Auditoría directa de mi billetera principal (<strong style="color: #fff;">stevendior.bnb</strong>). Para que se sepa de dónde sale todo mi conocimiento Web3, aquí se refleja la administración de los recursos descentralizados (Snapshot de Blockscan).</p>
+            <p>Auditoría directa de mi billetera principal (<strong style="color: #fff;">stevendior.bnb</strong>). Para que se sepa de dónde sale todo mi conocimiento Web3, aquí se refleja la administración de los recursos descentralizados.</p>
 
             <div class="wallet-dashboard">
                 <div class="wallet-header">
                     <div>
                         <span class="wallet-stat-label">Valor Neto (Net Worth)</span>
-                        <div class="wallet-stat-value">$150.57</div>
+                        <!-- EL ID "net-worth-counter" ES CLAVE AQUÍ PARA EL SCRIPT -->
+                        <div class="wallet-stat-value" id="net-worth-counter">$150.57</div>
                     </div>
                     <div style="text-align: right;">
                         <span class="wallet-stat-label">Red Dominante</span>
@@ -315,15 +360,129 @@
         </div>
     </div>
 
+    <!-- Módulo Asistente IA SADV41 -->
+    <div class="grid">
+        <div class="card full-width ai-module">
+            <div class="ai-header mb-4">
+                <h2 style="margin:0;">🤖 Asistente SADV41</h2>
+                <span style="font-size: 0.75rem; border: 1px solid #334155; padding: 2px 8px; border-radius: 4px; background: rgba(0,0,0,0.5);">Telemetría IA</span>
+            </div>
+            
+            <input 
+                type="text" 
+                id="ia-input" 
+                class="ai-input" 
+                placeholder="¿Qué necesitas saber sobre CasaCrypto o GSADV41?"
+            >
+            
+            <button id="ia-btn" class="btn w-full ai-btn">
+                Transmitir Consulta a la Logia
+            </button>
+            
+            <div class="ai-response-box">
+                <p id="ia-response" style="color: #cbd5e1; margin:0; font-size: 0.95rem;">
+                    <span style="color: #64748b; font-style: italic;">El enlace neural está a la espera de tu instrucción...</span>
+                </p>
+            </div>
+        </div>
+    </div>
+
     <div class="divider"></div>
 
     <div class="grid">
-        <!-- Tarjeta de Actualidad Nacional (Ancho completo) -->
         <div class="card full-width">
             <h2>Postura y Actualidad Panameña</h2>
             <p>Recientemente se ha notificado que hay "al menos 20 panameños y un fallecido en la guerra entre Rusia y Ucrania". Ésto mueve el mercado panameño desde Minera Panamá, ésto no es pan y circo, ellos saben que cometieron un error al querer imponerse con la nefasta ley 406 que se peleó del 23 de octubre 2023 hasta el 28 de noviembre, ésto es para que respeten al pueblo porque en él está el máximo poder del Estado una vez el pueblo reconoce que Dios está con dicho pueblo que le respalda en fe y acción.</p>
         </div>
     </div>
 
+    <!-- ========================================== -->
+    <!-- SCRIPTS DE CONEXIÓN CON EL ORÁCULO DE RENDER -->
+    <!-- ========================================== -->
+    <script>
+        // URls Base del Backend
+        const API_BASE_URL = 'https://oraculo-ah30.onrender.com/api';
+        
+        // 1. LÓGICA DE TRANSPARENCIA (COVALENT)
+        async function actualizarBalance() {
+            const counterElement = document.getElementById('net-worth-counter');
+            if (!counterElement) return;
+
+            try {
+                counterElement.style.opacity = '0.5';
+                counterElement.style.transition = 'opacity 0.3s ease';
+                
+                const response = await fetch(`${API_BASE_URL}/wallet-balance`);
+                const data = await response.json();
+                
+                if (data.net_worth !== undefined) {
+                    const valorFormateado = new Intl.NumberFormat('en-US', {
+                        style: 'currency',
+                        currency: 'USD'
+                    }).format(data.net_worth);
+                    counterElement.innerText = valorFormateado;
+                }
+            } catch (error) {
+                console.error("Fallo de telemetría con la BNB Chain:", error);
+            } finally {
+                counterElement.style.opacity = '1';
+            }
+        }
+
+        // 2. LÓGICA DEL ASISTENTE IA (B.AI)
+        function initIA() {
+            const sendBtn = document.getElementById('ia-btn');
+            const inputField = document.getElementById('ia-input');
+            const responseDiv = document.getElementById('ia-response');
+
+            if (!sendBtn || !inputField || !responseDiv) return;
+
+            const procesarConsulta = async () => {
+                const pregunta = inputField.value.trim();
+                if (!pregunta) return;
+
+                responseDiv.innerHTML = '<span style="color: #00f3ff; font-family: monospace;">⚙️ Sincronizando con la red neural...</span>';
+                sendBtn.disabled = true;
+                sendBtn.style.opacity = '0.5';
+
+                try {
+                    const response = await fetch(`${API_BASE_URL}/ask-ia`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ pregunta: pregunta })
+                    });
+
+                    const data = await response.json();
+
+                    if (response.ok && data.choices && data.choices.length > 0) {
+                        responseDiv.innerHTML = `<span style="color: #fff;">${data.choices[0].message.content}</span>`;
+                    } else {
+                        responseDiv.innerHTML = `<span style="color: #fb7185;">⚠️ Ruido en la señal: ${data.error || 'Formato desconocido.'}</span>`;
+                    }
+                } catch (error) {
+                    console.error("Fallo de telemetría IA:", error);
+                    responseDiv.innerHTML = `<span style="color: #fb7185;">⚠️ Error crítico: El nodo Oráculo no responde.</span>`;
+                } finally {
+                    sendBtn.disabled = false;
+                    sendBtn.style.opacity = '1';
+                    inputField.value = ''; 
+                }
+            };
+
+            sendBtn.addEventListener('click', procesarConsulta);
+            inputField.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') procesarConsulta();
+            });
+        }
+
+        // Ejecutar funciones al cargar la página
+        document.addEventListener('DOMContentLoaded', () => {
+            actualizarBalance();
+            initIA();
+        });
+
+        // Automatización del contador (cada 60 segundos)
+        setInterval(actualizarBalance, 60000);
+    </script>
 </body>
 </html>
