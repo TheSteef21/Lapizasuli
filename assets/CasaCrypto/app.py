@@ -4,7 +4,7 @@ import requests
 import os
 
 app = Flask(__name__)
-CORS(app) # Permite peticiones desde tu frontend HTML
+CORS(app) # Permite peticiones desde el frontend HTML
 
 # 🛡️ SEGURIDAD SADV41: Obtenemos las claves desde Render
 B_AI_API_KEY = os.environ.get('AI_API_KEY') 
@@ -63,25 +63,24 @@ def get_wallet_balance():
         print("Advertencia: API Key de Covalent no encontrada. Mostrando saldo base.")
         return jsonify({"net_worth": 150.57, "network": "BNB Chain"}), 200
 
-    # Tu dirección pública de origen
+    # Dirección pública de origen
     wallet_address = '0x4cBf2DB3838341BeCB185892C3af576Dc04e2498'
     
     # Endpoint de Covalent para la BNB Chain (Chain ID: 56)
     url = f"https://api.covalenthq.com/v1/56/address/{wallet_address}/balances_v2/"
 
     try:
-        # Covalent acepta la API key como Basic Auth (usuario=API_KEY, contraseña=en blanco)
         response = requests.get(url, auth=(COVALENT_API_KEY, ''))
         response.raise_for_status()
         
         datos = response.json()
         
-        # Sumamos el valor en USD de todos los tokens en la billetera
+        # Sumamos el valor en USD de todos los tokens
         net_worth_total = 0.0
         items = datos.get('data', {}).get('items', [])
         
         for item in items:
-            quote = item.get('quote') # 'quote' es el valor en USD del token
+            quote = item.get('quote') 
             if quote:
                 net_worth_total += float(quote)
                 
@@ -92,7 +91,7 @@ def get_wallet_balance():
         
     except Exception as e:
         print(f"Ruido en el Oráculo Blockchain: {e}")
-        # Si la API falla, retornamos el saldo base estático como respaldo
+        # Retornamos el saldo base estático en caso de fallo de red
         return jsonify({"net_worth": 150.57, "network": "BNB Chain"}), 200
 
 if __name__ == '__main__':
