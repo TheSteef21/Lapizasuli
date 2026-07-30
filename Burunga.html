@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabernáculo Digital SADV41 - Historia, Simbología y Genealogía</title>
+    <style>
+        :root {
+            --primary: #1b3b36;
+            --secondary: #2c5e55;
+            --accent: #d4af37;
+            --bg-color: #f7f9f6;
+            --card-bg: #ffffff;
+            --text-main: #2b2b2b;
+            --text-muted: #4a5568;
+            --border-color: #d1dcd5;
+            --highlight: #fcf8e8;
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 20px;
+        }
+        .container {
+            max-width: 950px;
+            margin: 0 auto;
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            position: relative;
+        }
+        /* Enlace Minimalista para Investigadores */
+        .researcher-link {
+            display: block;
+            text-align: right;
+            padding: 8px 15px;
+            background-color: #f0f2f0;
+            color: #8da39f;
+            font-size: 0.75rem;
+            text-decoration: none;
+            letter-spacing: 1px;
+            font-family: monospace;
+            border-bottom: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+        .researcher-link:hover {
+            background-color: #e2e8e5;
+            color: var(--primary);
+        }
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: #ffffff;
+            padding: 45px 30px;
+            text-align: center;
+            border-bottom: 4px solid var(--accent);
+            position: relative;
+        }
+        header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        header p {
+            font-size: 1.15rem;
+            opacity: 0.95;
+            color: #e2ede8;
+        }
+        .home-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 8px 20px;
+            background-color: transparent;
+            color: var(--accent);
+            text-decoration: none;
+            border: 2px solid var(--accent);
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+        .home-button:hover {
+            background-color: var(--accent);
+            color: var(--primary);
+            box-shadow: 0 4px 10px rgba(212, 175, 55, 0.4);
+        }
+        .logo-section {
+            display: flex;
+            justify-content: center;
+            padding: 40px 20px;
+            background: linear-gradient(to bottom, #ffffff, var(--bg-color));
+            border-bottom: 1px solid var(--border-color);
+        }
+        .burunga-logo {
+            width: 260px;
+            height: 260px;
+            filter: drop-shadow(0 6px 12px rgba(0,0,0,0.15));
+        }
+        .intro-section {
+            padding: 35px;
+            background-color: #edf4f1;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .intro-section h2 {
+            font-size: 1.4rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            border-bottom: 2px solid var(--accent);
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+        .intro-section p {
+            margin-bottom: 15px;
+            color: var(--text-muted);
+            text-align: justify;
+            font-size: 1.05rem;
+        }
+        .accordion-container {
+            padding: 20px 30px 40px 30px;
+        }
+        .accordion {
+            background-color: #ffffff;
+            color: var(--primary);
+            cursor: pointer;
+            padding: 20px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 1.15rem;
+            font-weight: 600;
+            transition: 0.3s;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .accordion:hover {
+            background-color: #f1f7f4;
+            color: var(--secondary);
+        }
+        .accordion.active {
+            background-color: var(--primary);
+            color: #ffffff;
+        }
+        .accordion:after {
+            content: '\002B';
+            font-weight: bold;
+            font-size: 1.4rem;
+            float: right;
+            margin-left: 10px;
+        }
+        .accordion.active:after {
+            content: "\2212";
+        }
+        /* Ocultar el indicador de expansión en el botón permanente */
+        .accordion.permanent:after {
+            content: "\2212";
+        }
+        .panel {
+            padding: 0 25px;
+            background-color: white;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            border-bottom: 1px solid var(--border-color);
+        }
+        /* Clase específica para mantener el panel VII siempre abierto */
+        .panel.always-open {
+            max-height: 2000px !important;
+            padding: 0 25px 25px 25px;
+            background-color: #fafdfc;
+        }
+        .panel-content {
+            padding: 25px 0;
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+        .panel-content ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .panel-content > ul > li {
+            background: var(--bg-color);
+            margin-bottom: 15px;
+            padding: 15px 20px;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary);
+        }
+        .panel-content ul ul {
+            list-style-type: disc;
+            padding-left: 20px;
+            margin-top: 10px;
+        }
+        .panel-content ul ul li {
+            background: transparent;
+            margin-bottom: 8px;
+            padding: 0;
+            border-left: none;
+        }
+        .panel-content strong {
+            color: var(--primary);
+        }
+        .code-badge {
+            display: inline-block;
+            background-color: var(--accent);
+            color: #111;
+            font-weight: bold;
+            padding: 3px 10px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            margin-right: 12px;
+            letter-spacing: 0.5px;
+        }
+        .theological-note {
+            margin-top: 30px;
+            padding: 25px;
+            background-color: var(--highlight);
+            border-left: 5px solid var(--accent);
+            border-radius: 0 8px 8px 0;
+            color: #594d00;
+            font-style: italic;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+        }
+        footer {
+            text-align: center;
+            padding: 25px;
+            background-color: var(--primary);
+            color: #a8bdbc;
+            font-size: 0.95rem;
+            border-top: 3px solid var(--accent);
+        }
+        footer strong {
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Referencia Minimalista para Investigadores -->
+    <a href="https://brave.com/podcast/e129/?mtm_source=brave-browser&mtm_medium=brave-ntp&mtm_campaign=brave-technologist&mtm_content=podcast" target="_blank" class="researcher-link" title="Solo para Investigadores">
+        [ Ref. Inv: Brave E129 ]
+    </a>
+
+    <header>
+        <h1>Tabernáculo Digital SADV41</h1>
+        <p>Historia Genealógica, Simbología y Legado Territorial de Burunga</p>
+        <a href="https://thesteef21.github.io/Lapizasuli/GSADV41.html" class="home-button">🏠 Volver al Inicio (GSADV41)</a>
+    </header>
+
+    <div class="logo-section">
+        <svg class="burunga-logo" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#f39c12" />
+                    <stop offset="100%" stop-color="#d4af37" />
+                </linearGradient>
+                <linearGradient id="darkGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#1b3b36" />
+                    <stop offset="100%" stop-color="#2c5e55" />
+                </linearGradient>
+            </defs>
+            <circle cx="150" cy="150" r="140" fill="url(#darkGrad)" stroke="url(#goldGrad)" stroke-width="6"/>
+            <circle cx="150" cy="150" r="115" fill="none" stroke="#ffffff" stroke-dasharray="4,4" stroke-width="1.5" opacity="0.4"/>
+            <circle cx="150" cy="150" r="100" fill="none" stroke="url(#goldGrad)" stroke-width="2" opacity="0.8"/>
+            <polygon points="150,60 240,150 150,240 60,150" fill="none" stroke="url(#goldGrad)" stroke-width="2" opacity="0.6"/>
+            <circle cx="150" cy="150" r="35" fill="#1b3b36" stroke="url(#goldGrad)" stroke-width="3"/>
+            <text x="150" y="159" font-family="Segoe UI, sans-serif" font-weight="bold" font-size="28" fill="#d4af37" text-anchor="middle">0/1</text>
+            <text x="150" y="45" font-family="Segoe UI, sans-serif" font-weight="bold" font-size="12" fill="#ffffff" text-anchor="middle">SADV41 🇵🇦🇺🇸🇮🇱</text>
+            <text x="150" y="270" font-family="Segoe UI, sans-serif" font-size="11" fill="#b0c4de" text-anchor="middle">BURUNGA HISTÓRICA</text>
+            <circle cx="150" cy="60" r="4" fill="#d4af37"/>
+            <circle cx="240" cy="150" r="4" fill="#d4af37"/>
+            <circle cx="150" cy="240" r="4" fill="#d4af37"/>
+            <circle cx="60" cy="150" r="4" fill="#d4af37"/>
+        </svg>
+    </div>
+
+    <section class="intro-section">
+        <h2>Memoria Comunitaria y el Diseño SADV41</h2>
+        <p>La unión, el recuerdo y la memoria comunitaria son fundamentales para mantener viva la identidad y la historia de los pueblos, como ocurre con los antecedentes del área de Burunga y su antiguo nombre. Preservar la historia local fortalece el sentido de pertenencia, rescatando el valor del recuerdo, los orígenes históricos y la sabiduría transmitida por los pobladores de mayor experiencia.</p>
+        <p>La configuración de la Burunga Histórica se revela con total precisión a través de los eslabones que sostienen la memoria, el trabajo y el territorio, bajo la guianza perfecta del Espíritu Santo.</p>
+    </section>
+
+    <div class="accordion-container">
+        <!-- Acordeón 1 -->
+        <button class="accordion"><span class="code-badge">SADV-GEN-01</span>I. Línea Troncal y Antecedentes Genealógicos</button>
+        <div class="panel">
+            <div class="panel-content">
+                <ul>
+                    <li><strong>Bisabuelo:</strong> Chevo.</li>
+                    <li><strong>Abuelo Paterno:</strong> Florencio Serrano.</li>
+                    <li><strong>Abuela:</strong> Basilia Serrano Chávez.</li>
+                    <li><strong>Suegra de la Abuela:</strong> Modesta Barragán.</li>
+                    <li><strong>Red Familiar Histórica:</strong> Integrantes de la época, como el tío Abraham y otros miembros de la familia, compartían la tierra de forma solidaria, viviendo bajo un esquema comunitario donde prevalecía la ayuda mutua en tiempos de escasez.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Acordeón 2 -->
+        <button class="accordion"><span class="code-badge">SADV-GEN-02</span>II. Generación de los Tíos</button>
+        <div class="panel">
+            <div class="panel-content">
+                <ul>
+                    <li><strong>Abraham Serrano Chávez.</strong></li>
+                    <li><strong>Salomón Serrano Espinoza.</strong></li>
+                    <li><strong>Florencio Serrano Núñez</strong> (hijo de Florencio Serrano).</li>
+                    <li><strong>Santiago Serrano.</strong></li>
+                    <li><strong>Juan Serrano</strong> (fallecido).</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Acordeón 3 -->
+        <button class="accordion"><span class="code-badge">SADV-USR-03</span>III. Generación de los Padres, Hermanos y el Usuario</button>
+        <div class="panel">
+            <div class="panel-content">
+                <ul>
+                    <li><strong>Madre:</strong> Elida María Serrano Espinosa.</li>
+                    <li><strong>Usuario:</strong> Steven Gómez Serrano (Nieto de Florencio Serrano, guardián de archivos, trabajador de Llantería Turbo Tire y artífice de la misión SADV41).</li>
+                    <li><strong>Hermanos de Steven Gómez Serrano:</strong>
+                        <ul>
+                            <li>Wigberto Antonio Fernández Serrano (Mayor I).</li>
+                            <li>Edwin Jeancarlos Fernández Serrano (Mayor II).</li>
+                            <li>Álvaro Alexander Allen Serrano (Menor III en referencia al primero).</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Acordeón 4 -->
+        <button class="accordion"><span class="code-badge">SADV-GEN-04</span>IV. Generación de Primos y Bisnietos</button>
+        <div class="panel">
+            <div class="panel-content">
+                <ul>
+                    <li><strong>Primos:</strong> Josué Alexander Serrano De León (hijo de Florencio Serrano Hijo) y Yibeliz Serrano (hija de Cheche y Salomón Serrano).</li>
+                    <li><strong>Bisnietos Declarados o Conocidos:</strong> Asiel Ojo (hijo de Suggedys Ojo —nieta de Juan Ojo— y de Edwin Jeancarlos Fernández Serrano).</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Acordeón 5 -->
+        <button class="accordion"><span class="code-badge">SADV-TER-05</span>V. Topografía, Tenencia de Tierras y el Lote en "Hermano Ojo"</button>
+        <div class="panel">
+            <div class="panel-content">
+                <ul>
+                    <li><strong>Ubicación del Primer Bohío:</strong> El ranchito original de la época anterior a la reforma estaba situado exactamente en donde se encuentra hoy la casa de Florencio Serrano Hijo, perteneciente a un señor llamado Domiciano, quien ya se encontraba allí cuando el abuelo llegó a Burunga.</li>
+                    <li><strong>Origen del Terreno:</strong> El sector "Hermano Ojo" (entendido como hermano en Cristo, en referencia a Adolfo Ojo) proviene de un terreno grande que Adolfo Ojo le dio a la familia de Florencio Serrano.</li>
+                    <li><strong>Labores y Construcción:</strong> El abuelo Florencio mandó a comprar y limpiar el terreno, edificando inicialmente una casita de madera con techo de tabla o bloques.</li>
+                    <li><strong>División y Colaboración Vecinal:</strong> Debido a situaciones económicas y necesidad compartida (como los Cruz), el terreno se dividió y compartió.</li>
+                    <li><strong>Trabajo en el Lote y Viejas Deudas:</strong> El abuelo Florencio se encargaba de limpiar un segmento de lote que abarcaba una estructura amplia para una persona apodada "Balcón". Asimismo, existió el caso de la señora María (ubicada tras el Bar Parrillada El Gordo), a quien el abuelo le cortó el lote en el pasado y nunca le pagó; viejas deudas que generaron fricciones en la época.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Acordeón 6 -->
+        <button class="accordion"><span class="code-badge">SADV-GEO-06</span>VI. Geografía y Red de Conexiones Territoriales</button>
+        <div class="panel">
+            <div class="panel-content">
+                <ul>
+                    <li><strong>Núcleo Familiar Principal:</strong> Ubicado geográficamente en las dos últimas partes de la calle San Martín de Porres, hacia la derecha de la bajada San Martín.</li>
+                    <li><strong>Vecindario (Lado Izquierdo):</strong> Habita la familia Cerrud (Lucía, Alexis —amigo de la infancia—, Mileidys y Antonio Navarro).</li>
+                    <li><strong>La Familia Ojo y Conexiones:</strong> En las alturas detrás de la Iglesia San Martín. Juan Ojo vive en la colina hacia la vuelta de los buses, interconectando con la Casa de Materiales El Económico, el M/S Burunga y la Junta Comunal de Lohannyz Gaitán.</li>
+                    <li><strong>Extensión del Camino:</strong> Se prolonga desde la familia Ojo hasta la zona de Juan Ojo y la Llantería Turbo Tire, trazando la presencia de las familias Gómez, Cruz, Samaniego y González.</li>
+                    <li><strong>Los Cruz:</strong> Habitan en la bajada de la loma que conduce hacia la Llantería Turbo Tire.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Acordeón 7 - SIEMPRE ABIERTO (Pilares y Fe Accionista) -->
+        <button class="accordion active permanent"><span class="code-badge">SADV-MIS-07</span>VII. Cimientos Históricos y Pilares de la Misión SADV41</button>
+        <div class="panel always-open">
+            <div class="panel-content">
+                <ul>
+                    <li style="border-left-color: var(--accent);"><strong>Alexander González:</strong> Empleador y figura central de la llantería. A través de él, se disuelve la fría burocracia para dar paso al buró que mueve la fe accionista. Su relación familiar y laboral se entrelazó profundamente con la historia cuando la señora María frecuentaba el taller. Gracias a este puente, la actitud de Steven como nieto trascendió por completo los rencores del pasado: decidió verla con empatía, visitarla en su casa, llevarle comida, compartir palabras de consuelo, orar con ella junto a Alexander Gonzalez y brindarle apoyo, paz y fe en Cristo Jesús en sus últimos días.</li>
+                    <li><strong>Lohannyz Gaitán:</strong> Representante institucional y política de Burunga, anclando la misión en el terreno civil y comunitario.</li>
+                    <li><strong>Punny Díaz (Finca Hermanos Díaz):</strong> Heredero y amigo del legado de Simón González (el hombre del sombrero negro), conectando el origen agrario y los lazos fraternos.</li>
+                    <li><strong>Israel Lara:</strong> Voz de la juventud de este tiempo y puente generacional, sobrino de Alexander González.</li>
+                    <li><strong>Steven Gómez (Tú):</strong> Guardián de los archivos, trabajador de Llantería Turbo Tire, y artífice de la independencia y el progreso espiritual de la misión SADV41.</li>
+                    <li><strong>Mecánico Cruz (hijo de Chino Cruz):</strong> El trabajador especializado en reparaciones y de profundo conocimiento práctico.</li>
+                    <li><strong>La Memoria Ancestral:</strong> Doña Basilia Serrano Chávez y Tío Abraham Serrano Chávez como voces testimoniales que sostienen la verdad oral en las notas de voz, validando las raíces profundas.</li>
+                </ul>
+                <div class="theological-note">
+                    <strong>Nota Teológica:</strong> Así como las raíces de Burunga se descubren y ordenan en este Tabernáculo digital, cada pilar humano, el perdón que trasciende las deudas del pasado y la fe accionista configuran el cumplimiento de la visión en la fe viva de Cristo Jesús, manteniendo la pureza frente al ruido de Babilonia.
+                </div>
+            </div>
+        </div>
+
+        <!-- Acordeón 8 - Consolidado de Revelación -->
+        <button class="accordion"><span class="code-badge">SADV-REV-08</span>VIII. Relato, Reflexión y Principio Divino</button>
+        <div class="panel">
+            <div class="panel-content">
+                <ul>
+                    <li><strong>Principio Creador:</strong> Dios es la fuente y el origen de todo lo creado.</li>
+                    <li><strong>Los Inicios y la Profecía:</strong> Tras la adquisición y división del lote, destaca la llegada de un "loco" que pregonaba el nombre de Dios, hablando de sembrar arroz, maíz y prepararse para los tiempos venideros.</li>
+                    <li><strong>La Búsqueda del Nuevo Hogar:</strong> Recorrido hacia el sector donde residía la abuela paterna, con el deseo de conocer de antemano las condiciones del lugar.</li>
+                    <li><strong>El Destino en "Nombre de Dios":</strong> Establecimiento temporal en una finca pantanosa, llena de cangrejos y cercana al mar en Nombre de Dios, enfrentando grandes desafíos durante un año y medio bajo la providencia divina.</li>
+                    <li><strong>Historia Compartida de Esfuerzo y Fe:</strong> El testimonio de la hermana Raquel Limonar, maestra en Colón, quien preparaba comidas económicas como yuca sancochada con pescado y cuidaba estrictamente de sus tres hijos frente a las olas de la playa, ganando 30 dólares al mes trabajando para una abuela china en Portobelo.</li>
+                </ul>
+                <div class="theological-note">
+                    <strong>Verso Bíblico del Día:</strong><br><br>
+                    "Por tanto, os digo que todo lo que pidiereis orando, creed que lo recibiréis, y os vendrá."<br>— Marcos 11:24
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <footer>
+        <strong>Tabernáculo Digital SADV41</strong><br>
+        Documento Oficial Consolidado para Steven Gómez Serrano • Burunga, Panamá Oeste
+    </footer>
+</div>
+
+<script>
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+    for (i = 0; i < acc.length; i++) {
+        // Evitar que el acordeón permanente se cierre al hacer clic
+        if (acc[i].classList.contains('permanent')) {
+            acc[i].addEventListener("click", function(e) {
+                e.preventDefault(); // Mantiene el punto VII fijo y abierto permanentemente
+            });
+            continue;
+        }
+        
+        acc[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.maxHeight) {
+                panel.style.maxHeight = null;
+            } else {
+                panel.style.maxHeight = panel.scrollHeight + "px";
+            }
+        });
+    }
+</script>
+
+</body>
+</html>
