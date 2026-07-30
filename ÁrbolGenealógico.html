@@ -1,323 +1,303 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Historia Genealógica, Familiar y Territorial - Steven Gómez Serrano</title>
-    <style>
-        :root {
-            --primary: #1b3b36;
-            --secondary: #2c5e55;
-            --accent: #d4af37;
-            --bg-color: #f7f9f6;
-            --card-bg: #ffffff;
-            --text-main: #2b2b2b;
-            --text-muted: #555555;
-            --border-color: #d1dcd5;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            line-height: 1.6;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            background-color: var(--card-bg);
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            overflow: hidden;
-            border: 1px solid var(--border-color);
-        }
-
-        header {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: #ffffff;
-            padding: 40px 30px;
-            text-align: center;
-            border-bottom: 4px solid var(--accent);
-        }
-
-        header h1 {
-            font-size: 2rem;
-            margin-bottom: 10px;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-        }
-
-        header p {
-            font-size: 1.1rem;
-            opacity: 0.9;
-            color: #e2ede8;
-        }
-
-        .intro-section {
-            padding: 30px;
-            background-color: #edf4f1;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .intro-section h2 {
-            font-size: 1.3rem;
-            color: var(--primary);
-            margin-bottom: 15px;
-        }
-
-        .intro-section p {
-            margin-bottom: 15px;
-            color: var(--text-muted);
-            text-align: justify;
-        }
-
-        .accordion-container {
-            padding: 20px 30px 40px 30px;
-        }
-
-        .accordion {
-            background-color: #ffffff;
-            color: var(--primary);
-            cursor: pointer;
-            padding: 18px 20px;
-            width: 100%;
-            border: none;
-            text-align: left;
-            outline: none;
-            font-size: 1.15rem;
-            font-weight: 600;
-            transition: 0.3s;
-            border-bottom: 1px solid var(--border-color);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .accordion:hover {
-            background-color: #f1f7f4;
-            color: var(--secondary);
-        }
-
-        .accordion.active {
-            background-color: var(--primary);
-            color: #ffffff;
-        }
-
-        .accordion:after {
-            content: '\002B';
-            font-weight: bold;
-            font-size: 1.3rem;
-            float: right;
-            margin-left: 10px;
-        }
-
-        .accordion.active:after {
-            content: "\2212";
-        }
-
-        .panel {
-            padding: 0 20px;
-            background-color: white;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-out;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .panel-content {
-            padding: 20px 0;
-            color: var(--text-muted);
-        }
-
-        .panel-content ul {
-            list-style-type: disc;
-            padding-left: 20px;
-        }
-
-        .panel-content li {
-            margin-bottom: 10px;
-        }
-
-        .panel-content strong {
-            color: var(--primary);
-        }
-
-        .code-badge {
-            display: inline-block;
-            background-color: var(--accent);
-            color: #111;
-            font-weight: bold;
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-size: 0.85rem;
-            margin-right: 8px;
-        }
-
-        .theological-note {
-            margin-top: 25px;
-            padding: 20px;
-            background-color: #fcf8e8;
-            border-left: 5px solid var(--accent);
-            border-radius: 4px;
-            color: #5c4d00;
-            font-style: italic;
-        }
-
-        footer {
-            text-align: center;
-            padding: 20px;
-            background-color: #1b3b36;
-            color: #fff;
-            font-size: 0.9rem;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Historia Genealógica, Familiar y Territorial - Steven Gómez Serrano</title>
+<style>
+:root {
+--primary: #1b3b36;
+--secondary: #2c5e55;
+--accent: #d4af37;
+--bg-color: #f7f9f6;
+--card-bg: #ffffff;
+--text-main: #2b2b2b;
+--text-muted: #555555;
+--border-color: #d1dcd5;
+}
+* {
+box-sizing: border-box;
+margin: 0;
+padding: 0;
+}
+body {
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+background-color: var(--bg-color);
+color: var(--text-main);
+line-height: 1.6;
+padding: 20px;
+}
+.container {
+max-width: 900px;
+margin: 0 auto;
+background-color: var(--card-bg);
+border-radius: 12px;
+box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+overflow: hidden;
+border: 1px solid var(--border-color);
+}
+header {
+background: linear-gradient(135deg, var(--primary), var(--secondary));
+color: #ffffff;
+padding: 40px 30px;
+text-align: center;
+border-bottom: 4px solid var(--accent);
+}
+header h1 {
+font-size: 2rem;
+margin-bottom: 10px;
+font-weight: 700;
+letter-spacing: 0.5px;
+}
+header p {
+font-size: 1.1rem;
+opacity: 0.9;
+color: #e2ede8;
+}
+.intro-section {
+padding: 30px;
+background-color: #edf4f1;
+border-bottom: 1px solid var(--border-color);
+}
+.intro-section h2 {
+font-size: 1.3rem;
+color: var(--primary);
+margin-bottom: 15px;
+}
+.intro-section p {
+margin-bottom: 15px;
+color: var(--text-muted);
+text-align: justify;
+}
+.accordion-container {
+padding: 20px 30px 40px 30px;
+}
+.accordion {
+background-color: #ffffff;
+color: var(--primary);
+cursor: pointer;
+padding: 18px 20px;
+width: 100%;
+border: none;
+text-align: left;
+outline: none;
+font-size: 1.15rem;
+font-weight: 600;
+transition: 0.3s;
+border-bottom: 1px solid var(--border-color);
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+.accordion:hover {
+background-color: #f1f7f4;
+color: var(--secondary);
+}
+.accordion.active {
+background-color: var(--primary);
+color: #ffffff;
+}
+.accordion:after {
+content: '\002B';
+font-weight: bold;
+font-size: 1.3rem;
+float: right;
+margin-left: 10px;
+}
+.accordion.active:after {
+content: "\2212";
+}
+.panel {
+padding: 0 20px;
+background-color: white;
+max-height: 0;
+overflow: hidden;
+transition: max-height 0.3s ease-out;
+border-bottom: 1px solid var(--border-color);
+}
+/* Clase específica para mantener el panel VII siempre abierto */
+.panel.always-open {
+max-height: 1000px !important;
+padding: 0 20px 20px 20px;
+}
+/* Ocultar el indicador de expansión en el botón permanente */
+.accordion.permanent:after {
+content: "\2212";
+}
+.panel-content {
+padding: 20px 0;
+color: var(--text-muted);
+}
+.panel-content ul {
+list-style-type: disc;
+padding-left: 20px;
+}
+.panel-content li {
+margin-bottom: 10px;
+}
+.panel-content strong {
+color: var(--primary);
+}
+.code-badge {
+display: inline-block;
+background-color: var(--accent);
+color: #111;
+font-weight: bold;
+padding: 2px 8px;
+border-radius: 4px;
+font-size: 0.85rem;
+margin-right: 8px;
+}
+.theological-note {
+margin-top: 25px;
+padding: 20px;
+background-color: #fcf8e8;
+border-left: 5px solid var(--accent);
+border-radius: 4px;
+color: #5c4d00;
+font-style: italic;
+}
+footer {
+text-align: center;
+padding: 20px;
+background-color: #1b3b36;
+color: #fff;
+font-size: 0.9rem;
+}
+</style>
 </head>
 <body>
-
 <div class="container">
-    <header>
-        <h1>Historia Genealógica, Familiar y Territorial</h1>
-        <p>Legado de la Familia de los Hijos y Nietos de Florencio Serrano | Misión SADV41</p>
-    </header>
-
-    <section class="intro-section">
-        <h2>Memoria Comunitaria y el Diseño SADV41</h2>
-        <p>La unión, el recuerdo y la memoria comunitaria son fundamentales para mantener viva la identidad y la historia de los pueblos, como ocurre con los antecedentes del área de Burunga y su antiguo nombre. Preservar la historia local fortalece el sentido de pertenencia, rescatando el valor del recuerdo, los orígenes históricos y la sabiduría transmitida por los pobladores de mayor experiencia.</p>
-    </section>
-
-    <div class="accordion-container">
-        <!-- Acordeón 1 -->
-        <button class="accordion"><span class="code-badge">SADV-GEN-01</span>I. Línea Troncal y Antecedentes Genealógicos</button>
-        <div class="panel">
-            <div class="panel-content">
-                <ul>
-                    <li><strong>Bisabuelo:</strong> Chevo.</li>
-                    <li><strong>Abuelo Paterno:</strong> Florencio Serrano.</li>
-                    <li><strong>Abuela:</strong> Basilia Serrano Chávez.</li>
-                    <li><strong>Suegra de la Abuela:</strong> Modesta Barragán.</li>
-                    <li><strong>Red Familiar Histórica:</strong> Integrantes de la época, como el tío Abraham y otros miembros de la familia, compartían la tierra de forma solidaria, viviendo bajo un esquema comunitario donde prevalecía la ayuda mutua en tiempos de escasez.</li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- Acordeón 2 -->
-        <button class="accordion"><span class="code-badge">SADV-GEN-02</span>II. Generación de los Tíos</button>
-        <div class="panel">
-            <div class="panel-content">
-                <ul>
-                    <li><strong>Abraham Serrano Chávez.</strong></li>
-                    <li><strong>Salomón Serrano Espinoza.</strong></li>
-                    <li><strong>Florencio Serrano Núñez</strong> (hijo de Florencio Serrano).</li>
-                    <li><strong>Santiago Serrano.</strong></li>
-                    <li><strong>Juan Serrano</strong> (fallecido).</li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- Acordeón 3 -->
-        <button class="accordion"><span class="code-badge">SADV-USR-03</span>III. Generación de los Padres, Hermanos y el Usuario (Steven Gómez Serrano)</button>
-        <div class="panel">
-            <div class="panel-content">
-                <ul>
-                    <li><strong>Madre:</strong> Elida María Serrano Espinosa.</li>
-                    <li><strong>Usuario:</strong> Steven Gómez Serrano (Nieto de Florencio Serrano, guardián de archivos, trabajador de Llantería Turbo Tire y artífice de la misión SADV41).</li>
-                    <li><strong>Hermanos de Steven Gómez Serrano:</strong>
-                        <ul>
-                            <li>Wigberto Antonio Fernández Serrano (Mayor I).</li>
-                            <li>Edwin Jeancarlos Fernández Serrano (Mayor II).</li>
-                            <li>Álvaro Alexander Allen Serrano (Menor III en referencia al primero).</li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- Acordeón 4 -->
-        <button class="accordion"><span class="code-badge">SADV-GEN-04</span>IV. Generación de Primos y Bisnietos</button>
-        <div class="panel">
-            <div class="panel-content">
-                <ul>
-                    <li><strong>Primos:</strong> Josué Alexander Serrano De León (hijo de Florencio Serrano Hijo) y Yibeliz Serrano (hija de Cheche y Salomón Serrano).</li>
-                    <li><strong>Bisnietos Declarados o Conocidos:</strong> Asiel Ojo (hijo de Suggedys Ojo —nieta de Juan Ojo— y de Edwin Jeancarlos Fernández Serrano).</li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- Acordeón 5 -->
-        <button class="accordion"><span class="code-badge">SADV-TER-05</span>V. Topografía, Tenencia de Tierras y el Lote en "Hermano Ojo"</button>
-        <div class="panel">
-            <div class="panel-content">
-                <ul>
-                    <li><strong>Origen del Terreno:</strong> El sector "Hermano Ojo" (entendido como hermano en Cristo, en referencia a Adolfo Ojo) proviene de un terreno grande que Adolfo Ojo le dio a la familia de Florencio Serrano.</li>
-                    <li><strong>Labores y Construcción:</strong> El abuelo Florencio mandó a comprar y limpiar el terreno, edificando inicialmente una casita de madera con techo de tabla o bloques.</li>
-                    <li><strong>División y Colaboración Vecinal:</strong> Adviso por situaciones económicas y necesidad compartida (como los Cruz), el terreno se dividió y compartió.</li>
-                    <li><strong>Anécdota del Lote y la Sra. María:</strong> Relato sobre la señora María (ubicada tras el Bar Parrillada El Gordo), a quien el abuelo Florencio le cortó el lote en el pasado y ella nunca le pagó; una vieja deuda que generó fuertes fricciones y anécdotas de infancia marcadas por el carácter de la época.</li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- Acordeón 6 -->
-        <button class="accordion"><span class="code-badge">SADV-GEO-06</span>VI. Geografía y Red de Conexiones Territoriales</button>
-        <div class="panel">
-            <div class="panel-content">
-                <ul>
-                    <li><strong>Núcleo Familiar Principal:</strong> Ubicado geográficamente en las dos últimas partes de la calle San Martín de Porres, hacia la derecha de la bajada San Martín.</li>
-                    <li><strong>Vecindario (Lado Izquierdo):</strong> Habita la familia Cerrud (Lucía, Alexis —amigo de la infancia—, Mileidys y Antonio Navarro).</li>
-                    <li><strong>La Familia Ojo y Conexiones:</strong> En las alturas detrás de la Iglesia San Martín. Juan Ojo vive en la colina hacia la vuelta de los buses, interconectando con la Casa de Materiales El Económico, el M/S Burunga y la Junta Comunal de Lohannyz Gaitán.</li>
-                    <li><strong>Extensión del Camino:</strong> Se prolonga desde la familia Ojo hasta la zona de Juan Ojo y la Llantería Turbo Tire, trazando la presencia de las familias Gómez, Cruz, Samaniego y González.</li>
-                    <li><strong>Los Cruz:</strong> Habitan en la bajada de la loma que conduce hacia la Llantería Turbo Tire.</li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- Acordeón 7 -->
-        <button class="accordion"><span class="code-badge">SADV-MIS-07</span>VII. Cimientos Históricos y Pilares de la Misión SADV41</button>
-        <div class="panel">
-            <div class="panel-content">
-                <ul>
-                    <li><strong>Alexander González:</strong> Empleador y figura central de la llantería. Su relación familiar y laboral se entrelazó profundamente con la historia cuando la señora María frecuentaba el taller. A través de este vínculo, la actitud de Steven como nieto trascendió por completo los antiguos rencores del pasado: decidió verla con empatía, visitarla en su casa, llevarle comida, compartir palabras de consuelo, orar con ella junto a Alexander Gonzalez y brindarle apoyo, paz y fe en Cristo Jesús en sus últimos días.</li>
-                    <li><strong>Lohannyz Gaitán:</strong> Representante institucional y política de Burunga.</li>
-                    <li><strong>Punny Díaz (Finca Hermanos Díaz):</strong> Heredero y amigo del legado de Simón González.</li>
-                    <li><strong>Israel Lara:</strong> Voz de la juventud y puente generacional, sobrino de Alexander González.</li>
-                    <li><strong>Mecánico Cruz:</strong> Trabajador especializado en reparaciones y profundo conocimiento práctico.</li>
-                    <li><strong>Memoria Ancestral:</strong> Doña Basilia Serrano Chávez y Tío Abraham Serrano Chávez como voces testimoniales en las notas de voz.</li>
-                </ul>
-                <div class="theological-note">
-                    <strong>Nota Teológica:</strong> Así como las raíces de Burunga se descubren y ordenan en este Tabernáculo digital, cada pilar humano, el perdón que trasciende las deudas del pasado y el amor al prójimo configuran el cumplimiento de la visión en la fe de Cristo Jesús.
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <footer>
-        <p>Misión SADV41 &bull; Documento Oficial Consolidado para Steven Gómez Serrano</p>
-    </footer>
+<header>
+<h1>Historia Genealógica, Familiar y Territorial</h1>
+<p>Legado de la Familia de los Hijos y Nietos de Florencio Serrano | Misión SADV41</p>
+</header>
+<section class="intro-section">
+<h2>Memoria Comunitaria y el Diseño SADV41</h2>
+<p>La unión, el recuerdo y la memoria comunitaria son fundamentales para mantener viva la identidad y la historia de los pueblos, como ocurre con los antecedentes del área de Burunga y su antiguo nombre. Preservar la historia local fortalece el sentido de pertenencia, rescatando el valor del recuerdo, los orígenes históricos y la sabiduría transmitida por los pobladores de mayor experiencia.</p>
+</section>
+<div class="accordion-container">
+<!-- Acordeón 1 -->
+<button class="accordion"><span class="code-badge">SADV-GEN-01</span>I. Línea Troncal y Antecedentes Genealógicos</button>
+<div class="panel">
+<div class="panel-content">
+<ul>
+<li><strong>Bisabuelo:</strong> Chevo.</li>
+<li><strong>Abuelo Paterno:</strong> Florencio Serrano.</li>
+<li><strong>Abuela:</strong> Basilia Serrano Chávez.</li>
+<li><strong>Suegra de la Abuela:</strong> Modesta Barragán.</li>
+<li><strong>Red Familiar Histórica:</strong> Integrantes de la época, como el tío Abraham y otros miembros de la familia, compartían la tierra de forma solidaria, viviendo bajo un esquema comunitario donde prevalecía la ayuda mutua en tiempos de escasez.</li>
+</ul>
 </div>
-
+</div>
+<!-- Acordeón 2 -->
+<button class="accordion"><span class="code-badge">SADV-GEN-02</span>II. Generación de los Tíos</button>
+<div class="panel">
+<div class="panel-content">
+<ul>
+<li><strong>Abraham Serrano Chávez.</strong></li>
+<li><strong>Salomón Serrano Espinoza.</strong></li>
+<li><strong>Florencio Serrano Núñez</strong> (hijo de Florencio Serrano).</li>
+<li><strong>Santiago Serrano.</strong></li>
+<li><strong>Juan Serrano</strong> (fallecido).</li>
+</ul>
+</div>
+</div>
+<!-- Acordeón 3 -->
+<button class="accordion"><span class="code-badge">SADV-USR-03</span>III. Generación de los Padres, Hermanos y el Usuario (Steven Gómez Serrano)</button>
+<div class="panel">
+<div class="panel-content">
+<ul>
+<li><strong>Madre:</strong> Elida María Serrano Espinosa.</li>
+<li><strong>Usuario:</strong> Steven Gómez Serrano (Nieto de Florencio Serrano, guardián de archivos, trabajador de Llantería Turbo Tire y artífice de la misión SADV41).</li>
+<li><strong>Hermanos de Steven Gómez Serrano:</strong>
+<ul>
+<li>Wigberto Antonio Fernández Serrano (Mayor I).</li>
+<li>Edwin Jeancarlos Fernández Serrano (Mayor II).</li>
+<li>Álvaro Alexander Allen Serrano (Menor III en referencia al primero).</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<!-- Acordeón 4 -->
+<button class="accordion"><span class="code-badge">SADV-GEN-04</span>IV. Generación de Primos y Bisnietos</button>
+<div class="panel">
+<div class="panel-content">
+<ul>
+<li><strong>Primos:</strong> Josué Alexander Serrano De León (hijo de Florencio Serrano Hijo) y Yibeliz Serrano (hija de Cheche y Salomón Serrano).</li>
+<li><strong>Bisnietos Declarados o Conocidos:</strong> Asiel Ojo (hijo de Suggedys Ojo —nieta de Juan Ojo— y de Edwin Jeancarlos Fernández Serrano).</li>
+</ul>
+</div>
+</div>
+<!-- Acordeón 5 -->
+<button class="accordion"><span class="code-badge">SADV-TER-05</span>V. Topografía, Tenencia de Tierras y el Lote en "Hermano Ojo"</button>
+<div class="panel">
+<div class="panel-content">
+<ul>
+<li><strong>Origen del Terreno:</strong> El sector "Hermano Ojo" (entendido como hermano en Cristo, en referencia a Adolfo Ojo) proviene de un terreno grande que Adolfo Ojo le dio a la familia de Florencio Serrano.</li>
+<li><strong>Labores y Construcción:</strong> El abuelo Florencio mandó a comprar y limpiar el terreno, edificando inicialmente una casita de madera con techo de tabla o bloques.</li>
+<li><strong>División y Colaboración Vecinal:</strong> Debido a situaciones económicas y necesidad compartida (como los Cruz), el terreno se dividió y compartió.</li>
+<li><strong>Anécdota del Lote y la Sra. María:</strong> Relato sobre la señora María (ubicada tras el Bar Parrillada El Gordo), a quien el abuelo Florencio le cortó el lote en el pasado y ella nunca le pagó; una vieja deuda que generó fuertes fricciones y anécdotas de infancia marcadas por el carácter de la época.</li>
+</ul>
+</div>
+</div>
+<!-- Acordeón 6 -->
+<button class="accordion"><span class="code-badge">SADV-GEO-06</span>VI. Geografía y Red de Conexiones Territoriales</button>
+<div class="panel">
+<div class="panel-content">
+<ul>
+<li><strong>Núcleo Familiar Principal:</strong> Ubicado geográficamente en las dos últimas partes de la calle San Martín de Porres, hacia la derecha de la bajada San Martín.</li>
+<li><strong>Vecindario (Lado Izquierdo):</strong> Habita la familia Cerrud (Lucía, Alexis —amigo de la infancia—, Mileidys y Antonio Navarro).</li>
+<li><strong>La Familia Ojo y Conexiones:</strong> En las alturas detrás de la Iglesia San Martín. Juan Ojo vive en la colina hacia la vuelta de los buses, interconectando con la Casa de Materiales El Económico, el M/S Burunga y la Junta Comunal de Lohannyz Gaitán.</li>
+<li><strong>Extensión del Camino:</strong> Se prolonga desde la familia Ojo hasta la zona de Juan Ojo y la Llantería Turbo Tire, trazando la presencia de las familias Gómez, Cruz, Samaniego y González.</li>
+<li><strong>Los Cruz:</strong> Habitan en la bajada de la loma que conduce hacia la Llantería Turbo Tire.</li>
+</ul>
+</div>
+</div>
+<!-- Acordeón 7 - SIEMPRE ABIIERTO (Pilares y Fe Accionista) -->
+<button class="accordion active permanent"><span class="code-badge">SADV-MIS-07</span>VII. Cimientos Históricos y Pilares de la Misión SADV41</button>
+<div class="panel always-open">
+<div class="panel-content">
+<ul>
+<li><strong>Alexander González:</strong> Empleador y figura central de la llantería. A través de él, se disuelve la fría burocracia para dar paso al buró que mueve la fe accionista. Su relación familiar y laboral se entrelazó profundamente con la historia cuando la señora María frecuentaba el taller. Gracias a este puente, la actitud de Steven como nieto trascendió por completo los rencores del pasado: decidió verla con empatía, visitarla en su casa, llevarle comida, compartir palabras de consuelo, orar con ella junto a Alexander Gonzalez y brindarle apoyo, paz y fe en Cristo Jesús en sus últimos días.</li>
+<li><strong>Lohannyz Gaitán:</strong> Representante institucional y política de Burunga.</li>
+<li><strong>Punny Díaz (Finca Hermanos Díaz):</strong> Heredero y amigo del legado de Simón González.</li>
+<li><strong>Israel Lara:</strong> Voz de la juventud y puente generacional, sobrino de Alexander González.</li>
+<li><strong>Mecánico Cruz:</strong> Trabajador especializado en reparaciones y profundo conocimiento práctico.</li>
+<li><strong>Memoria Ancestral:</strong> Doña Basilia Serrano Chávez y Tío Abraham Serrano Chávez como voces testimoniales en las notas de voz.</li>
+</ul>
+<div class="theological-note">
+<strong>Nota Teológica:</strong> Así como las raíces de Burunga se descubren y ordenan en este Tabernáculo digital, cada pilar humano, el perdón que trasciende las deudas del pasado y la fe accionista configuran el cumplimiento de la visión en la fe viva de Cristo Jesús.
+</div>
+</div>
+</div>
+</div>
+<footer>
+<p>Misión SADV41 • Documento Oficial Consolidado para Steven Gómez Serrano</p>
+</footer>
+</div>
 <script>
-    var acc = document.getElementsByClassName("accordion");
-    var i;
-
-    for (i = 0; i < acc.length; i++) {
-        acc[i].addEventListener("click", function() {
-            this.classList.toggle("active");
-            var panel = this.nextElementSibling;
-            if (panel.style.maxHeight) {
-                panel.style.maxHeight = null;
-            } else {
-                panel.style.maxHeight = panel.scrollHeight + "px";
-            }
-        });
-    }
+var acc = document.getElementsByClassName("accordion");
+var i;
+for (i = 0; i < acc.length; i++) {
+// Evitar que el acordeón VII se cierre al hacer clic
+if (acc[i].classList.contains('permanent')) {
+acc[i].addEventListener("click", function(e) {
+e.preventDefault(); // Mantiene el punto VII fijo y abierto permanentemente
+});
+continue;
+}
+acc[i].addEventListener("click", function() {
+this.classList.toggle("active");
+var panel = this.nextElementSibling;
+if (panel.style.maxHeight) {
+panel.style.maxHeight = null;
+} else {
+panel.style.maxHeight = panel.scrollHeight + "px";
+}
+});
+}
 </script>
-
 </body>
 </html>
