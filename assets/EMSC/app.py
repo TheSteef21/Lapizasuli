@@ -15,13 +15,13 @@ app.add_middleware(
 
 @app.get("/api/sismos-panama")
 async def obtener_sismos_panama():
-    # API pública de la EMSC en formato JSON (últimos sismos globales con magnitud >= 2.0)
-    url = "https://www.emsc-csem.org/service/rest/earthquake/search.php?min_mag=2.0&limit=20"
+    # URL directa al servicio REST de sismos recientes de la EMSC
+    url = "https://www.emsc-csem.org/service/rest/earthquake/search.php?limit=25"
     
     eventos = []
     try:
         async with httpx.AsyncClient() as client:
-            response = await client.get(url, timeout=10.0)
+            response = await client.get(url, timeout=12.0)
             if response.status_code == 200:
                 data = response.json()
                 features = data.get("features", [])
@@ -29,10 +29,10 @@ async def obtener_sismos_panama():
                 for feature in features:
                     props = feature.get("properties", {})
                     geom = feature.get("geometry", {})
-                    coords = geom.get("coordinates", [0, 0]) # [longitud, latitud, profundidad]
+                    coords = geom.get("coordinates", [0, 0, 0]) # [longitud, latitud, profundidad]
                     
                     eventos.append({
-                        "titulo": props.get("flynn_region", "Sismo en la región"),
+                        "titulo": props.get("flynn_region", "Sismo registrado"),
                         "coordenadas": [coords[1], coords[0]], # [latitud, longitud]
                         "magnitud": props.get("mag", "N/A"),
                         "fecha": props.get("time", str(datetime.now()))
