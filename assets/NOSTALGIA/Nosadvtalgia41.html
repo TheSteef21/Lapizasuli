@@ -137,9 +137,16 @@
 
         <!-- Tarjeta de Imagen y Nostalgia -->
         <div id="imageContainer" class="logia-card p-2 rounded-2xl max-w-md w-full loading-state glitch-effect transform transition-all duration-700">
-            <div class="relative rounded-xl overflow-hidden border border-white/5">
-                <img src="https://thesteef21.github.io/Lapizasuli/assets/NOSTALGIA" alt="Reflexión de 16 años" class="w-full h-auto object-cover opacity-90 transition-opacity">
-                <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent flex items-end p-6">
+            <div class="relative rounded-xl overflow-hidden border border-white/5 bg-black">
+                
+                <!-- IMPLEMENTACIÓN: El video de Josué 1:9 que limpia el sistema -->
+                <video autoplay loop muted playsinline class="w-full h-auto object-cover opacity-90 transition-opacity">
+                    <source src="https://thesteef21.github.io/Lapizasuli/assets/NOSTALGIA/VID-20260731-WA0202.mp4" type="video/mp4">
+                    <!-- RESPALDO: Si el video falla en cargar o no es soportado, muestra la captura original de la nostalgia -->
+                    <img src="https://thesteef21.github.io/Lapizasuli/assets/NOSTALGIA/Screenshot_20260731_215909_WhatsAppBusiness.jpg" alt="Reflexión de 16 años" class="w-full h-auto object-cover opacity-90 transition-opacity">
+                </video>
+
+                <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent flex items-end p-6 pointer-events-none">
                     <p class="text-sm font-serif italic text-gray-200 tracking-wide">"Ojalá algún día ellas sepan que las quise con todo y mis problemas..."</p>
                 </div>
             </div>
@@ -190,7 +197,7 @@
             // Simulamos el "Shock" de la pantalla tildada (2.5 segundos de reflexión)
             setTimeout(async () => {
                 try {
-                    // Quitamos el glitch y restauramos la imagen
+                    // Quitamos el glitch y restauramos la imagen/video
                     imgContainer.classList.remove("glitch-effect", "loading-state");
                     imgContainer.classList.add("restored");
                     
