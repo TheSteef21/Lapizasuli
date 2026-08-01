@@ -51,12 +51,14 @@
         }
         button:hover { background-color: #d0d0d0; }
         #resultado { margin-top: 15px; font-size: 0.85rem; text-align: center; color: #4CAF50; }
+        .back-link { display: block; text-align: center; margin-top: 20px; color: #888; text-decoration: none; font-size: 0.85rem; }
+        .back-link:hover { color: #fff; }
     </style>
 </head>
 <body>
 
     <div class="admin-card">
-        <h2>Nodo SADV41 - Inyección</h2>
+        <h2>Nodo SADV41 - Caja de Inyección</h2>
         <form id="newsForm">
             <div class="form-group">
                 <label>Fuente (Source)</label>
@@ -77,6 +79,7 @@
             <button type="submit">Inyectar al Nodo</button>
         </form>
         <div id="resultado"></div>
+        <a href="/" class="back-link">← Ver Previsualización de Noticias</a>
     </div>
 
     <script>
@@ -94,7 +97,7 @@
             resultadoDiv.textContent = "Transmitiendo al servidor en Render...";
 
             try {
-                const response = await fetch('https://hoy-v95f.onrender.com/api/actualizar', {
+                const response = await fetch('/api/actualizar', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded',
@@ -112,7 +115,7 @@
                 }
             } catch (error) {
                 resultadoDiv.style.color = "#ff5252";
-                resultadoDiv.textContent = "Error al conectar con Render.";
+                resultadoDiv.textContent = "Error al conectar con el servidor.";
             }
         });
     </script>
