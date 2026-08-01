@@ -1,24 +1,35 @@
 from datetime import timedelta
+from fastapi import FastAPI
 from georss_emsc_csem_earthquakes_client import EMSCEarthquakesFeed
 
-# Coordenadas de Referencia para Panamá (ej. Área metropolitana / Burunga / Panamá Oeste)
-# Latitud: 8.98, Longitud: -79.52
-panama_coordinates = (8.98, -79.52)
+app = FastAPI()
 
-# Configuración del feed para capturar sismos relevantes
-feed = EMSCEarthquakesFeed(
-    panama_coordinates, 
-    filter_radius=800,               # Radio de cobertura en km para abarcar la región
-    filter_minimum_magnitude=2.0,    # Magnitud mínima a filtrar
-    filter_timespan=timedelta(days=3) # Margen de tiempo reciente
-)
-
-status, entries = feed.update()
-
-print(f"Estado de la actualización: {status}")
-print(f"Sismos detectados en el radio de Panamá: {len(entries)}")
-
-for entry in entries:
-    print(f"- Título: {entry.title}")
-    print(f"  Coordenadas: {entry.coordinates}")
-    print(f"  Magnitud: {getattr(entry, 'magnitude', 'N/A')} | Fecha: {entry.published}")
+@app.get("/api/sismos-panama")
+def obtener_sismos_panama():
+    # Coordenadas de Referencia para Panamá (Burunga / Panamá Oeste)
+    panama_coordinates = (8.98, -79.52)
+    
+    feed = EMSCEarthquakesFeed(
+        panama_coordinates, 
+        filter_radius=800,
+        filter_minimum_magnitude=2.0,
+        filter_timespan=timedelta(days=3)
+    )
+    
+    status, entries = feed.update()
+    
+    eventos = []
+    if entries:
+        for entry in entries:
+            eventos.append({
+                "titulo": entry.title,
+                "coordenadas": getattr(entry, 'coordinates', None),
+                "magnitud": getattr(entry, 'magnitude', 'N/A'),
+                "fecha": str(getattr(entry, 'published', 'N/A'))
+            })
+            
+    return {
+        "status": status,
+        "total": len(eventos),
+        "eventos": eventos
+    }
