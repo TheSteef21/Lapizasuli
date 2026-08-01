@@ -1,8 +1,18 @@
 from datetime import timedelta
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from georss_emsc_csem_earthquakes_client import EMSCEarthquakesFeed
 
 app = FastAPI()
+
+# Configuración de CORS para permitir solicitudes desde cualquier origen (GitHub Pages)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get("/api/sismos-panama")
 def obtener_sismos_panama():
