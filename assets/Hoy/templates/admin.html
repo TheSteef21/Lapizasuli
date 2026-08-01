@@ -61,20 +61,24 @@
         <h2>Nodo SADV41 - Caja de Inyección</h2>
         <form id="newsForm">
             <div class="form-group">
+                <label>Enlace Oficial (ej. https://share.google/...)</label>
+                <input type="text" id="url" placeholder="Pega el enlace de Google aquí...">
+            </div>
+            <div class="form-group">
                 <label>Fuente (Source)</label>
-                <input type="text" id="source" value="SADV41 Live" required>
+                <input type="text" id="source" value="Google Noticias" required>
             </div>
             <div class="form-group">
                 <label>Hora / Fecha (Time)</label>
                 <input type="text" id="time" value="Ahora" required>
             </div>
             <div class="form-group">
-                <label>Título de la Noticia</label>
-                <input type="text" id="title" placeholder="Escribe el mensaje o profecía..." required>
+                <label>Título de la Noticia (Opcional si usas enlace)</label>
+                <input type="text" id="title" placeholder="Se extraerá solo o escríbelo...">
             </div>
             <div class="form-group">
-                <label>URL de la Imagen / Asset</label>
-                <input type="text" id="image" placeholder="https://..." required>
+                <label>URL de la Imagen / Asset (Opcional si usas enlace)</label>
+                <input type="text" id="image" placeholder="https://...">
             </div>
             <button type="submit">Inyectar al Nodo</button>
         </form>
@@ -88,13 +92,14 @@
             e.preventDefault();
             
             const formData = new URLSearchParams();
+            formData.append('url', document.getElementById('url').value);
             formData.append('source', document.getElementById('source').value);
             formData.append('time', document.getElementById('time').value);
             formData.append('title', document.getElementById('title').value);
             formData.append('image', document.getElementById('image').value);
 
             const resultadoDiv = document.getElementById('resultado');
-            resultadoDiv.textContent = "Transmitiendo al servidor en Render...";
+            resultadoDiv.textContent = "Transmitiendo y rastreando en el servidor...";
 
             try {
                 const response = await fetch('/api/actualizar', {
