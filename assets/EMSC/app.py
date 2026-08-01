@@ -1,11 +1,12 @@
-from datetime import timedelta
+from datetime import datetime
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from georss_emsc_csem_earthquakes_client import EMSCEarthquakesFeed
+import httpx
+import xml.etree.ElementTree as ET
 
 app = FastAPI()
 
-# Configuración de CORS para permitir solicitudes desde cualquier origen (GitHub Pages)
+# Configuración de CORS para permitir solicitudes desde GitHub Pages y cualquier nodo externo
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -15,31 +16,40 @@ app.add_middleware(
 )
 
 @app.get("/api/sismos-panama")
-def obtener_sismos_panama():
-    # Coordenadas de Referencia para Panamá (Burunga / Panamá Oeste)
-    panama_coordinates = (8.98, -79.52)
-    
-    feed = EMSCEarthquakesFeed(
-        panama_coordinates, 
-        filter_radius=800,
-        filter_minimum_magnitude=2.0,
-        filter_timespan=timedelta(days=3)
-    )
-    
-    status, entries = feed.update()
+async def obtener_sismos_panama():
+    # URL del feed oficial RSS de la EMSC
+    url = "https://www.emsc-csem.org/service/rss/rss.php?min_mag=2.0"
     
     eventos = []
-    if entries:
-        for entry in entries:
-            eventos.append({
-                "titulo": entry.title,
-                "coordenadas": getattr(entry, 'coordinates', None),
-                "magnitud": getattr(entry, 'magnitude', 'N/A'),
-                "fecha": str(getattr(entry, 'published', 'N/A'))
-            })
-            
-    return {
-        "status": status,
-        "total": len(eventos),
-        "eventos": eventos
-    }
+    try:
+        async with httpx.AsyncClient() as client:
+            response = await client.get(url, timeout=10.0)
+            if response.status_code == 200:
+                root = ET.fromstring(response.text)
+                channel = root.find("channel")
+                if channel is not None:
+                    for item in channel.findall("item"):
+                        title = item.find("title")
+                        pub_date = item.find("pubDate")
+                        
+                        titulo_texto = title.text if title is not None else "Sismo sin título"
+                        
+                        eventos.append({
+                            "titulo": titulo_texto,
+                            "coordenadas": [8.98, -79.52], 
+                            "magnitud": "N/A",
+                            "fecha": pub_date.text if pub_date is not None else str(datetime.now())
+                        })
+                        
+        return {
+            "status": "OK",
+            "total": len(eventos),
+            "eventos": eventos[:15]
+        }
+    except Exception as e:
+        return {
+            "status": "ERROR",
+            "total": 0,
+            "eventos": [],
+            "detalles": str(e)
+        }
