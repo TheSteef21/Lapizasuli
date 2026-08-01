@@ -62,7 +62,7 @@
         <form id="newsForm">
             <div class="form-group">
                 <label>Enlace Oficial (ej. https://share.google/...)</label>
-                <input type="text" id="url" placeholder="Pega el enlace de Google aquí...">
+                <input type="text" id="url" placeholder="Pega el enlace aquí para autocompletar...">
             </div>
             <div class="form-group">
                 <label>Fuente (Source)</label>
@@ -103,7 +103,7 @@
             resultadoDiv.textContent = "Transmitiendo y rastreando en el servidor...";
 
             try {
-                const response = await fetch('/api/actualizar', {
+                const response = await fetch('https://hoy-v95f.onrender.com/api/actualizar', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded',
