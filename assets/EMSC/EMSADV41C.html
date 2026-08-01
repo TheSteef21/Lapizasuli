@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SADV41T | Monitor Sísmico de Panamá (EMSC)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#020617',
+                        oro: '#eab308',
+                        renderRed: '#da3637',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mason: ['Cinzel', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #050505;
+            background-image: radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.1) 0%, transparent 50%), linear-gradient(rgba(2, 6, 23, 0.85), rgba(2, 6, 23, 0.95));
+            color: #f8fafc;
+        }
+        .logia-card {
+            background: linear-gradient(145deg, rgba(10,10,10,0.85), rgba(20,20,20,0.85));
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.9);
+            backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+<body class="font-sans antialiased min-h-screen p-6 flex flex-col items-center justify-center">
+
+    <main class="w-full max-w-4xl space-y-6">
+        <div class="text-center space-y-2">
+            <h1 class="text-3xl font-mason text-oro uppercase tracking-wider">Telemetría Sísmica SADV41T</h1>
+            <p class="text-xs text-slate-400 font-mono tracking-widest uppercase">Conexión Directa: FastAPI & EMSC Feed (Panamá)</p>
+        </div>
+
+        <section class="logia-card p-6 rounded-2xl border-t-2 border-cyan-500/50">
+            <div class="flex justify-between items-center mb-6 border-b border-gray-800 pb-4">
+                <span class="text-sm font-mono text-cyan-400">ENDPOINT: /api/sismos-panama</span>
+                <button id="btn-refrescar" onclick="cargarSismos()" class="bg-cyan-600 hover:bg-cyan-500 text-white font-bold text-xs px-4 py-2 rounded-lg transition-all cursor-pointer font-mono">
+                    Actualizar Datos
+                </button>
+            </div>
+
+            <div id="badge-estado" class="text-xs font-mono text-center mb-4 text-oro">Sincronizando con el servidor de Render...</div>
+
+            <div id="monitor-salida" class="space-y-4">
+                <!-- La tabla de sismos se inyectará aquí -->
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const API_URL = "https://emsc.onrender.com/api/sismos-panama";
+
+        async function cargarSismos() {
+            const monitorSalida = document.getElementById("monitor-salida");
+            const badgeEstado = document.getElementById("badge-estado");
+            const btnRefrescar = document.getElementById("btn-refrescar");
+
+            try {
+                if (btnRefrescar) btnRefrescar.innerText = "Consultando...";
+                if (badgeEstado) badgeEstado.innerText = "Conectando con emsc.onrender.com...";
+
+                const response = await fetch(API_URL);
+                if (!response.ok) throw new Error(`HTTP status: ${response.status}`);
+                const data = await response.json();
+
+                if (badgeEstado) {
+                    badgeEstado.innerText = `Estado: ${data.status} | Total Eventos Registrados: ${data.total}`;
+                }
+
+                if (data.eventos && data.eventos.length > 0) {
+                    const muestras = data.eventos.slice(0, 10);
+                    let html = `
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left text-xs text-slate-300 border-collapse border border-slate-800 font-mono">
+                                <thead>
+                                    <tr class="bg-slate-900 text-oro border-b border-slate-800 font-mason">
+                                        <th class="p-3">#</th>
+                                        <th class="p-3">Título / Ubicación</th>
+                                        <th class="p-3">Magnitud</th>
+                                        <th class="p-3">Coordenadas</th>
+                                        <th class="p-3">Fecha</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-800">
+                    `;
+
+                    muestras.forEach((sismo, index) => {
+                        const coords = sismo.coordenadas ? sismo.coordenadas.join(', ') : 'N/A';
+                        html += `
+                            <tr class="hover:bg-black/40 transition-colors">
+                                <td class="p-3 text-oro font-bold">${index + 1}</td>
+                                <td class="p-3 text-white">${sismo.titulo}</td>
+                                <td class="p-3 text-rose-400 font-bold">M ${sismo.magnitud}</td>
+                                <td class="p-3 text-cyan-400">${coords}</td>
+                                <td class="p-3 text-slate-400 text-[10px]">${sismo.fecha}</td>
+                            </tr>
+                        `;
+                    });
+
+                    html += `
+                                </tbody>
+                            </table>
+                        </div>
+                    `;
+                    monitorSalida.innerHTML = html;
+                } else {
+                    monitorSalida.innerHTML = `<div class="p-4 text-xs text-slate-400 font-mono text-center">No se encontraron sismos recientes en el radio configurado de Panamá.</div>`;
+                }
+            } catch (error) {
+                if (badgeEstado) badgeEstado.innerText = "Error de Conexión con la API";
+                monitorSalida.innerHTML = `<div class="p-4 text-xs text-red-400 font-mono text-center">No se pudo conectar a ${API_URL}. Asegúrate de que el servicio en Render esté activo.</div>`;
+            } finally {
+                if (btnRefrescar) btnRefrescar.innerText = "Actualizar Datos";
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            cargarSismos();
+        });
+    </script>
+</body>
+</html>
