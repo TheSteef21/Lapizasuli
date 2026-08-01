@@ -1,42 +1,34 @@
-from fastapi import FastAPI, Request
-from fastapi.responses import HTMLResponse
-from fastapi.templating import Jinja2Templates
+from fastapi import Form
+import json
+import os
 
-app = FastAPI()
-templates = Jinja2Templates(directory="templates")
+ARCHIVO_JSON = "noticias.json"
 
-# Datos de ejemplo basados en tus notificaciones recientes
-NOTICIAS_EJEMPLO = [
-    {
-        "source": "Montevideo Portal",
-        "time": "8:38 p.m.",
-        "title": "“Significativo y violento”: las impactantes imágenes de un tornado que golpeó a Argentina",
-        "image": "https://images.unsplash.com/photo-1527482797697-8795b05813fe?q=80&w=600&auto=format&fit=crop",
-        "url": "#"
-    },
-    {
-        "source": "BioBioChile",
-        "time": "4:08 p.m.",
-        "title": "¿Puede España ser excluido del Espacio Schengen debido a la crisis migratoria en Ceuta?",
-        "image": "https://images.unsplash.com/photo-1541872703-74c5e44368f9?q=80&w=600&auto=format&fit=crop",
-        "url": "#"
-    },
-    {
-        "source": "ESPN Deportes",
-        "time": "31/7/2026",
-        "title": "Cuándo juegan Real Madrid vs Fiorentina: equipo, fecha, hora y TV en vivo",
-        "image": "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=600&auto=format&fit=crop",
-        "url": "#"
-    },
-    {
-        "source": "La Estrella de Panamá",
-        "time": "3:14 p.m.",
-        "title": "China reafirma apoyo a la soberanía del Canal de Panamá",
-        "image": "https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?q=80&w=600&auto=format&fit=crop",
+@app.post("/api/actualizar")
+async def agregar_noticia_dinamica(source: str = Form(...), title: str = Form(...), image: str = Form(...), time: str = Form(...)):
+    # 1. Leer noticias actuales
+    noticias = []
+    if os.path.exists(ARCHIVO_JSON):
+        with open(ARCHIVO_JSON, "r", encoding="utf-8") as f:
+            try:
+                noticias = json.load(f)
+            except json.JSONDecodeError:
+                noticias = []
+                
+    # 2. Crear la nueva estructura
+    nueva_noticia = {
+        "source": source,
+        "time": time,
+        "title": title,
+        "image": image,
         "url": "#"
     }
-]
-
-@app.get("/", response_class=HTMLResponse)
-async def home(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request, "noticias": NOTICIAS_EJEMPLO})
+    
+    # 3. Insertar al inicio de la lista
+    noticias.insert(0, nueva_noticia)
+    
+    # 4. Guardar en el archivo JSON del servidor
+    with open(ARCHIVO_JSON, "w", encoding="utf-8") as f:
+        json.dump(noticias, f, ensure_ascii=False, indent=4)
+        
+    return {"status": "¡Noticia inyectada con éxito al Nodo SADV41!", "total_noticias": len(noticias)}
