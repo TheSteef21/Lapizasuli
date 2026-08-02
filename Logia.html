@@ -296,18 +296,36 @@
         </svg>
     </div>
 
-    <!-- PANTALLA DE BLOQUEO LOGIA -->
-    <div id="bloqueo-popup" class="fixed inset-0 bg-black/90 backdrop-blur-md z-[9999] flex items-center justify-center transition-opacity duration-500 hidden opacity-0">
-        <div class="bg-slate-900 border border-oro/50 p-8 rounded-2xl text-center max-w-sm relative shadow-[0_0_30px_rgba(212,175,55,0.15)]">
+    <!-- PANTALLA DE BLOQUEO LOGIA CON ALTERNATIVAS -->
+    <div id="bloqueo-popup" class="fixed inset-0 bg-black/90 backdrop-blur-md z-[9999] flex items-center justify-center transition-opacity duration-500 hidden opacity-0 px-4">
+        <div class="bg-slate-900 border border-oro/50 p-8 rounded-2xl text-center max-w-md w-full relative shadow-[0_0_30px_rgba(212,175,55,0.15)]">
             <div id="emoji-status" class="text-6xl mb-4 drop-shadow-[0_0_15px_rgba(212,175,55,0.5)]">🔒</div>
             <h2 class="text-oro font-bold text-xl uppercase tracking-widest mb-4">Acceso Reservado</h2>
             <p id="feedback-msg" class="text-slate-300 text-sm mb-6">La arquitectura SADV41 está sintonizada en 432Hz. ¿Buscando crédito o buscando propósito?</p>
             
+            <!-- Entrada por Contraseña -->
             <input type="password" id="clave-acceso" placeholder="Clave de propósito..." class="w-full bg-black/80 border border-slate-600 rounded-lg p-3 text-white text-center mb-4 focus:border-oro focus:outline-none transition-colors">
             
-            <button id="btn-desbloqueo" onclick="verificarClave()" class="w-full bg-oro text-navy font-bold py-3 rounded-lg hover:bg-yellow-500 transition-all shadow-[0_0_15px_rgba(234,179,8,0.3)] cursor-pointer">
+            <button id="btn-desbloqueo" onclick="verificarClave()" class="w-full bg-oro text-navy font-bold py-3 rounded-lg hover:bg-yellow-500 transition-all shadow-[0_0_15px_rgba(234,179,8,0.3)] cursor-pointer mb-6">
                 Desbloquear Propósito
             </button>
+
+            <!-- Separador -->
+            <div class="relative flex py-3 items-center mb-4">
+                <div class="flex-grow border-t border-slate-700"></div>
+                <span class="flex-shrink-0 mx-4 text-slate-500 text-[10px] md:text-xs font-mono tracking-widest uppercase">Otras Vías de Acceso</span>
+                <div class="flex-grow border-t border-slate-700"></div>
+            </div>
+
+            <!-- Entrada por Wallet Web3 -->
+            <button onclick="conectarWalletLogia()" class="w-full bg-slate-800 hover:bg-slate-700 border border-green-500/30 hover:border-green-500/80 text-white font-bold py-3 rounded-lg transition-all shadow-md cursor-pointer flex items-center justify-center gap-2 mb-3">
+                ⚡ Conectar Binance Web3 Wallet
+            </button>
+
+            <!-- Entrada al FUNDING -->
+            <a href="https://thesteef21.github.io/Lapizasuli/FUNDING.html" target="_blank" class="w-full block bg-slate-800 hover:bg-slate-700 border border-emerald-500/30 hover:border-emerald-500/80 text-emerald-400 font-bold py-3 rounded-lg transition-all shadow-md cursor-pointer flex items-center justify-center gap-2">
+                💵 Ejecutar Protocolo FUNDING.yml
+            </a>
         </div>
     </div>
     <div class="scanline"></div>
@@ -919,6 +937,42 @@ custom: ["https://thesteef21.github.io/Lapizasuli/FUNDING.html"]
             }
         }
 
+        // NUEVO MÉTODO PARA DESBLOQUEAR LOGIA MEDIANTE WEB3 WALLET DIRECTAMENTE EN EL POPUP
+        async function conectarWalletLogia() {
+            const feedback = document.getElementById("feedback-msg");
+            
+            if (typeof window.ethereum !== 'undefined') {
+                try {
+                    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                    const account = accounts[0];
+                    
+                    alert("Wallet verificada: " + account + "\n\nLa Logia reconoce tu firma Web3.");
+                    
+                    // Actualizar UI del header internamente para cuando se desbloquee
+                    const addressP = document.getElementById('walletAddress');
+                    const statusDiv = document.getElementById('walletStatus');
+                    const btn = document.getElementById('btnConnect');
+                    if (addressP) addressP.innerText = account;
+                    if (statusDiv) statusDiv.classList.remove('hidden');
+                    if (btn) {
+                        btn.innerText = "🌐 Connected";
+                        btn.className = "bg-green-600 text-white font-bold text-xs px-3 py-2 rounded transition-all shadow-md cursor-pointer flex items-center gap-1.5";
+                    }
+                    
+                    // Desbloqueo del popup
+                    desbloquearInterfaz();
+                    
+                } catch (error) {
+                    console.error("Conexión denegada", error);
+                    feedback.innerText = "Conexión Web3 cancelada. El sistema sigue bloqueado.";
+                    feedback.classList.add("text-red-400");
+                }
+            } else {
+                alert("No se detectó un proveedor Web3 activo.");
+                window.open('https://web3.binance.com/en/referral?ref=ORCZSDLK', '_blank');
+            }
+        }
+
         function gestionarFallo(feedback) {
             intentosFallidos++;
             if (intentosFallidos === 1) {
@@ -1056,7 +1110,7 @@ custom: ["https://thesteef21.github.io/Lapizasuli/FUNDING.html"]
             }
         }
 
-        // --- 5. PIPELINE DE CONEXIÓN WEB3 AUTH ---
+        // --- 5. PIPELINE DE CONEXIÓN WEB3 AUTH DESDE EL HEADER ---
         async function connectBinance() {
             const btn = document.getElementById('btnConnect');
             const statusDiv = document.getElementById('walletStatus');
