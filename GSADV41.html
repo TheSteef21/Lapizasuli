@@ -80,7 +80,7 @@
         @keyframes scanline { 0% { top: 0; } 100% { top: 100%; } }
 
         /* --- MENÚ LATERAL BILATERAL --- */
-        .sidebar-tabs { position: fixed; left: 0; top: 50%; transform: translateY(-50%); z-index: 45; display: flex; flex-direction: column; gap: 12px; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+        .sidebar-tabs { position: fixed; left: 0; top: 50%; transform: translateY(-50%); z-index: 55; display: flex; flex-direction: column; gap: 12px; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
         .vertical-tab { display: flex; align-items: center; background: rgba(2, 6, 23, 0.95); padding: 12px 15px; border-radius: 0 15px 15px 0; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); width: 60px; overflow: hidden; white-space: nowrap; box-shadow: 4px 4px 15px rgba(0,0,0,0.5); cursor: pointer; }
         .vertical-tab:hover { width: 340px; padding-left: 20px; }
         .vertical-tab span.icon { font-size: 1.5rem; min-width: 30px; display: flex; justify-content: center; }
@@ -221,7 +221,7 @@
     
     <div class="scanline"></div>
 
-    <!-- BARRA LATERAL -->
+    <!-- BARRA LATERAL (z-index corregido a 55) -->
     <div id="main-sidebar" class="sidebar-tabs transition-all duration-500">
         <a href="https://thesteef21.github.io/Lapizasuli/SLogia.html" target="_blank" class="vertical-tab tab-slogia">
             <span class="icon">🎚️</span><span class="text text-cyan-300">SLogia | Conexión SADV41</span>
@@ -261,8 +261,8 @@
         </div>
     </div>
 
-    <!-- HEADER SUPERIOR -->
-    <header id="main-header" class="fixed w-full z-50 glass border-b border-oro/30 px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-4 transition-all duration-500">
+    <!-- HEADER SUPERIOR (top-0 left-0 añadido y z-index a 40 para evitar solapamiento) -->
+    <header id="main-header" class="fixed top-0 left-0 w-full z-40 glass border-b border-oro/30 px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-4 transition-all duration-500">
         <div class="flex items-center gap-3">
             <span class="text-2xl">🛡️</span>
             <div>
