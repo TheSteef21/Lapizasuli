@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SADV41TT - Control de Cobros y Cierre Diario</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f6f9; margin: 0; padding: 20px; color: #333; }
+        .container { max-width: 800px; margin: 0 auto; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        h1, h2 { color: #1e293b; text-align: center; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; font-weight: bold; margin-bottom: 5px; }
+        input, select, textarea { width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 4px; box-sizing: border-box; }
+        button { background-color: #2563eb; color: white; border: none; padding: 12px 20px; font-size: 16px; border-radius: 4px; cursor: pointer; width: 100%; margin-top: 10px; }
+        button:hover { background-color: #1d4ed8; }
+        .btn-whatsapp { background-color: #16a34a; margin-top: 15px; }
+        .btn-whatsapp:hover { background-color: #15803d; }
+        table { width: 100%; margin-top: 20px; border-collapse: collapse; }
+        th, td { border: 1px solid #e2e8f0; padding: 10px; text-align: left; }
+        th { background-color: #f1f5f9; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Llantería Turbo Tire</h1>
+    <h2>Control de Cobros y Servicios (SADV41)</h2>
+
+    <div class="form-group">
+        <label for="unidades">Unidades:</label>
+        <input type="number" id="unidades" min="1" value="1">
+    </div>
+    <div class="form-group">
+        <label for="medida">Medida / Llanta:</label>
+        <input type="text" id="medida" placeholder="Ej: 195/65R15">
+    </div>
+    <div class="form-group">
+        <label for="marca">Marca:</label>
+        <select id="marca">
+            <option value="Duraturn">Duraturn</option>
+            <option value="Mazzini">Mazzini</option>
+            <option value="Otras">Otras</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="monto">Monto ($):</label>
+        <input type="number" id="monto" step="0.01" placeholder="0.00">
+    </div>
+    <div class="form-group">
+        <label for="metodo">Método de Pago:</label>
+        <select id="metodo">
+            <option value="Efectivo">Efectivo</option>
+            <option value="Yappy">Yappy</option>
+            <option value="Tarjeta">Tarjeta</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="observaciones">Observaciones:</label>
+        <textarea id="observaciones" rows="2" placeholder="Detalles adicionales..."></textarea>
+    </div>
+
+    <button type="button" onclick="agregarRegistro()">Registrar Venta</button>
+
+    <h3>Registros del Día</h3>
+    <table id="tablaRegistros">
+        <thead>
+            <tr>
+                <th>Unidades</th>
+                <th>Medida</th>
+                <th>Marca</th>
+                <th>Monto</th>
+                <th>Método</th>
+                <th>Obs</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <button type="button" class="btn-whatsapp" onclick="cerrarDiaYEnviarWhatsApp()">Cerrar Día y Enviar JSON a WhatsApp</button>
+</div>
+
+<script>
+    let registrosDia = [];
+
+    function agregarRegistro() {
+        const unidades = document.getElementById('unidades').value;
+        const medida = document.getElementById('medida').value;
+        const marca = document.getElementById('marca').value;
+        const monto = document.getElementById('monto').value;
+        const metodo = document.getElementById('metodo').value;
+        const observaciones = document.getElementById('observaciones').value;
+
+        if (!medida || !monto) {
+            alert("Por favor complete los campos obligatorios de Medida y Monto.");
+            return;
+        }
+
+        const item = { unidades, medida, marca, monto, metodo, observaciones };
+        registrosDia.push(item);
+        actualizarTabla();
+        limpiarFormulario();
+    }
+
+    function actualizarTabla() {
+        const tbody = document.getElementById('tablaRegistros').querySelector('tbody');
+        tbody.innerHTML = '';
+        registrosDia.forEach(reg => {
+            const row = `<tr>
+                <td>${reg.unidades}</td>
+                <td>${reg.medida}</td>
+                <td>${reg.marca}</td>
+                <td>$${reg.monto}</td>
+                <td>${reg.metodo}</td>
+                <td>${reg.observaciones}</td>
+            </tr>`;
+            tbody.innerHTML += row;
+        });
+    }
+
+    function limpiarFormulario() {
+        document.getElementById('unidades').value = '1';
+        document.getElementById('medida').value = '';
+        document.getElementById('monto').value = '';
+        document.getElementById('observaciones').value = '';
+    }
+
+    function cerrarDiaYEnviarWhatsApp() {
+        if (registrosDia.length === 0) {
+            alert("No hay registros para cerrar el día.");
+            return;
+        }
+
+        const fechaActual = new Date().toISOString().split('T')[0];
+        const paqueteDatos = {
+            fecha: fechaActual,
+            mision: "SADV41",
+            total_registros: registrosDia.length,
+            transacciones: registrosDia
+        };
+
+        const jsonString = JSON.stringify(paqueteDatos, null, 2);
+        const mensajeCodificado = encodeURIComponent(`*CIERRE DE JORNADA - SADV41TT*\n\`\`\`json\n${jsonString}\n\`\`\``);
+        
+        // Número de destino: +50769362166 (StevenDiorOficial)
+        const numeroTelefono = "50769362166";
+        const urlWhatsApp = `https://wa.me/${numeroTelefono}?text=${mensajeCodificado}`;
+
+        window.open(urlWhatsApp, '_blank');
+    }
+</script>
+
+</body>
+</html>
