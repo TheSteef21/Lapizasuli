@@ -347,6 +347,38 @@
         .mode-car .car-view { display: inline; }
         .mode-car .motor-view { display: none; }
 
+        /* Dedicatoria Israel Lara */
+        .dedication-section {
+            background: #1a1a1a;
+            border: 1px solid var(--primary);
+            border-radius: 12px;
+            padding: 30px;
+            margin-top: 40px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.1);
+        }
+        
+        .dedication-svg-container {
+            max-width: 100%;
+            overflow: hidden;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .dedication-svg-container svg {
+            width: 100%;
+            height: auto;
+            max-height: 500px;
+        }
+
+        .dedication-text {
+            color: var(--text-muted);
+            font-style: italic;
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
         footer { 
             text-align: center; 
             padding: 50px 20px; 
@@ -378,10 +410,13 @@
 
     <!-- Enlaces del Ecosistema Lapizasuli / SADV41 -->
     <div class="links-grid">
+        <a href="https://thesteef21.github.io/Lapizasuli/KSADV41.html" target="_blank">Portal KSADV41</a>
+        <a href="https://thesteef21.github.io/Lapizasuli/assets/7/8/9.html" target="_blank">Módulo Principal Assets</a>
+        <a href="https://thesteef21.github.io/Lapizasuli/iSADV41.html" target="_blank">Módulo iSADV41</a>
+        <a href="https://thesteef21.github.io/Lapizasuli/GSADV41.html" target="_blank">Ecosistema GSADV41</a>
         <a href="https://thesteef21.github.io/Lapizasuli/Calc.html" target="_blank">Calculadora Pagos Netos</a>
         <a href="https://thesteef21.github.io/Lapizasuli/Bless.html" target="_blank">Crypto Mundo de Pagos</a>
         <a href="https://thesteef21.github.io/Lapizasuli/Noticias.html" target="_blank">Portal de Noticias</a>
-        <a href="https://thesteef21.github.io/Lapizasuli/GSADV41.html" target="_blank">Ecosistema GSADV41</a>
         <a href="https://wa.me/50769362166" target="_blank">WhatsApp Ventas/Pagos</a>
         <a href="https://instagram.com/llanteria_turbotire" target="_blank">Instagram (Galería)</a>
         <a href="https://tiktok.com/@AlexTurbotire" target="_blank">TikTok @AlexTurbotire</a>
@@ -575,6 +610,50 @@
                 </tbody>
             </table>
         </div>
+    </div>
+
+    <!-- DEDICATORIA A ISRAEL LARA - MISIÓN SADV41 -->
+    <div class="dedication-section">
+        <div class="dedication-svg-container">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%" style="background: #121212; border-radius: 12px;">
+              <defs>
+                <linearGradient id="goldGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#d4af37" />
+                  <stop offset="50%" stop-color="#fff" />
+                  <stop offset="100%" stop-color="#d4af37" />
+                </linearGradient>
+                <linearGradient id="bgGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#1a1a1a" />
+                  <stop offset="100%" stop-color="#0d0d0d" />
+                </linearGradient>
+                <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+                  <feGaussianBlur stdDeviation="4" result="blur" />
+                  <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                </filter>
+              </defs>
+
+              <rect width="800" height="500" fill="url(#bgGrad)" rx="12" />
+              <rect x="15" y="15" width="770" height="470" fill="none" stroke="#333" stroke-width="2" rx="8" />
+
+              <g transform="translate(400, 160)" filter="url(#glow)">
+                <polygon points="0,-70 60,35 -60,35" fill="none" stroke="#d4af37" stroke-width="2.5" opacity="0.4" />
+                <polygon points="0,70 -60,-35 60,-35" fill="none" stroke="#d4af37" stroke-width="2.5" opacity="0.4" />
+                <circle cx="0" cy="0" r="35" fill="#1e1e1e" stroke="#d4af37" stroke-width="3" />
+                <text x="0" y="10" font-family="'Segoe UI', Arial, sans-serif" font-size="22" font-weight="bold" fill="#d4af37" text-anchor="middle">41</text>
+              </g>
+
+              <text x="400" y="270" font-family="'Segoe UI', Arial, sans-serif" font-size="20" font-weight="bold" fill="#ffffff" text-anchor="middle" letter-spacing="3">MISIÓN SADV41 &bull; JUVENTUD CON PROPÓSITO</text>
+              <text x="400" y="305" font-family="'Segoe UI', Arial, sans-serif" font-size="15" fill-opacity="0.9" text-anchor="middle" fill="#d4af37">Dedicado al Crecimiento, la Guianza y el Futuro de Israel Lara</text>
+
+              <line x1="250" y1="335" x2="550" y2="335" stroke="#d4af37" stroke-width="1.5" stroke-dasharray="6,6" />
+
+              <text x="400" y="380" font-family="sans-serif" font-size="22" text-anchor="middle">🇮🇱 🔯 🇺🇸 💯 🇦🇷 🇵🇦 🏁 ⚡️ 🎚</text>
+              <text x="400" y="440" font-family="'Segoe UI', Arial, sans-serif" font-size="11" fill="#a0aec0" text-anchor="middle" letter-spacing="1">"Transformando la negligencia en diligencia bajo la luz del Todopoderoso"</text>
+            </svg>
+        </div>
+        <p class="dedication-text">
+            Confiando en que Dios tiene propósitos inquebrantables, este proyecto se extiende para bendecir e iluminar el camino hacia la diligencia y el futuro brillante.
+        </p>
     </div>
 </div>
 
