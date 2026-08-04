@@ -1,1 +1,463 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TSADV41 | Ecosistema Unificado y Red Pyme</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600;800;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.jsdelivr.net/npm/@web3auth/modal@8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.0/ethers.umd.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#020617',
+                        oro: '#eab308',
+                        blanco: '#f8fafc',
+                        borgona: '#4a0010',
+                        neonGreen: '#10b981',
+                        neonBlue: '#00f3ff',
+                        animePink: '#ec4899',
+                        renderRed: '#da3637',
+                        violeta: '#6d28d9',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                        mason: ['Cinzel', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root { 
+            --oro-alquimico: #d4af37; 
+            --obsidiana: #050505; 
+            --neon-cyan: #00f3ff;
+        }
+
+        body {
+            background-color: var(--obsidiana);
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.15) 0%, transparent 50%),
+                linear-gradient(rgba(2, 6, 23, 0.88), rgba(2, 6, 23, 0.98)),
+                url('https://y2s.onrender.com/api/graphics/mundial_bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #f8fafc;
+            position: relative;
+        }
+        
+        .glass { background: rgba(2, 6, 23, 0.85); backdrop-filter: blur(12px); border: 1px solid rgba(234, 179, 8, 0.2); }
+        .logia-card { 
+            background: linear-gradient(145deg, rgba(10,10,12,0.9), rgba(20,20,25,0.9));
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.9), inset 0 0 20px rgba(0, 243, 255, 0.05);
+            backdrop-filter: blur(12px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .anime-border {
+            position: absolute;
+            inset: 0;
+            border: 2px solid transparent;
+            background: linear-gradient(45deg, #00f3ff, #ec4899, #eab308) border-box;
+            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0.5;
+            border-radius: 0.75rem;
+            pointer-events: none;
+        }
+
+        .text-shadow-oro { text-shadow: 0 0 10px rgba(234, 179, 8, 0.5); }
+        .text-shadow-neon { text-shadow: 0 0 15px rgba(0, 243, 255, 0.8), 0 0 30px rgba(0, 243, 255, 0.4); }
+
+        .scanline {
+            width: 100%; height: 2px;
+            background: rgba(0, 209, 255, 0.15);
+            position: fixed; z-index: 50; top: 0;
+            pointer-events: none;
+            animation: scanline 8s linear infinite;
+        }
+        @keyframes scanline { 0% { top: 0; } 100% { top: 100%; } }
+
+        /* --- PESTAÑAS VERTICALES BILATERALES --- */
+        .sidebar-tabs { position: fixed; left: 0; top: 50%; transform: translateY(-50%); z-index: 45; display: flex; flex-direction: column; gap: 12px; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+        .vertical-tab { display: flex; align-items: center; background: rgba(2, 6, 23, 0.95); padding: 12px 15px; border-radius: 0 15px 15px 0; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); width: 60px; overflow: hidden; white-space: nowrap; box-shadow: 4px 4px 15px rgba(0,0,0,0.5); cursor: pointer; }
+        .vertical-tab:hover { width: 340px; padding-left: 20px; }
+        .vertical-tab span.icon { font-size: 1.5rem; min-width: 30px; display: flex; justify-content: center; }
+        .vertical-tab span.text { margin-left: 15px; font-weight: bold; opacity: 0; transition: opacity 0.3s; font-size: 0.85rem; letter-spacing: 0.05em; }
+        .vertical-tab:hover span.text { opacity: 1; transition-delay: 0.1s; }
+        
+        .tab-home { border-left: 4px solid #eab308; }
+        .tab-slogia { border-left: 4px solid #00f3ff; }
+        .tab-ima { border-left: 4px solid #3b82f6; }
+        .tab-col { border-left: 4px solid #10b981; }
+        .tab-ven { border-left: 4px solid #facc15; }
+        .tab-cristo { border-left: 4px solid #c084fc; }
+        .tab-fifa { border-left: 4px solid #22c55e; }
+        .tab-toggle { border-left: 4px solid #94a3b8; }
+
+        .sidebar-tabs.right-aligned { left: auto; right: 0; }
+        .sidebar-tabs.right-aligned .vertical-tab { border-radius: 15px 0 0 15px; flex-direction: row-reverse; }
+        .sidebar-tabs.right-aligned .vertical-tab:hover { padding-right: 20px; padding-left: 15px; }
+        .sidebar-tabs.right-aligned .vertical-tab span.text { margin-left: 0; margin-right: 15px; text-align: right; }
+
+        .marca-background {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1;
+            display: flex; justify-content: center; align-items: center; opacity: 0.1; pointer-events: none;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-neonBlue selection:text-navy overflow-x-hidden">
+
+    <div class="marca-background">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="100%" height="100%">
+          <defs>
+            <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#00f3ff" stop-opacity="0.6"/>
+              <stop offset="100%" stop-color="#050505" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <circle cx="400" cy="400" r="350" fill="url(#glow)"/>
+          <text x="400" y="420" font-family="Cinzel, serif" font-size="80" fill="#ec4899" text-anchor="middle" font-weight="bold" opacity="0.2">TSADV41</text>
+        </svg>
+    </div>
+
+    <div class="scanline"></div>
+
+    <!-- BARRA LATERAL -->
+    <div id="main-sidebar" class="sidebar-tabs">
+        <a href="https://thesteef21.github.io/Lapizasuli/KSADV41.html" class="vertical-tab tab-home">
+            <span class="icon">🏠</span><span class="text text-oro">KSADV41 | HOME</span>
+        </a>
+        <a href="https://thesteef21.github.io/Lapizasuli/SLogia.html" target="_blank" class="vertical-tab tab-slogia">
+            <span class="icon">🎚️</span><span class="text text-cyan-300">SLogia | Conexión SADV41</span>
+        </a>
+        <a href="https://thesteef21.github.io/Lapizasuli/IMA.html" target="_blank" class="vertical-tab tab-ima">
+            <span class="icon">🍚</span><span class="text text-blue-200">Arroz barato cerca de ti! 🇵🇦</span>
+        </a>
+        <a href="https://thesteef21.github.io/Lapizasuli/ColombiaPTY.html" target="_blank" class="vertical-tab tab-col">
+            <span class="icon">💸</span><span class="text text-emerald-300">Préstamos 🇵🇦🇨🇴🇺🇸💯⚡️✨️</span>
+        </a>
+        <a href="https://thesteef21.github.io/Lapizasuli/VSADV41.html" target="_blank" class="vertical-tab tab-ven">
+            <span class="icon">🇻🇪</span><span class="text text-yellow-300">Por Venezuela 🇻🇪</span>
+        </a>
+        <a href="https://thesteef21.github.io/Lapizasuli/CristoTeAma.html" target="_blank" class="vertical-tab tab-cristo">
+            <span class="icon">☦️</span><span class="text text-purple-300">Cristo Te Ama 🎚</span>
+        </a>
+        <a href="https://thesteef21.github.io/Lapizasuli/FIFA2026.html" target="_blank" class="vertical-tab tab-fifa">
+            <span class="icon">⚽</span><span class="text text-green-300">Mundial 2026 ⚽️🇵🇦🇺🇸🇮🇱⚡️✨️💯</span>
+        </a>
+        <div onclick="toggleSidebar()" class="vertical-tab tab-toggle" title="Cambiar lado del menú">
+            <span class="icon">⇋</span><span class="text text-slate-300">Alternar Menú</span>
+        </div>
+    </div>
+
+    <!-- PESTAÑAS SUPERIORES -->
+    <header class="fixed w-full z-50 glass border-b border-cyan-500/30 px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+            <div class="relative flex items-center justify-center w-12 h-12 rounded-full border-2 border-neonBlue bg-navy overflow-hidden shadow-[0_0_15px_rgba(0,243,255,0.5)]">
+                <span class="text-xl text-neonBlue text-shadow-neon">🎚️</span>
+            </div>
+            <div>
+                <h1 class="font-sans text-xl tracking-wider text-white font-extrabold uppercase italic">
+                    TSADV41 <span class="text-animePink">PYME</span>
+                </h1>
+                <p class="text-[9px] text-cyan-400 font-mono tracking-widest">SADV41 DIGITAL ARCHITECTURE | BURUNGA CRECE</p>
+            </div>
+        </div>
+        
+        <div class="flex flex-col items-center gap-2">
+            <nav class="flex gap-4 text-xs uppercase tracking-wider font-bold flex-wrap justify-center bg-black/40 px-6 py-2 rounded-full border border-white/10">
+                <span class="text-white/50">Red Global:</span>
+                <span class="text-white hover:text-cyan-400 transition cursor-pointer">🇵🇦 PAN</span>
+                <span class="text-white hover:text-cyan-400 transition cursor-pointer">🇺🇸 USA</span>
+                <span class="text-white hover:text-cyan-400 transition cursor-pointer">🇮🇱 ISR</span>
+                <span class="text-white hover:text-cyan-400 transition cursor-pointer">🇦🇷 ARG</span>
+                <span class="text-white hover:text-cyan-400 transition cursor-pointer">🔯 ZION</span>
+            </nav>
+        </div>
+    </header>
+
+    <main class="pt-40 pb-12 px-4 md:px-12 max-w-6xl mx-auto space-y-16">
+
+        <!-- HEADER GRID: LOHANNYZ & PYME CONCEPT -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+            
+            <!-- LOHANNYZ GAITÁN CARD (GSADV41) -->
+            <div class="flex flex-col items-center justify-center p-8 bg-white/95 backdrop-blur-md rounded-2xl shadow-[0_0_30px_rgba(16,185,129,0.3)] border-b-8 border-green-600 transition-transform duration-300 hover:scale-105 relative z-10 w-full max-w-sm mx-auto lg:mx-0">
+              <div class="relative flex items-center justify-center w-32 h-32 bg-green-50 rounded-full mb-6 shadow-inner">
+                <div class="absolute inset-0 rounded-full border-4 border-green-200 border-dashed animate-[spin_10s_linear_infinite]"></div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-16 h-16 text-green-600 z-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 22c4.97 0 9-4.03 9-9 0-4.97-4.03-9-9-9s-9 4.03-9 9c0 4.97 4.03 9 9 9z" fill="#dcfce7" stroke="none"/>
+                  <path d="M12 22V12"/>
+                  <path d="M12 12c-2.5-2.5-5-1-5-1s1.5-2.5-5 1z"/>
+                  <path d="M12 12c2.5-2.5 5-1 5-1s-1.5-2.5-5 1z"/>
+                  <path d="M9 16.5c-1.5-1.5-3-.5-3-.5s1-1.5 3 .5z"/>
+                  <path d="M15 16.5c1.5-1.5 3-.5 3-.5s-1-1.5-3 .5z"/>
+                </svg>
+              </div>
+
+              <div class="text-center">
+                <h1 class="text-3xl font-extrabold text-gray-800 tracking-tight uppercase leading-none">
+                  Burunga <span class="text-green-600">Crece</span>
+                </h1>
+                <div class="flex items-center justify-center gap-2 mt-3">
+                  <div class="h-px w-8 bg-gray-300"></div>
+                  <h2 class="text-xl font-bold text-gray-700 tracking-wide">Lohannyz Gaitán</h2>
+                  <div class="h-px w-8 bg-gray-300"></div>
+                </div>
+                <p class="mt-4 text-xs font-bold text-amber-500 tracking-[0.3em] uppercase bg-amber-50 py-1 px-3 rounded-full inline-block">
+                  Comunidad Unida
+                </p>
+              </div>
+            </div>
+
+            <!-- PRESENTACIÓN DEL CONCEPTO PYME (JSADV41) -->
+            <div class="logia-card p-8 rounded-2xl text-center relative h-full flex flex-col justify-center">
+                <div class="anime-border"></div>
+                <div class="inline-flex items-center justify-center space-x-2 bg-black/60 px-4 py-1.5 rounded-full border border-oro/30 mb-4 mx-auto">
+                    <span class="w-2 h-2 rounded-full bg-neonBlue animate-pulse"></span>
+                    <span class="text-[10px] font-mono text-oro tracking-widest">SADV41 LEY - MÁS DE 34 REGLAS</span>
+                </div>
+                <h2 class="text-3xl font-black italic text-transparent bg-clip-text bg-gradient-to-r from-neonBlue via-white to-animePink tracking-tighter mb-4">
+                    EL COMERCIO DEL FUTURO
+                </h2>
+                <!-- Arte central (Estilo Yatai/Tienda) -->
+                <div class="relative w-48 h-48 mx-auto bg-gradient-to-b from-navy to-black rounded-full border-4 border-oro shadow-[0_0_40px_rgba(212,175,55,0.3)] flex flex-col items-center justify-center overflow-hidden group">
+                    <svg class="absolute inset-0 w-full h-full animate-[spin_20s_linear_infinite]" viewBox="0 0 100 100">
+                        <path d="M 50, 50 m -40, 0 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0" id="circleText" fill="none" />
+                        <text font-size="7.5" fill="#d4af37" font-family="Cinzel" font-weight="bold" letter-spacing="2">
+                            <textPath href="#circleText" startOffset="0%">★ TSADV41 ★ UNIÓN ★ PYME ★ SERVICIO ★</textPath>
+                        </text>
+                    </svg>
+                    <div class="z-10 flex flex-col items-center transition-transform duration-500 group-hover:scale-110">
+                        <div class="text-4xl mb-1 filter drop-shadow-[0_0_10px_rgba(236,72,153,0.8)]">🏪</div>
+                        <div class="text-2xl font-black text-shadow-neon text-white">🎚️</div>
+                        <div class="mt-2 text-[8px] font-bold bg-animePink text-white px-2 py-0.5 rounded-sm uppercase tracking-wider">Atención Local</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- YOUTH SPONSORSHIP SVG (FBI ALIANZA) -->
+        <section class="logia-card p-6 md:p-10 rounded-2xl">
+            <div class="anime-border"></div>
+            <div class="text-center mb-8">
+                <h2 class="text-3xl md:text-4xl font-mason text-white tracking-wider font-bold mb-2">Alianza <span class="text-oro">JSADV41</span></h2>
+                <p class="text-cyan-400 font-mono text-sm tracking-widest uppercase">Auspicio a la Juventud & Seguridad Comunitaria</p>
+            </div>
+            
+            <div class="w-full max-w-2xl mx-auto rounded-xl overflow-hidden border border-white/10 shadow-[0_0_50px_rgba(0,243,255,0.2)]">
+                <!-- SVG INTEGRADO -->
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" class="w-full h-auto" style="background-color: #020617; font-family: 'Inter', sans-serif, system-ui;">
+                  <defs>
+                    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#020617" />
+                      <stop offset="50%" stop-color="#0f172a" />
+                      <stop offset="100%" stop-color="#020617" />
+                    </linearGradient>
+                    <linearGradient id="cyanGlow" x1="0%" y1="0%" x2="0%" y2="100%">
+                      <stop offset="0%" stop-color="#00f3ff" stop-opacity="0.8"/>
+                      <stop offset="100%" stop-color="#00f3ff" stop-opacity="0"/>
+                    </linearGradient>
+                    <linearGradient id="pinkGlow" x1="0%" y1="0%" x2="0%" y2="100%">
+                      <stop offset="0%" stop-color="#ec4899" stop-opacity="0.8"/>
+                      <stop offset="100%" stop-color="#ec4899" stop-opacity="0"/>
+                    </linearGradient>
+                    <filter id="neonGlowSVG" x="-20%" y="-20%" width="140%" height="140%">
+                      <feGaussianBlur stdDeviation="15" result="blur" />
+                      <feMerge>
+                        <feMergeNode in="blur" />
+                        <feMergeNode in="SourceGraphic" />
+                      </feMerge>
+                    </filter>
+                  </defs>
+
+                  <rect width="800" height="1000" fill="url(#bgGrad)" />
+
+                  <!-- Líneas de Velocidad -->
+                  <g stroke="#ffffff" stroke-opacity="0.05" stroke-width="2">
+                    <line x1="400" y1="400" x2="0" y2="0" />
+                    <line x1="400" y1="400" x2="200" y2="0" />
+                    <line x1="400" y1="400" x2="400" y2="0" />
+                    <line x1="400" y1="400" x2="600" y2="0" />
+                    <line x1="400" y1="400" x2="800" y2="0" />
+                    <line x1="400" y1="400" x2="800" y2="200" />
+                    <line x1="400" y1="400" x2="800" y2="400" />
+                    <line x1="400" y1="400" x2="0" y2="200" />
+                    <line x1="400" y1="400" x2="0" y2="400" />
+                  </g>
+
+                  <!-- Escudo Holográfico Central -->
+                  <circle cx="400" cy="400" r="280" fill="none" stroke="#00f3ff" stroke-width="2" stroke-dasharray="10 15" opacity="0.3" />
+                  <circle cx="400" cy="400" r="260" fill="url(#cyanGlow)" opacity="0.1" />
+
+                  <!-- FIGURAS MANGA -->
+                  <g id="figures" transform="translate(0, 30)">
+                    <!-- AGENTE FBI -->
+                    <path d="M 230 310 L 140 280 L 160 190" fill="none" stroke="#64748b" stroke-width="35" stroke-linejoin="round" stroke-linecap="round"/>
+                    <path d="M 370 310 L 460 280 L 440 190" fill="none" stroke="#64748b" stroke-width="35" stroke-linejoin="round" stroke-linecap="round"/>
+                    <path d="M 210 280 L 390 280 L 420 600 L 180 600 Z" fill="#1e293b" />
+                    <path d="M 250 280 L 300 450 L 350 280 Z" fill="#cbd5e1" opacity="0.9"/>
+                    <path d="M 295 300 L 305 300 L 305 440 L 295 440 Z" fill="#334155" />
+                    <rect x="270" y="180" width="60" height="80" rx="15" fill="#94a3b8" />
+                    <circle cx="230" cy="480" r="20" fill="#eab308" filter="url(#neonGlowSVG)"/>
+                    <circle cx="230" cy="480" r="15" fill="#ca8a04" />
+
+                    <!-- NIÑO AUSPICIADO -->
+                    <path d="M 520 400 L 450 360 L 470 290" fill="none" stroke="#3b82f6" stroke-width="25" stroke-linejoin="round" stroke-linecap="round"/>
+                    <path d="M 640 400 L 710 360 L 690 290" fill="none" stroke="#3b82f6" stroke-width="25" stroke-linejoin="round" stroke-linecap="round"/>
+                    <path d="M 540 550 L 520 750" fill="none" stroke="#1e3a8a" stroke-width="30" stroke-linecap="round"/>
+                    <path d="M 620 550 L 640 750" fill="none" stroke="#1e3a8a" stroke-width="30" stroke-linecap="round"/>
+                    
+                    <rect x="500" y="380" width="160" height="150" rx="10" fill="#4b5563" stroke="#eab308" stroke-width="6" />
+                    <rect x="520" y="470" width="120" height="40" rx="5" fill="#374151" />
+                    <line x1="520" y1="480" x2="640" y2="480" stroke="#1f2937" stroke-width="4"/>
+                    <line x1="520" y1="490" x2="640" y2="490" stroke="#1f2937" stroke-width="4"/>
+                    <line x1="520" y1="500" x2="640" y2="500" stroke="#1f2937" stroke-width="4"/>
+                    
+                    <rect x="535" y="405" width="90" height="40" fill="#eab308" />
+                    <text x="580" y="435" font-family="'Inter', sans-serif" font-weight="900" font-size="28" fill="#111827" text-anchor="middle">FBI</text>
+                    <rect x="555" y="290" width="50" height="65" rx="20" fill="#ec4899" filter="url(#neonGlowSVG)"/>
+                  </g>
+
+                  <!-- Gradiente Texto -->
+                  <rect x="0" y="600" width="800" height="400" fill="url(#bgGrad)" opacity="0.9" />
+
+                  <!-- TEXTO OFICIAL -->
+                  <g transform="translate(60, 720)">
+                    <text x="0" y="0" font-family="'Inter', sans-serif" font-weight="900" font-size="65" fill="#ffffff" letter-spacing="-1">Making</text>
+                    <text x="0" y="70" font-family="'Inter', sans-serif" font-weight="900" font-size="65" fill="#ffffff" letter-spacing="-1">communities</text>
+                    <text x="0" y="140" font-family="'Inter', sans-serif" font-weight="900" font-size="65" fill="#ffffff" letter-spacing="-1">safer, together.</text>
+                    <text x="0" y="200" font-family="'Inter', sans-serif" font-weight="700" font-style="italic" font-size="35" fill="#eab308">National Night Out</text>
+                  </g>
+
+                  <!-- SELLO JSADV41 -->
+                  <g transform="translate(620, 800)">
+                    <circle cx="50" cy="50" r="45" fill="none" stroke="#4b5563" stroke-width="3"/>
+                    <circle cx="50" cy="50" r="38" fill="none" stroke="#eab308" stroke-width="1" stroke-dasharray="4 4"/>
+                    <text x="50" y="62" font-size="35" text-anchor="middle" filter="url(#neonGlowSVG)">🎚️</text>
+                    <path id="curveUp" d="M 15,50 A 35,35 0 0,1 85,50" fill="none" />
+                    <text font-size="9" font-weight="bold" fill="#00f3ff" letter-spacing="2">
+                      <textPath href="#curveUp" startOffset="50%" text-anchor="middle">JSADV41</textPath>
+                    </text>
+                    <path id="curveDown" d="M 85,55 A 35,35 0 0,1 15,55" fill="none" />
+                    <text font-size="8" font-weight="bold" fill="#ec4899" letter-spacing="1">
+                      <textPath href="#curveDown" startOffset="50%" text-anchor="middle">YOUTH SPONSOR</textPath>
+                    </text>
+                  </g>
+                </svg>
+            </div>
+        </section>
+
+        <!-- SECCIÓN DE ESTRUCTURA Y DIRECTORIO -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            
+            <!-- ANÁLISIS HISTÓRICO DE BURUNGA -->
+            <section class="logia-card p-8 rounded-xl font-sans">
+                <div class="flex items-center gap-3 mb-6">
+                    <span class="text-2xl">📽️</span>
+                    <h3 class="text-xl font-mason text-oro tracking-wide border-b border-oro/30 pb-2 w-full">
+                        Extracto del Documental (FEP)
+                    </h3>
+                </div>
+                <p class="text-sm text-slate-300 leading-relaxed mb-4">
+                    Registro histórico del proceso de elección de la primera Junta Local de Burunga. La comunidad, respaldada por la Federación de Estudiantes de Panamá (FEP) y la Guardia Nacional, lucha por legalizar la tenencia de tierras frente a la especulación.
+                </p>
+                <ul class="space-y-3 text-xs text-slate-300 font-mono mt-4">
+                    <li class="bg-black/40 p-3 rounded-lg border border-slate-800"><strong class="text-white">Participación Ciudadana:</strong> Campesinos expresan sus necesidades urgentes: agua, luz y tierra.</li>
+                    <li class="bg-black/40 p-3 rounded-lg border border-slate-800"><strong class="text-white">Roberto Gómez (FEP):</strong> Explica el apoyo estudiantil como fuerza política y popular en pro del progreso.</li>
+                    <li class="bg-black/40 p-3 rounded-lg border border-slate-800"><strong class="text-white">Alianza Estratégica:</strong> Acuerdo entre la Guardia Nacional y los estudiantes para respaldar a la comunidad.</li>
+                </ul>
+            </section>
+
+            <!-- CONEXIÓN COMERCIAL BURUNGA & BASE ARQUITECTÓNICA -->
+            <section class="logia-card p-8 rounded-xl font-sans flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center gap-3 mb-6">
+                        <span class="text-2xl">📜</span>
+                        <h3 class="text-xl font-mason text-cyan-400 tracking-wide border-b border-cyan-400/30 pb-2 w-full">
+                            Red Local & Base TSADV41
+                        </h3>
+                    </div>
+                    
+                    <!-- Reglas Base -->
+                    <ul class="space-y-3 text-xs text-slate-300 mb-6">
+                        <li class="flex items-start gap-3 bg-white/5 p-3 rounded-lg border border-white/10 hover:border-neonBlue/50 transition-colors">
+                            <span class="text-neonBlue mt-0.5">⬡</span>
+                            <div>
+                                <strong class="text-white block">Himno 395 y los 3 Soles</strong>
+                                <span class="text-slate-400">Integrado en el motor de búsqueda central de las 42 reglas de la ley SADV41.</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3 bg-white/5 p-3 rounded-lg border border-white/10 hover:border-oro/50 transition-colors">
+                            <span class="text-oro mt-0.5">⬡</span>
+                            <div>
+                                <strong class="text-white block">El Diezmo y El Origen = 0</strong>
+                                <span class="text-slate-400">Todo cálculo reconoce que el origen del diezmo es 0, así como el Señor es el origen de todo.</span>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <!-- Comercios -->
+                    <div class="space-y-3">
+                        <div class="bg-black/40 p-3 rounded-lg border border-emerald-500/30 flex justify-between items-center">
+                            <span class="text-xs font-bold text-emerald-400">Llantería Turbo Tire (Extreme)</span>
+                            <span class="text-[10px] bg-emerald-500/20 text-emerald-300 px-2 py-1 rounded">Activo</span>
+                        </div>
+                        <div class="bg-black/40 p-3 rounded-lg border border-orange-500/30 flex justify-between items-center">
+                            <span class="text-xs font-bold text-orange-400">Comida Rápida Don David</span>
+                            <span class="text-[10px] bg-orange-500/20 text-orange-300 px-2 py-1 rounded">Integrado</span>
+                        </div>
+                        <div class="bg-black/40 p-3 rounded-lg border border-red-500/30 flex justify-between items-center">
+                            <span class="text-xs font-bold text-red-400">U.B.A. y Clubes Deportivos</span>
+                            <span class="text-[10px] bg-red-500/20 text-red-300 px-2 py-1 rounded">En Red</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="mt-8 w-full py-3 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold rounded-lg uppercase tracking-widest text-sm transition-all shadow-[0_0_15px_rgba(0,243,255,0.4)]">
+                    Ingresar Nuevo Comercio
+                </button>
+            </section>
+
+        </div>
+    </main>
+
+    <footer class="text-center p-8 mt-12 border-t border-white/10 opacity-75 font-mono text-[10px] flex flex-col items-center justify-center gap-2">
+        <div class="flex gap-3 text-lg">
+            <span>🇵🇦</span><span>🇺🇸</span><span>🇮🇱</span><span>🇦🇷</span><span>🔯</span>
+        </div>
+        <p class="text-slate-400 mt-2">TSADV41 Architecture © 2026 | El Origen es 0</p>
+        <p class="text-slate-500">Diseñado bajo la guianza perfecta. 🎚️</p>
+    </footer>
+
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('main-sidebar');
+            sidebar.classList.toggle('right-aligned');
+            const isRight = sidebar.classList.contains('right-aligned');
+            localStorage.setItem('sidebarPosition', isRight ? 'right' : 'left');
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const savedPos = localStorage.getItem('sidebarPosition');
+            if(savedPos === 'right') {
+                document.getElementById('main-sidebar').classList.add('right-aligned');
+            }
+        });
+    </script>
+</body>
+</html>
 
