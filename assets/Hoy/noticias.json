@@ -1,5 +1,5 @@
 {
-  "fecha": "2026-08-02",
+  "fecha": "2026-08-05",
   "noticias": [
     {
       "source": "Google Noticias",
@@ -28,6 +28,13 @@
       "title": "Donald Trump suspende ataque contra Irán tras alcanzar los términos de un acuerdo",
       "image": null,
       "url": "https://www.univision.com/noticias/estados-unidos/donald-trump-suspende-ataque-contra-iran-tras-alcanzar-los-terminos-de-un-acuerdo"
+    },
+    {
+      "source": "La Nueva",
+      "time": "Ahora",
+      "title": "Ley de Tierras: ¿cuánto territorio argentino ya está actualmente en manos extranjeras?",
+      "image": null,
+      "url": "https://www.lanueva.com/nota/2026-8-5-16-24-0-ley-de-tierras-cuanto-territorio-argentino-ya-esta-actualmente-en-manos-extranjeras"
     }
   ]
 }
