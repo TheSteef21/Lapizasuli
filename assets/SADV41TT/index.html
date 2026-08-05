@@ -18,6 +18,7 @@
         table { width: 100%; margin-top: 20px; border-collapse: collapse; }
         th, td { border: 1px solid #e2e8f0; padding: 10px; text-align: left; }
         th { background-color: #f1f5f9; }
+        .status-sync { font-size: 12px; color: #16a34a; text-align: right; margin-top: 5px; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -60,6 +61,7 @@
     </div>
 
     <button type="button" onclick="agregarRegistro()">Registrar Venta</button>
+    <div id="syncStatus" class="status-sync"></div>
 
     <h3>Registros del Día</h3>
     <table id="tablaRegistros">
@@ -82,7 +84,7 @@
 <script>
     let registrosDia = [];
 
-    function agregarRegistro() {
+    async function agregarRegistro() {
         const unidades = document.getElementById('unidades').value;
         const medida = document.getElementById('medida').value;
         const marca = document.getElementById('marca').value;
@@ -99,6 +101,34 @@
         registrosDia.push(item);
         actualizarTabla();
         limpiarFormulario();
+
+        // Enviar actualización automática al servidor Python para actualizar el JSON
+        await sincronizarConServidor();
+    }
+
+    async function sincronizarConServidor() {
+        const fechaActual = new Date().toISOString().split('T')[0];
+        const paqueteDatos = {
+            fecha: fechaActual,
+            mision: "SADV41",
+            total_registros: registrosDia.length,
+            transacciones: registrosDia
+        };
+
+        try {
+            const response = await fetch('http://127.0.0.1:8000/api/registrar', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(paqueteDatos)
+            });
+            const resultado = await response.json();
+            if (resultado.status === "success") {
+                document.getElementById('syncStatus').innerText = "✔ JSON sincronizado en tiempo real";
+            }
+        } catch (error) {
+            document.getElementById('syncStatus').innerText = "⚠ Error de sincronización con Python";
+            console.error("Error al conectar con el servidor local:", error);
+        }
     }
 
     function actualizarTabla() {
@@ -141,7 +171,6 @@
         const jsonString = JSON.stringify(paqueteDatos, null, 2);
         const mensajeCodificado = encodeURIComponent(`*CIERRE DE JORNADA - SADV41TT*\n\`\`\`json\n${jsonString}\n\`\`\``);
         
-        // Número de destino: +50769362166 (StevenDiorOficial)
         const numeroTelefono = "50769362166";
         const urlWhatsApp = `https://wa.me/${numeroTelefono}?text=${mensajeCodificado}`;
 
