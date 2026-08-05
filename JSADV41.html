@@ -2,220 +2,464 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Informe de Salvaguarda Institucional y Operativa - JSADV41</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Burunga Crece | GSADV41 Ecosistema Unificado y Salvaguarda</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.jsdelivr.net/npm/@web3auth/modal@8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.0/ethers.umd.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#020617',
+                        oro: '#eab308',
+                        blanco: '#f8fafc',
+                        borgona: '#4a0010',
+                        neonGreen: '#10b981',
+                        neonBlue: '#00f3ff',
+                        renderRed: '#da3637',
+                        violeta: '#6d28d9',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                        mason: ['Cinzel', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
     <style>
-        *, *::before, *::after {
-            box-sizing: border-box;
+        :root { 
+            --oro-alquimico: #d4af37; 
+            --obsidiana: #050505; 
         }
-        @page {
-            size: A4;
-            margin: 20mm 15mm;
-            background-color: #0b1120;
-        }
+
         body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            color: #e2e8f0;
-            background-color: #0b1120;
-            line-height: 1.6;
-            font-size: 10.5pt;
-        }
-        .header-banner {
-            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
-            color: #0f172a;
-            margin: -20mm -15mm 25px -15mm;
-            padding: 30px 20px;
-            text-align: center;
-            border-bottom: 4px solid #fbbf24;
-        }
-        .header-banner h1 {
-            margin: 0 0 8px 0;
-            font-size: 18pt;
-            letter-spacing: 0.5px;
-            font-weight: 700;
-            text-transform: uppercase;
-        }
-        .header-banner p {
-            margin: 0;
-            font-size: 10pt;
-            color: #334155;
-        }
-        .meta-card {
-            background: #1e293b;
-            border-left: 5px solid #fbbf24;
-            padding: 12px 18px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 8px rgba(255,255,255,0.05);
-            font-size: 10pt;
-        }
-        .meta-card table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        .meta-card td {
-            padding: 4px 0;
-            vertical-align: top;
-        }
-        .meta-card td.label {
-            font-weight: bold;
-            color: #fbbf24;
-            width: 35%;
-        }
-        h2 {
-            font-size: 13pt;
+            background-color: var(--obsidiana);
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+                linear-gradient(rgba(2, 6, 23, 0.85), rgba(2, 6, 23, 0.95)), 
+                url('https://y2s.onrender.com/api/graphics/mundial_bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
             color: #f8fafc;
-            border-bottom: 2px solid #334155;
-            padding-bottom: 4px;
-            margin-top: 25px;
-            margin-bottom: 10px;
-            page-break-after: avoid;
-        }
-        p {
-            margin: 0 0 10px 0;
-            text-align: justify;
-        }
-        table.data-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-            margin-bottom: 15px;
-            font-size: 9.5pt;
-            background: #1e293b;
-        }
-        table.data-table th, table.data-table td {
-            border: 1px solid #334155;
-            padding: 8px 10px;
-            text-align: left;
-            vertical-align: top;
-        }
-        table.data-table th {
-            background-color: #f8fafc;
-            color: #0f172a;
-            font-weight: 600;
-            text-transform: uppercase;
-            font-size: 9pt;
-        }
-        table.data-table tr:nth-child(even) {
-            background-color: #0f172a;
-        }
-        .timeline-item {
             position: relative;
-            padding-left: 20px;
-            margin-bottom: 10px;
-            border-left: 2px solid #fbbf24;
         }
-        .timeline-time {
-            font-weight: bold;
-            color: #fbbf24;
+        
+        .glass { background: rgba(2, 6, 23, 0.85); backdrop-filter: blur(12px); border: 1px solid rgba(234, 179, 8, 0.2); }
+        .glass-mundial { background: rgba(2, 6, 23, 0.60); backdrop-filter: blur(8px); border: 1px solid rgba(16, 185, 129, 0.3); }
+        
+        .text-shadow-oro { text-shadow: 0 0 10px rgba(234, 179, 8, 0.5); }
+        .text-shadow-green { text-shadow: 0 0 10px rgba(16, 185, 129, 0.6); }
+        .text-shadow-blue { text-shadow: 0 0 10px rgba(0, 243, 255, 0.6); }
+
+        .scanline {
+            width: 100%; height: 2px;
+            background: rgba(0, 209, 255, 0.15);
+            position: fixed; z-index: 50; top: 0;
+            pointer-events: none;
+            animation: scanline 8s linear infinite;
         }
-        .footer-note {
-            margin-top: 30px;
-            background: #1e293b;
-            border: 1px solid #334155;
-            padding: 15px;
-            font-style: italic;
-            font-size: 9.5pt;
-            text-align: center;
-            color: #cbd5e1;
+        @keyframes scanline { 0% { top: 0; } 100% { top: 100%; } }
+
+        /* --- PESTAÑAS VERTICALES BILATERALES --- */
+        .sidebar-tabs { position: fixed; left: 0; top: 50%; transform: translateY(-50%); z-index: 45; display: flex; flex-direction: column; gap: 12px; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+        .vertical-tab { display: flex; align-items: center; background: rgba(2, 6, 23, 0.95); padding: 12px 15px; border-radius: 0 15px 15px 0; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); width: 60px; overflow: hidden; white-space: nowrap; box-shadow: 4px 4px 15px rgba(0,0,0,0.5); cursor: pointer; }
+        .vertical-tab:hover { width: 340px; padding-left: 20px; }
+        .vertical-tab span.icon { font-size: 1.5rem; min-width: 30px; display: flex; justify-content: center; }
+        .vertical-tab span.text { margin-left: 15px; font-weight: bold; opacity: 0; transition: opacity 0.3s; font-size: 0.85rem; letter-spacing: 0.05em; }
+        .vertical-tab:hover span.text { opacity: 1; transition-delay: 0.1s; }
+        
+        .tab-slogia { border-left: 4px solid #00f3ff; }
+        .tab-ima { border-left: 4px solid #3b82f6; }
+        .tab-col { border-left: 4px solid #10b981; }
+        .tab-ven { border-left: 4px solid #facc15; }
+        .tab-cristo { border-left: 4px solid #c084fc; }
+        .tab-fifa { border-left: 4px solid #22c55e; }
+        .tab-brave { border-left: 4px solid #f97316; }
+        .tab-arg { border-left: 4px solid #60a5fa; }
+        .tab-cripto { border-left: 4px solid #f59e0b; }
+        .tab-box { border-left: 4px solid #ef4444; }
+        .tab-funding { border-left: 4px solid #10b981; }
+        .tab-toggle { border-left: 4px solid #94a3b8; }
+
+        .sidebar-tabs.right-aligned { left: auto; right: 0; }
+        .sidebar-tabs.right-aligned .vertical-tab { border-radius: 15px 0 0 15px; flex-direction: row-reverse; }
+        .sidebar-tabs.right-aligned .vertical-tab:hover { padding-right: 20px; padding-left: 15px; }
+        .sidebar-tabs.right-aligned .vertical-tab span.text { margin-left: 0; margin-right: 15px; text-align: right; }
+
+        .logia-card { 
+            background: linear-gradient(145deg, rgba(10,10,10,0.85), rgba(20,20,20,0.85));
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.9);
+            backdrop-filter: blur(12px);
+            position: relative;
+            overflow: hidden;
         }
-        .sadv-tag {
-            text-align: right;
-            font-size: 8pt;
-            color: #94a3b8;
-            margin-top: 15px;
+
+        .marca-background {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1;
+            display: flex; justify-content: center; align-items: center; opacity: 0.15; pointer-events: none;
         }
     </style>
 </head>
-<body>
+<body class="font-sans antialiased selection:bg-oro selection:text-navy overflow-x-hidden">
 
-    <div class="header-banner">
-        <h1>Informe de Salvaguarda Institucional, Actuación Humanitaria y Deslinde de Responsabilidades</h1>
-        <p>A beneficio de las empresas de mecánica y servicios automotrices internacionales &bull; Marco Operativo SADV41</p>
+    <div class="marca-background">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="100%" height="100%">
+          <defs>
+            <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#d4af37" stop-opacity="0.8"/>
+              <stop offset="100%" stop-color="#050505" stop-opacity="0"/>
+            </radialGradient>
+            <linearGradient id="beam" x1="50%" y1="0%" x2="50%" y2="100%">
+              <stop offset="0%" stop-color="#00f3ff" stop-opacity="0"/>
+              <stop offset="50%" stop-color="#00f3ff" stop-opacity="0.9"/>
+              <stop offset="100%" stop-color="#00f3ff" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <circle cx="400" cy="400" r="350" fill="url(#glow)"/>
+          <rect x="395" y="100" width="10" height="600" fill="url(#beam)"/>
+          <text x="400" y="160" font-family="Cinzel, serif" font-size="24" fill="#d4af37" text-anchor="middle" letter-spacing="4">SADV41</text>
+        </svg>
     </div>
 
-    <div class="meta-card">
-        <table>
-            <tr>
-                <td class="label">Fecha del Incidente:</td>
-                <td>4 de agosto de 2026</td>
-            </tr>
-            <tr>
-                <td class="label">Asistente / Informante:</td>
-                <td>Cristo Jesús a través de nosotros</td>
-            </tr>
-            <tr>
-                <td class="label">Lugar de los Hechos:</td>
-                <td>Establecimiento de Servicios Técnicos y Mecánicos</td>
-            </tr>
-            <tr>
-                <td class="label">Activo Operativo Beneficiado:</td>
-                <td>Protección jurídica de valores-activos operativos internacionales</td>
-            </tr>
-        </table>
+    <div class="scanline"></div>
+
+    <!-- BARRA LATERAL Y CONEXIONES UNIFICADAS -->
+    <div id="main-sidebar" class="sidebar-tabs">
+        <a href="https://thesteef21.github.io/Lapizasuli/SLogia.html" target="_blank" class="vertical-tab tab-slogia">
+            <span class="icon">🎚️</span><span class="text text-cyan-300">SLogia | Conexión SADV41</span>
+        </a>
+        <a href="https://thesteef21.github.io/Lapizasuli/IMA.html" target="_blank" class="vertical-tab tab-ima">
+            <span class="icon">🍚</span><span class="text text-blue-200">Arroz barato cerca de ti! 🇵🇦</span>
+        </a>
+        <a href="https://thesteef21.github.io/Lapizasuli/ColombiaPTY.html" target="_blank" class="vertical-tab tab-col">
+            <span class="icon">💸</span><span class="text text-emerald-300">Préstamos 🇵🇦🇨🇴🇺🇸💯⚡️✨️</span>
+        </a>
+        <a href="https://thesteef21.github.io/Lapizasuli/VSADV41.html" target="_blank" class="vertical-tab tab-ven">
+            <span class="icon">🇻🇪</span><span class="text text-yellow-300">Por Venezuela 🇻🇪</span>
+        </a>
+        <a href="https://thesteef21.github.io/Lapizasuli/CristoTeAma.html" target="_blank" class="vertical-tab tab-cristo">
+            <span class="icon">☦️</span><span class="text text-purple-300">Cristo Te Ama 🎚</span>
+        </a>
+        <a href="https://thesteef21.github.io/Lapizasuli/FIFA2026.html" target="_blank" class="vertical-tab tab-fifa">
+            <span class="icon">⚽</span><span class="text text-green-300">Mundial 2026 ⚽️🇵🇦🇺🇸🇮🇱⚡️✨️💯</span>
+        </a>
+        <a href="https://brave.com/evi088" target="_blank" class="vertical-tab tab-brave">
+            <span class="icon">🦁</span><span class="text text-orange-400">Navegador seguro = Brave</span>
+        </a>
+        <a href="https://thesteef21.github.io/Lapizasuli/assets/Malvinas/" target="_blank" class="vertical-tab tab-arg">
+            <span class="icon">🇦🇷</span><span class="text text-blue-300">Malvinas Argentinas</span>
+        </a>
+        <a href="https://thesteef21.github.io/Lapizasuli/CasaCrypto.html" target="_blank" class="vertical-tab tab-cripto">
+            <span class="icon">🪙</span><span class="text text-amber-400">La Casa Cripto</span>
+        </a>
+        <a href="https://thesteef21.github.io/Lapizasuli/RubenGuerraBox.html" target="_blank" class="vertical-tab tab-box">
+            <span class="icon">🥊</span><span class="text text-red-400">Rubén Guerra Box</span>
+        </a>
+        <a href="https://thesteef21.github.io/Lapizasuli/FUNDING.html" target="_blank" class="vertical-tab tab-funding">
+            <span class="icon">💵</span><span class="text text-emerald-400">Invertir (FUNDING)</span>
+        </a>
+        <div onclick="toggleSidebar()" class="vertical-tab tab-toggle" title="Cambiar lado del menú">
+            <span class="icon">⇋</span><span class="text text-slate-300">Alternar Menú</span>
+        </div>
     </div>
 
-    <h2>1. Situación Jurídica</h2>
-    <p>El presente documento constituye un registro formal y descargo de responsabilidad de carácter preventivo y operativo, enfocado en blindar jurídicamente la actuación guiada por Cristo Jesús ante posibles acciones, presiones o imputaciones derivadas de la omisión de socorro institucional por parte de superiores o terceros, y evidenciar la negligencia operativa en la cadena de mando y de actores externos u operativos involucrados.</p>
+    <!-- PESTAÑAS SUPERIORES -->
+    <header class="fixed w-full z-50 glass border-b border-oro/30 px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+            <span class="text-2xl">🛡️</span>
+            <div>
+                <h1 class="font-serif text-xl tracking-wider text-oro font-bold">BURUNGA CRECE</h1>
+                <p class="text-[9px] text-slate-400 font-mono tracking-widest">SADV41 DIGITAL ARCHITECTURE</p>
+            </div>
+        </div>
+        
+        <div class="flex flex-col items-center gap-2">
+            <nav class="flex gap-6 text-sm uppercase tracking-wider font-medium flex-wrap justify-center">
+                <a href="https://thesteef21.github.io/Lapizasuli/assets/Malvinas/GSADV41.html" target="_blank" class="hover:text-blue-400 transition-colors text-blue-300 font-bold flex items-center gap-1">🇦🇷 GSADV41 ↗</a>
+                <a href="https://thesteef21.github.io/Lapizasuli/FIFA2026.html" target="_blank" class="hover:text-emerald-400 transition-colors text-emerald-300 font-bold flex items-center gap-1">⚽ Mundial 2026 ↗</a>
+                <a href="https://thesteef21.github.io/Lapizasuli/FUNDING.html" target="_blank" class="hover:text-emerald-400 transition-colors text-emerald-300 font-bold flex items-center gap-1">💵 INVIERTE EN NOSOTROS</a>
+                <a href="https://thesteef21.github.io/Lapizasuli/SLogia.html" target="_blank" class="hover:text-neonBlue transition-colors text-cyan-300">🎚️ SLogia</a>
+            </nav>
+        </div>
+    </header>
 
-    <h2>2. Fundamento Legal</h2>
-    <p><strong>Constitución Política de la República de Panamá y Tratados Internacionales de Derechos Humanos:</strong> Principio de protección a la vida, la dignidad humana y los deberes ciudadanos de solidaridad, auxilio y respeto a los derechos fundamentales.</p>
-    <p><strong>Código Penal - Delitos contra la Vida y la Integridad Personal:</strong> Deber de solidaridad y tipificación de la omisión de socorro, priorizando la preservación de la vida humana por encima de exigencias laborales o mercantiles.</p>
-    <p><strong>Código de Trabajo:</strong> Normativa relativa a la seguridad, salud ocupacional y los límites razonables de las órdenes patronales ante situaciones de fuerza mayor o emergencias humanitarias.</p>
+    <main class="pt-40 pb-12 px-4 md:px-12 max-w-4xl mx-auto space-y-12">
 
-    <h2>3. Estrategia Sugerida</h2>
-    <table class="data-table">
-        <thead>
-            <tr>
-                <th style="width: 20%;">Fase de Acción</th>
-                <th style="width: 40%;">Medida Preventiva</th>
-                <th style="width: 40%;">Justificación Legal</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><strong>Inmediata</strong></td>
-                <td>Resguardo formal de registros de llamadas de emergencia (SUME 911 y Policía Nacional) y bitácoras horarias.</td>
-                <td>Acreditar la diligencia activa y el cumplimiento del deber humanitario frente a la inacción de terceros.</td>
-            </tr>
-            <tr>
-                <td><strong>Documental</strong></td>
-                <td>Notificación y archivo interno de este informe para deslindar responsabilidad ante presiones de la administración o jefatura.</td>
-                <td>Evidenciar que las llamadas de la administración priorizaron la actividad comercial por sobre la emergencia médica, eximiendo a los siervos de culpa.</td>
-            </tr>
-            <tr>
-                <td><strong>Proactiva</strong></td>
-                <td>Señalamiento directo de la negligencia e inacción atribuible a la cadena de mando administrativa y personal directivo.</td>
-                <td>Trasladar la responsabilidad de la falta de protocolos de emergencia al sector directivo y administrativo.</td>
-            </tr>
-        </tbody>
-    </table>
+        <!-- LOHANNYZ GAITÁN CARD -->
+        <div class="flex flex-col items-center justify-center p-8 bg-white/95 backdrop-blur-md rounded-2xl shadow-[0_0_30px_rgba(16,185,129,0.3)] max-w-sm mx-auto border-b-8 border-green-600 transition-transform duration-300 hover:scale-105 relative z-10">
+          <div class="relative flex items-center justify-center w-32 h-32 bg-green-50 rounded-full mb-6 shadow-inner">
+            <div class="absolute inset-0 rounded-full border-4 border-green-200 border-dashed animate-[spin_10s_linear_infinite]"></div>
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-16 h-16 text-green-600 z-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22c4.97 0 9-4.03 9-9 0-4.97-4.03-9-9-9s-9 4.03-9 9c0 4.97 4.03 9 9 9z" fill="#dcfce7" stroke="none"/>
+              <path d="M12 22V12"/>
+              <path d="M12 12c-2.5-2.5-5-1-5-1s1.5-2.5 5 1z"/>
+              <path d="M12 12c2.5-2.5 5-1 5-1s-1.5-2.5-5 1z"/>
+              <path d="M9 16.5c-1.5-1.5-3-.5-3-.5s1-1.5 3 .5z"/>
+              <path d="M15 16.5c1.5-1.5 3-.5 3-.5s-1-1.5-3 .5z"/>
+            </svg>
+          </div>
 
-    <h2>4. Riesgos y Oportunidades</h2>
-    <p><strong>Riesgos:</strong> Intentos de coacción laboral, sanciones injustificadas o traslados de culpa por parte de la administración debido a la interrupción temporal de las labores comerciales para atender una vida humana en peligro.</p>
-    <p><strong>Oportunidades:</strong> Establecer un precedente sólido de protección de derechos humanos y garantías laborales, blindando jurídicamente la labor humanitaria ante cualquier represalia o maniobra orientada a encubrir la negligencia gerencial y administrativa, salvaguardando los valores operativos internacionales.</p>
+          <div class="text-center">
+            <h1 class="text-3xl font-extrabold text-gray-800 tracking-tight uppercase leading-none">
+              Burunga <span class="text-green-600">Crece</span>
+            </h1>
+            
+            <div class="flex items-center justify-center gap-2 mt-3">
+              <div class="h-px w-8 bg-gray-300"></div>
+              <h2 class="text-xl font-bold text-gray-700 tracking-wide">
+                Lohannyz Gaitán
+              </h2>
+              <div class="h-px w-8 bg-gray-300"></div>
+            </div>
+            
+            <p class="mt-4 text-xs font-bold text-amber-500 tracking-[0.3em] uppercase bg-amber-50 py-1 px-3 rounded-full inline-block">
+              Comunidad Unida
+            </p>
+          </div>
+        </div>
 
-    <h2>5. Cronología de Acciones y Llamadas de Emergencia</h2>
-    <div class="timeline-item">
-        <span class="timeline-time">9:48 a.m. – SUME 911:</span> Primer intento de enlace para auxilio médico, interrumpido por caídas en la línea de atención.
-    </div>
-    <div class="timeline-item">
-        <span class="timeline-time">9:49 a.m. – Policía Nacional:</span> Enlace activo sostenido de manera simultánea a la aplicación de primeros auxilios al ciudadano afectado que presentaba golpe en la cabeza con hemorragia.
-    </div>
-    <div class="timeline-item">
-        <span class="timeline-time">9:56 a.m. a 9:57 a.m. – Líneas Administrativas:</span> Intervenciones de representantes de la administración, exigiendo la reanudación de labores y priorizando la actividad mercantil por encima de la asistencia humanitaria.
-    </div>
-    <div class="timeline-item">
-        <span class="timeline-time">10:16 a.m. a 10:18 a.m. – Cierre de Incidente:</span> Llamadas de seguimiento y cancelación de recursos de emergencia tras la reincorporación física y recuperación motriz del afectado.
-    </div>
+        <!-- COMUNICADO INTERNACIONAL Y REPORTE DE SALVAGUARDA -->
+        <section class="logia-card p-8 md:p-12 rounded-xl space-y-8 font-sans mt-8 border-t-4 border-t-oro">
+            <div class="text-center space-y-3 mb-8">
+                <div class="bg-blue-900/50 border border-blue-500/50 p-6 rounded-lg text-center mb-6 shadow-lg">
+                    <h2 class="text-xl font-bold text-white tracking-widest uppercase font-mason">Comunicado Internacional</h2>
+                    <p class="text-2xl text-oro font-serif mt-2 font-extrabold tracking-wide uppercase drop-shadow-md">Honor a la Policía Nacional</p>
+                    <p class="text-3xl text-white font-mason mt-2 font-bold animate-pulse">Dios y Patria 🇵🇦</p>
+                </div>
+                
+                <h1 class="text-2xl md:text-3xl font-mason text-white tracking-wider uppercase mb-2 text-shadow-oro">
+                    Informe de Salvaguarda Institucional, Actuación Humanitaria y Deslinde de Responsabilidades
+                </h1>
+                <p class="text-neonBlue text-xs md:text-sm tracking-widest uppercase">
+                    A beneficio de las empresas de mecánica y servicios automotrices internacionales &bull; Marco Operativo SADV41
+                </p>
+            </div>
 
-    <div class="footer-note">
-        Este documento sirve como salvaguarda legal irrefutable de la conducta observada y guiada por Cristo Jesús, priorizando la vida humana y dejando constancia fehaciente de la falta de protocolos e inacción de la administración y mandos responsables del establecimiento, a beneficio de los valores y activos operativos internacionales.
-    </div>
+            <div class="bg-slate-900/60 border-l-4 border-oro p-6 rounded-r-lg shadow-inner mb-6">
+                <table class="w-full text-sm text-slate-300 border-collapse">
+                    <tbody>
+                        <tr class="border-b border-slate-700/50">
+                            <td class="py-3 font-bold text-oro w-1/3">Fecha del Incidente:</td>
+                            <td class="py-3 text-white">4 de agosto de 2026</td>
+                        </tr>
+                        <tr class="border-b border-slate-700/50">
+                            <td class="py-3 font-bold text-oro">Asistente / Informante:</td>
+                            <td class="py-3 text-white">Cristo Jesús a través de nosotros</td>
+                        </tr>
+                        <tr class="border-b border-slate-700/50">
+                            <td class="py-3 font-bold text-oro">Lugar de los Hechos:</td>
+                            <td class="py-3 text-white">Establecimiento de Servicios Técnicos y Mecánicos</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 font-bold text-oro">Activo Operativo Beneficiado:</td>
+                            <td class="py-3 text-white">Protección jurídica de valores-activos operativos internacionales</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
-    <div class="sadv-tag">
-        SADV41 &bull; 🎚 &bull; Protocolo de Salvaguarda Institucional
-    </div>
+            <div>
+                <h2 class="text-xl font-mason text-white tracking-wider uppercase mb-4 border-b border-slate-700 pb-2">1. Situación Jurídica</h2>
+                <p class="text-sm text-slate-300 leading-relaxed text-justify">
+                    El presente documento constituye un registro formal y descargo de responsabilidad de carácter preventivo y operativo, enfocado en blindar jurídicamente la actuación guiada por Cristo Jesús ante posibles acciones, presiones o imputaciones derivadas de la omisión de socorro institucional por parte de superiores o terceros, y evidenciar la negligencia operativa en la cadena de mando y de actores externos u operativos involucrados.
+                </p>
+            </div>
 
+            <div>
+                <h2 class="text-xl font-mason text-white tracking-wider uppercase mb-4 border-b border-slate-700 pb-2">2. Fundamento Legal</h2>
+                <ul class="space-y-4 text-sm text-slate-300 text-justify">
+                    <li><strong class="text-neonBlue">Constitución Política de la República de Panamá y Tratados Internacionales de Derechos Humanos:</strong> Principio de protección a la vida, la dignidad humana y los deberes ciudadanos de solidaridad, auxilio y respeto a los derechos fundamentales.</li>
+                    <li><strong class="text-neonBlue">Código Penal - Delitos contra la Vida y la Integridad Personal:</strong> Deber de solidaridad y tipificación de la omisión de socorro, priorizando la preservación de la vida humana por encima de exigencias laborales o mercantiles.</li>
+                    <li><strong class="text-neonBlue">Código de Trabajo:</strong> Normativa relativa a la seguridad, salud ocupacional y los límites razonables de las órdenes patronales ante situaciones de fuerza mayor o emergencias humanitarias.</li>
+                </ul>
+            </div>
+
+            <div>
+                <h2 class="text-xl font-mason text-white tracking-wider uppercase mb-4 border-b border-slate-700 pb-2">3. Estrategia Sugerida</h2>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-sm text-slate-300 border-collapse border border-slate-800 bg-slate-900/40">
+                        <thead>
+                            <tr class="bg-slate-800 text-white font-mason uppercase text-xs tracking-wider">
+                                <th class="p-4 border border-slate-700 w-1/4">Fase de Acción</th>
+                                <th class="p-4 border border-slate-700 w-2/5">Medida Preventiva</th>
+                                <th class="p-4 border border-slate-700 w-2/5">Justificación Legal</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-700">
+                            <tr class="hover:bg-slate-800/50 transition-colors">
+                                <td class="p-4 font-bold text-oro border border-slate-700">Inmediata</td>
+                                <td class="p-4 border border-slate-700">Resguardo formal de registros de llamadas de emergencia y bitácoras horarias.</td>
+                                <td class="p-4 border border-slate-700">Acreditar la diligencia activa y el cumplimiento del deber humanitario frente a la inacción de terceros.</td>
+                            </tr>
+                            <tr class="hover:bg-slate-800/50 transition-colors bg-slate-800/20">
+                                <td class="p-4 font-bold text-oro border border-slate-700">Documental</td>
+                                <td class="p-4 border border-slate-700">Notificación y archivo interno de este informe para deslindar responsabilidad ante presiones de la administración o jefatura.</td>
+                                <td class="p-4 border border-slate-700">Evidenciar que las llamadas de la administración priorizaron la actividad comercial por sobre la emergencia médica, eximiendo a los siervos de culpa.</td>
+                            </tr>
+                            <tr class="hover:bg-slate-800/50 transition-colors">
+                                <td class="p-4 font-bold text-oro border border-slate-700">Proactiva</td>
+                                <td class="p-4 border border-slate-700">Señalamiento directo de la negligencia e inacción atribuible a la cadena de mando administrativa y personal directivo.</td>
+                                <td class="p-4 border border-slate-700">Trasladar la responsabilidad de la falta de protocolos de emergencia al sector directivo y administrativo.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div>
+                <h2 class="text-xl font-mason text-white tracking-wider uppercase mb-4 border-b border-slate-700 pb-2">4. Riesgos y Oportunidades</h2>
+                <div class="space-y-4 text-sm text-slate-300 text-justify">
+                    <p><strong class="text-renderRed block mb-1">Riesgos:</strong> Intentos de coacción laboral, sanciones injustificadas o traslados de culpa por parte de la administración debido a la interrupción temporal de las labores comerciales para atender una vida humana en peligro.</p>
+                    <p><strong class="text-neonGreen block mb-1">Oportunidades:</strong> Establecer un precedente sólido de protección de derechos humanos y garantías laborales, blindando jurídicamente la labor humanitaria ante cualquier represalia o maniobra orientada a encubrir la negligencia gerencial y administrativa, salvaguardando los valores operativos internacionales.</p>
+                </div>
+            </div>
+
+            <div>
+                <h2 class="text-xl font-mason text-white tracking-wider uppercase mb-4 border-b border-slate-700 pb-2">5. Cronología de Acciones y Llamadas de Emergencia</h2>
+                <div class="space-y-4 pl-2">
+                    <div class="relative pl-6 border-l-2 border-oro">
+                        <div class="absolute w-3 h-3 bg-oro rounded-full -left-[7px] top-1.5 shadow-[0_0_10px_rgba(234,179,8,0.8)]"></div>
+                        <span class="font-bold text-white uppercase tracking-wide block mb-1">SUME 911:</span>
+                        <p class="text-sm text-slate-300">Primer intento de enlace para auxilio médico, interrumpido por caídas en la línea de atención.</p>
+                    </div>
+                    
+                    <div class="relative pl-6 border-l-2 border-blue-500">
+                        <div class="absolute w-3 h-3 bg-blue-500 rounded-full -left-[7px] top-1.5 shadow-[0_0_10px_rgba(59,130,246,0.8)]"></div>
+                        <span class="font-bold text-blue-400 uppercase tracking-wide block mb-1 flex items-center gap-2">
+                            Policía Nacional <span class="bg-blue-900/50 text-white text-xs px-2 py-0.5 rounded border border-blue-500/30">Dios y Patria 🇵🇦</span>
+                        </span>
+                        <p class="text-sm text-slate-300">Enlace activo sostenido de manera simultánea a la aplicación de primeros auxilios al ciudadano afectado que presentaba golpe en la cabeza con hemorragia.</p>
+                    </div>
+
+                    <div class="relative pl-6 border-l-2 border-renderRed">
+                        <div class="absolute w-3 h-3 bg-renderRed rounded-full -left-[7px] top-1.5 shadow-[0_0_10px_rgba(218,54,55,0.8)]"></div>
+                        <span class="font-bold text-white uppercase tracking-wide block mb-1">Líneas Administrativas:</span>
+                        <p class="text-sm text-slate-300">Intervenciones de representantes de la administración, exigiendo la reanudación de labores y priorizando la actividad mercantil por encima de la asistencia humanitaria.</p>
+                    </div>
+
+                    <div class="relative pl-6 border-l-2 border-neonGreen">
+                        <div class="absolute w-3 h-3 bg-neonGreen rounded-full -left-[7px] top-1.5 shadow-[0_0_10px_rgba(16,185,129,0.8)]"></div>
+                        <span class="font-bold text-white uppercase tracking-wide block mb-1">Cierre de Incidente:</span>
+                        <p class="text-sm text-slate-300">Llamadas de seguimiento y cancelación de recursos de emergencia tras la reincorporación física y recuperación motriz del afectado.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-8 bg-slate-900/80 border border-slate-700 p-5 rounded-lg text-center shadow-lg">
+                <p class="italic text-xs md:text-sm text-slate-400 leading-relaxed">
+                    Este documento sirve como salvaguarda legal irrefutable de la conducta observada y guiada por Cristo Jesús, priorizando la vida humana y dejando constancia fehaciente de la falta de protocolos e inacción de la administración y mandos responsables del establecimiento, a beneficio de los valores y activos operativos internacionales.
+                </p>
+                <div class="text-right text-[10px] text-slate-500 mt-4 tracking-widest uppercase font-mono">
+                    SADV41 &bull; 🎚 &bull; Protocolo de Salvaguarda Institucional
+                </div>
+            </div>
+        </section>
+
+        <!-- ANÁLISIS HISTÓRICO DE BURUNGA Y LA FEP -->
+        <section class="logia-card p-8 md:p-12 rounded-xl space-y-8 font-sans">
+            <div>
+                <h2 class="text-2xl font-mason text-oro tracking-wider uppercase mb-4 border-l-4 border-oro pl-3">
+                    Extracto del Documental
+                </h2>
+                <p class="text-sm text-slate-300 leading-relaxed">
+                    El video es un valioso registro histórico que documenta el proceso de elección y constitución de la primera Junta Local de la comunidad de Burunga, en Arraiján, Panamá. Este evento, que representa un hito en la organización comunitaria de la zona, no se da en un vacío, sino en un contexto de lucha por la tierra. La comunidad, respaldada activamente por la Federación de Estudiantes de Panamá (FEP) y miembros de la Guardia Nacional, busca legalizar y asegurar la tenencia de las tierras que ocupan (pertenecientes originalmente a la familia Crespo), a través de los mecanismos de la Junta Agraria y el gobierno revolucionario.
+                </p>
+                <p class="text-sm text-slate-300 leading-relaxed mt-3">
+                    El documental narra la llegada de los habitantes de Burunga a la asamblea, la formalización del proceso electoral con la juramentación de la mesa, y recoge testimonios directos de los campesinos sobre sus necesidades más apremiantes: agua, luz y tierra. Se destaca el papel de Roberto Gómez, en representación de la FEP (quien luego sería Secretario General de dicha federación), explicando el apoyo estudiantil como una fuerza política y popular en pro del progreso de las masas campesinas. El video culmina reafirmando la alianza entre la Guardia Nacional y los estudiantes, apoyando las demandas de la comunidad para evitar la especulación con el precio de las tierras expropiadas.
+                </p>
+            </div>
+
+            <div>
+                <h3 class="text-xl font-mason text-cyan-400 tracking-wide mb-4 border-l-4 border-cyan-400 pl-3">
+                    Lista de Eventos y Temas Mencionados
+                </h3>
+                <ul class="space-y-3 text-xs text-slate-300 font-mono">
+                    <li class="bg-black/40 p-3 rounded-lg border border-slate-800"><strong class="text-white">Llegada y Organización:</strong> Movilización de los habitantes de Burunga (en autobuses, camionetas y a pie) hacia el lugar de la asamblea comunitaria.</li>
+                    <li class="bg-black/40 p-3 rounded-lg border border-slate-800"><strong class="text-white">Contexto Político-Legal:</strong> Explicación del marco legal. Se realizan elecciones para la Asamblea de Representantes, Juntas Comunales y Juntas Locales (esta última a nivel de barrio o comunidad agraria).</li>
+                    <li class="bg-black/40 p-3 rounded-lg border border-slate-800"><strong class="text-white">Proceso Electoral:</strong> Acto de juramentación de la mesa directiva (miembros del jurado) ante "Dios y la Patria" para garantizar una elección transparente.</li>
+                    <li class="bg-black/40 p-3 rounded-lg border border-slate-800"><strong class="text-white">Participación Ciudadana:</strong> Entrevistas a varios campesinos, preguntándoles si han participado en elecciones anteriores y si tienen tierras propias. La mayoría responde negativamente a ambas preguntas.</li>
+                    <li class="bg-black/40 p-3 rounded-lg border border-slate-800"><strong class="text-white">Conflicto por la Tierra:</strong> Un dirigente campesino explica el origen del problema: las tierras pertenecían a la familia Crespo y fueron expropiadas por la Reforma Agraria para ser pasadas a la Junta Comunal. Sin embargo, denuncian que la Junta Comunal intenta cobrar precios demasiado altos, lo que motivó la movilización y la exigencia de una venta a "bajo costo".</li>
+                    <li class="bg-black/40 p-3 rounded-lg border border-slate-800"><strong class="text-white">Necesidades Urgentes de Burunga:</strong> Diversos pobladores, incluyendo mujeres, identifican el agua, la luz y la tenencia de la tierra como las principales urgencias de la comunidad.</li>
+                    <li class="bg-black/40 p-3 rounded-lg border border-slate-800"><strong class="text-white">Creación de la Nómina:</strong> Presentación del candidato Eugenio Tejada y su nómina "Unidad, Trabajo y Progreso".</li>
+                    <li class="bg-black/40 p-3 rounded-lg border border-slate-800"><strong class="text-white">Plataforma de la Nómina:</strong> Eugenio Tejada explica que su objetivo es la unificación de las masas para lograr progreso y asegurar la tierra para los campesinos, evitando que pertenezca a "personas ajenas" o latifundistas.</li>
+                    <li class="bg-black/40 p-3 rounded-lg border border-slate-800"><strong class="text-white">Intervención de la FEP y la Guardia Nacional:</strong> Diálogo entre un Capitán de la Guardia Nacional y Roberto Gómez, presidente de la Federación de Estudiantes de Panamá. Roberto Gómez define la acción de la FEP no como una fuerza electoral, sino como un "grupo popular de apoyo" y una "fuerza política" al servicio del pueblo.</li>
+                    <li class="bg-black/40 p-3 rounded-lg border border-slate-800"><strong class="text-white">Alianza Estudiantes-Guardia Nacional:</strong> Se establece el acuerdo y la acción conjunta entre la Guardia Nacional y los estudiantes para respaldar a la comunidad campesina.</li>
+                </ul>
+            </div>
+
+            <div>
+                <h3 class="text-xl font-mason text-amber-400 tracking-wide mb-4 border-l-4 border-amber-400 pl-3">
+                    Tabla de Personajes Identificados
+                </h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs text-slate-300 border-collapse border border-slate-800">
+                        <thead>
+                            <tr class="bg-slate-900 text-oro border-b border-slate-800 font-mason">
+                                <th class="p-3">Nombre / Título en el video</th>
+                                <th class="p-3">Rol / Participación en el evento</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-800 font-mono">
+                            <tr>
+                                <td class="p-3 text-white font-bold">Campesinos/Pobladores anónimos</td>
+                                <td class="p-3 text-slate-400">Asistentes a la asamblea. Expresan sus necesidades de agua, luz y tierra. Muchos participan por primera vez en unas elecciones.</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 text-white font-bold">Miembros del Jurado</td>
+                                <td class="p-3 text-slate-400">Seis hombres y una mujer (con sombrero) que son juramentados para dirigir el proceso electoral de la Junta Local.</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 text-white font-bold">Dirigente Campesino (boina negra)</td>
+                                <td class="p-3 text-slate-400">Explica el conflicto de tierras con la familia Crespo, la expropiación por la Reforma Agraria y los problemas de especulación de precios por parte de la Junta Comunal.</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 text-white font-bold">Eugenio Tejada</td>
+                                <td class="p-3 text-slate-400">Candidato a la presidencia de la Junta Local. Lidera la nómina "Unidad, Trabajo y Progreso". Defiende la tenencia de la tierra para la comunidad.</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 text-white font-bold">Capitán de la Guardia Nacional</td>
+                                <td class="p-3 text-slate-400">(No se menciona su nombre). Dialoga con los estudiantes, buscando entender su papel y confirmando la acción conjunta entre la Guardia y la juventud.</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 text-white font-bold">Roberto Gómez</td>
+                                <td class="p-3 text-slate-400">Presidente de la Federación de Estudiantes de Panamá (FEP) en ese momento. Actúa como vocero de los estudiantes, explicando el respaldo político al movimiento campesino de Burunga.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="text-center p-8 mt-12 border-t border-white/5 opacity-50 font-mono text-[10px]">
+        <p>SADV41 Architecture © 2026 | El Origen es 0</p>
+    </footer>
+
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('main-sidebar');
+            sidebar.classList.toggle('right-aligned');
+            const isRight = sidebar.classList.contains('right-aligned');
+            localStorage.setItem('sidebarPosition', isRight ? 'right' : 'left');
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const savedPos = localStorage.getItem('sidebarPosition');
+            if(savedPos === 'right') {
+                document.getElementById('main-sidebar').classList.add('right-aligned');
+            }
+        });
+    </script>
 </body>
 </html>
