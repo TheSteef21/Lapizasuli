@@ -1,0 +1,18 @@
+*CIERRE DE JORNADA - SADV41TT*
+```json
+{
+  "fecha": "2026-08-05",
+  "mision": "SADV41",
+  "total_registros": 1,
+  "transacciones": [
+    {
+      "unidades": "1",
+      "medida": "185/60R15",
+      "marca": "Otras",
+      "monto": "33",
+      "metodo": "Yappy",
+      "observaciones": "Fue transferencia de Banco General"
+    }
+  ]
+}
+```
