@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SADV41 - Venus Lab</title>
+    <title>SADV41 - Venus Lab (BNB & USDT)</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.0/ethers.umd.min.js"></script>
     <style>
         body { 
@@ -33,6 +33,7 @@
             border-radius: 6px; 
             font-weight: bold;
             width: 100%;
+            margin-top: 10px;
         }
         button:hover { background: #007bff; }
         .status-pill { font-size: 0.8em; color: #ffc107; margin-bottom: 20px; text-align: center; }
@@ -50,12 +51,12 @@
             <div class="card">
                 <h4>BNB (vBNB)</h4>
                 <p>Balance en wallet: <span id="bnbBal">0</span></p>
-                <button onclick="interactVenus('BNB')">Suministrar BNB</button>
+                <button onclick="interactVenus('BNB')">Suministrar 0.0001 BNB</button>
             </div>
             <div class="card">
                 <h4>USDT (vUSDT)</h4>
                 <p>Balance en wallet: <span id="usdtBal">0</span></p>
-                <button onclick="interactVenus('USDT')">Suministrar USDT</button>
+                <button onclick="interactVenus('USDT')">Suministrar 1 USDT</button>
             </div>
         </div>
     </div>
@@ -69,7 +70,7 @@
                     provider = new ethers.BrowserProvider(window.ethereum);
                     signer = await provider.getSigner();
 
-                    // VALIDACIÓN DE RED: Comprobar si estamos en BNB Chain (Chain ID: 56)
+                    // Validación estricta de red: BNB Chain (Chain ID: 56)
                     const network = await provider.getNetwork();
                     if (network.chainId !== 56n) {
                         alert("Red incorrecta. Por favor, cambia tu billetera a la red BNB Smart Chain (Mainnet).");
@@ -100,7 +101,7 @@
                 const bnbBalanceFormatted = ethers.formatEther(bnbBalanceWei);
                 document.getElementById('bnbBal').innerText = Number(bnbBalanceFormatted).toFixed(4) + " BNB";
 
-                // 2. Obtener balance de USDT en BNB Chain
+                // 2. Obtener balance de USDT
                 const usdtAddress = "0x55d398326f99059ff775485246999027b3197955";
                 const erc20ABI = ["function balanceOf(address owner) view returns (uint256)"];
                 const usdtContract = new ethers.Contract(usdtAddress, erc20ABI, provider);
@@ -117,7 +118,7 @@
         }
 
         async function interactVenus(asset) {
-            // Doble validación de red antes de ejecutar cualquier transacción
+            // Validación de red antes de ejecutar transacciones
             const network = await provider.getNetwork();
             if (network.chainId !== 56n) {
                 alert("Operación bloqueada: Debes estar en la BNB Smart Chain (Mainnet).");
@@ -126,35 +127,65 @@
 
             if (asset === 'BNB') {
                 try {
-                    // Dirección oficial del contrato vBNB en minúsculas
                     const vBnbAddress = "0xa07c5e71b8248084f62e8a84620f4D0f3D1C8d45";
-                    
                     const vBnbABI = ["function mint() payable"];
                     const vBnbContract = new ethers.Contract(vBnbAddress, vBnbABI, signer);
-
                     const amountToSend = ethers.parseEther("0.0001");
 
-                    document.getElementById('status').innerText = "Firmando transacción en wallet...";
-
+                    document.getElementById('status').innerText = "Firmando suministro de BNB...";
                     const tx = await vBnbContract.mint({ value: amountToSend });
                     
-                    document.getElementById('status').innerText = "Transacción enviada...";
-                    console.log("Hash de transacción:", tx.hash);
-
+                    document.getElementById('status').innerText = "Esperando confirmación de BNB...";
                     await tx.wait();
                     
-                    document.getElementById('status').innerText = "¡Suministro exitoso!";
-                    alert("¡Transacción completada con éxito! Revisa tu posición en Venus.");
+                    document.getElementById('status').innerText = "¡Suministro de BNB exitoso!";
+                    alert("¡Transacción de BNB completada con éxito!");
+                    updateBalances();
+                } catch (error) {
+                    console.error("Error en la transacción BNB:", error);
+                    document.getElementById('status').innerText = "Error en la operación";
+                    alert("Error al suministrar BNB: " + (error.reason || error.message));
+                }
+            } else if (asset === 'USDT') {
+                try {
+                    // Direcciones oficiales en minúsculas para evitar errores de checksum
+                    const usdtAddress = "0x55d398326f99059ff775485246999027b3197955";
+                    const vUsdtAddress = "0xfd5840cd36d94d7229439859c0112a4185bc0255";
+
+                    // ABIs necesarios para tokens ERC-20 y vTokens de Venus
+                    const usdtABI = [
+                        "function approve(address spender, uint256 amount) returns (bool)",
+                        "function allowance(address owner, address spender) view returns (uint256)"
+                    ];
+                    const vUsdtABI = ["function mint(uint256 mintAmount) returns (uint256)"];
+
+                    const usdtContract = new ethers.Contract(usdtAddress, usdtABI, signer);
+                    const vUsdtContract = new ethers.Contract(vUsdtAddress, vUsdtABI, signer);
+
+                    // Cantidad de prueba: 1 USDT (18 decimales en BSC)
+                    const amountToSupply = ethers.parseUnits("1.0", 18);
+
+                    document.getElementById('status').innerText = "Paso 1/2: Aprobando USDT en Brave Wallet...";
                     
+                    // 1. Transacción de Aprobación (Approve)
+                    const approveTx = await usdtContract.approve(vUsdtAddress, amountToSupply);
+                    await approveTx.wait();
+
+                    document.getElementById('status').innerText = "Paso 2/2: Ejecutando Mint de USDT en Venus...";
+                    
+                    // 2. Transacción de Suministro (Mint)
+                    const mintTx = await vUsdtContract.mint(amountToSupply);
+                    await mintTx.wait();
+
+                    document.getElementById('status').innerText = "¡Suministro de USDT exitoso!";
+                    alert("¡Transacción de USDT completada con éxito en Venus!");
                     updateBalances();
 
                 } catch (error) {
-                    console.error("Error en la transacción:", error);
+                    console.error("Error en la transacción USDT:", error);
                     document.getElementById('status').innerText = "Error en la operación";
-                    alert("Error al interactuar con Venus: " + (error.reason || error.message));
+                    alert("Error al suministrar USDT: " + (error.reason || error.message));
                 }
-            } else if (asset === 'USDT') {
-                alert("Para USDT se requiere primero el flujo de Aprobación (Approve) antes del Mint.");
             }
         }
     </script>
