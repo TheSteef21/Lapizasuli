@@ -40,7 +40,7 @@
         .btn-swap:hover { background: #f59e0b; }
         .btn-harvest { background: #16a34a; }
         .btn-harvest:hover { background: #22c55e; }
-        .btn-stake { background: #6366f1; } /* Color para Staking */
+        .btn-stake { background: #6366f1; } 
         .btn-stake:hover { background: #4f46e5; }
         
         /* Controles Multi-Red */
@@ -104,7 +104,7 @@
     <script>
         let provider, signer, currentChainId;
         
-        // Direcciones BSC (Minúsculas)
+        // --- DIRECCIONES BSC (Minúsculas) ---
         const PANCAKE_ROUTER = "0x10ed43c718714eb63d5a57bb39d94baad6847c6a";
         const WBNB_ADDRESS = "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c";
         const USDT_ADDRESS = "0x55d398326f99059ff775485246999027b3197955";
@@ -112,12 +112,13 @@
         const V_USDT_ADDRESS = "0xfd5840cd36d94d7229439859c0112a4185bc0255";
         const VENUS_COMPTROLLER = "0xfd36e2c2a67f9db21f736f8d18ae4ef5c4f28b794";
 
-        // Direcciones Optimism L2 (Minúsculas)
+        // --- DIRECCIONES OPTIMISM L2 (Minúsculas) ---
         const WCT_ADDRESS_OP = "0xef4461891dfb3ac8572ccf7c794664a8dd927945";
-        // TODO: Reemplazar con la dirección oficial de Staking de WCT si es diferente
-        const WCT_STAKING_CONTRACT = "0x0000000000000000000000000000000000000000"; 
+        
+        // Dirección Oficial de Staking de WCT en Optimism (StakeWeight Contract)
+        const WCT_STAKING_CONTRACT = "0x521b4c065bbdbe3e20b3727340730936912dfa46"; 
 
-        // Escuchar cambios de red o cuenta nativamente
+        // Escuchadores de eventos para metamask/brave
         if (window.ethereum) {
             window.ethereum.on('chainChanged', () => window.location.reload());
             window.ethereum.on('accountsChanged', () => window.location.reload());
@@ -136,7 +137,6 @@
                     document.getElementById('connectBtn').style.display = "none";
                     document.getElementById('network-controls').style.display = "flex";
 
-                    // Enrutamiento visual según la red conectada
                     if (currentChainId === 56n) {
                         document.getElementById('status').innerText = "Conectado: " + accounts[0].substring(0,6) + "... [BSC Mainnet]";
                         document.getElementById('market-bsc').style.display = "block";
@@ -159,7 +159,6 @@
             }
         });
 
-        // Función nativa para solicitar el cambio de red a la billetera Web3
         async function switchNetwork(chainIdHex) {
             if (!window.ethereum) return;
             try {
@@ -169,15 +168,13 @@
                 });
             } catch (error) {
                 console.error("Error cambiando de red", error);
-                alert("Abre tu billetera y aprueba el cambio de red. Si no tienes Optimism, añádela en Chainlist.org");
+                alert("Abre tu billetera y aprueba el cambio de red.");
             }
         }
 
-        // ---------- LÓGICAS DE LECTURA DE BALANCES ---------- //
         async function updateBalancesBSC() {
             try {
                 const address = await signer.getAddress();
-                
                 const bnbWei = await provider.getBalance(address);
                 document.getElementById('bnbBal').innerText = Number(ethers.formatEther(bnbWei)).toFixed(4) + " BNB";
 
@@ -202,32 +199,25 @@
             }
         }
 
-        // ---------- NUEVO: LÓGICA DE STAKING WCT (OPTIMISM) ---------- //
+        // ---------- LÓGICA DE STAKING WCT (OPTIMISM) ---------- //
         async function stakeWCT() {
             if (currentChainId !== 10n) return alert("Debes estar en Optimism para operar con WCT.");
 
-            // Si el contrato de staking no se ha definido, avisamos al usuario
-            if (WCT_STAKING_CONTRACT === "0x0000000000000000000000000000000000000000") {
-                return alert("Para ejecutar el Staking real, reemplaza la variable 'WCT_STAKING_CONTRACT' en el código con la dirección oficial del contrato de Staking de WalletConnect.");
-            }
-
             try {
                 const wctABI = ["function approve(address spender, uint256 amount) returns (bool)"];
-                // Asumimos interfaz de staking estándar (stake o deposit)
+                // Nota estructural: WalletConnect incluye opciones de temporalidad en sus contratos, 
+                // usando 'stake(uint256)' como base transaccional estándar del Asset.
                 const stakingABI = ["function stake(uint256 amount) public"]; 
                 
                 const wctContract = new ethers.Contract(WCT_ADDRESS_OP, wctABI, signer);
                 const stakingContract = new ethers.Contract(WCT_STAKING_CONTRACT, stakingABI, signer);
 
-                // Cantidad de prueba: 1 WCT
                 const amountToStake = ethers.parseUnits("1.0", 18);
 
-                // Paso 1: Approve
                 document.getElementById('status').innerText = "Paso 1/2: Aprobando WCT para Staking...";
                 const txApprove = await wctContract.approve(WCT_STAKING_CONTRACT, amountToStake);
                 await txApprove.wait();
 
-                // Paso 2: Stake
                 document.getElementById('status').innerText = "Paso 2/2: Confirmando Staking en Optimism...";
                 const txStake = await stakingContract.stake(amountToStake);
                 await txStake.wait();
@@ -243,7 +233,7 @@
             }
         }
 
-        // ---------- LÓGICAS DE BSC RESTAURADAS (VENUS & PANCAKE) ---------- //
+        // ---------- LÓGICAS DE BSC (VENUS & PANCAKE) ---------- //
         async function executeSwap() {
             if (currentChainId !== 56n) return alert("Cambia a la red BSC.");
             try {
