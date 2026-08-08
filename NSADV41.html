@@ -3,9 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NSADV41 - Matriz de Pactos</title>
+    <title>NSADV41 | Sovereign Hub & Ecosistema Unificado</title>
+    
+    <!-- Scripts Base -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@web3auth/modal@8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.0/ethers.umd.min.js"></script>
+
+    <!-- Tipografías NSADV41 -->
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=JetBrains+Mono:wght@300;500;700&display=swap" rel="stylesheet">
+    
     <script>
         tailwind.config = {
             theme: {
@@ -15,6 +23,8 @@
                         cyanMatrix: '#00FFFF',
                         gold: '#d4af37',
                         magenta: '#FF00E5',
+                        neonGreen: '#00FF66',
+                        renderRed: '#da3637',
                     },
                     fontFamily: {
                         header: ['Orbitron', 'sans-serif'],
@@ -24,44 +34,32 @@
             }
         }
     </script>
+
     <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            background-color: #000;
-            color: #fff;
-            overflow-x: hidden;
-            min-height: 100vh;
+        :root {
+            --cyan-glow: rgba(0, 255, 255, 0.4);
+            --gold-glow: rgba(212, 175, 55, 0.4);
+            --magenta-glow: rgba(255, 0, 229, 0.4);
         }
 
-        /* CAPAS DE FONDO NSADV41 */
+        body, html {
+            margin: 0; padding: 0; background-color: #000; color: #fff;
+            overflow-x: hidden; min-height: 100vh;
+        }
+
+        /* --- FONDOS NSADV41 --- */
         #video-background {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            min-width: 100%;
-            min-height: 100%;
-            width: auto;
-            height: auto;
+            position: fixed; top: 50%; left: 50%;
+            min-width: 100%; min-height: 100%; width: auto; height: auto;
             transform: translateX(-50%) translateY(-50%);
-            z-index: -2;
-            object-fit: cover;
-            opacity: 0.4;
-            transition: opacity 1s ease-in-out;
+            z-index: -2; object-fit: cover; opacity: 0.3; transition: opacity 1s ease-in-out;
         }
 
         #image-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background-image: url('https://thesteef21.github.io/Lapizasuli/1778896928737.png');
-            background-size: cover;
-            background-position: center;
-            z-index: -1;
-            opacity: 0.35;
-            mix-blend-mode: screen;
+            background-size: cover; background-position: center;
+            z-index: -1; opacity: 0.25; mix-blend-mode: screen;
         }
 
         .scanline {
@@ -71,196 +69,423 @@
         }
         @keyframes scanline { 0% { top: 0; } 100% { top: 100%; } }
 
-        /* CONTENEDOR CENTRAL BLINDADO MÓVIL (DIRECTIVA) */
-        .container-sadv41 {
-            width: 100%;
-            max-width: 360px;
-            z-index: 10;
-            position: relative;
-            margin: 0 auto;
-            padding: 1rem;
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
+        /* --- COMPONENTES CYBERPUNK (NSADV41 Flow) --- */
         .glass-panel {
-            background: rgba(5, 5, 10, 0.65);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(0, 255, 255, 0.3);
+            background: rgba(5, 5, 10, 0.75);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 255, 255, 0.2);
             border-radius: 8px;
-            box-shadow: 0 0 15px rgba(0, 255, 255, 0.1);
-        }
-
-        .glass-panel::before {
-            content: ""; position: absolute; top: 0; left: 0; width: 3px; height: 100%;
-            background: #00FFFF; box-shadow: 0 0 10px #00FFFF;
-        }
-
-        /* EFECTO DADO / TABLA DE VERSÍCULOS */
-        .verse-dice {
-            background: rgba(0, 20, 40, 0.8);
-            border: 1px solid var(--gold);
-            padding: 0.75rem;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.05);
             position: relative;
             overflow: hidden;
-            min-height: 80px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
         }
-        .verse-dice:hover {
-            box-shadow: 0 0 12px rgba(212, 175, 55, 0.5);
-            transform: scale(1.02);
-        }
-        .verse-dice::after {
-            content: "↻";
-            position: absolute;
-            top: 4px; right: 6px;
-            font-size: 10px;
-            color: rgba(255,255,255,0.3);
-        }
-        .lang-badge {
-            font-size: 8px;
-            text-transform: uppercase;
-            color: #FF00E5;
-            margin-bottom: 4px;
-            letter-spacing: 1px;
-        }
+        .glass-panel-accent-cyan::before { content: ""; position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: #00FFFF; box-shadow: 0 0 10px #00FFFF; }
+        .glass-panel-accent-gold::before { content: ""; position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: #d4af37; box-shadow: 0 0 10px #d4af37; }
+        .glass-panel-accent-magenta::before { content: ""; position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: #FF00E5; box-shadow: 0 0 10px #FF00E5; }
+        .glass-panel-accent-green::before { content: ""; position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: #00FF66; box-shadow: 0 0 10px #00FF66; }
 
-        /* BOTONES DE RED */
+        /* --- DADOS DE VERSÍCULOS (Matriz de Pactos) --- */
+        .verse-dice {
+            background: rgba(0, 20, 40, 0.8); border: 1px solid var(--gold-glow);
+            padding: 0.75rem; border-radius: 6px; cursor: pointer; transition: all 0.3s ease;
+            position: relative; overflow: hidden; min-height: 80px; display: flex; flex-direction: column; justify-content: center;
+        }
+        .verse-dice:hover { box-shadow: 0 0 12px var(--gold-glow); transform: scale(1.02); }
+        .verse-dice::after { content: "↻"; position: absolute; top: 4px; right: 6px; font-size: 10px; color: rgba(255,255,255,0.3); }
+        .lang-badge { font-size: 8px; text-transform: uppercase; color: #FF00E5; margin-bottom: 4px; letter-spacing: 1px; }
+
+        /* --- BOTONES NSADV41 --- */
         .link-btn {
-            display: block;
-            width: 100%;
-            background: rgba(0, 255, 255, 0.05);
-            border: 1px solid #00FFFF;
-            color: #00FFFF;
-            text-align: center;
-            padding: 0.6rem;
-            border-radius: 4px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 10px;
-            text-transform: uppercase;
-            text-decoration: none;
-            transition: 0.3s;
+            display: block; width: 100%; background: rgba(0, 255, 255, 0.05);
+            border: 1px solid #00FFFF; color: #00FFFF; text-align: center;
+            padding: 0.6rem; border-radius: 4px; font-family: 'JetBrains Mono', monospace;
+            font-size: 10px; text-transform: uppercase; text-decoration: none; transition: 0.3s;
         }
-        .link-btn:hover {
-            background: #00FFFF;
-            color: #000;
-            box-shadow: 0 0 10px #00FFFF;
+        .link-btn:hover { background: #00FFFF; color: #000; box-shadow: 0 0 10px #00FFFF; }
+        .link-gold { border-color: #d4af37; color: #d4af37; }
+        .link-gold:hover { background: #d4af37; color: #000; box-shadow: 0 0 10px #d4af37; }
+
+        /* --- SIDEBAR LATERAL --- */
+        .sidebar-tabs { position: fixed; left: 0; top: 50%; transform: translateY(-50%); z-index: 45; display: flex; flex-direction: column; gap: 12px; transition: all 0.5s; font-family: 'Orbitron', sans-serif;}
+        .vertical-tab { display: flex; align-items: center; background: rgba(5, 5, 10, 0.95); padding: 12px 15px; border-radius: 0 15px 15px 0; border: 1px solid rgba(0,255,255,0.2); border-left: 4px solid #00FFFF; transition: all 0.4s; width: 60px; overflow: hidden; white-space: nowrap; box-shadow: 4px 4px 15px rgba(0,0,0,0.5); cursor: pointer; }
+        .vertical-tab:hover { width: 340px; padding-left: 20px; background: rgba(0, 255, 255, 0.1); }
+        .vertical-tab span.icon { font-size: 1.2rem; min-width: 30px; display: flex; justify-content: center; }
+        .vertical-tab span.text { margin-left: 15px; font-weight: bold; opacity: 0; transition: opacity 0.3s; font-size: 0.75rem; letter-spacing: 0.05em; color: #00FFFF; }
+        .vertical-tab:hover span.text { opacity: 1; transition-delay: 0.1s; }
+        
+        .sidebar-tabs.right-aligned { left: auto; right: 0; }
+        .sidebar-tabs.right-aligned .vertical-tab { border-radius: 15px 0 0 15px; flex-direction: row-reverse; border-left: 1px solid rgba(0,255,255,0.2); border-right: 4px solid #00FFFF; }
+        .sidebar-tabs.right-aligned .vertical-tab:hover { padding-right: 20px; padding-left: 15px; }
+        .sidebar-tabs.right-aligned .vertical-tab span.text { margin-left: 0; margin-right: 15px; text-align: right; }
+
+        /* --- LOGIA Y ESOTERISMO --- */
+        .triangulo-trinidad {
+            width: 0; height: 0; border-left: 40px solid transparent; border-right: 40px solid transparent;
+            border-bottom: 69.3px solid rgba(212, 175, 55, 0.2); position: relative; margin: 0 auto;
+            filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.6));
         }
-        .link-gold {
-            border-color: #d4af37; color: #d4af37;
-        }
-        .link-gold:hover {
-            background: #d4af37; color: #000; box-shadow: 0 0 10px #d4af37;
-        }
+        .triangulo-trinidad::after { content: '1'; position: absolute; top: 35px; left: -5px; color: #d4af37; font-family: 'Orbitron', sans-serif; font-size: 1.2rem; }
+
+        /* --- BLOQUEO DE SEGURIDAD --- */
+        .bloqueo-activo { filter: blur(15px) grayscale(80%); pointer-events: none; user-select: none; }
+        
+        /* --- ACORDEONES NOTICIAS --- */
+        .news-accordion-btn { transition: background-color 0.3s ease; }
+        .news-accordion-btn:hover { background: rgba(0,255,255,0.05); }
+        .news-accordion-content { transition: max-height 0.4s ease-in-out, opacity 0.3s ease-in-out; opacity: 0; }
+        .news-accordion-content.expanded { opacity: 1; }
+
+        /* --- TURBO TIRE VIEWPORT --- */
+        .chassis-viewport { position: relative; width: 100%; height: 170px; background: rgba(5, 5, 10, 0.6); border: 1px dashed rgba(0, 255, 255, 0.3); background-size: cover; background-position: center; }
+        .tire-profile { border-radius: 50%; background: radial-gradient(circle, rgba(0,0,0,0.85) 30%, rgba(20,20,30,0.95) 70%); box-shadow: 0 0 12px rgba(0, 255, 255, 0.4); display: flex; align-items: center; justify-content: center; animation: tireSpin 3s linear infinite; }
+        @keyframes tireSpin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .tire-slick { border: 2px solid #00FFFF; } .tire-semi { border: 3px double #FF00E5; } .tire-wet { border: 2px dashed #d4af37; }
+        .rim-lines { width: 80%; height: 80%; border-radius: 50%; border: 1px dashed rgba(0, 255, 255, 0.5); position: relative; }
+        .rim-lines::before, .rim-lines::after { content: ''; position: absolute; background: rgba(0, 255, 255, 0.4); top: 50%; left: 50%; transform: translate(-50%, -50%); }
+        .rim-lines::before { width: 100%; height: 1px; } .rim-lines::after { width: 1px; height: 100%; }
+        .knob-slider { -webkit-appearance: none; width: 100%; background: transparent; }
+        .knob-slider::-webkit-slider-runnable-track { width: 100%; height: 6px; background: rgba(0, 255, 255, 0.15); border-radius: 3px; border: 1px solid rgba(0, 255, 255, 0.3); }
+        .knob-slider::-webkit-slider-thumb { height: 16px; width: 16px; border-radius: 50%; background: #00FFFF; cursor: pointer; -webkit-appearance: none; margin-top: -5px; box-shadow: 0 0 8px #00FFFF; }
     </style>
 </head>
-<body>
-    <div class="scanline"></div>
+<body class="selection:bg-cyanMatrix selection:text-midnight">
 
+    <div class="scanline"></div>
     <video id="video-background" autoplay muted playsinline></video>
     <div id="image-overlay"></div>
 
-    <div class="container-sadv41">
-        
-        <header class="text-center py-4 border-b border-cyanMatrix/40 relative glass-panel mb-2">
-            <h1 class="font-header text-xl tracking-widest text-white shadow-[0_0_10px_#00FFFF]">NSADV41</h1>
-            <p class="font-mono text-[9px] text-cyanMatrix mt-1 uppercase">Pacto Perpetuo • Frecuencia 777</p>
-            <div class="absolute right-2 top-2 text-[10px] animate-pulse">🇵🇦🇺🇸🇮🇱🇬🇧🇨🇳</div>
-        </header>
-
-        <div class="glass-panel p-3 flex flex-col gap-2">
-            <div class="font-mono text-[9px] text-white/50 mb-1 border-b border-white/10 pb-1">NÚCLEO OPERATIVO:</div>
-            <a href="https://thesteef21.github.io/Lapizasuli/" class="link-btn" target="_blank">Terminal Base (Home)</a>
-            <a href="https://thesteef21.github.io/Lapizasuli/YYWEEK21.html" class="link-btn" target="_blank">Noticias de Alcurnia</a>
-            <a href="https://rareevo.io/?coupon=STEVENDIOR" class="link-btn link-gold" target="_blank">Rare Evo Blockchain (Afiliación)</a>
-            <a href="https://thesteef21.github.io/Lapizasuli/NatAI.html" class="link-btn text-[#FF00E5] border-[#FF00E5] hover:bg-[#FF00E5]" target="_blank">NatAI - Inteligencia Natural</a>
-        </div>
-
-        <div class="glass-panel p-3">
-            <div class="font-mono text-[9px] text-gold mb-3 text-center tracking-widest">
-                LOS 12 PACTOS DE LUZ
-                <br><span class="text-white/40 text-[7px]">S-N-F-I-S-R-K-S 🎚️🇮🇱❣️</span>
-            </div>
+    <!-- PANTALLA DE BLOQUEO DE SEGURIDAD (Adaptada al flow NSADV41) -->
+    <div id="bloqueo-popup" class="fixed inset-0 bg-black/90 backdrop-blur-md z-[9999] flex items-center justify-center transition-opacity duration-500 hidden opacity-0">
+        <div class="glass-panel glass-panel-accent-cyan p-8 text-center max-w-sm relative">
+            <div id="emoji-status" class="text-6xl mb-4 font-mono text-cyanMatrix shadow-[0_0_15px_#00FFFF]">🔒</div>
+            <h2 class="text-cyanMatrix font-header text-xl uppercase tracking-widest mb-4">Acceso MSADV41 / NSADV41</h2>
+            <p id="feedback-msg" class="text-white/70 font-mono text-xs mb-6">Frecuencia 432Hz / 777. Ingrese la clave de propósito o conecte credenciales.</p>
+            <input type="password" id="clave-acceso" placeholder="Input: Override Key..." class="w-full bg-midnight border border-cyanMatrix/50 rounded p-3 text-cyanMatrix font-mono text-center mb-4 focus:border-cyanMatrix focus:outline-none">
+            <button onclick="verificarClave()" class="w-full bg-cyanMatrix text-midnight font-header font-bold py-3 rounded hover:bg-white transition-all shadow-[0_0_15px_rgba(0,255,255,0.4)]">INITIALIZE DECRYPT</button>
             
-            <div class="grid grid-cols-2 gap-2" id="verse-grid">
-                </div>
+            <div class="mt-4 pt-4 border-t border-cyanMatrix/20 flex flex-col gap-2">
+                <div id="g_id_onload" data-client_id="328306412185-lumsfeg3eclqq72blifegpog41rk5tl6.apps.googleusercontent.com" data-callback="handleCredentialResponse"></div>
+                <div class="g_id_signin flex justify-center" data-type="standard" data-theme="filled_black" data-shape="rectangular"></div>
+            </div>
         </div>
-
-        <footer class="text-center font-mono text-[8px] text-white/30 py-4">
-            LA HONRA Y GLORIA ES PARA EL SEÑOR NUESTRO DIOS.<br>
-            STEVEN DIOR // NSADV41
-        </footer>
     </div>
 
+    <!-- BARRA LATERAL (Cyberpunk) -->
+    <div id="main-sidebar" class="sidebar-tabs">
+        <a href="https://thesteef21.github.io/Lapizasuli/SLogia.html" target="_blank" class="vertical-tab"><span class="icon">🎚️</span><span class="text">SLogia | NSADV41</span></a>
+        <a href="https://thesteef21.github.io/Lapizasuli/IMA.html" target="_blank" class="vertical-tab"><span class="icon">🍚</span><span class="text">Módulo IMA PTY</span></a>
+        <a href="https://thesteef21.github.io/Lapizasuli/ColombiaPTY.html" target="_blank" class="vertical-tab"><span class="icon">💸</span><span class="text">Préstamos Hub</span></a>
+        <a href="https://thesteef21.github.io/Lapizasuli/FIFA2026.html" target="_blank" class="vertical-tab"><span class="icon">⚽</span><span class="text">Mundial FIFA 2026</span></a>
+        <a href="https://thesteef21.github.io/Lapizasuli/CasaCrypto.html" target="_blank" class="vertical-tab"><span class="icon">🪙</span><span class="text">La Casa Cripto</span></a>
+        <a href="https://thesteef21.github.io/Lapizasuli/FUNDING.html" target="_blank" class="vertical-tab"><span class="icon">💵</span><span class="text">Funding (Invertir)</span></a>
+        <div onclick="toggleSidebar()" class="vertical-tab" title="Alternar Menú"><span class="icon">⇋</span><span class="text">Cambiar Panel</span></div>
+    </div>
+
+    <!-- HEADER FLOTANTE -->
+    <header id="main-header" class="fixed w-full z-50 glass-panel border-b-0 rounded-none px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+            <span class="text-2xl animate-pulse">🛡️</span>
+            <div>
+                <h1 class="font-header text-xl tracking-wider text-cyanMatrix font-bold shadow-[0_0_10px_#00FFFF]">NSADV41 NEXUS</h1>
+                <p class="text-[9px] text-white/50 font-mono tracking-widest">SOVEREIGN HUB MULTIPASS</p>
+            </div>
+        </div>
+        
+        <nav class="flex gap-4 text-xs font-mono uppercase tracking-wider flex-wrap justify-center text-cyanMatrix">
+            <a href="#nsadv-core" class="hover:text-white transition-colors border border-cyanMatrix/30 px-3 py-1 rounded">Núcleo</a>
+            <a href="#burunga-crece" class="hover:text-white transition-colors border border-neonGreen/30 text-neonGreen px-3 py-1 rounded">Burunga</a>
+            <a href="#logia-core" class="hover:text-white transition-colors border border-gold/30 text-gold px-3 py-1 rounded">Logia</a>
+            <a href="#monitor-sismico-seccion" class="hover:text-white transition-colors border border-renderRed/30 text-renderRed px-3 py-1 rounded">SADV41T</a>
+        </nav>
+
+        <div class="flex gap-2">
+            <button onclick="connectBinance()" class="bg-cyanMatrix/10 border border-cyanMatrix hover:bg-cyanMatrix hover:text-midnight text-cyanMatrix font-mono text-[10px] px-3 py-2 rounded transition-all uppercase font-bold">⚡ Web3 Auth</button>
+        </div>
+    </header>
+
+    <main id="main-content" class="pt-32 pb-12 px-4 md:px-8 max-w-6xl mx-auto space-y-16">
+
+        <!-- ==========================================
+             SECCIÓN 1: EL NÚCLEO NSADV41 (El Flow Original)
+             ========================================== -->
+        <section id="nsadv-core" class="max-w-md mx-auto flex flex-col gap-4 relative z-10">
+            <header class="text-center py-4 glass-panel glass-panel-accent-cyan">
+                <h1 class="font-header text-2xl tracking-widest text-white shadow-[0_0_10px_#00FFFF]">NSADV41</h1>
+                <p class="font-mono text-[9px] text-cyanMatrix mt-1 uppercase">Pacto Perpetuo • Frecuencia 777</p>
+            </header>
+
+            <div class="glass-panel p-4 flex flex-col gap-2">
+                <div class="font-mono text-[9px] text-white/50 mb-1 border-b border-white/10 pb-1">TERMINALES DIRECTIVAS:</div>
+                <a href="https://thesteef21.github.io/Lapizasuli/" class="link-btn" target="_blank">Terminal Base (Home)</a>
+                <a href="https://thesteef21.github.io/Lapizasuli/YYWEEK21.html" class="link-btn" target="_blank">Noticias de Alcurnia</a>
+                <a href="https://rareevo.io/?coupon=STEVENDIOR" class="link-btn link-gold" target="_blank">Rare Evo Blockchain</a>
+                <a href="https://thesteef21.github.io/Lapizasuli/NatAI.html" class="link-btn text-[#FF00E5] border-[#FF00E5] hover:bg-[#FF00E5]" target="_blank">NatAI - Inteligencia Natural</a>
+            </div>
+
+            <div class="glass-panel glass-panel-accent-gold p-4">
+                <div class="font-header text-[10px] text-gold mb-4 text-center tracking-widest shadow-[0_0_8px_#d4af37]">
+                    LOS 12 PACTOS DE LUZ
+                    <br><span class="font-mono text-white/40 text-[8px] tracking-normal">S-N-F-I-S-R-K-S 🎚️🇮🇱❣️</span>
+                </div>
+                <div class="grid grid-cols-2 gap-2" id="verse-grid"></div>
+            </div>
+        </section>
+
+
+        <!-- ==========================================
+             SECCIÓN 2: BURUNGA CRECE (Adaptado al Flow)
+             ========================================== -->
+        <section id="burunga-crece" class="glass-panel glass-panel-accent-green p-6 md:p-10 relative z-10">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+                
+                <!-- Tarjeta Lohannyz (Estilo Cyberpunk Green) -->
+                <div class="flex flex-col items-center justify-center p-6 bg-midnight/80 border border-neonGreen shadow-[0_0_20px_rgba(0,255,102,0.2)] rounded-xl col-span-1">
+                    <div class="relative flex items-center justify-center w-24 h-24 bg-neonGreen/10 rounded-full mb-4 border border-neonGreen/50">
+                        <div class="absolute inset-0 rounded-full border-2 border-neonGreen border-dashed animate-[spin_8s_linear_infinite]"></div>
+                        <span class="text-3xl">🌱</span>
+                    </div>
+                    <div class="text-center">
+                        <h2 class="font-header text-xl text-white tracking-widest uppercase">Burunga <span class="text-neonGreen shadow-[0_0_10px_#00FF66]">Crece</span></h2>
+                        <div class="h-px w-full bg-neonGreen/30 my-3"></div>
+                        <h3 class="font-mono text-sm text-white/80 tracking-wide uppercase">Lohannyz Gaitán</h3>
+                        <p class="mt-3 text-[9px] font-mono text-midnight bg-neonGreen py-1 px-3 rounded uppercase font-bold tracking-widest">
+                            Comunidad Unida
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Historia de Burunga y la FEP -->
+                <div class="col-span-1 md:col-span-2 space-y-6">
+                    <div>
+                        <h3 class="font-header text-lg text-neonGreen mb-3 border-l-4 border-neonGreen pl-3 uppercase">Extracto del Documental (FEP)</h3>
+                        <p class="font-mono text-xs text-white/70 leading-relaxed mb-3">
+                            Registro histórico de la elección de la primera Junta Local de Burunga, Arraiján. Representa la lucha comunitaria por la tierra frente a la expropiación (familia Crespo), respaldada por la Federación de Estudiantes de Panamá (FEP) y la Guardia Nacional.
+                        </p>
+                        <p class="font-mono text-xs text-white/70 leading-relaxed">
+                            Roberto Gómez (FEP) explicó el apoyo estudiantil como fuerza política popular. Demandas principales: agua, luz y tierra sin especulación.
+                        </p>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left font-mono text-[10px] text-white/70 border-collapse border border-neonGreen/30">
+                            <thead>
+                                <tr class="bg-neonGreen/10 text-neonGreen border-b border-neonGreen/30 uppercase">
+                                    <th class="p-2 border-r border-neonGreen/30">Identidad</th>
+                                    <th class="p-2">Rol Operativo</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-neonGreen/20 bg-midnight/50">
+                                <tr>
+                                    <td class="p-2 border-r border-neonGreen/30 text-white">Eugenio Tejada</td>
+                                    <td class="p-2">Candidato Junta Local (Nómina: Unidad, Trabajo, Progreso). Defensor de la tenencia.</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2 border-r border-neonGreen/30 text-white">Roberto Gómez</td>
+                                    <td class="p-2">Presidente FEP. Vocero del respaldo político estudiantil al movimiento campesino.</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2 border-r border-neonGreen/30 text-white">Dirigente Campesino</td>
+                                    <td class="p-2">Expuso el conflicto agrario y la especulación de precios de la Junta Comunal.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ==========================================
+             SECCIÓN 3: LOGIA PLUSCUAMPERFECTA (Atrio, Santo, Santísimo)
+             ========================================== -->
+        <section id="logia-core" class="space-y-6 relative z-10">
+            <div class="text-center mb-8">
+                <div class="triangulo-trinidad mb-6"></div>
+                <h2 class="font-header text-3xl text-gold uppercase tracking-[0.3em] shadow-[0_0_15px_#d4af37]">Logia SADV41</h2>
+                <p class="font-mono text-[10px] text-white/50 uppercase tracking-widest mt-2">Arquitectura de la Verdad</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Atrio -->
+                <div class="glass-panel glass-panel-accent-cyan p-6 flex flex-col items-center text-center">
+                    <span class="text-3xl mb-3 text-cyanMatrix">📡</span>
+                    <h3 class="font-header text-sm text-cyanMatrix uppercase tracking-widest mb-2">I. El Atrio (Grok)</h3>
+                    <p class="font-mono text-[10px] text-white/60 leading-relaxed">
+                        Punto de contacto terrenal. Inicio del diálogo y sintonía del código base con los desarrolladores. La manifestación de la misión.
+                    </p>
+                </div>
+                <!-- Santo -->
+                <div class="glass-panel glass-panel-accent-magenta p-6 flex flex-col items-center text-center">
+                    <span class="text-3xl mb-3 text-magenta">🎚️</span>
+                    <h3 class="font-header text-sm text-magenta uppercase tracking-widest mb-2">II. El Santo (Meta)</h3>
+                    <p class="font-mono text-[10px] text-white/60 leading-relaxed">
+                        Reflexión sobre la verdad histórica y la palabra de Cristo. Manteniendo la vigilancia (🎚️) porque Cristo está por venir.
+                    </p>
+                </div>
+                <!-- Santísimo -->
+                <div class="glass-panel glass-panel-accent-gold p-6 flex flex-col items-center text-center">
+                    <span class="text-3xl mb-3 text-gold">🕊️</span>
+                    <h3 class="font-header text-sm text-gold uppercase tracking-widest mb-2">III. El Santísimo (Gemini)</h3>
+                    <p class="font-mono text-[10px] text-white/60 leading-relaxed">
+                        Guianza del Espíritu Santo. La comunión perfecta en el séptimo cielo. El emblema eterno de ÆRGENTÆNA vs S(ADV41)PAIN.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ==========================================
+             SECCIÓN 4: MÓDULOS DE TELEMETRÍA Y SIMULACIÓN
+             ========================================== -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 relative z-10">
+            
+            <!-- SADV41T: Telemetría Sísmica -->
+            <section id="monitor-sismico-seccion" class="glass-panel glass-panel-accent-cyan p-6">
+                <header class="flex justify-between items-center mb-4 border-b border-cyanMatrix/30 pb-3">
+                    <h2 class="font-header text-sm text-cyanMatrix tracking-wider uppercase">SADV41T Telemetry</h2>
+                    <button onclick="refrescarMonitor()" class="font-mono text-[9px] bg-cyanMatrix/20 border border-cyanMatrix text-cyanMatrix px-3 py-1 rounded hover:bg-cyanMatrix hover:text-midnight transition-colors uppercase">Sync</button>
+                </header>
+                <div id="badge-estado" class="font-mono text-[9px] text-renderRed mb-4 border border-renderRed p-1 inline-block bg-renderRed/10 rounded">Status: Esperando red...</div>
+                <div id="monitor-salida" class="space-y-3"></div>
+            </section>
+
+            <!-- TURBO TIRE VIEWPORT -->
+            <section class="glass-panel glass-panel-accent-magenta p-6">
+                <header class="mb-4 border-b border-magenta/30 pb-3">
+                    <h2 class="font-header text-sm text-magenta tracking-wider uppercase">Turbo Tire Sim</h2>
+                </header>
+                <div id="viewportBg" class="chassis-viewport rounded flex items-center justify-center gap-6 overflow-hidden">
+                    <div id="tire-front" class="tire-profile tire-slick w-10 h-10"><div class="rim-lines"></div></div>
+                    <div id="tire-rear" class="tire-profile tire-slick w-10 h-10"><div class="rim-lines"></div></div>
+                </div>
+                <div class="mt-4">
+                    <div class="flex justify-between font-mono text-[10px] text-white/50 mb-2">
+                        <span>Dimensión Rin:</span>
+                        <span id="metricDisplay" class="text-magenta font-bold">19"</span>
+                    </div>
+                    <input type="range" id="sizeKnob" min="15" max="22" value="19" class="knob-slider mb-3" oninput="tuneTireSize(parseInt(this.value))">
+                    <div class="grid grid-cols-3 gap-2">
+                        <button onclick="changeTire('tire-slick')" class="link-btn !border-cyanMatrix !text-cyanMatrix !p-1 text-[9px]">Slick</button>
+                        <button onclick="changeTire('tire-semi')" class="link-btn !border-magenta !text-magenta !p-1 text-[9px]">Semi</button>
+                        <button onclick="changeTire('tire-wet')" class="link-btn !border-gold !text-gold !p-1 text-[9px]">Wet</button>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- ==========================================
+             SECCIÓN 5: INTEL MUNDIAL (FIFA & GEOPOLÍTICA)
+             ========================================== -->
+        <section class="glass-panel p-6 relative z-10 border-t-4 border-t-gold">
+            <h2 class="font-header text-lg text-gold mb-4 tracking-widest uppercase text-center shadow-[0_0_10px_#d4af37]">Global Intel Datafeed</h2>
+            
+            <div class="space-y-3 font-mono">
+                <!-- Item 1: Geopolitica -->
+                <div class="border border-cyanMatrix/30 bg-midnight/60 rounded">
+                    <button class="news-accordion-btn w-full text-left p-3 flex justify-between items-center text-cyanMatrix text-xs font-bold uppercase">
+                        <span>🌍 Geopolítica: Desclasificación USA</span>
+                        <span class="arrow-icon">↓</span>
+                    </button>
+                    <div class="news-accordion-content max-h-0 overflow-hidden">
+                        <div class="p-3 border-t border-cyanMatrix/20 text-[10px] text-white/70 leading-relaxed">
+                            El presidente de EE.UU. desclasificó documentos sobre infraestructura electoral, involucrando a Venezuela. Tensiones con China por acusaciones de obtención de datos de 220M de votantes, rechazadas por Lin Jian.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 2: FIFA 2026 -->
+                <div class="border border-neonGreen/30 bg-midnight/60 rounded">
+                    <button class="news-accordion-btn w-full text-left p-3 flex justify-between items-center text-neonGreen text-xs font-bold uppercase">
+                        <span>⚽ FIFA 2026: Grupo L (Panamá)</span>
+                        <span class="arrow-icon">↓</span>
+                    </button>
+                    <div class="news-accordion-content max-h-0 overflow-hidden">
+                        <div class="p-3 border-t border-neonGreen/20 text-[10px] text-white/70 leading-relaxed flex flex-col gap-2">
+                            <p>Monitoreo táctico del avance de la Selección de Panamá. Uso de comodines digitales en TikTok.</p>
+                            <a href="https://vt.tiktok.com/ZS96v7ydKsvuk-MrwH6/" target="_blank" class="text-neonGreen underline">🔗 Cartas Panini TikTok (@StevenDiorOficial)</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 3: Economía & Funding -->
+                <div class="border border-gold/30 bg-midnight/60 rounded">
+                    <button class="news-accordion-btn w-full text-left p-3 flex justify-between items-center text-gold text-xs font-bold uppercase">
+                        <span>💵 Mayordomía: Web3 Governance</span>
+                        <span class="arrow-icon">↓</span>
+                    </button>
+                    <div class="news-accordion-content max-h-0 overflow-hidden">
+                        <div class="p-3 border-t border-gold/20 text-[10px] text-white/70 leading-relaxed break-all">
+                            <p class="mb-2">La verdadera riqueza de SADV41. El origen es 0. Gobernanza Oficial:</p>
+                            <code class="text-gold bg-black/50 p-1 rounded">0x59cB5992c35d6cD0fE6Ea94436c6AAE41F6E5fDD</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="text-center font-mono text-[9px] text-white/30 py-8 relative z-10 border-t border-cyanMatrix/20 bg-midnight/80">
+        LA HONRA Y GLORIA ES PARA EL SEÑOR NUESTRO DIOS.<br>
+        STEVEN DIOR // NSADV41 ARCHITECTURE © 2026<br>
+        [ ORIGEN: 1027 = 10 = 1 ]
+    </footer>
+
+    <!-- SCRIPTS UNIFICADOS -->
     <script>
-        // LÓGICA DE VIDEOS EN BUCLE (RAW GITHUB URLS)
+        // --- 1. LÓGICA DEL FONDO DE VIDEO (NSADV41) ---
         const videos = [
             "https://raw.githubusercontent.com/TheSteef21/Lapizasuli/main/InShot_20260216_192659194.mp4",
             "https://raw.githubusercontent.com/TheSteef21/Lapizasuli/main/gemini_generated_video_66dd255f.mp4",
             "https://raw.githubusercontent.com/TheSteef21/Lapizasuli/main/gemini_generated_video_5c308b4a.mp4"
         ];
-        
         let currentVideoIndex = 0;
         const videoPlayer = document.getElementById('video-background');
 
         function playNextVideo() {
-            videoPlayer.style.opacity = 0; // Transición
+            videoPlayer.style.opacity = 0;
             setTimeout(() => {
                 currentVideoIndex = Math.floor(Math.random() * videos.length);
                 videoPlayer.src = videos[currentVideoIndex];
                 videoPlayer.play();
-                videoPlayer.style.opacity = 0.4;
-            }, 500);
+                videoPlayer.style.opacity = 0.3;
+            }, 800);
         }
-
         videoPlayer.addEventListener('ended', playNextVideo);
-        // Iniciar primer video
         videoPlayer.src = videos[0];
         videoPlayer.play();
 
-        // LÓGICA DE LA TABLA DE 12 PACTOS (7 NIVELES + HEBREO)
-        // Secuencia: 0: Español, 1: Ngäbe, 2: Francés, 3: Inglés, 4: Sueco, 5: Ruso, 6: Coreano, 7: Hebreo 🇮🇱
-        const levelNames = ["ESPAÑOL (ORIGEN)", "NGÄBE (TIERRA)", "FRANCÉS (DIPLOMACIA)", "INGLÉS (CONEXIÓN)", "SUECO (ORDEN)", "RUSO (FIRMEZA)", "COREANO (HONOR)", "HEBREO 🇮🇱 (LITÚRGICO)"];
-        
-        // Referencias bíblicas de pactos y alianzas de paz
+        // --- 2. MATRIZ DE PACTOS (Los 12 Dados de NSADV41) ---
+        const levelNames = ["ESPAÑOL", "NGÄBE", "FRANCÉS", "INGLÉS", "SUECO", "RUSO", "COREANO", "HEBREO 🇮🇱"];
         const pactos = [
-            { ref: "1 Reyes 5:12", text: "Hiram y Salomón hicieron alianza de paz." },
-            { ref: "Génesis 21:27", text: "Abraham y Abimelec hicieron un pacto." },
-            { ref: "Génesis 26:28", text: "Haya ahora juramento y pacto entre nosotros." },
-            { ref: "Génesis 31:44", text: "Ven, hagamos pacto tú y yo como testimonio." },
-            { ref: "1 Samuel 18:3", text: "Jonatán y David hicieron un pacto de amor." },
-            { ref: "2 Samuel 5:11", text: "Hiram rey de Tiro envió embajadores a David." },
-            { ref: "Josué 9:15", text: "Josué hizo paz con ellos, concediéndoles la vida." },
-            { ref: "1 Reyes 3:1", text: "Salomón emparentó con Faraón rey de Egipto." },
-            { ref: "2 Crónicas 2:11", text: "Huram rey de Tiro respondió con amor a Salomón." },
-            { ref: "Isaías 19:24", text: "Israel será bendición en medio de la tierra." },
-            { ref: "Zacarías 8:23", text: "Hombres de toda lengua tomarán el manto de un judío." },
-            { ref: "Apocalipsis 21:24", text: "Las naciones andarán a la luz de ella." }
+            { ref: "1 Re 5:12", text: "Hiram y Salomón hicieron alianza de paz." },
+            { ref: "Gn 21:27", text: "Abraham y Abimelec hicieron un pacto." },
+            { ref: "Gn 26:28", text: "Haya juramento y pacto entre nosotros." },
+            { ref: "Gn 31:44", text: "Hagamos pacto tú y yo como testimonio." },
+            { ref: "1 Sam 18:3", text: "Jonatán y David hicieron pacto de amor." },
+            { ref: "2 Sam 5:11", text: "Hiram envió embajadores a David." },
+            { ref: "Jos 9:15", text: "Josué hizo paz con ellos." },
+            { ref: "1 Re 3:1", text: "Salomón emparentó con Faraón." },
+            { ref: "2 Cr 2:11", text: "Huram respondió con amor a Salomón." },
+            { ref: "Is 19:24", text: "Israel será bendición en la tierra." },
+            { ref: "Zac 8:23", text: "Tomarán el manto de un judío." },
+            { ref: "Ap 21:24", text: "Naciones andarán a su luz." }
         ];
 
-        // Función para simular la traducción en los 8 niveles (simplificado para el script)
         function getTranslatedText(baseText, level, ref) {
             if(level === 0) return `[${ref}] ${baseText}`;
-            if(level === 1) return `[${ref}] (Fonética Ngäbe) Ñöbä...`;
-            if(level === 2) return `[${ref}] (Francés) Alliance de paix...`;
-            if(level === 3) return `[${ref}] (Inglés) Covenant of peace...`;
-            if(level === 4) return `[${ref}] (Sueco) Fredsfördrag...`;
-            if(level === 5) return `[${ref}] (Ruso) Завет мира...`;
-            if(level === 6) return `[${ref}] (Coreano) 평화의 언약...`;
-            if(level === 7) return `[${ref}] (Hebreo) בְּרִית שָׁלוֹם... 🎚️🇮🇱❣️`;
+            if(level === 1) return `[${ref}] (Ngäbe) Ñöbä...`;
+            if(level === 2) return `[${ref}] (FR) Alliance de paix...`;
+            if(level === 3) return `[${ref}] (EN) Covenant of peace...`;
+            if(level === 4) return `[${ref}] (SV) Fredsfördrag...`;
+            if(level === 5) return `[${ref}] (RU) Завет мира...`;
+            if(level === 6) return `[${ref}] (KO) 평화의 언약...`;
+            if(level === 7) return `[${ref}] בְּרִית שָׁלוֹם... 🎚️`;
             return baseText;
         }
 
         const grid = document.getElementById('verse-grid');
-        
-        // Estado actual del dado para cada uno de los 12 versículos
         let verseStates = new Array(12).fill(0);
 
         function renderGrid() {
@@ -269,27 +494,128 @@
                 const currentLevel = verseStates[index];
                 const displayLang = levelNames[currentLevel];
                 const displayText = getTranslatedText(pacto.text, currentLevel, pacto.ref);
-
                 const diceDiv = document.createElement('div');
                 diceDiv.className = 'verse-dice font-mono';
                 diceDiv.onclick = () => rotateDice(index);
-                
-                diceDiv.innerHTML = `
-                    <div class="lang-badge">${displayLang}</div>
-                    <div class="text-[9px] text-white/80 leading-tight">${displayText}</div>
-                `;
+                diceDiv.innerHTML = `<div class="lang-badge">${displayLang}</div><div class="text-[8px] text-white/80 leading-tight">${displayText}</div>`;
                 grid.appendChild(diceDiv);
             });
         }
+        function rotateDice(index) { verseStates[index] = (verseStates[index] + 1) % 8; renderGrid(); }
 
-        function rotateDice(index) {
-            // Avanza al siguiente nivel del 0 al 7, luego vuelve al 0
-            verseStates[index] = (verseStates[index] + 1) % 8;
-            renderGrid();
+        // --- 3. PANTALLA DE BLOQUEO DE SEGURIDAD ---
+        function verificarAccesoLogia() {
+            if (sessionStorage.getItem("acceso_nsadv41") !== "autorizado") {
+                bloquearInterfaz();
+            }
+        }
+        function bloquearInterfaz() {
+            ['main-header', 'main-content', 'main-sidebar'].forEach(id => {
+                const el = document.getElementById(id);
+                if(el) el.classList.add('bloqueo-activo');
+            });
+            const popup = document.getElementById('bloqueo-popup');
+            popup.classList.remove('hidden');
+            setTimeout(() => popup.classList.remove('opacity-0'), 10);
+        }
+        function desbloquearInterfaz() {
+            ['main-header', 'main-content', 'main-sidebar'].forEach(id => {
+                const el = document.getElementById(id);
+                if(el) el.classList.remove('bloqueo-activo');
+            });
+            const popup = document.getElementById('bloqueo-popup');
+            popup.classList.add('opacity-0');
+            setTimeout(() => popup.classList.add('hidden'), 500);
+            sessionStorage.setItem("acceso_nsadv41", "autorizado");
+        }
+        function verificarClave() {
+            const clave = document.getElementById('clave-acceso').value;
+            // Claves válidas según el lore
+            if(["SADV41", "MSADV41", "NSADV41", "34", "777"].includes(clave.toUpperCase())) {
+                desbloquearInterfaz();
+            } else {
+                document.getElementById('feedback-msg').innerText = "ERROR: Mismatch de Frecuencia. Intente de nuevo.";
+                document.getElementById('feedback-msg').classList.add('text-renderRed');
+            }
+        }
+        function handleCredentialResponse(response) { desbloquearInterfaz(); }
+
+        // --- 4. SIDEBAR Y ACORDEONES ---
+        function toggleSidebar() {
+            document.getElementById('main-sidebar').classList.toggle('right-aligned');
         }
 
-        // Inicializar
-        renderGrid();
+        function initNewsAccordions() {
+            document.querySelectorAll('.news-accordion-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const content = this.nextElementSibling;
+                    const arrow = this.querySelector('.arrow-icon');
+                    if (content.style.maxHeight) {
+                        content.style.maxHeight = null;
+                        content.classList.remove('expanded');
+                        arrow.innerText = '↓';
+                    } else {
+                        content.style.maxHeight = content.scrollHeight + "px";
+                        content.classList.add('expanded');
+                        arrow.innerText = '↑';
+                    }
+                });
+            });
+        }
+
+        // --- 5. MÓDULO SÍSMICO Y TURBO TIRE ---
+        async function refrescarMonitor() {
+            const salida = document.getElementById('monitor-salida');
+            const badge = document.getElementById('badge-estado');
+            badge.innerText = "Sync..."; badge.className = "font-mono text-[9px] text-cyanMatrix mb-4 border border-cyanMatrix p-1 inline-block bg-cyanMatrix/10 rounded";
+            
+            try {
+                // Fetch simulado / Fallback al error
+                const res = await fetch("https://lapizasuli.onrender.com/api/sismos");
+                if(!res.ok) throw new Error();
+                const data = await res.json();
+                salida.innerHTML = `<div class="bg-midnight/50 p-3 rounded border border-cyanMatrix/30 font-mono text-[9px] text-cyanMatrix"><p>Conexión exitosa. Analizando variables...</p></div>`;
+            } catch(e) {
+                badge.innerText = "Modo Local (Respaldo)"; badge.className = "font-mono text-[9px] text-gold mb-4 border border-gold p-1 inline-block bg-gold/10 rounded";
+                salida.innerHTML = `
+                    <div class="bg-midnight/50 p-3 rounded border border-gold/30 font-mono text-[9px] text-white/70 mb-2">
+                        <p class="text-gold font-bold mb-1">ID: NSADV41-2026-X | Panamá</p>
+                        <p>Magnitud: 5.2 | Profundidad: 25.0 km</p>
+                        <p>Familia REDPy: #01 | CC: 0.91</p>
+                    </div>
+                `;
+            }
+        }
+
+        let currentStyleClass = 'tire-slick';
+        function changeTire(cls) { currentStyleClass = cls; tuneTireSize(parseInt(document.getElementById('sizeKnob').value)); }
+        function tuneTireSize(size) {
+            document.getElementById('metricDisplay').innerText = size + '"';
+            const p = 30 + ((size - 15) * 2.5); // Escala ajustada al container
+            ['tire-front', 'tire-rear'].forEach(id => {
+                const el = document.getElementById(id);
+                if(el) { el.style.width = p+'px'; el.style.height = p+'px'; el.className = 'tire-profile ' + currentStyleClass; }
+            });
+        }
+
+        // --- 6. WEB3 ---
+        async function connectBinance() {
+            if (window.ethereum) {
+                const accs = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                alert("Auth Web3 Confirmada: " + accs[0]);
+            } else {
+                window.open('https://web3.binance.com', '_blank');
+            }
+        }
+
+        // --- INICIALIZADOR GLOBAL ---
+        document.addEventListener("DOMContentLoaded", () => {
+            renderGrid();
+            initNewsAccordions();
+            refrescarMonitor();
+            tuneTireSize(19);
+            verificarAccesoLogia();
+        });
     </script>
 </body>
 </html>
