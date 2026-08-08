@@ -106,8 +106,8 @@
         async function interactVenus(asset) {
             if (asset === 'BNB') {
                 try {
-                    // Dirección oficial del contrato vBNB en la BNB Chain Mainnet
-                    const vBnbAddress = "0xA07c5e71B8248084f62e8a84620f4D0f3D1C8d45";
+                    // Dirección oficial del contrato vBNB en minúsculas para evitar errores de checksum
+                    const vBnbAddress = "0xa07c5e71b8248084f62e8a84620f4D0f3D1C8d45";
                     
                     // ABI simplificado para la función mint de vBNB
                     const vBnbABI = ["function mint() payable"];
