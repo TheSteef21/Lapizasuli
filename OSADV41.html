@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SADV41 - Venus Lab</title>
+    <!-- Incluimos Ethers.js v6 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.0/ethers.umd.min.js"></script>
+    <style>
+        body { 
+            background-color: #050505; 
+            color: #d1d1d1; 
+            font-family: 'Segoe UI', sans-serif; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            padding: 40px; 
+        }
+        .hub-container { width: 100%; max-width: 600px; }
+        .card { 
+            background: #121212; 
+            border: 1px solid #333; 
+            padding: 20px; 
+            margin: 15px 0; 
+            border-radius: 12px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+        button { 
+            background: #0056b3; 
+            color: white; 
+            border: none; 
+            padding: 12px 24px; 
+            cursor: pointer; 
+            border-radius: 6px; 
+            font-weight: bold;
+        }
+        button:hover { background: #007bff; }
+        .status-pill { font-size: 0.8em; color: #ffc107; margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+
+    <div class="hub-container">
+        <h1>SADV41: Módulo Venus (Beta)</h1>
+        <div id="status" class="status-pill">Protocolo inactivo. Conecta tu billetera.</div>
+        <button id="connectBtn">Conectar Wallet</button>
+
+        <div id="market" style="display:none;">
+            <h3>Mercado Disponible</h3>
+            <div class="card">
+                <h4>BNB (vBNB)</h4>
+                <p>Balance en wallet: <span id="bnbBal">0</span></p>
+                <button onclick="interactVenus('BNB')">Suministrar BNB</button>
+            </div>
+            <div class="card">
+                <h4>USDT (vUSDT)</h4>
+                <p>Balance en wallet: <span id="usdtBal">0</span></p>
+                <button onclick="interactVenus('USDT')">Suministrar USDT</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let provider, signer;
+        
+        document.getElementById('connectBtn').addEventListener('click', async () => {
+            if (window.ethereum) {
+                provider = new ethers.BrowserProvider(window.ethereum);
+                signer = await provider.getSigner();
+                const accounts = await provider.send("eth_requestAccounts", []);
+                document.getElementById('status').innerText = "Conectado: " + accounts[0].substring(0,6) + "...";
+                document.getElementById('market').style.display = "block";
+                document.getElementById('connectBtn').style.display = "none";
+                updateBalances();
+            } else {
+                alert("Por favor, instala Brave Wallet o MetaMask.");
+            }
+        });
+
+        async function updateBalances() {
+            // Aquí iría la lógica para leer el balance del token (ERC20)
+            document.getElementById('bnbBal').innerText = "Cargando..."; 
+        }
+
+        async function interactVenus(asset) {
+            alert("Preparando interacción con el contrato Venus para: " + asset + 
+                  "\nNOTA: Aquí es donde llamaremos a la función 'mint()' del contrato vToken.");
+            console.log("Flujo: 1. Aprobación -> 2. Mint()");
+        }
+    </script>
+</body>
+</html>
