@@ -165,13 +165,6 @@
         /* Acordeones */
         .news-accordion-content { transition: max-height 0.4s ease-in-out, opacity 0.3s ease-in-out; opacity: 0; }
         .news-accordion-content.expanded { opacity: 1; }
-
-        /* Bloqueo Logia (Ultra Instinct) */
-        .bloqueo-activo { filter: blur(12px) grayscale(50%); pointer-events: none; user-select: none; transition: filter 0.5s ease; }
-        @keyframes pulso-divino-ultra {
-            0% { filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.2)) hue-rotate(0deg); transform: scale(1); }
-            100% { filter: drop-shadow(0 0 40px rgba(212, 175, 55, 0.9)) hue-rotate(90deg); transform: scale(1.02); }
-        }
     </style>
 </head>
 <body class="font-sans antialiased selection:bg-oro selection:text-navy overflow-x-hidden">
@@ -204,25 +197,25 @@
         </svg>
     </div>
 
-    <!-- PANTALLA DE BLOQUEO LOGIA -->
-    <div id="bloqueo-popup" class="fixed inset-0 bg-black/90 backdrop-blur-md z-[9999] flex items-center justify-center transition-opacity duration-500 hidden opacity-0">
-        <div class="bg-slate-900 border border-oro/50 p-8 rounded-2xl text-center max-w-sm relative shadow-[0_0_30px_rgba(212,175,55,0.15)]">
-            <div id="emoji-status" class="text-6xl mb-4 drop-shadow-[0_0_15px_rgba(212,175,55,0.5)]">🔒</div>
-            <h2 class="text-oro font-bold text-xl uppercase tracking-widest mb-4 font-mason">Acceso Reservado</h2>
-            <p id="feedback-msg" class="text-slate-300 text-sm mb-6 font-sans">La arquitectura SADV41 está sintonizada en 432Hz. ¿Buscando crédito o buscando propósito?</p>
+    <!-- POP-UP DE APOYO Y FACTURACIÓN -->
+    <div id="apoyo-popup" class="fixed inset-0 bg-black/80 backdrop-blur-md z-[9999] flex items-center justify-center transition-opacity duration-500 opacity-0 hidden">
+        <div class="bg-slate-900 border border-emerald-500/50 p-8 rounded-2xl text-center max-w-sm relative shadow-[0_0_40px_rgba(16,185,129,0.2)]">
+            <button onclick="cerrarPopupApoyo()" class="absolute top-3 right-4 text-slate-400 hover:text-white font-bold text-2xl transition-colors">&times;</button>
+            <div class="text-6xl mb-4 drop-shadow-[0_0_15px_rgba(212,175,55,0.5)]">🇵🇦🔯</div>
+            <h2 class="text-oro font-bold text-xl uppercase tracking-widest mb-4 font-mason">Misión SADV41</h2>
+            <p class="text-slate-300 text-sm mb-8 font-sans leading-relaxed">¿Te gusta nuestro proyecto? Puedes formar parte con tu apoyo, toda inversión retorna en bendición.</p>
             
-            <input type="password" id="clave-acceso" placeholder="Clave de propósito..." class="w-full bg-black/80 border border-slate-600 rounded-lg p-3 text-white text-center mb-4 focus:border-oro focus:outline-none transition-colors">
-            
-            <button id="btn-desbloqueo" onclick="verificarClave()" class="w-full bg-oro text-navy font-bold py-3 rounded-lg hover:bg-yellow-500 transition-all shadow-[0_0_15px_rgba(234,179,8,0.3)] cursor-pointer">
-                Desbloquear Propósito
-            </button>
+            <a href="https://factura-88pp.onrender.com/" target="_blank" onclick="cerrarPopupApoyo()" class="block w-full bg-emerald-600 text-white font-bold py-3.5 rounded-lg hover:bg-emerald-500 transition-all shadow-[0_0_15px_rgba(16,185,129,0.4)] cursor-pointer tracking-wide">
+                Apoyar Proyecto Ahora
+            </a>
         </div>
     </div>
     
     <div class="scanline"></div>
 
-    <!-- BARRA LATERAL (z-index corregido a 55) -->
+    <!-- BARRA LATERAL -->
     <div id="main-sidebar" class="sidebar-tabs transition-all duration-500">
+        <!-- ... (Enlaces existentes de la barra lateral se mantienen igual) ... -->
         <a href="https://thesteef21.github.io/Lapizasuli/SLogia.html" target="_blank" class="vertical-tab tab-slogia">
             <span class="icon">🎚️</span><span class="text text-cyan-300">SLogia | Conexión SADV41</span>
         </a>
@@ -253,15 +246,15 @@
         <a href="https://thesteef21.github.io/Lapizasuli/RubenGuerraBox.html" target="_blank" class="vertical-tab tab-box">
             <span class="icon">🥊</span><span class="text text-red-400">Rubén Guerra Box</span>
         </a>
-        <a href="https://thesteef21.github.io/Lapizasuli/FUNDING.html" target="_blank" class="vertical-tab tab-funding">
-            <span class="icon">💵</span><span class="text text-emerald-400">Invertir (FUNDING)</span>
+        <a href="https://factura-88pp.onrender.com/" target="_blank" class="vertical-tab tab-funding">
+            <span class="icon">💵</span><span class="text text-emerald-400">Invertir (FACTURA)</span>
         </a>
         <div onclick="toggleSidebar()" class="vertical-tab tab-toggle" title="Cambiar lado del menú">
             <span class="icon">⇋</span><span class="text text-slate-300">Alternar Menú</span>
         </div>
     </div>
 
-    <!-- HEADER SUPERIOR (top-0 left-0 añadido y z-index a 40 para evitar solapamiento) -->
+    <!-- HEADER SUPERIOR CON BOTÓN DE APOYO -->
     <header id="main-header" class="fixed top-0 left-0 w-full z-40 glass border-b border-oro/30 px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-4 transition-all duration-500">
         <div class="flex items-center gap-3">
             <span class="text-2xl">🛡️</span>
@@ -271,26 +264,27 @@
             </div>
         </div>
         
-        <div class="flex flex-col items-center gap-2">
+        <div class="flex flex-col items-center gap-2 hidden lg:flex">
             <nav class="flex gap-4 lg:gap-6 text-sm uppercase tracking-wider font-medium flex-wrap justify-center">
                 <a href="#isadv41-seccion" class="hover:text-blue-400 transition-colors text-blue-300 font-bold">📖 Versículos</a>
                 <a href="#historia-crece" class="hover:text-emerald-400 transition-colors text-emerald-300 font-bold">🌱 Burunga Crece</a>
                 <a href="#noticias-seccion" class="hover:text-neonBlue transition-colors text-cyan-300">📰 Boletín</a>
                 <a href="#world-cup-tracking" class="hover:text-emerald-400 transition-colors text-emerald-300 font-bold">⚽ Mundial</a>
-                <a href="#monitor-sismico-seccion" class="hover:text-red-400 transition-colors text-red-300 font-bold">⚠️ Telemetría</a>
             </nav>
         </div>
 
-        <div class="flex flex-col items-center justify-center gap-2">
-            <div id="status" class="text-[10px] text-oro font-mono text-center tracking-widest uppercase">Protocolo de validación iniciado...</div>
-            <div class="flex flex-wrap gap-2 justify-center">
-                <button onclick="loginSocial('github')" class="bg-slate-800 hover:bg-slate-700 text-white font-semibold text-xs px-3 py-2 rounded transition-all flex items-center gap-1.5 border border-slate-700 cursor-pointer">
-                    💻 GitHub Access
-                </button>
-                <button id="btnConnect" onclick="connectBinance()" class="bg-oro hover:bg-amber-600 text-navy font-bold text-xs px-3 py-2 rounded transition-all flex items-center gap-1.5 shadow-lg shadow-oro/20 cursor-pointer">
-                    ⚡ Binance Web3 Wallet
-                </button>
-            </div>
+        <div class="flex flex-wrap items-center justify-center gap-3">
+            <!-- NUEVO BOTÓN PERSISTENTE AL PRINCIPIO -->
+            <a href="https://factura-88pp.onrender.com/" target="_blank" class="bg-emerald-600/90 hover:bg-emerald-500 text-white font-bold text-xs px-4 py-2 rounded-lg border border-emerald-400/50 shadow-[0_0_15px_rgba(16,185,129,0.3)] flex items-center gap-2 animate-pulse">
+                <span>🇵🇦</span> Apoyar <span>🔯</span>
+            </a>
+            
+            <button onclick="simularTransito()" class="bg-slate-800 hover:bg-slate-700 text-white font-semibold text-xs px-3 py-2 rounded-lg transition-all flex items-center gap-1.5 border border-slate-700 cursor-pointer">
+                💻 GitHub
+            </button>
+            <button id="btnConnect" onclick="connectBinance()" class="bg-oro hover:bg-amber-600 text-navy font-bold text-xs px-3 py-2 rounded-lg transition-all flex items-center gap-1.5 shadow-lg shadow-oro/20 cursor-pointer">
+                ⚡ Web3 Wallet
+            </button>
         </div>
     </header>
 
@@ -585,8 +579,8 @@
                             <h3 class="font-bold text-lg tracking-wide text-slate-200">Telemetría Mundial</h3>
                         </div>
                         <p class="text-xs text-slate-400 font-mono leading-relaxed">Monitoreo de variables sísmicas, estructuras de datos Web3 y recepción de la voluntad divina en el código de la realidad.</p>
-                        <button onclick="simularTransito()" class="text-xs bg-slate-900 border border-oro/30 hover:border-oro text-oro/70 hover:text-oro px-4 py-2 rounded transition-colors mt-6 cursor-pointer w-full text-center">
-                            🔑 Simular Acceso Directo (Google Auth)
+                        <button class="text-xs bg-slate-900 border border-oro/30 hover:border-oro text-oro/70 hover:text-oro px-4 py-2 rounded transition-colors mt-6 cursor-pointer w-full text-center">
+                            📡 Canal de Datos Activo
                         </button>
                     </div>
                     <div class="p-6 bg-black/40 border border-slate-800 hover:border-cyan-500/50 transition-all rounded-lg flex flex-col justify-between">
@@ -748,7 +742,7 @@
                 <div class="bg-[#0d1117] p-4 rounded-xl border border-gray-700">
                     <pre class="font-mono text-[11px] text-green-300"><code># .github/FUNDING.yml
 # El origen es 0, toda inversión retorna en bendición.</code></pre>
-                    <a href="https://thesteef21.github.io/Lapizasuli/FUNDING.html" target="_blank" class="block text-center mt-3 bg-emerald-600/20 text-emerald-400 font-mono text-xs px-4 py-1.5 rounded">EJECUTAR INVERSIÓN</a>
+                    <a href="https://factura-88pp.onrender.com/" target="_blank" class="block text-center mt-3 bg-emerald-600/20 hover:bg-emerald-600/40 transition-colors text-emerald-400 font-mono text-xs px-4 py-1.5 rounded">EJECUTAR INVERSIÓN</a>
                 </div>
             </div>
         </section>
@@ -810,7 +804,7 @@
         /* === 2. LÓGICA TESSERACTO 4D === */
         function initTesseract() {
             const linesGroup = document.getElementById("tesseractLines");
-            if (!linesGroup) return; // Prevenir error si no está
+            if (!linesGroup) return; 
             
             const [rotXY, rotXZ, rotXW, rotZW] = [document.getElementById("rotXY"), document.getElementById("rotXZ"), document.getElementById("rotXW"), document.getElementById("rotZW")];
             const [valXY, valXZ, valXW, valZW] = [document.getElementById("valXY"), document.getElementById("valXZ"), document.getElementById("valXW"), document.getElementById("valZW")];
@@ -857,48 +851,22 @@
             renderTesseract();
         }
 
-        /* === 3. SEGURIDAD Y LOGIA (SADV41-2026) === */
-        let intentosFallidos = 0;
-        function verificarAccesoLogia() {
-            const origen = sessionStorage.getItem("acceso_sadv41_origen");
-            if (origen !== "GSADV41") bloquearInterfaz();
-        }
-
-        function bloquearInterfaz() {
-            ["main-header", "main-content", "main-sidebar"].forEach(id => {
-                let el = document.getElementById(id); if(el) el.classList.add("bloqueo-activo");
-            });
-            const p = document.getElementById("bloqueo-popup");
-            p.classList.remove("hidden"); setTimeout(() => p.classList.remove("opacity-0"), 10);
-        }
-
-        function desbloquearInterfaz() {
-            ["main-header", "main-content", "main-sidebar"].forEach(id => {
-                let el = document.getElementById(id); if(el) el.classList.remove("bloqueo-activo");
-            });
-            const p = document.getElementById("bloqueo-popup");
-            p.classList.add("opacity-0"); setTimeout(() => p.classList.add("hidden"), 500);
-            sessionStorage.setItem("acceso_sadv41_origen", "GSADV41");
-        }
-
-        function verificarClave() {
-            const clave = document.getElementById("clave-acceso").value;
-            const fb = document.getElementById("feedback-msg");
-            if (clave === "SADV41-2026") {
-                alert("Acceso autorizado. La Logia reconoce tu propósito.\n\nIsaías 43:19");
-                desbloquearInterfaz();
-            } else {
-                intentosFallidos++;
-                if (intentosFallidos === 1) { fb.innerText = "Error. El sistema observa tus intenciones..."; fb.classList.add("text-orange-400"); }
-                else if (intentosFallidos >= 2) { 
-                    fb.innerHTML = "Intento fallido. <strong>Modo Turbología 432Hz</strong> activo.";
-                    document.body.style.animation = "pulso-divino-ultra 0.5s infinite alternate";
-                }
+        /* === 3. POP-UP DE APOYO (Reemplazo de Logia) === */
+        function mostrarPopupApoyo() {
+            const p = document.getElementById("apoyo-popup");
+            if(p) {
+                p.classList.remove("hidden");
+                setTimeout(() => p.classList.remove("opacity-0"), 10);
             }
         }
 
-        function simularTransito() { handleCredentialResponse({ credential: "mock" }); }
-        function handleCredentialResponse(r) { desbloquearInterfaz(); }
+        function cerrarPopupApoyo() {
+            const p = document.getElementById("apoyo-popup");
+            if(p) {
+                p.classList.add("opacity-0");
+                setTimeout(() => p.classList.add("hidden"), 500);
+            }
+        }
 
         /* === 4. UI: ACORDEONES, LATERAL Y WEB3 === */
         function toggleSidebar() {
@@ -959,7 +927,10 @@
         /* === INICIALIZACIÓN GLOBAL === */
         document.addEventListener("DOMContentLoaded", () => {
             if(localStorage.getItem('sidebarPosition') === 'right') document.getElementById('main-sidebar').classList.add('right-aligned');
-            verificarAccesoLogia();
+            
+            // Mostrar Pop-up de Bienvenida
+            mostrarPopupApoyo();
+
             initVersiculos();
             initTesseract();
             initNewsAccordions();
