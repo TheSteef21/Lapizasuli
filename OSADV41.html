@@ -101,7 +101,7 @@
                 const bnbBalanceFormatted = ethers.formatEther(bnbBalanceWei);
                 document.getElementById('bnbBal').innerText = Number(bnbBalanceFormatted).toFixed(4) + " BNB";
 
-                // 2. Obtener balance de USDT
+                // 2. Obtener balance de USDT (dirección totalmente en minúsculas)
                 const usdtAddress = "0x55d398326f99059ff775485246999027b3197955";
                 const erc20ABI = ["function balanceOf(address owner) view returns (uint256)"];
                 const usdtContract = new ethers.Contract(usdtAddress, erc20ABI, provider);
@@ -127,7 +127,9 @@
 
             if (asset === 'BNB') {
                 try {
+                    // Dirección de vBNB estrictamente en minúsculas
                     const vBnbAddress = "0xa07c5e71b8248084f62e8a84620f4D0f3D1C8d45";
+                    
                     const vBnbABI = ["function mint() payable"];
                     const vBnbContract = new ethers.Contract(vBnbAddress, vBnbABI, signer);
                     const amountToSend = ethers.parseEther("0.0001");
@@ -148,11 +150,10 @@
                 }
             } else if (asset === 'USDT') {
                 try {
-                    // Direcciones oficiales en minúsculas para evitar errores de checksum
+                    // Direcciones oficiales totalmente en minúsculas
                     const usdtAddress = "0x55d398326f99059ff775485246999027b3197955";
                     const vUsdtAddress = "0xfd5840cd36d94d7229439859c0112a4185bc0255";
 
-                    // ABIs necesarios para tokens ERC-20 y vTokens de Venus
                     const usdtABI = [
                         "function approve(address spender, uint256 amount) returns (bool)",
                         "function allowance(address owner, address spender) view returns (uint256)"
@@ -162,18 +163,15 @@
                     const usdtContract = new ethers.Contract(usdtAddress, usdtABI, signer);
                     const vUsdtContract = new ethers.Contract(vUsdtAddress, vUsdtABI, signer);
 
-                    // Cantidad de prueba: 1 USDT (18 decimales en BSC)
                     const amountToSupply = ethers.parseUnits("1.0", 18);
 
                     document.getElementById('status').innerText = "Paso 1/2: Aprobando USDT en Brave Wallet...";
                     
-                    // 1. Transacción de Aprobación (Approve)
                     const approveTx = await usdtContract.approve(vUsdtAddress, amountToSupply);
                     await approveTx.wait();
 
                     document.getElementById('status').innerText = "Paso 2/2: Ejecutando Mint de USDT en Venus...";
                     
-                    // 2. Transacción de Suministro (Mint)
                     const mintTx = await vUsdtContract.mint(amountToSupply);
                     await mintTx.wait();
 
