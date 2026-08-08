@@ -78,8 +78,28 @@
         });
 
         async function updateBalances() {
-            // Aquí iría la lógica para leer el balance del token (ERC20)
-            document.getElementById('bnbBal').innerText = "Cargando..."; 
+            try {
+                const address = await signer.getAddress();
+                
+                // 1. Obtener balance nativo de BNB
+                const bnbBalanceWei = await provider.getBalance(address);
+                const bnbBalanceFormatted = ethers.formatEther(bnbBalanceWei);
+                document.getElementById('bnbBal').innerText = Number(bnbBalanceFormatted).toFixed(4) + " BNB";
+
+                // 2. Obtener balance de USDT en BNB Chain (Dirección del contrato oficial de USDT en BSC)
+                const usdtAddress = "0x55d398326f99059ff775485246999027b3197955";
+                const erc20ABI = ["function balanceOf(address owner) view returns (uint256)"];
+                const usdtContract = new ethers.Contract(usdtAddress, erc20ABI, provider);
+                
+                const usdtBalanceWei = await usdtContract.balanceOf(address);
+                const usdtBalanceFormatted = ethers.formatUnits(usdtBalanceWei, 18);
+                document.getElementById('usdtBal').innerText = Number(usdtBalanceFormatted).toFixed(2) + " USDT";
+
+            } catch (error) {
+                console.error("Error al cargar los balances:", error);
+                document.getElementById('bnbBal').innerText = "Error de lectura";
+                document.getElementById('usdtBal').innerText = "Error de lectura";
+            }
         }
 
         async function interactVenus(asset) {
