@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SADV41 - Sovereign Hub (DeFi & Harvest)</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.0/ethers.umd.min.js"></script>
+    <style>
+        body { 
+            background-color: #050505; 
+            color: #d1d1d1; 
+            font-family: 'Segoe UI', sans-serif; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            padding: 30px; 
+        }
+        .hub-container { width: 100%; max-width: 650px; }
+        .card { 
+            background: #121212; 
+            border: 1px solid #333; 
+            padding: 20px; 
+            margin: 15px 0; 
+            border-radius: 12px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+        button { 
+            background: #0056b3; 
+            color: white; 
+            border: none; 
+            padding: 12px 20px; 
+            cursor: pointer; 
+            border-radius: 6px; 
+            font-weight: bold;
+            width: 100%;
+            margin-top: 8px;
+        }
+        button:hover { background: #007bff; }
+        .btn-swap { background: #d97706; }
+        .btn-swap:hover { background: #f59e0b; }
+        .btn-harvest { background: #16a34a; }
+        .btn-harvest:hover { background: #22c55e; }
+        .status-pill { font-size: 0.8em; color: #ffc107; margin-bottom: 20px; text-align: center; }
+    </style>
+</head>
+<body>
+
+    <div class="hub-container">
+        <h1>SADV41: Sovereign Hub DeFi</h1>
+        <div id="status" class="status-pill">Protocolo inactivo. Conecta tu billetera.</div>
+        <button id="connectBtn">Conectar Wallet</button>
+
+        <div id="market" style="display:none;">
+            <h3>Panel de Operaciones (BSC Mainnet)</h3>
+            
+            <div class="card">
+                <h4>PancakeSwap Router (Swap)</h4>
+                <p>Intercambiar 0.0002 BNB por USDT</p>
+                <button class="btn-swap" onclick="executeSwap()">Ejecutar Swap BNB → USDT</button>
+            </div>
+
+            <div class="card">
+                <h4>Venus Protocol - BNB (vBNB)</h4>
+                <p>Balance en wallet: <span id="bnbBal">0</span></p>
+                <button onclick="interactVenus('BNB')">Suministrar 0.0001 BNB</button>
+            </div>
+
+            <div class="card">
+                <h4>Venus Protocol - USDT (vUSDT)</h4>
+                <p>Balance en wallet: <span id="usdtBal">0</span></p>
+                <button onclick="interactVenus('USDT')">Suministrar 1 USDT</button>
+            </div>
+
+            <div class="card">
+                <h4>Harvest Rewards (Venus Protocol)</h4>
+                <p>Reclamar incentivos acumulados (XVS)</p>
+                <button class="btn-harvest" onclick="harvestRewards()">Cosechar / Harvest Recompensas</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let provider, signer;
+        
+        // Direcciones oficiales normalizadas en minúsculas para evitar errores de Checksum en Ethers.js v6
+        const PANCAKE_ROUTER = "0x10ed43c718714eb63d5a57bb39d94baad6847c6a";
+        const WBNB_ADDRESS = "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c";
+        const USDT_ADDRESS = "0x55d398326f99059ff775485246999027b3197955";
+        const V_BNB_ADDRESS = "0xa07c5e71b8248084f62e8a84620f4d0f3d1c8d45";
+        const V_USDT_ADDRESS = "0xfd5840cd36d94d7229439859c0112a4185bc0255";
+        
+        // Contrato Comptroller oficial de Venus en BSC Mainnet para el manejo de recompensas
+        const VENUS_COMPTROLLER = "0xfd36e2c2a67f9db21f736f8d18ae4ef5c4f28b794";
+
+        document.getElementById('connectBtn').addEventListener('click', async () => {
+            if (window.ethereum) {
+                try {
+                    provider = new ethers.BrowserProvider(window.ethereum);
+                    signer = await provider.getSigner();
+
+                    const network = await provider.getNetwork();
+                    if (network.chainId !== 56n) {
+                        alert("Red incorrecta. Cambia tu billetera a BNB Smart Chain (Mainnet).");
+                        document.getElementById('status').innerText = "Error: Se requiere BSC Mainnet (Chain ID 56)";
+                        return;
+                    }
+
+                    const accounts = await provider.send("eth_requestAccounts", []);
+                    document.getElementById('status').innerText = "Conectado: " + accounts[0].substring(0,6) + "... [BSC Mainnet]";
+                    document.getElementById('market').style.display = "block";
+                    document.getElementById('connectBtn').style.display = "none";
+                    updateBalances();
+                } catch (err) {
+                    console.error("Error en conexión:", err);
+                    document.getElementById('status').innerText = "Conexión rechazada.";
+                }
+            } else {
+                alert("Instala Brave Wallet o MetaMask.");
+            }
+        });
+
+        async function updateBalances() {
+            try {
+                const address = await signer.getAddress();
+                
+                const bnbWei = await provider.getBalance(address);
+                document.getElementById('bnbBal').innerText = Number(ethers.formatEther(bnbWei)).toFixed(4) + " BNB";
+
+                const erc20ABI = ["function balanceOf(address owner) view returns (uint256)"];
+                const usdtContract = new ethers.Contract(USDT_ADDRESS, erc20ABI, provider);
+                const usdtWei = await usdtContract.balanceOf(address);
+                document.getElementById('usdtBal').innerText = Number(ethers.formatUnits(usdtWei, 18)).toFixed(2) + " USDT";
+
+            } catch (error) {
+                console.error("Error al leer balances:", error);
+            }
+        }
+
+        // GANCHO DE PANCAKESWAP: SWAP PLANNER INTEGRATION
+        async function executeSwap() {
+            const network = await provider.getNetwork();
+            if (network.chainId !== 56n) return alert("Red incorrecta.");
+
+            try {
+                const routerABI = [
+                    "function swapExactETHForTokens(uint amountOutMin, address[] path, address to, uint deadline) payable returns (uint[] memory amounts)"
+                ];
+                const routerContract = new ethers.Contract(PANCAKE_ROUTER, routerABI, signer);
+
+                const amountIn = ethers.parseEther("0.0002");
+                const path = [WBNB_ADDRESS, USDT_ADDRESS];
+                const to = await signer.getAddress();
+                const deadline = Math.floor(Date.now() / 1000) + 60 * 10; // 10 min
+
+                document.getElementById('status').innerText = "Ejecutando Swap en PancakeSwap...";
+                
+                const tx = await routerContract.swapExactETHForTokens(0, path, to, deadline, { value: amountIn });
+                await tx.wait();
+
+                document.getElementById('status').innerText = "¡Swap completado con éxito!";
+                alert("¡Intercambio de BNB por USDT realizado mediante PancakeSwap Router!");
+                updateBalances();
+            } catch (error) {
+                console.error("Error en Swap:", error);
+                document.getElementById('status').innerText = "Error en Swap";
+                alert("Fallo en PancakeSwap: " + (error.reason || error.message));
+            }
+        }
+
+        // GANCHO DE VENUS PROTOCOL
+        async function interactVenus(asset) {
+            const network = await provider.getNetwork();
+            if (network.chainId !== 56n) return alert("Red incorrecta.");
+
+            if (asset === 'BNB') {
+                try {
+                    const vBnbABI = ["function mint() payable"];
+                    const vBnbContract = new ethers.Contract(V_BNB_ADDRESS, vBnbABI, signer);
+                    const amountToSend = ethers.parseEther("0.0001");
+
+                    document.getElementById('status').innerText = "Suministrando BNB a Venus...";
+                    const tx = await vBnbContract.mint({ value: amountToSend });
+                    await tx.wait();
+                    
+                    document.getElementById('status').innerText = "¡Suministro BNB exitoso!";
+                    alert("¡BNB depositado en Venus correctamente!");
+                    updateBalances();
+                } catch (error) {
+                    console.error("Error Venus BNB:", error);
+                    alert("Error: " + (error.reason || error.message));
+                }
+            } else if (asset === 'USDT') {
+                try {
+                    const usdtABI = ["function approve(address spender, uint256 amount) returns (bool)"];
+                    const vUsdtABI = ["function mint(uint256 mintAmount) returns (uint256)"];
+
+                    const usdtContract = new ethers.Contract(USDT_ADDRESS, usdtABI, signer);
+                    const vUsdtContract = new ethers.Contract(V_USDT_ADDRESS, vUsdtABI, signer);
+                    const amountToSupply = ethers.parseUnits("1.0", 18);
+
+                    document.getElementById('status').innerText = "Aprobando USDT para Venus...";
+                    const approveTx = await usdtContract.approve(V_USDT_ADDRESS, amountToSupply);
+                    await approveTx.wait();
+
+                    document.getElementById('status').innerText = "Suministrando USDT a Venus...";
+                    const mintTx = await vUsdtContract.mint(amountToSupply);
+                    await mintTx.wait();
+
+                    document.getElementById('status').innerText = "¡Suministro USDT exitoso!";
+                    alert("¡USDT aprobado y suministrado en Venus correctamente!");
+                    updateBalances();
+                } catch (error) {
+                    console.error("Error Venus USDT:", error);
+                    alert("Error: " + (error.reason || error.message));
+                }
+            }
+        }
+
+        // MÓDULO HARVEST REWARDS: RECOLECCIÓN DE RECOMPENSAS
+        async function harvestRewards() {
+            const network = await provider.getNetwork();
+            if (network.chainId !== 56n) return alert("Red incorrecta.");
+
+            try {
+                const userAddress = await signer.getAddress();
+                
+                // ABI oficial del Comptroller de Venus para reclamar recompensas (claimVenus)
+                const comptrollerABI = [
+                    "function claimVenus(address holder, address[] vTokens) public",
+                    "function claimVenus(address holder)"
+                ];
+                
+                const comptrollerContract = new ethers.Contract(VENUS_COMPTROLLER, comptrollerABI, signer);
+
+                document.getElementById('status').innerText = "Reclamando recompensas de Venus (Harvest)...";
+
+                const vTokensList = [V_BNB_ADDRESS, V_USDT_ADDRESS];
+                const tx = await comptrollerContract.claimVenus(userAddress, vTokensList);
+                
+                await tx.wait();
+
+                document.getElementById('status').innerText = "¡Recompensas cosechadas con éxito!";
+                alert("¡Has reclamado tus recompensas de Venus Protocol correctamente!");
+                updateBalances();
+
+            } catch (error) {
+                console.error("Error en Harvest:", error);
+                document.getElementById('status').innerText = "Error en Harvest";
+                alert("No se pudieron cosechar las recompensas: " + (error.reason || error.message));
+            }
+        }
+    </script>
+</body>
+</html>
