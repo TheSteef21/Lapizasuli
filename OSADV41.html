@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SADV41 - Venus Lab</title>
-    <!-- Incluimos Ethers.js v6 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.0/ethers.umd.min.js"></script>
     <style>
         body { 
@@ -66,13 +65,27 @@
         
         document.getElementById('connectBtn').addEventListener('click', async () => {
             if (window.ethereum) {
-                provider = new ethers.BrowserProvider(window.ethereum);
-                signer = await provider.getSigner();
-                const accounts = await provider.send("eth_requestAccounts", []);
-                document.getElementById('status').innerText = "Conectado: " + accounts[0].substring(0,6) + "...";
-                document.getElementById('market').style.display = "block";
-                document.getElementById('connectBtn').style.display = "none";
-                updateBalances();
+                try {
+                    provider = new ethers.BrowserProvider(window.ethereum);
+                    signer = await provider.getSigner();
+
+                    // VALIDACIÓN DE RED: Comprobar si estamos en BNB Chain (Chain ID: 56)
+                    const network = await provider.getNetwork();
+                    if (network.chainId !== 56n) {
+                        alert("Red incorrecta. Por favor, cambia tu billetera a la red BNB Smart Chain (Mainnet).");
+                        document.getElementById('status').innerText = "Error: Red incorrecta (Se requiere BSC Mainnet)";
+                        return;
+                    }
+
+                    const accounts = await provider.send("eth_requestAccounts", []);
+                    document.getElementById('status').innerText = "Conectado: " + accounts[0].substring(0,6) + "... [BSC Mainnet]";
+                    document.getElementById('market').style.display = "block";
+                    document.getElementById('connectBtn').style.display = "none";
+                    updateBalances();
+                } catch (err) {
+                    console.error("Error en la conexión:", err);
+                    document.getElementById('status').innerText = "Conexión cancelada o fallida.";
+                }
             } else {
                 alert("Por favor, instala Brave Wallet o MetaMask.");
             }
@@ -104,21 +117,25 @@
         }
 
         async function interactVenus(asset) {
+            // Doble validación de red antes de ejecutar cualquier transacción
+            const network = await provider.getNetwork();
+            if (network.chainId !== 56n) {
+                alert("Operación bloqueada: Debes estar en la BNB Smart Chain (Mainnet).");
+                return;
+            }
+
             if (asset === 'BNB') {
                 try {
-                    // Dirección oficial del contrato vBNB en minúsculas para evitar errores de checksum
+                    // Dirección oficial del contrato vBNB en minúsculas
                     const vBnbAddress = "0xa07c5e71b8248084f62e8a84620f4D0f3D1C8d45";
                     
-                    // ABI simplificado para la función mint de vBNB
                     const vBnbABI = ["function mint() payable"];
                     const vBnbContract = new ethers.Contract(vBnbAddress, vBnbABI, signer);
 
-                    // Definimos una cantidad de prueba (0.0001 BNB)
                     const amountToSend = ethers.parseEther("0.0001");
 
                     document.getElementById('status').innerText = "Firmando transacción en wallet...";
 
-                    // Ejecución del contrato enviando BNB
                     const tx = await vBnbContract.mint({ value: amountToSend });
                     
                     document.getElementById('status').innerText = "Transacción enviada...";
@@ -129,7 +146,6 @@
                     document.getElementById('status').innerText = "¡Suministro exitoso!";
                     alert("¡Transacción completada con éxito! Revisa tu posición en Venus.");
                     
-                    // Actualizar balances tras la operación
                     updateBalances();
 
                 } catch (error) {
