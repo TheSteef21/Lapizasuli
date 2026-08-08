@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SADV41 - Sovereign Hub (Multi-Chain)</title>
+    <title>SADV41 - Sovereign Hub (Multi-Chain: BSC & OP)</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.0/ethers.umd.min.js"></script>
     <style>
         body { 
@@ -40,6 +40,8 @@
         .btn-swap:hover { background: #f59e0b; }
         .btn-harvest { background: #16a34a; }
         .btn-harvest:hover { background: #22c55e; }
+        .btn-stake { background: #6366f1; } /* Color para Staking */
+        .btn-stake:hover { background: #4f46e5; }
         
         /* Controles Multi-Red */
         .network-controls { display: flex; gap: 10px; margin-bottom: 20px; width: 100%; justify-content: center;}
@@ -60,29 +62,30 @@
         <button id="connectBtn">Conectar Wallet</button>
 
         <div id="network-controls" class="network-controls" style="display:none;">
-            <button class="btn-bsc" onclick="switchNetwork('0x38')">Cambiar a BSC</button>
-            <button class="btn-op" onclick="switchNetwork('0xa')">Cambiar a Optimism</button>
+            <button class="btn-bsc" onclick="switchNetwork('0x38')">Cambiar a BSC (Binance)</button>
+            <button class="btn-op" onclick="switchNetwork('0xa')">Cambiar a Optimism (L2)</button>
         </div>
 
         <div id="market-bsc" style="display:none;">
             <h3 style="color: #eab308;">Panel BSC Mainnet (Venus & Pancake)</h3>
             <div class="card">
                 <h4>PancakeSwap Router (Swap)</h4>
+                <p>Intercambiar 0.0002 BNB por USDT</p>
                 <button class="btn-swap" onclick="executeSwap()">Ejecutar Swap BNB → USDT</button>
             </div>
             <div class="card">
                 <h4>Venus Protocol - BNB (vBNB)</h4>
                 <p>Balance en wallet: <span id="bnbBal">0</span></p>
-                <button onclick="interactVenus('BNB')">Suministrar BNB</button>
+                <button onclick="interactVenus('BNB')">Suministrar 0.0001 BNB</button>
             </div>
             <div class="card">
                 <h4>Venus Protocol - USDT (vUSDT)</h4>
                 <p>Balance en wallet: <span id="usdtBal">0</span></p>
-                <button onclick="interactVenus('USDT')">Suministrar USDT</button>
+                <button onclick="interactVenus('USDT')">Suministrar 1 USDT</button>
             </div>
             <div class="card">
                 <h4>Harvest Rewards (Venus)</h4>
-                <button class="btn-harvest" onclick="harvestRewards()">Cosechar XVS</button>
+                <button class="btn-harvest" onclick="harvestRewards()">Cosechar Recompensas (XVS)</button>
             </div>
         </div>
 
@@ -92,7 +95,7 @@
                 <h4>WalletConnect Token (WCT)</h4>
                 <p>Dirección del activo: <span style="font-size: 0.7em;">0xef44...7945</span></p>
                 <p>Balance en wallet: <span id="wctBal" style="font-weight: bold; color: #ef4444;">0</span></p>
-                <button class="btn-op" onclick="interactWCT()">Explorar Opciones WCT</button>
+                <button class="btn-stake" onclick="stakeWCT()">Hacer Stake de 1 WCT</button>
             </div>
         </div>
 
@@ -109,8 +112,10 @@
         const V_USDT_ADDRESS = "0xfd5840cd36d94d7229439859c0112a4185bc0255";
         const VENUS_COMPTROLLER = "0xfd36e2c2a67f9db21f736f8d18ae4ef5c4f28b794";
 
-        // Dirección Optimism L2 (Minúsculas)
+        // Direcciones Optimism L2 (Minúsculas)
         const WCT_ADDRESS_OP = "0xef4461891dfb3ac8572ccf7c794664a8dd927945";
+        // TODO: Reemplazar con la dirección oficial de Staking de WCT si es diferente
+        const WCT_STAKING_CONTRACT = "0x0000000000000000000000000000000000000000"; 
 
         // Escuchar cambios de red o cuenta nativamente
         if (window.ethereum) {
@@ -164,10 +169,11 @@
                 });
             } catch (error) {
                 console.error("Error cambiando de red", error);
-                alert("Abre tu billetera y aprueba el cambio de red.");
+                alert("Abre tu billetera y aprueba el cambio de red. Si no tienes Optimism, añádela en Chainlist.org");
             }
         }
 
+        // ---------- LÓGICAS DE LECTURA DE BALANCES ---------- //
         async function updateBalancesBSC() {
             try {
                 const address = await signer.getAddress();
@@ -185,39 +191,120 @@
         async function updateBalancesOP() {
             try {
                 const address = await signer.getAddress();
-                // Consultamos el balance de WalletConnect Token (WCT) en Optimism
                 const erc20ABI = ["function balanceOf(address owner) view returns (uint256)"];
                 const wctContract = new ethers.Contract(WCT_ADDRESS_OP, erc20ABI, provider);
                 
                 const wctWei = await wctContract.balanceOf(address);
-                // Asumiendo el estándar de 18 decimales para el ERC20
                 document.getElementById('wctBal').innerText = Number(ethers.formatUnits(wctWei, 18)).toFixed(2) + " WCT";
             } catch (error) { 
                 console.error("Error leyendo WCT en Optimism:", error); 
-                document.getElementById('wctBal').innerText = "Error";
+                document.getElementById('wctBal').innerText = "Error de lectura";
             }
         }
 
-        // Simulación de interacción WCT
-        async function interactWCT() {
-            if (currentChainId !== 10n) return alert("Debes estar en Optimism.");
-            alert("Módulo Optimism L2 Activo. Preparando integración de contratos futuros para staking o transferencia de WCT.");
+        // ---------- NUEVO: LÓGICA DE STAKING WCT (OPTIMISM) ---------- //
+        async function stakeWCT() {
+            if (currentChainId !== 10n) return alert("Debes estar en Optimism para operar con WCT.");
+
+            // Si el contrato de staking no se ha definido, avisamos al usuario
+            if (WCT_STAKING_CONTRACT === "0x0000000000000000000000000000000000000000") {
+                return alert("Para ejecutar el Staking real, reemplaza la variable 'WCT_STAKING_CONTRACT' en el código con la dirección oficial del contrato de Staking de WalletConnect.");
+            }
+
+            try {
+                const wctABI = ["function approve(address spender, uint256 amount) returns (bool)"];
+                // Asumimos interfaz de staking estándar (stake o deposit)
+                const stakingABI = ["function stake(uint256 amount) public"]; 
+                
+                const wctContract = new ethers.Contract(WCT_ADDRESS_OP, wctABI, signer);
+                const stakingContract = new ethers.Contract(WCT_STAKING_CONTRACT, stakingABI, signer);
+
+                // Cantidad de prueba: 1 WCT
+                const amountToStake = ethers.parseUnits("1.0", 18);
+
+                // Paso 1: Approve
+                document.getElementById('status').innerText = "Paso 1/2: Aprobando WCT para Staking...";
+                const txApprove = await wctContract.approve(WCT_STAKING_CONTRACT, amountToStake);
+                await txApprove.wait();
+
+                // Paso 2: Stake
+                document.getElementById('status').innerText = "Paso 2/2: Confirmando Staking en Optimism...";
+                const txStake = await stakingContract.stake(amountToStake);
+                await txStake.wait();
+
+                document.getElementById('status').innerText = "¡Staking de WCT exitoso!";
+                alert("¡Has puesto en Stake tus WCT en Optimism correctamente!");
+                updateBalancesOP();
+
+            } catch (error) {
+                console.error("Error en Staking de WCT:", error);
+                document.getElementById('status').innerText = "Error en operación";
+                alert("Fallo el Staking: " + (error.reason || error.message));
+            }
         }
 
-        // -------- LÓGICAS DE BSC QUE YA TENÍAS PREVIAMENTE -------- //
+        // ---------- LÓGICAS DE BSC RESTAURADAS (VENUS & PANCAKE) ---------- //
         async function executeSwap() {
-            if (currentChainId !== 56n) return alert("Cambia a BSC");
-            alert("Ejecutando lógica PancakeSwap...");
+            if (currentChainId !== 56n) return alert("Cambia a la red BSC.");
+            try {
+                const routerABI = ["function swapExactETHForTokens(uint amountOutMin, address[] path, address to, uint deadline) payable returns (uint[] memory amounts)"];
+                const routerContract = new ethers.Contract(PANCAKE_ROUTER, routerABI, signer);
+                const amountIn = ethers.parseEther("0.0002");
+                const path = [WBNB_ADDRESS, USDT_ADDRESS];
+                const to = await signer.getAddress();
+                const deadline = Math.floor(Date.now() / 1000) + 60 * 10;
+                
+                document.getElementById('status').innerText = "Ejecutando Swap en PancakeSwap...";
+                const tx = await routerContract.swapExactETHForTokens(0, path, to, deadline, { value: amountIn });
+                await tx.wait();
+                document.getElementById('status').innerText = "¡Swap completado!";
+                updateBalancesBSC();
+            } catch (error) { console.error(error); alert("Fallo: " + error.message); }
         }
 
         async function interactVenus(asset) {
-            if (currentChainId !== 56n) return alert("Cambia a BSC");
-            alert("Ejecutando lógica Venus Protocol para " + asset);
+            if (currentChainId !== 56n) return alert("Cambia a BSC.");
+            if (asset === 'BNB') {
+                try {
+                    const vBnbContract = new ethers.Contract(V_BNB_ADDRESS, ["function mint() payable"], signer);
+                    document.getElementById('status').innerText = "Suministrando BNB a Venus...";
+                    const tx = await vBnbContract.mint({ value: ethers.parseEther("0.0001") });
+                    await tx.wait();
+                    document.getElementById('status').innerText = "¡Suministro BNB exitoso!";
+                    updateBalancesBSC();
+                } catch (error) { console.error(error); alert("Fallo: " + error.message); }
+            } else if (asset === 'USDT') {
+                try {
+                    const usdtContract = new ethers.Contract(USDT_ADDRESS, ["function approve(address spender, uint256 amount) returns (bool)"], signer);
+                    const vUsdtContract = new ethers.Contract(V_USDT_ADDRESS, ["function mint(uint256 mintAmount) returns (uint256)"], signer);
+                    const amount = ethers.parseUnits("1.0", 18);
+                    
+                    document.getElementById('status').innerText = "Aprobando USDT...";
+                    await (await usdtContract.approve(V_USDT_ADDRESS, amount)).wait();
+                    
+                    document.getElementById('status').innerText = "Suministrando USDT a Venus...";
+                    await (await vUsdtContract.mint(amount)).wait();
+                    
+                    document.getElementById('status').innerText = "¡Suministro USDT exitoso!";
+                    updateBalancesBSC();
+                } catch (error) { console.error(error); alert("Fallo: " + error.message); }
+            }
         }
 
         async function harvestRewards() {
-            if (currentChainId !== 56n) return alert("Cambia a BSC");
-            alert("Ejecutando recolección de recompensas Venus...");
+            if (currentChainId !== 56n) return alert("Cambia a BSC.");
+            try {
+                const userAddress = await signer.getAddress();
+                const comptrollerABI = ["function claimVenus(address holder, address[] vTokens) public"];
+                const comptrollerContract = new ethers.Contract(VENUS_COMPTROLLER, comptrollerABI, signer);
+                
+                document.getElementById('status').innerText = "Cosechando recompensas...";
+                const tx = await comptrollerContract.claimVenus(userAddress, [V_BNB_ADDRESS, V_USDT_ADDRESS]);
+                await tx.wait();
+                
+                document.getElementById('status').innerText = "¡Recompensas reclamadas!";
+                updateBalancesBSC();
+            } catch (error) { console.error(error); alert("Fallo: " + error.message); }
         }
     </script>
 </body>
