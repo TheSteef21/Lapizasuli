@@ -153,10 +153,10 @@
 
             <div class="bg-oro/5 border-l-2 border-oro p-4 text-xs text-left mb-6 text-slate-300">
                 <strong class="text-oro block mb-1 uppercase font-mono tracking-widest">Parámetro de Entrada (Filtro de Gravedad):</strong> 
-                Para asegurar la seriedad y el respeto por el sistema, la afiliación requiere un pago de <strong>$150</strong>. Puedes gestionar tu pago a través de WhatsApp o consultar métodos alternativos en el registro oficial.
+                Para asegurar la seriedad y el respeto por el sistema, la afiliación requiere un pago de <strong>$150</strong>. Gestiona tu pago vía WhatsApp o consulta métodos alternativos en el registro oficial.
             </div>
 
-            <!-- Botones de Acción y Pago Actualizados -->
+            <!-- Botones de Acción y Pago -->
             <div class="space-y-3 mb-8">
                 <a href="https://wa.me/50769362166?text=Deseo%20solicitar%20mi%20afiliacion%20a%20la%20Logia%20SADV41.%20Comprendo%20el%20filtro%20de%20150%20al%20+50769362166" 
                    class="block w-full bg-oro hover:bg-amber-500 text-black font-bold py-3 rounded transition-colors uppercase tracking-widest text-sm shadow-[0_0_15px_rgba(234,179,8,0.3)] text-center" target="_blank">
@@ -168,14 +168,14 @@
                 </a>
             </div>
 
-            <!-- Verificación de Token -->
+            <!-- Verificación con la Clave Única -->
             <div class="border-t border-slate-800 pt-6">
-                <label class="block text-xs text-slate-500 font-mono mb-2">Si ya realizaste el pago y recibiste tu llave, ingrésala aquí:</label>
+                <label class="block text-xs text-slate-500 font-mono mb-2">Ingresa tu clave de acceso autorizada:</label>
                 <div class="flex gap-2">
-                    <input type="password" id="access-token" placeholder="Token Cifrado GSADV41" class="w-full bg-black/50 border border-slate-700 rounded px-4 py-2 text-white font-mono text-sm focus:border-oro focus:outline-none text-center tracking-widest">
+                    <input type="password" id="access-token" placeholder="GSADV41-2026-CHRIST0" class="w-full bg-black/50 border border-slate-700 rounded px-4 py-2 text-white font-mono text-xs focus:border-oro focus:outline-none text-center tracking-wider">
                     <button onclick="verificarLlave()" class="bg-slate-800 hover:bg-slate-700 text-white border border-slate-600 px-4 py-2 rounded font-bold transition-all cursor-pointer">➔</button>
                 </div>
-                <p id="token-error" class="text-red-500 text-xs mt-2 hidden font-mono">Llave incorrecta o no autorizada.</p>
+                <p id="token-error" class="text-red-500 text-xs mt-2 hidden font-mono">Clave incorrecta o no autorizada.</p>
             </div>
             
             <div class="text-[10px] text-slate-600 mt-8 font-mono">El origen es 0. Transmisión protegida.</div>
@@ -378,9 +378,10 @@
             const gatekeeper = document.getElementById('gatekeeper-screen');
             const sistemaPrincipal = document.getElementById('sistema-principal');
 
-            const tokensValidos = ["SADV41-ORIGEN-0", "GSADV41", "YAPPY150"];
+            // Clave única autorizada
+            const claveMaestra = "GSADV41-2026-CHRIST0";
 
-            if (tokensValidos.includes(tokenInput)) {
+            if (tokenInput === claveMaestra) {
                 gatekeeper.classList.add('hidden');
                 sistemaPrincipal.classList.remove('hidden');
             } else {
