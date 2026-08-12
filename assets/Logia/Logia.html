@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GSADV41 | Logia Pluscuamperfecta & Sistema de Acceso</title>
+    
+    <!-- Tipografías Sagradas -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    
+    <!-- Scripts Externos -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@web3auth/modal@8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.0/ethers.umd.min.js"></script>
+
+    <!-- Configuración Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#020617',
+                        oro: '#eab308',
+                        blanco: '#f8fafc',
+                        borgona: '#4a0010',
+                        neonGreen: '#10b981',
+                        neonBlue: '#00f3ff',
+                        renderRed: '#da3637',
+                        violeta: '#6d28d9',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                        mason: ['Cinzel', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root { 
+            --oro-alquimico: #d4af37; 
+            --obsidiana: #050505; 
+            --luz-divina: #7f5af0;
+            --luz-santo: #00f3ff;
+            --borgona-sacro: #4a0010;
+        }
+
+        body {
+            background-color: var(--obsidiana);
+            color: #f8fafc;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* --- FONDOS Y EFECTOS --- */
+        .bg-logia {
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+                linear-gradient(rgba(2, 6, 23, 0.85), rgba(2, 6, 23, 0.95)), 
+                url('https://y2s.onrender.com/api/graphics/mundial_bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        
+        .glass { background: rgba(2, 6, 23, 0.85); backdrop-filter: blur(12px); border: 1px solid rgba(234, 179, 8, 0.2); }
+        .text-shadow-oro { text-shadow: 0 0 10px rgba(234, 179, 8, 0.5); }
+        .text-shadow-blue { text-shadow: 0 0 10px rgba(0, 243, 255, 0.6); }
+        .esoterico-glow { text-shadow: 0 0 25px rgba(212, 175, 55, 0.7); }
+
+        .scanline {
+            width: 100%; height: 2px;
+            background: rgba(0, 209, 255, 0.15);
+            position: fixed; z-index: 9999; top: 0;
+            pointer-events: none;
+            animation: scanline 8s linear infinite;
+        }
+        @keyframes scanline { 0% { top: 0; } 100% { top: 100%; } }
+
+        /* --- MENÚ LATERAL --- */
+        .sidebar-tabs { position: fixed; left: 0; top: 50%; transform: translateY(-50%); z-index: 60; display: flex; flex-direction: column; gap: 12px; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+        .vertical-tab { display: flex; align-items: center; background: rgba(2, 6, 23, 0.95); padding: 12px 15px; border-radius: 0 15px 15px 0; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); width: 60px; overflow: hidden; white-space: nowrap; box-shadow: 4px 4px 15px rgba(0,0,0,0.5); cursor: pointer; }
+        .vertical-tab:hover { width: 340px; padding-left: 20px; }
+        .vertical-tab span.icon { font-size: 1.5rem; min-width: 30px; display: flex; justify-content: center; }
+        .vertical-tab span.text { margin-left: 15px; font-weight: bold; opacity: 0; transition: opacity 0.3s; font-size: 0.85rem; letter-spacing: 0.05em; }
+        .vertical-tab:hover span.text { opacity: 1; transition-delay: 0.1s; }
+        
+        .sidebar-tabs.right-aligned { left: auto; right: 0; }
+        .sidebar-tabs.right-aligned .vertical-tab { border-radius: 15px 0 0 15px; flex-direction: row-reverse; }
+        .sidebar-tabs.right-aligned .vertical-tab:hover { padding-right: 20px; padding-left: 15px; }
+        .sidebar-tabs.right-aligned .vertical-tab span.text { margin-left: 0; margin-right: 15px; text-align: right; }
+
+        /* --- COMPONENTES LOGIA --- */
+        .logia-card { 
+            background: linear-gradient(145deg, rgba(10,10,10,0.85), rgba(20,20,20,0.85));
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.9), inset 0 0 20px rgba(212, 175, 55, 0.03);
+            backdrop-filter: blur(12px);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s ease;
+        }
+        .logia-card:hover { border-color: rgba(212, 175, 55, 0.4); box-shadow: 0 20px 40px rgba(0,0,0,0.9), inset 0 0 30px rgba(212, 175, 55, 0.05); }
+
+        .geometria-bg {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 100%; height: 100%; pointer-events: none; z-index: 0;
+            background: 
+                linear-gradient(30deg, transparent 49.5%, rgba(212, 175, 55, 0.03) 50%, transparent 50.5%),
+                linear-gradient(-30deg, transparent 49.5%, rgba(212, 175, 55, 0.03) 50%, transparent 50.5%);
+        }
+
+        .triangulo-trinidad {
+            width: 0; height: 0;
+            border-left: 40px solid transparent; border-right: 40px solid transparent;
+            border-bottom: 69.3px solid rgba(212, 175, 55, 0.15); 
+            position: relative; margin: 0 auto;
+            animation: pulso-divino-trinidad 4s infinite alternate ease-in-out;
+        }
+        .triangulo-trinidad::after {
+            content: '1'; position: absolute; top: 35px; left: -5px;
+            color: var(--oro-alquimico); font-family: 'Cinzel', serif; font-size: 1.2rem;
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.8);
+        }
+        @keyframes pulso-divino-trinidad {
+            0% { filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.2)); transform: scale(1); }
+            100% { filter: drop-shadow(0 0 30px rgba(212, 175, 55, 0.9)); transform: scale(1.08); }
+        }
+
+        .marca-background {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1;
+            display: flex; justify-content: center; align-items: center; opacity: 0.15; pointer-events: none;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-oro selection:text-navy">
+    <div class="scanline"></div>
+
+    <!-- ==========================================
+         FASE 1: EL EMBUDO / EL VERDUGO SILENCIOSO 
+         ========================================== -->
+    <div id="gatekeeper-screen" class="fixed inset-0 z-[100] flex justify-center items-center p-4 bg-[#0d0f12]">
+        <div class="logia-card max-w-lg w-full p-8 md:p-10 text-center border-t-4 border-t-oro rounded-lg z-10 relative">
+            <div class="font-mono text-sm text-oro tracking-[0.15em] mb-3 uppercase">SADV41 // PROTOCOLO DE AFILIACIÓN</div>
+            <h1 class="text-2xl font-mason font-bold mb-4">¿Deseas afiliarte a la Logia?</h1>
+            
+            <p class="text-sm leading-relaxed text-slate-400 mb-6 text-justify font-sans">
+                Acceso exclusivo al sistema de información, cobertura y parámetros de seguridad. Este canal no es negociable ni está sujeto a filosofías externas. La solicitud otorga derecho a evaluación de perfil, asignación de insignias oficiales y cobertura dentro de la red.
+            </p>
+
+            <div class="bg-oro/5 border-l-2 border-oro p-4 text-xs text-left mb-6 text-slate-300">
+                <strong class="text-oro block mb-1 uppercase font-mono tracking-widest">Parámetro de Entrada (Filtro de Gravedad):</strong> 
+                Para asegurar la seriedad y el respeto por el sistema, la afiliación requiere un pago inicial de <strong>$150 vía Yappy al número 0412-936-2166</strong>. Esto actúa como un fondo de protección. Si la información se filtra, tu acceso será revocado permanentemente.
+            </div>
+
+            <!-- Botón WhatsApp -->
+            <a href="https://wa.me/50763263403?text=Deseo%20solicitar%20mi%20afiliacion%20a%20la%20Logia%20SADV41.%20Comprendo%20el%20filtro%20de%20150%20via%20Yappy%20al%200412-936-2166" 
+               class="block w-full bg-oro hover:bg-amber-500 text-black font-bold py-3 rounded transition-colors uppercase tracking-widest text-sm mb-8 shadow-[0_0_15px_rgba(234,179,8,0.3)]" target="_blank">
+                1. Solicitar Vía WhatsApp
+            </a>
+
+            <!-- Verificación de Token -->
+            <div class="border-t border-slate-800 pt-6">
+                <label class="block text-xs text-slate-500 font-mono mb-2">Si ya realizaste el pago y recibiste tu llave, ingrésala aquí:</label>
+                <div class="flex gap-2">
+                    <input type="password" id="access-token" placeholder="Token Cifrado GSADV41" class="w-full bg-black/50 border border-slate-700 rounded px-4 py-2 text-white font-mono text-sm focus:border-oro focus:outline-none text-center tracking-widest">
+                    <button onclick="verificarLlave()" class="bg-slate-800 hover:bg-slate-700 text-white border border-slate-600 px-4 py-2 rounded font-bold transition-all">➔</button>
+                </div>
+                <p id="token-error" class="text-red-500 text-xs mt-2 hidden font-mono">Llave incorrecta o no autorizada.</p>
+            </div>
+            
+            <div class="text-[10px] text-slate-600 mt-8 font-mono">El origen es 0. Transmisión protegida.</div>
+        </div>
+        
+        <!-- Fondo del Gatekeeper -->
+        <div class="absolute inset-0 bg-[url('https://y2s.onrender.com/api/graphics/mundial_bg.jpg')] bg-cover bg-center opacity-10 blur-sm"></div>
+    </div>
+
+
+    <!-- ==========================================
+         FASE 2: EL ECOSISTEMA GSADV41 (Oculto)
+         ========================================== -->
+    <div id="sistema-principal" class="hidden bg-logia w-full min-h-screen">
+        
+        <!-- FONDO VECTORIAL GLOBAL -->
+        <div class="marca-background">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="100%" height="100%">
+            <defs>
+                <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#d4af37" stop-opacity="0.8"/>
+                <stop offset="100%" stop-color="#050505" stop-opacity="0"/>
+                </radialGradient>
+                <linearGradient id="beam" x1="50%" y1="0%" x2="50%" y2="100%">
+                <stop offset="0%" stop-color="#00f3ff" stop-opacity="0"/>
+                <stop offset="50%" stop-color="#00f3ff" stop-opacity="0.9"/>
+                <stop offset="100%" stop-color="#00f3ff" stop-opacity="0"/>
+                </linearGradient>
+                <filter id="neon">
+                <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+                <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+            </defs>
+            <circle cx="400" cy="400" r="350" fill="url(#glow)"/>
+            <rect x="395" y="100" width="10" height="600" fill="url(#beam)" filter="url(#neon)"/>
+            <rect x="250" y="398" width="300" height="4" fill="#d4af37" filter="url(#neon)"/>
+            <polygon points="400,200 550,480 250,480" fill="none" stroke="#d4af37" stroke-width="2" stroke-opacity="0.5"/>
+            <text x="400" y="160" font-family="Cinzel, serif" font-size="24" fill="#d4af37" text-anchor="middle" letter-spacing="4">SADV41</text>
+            <text x="400" y="650" font-family="Cinzel, serif" font-size="32" fill="#00f3ff" text-anchor="middle" letter-spacing="8" filter="url(#neon)">ISAÍAS 43:19</text>
+            <text x="400" y="690" font-family="Courier New, monospace" font-size="14" fill="#f8fafc" text-anchor="middle" letter-spacing="2">ORIGEN [1027 = 10 = 1]</text>
+            </svg>
+        </div>
+
+        <!-- MENÚ LATERAL BILATERAL -->
+        <div id="main-sidebar" class="sidebar-tabs">
+            <a href="#" class="vertical-tab border-l-4 border-cyan-400 hover:bg-cyan-900/40">
+                <span class="icon">🎚️</span><span class="text text-cyan-300">SLogia | Conexión SADV41</span>
+            </a>
+            <a href="#" class="vertical-tab border-l-4 border-emerald-400 hover:bg-emerald-900/40">
+                <span class="icon">💵</span><span class="text text-emerald-400">Invertir (FUNDING)</span>
+            </a>
+            <div onclick="toggleSidebar()" class="vertical-tab border-l-4 border-slate-400 hover:bg-slate-800/40" title="Cambiar lado del menú">
+                <span class="icon">⇋</span><span class="text text-slate-300">Alternar Menú</span>
+            </div>
+        </div>
+
+        <!-- NAVEGACIÓN SUPERIOR UNIFICADA -->
+        <header class="fixed w-full z-50 glass border-b border-oro/30 px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <span class="text-2xl">🛡️</span>
+                <div>
+                    <h1 class="font-serif text-xl tracking-wider text-oro font-bold leading-none">SOVEREIGN HUB</h1>
+                    <p class="text-[9px] text-slate-400 font-mono tracking-widest leading-none mt-1">LOGIA SADV41 | GSADV41</p>
+                </div>
+            </div>
+            
+            <div class="flex flex-col items-center gap-2 hidden xl:flex">
+                <nav class="flex gap-5 text-sm uppercase tracking-wider font-medium flex-wrap justify-center">
+                    <a href="#el-atrio" class="hover:text-oro transition-colors text-amber-200">I. El Atrio</a>
+                    <a href="#el-santo" class="hover:text-neonBlue transition-colors text-cyan-300">II. El Santo</a>
+                    <a href="#el-santisimo" class="hover:text-purple-400 transition-colors text-purple-300">III. El Santísimo</a>
+                </nav>
+            </div>
+
+            <div class="flex flex-col items-center justify-center gap-2">
+                <div id="status" class="text-[10px] text-oro font-mono text-center tracking-widest uppercase">Protocolo V.S. Activo...</div>
+                <div class="flex flex-wrap gap-2 justify-center">
+                    <button id="btnConnect" onclick="connectBinance()" class="bg-oro hover:bg-amber-600 text-navy font-bold text-xs px-3 py-2 rounded transition-all flex items-center gap-1.5 shadow-lg shadow-oro/20 cursor-pointer">
+                        ⚡ Web3 Wallet
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- HERO HEADER: TRANSICIÓN A PANTALLA COMPLETA -->
+        <div id="hero-header" class="relative w-full h-[70vh] pt-24 overflow-hidden flex items-center justify-center bg-black border-b border-oro/30">
+            <!-- Asset Animado SVG -->
+            <div id="hero-svg" class="absolute inset-0 w-full h-full bg-navy flex items-center justify-center transition-opacity duration-[2000ms] ease-in-out opacity-100 z-10">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" class="w-full h-full object-cover">
+                    <defs>
+                        <radialGradient id="svg-glow" cx="50%" cy="50%" r="50%">
+                            <stop offset="0%" stop-color="#00f3ff" stop-opacity="0.3"/>
+                            <stop offset="100%" stop-color="#020617" stop-opacity="1"/>
+                        </radialGradient>
+                        <linearGradient id="svg-gold-line" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#eab308"/>
+                            <stop offset="50%" stop-color="#d4af37"/>
+                            <stop offset="100%" stop-color="#a16207"/>
+                        </linearGradient>
+                    </defs>
+                    <rect width="100%" height="100%" fill="url(#svg-glow)"/>
+                    
+                    <g stroke="#00f3ff" stroke-width="1" opacity="0.4">
+                        <line x1="960" y1="540" x2="400" y2="300"/>
+                        <line x1="960" y1="540" x2="1500" y2="200"/>
+                        <line x1="960" y1="540" x2="1600" y2="800"/>
+                        <line x1="960" y1="540" x2="300" y2="850"/>
+                    </g>
+
+                    <circle cx="960" cy="540" r="250" fill="none" stroke="url(#svg-gold-line)" stroke-width="2" stroke-dasharray="10 5" opacity="0.6">
+                        <animateTransform attributeName="transform" type="rotate" from="0 960 540" to="360 960 540" dur="60s" repeatCount="indefinite"/>
+                    </circle>
+                    <circle cx="960" cy="540" r="150" fill="none" stroke="#00f3ff" stroke-width="1" opacity="0.8">
+                        <animateTransform attributeName="transform" type="rotate" from="360 960 540" to="0 960 540" dur="40s" repeatCount="indefinite"/>
+                    </circle>
+
+                    <text x="960" y="520" fill="#eab308" font-family="Cinzel, serif" font-size="72" font-weight="bold" text-anchor="middle" letter-spacing="10">SADV41</text>
+                    <text x="960" y="580" fill="#00f3ff" font-family="Inter, sans-serif" font-size="24" font-weight="300" text-anchor="middle" letter-spacing="5">THE DIVINE WHISPER</text>
+                </svg>
+            </div>
+
+            <div class="absolute bottom-10 z-20 flex flex-col items-center justify-center w-full px-4">
+                <button onclick="toggleFullScreen('hero-header')" class="group relative px-8 py-3 bg-black/60 hover:bg-black/90 border border-oro/50 text-oro font-mason uppercase tracking-widest text-sm rounded-lg backdrop-blur-md transition-all duration-300 shadow-[0_0_20px_rgba(234,179,8,0.2)] hover:shadow-[0_0_30px_rgba(234,179,8,0.6)]">
+                    <span class="flex items-center gap-2">
+                        Ver Arquitectura Completa
+                    </span>
+                </button>
+            </div>
+        </div>
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <main class="pt-8 pb-12 px-4 md:px-12 max-w-6xl mx-auto space-y-16">
+
+            <!-- HEADER LOGIA PLUSCUAMPERFECTA -->
+            <header class="p-12 border border-oro/20 text-center relative overflow-hidden rounded-2xl logia-card">
+                <div class="absolute inset-0 bg-gradient-to-b from-yellow-900/10 to-transparent pointer-events-none"></div>
+                <div class="triangulo-trinidad mb-8"></div>
+                <h1 class="text-4xl md:text-5xl font-mason text-oro esoterico-glow uppercase tracking-[0.25em]">Logia SADV41</h1>
+                <p class="text-xs md:text-sm uppercase tracking-[0.6em] text-slate-400 mt-4 border-t border-oro/30 inline-block pt-3">Arquitectura Pluscuamperfecta de la Verdad</p>
+            </header>
+
+            <!-- I. EL ATRIO: TELEMETRÍA Y GEMINI -->
+            <section id="el-atrio" class="logia-card p-8 md:p-12 rounded-xl">
+                <div class="geometria-bg"></div>
+                <div class="relative z-10">
+                    <h2 class="text-2xl text-oro mb-8 border-l-4 border-oro pl-5 tracking-widest flex items-center gap-3 font-mason">
+                        <span class="text-sm opacity-50">I.</span> EL ATRIO <span class="text-[10px] text-slate-500 font-mono tracking-normal ml-auto">(La Manifestación)</span>
+                    </h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Google Auth Box -->
+                        <div class="p-6 bg-black/40 border border-slate-800 hover:border-oro/50 transition-all rounded-lg group">
+                            <div class="flex items-center gap-4 mb-3">
+                                <span class="text-3xl grayscale group-hover:grayscale-0 transition-all">📡</span>
+                                <h3 class="font-bold text-lg tracking-wide text-slate-200">Identidad Confirmada</h3>
+                            </div>
+                            <p class="text-xs text-slate-400 font-mono leading-relaxed mb-6">Punto de contacto terrenal. Vincula tu identidad digital real a tu acceso pagado para establecer la trazabilidad y proteger el ecosistema.</p>
+                            
+                            <div class="pt-4 border-t border-slate-800 flex flex-col items-center gap-3 w-full">
+                                <div id="auth-container" style="display: flex; justify-content: center; width: 100%;">
+                                    <div id="g_id_onload" data-client_id="328306412185-lumsfeg3eclqq72blifegpog41rk5tl6.apps.googleusercontent.com" data-callback="handleCredentialResponse"></div>
+                                    <div class="g_id_signin" data-type="standard" data-theme="filled_black" data-shape="rectangular"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Gemini Box -->
+                        <div class="p-6 bg-black/40 border border-slate-800 hover:border-cyan-500/50 transition-all rounded-lg group flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center gap-4 mb-3">
+                                    <span class="text-3xl grayscale group-hover:grayscale-0 transition-all">🤖</span>
+                                    <h3 class="font-bold text-lg tracking-wide text-slate-200">Intersección Gemini</h3>
+                                </div>
+                                <p class="text-xs text-slate-400 font-mono leading-relaxed">El primer nivel de diálogo social y código. Aquí convergen la lógica de programación y la asistencia de IA antes de pasar el velo hacia el conocimiento superior.</p>
+                            </div>
+                            <div id="walletStatus" class="hidden mt-4 p-4 bg-gray-900/90 border border-oro/40 rounded-xl font-mono shadow-2xl w-full">
+                                <div class="flex items-center gap-2 mb-1">
+                                    <span class="relative flex h-2 w-2">
+                                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                                        <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                                    </span>
+                                    <p class="text-[10px] text-slate-400 uppercase tracking-widest">Web3 Pipeline Active</p>
+                                </div>
+                                <p class="text-xs text-slate-300 break-all">Dirección: <span id="walletAddress" class="text-oro font-bold select-all"></span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- MÓDULO SÍSMICO (SADV41T) -->
+            <section class="max-w-3xl mx-auto p-4 md:p-6 bg-[#0d1117] border border-slate-800 rounded-2xl shadow-xl mt-12 relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-red-900/10 blur-[50px] pointer-events-none"></div>
+                <div class="text-center py-4 relative z-10">
+                    <h2 class="text-renderRed font-bold text-2xl md:text-3xl tracking-tight uppercase font-mason">Módulo SADV41T</h2>
+                    <p class="text-slate-400 text-xs md:text-sm mt-1 border-b border-slate-800 pb-4 font-sans">
+                        Telemetría Física y Realidad Terrenal
+                    </p>
+                </div>
+
+                <div class="flex justify-center items-center gap-4 my-4 relative z-10">
+                    <button class="bg-[#ff6b81] hover:bg-[#ff4757] text-white font-bold text-sm px-5 py-2.5 rounded-lg transition-all shadow-[0_0_15px_rgba(255,107,129,0.3)]">
+                        Monitor Activo
+                    </button>
+                    <div class="bg-red-500/10 text-red-500 border border-red-500/40 px-4 py-1.5 rounded-full font-bold text-xs tracking-wide">
+                        Modo Local
+                    </div>
+                </div>
+
+                <div class="space-y-4 mt-6 relative z-10">
+                    <div class="sismo-card border-l-4 border-cyan-500 p-4 rounded-r-xl text-left bg-slate-950/50 border border-y-slate-800 border-r-slate-800 font-sans shadow-lg">
+                        <div class="text-xs text-slate-200 font-semibold mb-1">📍 Ubicación: <span class="text-white">Zona de Subducción (Panamá)</span></div>
+                        <div class="text-xs text-slate-400 grid grid-cols-2 gap-y-1 font-mono mt-3">
+                            <div>📊 Magnitud: <span class="text-rose-400 font-bold">M 5.1</span></div>
+                            <div>📉 Profundidad: <span class="text-cyan-400 font-bold">26.2 km</span></div>
+                            <div class="mt-2">🔗 Familia: <span class="text-slate-300">#04 (RedPy)</span></div>
+                            <div class="mt-2">⏱️ Fecha: <span class="text-slate-300">2026-06-20</span></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- II. EL SANTO: NOTICIAS, NODO RENDER Y TENDENCIAS IA -->
+            <section id="el-santo" class="logia-card p-8 md:p-12 rounded-xl border-t-4 border-cyan-400">
+                <div class="geometria-bg"></div>
+                <div class="relative z-10">
+                    <h2 class="text-2xl text-cyan-500 mb-8 border-l-4 border-cyan-500 pl-5 tracking-widest flex items-center gap-3 font-mason text-shadow-blue">
+                        <span class="text-sm opacity-50 text-oro">II.</span> EL SANTO <span class="text-[10px] text-slate-500 font-mono tracking-normal ml-auto">(Boletín del Nodo & IA)</span>
+                    </h2>
+                    
+                    <p class="text-sm text-slate-300 leading-relaxed font-sans mb-6 border-b border-slate-800 pb-4">
+                        El flujo de información estructurada. A través del nodo en Render, comprendemos la realidad sociopolítica, los movimientos locales y las vanguardias.
+                    </p>
+
+                    <!-- Tarjeta MIDES Panamá -->
+                    <div class="bg-gradient-to-r from-emerald-950/80 to-slate-900 p-5 rounded-xl border border-emerald-500/40 shadow-lg mb-10">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="text-lg">🇵🇦</span>
+                            <span class="text-xs font-mono text-emerald-400 font-bold uppercase tracking-wider">Burunga Crece | FEP 2026</span>
+                        </div>
+                        <h3 class="text-base font-bold text-white mb-2">La constitución de la primera Junta Local de Burunga respaldada por la Federación de Estudiantes de Panamá.</h3>
+                        <p class="text-xs text-slate-400 font-mono mt-2">La comunidad organizada busca legalizar la tenencia de tierras para asegurar agua, luz y territorio, combatiendo la especulación.</p>
+                    </div>
+
+                    <h3 class="text-xl font-mason text-oro tracking-wide mb-6 border-l-4 border-oro pl-3">Vanguardia Tecnológica & IA</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="bg-black/40 p-4 rounded-lg border border-slate-800"><h4 class="text-sm font-bold text-cyan-300 font-mono">Muse Code</h4><p class="text-xs text-slate-400 mt-2">Agente de programación impulsado por Muse Spark 1.2.</p></div>
+                        <div class="bg-black/40 p-4 rounded-lg border border-slate-800"><h4 class="text-sm font-bold text-emerald-300 font-mono">Figure AI</h4><p class="text-xs text-slate-400 mt-2">Modelos humanoides capaces de navegar por internet.</p></div>
+                        <div class="bg-black/40 p-4 rounded-lg border border-slate-800"><h4 class="text-sm font-bold text-purple-300 font-mono">Neurotech</h4><p class="text-xs text-slate-400 mt-2">Investigadores desarrollan arquitecturas telepáticas digitales.</p></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- III. EL SANTÍSIMO: LA FINAL ETERNA -->
+            <section id="el-santisimo" class="logia-card p-12 md:p-16 rounded-xl text-center relative">
+                <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 bg-purple-900/20 blur-[80px] rounded-full pointer-events-none"></div>
+                
+                <div class="relative z-10">
+                    <h2 class="text-3xl text-oro mb-10 uppercase tracking-[0.3em] font-mason esoterico-glow">
+                        <span class="text-sm opacity-50 block mb-2 tracking-widest">III.</span> EL SANTÍSIMO
+                    </h2>
+                    
+                    <div class="max-w-2xl mx-auto space-y-6 bg-gradient-to-b from-black/80 to-transparent p-10 rounded-2xl border border-oro/20 shadow-[0_0_40px_rgba(212,175,55,0.1)]">
+                        
+                        <h3 class="text-2xl md:text-3xl font-bold text-white font-mason tracking-wider uppercase mb-6">
+                            La Final Eterna
+                        </h3>
+
+                        <p class="text-sm md:text-base text-slate-200 leading-relaxed font-sans italic">
+                            El núcleo intocable del sistema. Donde la tecnología, la geopolítica y el código se rinden ante la verdad inalterable. Presentamos el emblema de una batalla que trasciende el tiempo: 
+                            <br><br>
+                            <span class="text-lg md:text-xl font-bold text-oro esoterico-glow not-italic block my-4">ÆRGENTÆNA vs S(ADV41)PAIN</span>
+                        </p>
+
+                        <p class="text-sm md:text-base text-slate-300 leading-relaxed font-sans">
+                            No se trata de fútbol, sino de la unidad de las naciones bajo el señorío de Cristo. Como nos enseña el <strong>Midrash::Para:::</strong> en nuestra búsqueda, Jesús es el Camino, la Verdad y la Vida. Él es el origen de todo y nuestra meta final.
+                        </p>
+
+                        <div class="pt-8 border-t border-oro/20 mt-8">
+                            <p class="text-xl font-bold text-white uppercase tracking-widest">¡Cristo está por venir!</p>
+                            <div class="text-5xl mt-6 animate-[pulse_3s_infinite]">🎚️</div>
+                        </div>
+
+                        <div class="text-[10px] text-slate-500 font-mono mt-8 tracking-widest">
+                            #SADV41 #EnJesusCristo #LaFinalEterna #ElOrigenEs0
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+        
+        <footer class="text-center p-8 mt-12 border-t border-white/5 opacity-50 font-mono text-[10px]">
+            <p>SADV41 Architecture © 2026 | El Origen es 0</p>
+        </footer>
+    </div>
+
+    <!-- ==========================================
+         LÓGICA DEL SISTEMA (JS UNIFICADO)
+         ========================================== -->
+    <script>
+        // --- 1. Control del Filtro (Verdugo Silencioso) ---
+        function verificarLlave() {
+            const tokenInput = document.getElementById('access-token').value.trim();
+            const errorMsg = document.getElementById('token-error');
+            const gatekeeper = document.getElementById('gatekeeper-screen');
+            const sistemaPrincipal = document.getElementById('sistema-principal');
+
+            // Tokens autorizados (Puedes modificarlos)
+            const tokensValidos = ["SADV41-ORIGEN-0", "GSADV41", "YAPPY150"];
+
+            if (tokensValidos.includes(tokenInput)) {
+                // Caída de la barrera
+                gatekeeper.classList.add('hidden');
+                sistemaPrincipal.classList.remove('hidden');
+                
+                // Ejecutar scripts que requieren que el DOM principal sea visible
+                inicializarSistema();
+            } else {
+                // Denegación
+                errorMsg.classList.remove('hidden');
+            }
+        }
+
+        // --- 2. Funciones de la Logia (Se ejecutan tras el acceso) ---
+        function inicializarSistema() {
+            console.log("Sistema GSADV41 Iniciado");
+            
+            // Si hay estado previo del sidebar guardado
+            if(localStorage.getItem('sidebarPosition') === 'right') {
+                document.getElementById('main-sidebar').classList.add('right-aligned');
+            }
+        }
+
+        function toggleSidebar() {
+            const sidebar = document.getElementById('main-sidebar');
+            sidebar.classList.toggle('right-aligned');
+            localStorage.setItem('sidebarPosition', sidebar.classList.contains('right-aligned') ? 'right' : 'left');
+        }
+
+        function toggleFullScreen(elementId) {
+            const elem = document.getElementById(elementId);
+            if (!document.fullscreenElement) {
+                if (elem.requestFullscreen) { elem.requestFullscreen(); } 
+                else if (elem.webkitRequestFullscreen) { elem.webkitRequestFullscreen(); } 
+                else if (elem.msRequestFullscreen) { elem.msRequestFullscreen(); }
+            } else {
+                if (document.exitFullscreen) { document.exitFullscreen(); }
+            }
+        }
+
+        // --- 3. Autenticación Google (Identidad Confirmada) ---
+        function handleCredentialResponse(response) {
+            sessionStorage.setItem("acceso_sadv41_origen", "GSADV41_AUTH");
+            alert("Identidad verificada. El Atrio reconoce tu registro digital.");
+        }
+
+        // --- 4. Web3 Wallet ---
+        async function connectBinance() {
+            const statusBox = document.getElementById('walletStatus');
+            const addressSpan = document.getElementById('walletAddress');
+            const btnConnect = document.getElementById('btnConnect');
+
+            if (typeof window.ethereum !== 'undefined') {
+                try {
+                    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                    addressSpan.innerText = accounts[0];
+                    statusBox.classList.remove('hidden');
+                    btnConnect.innerHTML = '🌐 Wallet Connected';
+                    btnConnect.classList.replace('bg-oro', 'bg-emerald-500');
+                } catch (e) {
+                    console.error("Conexión rechazada o error en Web3", e);
+                }
+            } else {
+                window.open('https://web3.binance.com/en/referral?ref=ORCZSDLK', '_blank');
+            }
+        }
+    </script>
+</body>
+</html>
