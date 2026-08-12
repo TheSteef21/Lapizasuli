@@ -168,11 +168,11 @@
                 </a>
             </div>
 
-            <!-- Verificación con la Clave Única -->
+            <!-- Verificación con Contraseña Segura (Oculta con Puntos) -->
             <div class="border-t border-slate-800 pt-6">
                 <label class="block text-xs text-slate-500 font-mono mb-2">Ingresa tu clave de acceso autorizada:</label>
                 <div class="flex gap-2">
-                    <input type="password" id="access-token" placeholder="GSADV41-2026-CHRIST0" class="w-full bg-black/50 border border-slate-700 rounded px-4 py-2 text-white font-mono text-xs focus:border-oro focus:outline-none text-center tracking-wider">
+                    <input type="password" id="access-token" placeholder="•••••••••••••••••••••" class="w-full bg-black/50 border border-slate-700 rounded px-4 py-2 text-white font-mono text-xs focus:border-oro focus:outline-none text-center tracking-widest">
                     <button onclick="verificarLlave()" class="bg-slate-800 hover:bg-slate-700 text-white border border-slate-600 px-4 py-2 rounded font-bold transition-all cursor-pointer">➔</button>
                 </div>
                 <p id="token-error" class="text-red-500 text-xs mt-2 hidden font-mono">Clave incorrecta o no autorizada.</p>
@@ -378,7 +378,7 @@
             const gatekeeper = document.getElementById('gatekeeper-screen');
             const sistemaPrincipal = document.getElementById('sistema-principal');
 
-            // Clave única autorizada
+            // Clave maestra protegida en la lógica del script (no visible en texto plano en la interfaz)
             const claveMaestra = "GSADV41-2026-CHRIST0";
 
             if (tokenInput === claveMaestra) {
