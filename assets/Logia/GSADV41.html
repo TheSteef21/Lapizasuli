@@ -170,7 +170,7 @@
 <body class="font-sans antialiased selection:bg-oro selection:text-navy overflow-x-hidden">
 
     <!-- ==========================================
-         FASE 0: EL EMBUDO / EL VERDUGO SILENCIOSO (GATEKEEPER)
+         FASE 0: EL EMBUDO / EL VERDUGO SILENCIOSO (GATEKEEPER LOCAL)
          ========================================== -->
     <div id="gatekeeper-screen" class="fixed inset-0 z-[100] flex justify-center items-center p-4 bg-[#0d0f12]">
         <div class="logia-card max-w-lg w-full p-8 md:p-10 text-center border-t-4 border-t-oro rounded-lg z-10 relative">
@@ -198,14 +198,14 @@
                 </a>
             </div>
 
-            <!-- Verificación con Contraseña Segura (Validación en Servidor) -->
+            <!-- Verificación con Contraseña de Actualización (Directa en Cliente) -->
             <div class="border-t border-slate-800 pt-6">
                 <label class="block text-xs text-slate-500 font-mono mb-2">Ingresa tu clave de acceso autorizada:</label>
                 <div class="flex gap-2">
                     <input type="password" id="access-token" placeholder="•••••••••••••••••••••" class="w-full bg-black/50 border border-slate-700 rounded px-4 py-2 text-white font-mono text-xs focus:border-oro focus:outline-none text-center tracking-widest">
-                    <button id="btn-verificar" onclick="verificarLlave()" class="bg-slate-800 hover:bg-slate-700 text-white border border-slate-600 px-4 py-2 rounded font-bold transition-all cursor-pointer">➔</button>
+                    <button id="btn-verificar" onclick="verificarLlaveLocal()" class="bg-slate-800 hover:bg-slate-700 text-white border border-slate-600 px-4 py-2 rounded font-bold transition-all cursor-pointer">➔</button>
                 </div>
-                <p id="token-error" class="text-red-500 text-xs mt-2 hidden font-mono">Clave incorrecta o error de conexión.</p>
+                <p id="token-error" class="text-red-500 text-xs mt-2 hidden font-mono">Clave incorrecta. Actualiza el código con tu nueva contraseña.</p>
             </div>
             
             <div class="text-[10px] text-slate-600 mt-8 font-mono">El origen es 0. Transmisión protegida.</div>
@@ -877,13 +877,15 @@
 
     <!-- SCRIPTS MAESTROS UNIFICADOS -->
     <script>
-        /* === 0. VERIFICACIÓN DE CLAVE EN BACKEND (RENDER) === */
-        async function verificarLlave() {
+        /* === 0. VERIFICACIÓN DE CLAVE LOCAL (ACTUALIZABLE EN CÓDIGO) === */
+        // Puedes cambiar esta constante directamente aquí cada vez que actualices el código
+        const CLAVE_ACCESO_ACTUAL = "SADV41-2026"; 
+
+        function verificarLlaveLocal() {
             const tokenInput = document.getElementById('access-token').value.trim();
             const errorMsg = document.getElementById('token-error');
             const gatekeeper = document.getElementById('gatekeeper-screen');
             const sistemaPrincipal = document.getElementById('sistema-principal');
-            const btnVerificar = document.getElementById('btn-verificar');
 
             if (!tokenInput) {
                 errorMsg.innerText = "Por favor ingresa una clave.";
@@ -891,49 +893,20 @@
                 return;
             }
 
-            // Estado de carga
-            btnVerificar.innerText = "⏳";
-            btnVerificar.disabled = true;
-            errorMsg.classList.add('hidden');
-
-            try {
-                // Petición al backend en Render usando la variable de entorno protegida LOGIA
-                const response = await fetch('/api/verificar-logia', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ token: tokenInput })
-                });
-
-                if (response.ok) {
-                    const data = await response.json();
-                    if (data.autorizado) {
-                        // Acceso concedido: desvelar el sistema principal
-                        gatekeeper.classList.add('hidden');
-                        sistemaPrincipal.classList.remove('hidden');
-                        
-                        // Inicializar componentes dinámicos al entrar
-                        mostrarPopupApoyo();
-                        initVersiculos();
-                        initTesseract();
-                        initNewsAccordions();
-                        refrescarMonitor();
-                    } else {
-                        errorMsg.innerText = "Clave incorrecta o no autorizada.";
-                        errorMsg.classList.remove('hidden');
-                    }
-                } else {
-                    errorMsg.innerText = "Error en el servidor de validación.";
-                    errorMsg.classList.remove('hidden');
-                }
-            } catch (error) {
-                console.error("Error validando llave:", error);
-                errorMsg.innerText = "Error de conexión con el nodo central.";
+            if (tokenInput === CLAVE_ACCESO_ACTUAL) {
+                errorMsg.classList.add('hidden');
+                gatekeeper.classList.add('hidden');
+                sistemaPrincipal.classList.remove('hidden');
+                
+                // Inicializar componentes dinámicos al entrar
+                mostrarPopupApoyo();
+                initVersiculos();
+                initTesseract();
+                initNewsAccordions();
+                refrescarMonitor();
+            } else {
+                errorMsg.innerText = "Clave incorrecta. Actualiza el código con tu nueva contraseña.";
                 errorMsg.classList.remove('hidden');
-            } finally {
-                btnVerificar.innerText = "➔";
-                btnVerificar.disabled = false;
             }
         }
 
