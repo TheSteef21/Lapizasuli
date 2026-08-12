@@ -1,0 +1,514 @@
+SVA41
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GSADV41 | Logia Pluscuamperfecta & Boletín Oficial Unificado</title>
+    
+    <!-- Tipografías Sagradas -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    
+    <!-- Scripts Externos -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@web3auth/modal@8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.0/ethers.umd.min.js"></script>
+
+    <!-- Configuración Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#020617',
+                        oro: '#eab308',
+                        blanco: '#f8fafc',
+                        borgona: '#4a0010',
+                        neonGreen: '#10b981',
+                        neonBlue: '#00f3ff',
+                        renderRed: '#da3637',
+                        violeta: '#6d28d9',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                        mason: ['Cinzel', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root { 
+            --oro-alquimico: #d4af37; 
+            --obsidiana: #050505; 
+            --luz-divina: #7f5af0;
+            --luz-santo: #00f3ff;
+            --borgona-sacro: #4a0010;
+        }
+
+        body {
+            background-color: var(--obsidiana);
+            color: #f8fafc;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* --- FONDOS Y EFECTOS --- */
+        .bg-logia {
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+                linear-gradient(rgba(2, 6, 23, 0.85), rgba(2, 6, 23, 0.95)), 
+                url('https://y2s.onrender.com/api/graphics/mundial_bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        
+        .glass { background: rgba(2, 6, 23, 0.85); backdrop-filter: blur(12px); border: 1px solid rgba(234, 179, 8, 0.2); }
+        .text-shadow-oro { text-shadow: 0 0 10px rgba(234, 179, 8, 0.5); }
+        .text-shadow-blue { text-shadow: 0 0 10px rgba(0, 243, 255, 0.6); }
+        .esoterico-glow { text-shadow: 0 0 25px rgba(212, 175, 55, 0.7); }
+
+        .scanline {
+            width: 100%; height: 2px;
+            background: rgba(0, 209, 255, 0.15);
+            position: fixed; z-index: 9999; top: 0;
+            pointer-events: none;
+            animation: scanline 8s linear infinite;
+        }
+        @keyframes scanline { 0% { top: 0; } 100% { top: 100%; } }
+
+        /* --- MENÚ LATERAL --- */
+        .sidebar-tabs { position: fixed; left: 0; top: 50%; transform: translateY(-50%); z-index: 60; display: flex; flex-direction: column; gap: 12px; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+        .vertical-tab { display: flex; align-items: center; background: rgba(2, 6, 23, 0.95); padding: 12px 15px; border-radius: 0 15px 15px 0; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); width: 60px; overflow: hidden; white-space: nowrap; box-shadow: 4px 4px 15px rgba(0,0,0,0.5); cursor: pointer; }
+        .vertical-tab:hover { width: 340px; padding-left: 20px; }
+        .vertical-tab span.icon { font-size: 1.5rem; min-width: 30px; display: flex; justify-content: center; }
+        .vertical-tab span.text { margin-left: 15px; font-weight: bold; opacity: 0; transition: opacity 0.3s; font-size: 0.85rem; letter-spacing: 0.05em; }
+        .vertical-tab:hover span.text { opacity: 1; transition-delay: 0.1s; }
+        
+        .sidebar-tabs.right-aligned { left: auto; right: 0; }
+        .sidebar-tabs.right-aligned .vertical-tab { border-radius: 15px 0 0 15px; flex-direction: row-reverse; }
+        .sidebar-tabs.right-aligned .vertical-tab:hover { padding-right: 20px; padding-left: 15px; }
+        .sidebar-tabs.right-aligned .vertical-tab span.text { margin-left: 0; margin-right: 15px; text-align: right; }
+
+        /* --- COMPONENTES LOGIA --- */
+        .logia-card { 
+            background: linear-gradient(145deg, rgba(10,10,10,0.85), rgba(20,20,20,0.85));
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.9), inset 0 0 20px rgba(212, 175, 55, 0.03);
+            backdrop-filter: blur(12px);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s ease;
+        }
+        .logia-card:hover { border-color: rgba(212, 175, 55, 0.4); box-shadow: 0 20px 40px rgba(0,0,0,0.9), inset 0 0 30px rgba(212, 175, 55, 0.05); }
+
+        .geometria-bg {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 100%; height: 100%; pointer-events: none; z-index: 0;
+            background: 
+                linear-gradient(30deg, transparent 49.5%, rgba(212, 175, 55, 0.03) 50%, transparent 50.5%),
+                linear-gradient(-30deg, transparent 49.5%, rgba(212, 175, 55, 0.03) 50%, transparent 50.5%);
+        }
+
+        .triangulo-trinidad {
+            width: 0; height: 0;
+            border-left: 40px solid transparent; border-right: 40px solid transparent;
+            border-bottom: 69.3px solid rgba(212, 175, 55, 0.15); 
+            position: relative; margin: 0 auto;
+            animation: pulso-divino-trinidad 4s infinite alternate ease-in-out;
+        }
+        .triangulo-trinidad::after {
+            content: '1'; position: absolute; top: 35px; left: -5px;
+            color: var(--oro-alquimico); font-family: 'Cinzel', serif; font-size: 1.2rem;
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.8);
+        }
+        @keyframes pulso-divino-trinidad {
+            0% { filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.2)); transform: scale(1); }
+            100% { filter: drop-shadow(0 0 30px rgba(212, 175, 55, 0.9)); transform: scale(1.08); }
+        }
+
+        .marca-background {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1;
+            display: flex; justify-content: center; align-items: center; opacity: 0.15; pointer-events: none;
+        }
+
+        /* Acordeón Noticias */
+        .news-accordion-content { transition: max-height 0.4s ease-in-out, opacity 0.3s ease-in-out; opacity: 0; max-height: 0; overflow: hidden; }
+        .news-accordion-content.expanded { opacity: 1; max-height: 2000px; }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-oro selection:text-navy">
+    <div class="scanline"></div>
+
+    <!-- ==========================================
+         FASE 1: EL EMBUDO / EL VERDUGO SILENCIOSO 
+         ========================================== -->
+    <div id="gatekeeper-screen" class="fixed inset-0 z-[100] flex justify-center items-center p-4 bg-[#0d0f12]">
+        <div class="logia-card max-w-lg w-full p-8 md:p-10 text-center border-t-4 border-t-oro rounded-lg z-10 relative">
+            <div class="font-mono text-sm text-oro tracking-[0.15em] mb-3 uppercase">SADV41 // PROTOCOLO DE AFILIACIÓN</div>
+            <h1 class="text-2xl font-mason font-bold mb-4">¿Deseas afiliarte a la Logia?</h1>
+            
+            <p class="text-sm leading-relaxed text-slate-400 mb-6 text-justify font-sans">
+                Acceso exclusivo al sistema de información, cobertura y parámetros de seguridad. Este canal no es negociable ni está sujeto a filosofías externas. La solicitud otorga derecho a evaluación de perfil, asignación de insignias oficiales y cobertura dentro de la red.
+            </p>
+
+            <div class="bg-oro/5 border-l-2 border-oro p-4 text-xs text-left mb-6 text-slate-300">
+                <strong class="text-oro block mb-1 uppercase font-mono tracking-widest">Parámetro de Entrada (Filtro de Gravedad):</strong> 
+                Para asegurar la seriedad y el respeto por el sistema, la afiliación requiere un pago de <strong>$150</strong>. Gestiona tu pago vía WhatsApp o consulta métodos alternativos en el registro oficial.
+            </div>
+
+            <!-- Botones de Acción y Pago -->
+            <div class="space-y-3 mb-8">
+                <a href="https://wa.me/50769362166?text=Deseo%20solicitar%20mi%20afiliacion%20a%20la%20Logia%20SADV41.%20Comprendo%20el%20filtro%20de%20150%20al%20+50769362166" 
+                   class="block w-full bg-oro hover:bg-amber-500 text-black font-bold py-3 rounded transition-colors uppercase tracking-widest text-sm shadow-[0_0_15px_rgba(234,179,8,0.3)] text-center" target="_blank">
+                    1. Solicitar Vía WhatsApp (+507 6936-2166)
+                </a>
+                <a href="https://thesteef21.github.io/Lapizasuli/FUNDING.yml" 
+                   class="block w-full bg-slate-900 hover:bg-slate-800 text-emerald-400 border border-emerald-500/40 font-bold py-2.5 rounded transition-colors uppercase tracking-wider text-xs text-center" target="_blank">
+                    💳 Ver Más Formas de Pago (Funding)
+                </a>
+            </div>
+
+            <!-- Verificación con Contraseña Segura -->
+            <div class="border-t border-slate-800 pt-6">
+                <label class="block text-xs text-slate-500 font-mono mb-2">Ingresa tu clave de acceso autorizada:</label>
+                <div class="flex gap-2">
+                    <input type="password" id="access-token" placeholder="•••••••••••••••••••••" class="w-full bg-black/50 border border-slate-700 rounded px-4 py-2 text-white font-mono text-xs focus:border-oro focus:outline-none text-center tracking-widest">
+                    <button onclick="verificarLlave()" class="bg-slate-800 hover:bg-slate-700 text-white border border-slate-600 px-4 py-2 rounded font-bold transition-all cursor-pointer">➔</button>
+                </div>
+                <p id="token-error" class="text-red-500 text-xs mt-2 hidden font-mono">Clave incorrecta o no autorizada.</p>
+            </div>
+            
+            <div class="text-[10px] text-slate-600 mt-8 font-mono">El origen es 0. Transmisión protegida.</div>
+        </div>
+        
+        <!-- Fondo del Gatekeeper -->
+        <div class="absolute inset-0 bg-[url('https://y2s.onrender.com/api/graphics/mundial_bg.jpg')] bg-cover bg-center opacity-10 blur-sm"></div>
+    </div>
+
+
+    <!-- ==========================================
+         FASE 2: EL ECOSISTEMA GSADV41 (Oculto)
+         ========================================== -->
+    <div id="sistema-principal" class="hidden bg-logia w-full min-h-screen">
+        
+        <!-- FONDO VECTORIAL GLOBAL -->
+        <div class="marca-background">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="100%" height="100%">
+            <defs>
+                <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#d4af37" stop-opacity="0.8"/>
+                <stop offset="100%" stop-color="#050505" stop-opacity="0"/>
+                </radialGradient>
+                <linearGradient id="beam" x1="50%" y1="0%" x2="50%" y2="100%">
+                <stop offset="0%" stop-color="#00f3ff" stop-opacity="0"/>
+                <stop offset="50%" stop-color="#00f3ff" stop-opacity="0.9"/>
+                <stop offset="100%" stop-color="#00f3ff" stop-opacity="0"/>
+                </linearGradient>
+                <filter id="neon">
+                <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+                <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+            </defs>
+            <circle cx="400" cy="400" r="350" fill="url(#glow)"/>
+            <rect x="395" y="100" width="10" height="600" fill="url(#beam)" filter="url(#neon)"/>
+            <rect x="250" y="398" width="300" height="4" fill="#d4af37" filter="url(#neon)"/>
+            <polygon points="400,200 550,480 250,480" fill="none" stroke="#d4af37" stroke-width="2" stroke-opacity="0.5"/>
+            <text x="400" y="160" font-family="Cinzel, serif" font-size="24" fill="#d4af37" text-anchor="middle" letter-spacing="4">SADV41</text>
+            <text x="400" y="650" font-family="Cinzel, serif" font-size="32" fill="#00f3ff" text-anchor="middle" letter-spacing="8" filter="url(#neon)">ISAÍAS 43:19</text>
+            <text x="400" y="690" font-family="Courier New, monospace" font-size="14" fill="#f8fafc" text-anchor="middle" letter-spacing="2">ORIGEN [1027 = 10 = 1]</text>
+            </svg>
+        </div>
+
+        <!-- MENÚ LATERAL BILATERAL -->
+        <div id="main-sidebar" class="sidebar-tabs">
+            <a href="https://thesteef21.github.io/Lapizasuli/FUNDING.yml" target="_blank" class="vertical-tab border-l-4 border-emerald-400 hover:bg-emerald-900/40">
+                <span class="icon">💵</span><span class="text text-emerald-400">Invertir / Funding (Formas de Pago)</span>
+            </a>
+            <div onclick="toggleSidebar()" class="vertical-tab border-l-4 border-slate-400 hover:bg-slate-800/40" title="Cambiar lado del menú">
+                <span class="icon">⇋</span><span class="text text-slate-300">Alternar Menú</span>
+            </div>
+        </div>
+
+        <!-- NAVEGACIÓN SUPERIOR UNIFICADA -->
+        <header class="fixed w-full z-50 glass border-b border-oro/30 px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <span class="text-2xl">🛡️</span>
+                <div>
+                    <h1 class="font-serif text-xl tracking-wider text-oro font-bold leading-none">SOVEREIGN HUB</h1>
+                    <p class="text-[9px] text-slate-400 font-mono tracking-widest leading-none mt-1">LOGIA SADV41 | GSADV41</p>
+                </div>
+            </div>
+            
+            <div class="flex flex-col items-center gap-2 hidden xl:flex">
+                <nav class="flex gap-5 text-sm uppercase tracking-wider font-medium flex-wrap justify-center">
+                    <a href="#el-atrio" class="hover:text-oro transition-colors text-amber-200">I. El Atrio</a>
+                    <a href="#el-santo" class="hover:text-neonBlue transition-colors text-cyan-300">II. El Santo</a>
+                    <a href="#el-santisimo" class="hover:text-purple-400 transition-colors text-purple-300">III. El Santísimo</a>
+                </nav>
+            </div>
+
+            <div class="flex flex-col items-center justify-center gap-2">
+                <div id="status" class="text-[10px] text-oro font-mono text-center tracking-widest uppercase">Protocolo V.S. Activo...</div>
+                <div class="flex flex-wrap gap-2 justify-center">
+                    <button id="btnConnect" onclick="connectBinance()" class="bg-oro hover:bg-amber-600 text-navy font-bold text-xs px-3 py-2 rounded transition-all flex items-center gap-1.5 shadow-lg shadow-oro/20 cursor-pointer">
+                        ⚡ Web3 Wallet
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <main class="pt-32 pb-12 px-4 md:px-12 max-w-6xl mx-auto space-y-16">
+
+            <!-- HEADER LOGIA -->
+            <header class="p-12 border border-oro/20 text-center relative overflow-hidden rounded-2xl logia-card">
+                <div class="absolute inset-0 bg-gradient-to-b from-yellow-900/10 to-transparent pointer-events-none"></div>
+                <div class="triangulo-trinidad mb-8"></div>
+                <h1 class="text-4xl md:text-5xl font-mason text-oro esoterico-glow uppercase tracking-[0.25em]">Logia SADV41</h1>
+                <p class="text-xs md:text-sm uppercase tracking-[0.6em] text-slate-400 mt-4 border-t border-oro/30 inline-block pt-3">Arquitectura Pluscuamperfecta de la Verdad</p>
+            </header>
+
+            <!-- MÓDULOS DE CÓDIGOS QR DOBLE HOME (LEVIATHÁN DUAL) -->
+            <section class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                
+                <!-- QR HOME 1: GSADV41 -->
+                <div class="logia-card p-6 md:p-8 rounded-2xl text-center border-t-2 border-oro">
+                    <div class="absolute top-0 right-0 w-24 h-24 bg-oro/10 blur-[40px] pointer-events-none"></div>
+                    <h3 class="text-lg font-mason text-oro uppercase tracking-widest mb-2">Home I // GSADV41</h3>
+                    <p class="text-xs text-slate-300 mb-4 font-sans">
+                        Enlace principal unificado hacia la matriz general del sistema.
+                    </p>
+                    
+                    <div class="bg-white p-3 rounded-xl inline-block shadow-[0_0_20px_rgba(234,179,8,0.3)] mb-3">
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https://thesteef21.github.io/Lapizasuli/GSADV41.html" 
+                             alt="QR GSADV41" 
+                             class="w-36 h-36 mx-auto">
+                    </div>
+                    
+                    <div class="text-[10px] text-slate-400 font-mono tracking-wider">
+                        <a href="https://thesteef21.github.io/Lapizasuli/GSADV41.html" target="_blank" class="text-oro hover:underline">GSADV41.html</a>
+                    </div>
+                </div>
+
+                <!-- QR HOME 2: Logia.html -->
+                <div class="logia-card p-6 md:p-8 rounded-2xl text-center border-t-2 border-cyan-400">
+                    <div class="absolute top-0 right-0 w-24 h-24 bg-cyan-500/10 blur-[40px] pointer-events-none"></div>
+                    <h3 class="text-lg font-mason text-cyan-300 uppercase tracking-widest mb-2">Home II // Logia</h3>
+                    <p class="text-xs text-slate-300 mb-4 font-sans">
+                        Enlace directo unificado hacia el templo y archivo de la Logia.
+                    </p>
+                    
+                    <div class="bg-white p-3 rounded-xl inline-block shadow-[0_0_20px_rgba(0,243,255,0.3)] mb-3">
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https://thesteef21.github.io/Lapizasuli/Logia.html" 
+                             alt="QR Logia" 
+                             class="w-36 h-36 mx-auto">
+                    </div>
+                    
+                    <div class="text-[10px] text-slate-400 font-mono tracking-wider">
+                        <a href="https://thesteef21.github.io/Lapizasuli/Logia.html" target="_blank" class="text-cyan-400 hover:underline">Logia.html</a>
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- I. EL ATRIO -->
+            <section id="el-atrio" class="logia-card p-8 md:p-12 rounded-xl">
+                <div class="geometria-bg"></div>
+                <div class="relative z-10">
+                    <h2 class="text-2xl text-oro mb-8 border-l-4 border-oro pl-5 tracking-widest flex items-center gap-3 font-mason">
+                        <span class="text-sm opacity-50">I.</span> EL ATRIO <span class="text-[10px] text-slate-500 font-mono tracking-normal ml-auto">(La Manifestación)</span>
+                    </h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="p-6 bg-black/40 border border-slate-800 hover:border-oro/50 transition-all rounded-lg group">
+                            <div class="flex items-center gap-4 mb-3">
+                                <span class="text-3xl grayscale group-hover:grayscale-0 transition-all">📡</span>
+                                <h3 class="font-bold text-lg tracking-wide text-slate-200">Identidad Confirmada</h3>
+                            </div>
+                            <p class="text-xs text-slate-400 font-mono leading-relaxed mb-6">Punto de contacto terrenal. Vincula tu identidad digital real a tu acceso pagado para establecer la trazabilidad.</p>
+                            <div class="pt-4 border-t border-slate-800 flex flex-col items-center gap-3 w-full">
+                                <div id="auth-container" style="display: flex; justify-content: center; width: 100%;">
+                                    <div id="g_id_onload" data-client_id="328306412185-lumsfeg3eclqq72blifegpog41rk5tl6.apps.googleusercontent.com" data-callback="handleCredentialResponse"></div>
+                                    <div class="g_id_signin" data-type="standard" data-theme="filled_black" data-shape="rectangular"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-6 bg-black/40 border border-slate-800 hover:border-cyan-500/50 transition-all rounded-lg group flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center gap-4 mb-3">
+                                    <span class="text-3xl grayscale group-hover:grayscale-0 transition-all">🤖</span>
+                                    <h3 class="font-bold text-lg tracking-wide text-slate-200">Intersección Gemini</h3>
+                                </div>
+                                <p class="text-xs text-slate-400 font-mono leading-relaxed">El primer nivel de diálogo social y código. Lógica de programación y asistencia de IA.</p>
+                            </div>
+                            <div id="walletStatus" class="hidden mt-4 p-4 bg-gray-900/90 border border-oro/40 rounded-xl font-mono shadow-2xl w-full">
+                                <p class="text-xs text-slate-300 break-all">Dirección: <span id="walletAddress" class="text-oro font-bold select-all"></span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- II. EL SANTO (BOLETÍN DE NOTICIAS CON ACORDEÓN) -->
+            <section id="el-santo" class="logia-card p-8 md:p-12 rounded-xl border-t-4 border-cyan-400">
+                <div class="geometria-bg"></div>
+                <div class="relative z-10">
+                    <h2 class="text-2xl text-cyan-500 mb-8 border-l-4 border-cyan-500 pl-5 tracking-widest flex items-center gap-3 font-mason text-shadow-blue">
+                        <span class="text-sm opacity-50 text-oro">II.</span> EL SANTO <span class="text-[10px] text-slate-500 font-mono tracking-normal ml-auto">(Boletín del Nodo & Archivos)</span>
+                    </h2>
+                    
+                    <!-- Tarjeta de Noticia Oficial (Estructura Acordeón) -->
+                    <div class="border border-cyan-500/40 bg-black/60 rounded-xl overflow-hidden hover:border-cyan-400 transition-all shadow-[0_0_20px_rgba(0,243,255,0.1)]">
+                        <button class="news-accordion-btn w-full text-left p-6 flex flex-col md:flex-row justify-between items-start md:items-center border-l-4 border-cyan-400 bg-cyan-950/20 gap-4 cursor-pointer">
+                            <div class="space-y-1">
+                                <div class="flex items-center gap-2">
+                                    <span class="text-xs font-mono bg-cyan-900/60 text-cyan-300 px-2 py-0.5 rounded border border-cyan-600">CONACAJU // 2026</span>
+                                    <span class="text-xs text-slate-400 font-mono">Publicado: 2026-08-10 09:50:03</span>
+                                </div>
+                                <h3 class="text-cyan-300 font-bold text-base md:text-lg uppercase tracking-wide">
+                                    El Consejo de Administración de la Carrera Administrativa Judicial celebra su quinta reunión ordinaria del año 2026
+                                </h3>
+                            </div>
+                            <span class="text-cyan-400 arrow-icon text-xl font-bold transition-transform duration-300 self-center">↓ Abrir Noticia</span>
+                        </button>
+                        
+                        <div class="news-accordion-content bg-black/90">
+                            <div class="p-6 md:p-8 border-t border-cyan-900/50 text-sm text-slate-300 space-y-4 font-sans leading-relaxed">
+                                <p>
+                                    El Consejo de Administración de la Carrera Administrativa Judicial (CONACAJU), presidido por la doctora Vielsa Ríos, celebró el pasado miércoles 5 de agosto de 2026 su quinta reunión ordinaria, reafirmando su compromiso con el fortalecimiento institucional, la transparencia y la excelencia en la gestión del talento humano del Órgano Judicial.
+                                </p>
+                                <p>
+                                    Durante la sesión, los miembros del Consejo analizaron aspectos relevantes del Concurso Abierto N.° 01-CONACAJU-2024, correspondiente a los cargos de Mediador I y Mediador II en distintas sedes a nivel nacional, como parte de las acciones orientadas a garantizar procesos de selección objetivos, transparentes y basados en el mérito.
+                                </p>
+                                <p>
+                                    Asimismo, se abordaron aspectos relacionados con la evaluación del desempeño de los Defensores de las Víctimas del Delito, cargo incorporado a la Carrera Administrativa Judicial mediante el Acuerdo N.° 01-CONACAJU-2026 de 25 de marzo de 2026, destacando la importancia de este mecanismo para fortalecer las competencias profesionales, reconocer el compromiso de los servidores judiciales y promover una cultura de mejora continua dentro de la institución.
+                                </p>
+                                <p>
+                                    La jornada permitió avanzar en decisiones dirigidas a consolidar una Carrera Administrativa Judicial moderna, eficiente y comprometida con la calidad del servicio público, procurando que cada actuación se desarrolle con apego a la normativa, igualdad de oportunidades y respeto por los principios que rigen la administración de justicia.
+                                </p>
+                                <p>
+                                    Con estas acciones, el CONACAJU continúa impulsando iniciativas que fortalecen la institucionalidad, dignifican la labor de los servidores administrativos judiciales y contribuyen a una justicia más cercana, confiable y al servicio de la ciudadanía.
+                                </p>
+                                <div class="pt-4 border-t border-slate-800 text-xs text-slate-400 font-mono flex justify-between items-center flex-wrap gap-2">
+                                    <span>Fotografías por: Alvanis Monterrey</span>
+                                    <span class="text-oro">📁 Archivo: assets/Logia/8/11/index.html</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- III. EL SANTÍSIMO -->
+            <section id="el-santisimo" class="logia-card p-12 md:p-16 rounded-xl text-center relative">
+                <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 bg-purple-900/20 blur-[80px] rounded-full pointer-events-none"></div>
+                <div class="relative z-10">
+                    <h2 class="text-3xl text-oro mb-10 uppercase tracking-[0.3em] font-mason esoterico-glow">
+                        <span class="text-sm opacity-50 block mb-2 tracking-widest">III.</span> EL SANTÍSIMO
+                    </h2>
+                    <div class="max-w-2xl mx-auto space-y-6 bg-gradient-to-b from-black/80 to-transparent p-10 rounded-2xl border border-oro/20">
+                        <h3 class="text-2xl md:text-3xl font-bold text-white font-mason tracking-wider uppercase mb-6">La Final Eterna</h3>
+                        <p class="text-sm md:text-base text-slate-200 leading-relaxed font-sans italic">
+                            El núcleo intocable del sistema. <br><br>
+                            <span class="text-lg md:text-xl font-bold text-oro esoterico-glow not-italic block my-4">ÆRGENTÆNA vs S(ADV41)PAIN</span>
+                        </p>
+                        <div class="pt-8 border-t border-oro/20 mt-8">
+                            <p class="text-xl font-bold text-white uppercase tracking-widest">¡Cristo está por venir!</p>
+                            <div class="text-5xl mt-6 animate-[pulse_3s_infinite]">🎚️</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+        
+        <footer class="text-center p-8 mt-12 border-t border-white/5 opacity-50 font-mono text-[10px]">
+            <p>SADV41 Architecture © 2026 | El Origen es 0</p>
+        </footer>
+    </div>
+
+    <!-- LÓGICA DEL SISTEMA -->
+    <script>
+        function verificarLlave() {
+            const tokenInput = document.getElementById('access-token').value.trim();
+            const errorMsg = document.getElementById('token-error');
+            const gatekeeper = document.getElementById('gatekeeper-screen');
+            const sistemaPrincipal = document.getElementById('sistema-principal');
+
+            // Clave maestra protegida en la lógica del script
+            const claveMaestra = "GSADV41-2026-CHRIST0";
+
+            if (tokenInput === claveMaestra) {
+                gatekeeper.classList.add('hidden');
+                sistemaPrincipal.classList.remove('hidden');
+                initNewsAccordions();
+            } else {
+                errorMsg.classList.remove('hidden');
+            }
+        }
+
+        function toggleSidebar() {
+            const sidebar = document.getElementById('main-sidebar');
+            sidebar.classList.toggle('right-aligned');
+            localStorage.setItem('sidebarPosition', sidebar.classList.contains('right-aligned') ? 'right' : 'left');
+        }
+
+        function handleCredentialResponse(response) {
+            sessionStorage.setItem("acceso_sadv41_origen", "GSADV41_AUTH");
+            alert("Identidad verificada. El Atrio reconoce tu registro digital.");
+        }
+
+        async function connectBinance() {
+            const statusBox = document.getElementById('walletStatus');
+            const addressSpan = document.getElementById('walletAddress');
+            const btnConnect = document.getElementById('btnConnect');
+
+            if (typeof window.ethereum !== 'undefined') {
+                try {
+                    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                    addressSpan.innerText = accounts[0];
+                    statusBox.classList.remove('hidden');
+                    btnConnect.innerHTML = '🌐 Wallet Connected';
+                    btnConnect.classList.replace('bg-oro', 'bg-emerald-500');
+                } catch (e) {
+                    console.error("Conexión rechazada", e);
+                }
+            } else {
+                window.open('https://web3.binance.com/en/referral?ref=ORCZSDLK', '_blank');
+            }
+        }
+
+        // Lógica de Acordeones para el Boletín
+        function initNewsAccordions() {
+            document.querySelectorAll('.news-accordion-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const content = this.nextElementSibling;
+                    const arrow = this.querySelector('.arrow-icon');
+                    
+                    document.querySelectorAll('.news-accordion-content').forEach(el => {
+                        if (el !== content) { 
+                            el.classList.remove('expanded'); 
+                            el.previousElementSibling.querySelector('.arrow-icon').innerText = '↓ Abrir Noticia'; 
+                        }
+                    });
+                    
+                    content.classList.toggle('expanded');
+                    if (content.classList.contains('expanded')) {
+                        arrow.innerText = '↑ Cerrar Noticia';
+                    } else {
+                        arrow.innerText = '↓ Abrir Noticia';
+                    }
+                });
+            });
+        }
+    </script>
+</body>
+</html>
