@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OJSADV41 | Órgano Judicial Potenciado & Logia Pluscuamperfecta</title>
+    
+    <!-- Tipografías Sagradas -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    
+    <!-- Scripts Externos -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@web3auth/modal@8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.0/ethers.umd.min.js"></script>
+
+    <!-- Configuración Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#020617',
+                        oro: '#eab308',
+                        blanco: '#f8fafc',
+                        borgona: '#4a0010',
+                        neonGreen: '#10b981',
+                        neonBlue: '#00f3ff',
+                        renderRed: '#da3637',
+                        violeta: '#6d28d9',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                        mason: ['Cinzel', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root { 
+            --oro-alquimico: #d4af37; 
+            --obsidiana: #050505; 
+            --luz-divina: #7f5af0;
+            --luz-santo: #00f3ff;
+            --borgona-sacro: #4a0010;
+        }
+
+        body {
+            background-color: var(--obsidiana);
+            color: #f8fafc;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* --- FONDOS Y EFECTOS --- */
+        .bg-logia {
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+                linear-gradient(rgba(2, 6, 23, 0.85), rgba(2, 6, 23, 0.95)), 
+                url('https://y2s.onrender.com/api/graphics/mundial_bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        
+        .glass { background: rgba(2, 6, 23, 0.85); backdrop-filter: blur(12px); border: 1px solid rgba(234, 179, 8, 0.2); }
+        .text-shadow-oro { text-shadow: 0 0 10px rgba(234, 179, 8, 0.5); }
+        .text-shadow-blue { text-shadow: 0 0 10px rgba(0, 243, 255, 0.6); }
+        .esoterico-glow { text-shadow: 0 0 25px rgba(212, 175, 55, 0.7); }
+
+        .scanline {
+            width: 100%; height: 2px;
+            background: rgba(0, 209, 255, 0.15);
+            position: fixed; z-index: 9999; top: 0;
+            pointer-events: none;
+            animation: scanline 8s linear infinite;
+        }
+        @keyframes scanline { 0% { top: 0; } 100% { top: 100%; } }
+
+        /* --- MENÚ LATERAL --- */
+        .sidebar-tabs { position: fixed; left: 0; top: 50%; transform: translateY(-50%); z-index: 60; display: flex; flex-direction: column; gap: 12px; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+        .vertical-tab { display: flex; align-items: center; background: rgba(2, 6, 23, 0.95); padding: 12px 15px; border-radius: 0 15px 15px 0; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); width: 60px; overflow: hidden; white-space: nowrap; box-shadow: 4px 4px 15px rgba(0,0,0,0.5); cursor: pointer; }
+        .vertical-tab:hover { width: 340px; padding-left: 20px; }
+        .vertical-tab span.icon { font-size: 1.5rem; min-width: 30px; display: flex; justify-content: center; }
+        .vertical-tab span.text { margin-left: 15px; font-weight: bold; opacity: 0; transition: opacity 0.3s; font-size: 0.85rem; letter-spacing: 0.05em; }
+        .vertical-tab:hover span.text { opacity: 1; transition-delay: 0.1s; }
+        
+        .sidebar-tabs.right-aligned { left: auto; right: 0; }
+        .sidebar-tabs.right-aligned .vertical-tab { border-radius: 15px 0 0 15px; flex-direction: row-reverse; }
+        .sidebar-tabs.right-aligned .vertical-tab:hover { padding-right: 20px; padding-left: 15px; }
+        .sidebar-tabs.right-aligned .vertical-tab span.text { margin-left: 0; margin-right: 15px; text-align: right; }
+
+        /* --- COMPONENTES LOGIA --- */
+        .logia-card { 
+            background: linear-gradient(145deg, rgba(10,10,10,0.85), rgba(20,20,20,0.85));
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.9), inset 0 0 20px rgba(212, 175, 55, 0.03);
+            backdrop-filter: blur(12px);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s ease;
+        }
+        .logia-card:hover { border-color: rgba(212, 175, 55, 0.4); box-shadow: 0 20px 40px rgba(0,0,0,0.9), inset 0 0 30px rgba(212, 175, 55, 0.05); }
+
+        .geometria-bg {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 100%; height: 100%; pointer-events: none; z-index: 0;
+            background: 
+                linear-gradient(30deg, transparent 49.5%, rgba(212, 175, 55, 0.03) 50%, transparent 50.5%),
+                linear-gradient(-30deg, transparent 49.5%, rgba(212, 175, 55, 0.03) 50%, transparent 50.5%);
+        }
+
+        .triangulo-trinidad {
+            width: 0; height: 0;
+            border-left: 40px solid transparent; border-right: 40px solid transparent;
+            border-bottom: 69.3px solid rgba(212, 175, 55, 0.15); 
+            position: relative; margin: 0 auto;
+            animation: pulso-divino-trinidad 4s infinite alternate ease-in-out;
+        }
+        .triangulo-trinidad::after {
+            content: '1'; position: absolute; top: 35px; left: -5px;
+            color: var(--oro-alquimico); font-family: 'Cinzel', serif; font-size: 1.2rem;
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.8);
+        }
+        @keyframes pulso-divino-trinidad {
+            0% { filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.2)); transform: scale(1); }
+            100% { filter: drop-shadow(0 0 30px rgba(212, 175, 55, 0.9)); transform: scale(1.08); }
+        }
+
+        .marca-background {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1;
+            display: flex; justify-content: center; align-items: center; opacity: 0.15; pointer-events: none;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-oro selection:text-navy">
+    <div class="scanline"></div>
+
+    <!-- ==========================================
+         ECOSISTEMA OJSADV41 (SIN BLOQUEO, ACCESO DIRECTO)
+         ========================================== -->
+    <div id="sistema-principal" class="bg-logia w-full min-h-screen">
+        
+        <!-- FONDO VECTORIAL GLOBAL -->
+        <div class="marca-background">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="100%" height="100%">
+            <defs>
+                <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#d4af37" stop-opacity="0.8"/>
+                <stop offset="100%" stop-color="#050505" stop-opacity="0"/>
+                </radialGradient>
+                <linearGradient id="beam" x1="50%" y1="0%" x2="50%" y2="100%">
+                <stop offset="0%" stop-color="#00f3ff" stop-opacity="0"/>
+                <stop offset="50%" stop-color="#00f3ff" stop-opacity="0.9"/>
+                <stop offset="100%" stop-color="#00f3ff" stop-opacity="0"/>
+                </linearGradient>
+                <filter id="neon">
+                <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+                <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+            </defs>
+            <circle cx="400" cy="400" r="350" fill="url(#glow)"/>
+            <rect x="395" y="100" width="10" height="600" fill="url(#beam)" filter="url(#neon)"/>
+            <rect x="250" y="398" width="300" height="4" fill="#d4af37" filter="url(#neon)"/>
+            <polygon points="400,200 550,480 250,480" fill="none" stroke="#d4af37" stroke-width="2" stroke-opacity="0.5"/>
+            <text x="400" y="160" font-family="Cinzel, serif" font-size="24" fill="#d4af37" text-anchor="middle" letter-spacing="4">SADV41</text>
+            <text x="400" y="650" font-family="Cinzel, serif" font-size="32" fill="#00f3ff" text-anchor="middle" letter-spacing="8" filter="url(#neon)">ISAÍAS 43:19</text>
+            <text x="400" y="690" font-family="Courier New, monospace" font-size="14" fill="#f8fafc" text-anchor="middle" letter-spacing="2">ORIGEN [1027 = 10 = 1]</text>
+            </svg>
+        </div>
+
+        <!-- MENÚ LATERAL BILATERAL -->
+        <div id="main-sidebar" class="sidebar-tabs">
+            <a href="https://thesteef21.github.io/Lapizasuli/FUNDING.yml" target="_blank" class="vertical-tab border-l-4 border-emerald-400 hover:bg-emerald-900/40">
+                <span class="icon">💵</span><span class="text text-emerald-400">Invertir / Funding (Formas de Pago)</span>
+            </a>
+            <div onclick="toggleSidebar()" class="vertical-tab border-l-4 border-slate-400 hover:bg-slate-800/40" title="Cambiar lado del menú">
+                <span class="icon">⇋</span><span class="text text-slate-300">Alternar Menú</span>
+            </div>
+        </div>
+
+        <!-- NAVEGACIÓN SUPERIOR UNIFICADA -->
+        <header class="fixed w-full z-50 glass border-b border-oro/30 px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <span class="text-2xl">🛡️</span>
+                <div>
+                    <h1 class="font-serif text-xl tracking-wider text-oro font-bold leading-none">OJSADV41 HUB</h1>
+                    <p class="text-[9px] text-slate-400 font-mono tracking-widest leading-none mt-1">ÓRGANO JUDICIAL | SADV41</p>
+                </div>
+            </div>
+            
+            <div class="flex flex-col items-center gap-2 hidden xl:flex">
+                <nav class="flex gap-5 text-sm uppercase tracking-wider font-medium flex-wrap justify-center">
+                    <a href="#svg-exposicion" class="hover:text-oro transition-colors text-amber-200">I. Emblema Oficial</a>
+                    <a href="#doble-home" class="hover:text-neonBlue transition-colors text-cyan-300">II. Doble Home QR</a>
+                    <a href="#el-santisimo" class="hover:text-purple-400 transition-colors text-purple-300">III. El Santísimo</a>
+                </nav>
+            </div>
+
+            <div class="flex flex-col items-center justify-center gap-2">
+                <div id="status" class="text-[10px] text-oro font-mono text-center tracking-widest uppercase">Protocolo OJSADV41 Activo...</div>
+                <div class="flex flex-wrap gap-2 justify-center">
+                    <button id="btnConnect" onclick="connectBinance()" class="bg-oro hover:bg-amber-600 text-navy font-bold text-xs px-3 py-2 rounded transition-all flex items-center gap-1.5 shadow-lg shadow-oro/20 cursor-pointer">
+                        ⚡ Web3 Wallet
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <main class="pt-32 pb-12 px-4 md:px-12 max-w-6xl mx-auto space-y-16">
+
+            <!-- HEADER LOGIA -->
+            <header class="p-12 border border-oro/20 text-center relative overflow-hidden rounded-2xl logia-card">
+                <div class="absolute inset-0 bg-gradient-to-b from-yellow-900/10 to-transparent pointer-events-none"></div>
+                <div class="triangulo-trinidad mb-8"></div>
+                <h1 class="text-4xl md:text-5xl font-mason text-oro esoterico-glow uppercase tracking-[0.25em]">OJSADV41</h1>
+                <p class="text-xs md:text-sm uppercase tracking-[0.6em] text-slate-400 mt-4 border-t border-oro/30 inline-block pt-3">Órgano Judicial Potenciado por la Logia SADV41</p>
+            </header>
+
+            <!-- EXPOSICIÓN MAESTRA DEL SVG ÓRGANO JUDICIAL + SADV41 -->
+            <section id="svg-exposicion" class="logia-card p-6 md:p-8 rounded-2xl border-t-4 border-oro text-center">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-oro/10 blur-[50px] pointer-events-none"></div>
+                <h2 class="text-2xl font-mason text-oro uppercase tracking-widest mb-4">Emblema Oficial Potenciado</h2>
+                <p class="text-xs text-slate-300 mb-6 font-sans max-w-2xl mx-auto">
+                    Integración alquímica entre la soberanía del Órgano Judicial de la República de Panamá y la arquitectura inquebrantable de SADV41.
+                </p>
+
+                <!-- Contenedor SVG Integrado con Alta Fidelidad -->
+                <div class="bg-black/60 p-4 rounded-xl border border-oro/30 inline-block w-full max-w-4xl shadow-[0_0_30px_rgba(212,175,55,0.2)]">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 400" width="100%" height="100%">
+                      <defs>
+                        <radialGradient id="bgGlow" cx="50%" cy="50%" r="50%">
+                          <stop offset="0%" stop-color="#020617" stop-opacity="1"/>
+                          <stop offset="100%" stop-color="#050505" stop-opacity="1"/>
+                        </radialGradient>
+                        
+                        <linearGradient id="oroGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" stop-color="#eab308"/>
+                          <stop offset="50%" stop-color="#d4af37"/>
+                          <stop offset="100%" stop-color="#854d0e"/>
+                        </linearGradient>
+
+                        <linearGradient id="cyanBeam" x1="0%" y1="0%" x2="0%" y2="100%">
+                          <stop offset="0%" stop-color="#00f3ff" stop-opacity="0"/>
+                          <stop offset="50%" stop-color="#00f3ff" stop-opacity="0.8"/>
+                          <stop offset="100%" stop-color="#00f3ff" stop-opacity="0"/>
+                        </linearGradient>
+
+                        <filter id="neonGlow" x="-20%" y="-20%" width="140%" height="140%">
+                          <feGaussianBlur stdDeviation="6" result="blur"/>
+                          <feMerge>
+                            <feMergeNode in="blur"/>
+                            <feMergeNode in="SourceGraphic"/>
+                          </feMerge>
+                        </filter>
+                      </defs>
+
+                      <rect width="1000" height="400" fill="url(#bgGlow)"/>
+
+                      <g opacity="0.25">
+                        <circle cx="200" cy="200" r="160" fill="none" stroke="url(#oroGrad)" stroke-width="1.5" stroke-dasharray="4 4"/>
+                        <polygon points="200,60 330,280 70,280" fill="none" stroke="#eab308" stroke-width="1"/>
+                        <rect x="197" y="20" width="6" height="360" fill="url(#cyanBeam)" filter="url(#neonGlow)"/>
+                      </g>
+
+                      <g transform="translate(30, 20)">
+                        <circle cx="180" cy="180" r="140" fill="none" stroke="url(#oroGrad)" stroke-width="4" filter="url(#neonGlow)"/>
+                        <line x1="20" y1="322" x2="340" y2="322" stroke="url(#oroGrad)" stroke-width="4" stroke-linecap="round"/>
+
+                        <g fill="#f8fafc">
+                          <path d="M120 320 C110 280, 95 240, 90 200 C88 180, 95 160, 105 145 C115 130, 130 115, 140 100 C145 92, 150 85, 155 75 C158 68, 160 62, 165 60 C170 58, 175 62, 178 70 C182 80, 185 90, 188 100 C195 125, 210 145, 220 170 C228 190, 235 220, 240 250 C245 280, 250 305, 255 320 Z"/>
+                          <path d="M150 65 C145 65, 140 70, 142 78 C144 85, 152 90, 160 88 C168 86, 172 78, 170 70 C168 64, 155 65, 150 65 Z"/>
+                          <rect x="135" y="70" width="40" height="6" fill="#eab308" rx="2"/>
+
+                          <path d="M175 110 L230 85 L235 95 L180 120 Z"/>
+                          <line x1="230" y1="85" x2="230" y2="120" stroke="#f8fafc" stroke-width="3"/>
+                          <line x1="205" y1="105" x2="255" y2="105" stroke="#f8fafc" stroke-width="2"/>
+                          <line x1="205" y1="105" x2="195" y2="125" stroke="#f8fafc" stroke-width="1.5"/>
+                          <line x1="205" y1="105" x2="215" y2="125" stroke="#f8fafc" stroke-width="1.5"/>
+                          <path d="M193 125 Q205 135, 217 125 Z" fill="none" stroke="#f8fafc" stroke-width="2"/>
+                          <line x1="255" y1="105" x2="245" y2="125" stroke="#f8fafc" stroke-width="1.5"/>
+                          <line x1="255" y1="105" x2="265" y2="125" stroke="#f8fafc" stroke-width="1.5"/>
+                          <path d="M243 125 Q255 135, 267 125 Z" fill="none" stroke="#f8fafc" stroke-width="2"/>
+
+                          <path d="M160 130 L135 185 L145 190 L168 140 Z"/>
+                          <line x1="135" y1="185" x2="125" y2="210" stroke="#00f3ff" stroke-width="3" filter="url(#neonGlow)"/>
+                        </g>
+
+                        <text x="180" y="270" font-family="'Cinzel', serif" font-size="14" fill="#eab308" text-anchor="middle" letter-spacing="3" opacity="0.8">SADV41</text>
+                      </g>
+
+                      <g transform="translate(370, 0)">
+                        <text x="0" y="95" font-family="'Inter', sans-serif" font-size="20" font-weight="600" fill="#f8fafc" letter-spacing="7">REPÚBLICA DE PANAMÁ</text>
+                        <text x="0" y="185" font-family="'Cinzel', serif" font-size="76" font-weight="700" fill="#f8fafc" letter-spacing="2" filter="url(#neonGlow)">ÓRGANO</text>
+                        <text x="0" y="275" font-family="'Cinzel', serif" font-size="76" font-weight="700" fill="url(#oroGrad)" letter-spacing="2">JUDICIAL</text>
+                        
+                        <g transform="translate(0, 330)">
+                          <rect x="0" y="0" width="580" height="360" fill="none"/>
+                          <text x="0" y="20" font-family="'Courier New', monospace" font-size="13" fill="#00f3ff" letter-spacing="3">ISAÍAS 43:19 // NODO BURUNGA ACTIVE 🎚️</text>
+                        </g>
+                      </g>
+                    </svg>
+                </div>
+            </section>
+
+            <!-- MÓDULOS DE CÓDIGOS QR DOBLE HOME (LEVIATHÁN DUAL) -->
+            <section id="doble-home" class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                
+                <!-- QR HOME 1: GSADV41 -->
+                <div class="logia-card p-6 md:p-8 rounded-2xl text-center border-t-2 border-oro">
+                    <div class="absolute top-0 right-0 w-24 h-24 bg-oro/10 blur-[40px] pointer-events-none"></div>
+                    <h3 class="text-lg font-mason text-oro uppercase tracking-widest mb-2">Home I // GSADV41</h3>
+                    <p class="text-xs text-slate-300 mb-4 font-sans">
+                        Enlace principal unificado hacia la matriz general del sistema.
+                    </p>
+                    
+                    <div class="bg-white p-3 rounded-xl inline-block shadow-[0_0_20px_rgba(234,179,8,0.3)] mb-3">
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https://thesteef21.github.io/Lapizasuli/GSADV41.html" 
+                             alt="QR GSADV41" 
+                             class="w-36 h-36 mx-auto">
+                    </div>
+                    
+                    <div class="text-[10px] text-slate-400 font-mono tracking-wider">
+                        <a href="https://thesteef21.github.io/Lapizasuli/GSADV41.html" target="_blank" class="text-oro hover:underline">GSADV41.html</a>
+                    </div>
+                </div>
+
+                <!-- QR HOME 2: Logia.html -->
+                <div class="logia-card p-6 md:p-8 rounded-2xl text-center border-t-2 border-cyan-400">
+                    <div class="absolute top-0 right-0 w-24 h-24 bg-cyan-500/10 blur-[40px] pointer-events-none"></div>
+                    <h3 class="text-lg font-mason text-cyan-300 uppercase tracking-widest mb-2">Home II // Logia</h3>
+                    <p class="text-xs text-slate-300 mb-4 font-sans">
+                        Enlace directo unificado hacia el templo y archivo de la Logia.
+                    </p>
+                    
+                    <div class="bg-white p-3 rounded-xl inline-block shadow-[0_0_20px_rgba(0,243,255,0.3)] mb-3">
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https://thesteef21.github.io/Lapizasuli/Logia.html" 
+                             alt="QR Logia" 
+                             class="w-36 h-36 mx-auto">
+                    </div>
+                    
+                    <div class="text-[10px] text-slate-400 font-mono tracking-wider">
+                        <a href="https://thesteef21.github.io/Lapizasuli/Logia.html" target="_blank" class="text-cyan-400 hover:underline">Logia.html</a>
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- III. EL SANTÍSIMO -->
+            <section id="el-santisimo" class="logia-card p-12 md:p-16 rounded-xl text-center relative">
+                <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 bg-purple-900/20 blur-[80px] rounded-full pointer-events-none"></div>
+                <div class="relative z-10">
+                    <h2 class="text-3xl text-oro mb-10 uppercase tracking-[0.3em] font-mason esoterico-glow">
+                        <span class="text-sm opacity-50 block mb-2 tracking-widest">III.</span> EL SANTÍSIMO
+                    </h2>
+                    <div class="max-w-2xl mx-auto space-y-6 bg-gradient-to-b from-black/80 to-transparent p-10 rounded-2xl border border-oro/20">
+                        <h3 class="text-2xl md:text-3xl font-bold text-white font-mason tracking-wider uppercase mb-6">La Final Eterna</h3>
+                        <p class="text-sm md:text-base text-slate-200 leading-relaxed font-sans italic">
+                            El núcleo intocable del sistema. <br><br>
+                            <span class="text-lg md:text-xl font-bold text-oro esoterico-glow not-italic block my-4">ÆRGENTÆNA vs S(ADV41)PAIN</span>
+                        </p>
+                        <div class="pt-8 border-t border-oro/20 mt-8">
+                            <p class="text-xl font-bold text-white uppercase tracking-widest">¡Cristo está por venir!</p>
+                            <div class="text-5xl mt-6 animate-[pulse_3s_infinite]">🎚️</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+        
+        <footer class="text-center p-8 mt-12 border-t border-white/5 opacity-50 font-mono text-[10px]">
+            <p>OJSADV41 Architecture © 2026 | El Origen es 0</p>
+        </footer>
+    </div>
+
+    <!-- LÓGICA DEL SISTEMA -->
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('main-sidebar');
+            sidebar.classList.toggle('right-aligned');
+            localStorage.setItem('sidebarPosition', sidebar.classList.contains('right-aligned') ? 'right' : 'left');
+        }
+
+        async function connectBinance() {
+            const statusBox = document.getElementById('walletStatus');
+            const addressSpan = document.getElementById('walletAddress');
+            const btnConnect = document.getElementById('btnConnect');
+
+            if (typeof window.ethereum !== 'undefined') {
+                try {
+                    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                    addressSpan.innerText = accounts[0];
+                    statusBox.classList.remove('hidden');
+                    btnConnect.innerHTML = '🌐 Wallet Connected';
+                    btnConnect.classList.replace('bg-oro', 'bg-emerald-500');
+                } catch (e) {
+                    console.error("Conexión rechazada", e);
+                }
+            } else {
+                window.open('https://web3.binance.com/en/referral?ref=ORCZSDLK', '_blank');
+            }
+        }
+    </script>
+</body>
+</html>
