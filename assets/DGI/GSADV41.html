@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funciones del Sistema e-Tax 2.0 (DGI Panamá)</title>
+    <style>
+        :root {
+            --primary-color: #003366;
+            --secondary-color: #ff9900;
+            --text-color: #333;
+            --bg-color: #f4f7f6;
+            --card-bg: #ffffff;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--secondary-color);
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .menu-section {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-left: 5px solid var(--primary-color);
+        }
+
+        .menu-section h2 {
+            color: var(--primary-color);
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .menu-desc {
+            font-style: italic;
+            color: #666;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            margin-bottom: 15px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        li::before {
+            content: "•";
+            color: var(--secondary-color);
+            font-weight: bold;
+            font-size: 1.2em;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .function-name {
+            font-weight: bold;
+            color: #222;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Manual de Funciones e-Tax 2.0</h1>
+        <p>Listado detallado de los módulos y opciones disponibles en el sistema de la DGI</p>
+    </header>
+
+    <div class="container">
+
+        <!-- 1. Consultas -->
+        <section class="menu-section">
+            <h2>1. Consultas</h2>
+            <p class="menu-desc">Este menú está destinado a la revisión y verificación de información histórica y actual del contribuyente.</p>
+            <ul>
+                <li><span class="function-name">Anexos a Declaraciones:</span> Permite visualizar los documentos y anexos que se han adjuntado a las declaraciones de impuestos presentadas anteriormente.</li>
+                <li><span class="function-name">Buzón Electrónico:</span> Es la bandeja de entrada donde el contribuyente recibe notificaciones, resoluciones y comunicados oficiales de la DGI.</li>
+                <li><span class="function-name">Declaraciones Presentadas:</span> Muestra el historial completo de las declaraciones juradas de impuestos que el contribuyente ha enviado al sistema.</li>
+                <li><span class="function-name">Documentos:</span> Permite consultar diversos documentos fiscales y legales emitidos o recibidos por la institución.</li>
+                <li><span class="function-name">Trámites pendientes:</span> Muestra el estado de las solicitudes o gestiones que el contribuyente ha iniciado y que aún están en proceso de revisión o aprobación.</li>
+                <li><span class="function-name">Pagos:</span> Permite ver el historial de los pagos de impuestos realizados.</li>
+                <li><span class="function-name">Consultar Informes:</span> Sección para generar y visualizar reportes específicos sobre el estado tributario.</li>
+                <li><span class="function-name">Sociedades Agentes Residentes:</span> Consulta de las sociedades vinculadas a un agente residente.</li>
+                <li><span class="function-name">Consultas Planilla Anual F3 / Consulta Planilla Anual F3 v2:</span> Permite verificar la presentación del Formulario 03 (Planilla, Fondo de Jubilación y Pensiones).</li>
+                <li><span class="function-name">Consulta Detalle F1091:</span> Sirve para consultar los detalles del formulario de informes de donaciones recibidas.</li>
+            </ul>
+        </section>
+
+        <!-- 2. Inmuebles -->
+        <section class="menu-section">
+            <h2>2. Inmuebles</h2>
+            <p class="menu-desc">Gestión de obligaciones, pagos y exoneraciones relacionadas con bienes raíces.</p>
+            <ul>
+                <li><span class="function-name">Pagos F106 y F107 de Inmuebles:</span> Para realizar el pago de los formularios de transferencia de bienes inmuebles y ganancia de capital.</li>
+                <li><span class="function-name">Información General de Fincas:</span> Permite consultar los datos, valores y el estado de las propiedades registradas a nombre del contribuyente.</li>
+                <li><span class="function-name">Elaborar formulario de Ganancia de Capital (Form. 107):</span> Genera la declaración del impuesto sobre la ganancia obtenida al vender un inmueble.</li>
+                <li><span class="function-name">Elaborar formulario de Transferencia de Inmueble (Form. 106):</span> Genera la declaración para el pago del impuesto del 2% sobre la transferencia de bienes inmuebles.</li>
+                <li><span class="function-name">Asignar Correo Propietario:</span> Permite actualizar el correo electrónico vinculado al dueño de la finca para recibir notificaciones.</li>
+                <li><span class="function-name">Solicitud de Patrimonio Familiar Tributario o Vivienda Principal:</span> Para solicitar la tarifa preferencial o exoneración del impuesto de inmueble para la residencia principal de la familia.</li>
+                <li><span class="function-name">Solicitud Exoneración Inmuebles:</span> Trámite para solicitar exoneraciones generales de impuestos sobre ciertas propiedades.</li>
+                <li><span class="function-name">Conciliar Pagos (Imp120/ Imp113) Declaraciones (F106 / F107):</span> Permite vincular y aplicar correctamente los pagos realizados a sus respectivas declaraciones de inmuebles.</li>
+                <li><span class="function-name">Solicitud de Exoneración por Primera Compra PFT/VP:</span> Trámite específico para exonerar propiedades que han sido adquiridas por primera vez como vivienda principal.</li>
+            </ul>
+        </section>
+
+        <!-- 3. Realizar Pagos -->
+        <section class="menu-section">
+            <h2>3. Realizar Pagos</h2>
+            <p class="menu-desc">Módulo para la generación de documentos de cobro y registro de pagos.</p>
+            <ul>
+                <li><span class="function-name">Generar boleta a partir de la Cuenta Corriente:</span> Crea un recibo de pago (boleta) con el saldo exacto que se debe según el estado de cuenta del contribuyente.</li>
+                <li><span class="function-name">Generar boleta de pago simple - Contribuyente:</span> Permite crear una boleta de pago manual indicando el tipo de impuesto y el monto a pagar.</li>
+                <li><span class="function-name">Generar boleta para arreglo de pago:</span> Emite el recibo correspondiente a las cuotas acordadas en un convenio de pago previo con la DGI.</li>
+                <li><span class="function-name">Consulta de Boletas de pago electrónicas:</span> Historial de las boletas que han sido generadas en el sistema.</li>
+                <li><span class="function-name">Tablero de Pagos:</span> Resumen visual o dashboard del estado de los pagos realizados y pendientes.</li>
+                <li><span class="function-name">Log Pagos Tarjetas de Crédito - Contribuyente:</span> Registro detallado de las transacciones de pago de impuestos que se han efectuado utilizando tarjetas de crédito.</li>
+            </ul>
+        </section>
+
+        <!-- 4. Agente Residente -->
+        <section class="menu-section">
+            <h2>4. Agente Residente</h2>
+            <p class="menu-desc">Funciones exclusivas para abogados y firmas que actúan como agentes residentes de sociedades anónimas en Panamá.</p>
+            <ul>
+                <li><span class="function-name">Sociedades Agentes Residentes:</span> Gestión del listado de sociedades que representa el agente.</li>
+                <li><span class="function-name">Actualizar Agente Residente:</span> Para modificar los datos de contacto o registro del agente.</li>
+                <li><span class="function-name">Consulta Trámite Agente Residente:</span> Permite verificar el estatus de las solicitudes presentadas por el agente.</li>
+                <li><span class="function-name">Consulta Declaración Registros Contables / Consulta Declaración Registros Contables V2:</span> Para verificar las declaraciones anuales que certifican que las sociedades offshore mantienen registros contables.</li>
+                <li><span class="function-name">Declaración de Registros Contables de Agentes Residentes V2:</span> Formulario para presentar la declaración obligatoria sobre el mantenimiento de registros contables de las entidades jurídicas.</li>
+                <li><span class="function-name">Consultar Documentos Registros Contables 2024 / 2021, 2022, 2023:</span> Archivo histórico para revisar la documentación de registros contables enviada en años anteriores.</li>
+            </ul>
+        </section>
+
+        <!-- 5. Regularización Tributaria -->
+        <section class="menu-section">
+            <h2>5. Regularización Tributaria</h2>
+            <p class="menu-desc">Gestiones para acogerse a leyes de amnistía o regularizar situaciones específicas.</p>
+            <ul>
+                <li><span class="function-name">Solicitud Exoneración de tributo de Tasa Única:</span> Para pedir que se exima a una sociedad del pago de la tasa única anual bajo ciertas condiciones legales.</li>
+                <li><span class="function-name">Solicitud de Fiscalización Abreviada:</span> Petición para someterse a una auditoría rápida o proceso abreviado para regularizar deudas.</li>
+                <li><span class="function-name">Solicitud de Regularización Agentes de Retención de Renta:</span> Trámite para que los agentes de retención puedan ponerse al día con los impuestos retenidos y no pagados.</li>
+            </ul>
+        </section>
+
+        <!-- 6. Factura Electrónica -->
+        <section class="menu-section">
+            <h2>6. Factura Electrónica</h2>
+            <p class="menu-desc">Administración del Sistema de Facturación Electrónica de Panamá (SFEP).</p>
+            <ul>
+                <li><span class="function-name">Apoderado para retiro de firma electrónica (FEP):</span> Asignación de una persona autorizada para retirar el certificado de firma electrónica.</li>
+                <li><span class="function-name">Solicitud de Autorización para PAC:</span> Petición para facturar a través de un Proveedor Autorizado Calificado (PAC).</li>
+                <li><span class="function-name">Afiliación contribuyente - Confirmación PAC:</span> Paso donde el contribuyente confirma qué empresa PAC le brindará el servicio de facturación.</li>
+                <li><span class="function-name">Declaración Jurada de Adopción al SFEP:</span> Documento formal donde el contribuyente se compromete a usar el sistema de factura electrónica.</li>
+                <li><span class="function-name">Solicitud Excepción de SFEP por Naturaleza o volumen de la actividad:</span> Trámite para solicitar permiso para no usar factura electrónica debido a que el negocio es muy pequeño o su naturaleza lo impide.</li>
+                <li><span class="function-name">Declaración Jurada de Excepción de SFEP por No Conectividad:</span> Declaración para aquellos negocios ubicados en áreas sin acceso a internet, lo que les impide facturar electrónicamente.</li>
+            </ul>
+        </section>
+
+        <!-- 7. Cuenta Corriente Tributaria -->
+        <section class="menu-section">
+            <h2>7. Cuenta Corriente Tributaria</h2>
+            <p class="menu-desc">Revisión de los saldos a favor o en contra del contribuyente.</p>
+            <ul>
+                <li><span class="function-name">Consultar Cuenta Corriente:</span> Muestra el balance de los impuestos (cuánto se debe o si hay saldo a favor).</li>
+                <li><span class="function-name">Solicitud de Corrección de Cuenta Corriente:</span> Permite abrir un reclamo si el contribuyente detecta que los saldos o pagos reflejados en su cuenta son incorrectos.</li>
+                <li><span class="function-name">Consultar Cuenta Corriente Morosos:</span> Visualización específica de los saldos vencidos que han caído en morosidad.</li>
+            </ul>
+        </section>
+
+        <!-- 8. Documentación Jurídica -->
+        <section class="menu-section">
+            <h2>8. Documentación Jurídica</h2>
+            <p class="menu-desc">Trámites de carácter legal ante la institución.</p>
+            <ul>
+                <li><span class="function-name">Presentar Solicitud de Prescripción:</span> Petición formal para que la DGI elimine el cobro de un impuesto debido a que ha pasado el tiempo máximo que otorga la ley para cobrarlo (prescripción).</li>
+            </ul>
+        </section>
+
+        <!-- 9. Contador Público Autorizado -->
+        <section class="menu-section">
+            <h2>9. Contador Público Autorizado</h2>
+            <p class="menu-desc">Opciones para los profesionales de la contabilidad.</p>
+            <ul>
+                <li><span class="function-name">Inscripción y/o Modificación CPA:</span> Para que un Contador Público Autorizado se registre en el sistema o actualice sus datos.</li>
+                <li><span class="function-name">Solicitud Registro Firma de Contadores:</span> Para inscribir formalmente a una firma o sociedad de contadores ante la DGI.</li>
+            </ul>
+        </section>
+
+        <!-- 10. Compensación y Cesión de Créditos Fiscales -->
+        <section class="menu-section">
+            <h2>10. Compensación y Cesión de Créditos Fiscales</h2>
+            <p class="menu-desc">Manejo de saldos a favor del contribuyente.</p>
+            <ul>
+                <li><span class="function-name">Solicitudes de Compensación:</span> Trámite para usar un saldo a favor en un impuesto (ej. ITBMS) para pagar la deuda de otro impuesto (ej. Renta).</li>
+                <li><span class="function-name">Solicitudes de Cesión:</span> Procedimiento para transferir (ceder) un crédito o saldo a favor a otro contribuyente distinto.</li>
+            </ul>
+        </section>
+
+        <!-- 11. Declaraciones Juradas y Documentos -->
+        <section class="menu-section">
+            <h2>11. Declaraciones Juradas y Documentos</h2>
+            <p class="menu-desc">Este menú agrupa todo lo relacionado con la presentación de declaraciones, informes y la emisión de certificados fiscales.</p>
+            <ul>
+                <li><span class="function-name">Certificado de no contribuyente del ITBMS:</span> Genera un documento oficial certificando que la persona o empresa no retiene ni declara el Impuesto de Transferencia de Bienes Corporales Muebles y la Prestación de Servicios (ITBMS).</li>
+                <li><span class="function-name">Certificación de tasa única:</span> Emite un comprobante que acredita que la sociedad está al día (paz y salvo) con el pago de la tasa única anual.</li>
+                <li><span class="function-name">Certificado de actividades exentas de ITBMS:</span> Documento que valida que las actividades económicas del contribuyente están libres del cobro de este impuesto.</li>
+                <li><span class="function-name">Declaraciones Pendientes:</span> Muestra un listado de las obligaciones y formularios de impuestos que aún no han sido presentados.</li>
+                <li><span class="function-name">Presentar Declaración Jurada:</span> Es el acceso principal para seleccionar, llenar y enviar cualquier tipo de declaración de impuestos (Renta, ITBMS, Dividendos, etc.).</li>
+                <li><span class="function-name">Presentar Informes:</span> Módulo para enviar reportes de cumplimiento exigidos por la DGI (ej. informes de compras, donaciones, retenciones).</li>
+                <li><span class="function-name">Solicitud de Prórroga:</span> Permite solicitar legalmente una extensión de tiempo para presentar la declaración jurada de rentas sin recargos inmediatos.</li>
+                <li><span class="function-name">Solicitar paz y salvo:</span> Trámite para generar el certificado de paz y salvo institucional, necesario para múltiples gestiones comerciales y legales.</li>
+                <li><span class="function-name">Solicitud de Arreglo de Pago:</span> Permite al contribuyente proponer y formalizar un acuerdo de pagos en cuotas para cancelar una deuda tributaria.</li>
+                <li><span class="function-name">Registrar Formulario 98:</span> Acceso específico para el registro y gestión de este formulario particular.</li>
+                <li><span class="function-name">Adjuntar Requisitos CAIR:</span> Opción para subir los documentos probatorios necesarios cuando se solicita la no aplicación del Cálculo Alternativo del Impuesto sobre la Renta (CAIR).</li>
+                <li><span class="function-name">Certificación de Sistemas según Método de Facturación:</span> Para registrar y certificar el software o mecanismo que el contribuyente utilizará para emitir sus comprobantes fiscales.</li>
+            </ul>
+        </section>
+
+        <!-- 12. Registro Único de Contribuyentes -->
+        <section class="menu-section">
+            <h2>12. Registro Único de Contribuyentes</h2>
+            <p class="menu-desc">Este apartado gestiona todo el perfil, la información base y las autorizaciones del contribuyente ante la DGI.</p>
+            <ul>
+                <li><span class="function-name">Autorizar a otro Contribuyente:</span> Permite delegar permisos a terceros (como un contador, agente residente o abogado) para que realicen trámites en nombre del titular.</li>
+                <li><span class="function-name">Solicitud de Actualización RUC:</span> Para modificar la información general del registro, como direcciones, teléfonos, correos electrónicos o la adición de nuevas actividades económicas.</li>
+                <li><span class="function-name">Consulta Contribuyente:</span> Muestra el perfil completo, el estado actual y los datos básicos con los que la entidad está registrada en el sistema.</li>
+                <li><span class="function-name">Solicitud de Cancelación o Suspensión:</span> Trámite para dar de baja definitiva o suspender temporalmente el RUC, usualmente por cese de operaciones comerciales.</li>
+                <li><span class="function-name">Generar Resolución para Rehabilitación de Sociedad:</span> Proceso para reactivar el estado tributario de una sociedad que previamente había sido suspendida.</li>
+                <li><span class="function-name">Preguntas de Seguridad:</span> Sección para configurar o actualizar las preguntas secretas necesarias para recuperar el acceso o la contraseña del sistema.</li>
+                <li><span class="function-name">Actualización RUC - Tipo Facturación:</span> Permite declarar o cambiar el método autorizado que utiliza el negocio para facturar (equipos fiscales, factura electrónica, etc.).</li>
+                <li><span class="function-name">Vinculación del Número Patronal - RUC:</span> Abre un formulario para asociar el Número Patronal (otorgado por la Caja de Seguro Social) al RUC del contribuyente independiente o sociedad comercial, unificando sus datos.</li>
+                <li><span class="function-name">Desvinculación del Número Patronal - RUC:</span> El proceso inverso para eliminar la asociación entre un número patronal y el registro tributario actual.</li>
+            </ul>
+        </section>
+
+    </div>
+</body>
+</html>
