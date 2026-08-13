@@ -142,7 +142,6 @@
                 linear-gradient(-30deg, transparent 49.5%, rgba(212, 175, 55, 0.03) 50%, transparent 50.5%);
         }
 
-        /* iSADV41 Glitch / Restored */
         @keyframes glitch {
             0% { opacity: 1; transform: translate(0) }
             20% { opacity: 0.8; transform: translate(-2px, 2px) }
@@ -154,28 +153,6 @@
         .glitch-effect { animation: glitch 0.3s linear infinite; }
         .loading-state { filter: grayscale(100%) blur(4px); opacity: 0.7; }
         .restored { transition: all 2s cubic-bezier(0.4, 0, 0.2, 1); filter: grayscale(0%) blur(0px); opacity: 1; box-shadow: 0 0 40px rgba(0, 243, 255, 0.2); }
-
-        /* Triángulo Trinidad */
-        .triangulo-trinidad {
-            width: 0; height: 0;
-            border-left: 40px solid transparent; border-right: 40px solid transparent;
-            border-bottom: 69.3px solid rgba(212, 175, 55, 0.15); 
-            position: relative; margin: 0 auto;
-            animation: pulso-divino-trinidad 4s infinite alternate ease-in-out;
-        }
-        .triangulo-trinidad::after {
-            content: '1'; position: absolute; top: 35px; left: -5px;
-            color: var(--oro-alquimico); font-family: 'Cinzel', serif; font-size: 1.2rem;
-            text-shadow: 0 0 10px rgba(212, 175, 55, 0.8);
-        }
-        @keyframes pulso-divino-trinidad {
-            0% { filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.2)); transform: scale(1); }
-            100% { filter: drop-shadow(0 0 30px rgba(212, 175, 55, 0.9)); transform: scale(1.08); }
-        }
-
-        /* Acordeones */
-        .news-accordion-content { transition: max-height 0.4s ease-in-out, opacity 0.3s ease-in-out; opacity: 0; }
-        .news-accordion-content.expanded { opacity: 1; }
     </style>
 </head>
 <body class="font-sans antialiased selection:bg-oro selection:text-navy overflow-x-hidden">
@@ -278,8 +255,6 @@
             <nav class="flex gap-4 lg:gap-6 text-sm uppercase tracking-wider font-medium flex-wrap justify-center">
                 <a href="#isadv41-seccion" class="hover:text-blue-400 transition-colors text-blue-300 font-bold">📖 Versículos</a>
                 <a href="#historia-crece" class="hover:text-emerald-400 transition-colors text-emerald-300 font-bold">🌱 Burunga Crece</a>
-                <a href="#noticias-seccion" class="hover:text-neonBlue transition-colors text-cyan-300">📰 Boletín</a>
-                <a href="#world-cup-tracking" class="hover:text-emerald-400 transition-colors text-emerald-300 font-bold">⚽ Mundial</a>
             </nav>
         </div>
 
@@ -287,13 +262,6 @@
             <a href="https://factura-88pp.onrender.com/" target="_blank" class="bg-emerald-600/90 hover:bg-emerald-500 text-white font-bold text-xs px-4 py-2 rounded-lg border border-emerald-400/50 shadow-[0_0_15px_rgba(16,185,129,0.3)] flex items-center gap-2 animate-pulse">
                 <span>🇵🇦</span> Apoyar <span>🔯</span>
             </a>
-            
-            <button onclick="simularTransito()" class="bg-slate-800 hover:bg-slate-700 text-white font-semibold text-xs px-3 py-2 rounded-lg transition-all flex items-center gap-1.5 border border-slate-700 cursor-pointer">
-                💻 GitHub
-            </button>
-            <button id="btnConnect" onclick="connectBinance()" class="bg-oro hover:bg-amber-600 text-navy font-bold text-xs px-3 py-2 rounded-lg transition-all flex items-center gap-1.5 shadow-lg shadow-oro/20 cursor-pointer">
-                ⚡ Web3 Wallet
-            </button>
         </div>
     </header>
 
@@ -308,65 +276,22 @@
             <p class="text-xs md:text-sm text-slate-200 font-serif italic mt-3 max-w-2xl text-center relative z-10 px-4 leading-relaxed">
                 "He aquí, yo hago cosa nueva; pronto saldrá a luz; ¿no la conoceréis? Otra vez abriré camino en el desierto, y ríos en la soledad."
             </p>
-            <div class="text-[10px] text-oro font-mono tracking-widest mt-4 relative z-10 border border-oro/40 px-4 py-1 rounded-full bg-black/50 shadow-inner">
-                LÍNEAS: 1018 ➞ ORIGEN: 10 ➞ [ 1 + 0 + 1 + 8 ]
-            </div>
         </div>
-        
-        <!-- SECCIÓN 1: iSADV41 (ALGORITMO DE VERSÍCULOS) -->
-        <section id="isadv41-seccion" class="flex flex-col items-center gap-10">
-            <!-- (Contenido existente de Versículos y Tesseracto...) -->
-            <div class="logia-card p-8 rounded-2xl w-full border-t-2 border-cyan-500/50 relative overflow-hidden max-w-4xl">
-                <div class="absolute top-0 right-0 w-32 h-32 bg-cyan-500/10 blur-[50px] pointer-events-none"></div>
-                <div class="flex justify-between items-center mb-8 border-b border-gray-800 pb-4">
-                    <h1 class="text-2xl font-mason font-bold tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-oro to-yellow-200">
-                        ALGORITMO DE VERSÍCULOS
-                    </h1>
-                    <span id="systemStatus" class="px-3 py-1 text-xs font-mono rounded-full bg-red-900/50 text-red-400 border border-red-700 animate-pulse">
-                        REINICIANDO SISTEMA...
-                    </span>
-                </div>
-                <div id="apiContent" class="space-y-6 font-mono text-sm hidden">
-                    <div class="border-l-4 border-cyan-500 pl-5 bg-black/40 p-4 rounded-r-lg">
-                        <p class="text-cyan-400 font-bold mb-2 tracking-widest">EXEC // JOSUÉ 1:9</p>
-                        <p id="fase1Text" class="text-gray-300 leading-relaxed font-sans text-base"></p>
-                    </div>
-                    <div class="border-l-4 border-oro pl-5 bg-black/40 p-4 rounded-r-lg mt-6">
-                        <p class="text-oro font-bold mb-2 tracking-widest">EXEC // PROVERBIOS 27:17</p>
-                        <p id="fase2Text" class="text-gray-300 leading-relaxed font-sans text-base"></p>
-                    </div>
-                    <div class="mt-10 text-center pt-6 border-t border-gray-800/50">
-                        <p id="mensajeCentral" class="text-xl font-mason font-bold text-white tracking-[0.2em] uppercase esoterico-glow"></p>
-                    </div>
-                </div>
-            </div>
-        </section>
 
-        <!-- SECCIÓN 3: BURUNGA HISTÓRICA Y CRECE (ACTUALIZADA CON DISEÑO OCTAGÓNICO) -->
+        <!-- SECCIÓN 3: BURUNGA HISTÓRICA Y CRECE (ACTUALIZADA CON DISEÑO OCTAGÓNICO Y ASSETS CORRECTOS) -->
         <section id="historia-crece" class="flex flex-col items-center gap-10">
-            <!-- Burunga Histórica Logo & Testigos -->
-            <div class="logia-card w-full max-w-4xl rounded-2xl overflow-hidden border-t-2 border-oro">
-                <header class="bg-[#1a2530] text-center p-8 border-b-4 border-oro relative">
-                    <h1 class="text-3xl font-mason text-white tracking-widest uppercase">Burunga Histórica</h1>
-                    <p class="text-blue-200 mt-2 font-mono text-sm tracking-widest">Simbología, Cimientos y Diseño Divino del Tabernáculo Digital</p>
-                </header>
-                <div class="p-8 md:p-12 space-y-6 font-sans bg-gradient-to-b from-[#1a2530] to-black">
-                    <p class="text-sm text-slate-300">La configuración de la Burunga Histórica se revela a través de los eslabones que sostienen la memoria y el territorio...</p>
-                </div>
-            </div>
-
             <!-- Burunga Crece: OCTAGÓNICA / PLUSCUAMPERFECTA -->
             <div class="logia-card p-8 md:p-12 rounded-xl border-t-4 border-emerald-500 w-full max-w-5xl text-center">
                 <h2 class="text-3xl font-mason text-emerald-400 uppercase tracking-[0.2em] mb-4 esoterico-glow">Burunga Crece</h2>
                 <p class="text-sm text-slate-300 mb-10 font-sans max-w-2xl mx-auto">La manifestación del crecimiento social, la seguridad alimentaria y el desarrollo deportivo unificados en el nodo central. La comunidad en pleno movimiento.</p>
                 
-                <!-- Grid Octagónica -->
+                <!-- Grid Octagónica con los Assets Actualizados -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8 justify-items-center relative">
                     
-                    <!-- Imagen 1: Voleibol -->
+                    <!-- Imagen 1: Voleibol (450573.jpg) -->
                     <div class="relative group cursor-pointer">
                         <div class="absolute inset-0 bg-emerald-500/20 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                        <img src="1786580600806.jpeg" alt="Voleibol Birria Mixta" class="w-64 h-64 object-cover clip-octagon border-2 border-emerald-500/50 shadow-2xl relative z-10">
+                        <img src="450573.jpg" alt="Voleibol Birria Mixta" class="w-64 h-64 object-cover clip-octagon border-2 border-emerald-500/50 shadow-2xl relative z-10">
                         <div class="mt-6">
                             <span class="bg-emerald-900/40 text-emerald-300 text-xs font-mono px-3 py-1 rounded-full border border-emerald-500/30 tracking-widest uppercase">Deporte</span>
                             <h3 class="font-bold text-slate-200 mt-2 font-mason">Voleibol Birria</h3>
@@ -374,10 +299,10 @@
                         </div>
                     </div>
 
-                    <!-- Imagen 2: Cupos Llenos -->
+                    <!-- Imagen 2: Cupos Llenos (450574.jpg) -->
                     <div class="relative group cursor-pointer md:-translate-y-6">
                         <div class="absolute inset-0 bg-oro/20 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                        <img src="1786580603608.jpeg" alt="Burunga Crece - Cupos Llenos" class="w-72 h-72 object-cover clip-octagon border-2 border-oro/50 shadow-[0_0_20px_rgba(212,175,55,0.3)] relative z-10">
+                        <img src="450574.jpg" alt="Burunga Crece - Cupos Llenos" class="w-72 h-72 object-cover clip-octagon border-2 border-oro/50 shadow-[0_0_20px_rgba(212,175,55,0.3)] relative z-10">
                         <div class="mt-6">
                             <span class="bg-yellow-900/40 text-oro text-xs font-mono px-3 py-1 rounded-full border border-oro/30 tracking-widest uppercase">Desarrollo Social</span>
                             <h3 class="font-bold text-slate-200 mt-2 font-mason text-lg">Centro Terapéutico</h3>
@@ -385,10 +310,10 @@
                         </div>
                     </div>
 
-                    <!-- Imagen 3: AgroFeria -->
+                    <!-- Imagen 3: AgroFeria (450575.jpg) -->
                     <div class="relative group cursor-pointer">
                         <div class="absolute inset-0 bg-cyan-500/20 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                        <img src="1786580604451.jpeg" alt="AgroFerias IMA" class="w-64 h-64 object-cover clip-octagon border-2 border-cyan-500/50 shadow-2xl relative z-10">
+                        <img src="450575.jpg" alt="AgroFerias IMA" class="w-64 h-64 object-cover clip-octagon border-2 border-cyan-500/50 shadow-2xl relative z-10">
                         <div class="mt-6">
                             <span class="bg-cyan-900/40 text-cyan-300 text-xs font-mono px-3 py-1 rounded-full border border-cyan-500/30 tracking-widest uppercase">Seguridad Alimentaria</span>
                             <h3 class="font-bold text-slate-200 mt-2 font-mason">AgroFerias IMA</h3>
@@ -400,14 +325,33 @@
             </div>
         </section>
 
-        <!-- SECCIÓN DE NOTICIAS, MUNDIAL Y SISTEMA SÍSMICO... (Resto del código original) -->
-        
     </main>
 
-    <!-- SCRIPTS -->
+    <!-- SCRIPTS DE CONTROL -->
     <script>
-        /* (Se mantienen los scripts originales de tesseracto, sismos, versículos y web3) */
-        // ... (Para mantener la respuesta concisa, el JS no se altera)
+        function toggleSidebar() {
+            const sidebar = document.getElementById('main-sidebar');
+            sidebar.classList.toggle('right-aligned');
+        }
+
+        // Mostrar Pop-up de Apoyo automáticamente a los pocos segundos
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                const popup = document.getElementById('apoyo-popup');
+                if(popup) {
+                    popup.classList.remove('hidden');
+                    setTimeout(() => popup.classList.remove('opacity-0'), 50);
+                }
+            }, 3000);
+        });
+
+        function cerrarPopupApoyo() {
+            const popup = document.getElementById('apoyo-popup');
+            if(popup) {
+                popup.classList.add('opacity-0');
+                setTimeout(() => popup.classList.add('hidden'), 500);
+            }
+        }
     </script>
 </body>
 </html>
