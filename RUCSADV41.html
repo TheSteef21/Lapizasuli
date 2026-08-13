@@ -1,0 +1,492 @@
+html_content = """<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RUCSADV41: DGI Y RUC:: Banco General Visa FIFA World Cup 2026</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@web3auth/modal@8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.0/ethers.umd.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#020617',
+                        oro: '#eab308',
+                        blanco: '#f8fafc',
+                        borgona: '#4a0010',
+                        neonGreen: '#10b981',
+                        neonBlue: '#00f3ff',
+                        renderRed: '#da3637',
+                        violeta: '#6d28d9',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                        mason: ['Cinzel', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root { 
+            --oro-alquimico: #d4af37; 
+            --obsidiana: #050505; 
+            --luz-divina: #7f5af0;
+            --luz-santo: #00f3ff;
+            --borgona-sacro: #4a0010;
+        }
+
+        body {
+            background-color: var(--obsidiana);
+            color: #f8fafc;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* --- FONDOS Y EFECTOS --- */
+        .bg-logia {
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+                linear-gradient(rgba(2, 6, 23, 0.85), rgba(2, 6, 23, 0.95)), 
+                url('https://y2s.onrender.com/api/graphics/mundial_bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        
+        .glass { background: rgba(2, 6, 23, 0.85); backdrop-filter: blur(12px); border: 1px solid rgba(234, 179, 8, 0.2); }
+        .text-shadow-oro { text-shadow: 0 0 10px rgba(234, 179, 8, 0.5); }
+        .text-shadow-blue { text-shadow: 0 0 10px rgba(0, 243, 255, 0.6); }
+        .esoterico-glow { text-shadow: 0 0 25px rgba(212, 175, 55, 0.7); }
+
+        .scanline {
+            width: 100%; height: 2px;
+            background: rgba(0, 209, 255, 0.15);
+            position: fixed; z-index: 9999; top: 0;
+            pointer-events: none;
+            animation: scanline 8s linear infinite;
+        }
+        @keyframes scanline { 0% { top: 0; } 100% { top: 100%; } }
+
+        /* --- MENÚ LATERAL --- */
+        .sidebar-tabs { position: fixed; left: 0; top: 50%; transform: translateY(-50%); z-index: 60; display: flex; flex-direction: column; gap: 12px; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+        .vertical-tab { display: flex; align-items: center; background: rgba(2, 6, 23, 0.95); padding: 12px 15px; border-radius: 0 15px 15px 0; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); width: 60px; overflow: hidden; white-space: nowrap; box-shadow: 4px 4px 15px rgba(0,0,0,0.5); cursor: pointer; }
+        .vertical-tab:hover { width: 340px; padding-left: 20px; }
+        .vertical-tab span.icon { font-size: 1.5rem; min-width: 30px; display: flex; justify-content: center; }
+        .vertical-tab span.text { margin-left: 15px; font-weight: bold; opacity: 0; transition: opacity 0.3s; font-size: 0.85rem; letter-spacing: 0.05em; }
+        .vertical-tab:hover span.text { opacity: 1; transition-delay: 0.1s; }
+        
+        .sidebar-tabs.right-aligned { left: auto; right: 0; }
+        .sidebar-tabs.right-aligned .vertical-tab { border-radius: 15px 0 0 15px; flex-direction: row-reverse; }
+        .sidebar-tabs.right-aligned .vertical-tab:hover { padding-right: 20px; padding-left: 15px; }
+        .sidebar-tabs.right-aligned .vertical-tab span.text { margin-left: 0; margin-right: 15px; text-align: right; }
+
+        /* --- COMPONENTES LOGIA --- */
+        .logia-card { 
+            background: linear-gradient(145deg, rgba(10,10,10,0.85), rgba(20,20,20,0.85));
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.9), inset 0 0 20px rgba(212, 175, 55, 0.03);
+            backdrop-filter: blur(12px);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s ease;
+        }
+        .logia-card:hover { border-color: rgba(212, 175, 55, 0.4); box-shadow: 0 20px 40px rgba(0,0,0,0.9), inset 0 0 30px rgba(212, 175, 55, 0.05); }
+
+        .geometria-bg {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 100%; height: 100%; pointer-events: none; z-index: 0;
+            background: 
+                linear-gradient(30deg, transparent 49.5%, rgba(212, 175, 55, 0.03) 50%, transparent 50.5%),
+                linear-gradient(-30deg, transparent 49.5%, rgba(212, 175, 55, 0.03) 50%, transparent 50.5%);
+        }
+
+        .triangulo-trinidad {
+            width: 0; height: 0;
+            border-left: 40px solid transparent; border-right: 40px solid transparent;
+            border-bottom: 69.3px solid rgba(212, 175, 55, 0.15); 
+            position: relative; margin: 0 auto;
+            animation: pulso-divino-trinidad 4s infinite alternate ease-in-out;
+        }
+        .triangulo-trinidad::after {
+            content: '1'; position: absolute; top: 35px; left: -5px;
+            color: var(--oro-alquimico); font-family: 'Cinzel', serif; font-size: 1.2rem;
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.8);
+        }
+        @keyframes pulso-divino-trinidad {
+            0% { filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.2)); transform: scale(1); }
+            100% { filter: drop-shadow(0 0 30px rgba(212, 175, 55, 0.9)); transform: scale(1.08); }
+        }
+
+        .marca-background {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1;
+            display: flex; justify-content: center; align-items: center; opacity: 0.15; pointer-events: none;
+        }
+
+        /* Acordeón Noticias */
+        .news-accordion-content { transition: max-height 0.4s ease-in-out, opacity 0.3s ease-in-out; opacity: 0; max-height: 0; overflow: hidden; }
+        .news-accordion-content.expanded { opacity: 1; max-height: 2000px; }
+        
+        .table-custom th { border-bottom: 1px solid rgba(234, 179, 8, 0.3); padding: 12px; text-align: left; color: var(--oro-alquimico); font-family: 'Cinzel', serif; }
+        .table-custom td { border-bottom: 1px solid rgba(255, 255, 255, 0.05); padding: 12px; }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-oro selection:text-navy">
+    <div class="scanline"></div>
+
+    <div id="gatekeeper-screen" class="fixed inset-0 z-[100] flex justify-center items-center p-4 bg-[#0d0f12]">
+        <div class="logia-card max-w-lg w-full p-8 md:p-10 text-center border-t-4 border-t-oro rounded-lg z-10 relative">
+            <div class="font-mono text-sm text-oro tracking-[0.15em] mb-3 uppercase">SADV41 // PROTOCOLO DE AFILIACIÓN</div>
+            <h1 class="text-2xl font-mason font-bold mb-4">¿Deseas afiliarte a la Logia?</h1>
+            
+            <p class="text-sm leading-relaxed text-slate-400 mb-6 text-justify font-sans">
+                Acceso exclusivo al sistema de información, cobertura y parámetros de seguridad. Este canal no es negociable ni está sujeto a filosofías externas. La solicitud otorga derecho a evaluación de perfil, asignación de insignias oficiales y cobertura dentro de la red.
+            </p>
+
+            <div class="bg-oro/5 border-l-2 border-oro p-4 text-xs text-left mb-6 text-slate-300">
+                <strong class="text-oro block mb-1 uppercase font-mono tracking-widest">Parámetro de Entrada (Filtro de Gravedad):</strong> 
+                Para asegurar la seriedad y el respeto por el sistema, la afiliación requiere un pago de <strong>$150</strong>. Gestiona tu pago vía WhatsApp o consulta métodos alternativos en el registro oficial.
+            </div>
+
+            <div class="space-y-3 mb-8">
+                <a href="https://wa.me/50769362166?text=Deseo%20solicitar%20mi%20afiliacion%20a%20la%20Logia%20SADV41.%20Comprendo%20el%20filtro%20de%20150%20al%20+50769362166" 
+                   class="block w-full bg-oro hover:bg-amber-500 text-black font-bold py-3 rounded transition-colors uppercase tracking-widest text-sm shadow-[0_0_15px_rgba(234,179,8,0.3)] text-center" target="_blank">
+                    1. Solicitar Vía WhatsApp
+                </a>
+                <a href="https://thesteef21.github.io/Lapizasuli/FUNDING.yml" 
+                   class="block w-full bg-slate-900 hover:bg-slate-800 text-emerald-400 border border-emerald-500/40 font-bold py-2.5 rounded transition-colors uppercase tracking-wider text-xs text-center" target="_blank">
+                    💳 Ver Más Formas de Pago (Funding)
+                </a>
+            </div>
+
+            <div class="border-t border-slate-800 pt-6">
+                <label class="block text-xs text-slate-500 font-mono mb-2">Ingresa tu clave de acceso autorizada:</label>
+                <div class="flex gap-2">
+                    <input type="password" id="access-token" placeholder="•••••••••••••••••••••" class="w-full bg-black/50 border border-slate-700 rounded px-4 py-2 text-white font-mono text-xs focus:border-oro focus:outline-none text-center tracking-widest">
+                    <button onclick="verificarLlave()" class="bg-slate-800 hover:bg-slate-700 text-white border border-slate-600 px-4 py-2 rounded font-bold transition-all cursor-pointer">➔</button>
+                </div>
+                <p id="token-error" class="text-red-500 text-xs mt-2 hidden font-mono">Clave incorrecta o no autorizada.</p>
+            </div>
+            
+            <div class="text-[10px] text-slate-600 mt-8 font-mono">El origen es 0. Transmisión protegida.</div>
+        </div>
+        
+        <div class="absolute inset-0 bg-[url('https://y2s.onrender.com/api/graphics/mundial_bg.jpg')] bg-cover bg-center opacity-10 blur-sm"></div>
+    </div>
+
+
+    <div id="sistema-principal" class="hidden bg-logia w-full min-h-screen">
+        
+        <div class="marca-background">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="100%" height="100%">
+            <defs>
+                <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#d4af37" stop-opacity="0.8"/>
+                <stop offset="100%" stop-color="#050505" stop-opacity="0"/>
+                </radialGradient>
+                <linearGradient id="beam" x1="50%" y1="0%" x2="50%" y2="100%">
+                <stop offset="0%" stop-color="#00f3ff" stop-opacity="0"/>
+                <stop offset="50%" stop-color="#00f3ff" stop-opacity="0.9"/>
+                <stop offset="100%" stop-color="#00f3ff" stop-opacity="0"/>
+                </linearGradient>
+                <filter id="neon">
+                <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+                <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+            </defs>
+            <circle cx="400" cy="400" r="350" fill="url(#glow)"/>
+            <rect x="395" y="100" width="10" height="600" fill="url(#beam)" filter="url(#neon)"/>
+            <rect x="250" y="398" width="300" height="4" fill="#d4af37" filter="url(#neon)"/>
+            <polygon points="400,200 550,480 250,480" fill="none" stroke="#d4af37" stroke-width="2" stroke-opacity="0.5"/>
+            <text x="400" y="160" font-family="Cinzel, serif" font-size="24" fill="#d4af37" text-anchor="middle" letter-spacing="4">RUCSADV41</text>
+            <text x="400" y="650" font-family="Cinzel, serif" font-size="32" fill="#00f3ff" text-anchor="middle" letter-spacing="8" filter="url(#neon)">DGI & BANCO GENERAL</text>
+            <text x="400" y="690" font-family="Courier New, monospace" font-size="14" fill="#f8fafc" text-anchor="middle" letter-spacing="2">ORIGEN [1027 = 10 = 1]</text>
+            </svg>
+        </div>
+
+        <div id="main-sidebar" class="sidebar-tabs">
+            <a href="https://thesteef21.github.io/Lapizasuli/FUNDING.yml" target="_blank" class="vertical-tab border-l-4 border-emerald-400 hover:bg-emerald-900/40">
+                <span class="icon">💵</span><span class="text text-emerald-400">Invertir / Funding (Formas de Pago)</span>
+            </a>
+            <div onclick="toggleSidebar()" class="vertical-tab border-l-4 border-slate-400 hover:bg-slate-800/40" title="Cambiar lado del menú">
+                <span class="icon">⇋</span><span class="text text-slate-300">Alternar Menú</span>
+            </div>
+        </div>
+
+        <header class="fixed w-full z-50 glass border-b border-oro/30 px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <span class="text-2xl">🛡️</span>
+                <div>
+                    <h1 class="font-serif text-xl tracking-wider text-oro font-bold leading-none">RUCSADV41 HUB</h1>
+                    <p class="text-[9px] text-slate-400 font-mono tracking-widest leading-none mt-1">DGI Y RUC | BANCO GENERAL VISA</p>
+                </div>
+            </div>
+            
+            <div class="flex flex-col items-center gap-2 hidden xl:flex">
+                <nav class="flex gap-5 text-sm uppercase tracking-wider font-medium flex-wrap justify-center">
+                    <a href="#guia-dgi" class="hover:text-oro transition-colors text-amber-200">I. Guía DGI / RUC</a>
+                    <a href="#promo-visa" class="hover:text-neonBlue transition-colors text-cyan-300">II. Promo Mundial 2026</a>
+                    <a href="#el-santisimo" class="hover:text-purple-400 transition-colors text-purple-300">III. El Santísimo</a>
+                </nav>
+            </div>
+
+            <div class="flex flex-col items-center justify-center gap-2">
+                <div id="status" class="text-[10px] text-oro font-mono text-center tracking-widest uppercase">Protocolo V.S. Activo...</div>
+                <div class="flex flex-wrap gap-2 justify-center">
+                    <button id="btnConnect" onclick="connectBinance()" class="bg-oro hover:bg-amber-600 text-navy font-bold text-xs px-3 py-2 rounded transition-all flex items-center gap-1.5 shadow-lg shadow-oro/20 cursor-pointer">
+                        ⚡ Web3 Wallet
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <main class="pt-32 pb-12 px-4 md:px-12 max-w-6xl mx-auto space-y-16">
+
+            <header class="p-12 border border-oro/20 text-center relative overflow-hidden rounded-2xl logia-card">
+                <div class="absolute inset-0 bg-gradient-to-b from-yellow-900/10 to-transparent pointer-events-none"></div>
+                <div class="triangulo-trinidad mb-8"></div>
+                <h1 class="text-4xl md:text-5xl font-mason text-oro esoterico-glow uppercase tracking-[0.25em]">RUCSADV41</h1>
+                <p class="text-xs md:text-sm uppercase tracking-[0.6em] text-slate-400 mt-4 border-t border-oro/30 inline-block pt-3">Guía de Control Tributario y Promociones Oficiales</p>
+            </header>
+
+            <section id="guia-dgi" class="logia-card p-8 md:p-12 rounded-xl">
+                <div class="geometria-bg"></div>
+                <div class="relative z-10">
+                    <h2 class="text-2xl text-oro mb-8 border-l-4 border-oro pl-5 tracking-widest flex items-center gap-3 font-mason">
+                        <span class="text-sm opacity-50">I.</span> GUÍA DGI & RUC <span class="text-[10px] text-slate-500 font-mono tracking-normal ml-auto">(Libro de Control Tributario)</span>
+                    </h2>
+                    
+                    <div class="bg-black/60 p-6 rounded-lg border border-slate-800 mb-6">
+                        <h3 class="text-lg font-bold text-slate-200 mb-3 border-b border-slate-700 pb-2">Clasificación de Gastos para la DGI (Panamá)</h3>
+                        <p class="text-sm text-slate-400 mb-4 font-sans leading-relaxed">
+                            Para mantener el orden fiscal en cumplimiento con los estándares de la Dirección General de Ingresos (DGI), es imperativo clasificar correctamente los comprobantes de pago (ej. Yappy). A continuación se muestra un modelo de "Libro de Control" estandarizado que protege los datos personales.
+                        </p>
+                        
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-sm text-slate-300 table-custom">
+                                <thead>
+                                    <tr>
+                                        <th>ID Interno</th>
+                                        <th>Fecha</th>
+                                        <th>Entidad / Acreedor</th>
+                                        <th>Concepto</th>
+                                        <th>Clasificación DGI</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="hover:bg-slate-800/50 transition-colors">
+                                        <td>SADV-001</td>
+                                        <td>2026-08-12</td>
+                                        <td>Institución Financiera S.A.</td>
+                                        <td>Acuerdo de financiamiento comercial</td>
+                                        <td><span class="text-emerald-400 font-bold">Deducible</span> (Obligación Comercial)</td>
+                                    </tr>
+                                    <tr class="hover:bg-slate-800/50 transition-colors">
+                                        <td>SADV-002</td>
+                                        <td>2026-08-12</td>
+                                        <td>Proveedor de Telecomunicaciones</td>
+                                        <td>Conectividad a Internet (Taller/Estudio)</td>
+                                        <td><span class="text-emerald-400 font-bold">Deducible</span> (Gasto Operativo)</td>
+                                    </tr>
+                                    <tr class="hover:bg-slate-800/50 transition-colors">
+                                        <td>SADV-003</td>
+                                        <td>2026-08-12</td>
+                                        <td>Colaborador Externo</td>
+                                        <td>Delegación empresarial / Promoción</td>
+                                        <td><span class="text-renderRed font-bold">No Deducible</span> (Gasto Promocional)</td>
+                                    </tr>
+                                    <tr class="hover:bg-slate-800/50 transition-colors">
+                                        <td>SADV-004</td>
+                                        <td>2026-08-12</td>
+                                        <td>Comercio Retail</td>
+                                        <td>Presentación personal y obsequios</td>
+                                        <td><span class="text-renderRed font-bold">No Deducible</span> (Gastos de presentación)</td>
+                                    </tr>
+                                    <tr class="hover:bg-slate-800/50 transition-colors">
+                                        <td>SADV-005</td>
+                                        <td>2026-08-12</td>
+                                        <td>Proveedor de Alimentos</td>
+                                        <td>Alimentación emergente (Línea de crédito)</td>
+                                        <td><span class="text-renderRed font-bold">No Deducible</span> (Sustento Personal)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div class="mt-6 p-4 bg-slate-900/80 border-l-2 border-oro text-xs text-slate-400 font-mono">
+                            <strong class="text-oro block mb-1">Recomendación para Declarantes:</strong> 
+                            Si operas bajo una Persona Jurídica, la normativa exige que los estados financieros estén firmados por un Contador Público Autorizado (CPA). Si eres Persona Natural (régimen simplificado), llevar esta bitácora te permitirá presentar tus ingresos en e-Tax 2.0 de forma ordenada.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="promo-visa" class="logia-card p-8 md:p-12 rounded-xl border-t-4 border-neonBlue">
+                <div class="geometria-bg"></div>
+                <div class="relative z-10">
+                    <h2 class="text-2xl text-cyan-500 mb-8 border-l-4 border-cyan-500 pl-5 tracking-widest flex items-center gap-3 font-mason text-shadow-blue">
+                        <span class="text-sm opacity-50 text-oro">II.</span> BANCO GENERAL & VISA <span class="text-[10px] text-slate-500 font-mono tracking-normal ml-auto">(FIFA World Cup 2026™)</span>
+                    </h2>
+                    
+                    <div class="bg-black/80 border border-cyan-500/40 rounded-xl p-6 md:p-8 shadow-[0_0_20px_rgba(0,243,255,0.1)]">
+                        <div class="flex items-center gap-4 mb-6 border-b border-cyan-900/50 pb-4">
+                            <span class="text-4xl">⚽</span>
+                            <div>
+                                <h3 class="text-xl text-cyan-300 font-bold uppercase tracking-wide">¡Tu Visa Estrellas te lleva a vivir la pasión!</h3>
+                                <p class="text-xs text-slate-400 font-mono">Promoción Oficial: 1 de febrero al 31 de marzo de 2026</p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-4 text-sm text-slate-300 font-sans leading-relaxed">
+                            <p>
+                                Todos los tarjetahabientes nuevos y existentes con tarjetas de crédito <strong class="text-white">Visa Estrellas Gold, Platinum y Signature</strong> de Banco General que realicen compras por un mínimo de <strong class="text-oro">US$50.00 o más</strong> por transacción, podrán participar para ser uno de los cuatro (4) ganadores de un viaje a <strong>Toronto, Canadá</strong>.
+                            </p>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
+                                <div class="bg-slate-900 p-4 rounded border border-slate-700">
+                                    <h4 class="text-cyan-400 font-bold mb-2 uppercase text-xs tracking-wider">El Premio Incluye</h4>
+                                    <ul class="list-disc list-inside space-y-1 text-xs text-slate-400">
+                                        <li>2 boletos de avión ida y vuelta (Panamá - Toronto)</li>
+                                        <li>4 noches de hospedaje en hotel 4 estrellas (con desayuno)</li>
+                                        <li>2 entradas para el partido de Panamá en el estadio BMO Field (17 de junio de 2026)</li>
+                                        <li>Transporte aeropuerto-hotel</li>
+                                    </ul>
+                                </div>
+                                <div class="bg-slate-900 p-4 rounded border border-slate-700">
+                                    <h4 class="text-oro font-bold mb-2 uppercase text-xs tracking-wider">Mecánica y Condiciones</h4>
+                                    <ul class="list-disc list-inside space-y-1 text-xs text-slate-400">
+                                        <li>El tarjetahabiente principal debe completar el formulario de registro.</li>
+                                        <li>Ganan los 4 tarjetahabientes con mayor número de transacciones elegibles.</li>
+                                        <li>El ganador y acompañante deben contar con pasaporte y visa vigente para Canadá.</li>
+                                        <li>Anuncio de ganadores: Miércoles 15 de abril de 2026.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <p class="text-xs text-slate-500 italic">
+                                *Exclusiones: No aplican tarjetas Mastercard Estrellas, corporativas ni operaciones de quasi-cash. El premio no es transferible ni canjeable.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="el-santisimo" class="logia-card p-12 md:p-16 rounded-xl text-center relative border-t-4 border-violet-500">
+                <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 bg-purple-900/20 blur-[80px] rounded-full pointer-events-none"></div>
+                <div class="relative z-10">
+                    <h2 class="text-3xl text-oro mb-10 uppercase tracking-[0.3em] font-mason esoterico-glow">
+                        <span class="text-sm opacity-50 block mb-2 tracking-widest">III.</span> EL SANTÍSIMO
+                    </h2>
+                    <div class="max-w-2xl mx-auto space-y-6 bg-gradient-to-b from-black/80 to-transparent p-10 rounded-2xl border border-oro/20">
+                        <h3 class="text-2xl md:text-3xl font-bold text-white font-mason tracking-wider uppercase mb-6">La Final Eterna</h3>
+                        <p class="text-sm md:text-base text-slate-200 leading-relaxed font-sans italic">
+                            El núcleo intocable del sistema. <br><br>
+                            <span class="text-lg md:text-xl font-bold text-oro esoterico-glow not-italic block my-4">ÆRGENTÆNA vs S(ADV41)PAIN</span>
+                        </p>
+                        <div class="pt-8 border-t border-oro/20 mt-8">
+                            <p class="text-xl font-bold text-white uppercase tracking-widest">¡Cristo está por venir!</p>
+                            <div class="text-5xl mt-6 animate-[pulse_3s_infinite]">🎚️</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+        
+        <footer class="text-center p-8 mt-12 border-t border-white/5 opacity-50 font-mono text-[10px]">
+            <p>RUCSADV41 Architecture © 2026 | El Origen es 0</p>
+        </footer>
+    </div>
+
+    <script>
+        function verificarLlave() {
+            const tokenInput = document.getElementById('access-token').value.trim();
+            const errorMsg = document.getElementById('token-error');
+            const gatekeeper = document.getElementById('gatekeeper-screen');
+            const sistemaPrincipal = document.getElementById('sistema-principal');
+
+            // Clave maestra protegida
+            const claveMaestra = "GSADV41-2026-CHRIST0";
+
+            if (tokenInput === claveMaestra) {
+                gatekeeper.classList.add('hidden');
+                sistemaPrincipal.classList.remove('hidden');
+                initNewsAccordions();
+            } else {
+                errorMsg.classList.remove('hidden');
+            }
+        }
+
+        function toggleSidebar() {
+            const sidebar = document.getElementById('main-sidebar');
+            sidebar.classList.toggle('right-aligned');
+            localStorage.setItem('sidebarPosition', sidebar.classList.contains('right-aligned') ? 'right' : 'left');
+        }
+
+        function handleCredentialResponse(response) {
+            sessionStorage.setItem("acceso_sadv41_origen", "GSADV41_AUTH");
+            alert("Identidad verificada. El Atrio reconoce tu registro digital.");
+        }
+
+        async function connectBinance() {
+            const statusBox = document.getElementById('walletStatus');
+            const addressSpan = document.getElementById('walletAddress');
+            const btnConnect = document.getElementById('btnConnect');
+
+            if (typeof window.ethereum !== 'undefined') {
+                try {
+                    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                    addressSpan.innerText = accounts[0];
+                    statusBox.classList.remove('hidden');
+                    btnConnect.innerHTML = '🌐 Wallet Connected';
+                    btnConnect.classList.replace('bg-oro', 'bg-emerald-500');
+                } catch (e) {
+                    console.error("Conexión rechazada", e);
+                }
+            } else {
+                window.open('https://web3.binance.com/en/referral?ref=ORCZSDLK', '_blank');
+            }
+        }
+
+        // Lógica de Acordeones
+        function initNewsAccordions() {
+            document.querySelectorAll('.news-accordion-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const content = this.nextElementSibling;
+                    const arrow = this.querySelector('.arrow-icon');
+                    
+                    document.querySelectorAll('.news-accordion-content').forEach(el => {
+                        if (el !== content) { 
+                            el.classList.remove('expanded'); 
+                            el.previousElementSibling.querySelector('.arrow-icon').innerText = '↓ Abrir Noticia'; 
+                        }
+                    });
+                    
+                    content.classList.toggle('expanded');
+                    if (content.classList.contains('expanded')) {
+                        arrow.innerText = '↑ Cerrar Noticia';
+                    } else {
+                        arrow.innerText = '↓ Abrir Noticia';
+                    }
+                });
+            });
+        }
+    </script>
+</body>
+</html>"""
+
+with open("RUCSADV41.html", "w", encoding="utf-8") as f:
+    f.write(html_content)
+
+print("File generated successfully: [file-tag: RUCSADV41.html]")
+
+
