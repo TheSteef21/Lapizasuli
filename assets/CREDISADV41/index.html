@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historial Crediticio | StevenDiorOficial</title>
+    
+    <!-- Tipografías Sagradas -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+
+    <!-- Configuración Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#020617',
+                        oro: '#eab308',
+                        blanco: '#f8fafc',
+                        neonBlue: '#00f3ff',
+                        emerald: '#10b981',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                        mason: ['Cinzel', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root { 
+            --oro-alquimico: #d4af37; 
+            --obsidiana: #050505; 
+        }
+
+        body {
+            background-color: var(--obsidiana);
+            color: #f8fafc;
+            overflow-x: hidden;
+        }
+
+        .bg-logia {
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+                linear-gradient(rgba(2, 6, 23, 0.85), rgba(2, 6, 23, 0.95)), 
+                url('https://y2s.onrender.com/api/graphics/mundial_bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .logia-card { 
+            background: linear-gradient(145deg, rgba(10,10,10,0.85), rgba(20,20,20,0.85));
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.9), inset 0 0 20px rgba(212, 175, 55, 0.03);
+            backdrop-filter: blur(12px);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s ease;
+        }
+
+        .logia-card:hover { 
+            border-color: rgba(212, 175, 55, 0.4); 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.9), inset 0 0 30px rgba(212, 175, 55, 0.05); 
+        }
+
+        .esoterico-glow { text-shadow: 0 0 25px rgba(212, 175, 55, 0.7); }
+        .text-shadow-blue { text-shadow: 0 0 10px rgba(0, 243, 255, 0.6); }
+        
+        .scanline {
+            width: 100%; height: 2px;
+            background: rgba(0, 209, 255, 0.15);
+            position: fixed; z-index: 9999; top: 0;
+            pointer-events: none;
+            animation: scanline 8s linear infinite;
+        }
+        @keyframes scanline { 0% { top: 0; } 100% { top: 100%; } }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-oro selection:text-navy bg-logia min-h-screen">
+    <div class="scanline"></div>
+
+    <header class="fixed w-full z-50 border-b border-oro/30 px-6 py-4 flex items-center justify-between bg-[#020617]/90 backdrop-blur-md">
+        <div class="flex items-center gap-3">
+            <span class="text-2xl text-oro">🛡️</span>
+            <div>
+                <h1 class="font-serif text-xl tracking-wider text-oro font-bold leading-none">STEVENDIOROFICIAL</h1>
+                <p class="text-[9px] text-slate-400 font-mono tracking-widest leading-none mt-1">REFERENCIA CREDITICIA | SADV41</p>
+            </div>
+        </div>
+        <div class="text-[10px] text-emerald font-mono tracking-widest uppercase border border-emerald/30 px-3 py-1 rounded bg-emerald/10">
+            Status: Solvencia Verificada
+        </div>
+    </header>
+
+    <main class="pt-32 pb-12 px-4 md:px-12 max-w-5xl mx-auto space-y-12">
+        
+        <!-- HEADER PERFIL -->
+        <header class="p-10 border border-oro/20 text-center relative rounded-2xl logia-card">
+            <h1 class="text-3xl md:text-4xl font-mason text-oro esoterico-glow uppercase tracking-[0.2em] mb-2">Steven Gómez Serrano</h1>
+            <p class="text-sm text-cyan-300 font-mono tracking-widest uppercase">@StevenDiorOficial</p>
+            
+            <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4 text-xs font-mono text-slate-300">
+                <div class="p-4 bg-black/50 rounded border border-slate-800">
+                    <span class="block text-slate-500 mb-1">CÉDULA / RUC</span>
+                    <span class="text-white font-bold">8-901-2251</span>
+                </div>
+                <div class="p-4 bg-black/50 rounded border border-slate-800">
+                    <span class="block text-slate-500 mb-1">OPERATIVA (YAPPY)</span>
+                    <span class="text-white font-bold">6936-2166</span>
+                </div>
+                <div class="p-4 bg-black/50 rounded border border-slate-800">
+                    <span class="block text-slate-500 mb-1">BASE DE OPERACIONES</span>
+                    <span class="text-white font-bold">Burunga, Panamá Oeste</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- HITO DE CRÉDITO: PAZ Y SALVO -->
+        <section class="logia-card p-8 md:p-10 rounded-xl border-t-4 border-emerald">
+            <div class="relative z-10">
+                <h2 class="text-xl text-emerald mb-6 border-l-4 border-emerald pl-4 tracking-widest flex items-center gap-3 font-mason text-shadow-blue">
+                    CERTIFICACIÓN DE PAZ Y SALVO
+                </h2>
+                
+                <div class="bg-black/80 border border-emerald/40 rounded-xl p-6 shadow-[0_0_15px_rgba(16,185,129,0.1)] flex flex-col md:flex-row gap-8 items-center">
+                    <div class="text-6xl text-emerald/80">📜</div>
+                    <div class="space-y-3 flex-1">
+                        <h3 class="text-lg text-white font-bold uppercase tracking-wide">Acuerdo Finalizado: pak2z8m</h3>
+                        <p class="text-sm text-slate-300 font-sans leading-relaxed text-justify">
+                            La institución financiera <strong>CREDIYA, S.A.</strong> certifica formalmente la cancelación total de la deuda asociada al contrato adquirido por el cliente. No se registran saldos morosos, demostrando una disciplina financiera impecable y cumplimiento absoluto de los términos acordados.
+                        </p>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4 text-xs font-mono border-t border-slate-800 pt-4">
+                            <div>
+                                <span class="block text-slate-500">Fecha de Emisión:</span>
+                                <span class="text-emerald font-bold">14/08/2026</span>
+                            </div>
+                            <div>
+                                <span class="block text-slate-500">Aprobado por:</span>
+                                <span class="text-white">Carlos Andrés Vargas</span>
+                            </div>
+                            <div>
+                                <span class="block text-slate-500">Documento Soporte:</span>
+                                <span class="text-oro">document (46).pdf</span>
+                            </div>
+                            <div>
+                                <span class="block text-slate-500">Estado:</span>
+                                <span class="text-emerald font-bold uppercase">Completado</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DETALLE DEL FINANCIAMIENTO -->
+        <section class="logia-card p-8 md:p-10 rounded-xl">
+            <h2 class="text-xl text-oro mb-6 border-l-4 border-oro pl-4 tracking-widest font-mason">
+                DESGLOSE DE OBLIGACIÓN CANCELADA
+            </h2>
+            
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm text-slate-300 text-left font-mono">
+                    <thead>
+                        <tr>
+                            <th class="border-b border-oro/30 pb-3 text-oro">Concepto</th>
+                            <th class="border-b border-oro/30 pb-3 text-oro">Detalle Técnico</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-800">
+                        <tr class="hover:bg-slate-800/30">
+                            <td class="py-4">Dispositivo Adquirido</td>
+                            <td class="py-4 text-white">Sm-a165m</td>
+                        </tr>
+                        <tr class="hover:bg-slate-800/30">
+                            <td class="py-4">Monto Total Financiado</td>
+                            <td class="py-4 text-white">US$ 400.00</td>
+                        </tr>
+                        <tr class="hover:bg-slate-800/30">
+                            <td class="py-4">Cuotas Completadas</td>
+                            <td class="py-4 text-emerald font-bold">16 de 16</td>
+                        </tr>
+                        <tr class="hover:bg-slate-800/30">
+                            <td class="py-4">Valor del Último Pago</td>
+                            <td class="py-4 text-white">US$ 25.00</td>
+                        </tr>
+                        <tr class="hover:bg-slate-800/30">
+                            <td class="py-4">Confirmación Yappy (Último)</td>
+                            <td class="py-4 text-neonBlue">#FHAHK-81132111</td>
+                        </tr>
+                        <tr class="hover:bg-slate-800/30">
+                            <td class="py-4">Saldo Atrasado</td>
+                            <td class="py-4 text-emerald font-bold">US$ 0.00</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="text-center p-8 border-t border-white/5 opacity-50 font-mono text-[10px]">
+        <p>Historial Validado © 2026 | Logia SADV41 Architecture</p>
+    </footer>
+</body>
+</html>
