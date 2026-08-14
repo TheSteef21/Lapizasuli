@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Getting Started - Birdeye Data API</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 30px 20px;
+            color: #E0E0E0;
+            background-color: #0D1117;
+        }
+        h1, h2 {
+            color: #FFFFFF;
+            border-bottom: 1px solid #30363D;
+            padding-bottom: 8px;
+            margin-top: 30px;
+        }
+        h1 { font-size: 2.2em; }
+        h2 { font-size: 1.5em; }
+        p, li { font-size: 1.05em; color: #C9D1D9; }
+        a {
+            color: #58A6FF;
+            text-decoration: none;
+        }
+        a:hover { text-decoration: underline; }
+        code {
+            background: #161B22;
+            padding: 3px 6px;
+            border-radius: 6px;
+            font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+            font-size: 0.9em;
+            color: #E6EDF3;
+        }
+        pre {
+            background: #161B22;
+            border: 1px solid #30363D;
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+            color: #A5D6FF;
+        }
+        .meta {
+            font-size: 0.85em;
+            color: #8B949E;
+            margin-bottom: 25px;
+        }
+        img {
+            max-width: 100%;
+            border-radius: 8px;
+            margin: 20px 0;
+            border: 1px solid #30363D;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="meta">
+        Updated at: 2026-08-06T11:25:57.000Z<br>
+        Fetch the complete documentation index at: <a href="https://docs.birdeye.so/llms.txt" target="_blank">https://docs.birdeye.so/llms.txt</a>. Use this file to discover all available pages before exploring further.
+    </div>
+
+    <h1>Getting Started</h1>
+
+    <p>Birdeye Data API is a full-spectrum blockchain and DEX data platform for teams that need production-grade crypto market intelligence across tokens, pairs, wallets, traders, protocols, and chains.</p>
+
+    <p>From real-time prices, OHLCV, liquidity, and transaction flow to holder analytics, token and pair overviews, wallet portfolio and PnL, smart money, discovery, security, and blockchain-level utilities, Birdeye gives you a unified data layer for building serious crypto products at scale.</p>
+
+    <p>Use it to power exchange interfaces, trading terminals, bots, market-making systems, quant research, alpha screeners, portfolio apps, wallet intelligence tools, alerting systems, analytics dashboards, and back-office data pipelines. Whether your users are retail traders, pro desks, analysts, or infrastructure teams, Birdeye helps you ship faster with broad market coverage and API surfaces that support both lightweight integrations and data-heavy workflows.</p>
+
+    <p>To start, create an account at <a href="https://bds.birdeye.so" target="_blank">bds.birdeye.so</a>, generate an API key from the <code>Security</code> tab, and send it in the <code>X-API-KEY</code> header on every request.</p>
+
+    <p>Use this flow to start calling Birdeye APIs:</p>
+    <ol>
+        <li>Create or sign in to your account at <a href="https://bds.birdeye.so" target="_blank">bds.birdeye.so</a>.</li>
+        <li>In the dashboard, open the <code>Security</code> tab.</li>
+        <li>Click <code>Generate key</code> to create an API key.</li>
+        <li>Copy the key and keep it secure.</li>
+        <li>Use that key in the <code>X-API-KEY</code> header when calling Birdeye APIs.</li>
+    </ol>
+
+    <h2>1. Create your BDS account</h2>
+    <ul>
+        <li>Go to <a href="https://bds.birdeye.so" target="_blank">bds.birdeye.so</a></li>
+        <li>Sign up or sign in</li>
+        <li>Choose the package that matches your usage and data needs</li>
+    </ul>
+
+    <h2>2. Generate an API key</h2>
+    <ul>
+        <li>In the BDS dashboard, open <code>Security</code></li>
+        <li>Click <code>Generate key</code></li>
+        <li>Save the key immediately after creation</li>
+        <li>Optionally configure whitelist and blacklist rules for production use</li>
+    </ul>
+    
+    <!-- Referencia visual de la clave API -->
+    <img src="1786687296482.jpeg" alt="Birdeye Security Dashboard showing SADV41 API key generation">
+
+    <h2>3. Make your first request</h2>
+    <pre><code>curl --request GET \
+  --url 'https://public-api.birdeye.so/defi/price?address=So11111111111111111111111111111111111111112' \
+  --header 'X-API-KEY: 1837f0b03aa342ff831d5ece69ca42fd' \
+  --header 'x-chain: solana'</code></pre>
+
+    <!-- Referencia visual de la documentación -->
+    <img src="1786687297760.jpeg" alt="Birdeye documentation mobile view">
+
+    <h2>4. Next steps</h2>
+    <ul>
+        <li>Read <a href="/reference/birdeye-api-authentication">Authentication</a></li>
+        <li>Check package access in <code>Resources &gt; Data Accessibility by Packages</code></li>
+        <li>Check endpoint pricing in <code>Resources &gt; Compute Unit Cost</code></li>
+    </ul>
+
+</body>
+</html>
