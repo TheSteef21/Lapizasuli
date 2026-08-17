@@ -1,322 +1,865 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- Meta Tags Básicos -->
-<title>IMA Agroferias | Sovereign Hub</title>
-<meta name="description" content="Calendario Oficial de Abastecimiento - Agroferias IMA. Verifica los puntos de venta vigentes a nivel nacional.">
-<!-- Open Graph / Vista previa para WhatsApp, Facebook, etc. -->
-<meta property="og:type" content="website">
-<meta property="og:url" content="[https://thesteef21.github.io/Lapizasuli/IMA.html](https://thesteef21.github.io/Lapizasuli/IMA.html)">
-<meta property="og:title" content="IMA Agroferias | Sovereign Hub">
-<meta property="og:description" content="Calendario Oficial de Abastecimiento - Agroferias IMA. Verifica los puntos de venta vigentes a nivel nacional.">
-<meta property="og:image" content="[https://thesteef21.github.io/Lapizasuli/assets/IMA/InShot_20260714_092016975.jpg](https://thesteef21.github.io/Lapizasuli/assets/IMA/InShot_20260714_092016975.jpg)">
-<meta property="og:image:secure_url" content="[https://thesteef21.github.io/Lapizasuli/assets/IMA/InShot_20260714_092016975.jpg](https://thesteef21.github.io/Lapizasuli/assets/IMA/InShot_20260714_092016975.jpg)">
-<meta property="og:image:type" content="image/jpeg">
-<meta property="og:image:width" content="600">
-<meta property="og:image:height" content="600">
-<!-- Twitter Cards / Vista previa para X (Twitter), Discord, etc. -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="IMA Agroferias | Sovereign Hub">
-<meta name="twitter:description" content="Calendario Oficial de Abastecimiento - Agroferias IMA. Verifica los puntos de venta vigentes a nivel nacional.">
-<meta name="twitter:image" content="[https://thesteef21.github.io/Lapizasuli/assets/IMA/InShot_20260714_092016975.jpg](https://thesteef21.github.io/Lapizasuli/assets/IMA/InShot_20260714_092016975.jpg)">
-<script src="[https://cdn.tailwindcss.com](https://cdn.tailwindcss.com)"></script>
-<link href="[https://fonts.googleapis.com/css2?family=Inter:wght=300;400;600&family=Playfair+Display:ital,wght=0,700;1,700&display=swap](https://fonts.googleapis.com/css2?family=Inter:wght=300;400;600&family=Playfair+Display:ital,wght=0,700;1,700&display=swap)" rel="stylesheet">
-<script src="[https://cdn.jsdelivr.net/npm/@web3auth/modal@8](https://cdn.jsdelivr.net/npm/@web3auth/modal@8)"></script>
-<script src="[https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.0/ethers.umd.min.js](https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.0/ethers.umd.min.js)"></script>
-<script>
-tailwind.config = {
-theme: {
-extend: {
-colors: {
-navy: '#020617', oro: '#eab308', blanco: '#f8fafc',
-borgona: '#4a0010', neonGreen: '#10b981', neonBlue: '#00f3ff', renderRed: '#da3637'
-},
-fontFamily: { sans: ['Inter', 'sans-serif'], serif: ['Playfair Display', 'serif'] }
-}
-}
-}
-</script>
-<style>
-body {
-background-color: #020617;
-background-image: linear-gradient(rgba(2, 6, 23, 0.85), rgba(2, 6, 23, 0.98)), url('https://y2s.onrender.com/api/graphics/mundial_bg.jpg');
-background-size: cover; background-position: center; background-attachment: fixed; color: #f8fafc;
-}
-.glass { background: rgba(2, 6, 23, 0.85); backdrop-filter: blur(12px); border: 1px solid rgba(16, 185, 129, 0.3); }
-.glass-table { background: rgba(10, 15, 30, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(16, 185, 129, 0.4); box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5); }
-.text-shadow-oro { text-shadow: 0 0 10px rgba(234, 179, 8, 0.5); }
-.text-shadow-green { text-shadow: 0 0 10px rgba(16, 185, 129, 0.6); }
-.scanline {
-width: 100%; height: 2px; background: rgba(16, 185, 129, 0.2);
-position: fixed; z-index: 50; top: 0; pointer-events: none; animation: scanline 8s linear infinite;
-}
-@keyframes scanline { 0% { top: 0; } 100% { top: 100%; } }
-/* Pestañas Laterales */
-.sidebar-tabs { position: fixed; left: 0; top: 50%; transform: translateY(-50%); z-index: 45; display: flex; flex-direction: column; gap: 12px; }
-.vertical-tab {
-display: flex; align-items: center; background: rgba(2, 6, 23, 0.95);
-padding: 12px 15px; border-radius: 0 15px 15px 0; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-width: 60px; overflow: hidden; white-space: nowrap; cursor: pointer; box-shadow: 4px 4px 15px rgba(0,0,0,0.5);
-}
-.vertical-tab:hover { width: 280px; padding-left: 20px; }
-.vertical-tab span.icon { font-size: 1.5rem; min-width: 30px; }
-.vertical-tab span.text { margin-left: 15px; font-weight: bold; opacity: 0; transition: opacity 0.3s; font-size: 0.85rem; letter-spacing: 0.05em; }
-.vertical-tab:hover span.text { opacity: 1; transition-delay: 0.1s; }
-.tab-ima { border-left: 4px solid #3b82f6; border-top: 1px solid rgba(59,130,246,0.3); border-right: 1px solid rgba(59,130,246,0.3); border-bottom: 1px solid rgba(59,130,246,0.3); background: rgba(30, 58, 138, 0.4); }
-.tab-col { border-left: 4px solid #10b981; border-top: 1px solid rgba(16,185,129,0.3); border-right: 1px solid rgba(16,185,129,0.3); border-bottom: 1px solid rgba(16,185,129,0.3); }
-.tab-col:hover { background: rgba(6, 78, 59, 0.4); }
-@media (max-width: 768px) {
-.sidebar-tabs { top: 85%; transform: translateY(0); gap: 8px; }
-.vertical-tab { width: 50px; padding: 10px; border-radius: 0 10px 10px 0; }
-.vertical-tab span.icon { font-size: 1.2rem; }
-.vertical-tab:hover { width: 240px; }
-.vertical-tab span.text { font-size: 0.75rem; }
-}
-.hide-scrollbar::-webkit-scrollbar { display: none; }
-.hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-</style>
-</head>
-<body class="font-sans antialiased selection:bg-emerald-500 selection:text-navy overflow-x-hidden">
-<div class="scanline"></div>
-<div class="sidebar-tabs">
-<a href="javascript:void(0)" class="vertical-tab tab-ima cursor-default">
-<span class="icon">🍚</span>
-<span class="text text-blue-200">Arroz barato cerca de ti! 🇵🇦</span>
-</a>
-<a href="[https://thesteef21.github.io/Lapizasuli/ColombiaPTY.html](https://thesteef21.github.io/Lapizasuli/ColombiaPTY.html)" target="_blank" class="vertical-tab tab-col">
-<span class="icon">💸</span>
-<span class="text text-emerald-300">PRÉSTAMOS FÁCILES! 🇵🇦🇨🇴</span>
-</a>
-</div>
-<header class="fixed w-full z-50 glass border-b border-emerald-500/30 px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
-<div class="flex items-center gap-3">
-<span class="text-2xl">🥬</span>
-<div>
-<h1 class="font-serif text-xl tracking-wider text-emerald-400 font-bold text-shadow-green">IMA HUB</h1>
-<p class="text-[9px] text-slate-400 font-mono tracking-widest">SADV41 FOOD SECURITY</p>
-</div>
-</div>
-<nav class="flex gap-6 text-sm uppercase tracking-wider font-medium flex-wrap justify-center">
-<a href="[https://thesteef21.github.io/Lapizasuli/GSADV41.html](https://thesteef21.github.io/Lapizasuli/GSADV41.html)" class="hover:text-oro transition-colors text-amber-300 font-bold flex items-center gap-1">🛡️ Volver a GSADV41</a>
-</nav>
-<div class="flex flex-wrap gap-2 justify-center">
-<button id="btnConnect" onclick="connectBinance()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs px-4 py-2 rounded transition-all flex items-center gap-1.5 shadow-lg shadow-emerald-500/20 cursor-pointer border border-emerald-400/50">
-⚡ Connect Web3 Wallet
-</button>
-</div>
-</header>
-<main class="pt-36 pb-12 px-4 md:px-12 max-w-6xl mx-auto space-y-12">
-<div id="walletStatus" class="hidden max-w-lg mx-auto p-4 bg-gray-900/90 border border-emerald-500/40 rounded-xl font-mono shadow-2xl">
-<div class="flex items-center gap-2 mb-1">
-<span class="relative flex h-2 w-2">
-<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-<span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-</span>
-<p class="text-[10px] text-slate-400 uppercase tracking-widest">Web3 Pipeline Active</p>
-</div>
-<p class="text-xs text-slate-300 break-all">Dirección: <span id="walletAddress" class="text-emerald-400 font-bold select-all"></span></p>
-</div>
-<section id="agroferias-seccion" class="glass-table rounded-2xl overflow-hidden relative">
-<div class="absolute top-[-50px] right-[-50px] w-64 h-64 bg-blue-600/20 rounded-full blur-[100px] pointer-events-none"></div>
-<div class="absolute bottom-[-50px] left-[-50px] w-64 h-64 bg-emerald-600/20 rounded-full blur-[100px] pointer-events-none"></div>
-<div class="p-8 border-b border-emerald-500/20 bg-gradient-to-b from-emerald-900/40 to-transparent flex flex-col md:flex-row justify-between items-center gap-6 relative z-10">
-<div class="text-center md:text-left">
-<h2 class="font-serif text-3xl md:text-4xl text-white font-extrabold tracking-wider uppercase text-shadow-green flex items-center gap-3 justify-center md:justify-start">
-Agroferias IMA
-</h2>
-<p class="text-oro font-bold text-sm md:text-base tracking-widest mt-2 uppercase">Calendario Oficial de Abastecimiento</p>
-<div class="mt-4 inline-block bg-blue-900/50 border border-blue-400/50 px-4 py-2 rounded-full text-xs font-bold text-blue-200 shadow-[0_0_15px_rgba(59,130,246,0.3)]">
-🍚 Arroz: 5 libras por $1.25
-</div>
-</div>
-<div class="bg-black/60 border border-emerald-500/50 rounded-xl p-4 text-right shadow-lg backdrop-blur-md min-w-[250px]">
-<span class="text-emerald-400 text-[10px] uppercase tracking-widest font-bold flex items-center gap-2 justify-end mb-2">
-<span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_8px_#10b981]"></span>
-Fuente Oficial Confirmada
-</span>
-<div class="space-y-1.5 text-xs font-mono text-slate-300">
-<p class="flex justify-between border-b border-white/10 pb-1"><span>Fecha:</span> <strong class="text-white">23 de Julio, 2026</strong></p>
-<p class="flex justify-between border-b border-white/10 pb-1"><span>Apertura:</span> <strong class="text-neonBlue">8:00 a.m.</strong></p>
-<p class="flex justify-between"><span>Alcance:</span> <strong class="text-oro">A nivel nacional</strong></p>
-</div>
-</div>
-</div>
-<div class="p-6 md:p-8 relative z-10 bg-slate-950/40">
-<div class="flex flex-wrap gap-4 mb-6 border-b border-slate-700/50 pb-4">
-<button onclick="showTab('panama')" id="btn-panama" class="flex-1 md:flex-none py-3 px-6 rounded-lg font-bold text-sm transition-all duration-300 bg-emerald-600 text-white shadow-[0_0_15px_rgba(16,185,129,0.5)] border border-emerald-400">
-📍 Panamá y Oeste
-</button>
-<button onclick="showTab('interior')" id="btn-interior" class="flex-1 md:flex-none py-3 px-6 rounded-lg font-bold text-sm transition-all duration-300 bg-slate-800 text-slate-400 hover:bg-slate-700 hover:text-white border border-slate-700">
-🌾 Interior del País
-</button>
-</div>
-<!-- CONTENIDO PANAMÁ Y OESTE -->
-<div id="tab-panama" class="block animate-[fadeIn_0.5s_ease-in-out]">
-<!-- BANNER ESPECIAL: LOHANNYZ GAITÁN -->
-<div class="mb-6 bg-gradient-to-r from-emerald-900/60 to-black/60 border border-emerald-500/50 rounded-xl p-4 md:p-6 flex flex-col md:flex-row items-center gap-6 shadow-[0_8px_30px_rgba(16,185,129,0.2)] relative overflow-hidden group">
-<div class="absolute inset-0 bg-emerald-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
-<img src="[https://thesteef21.github.io/Lapizasuli/assets/IMA/InShot_20260714_092016975.jpg](https://thesteef21.github.io/Lapizasuli/assets/IMA/InShot_20260714_092016975.jpg)" alt="Feria Junta Comunal Lohannyz Gaitán" class="w-full md:w-64 h-auto rounded-lg shadow-[0_0_15px_rgba(16,185,129,0.4)] border border-emerald-400/30 object-cover z-10">
-<div class="z-10 text-center md:text-left flex-1">
-<span class="inline-block px-3 py-1 mb-2 rounded-full bg-emerald-500/20 border border-emerald-400/50 text-emerald-300 text-[10px] font-bold tracking-widest uppercase animate-pulse">Evento Destacado en Burunga</span>
-<h3 class="text-xl md:text-2xl font-serif font-bold text-white mb-2 text-shadow-green">Feria de la Junta Comunal</h3>
-<p class="text-oro font-bold text-sm md:text-base tracking-wider uppercase mb-2">H.R. Lohannyz Gaitán</p>
-<div class="inline-flex items-center justify-center md:justify-start gap-2 bg-black/40 px-4 py-2 rounded-lg border border-white/10">
-<span class="text-lg">📍</span>
-<span class="text-slate-200 text-sm font-medium">Burunga, Arraiján (Panamá Oeste)</span>
-</div>
-</div>
-</div>
-<div class="overflow-x-auto hide-scrollbar rounded-xl border border-slate-700/50">
-<table class="w-full text-sm text-left whitespace-nowrap">
-<thead class="text-xs text-blue-200 uppercase bg-blue-900/30 border-b border-blue-500/30">
-<tr>
-<th scope="col" class="px-6 py-4 font-bold tracking-wider">Región</th>
-<th scope="col" class="px-6 py-4 font-bold tracking-wider">Ubicación Estratégica (23 Julio 2026)</th>
-</tr>
-</thead>
-<tbody class="divide-y divide-slate-700/50">
-<tr class="bg-black/40 hover:bg-white/[0.05] transition-colors group">
-<td class="px-6 py-5 font-bold text-oro text-base flex items-center gap-2">
-<span class="text-lg">🌉</span> Panamá Oeste
-</td>
-<td class="px-6 py-5 font-semibold text-white group-hover:text-emerald-300 transition-colors">
-Casa cultural de Lídice en el distrito de Capira
-</td>
-</tr>
-<tr class="bg-black/40 hover:bg-white/[0.05] transition-colors group">
-<td class="px-6 py-5 font-bold text-neonBlue text-base flex items-center gap-2">
-<span class="text-lg">🏙️</span> Panamá
-</td>
-<td class="px-6 py-5 font-semibold text-white group-hover:text-emerald-300 transition-colors">
-Iglesia San Agustín en Villa Zaita en el corregimiento de Ernesto Córdoba Campos en el distrito de Panamá
-</td>
-</tr>
-<tr class="bg-black/40 hover:bg-white/[0.05] transition-colors group">
-<td class="px-6 py-5 font-bold text-emerald-400 text-base flex items-center gap-2">
-<span class="text-lg">🌅</span> Panamá Este
-</td>
-<td class="px-6 py-5 font-semibold text-white group-hover:text-emerald-300 transition-colors">
-Catrigandí y Tortí Abajo en Tortí en el distrito de Chepo
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<!-- CONTENIDO INTERIOR -->
-<div id="tab-interior" class="hidden animate-[fadeIn_0.5s_ease-in-out]">
-<div class="overflow-x-auto hide-scrollbar rounded-xl border border-slate-700/50">
-<table class="w-full text-sm text-left whitespace-nowrap">
-<thead class="text-xs text-amber-200 uppercase bg-amber-900/30 border-b border-amber-500/30">
-<tr>
-<th scope="col" class="px-6 py-4 font-bold tracking-wider">Provincia</th>
-<th scope="col" class="px-6 py-4 font-bold tracking-wider">Punto de Venta (23 Julio 2026)</th>
-</tr>
-</thead>
-<tbody class="divide-y divide-slate-700/50">
-<tr class="bg-black/40 hover:bg-white/[0.05] transition-colors group">
-<td class="px-6 py-5 font-bold text-renderRed text-base flex items-center gap-2">
-<span class="text-lg">🌋</span> Chiriquí
-</td>
-<td class="px-6 py-5 font-semibold text-white group-hover:text-amber-300 transition-colors">
-Cancha comunal de Alanje en el distrito de Alanje
-</td>
-</tr>
-<tr class="bg-black/40 hover:bg-white/[0.05] transition-colors group">
-<td class="px-6 py-5 font-bold text-purple-400 text-base flex items-center gap-2">
-<span class="text-lg">⛰️</span> Coclé
-</td>
-<td class="px-6 py-5 font-semibold text-white group-hover:text-amber-300 transition-colors">
-Casa local de San Juan de Dios en el distrito de Antón
-</td>
-</tr>
-<tr class="bg-black/40 hover:bg-white/[0.05] transition-colors group">
-<td class="px-6 py-5 font-bold text-orange-400 text-base flex items-center gap-2">
-<span class="text-lg">🏺</span> Herrera
-</td>
-<td class="px-6 py-5 font-semibold text-white group-hover:text-amber-300 transition-colors">
-Junta Comunal de El Entradero del Castillo en el distrito de Ocú
-</td>
-</tr>
-<tr class="bg-black/40 hover:bg-white/[0.05] transition-colors group">
-<td class="px-6 py-5 font-bold text-pink-400 text-base flex items-center gap-2">
-<span class="text-lg">🌴</span> Los Santos
-</td>
-<td class="px-6 py-5 font-semibold text-white group-hover:text-amber-300 transition-colors">
-Junta Comunal de La Miel en el distrito de Las Tablas
-</td>
-</tr>
-<tr class="bg-black/40 hover:bg-white/[0.05] transition-colors group">
-<td class="px-6 py-5 font-bold text-blue-400 text-base flex items-center gap-2">
-<span class="text-lg">🌊</span> Veraguas
-</td>
-<td class="px-6 py-5 font-semibold text-white group-hover:text-amber-300 transition-colors">
-Casa comunal de La Soledad en el distrito de Soná 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GSADV41 | Logia Pluscuamperfecta & Ecosistema Unificado</title>
+    
+    <!-- Tipografías Sagradas -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    
+    <!-- Scripts Externos -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@web3auth/modal@8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.0/ethers.umd.min.js"></script>
 
-<span class="text-xs text-slate-400">Casa comunal de El Tigre en el corregimiento de El Barrito en el distrito de Atalaya</span>
-</td>
-</tr>
-<tr class="bg-black/40 hover:bg-white/[0.05] transition-colors group">
-<td class="px-6 py-5 font-bold text-emerald-500 text-base flex items-center gap-2">
-<span class="text-lg">🌿</span> Comarca Ngäbe Buglé
-</td>
-<td class="px-6 py-5 font-semibold text-white group-hover:text-amber-300 transition-colors">
-Comunidad de Salto Dupi en el distrito de Mironó
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<style>
-@keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
-</style>
-</div>
-</section>
-</main>
-<script>
-function showTab(tab) {
-document.getElementById('tab-panama').classList.add('hidden');
-document.getElementById('tab-panama').classList.remove('block');
-document.getElementById('tab-interior').classList.add('hidden');
-document.getElementById('tab-interior').classList.remove('block');
-const btnPanama = document.getElementById('btn-panama');
-const btnInterior = document.getElementById('btn-interior');
-btnPanama.className = "flex-1 md:flex-none py-3 px-6 rounded-lg font-bold text-sm transition-all duration-300 bg-slate-800 text-slate-400 hover:bg-slate-700 hover:text-white border border-slate-700";
-btnInterior.className = "flex-1 md:flex-none py-3 px-6 rounded-lg font-bold text-sm transition-all duration-300 bg-slate-800 text-slate-400 hover:bg-slate-700 hover:text-white border border-slate-700";
-document.getElementById('tab-' + tab).classList.remove('hidden');
-document.getElementById('tab-' + tab).classList.add('block');
-if (tab === 'panama') {
-btnPanama.className = "flex-1 md:flex-none py-3 px-6 rounded-lg font-bold text-sm transition-all duration-300 bg-emerald-600 text-white shadow-[0_0_15px_rgba(16,185,129,0.5)] border border-emerald-400";
-} else {
-btnInterior.className = "flex-1 md:flex-none py-3 px-6 rounded-lg font-bold text-sm transition-all duration-300 bg-amber-600 text-white shadow-[0_0_15px_rgba(245,158,11,0.5)] border border-amber-400";
-}
-}
-async function connectBinance() {
-const btn = document.getElementById('btnConnect');
-const statusDiv = document.getElementById('walletStatus');
-const addressP = document.getElementById('walletAddress');
-if (typeof window.ethereum !== 'undefined') {
-try {
-const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-const account = accounts[0];
-if (addressP) addressP.innerText = account;
-if (statusDiv) statusDiv.classList.remove('hidden');
-if (btn) {
-btn.innerHTML = "✅ Conectado";
-btn.className = "bg-emerald-600 text-white font-bold text-xs px-4 py-2 rounded transition-all shadow-md border border-emerald-400";
-}
-console.log("Sincronización Web3 establecida (IMA HUB):", account);
-} catch (error) {
-console.error("Conexión denegada", error);
-}
-} else {
-alert("No se detectó un proveedor Web3. Utiliza el dApp browser de Binance.");
-window.open('https://web3.binance.com/en/referral?ref=ORCZSDLK', '_blank');
-}
-}
-</script>
+    <!-- Configuración Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#020617',
+                        oro: '#eab308',
+                        blanco: '#f8fafc',
+                        borgona: '#4a0010',
+                        neonGreen: '#10b981',
+                        neonBlue: '#00f3ff',
+                        renderRed: '#da3637',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                        mason: ['Cinzel', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root { 
+            --oro-alquimico: #d4af37; 
+            --obsidiana: #050505; 
+            --luz-divina: #7f5af0;
+            --luz-santo: #00f3ff;
+            --borgona-sacro: #4a0010;
+        }
+
+        body {
+            background-color: var(--obsidiana);
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+                linear-gradient(rgba(2, 6, 23, 0.85), rgba(2, 6, 23, 0.95)), 
+                url('https://y2s.onrender.com/api/graphics/mundial_bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #f8fafc;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        /* --- UTILIDADES Y EFECTOS --- */
+        .glass { background: rgba(2, 6, 23, 0.85); backdrop-filter: blur(12px); border: 1px solid rgba(234, 179, 8, 0.2); }
+        .glass-mundial { background: rgba(2, 6, 23, 0.60); backdrop-filter: blur(8px); border: 1px solid rgba(16, 185, 129, 0.3); }
+        .glass-sismico { background: #161b22; border: 1px solid #30363d; }
+        .sismo-card { background-color: #1f242c; border-left: 5px solid #ff6b81; }
+        
+        .esoterico-glow { text-shadow: 0 0 25px rgba(212, 175, 55, 0.7); }
+        .text-shadow-blue { text-shadow: 0 0 10px rgba(0, 243, 255, 0.6); }
+        .text-shadow-green { text-shadow: 0 0 10px rgba(16, 185, 129, 0.6); }
+
+        .scanline {
+            width: 100%; height: 2px;
+            background: rgba(0, 209, 255, 0.15);
+            position: fixed; z-index: 9999; top: 0;
+            pointer-events: none;
+            animation: scanline 8s linear infinite;
+        }
+        @keyframes scanline { 0% { top: 0; } 100% { top: 100%; } }
+
+        /* --- PESTAÑAS VERTICALES BILATERALES --- */
+        .sidebar-tabs { position: fixed; left: 0; top: 50%; transform: translateY(-50%); z-index: 60; display: flex; flex-direction: column; gap: 12px; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+        .vertical-tab { display: flex; align-items: center; background: rgba(2, 6, 23, 0.95); padding: 12px 15px; border-radius: 0 15px 15px 0; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); width: 60px; overflow: hidden; white-space: nowrap; box-shadow: 4px 4px 15px rgba(0,0,0,0.5); cursor: pointer; }
+        .vertical-tab:hover { width: 340px; padding-left: 20px; }
+        .vertical-tab span.icon { font-size: 1.5rem; min-width: 30px; display: flex; justify-content: center; }
+        .vertical-tab span.text { margin-left: 15px; font-weight: bold; opacity: 0; transition: opacity 0.3s; font-size: 0.85rem; letter-spacing: 0.05em; }
+        .vertical-tab:hover span.text { opacity: 1; transition-delay: 0.1s; }
+        
+        .tab-slogia { border-left: 4px solid #00f3ff; } .tab-slogia:hover { background: rgba(0, 243, 255, 0.2); }
+        .tab-ima { border-left: 4px solid #3b82f6; } .tab-ima:hover { background: rgba(30, 58, 138, 0.4); }
+        .tab-col { border-left: 4px solid #10b981; } .tab-col:hover { background: rgba(6, 78, 59, 0.4); }
+        .tab-ven { border-left: 4px solid #facc15; } .tab-ven:hover { background: rgba(161, 98, 7, 0.4); }
+        .tab-cristo { border-left: 4px solid #c084fc; } .tab-cristo:hover { background: rgba(107, 33, 168, 0.4); }
+        .tab-fifa { border-left: 4px solid #22c55e; } .tab-fifa:hover { background: rgba(21, 128, 61, 0.4); }
+        .tab-funding { border-left: 4px solid #10b981; } .tab-funding:hover { background: rgba(16, 185, 129, 0.4); }
+        .tab-toggle { border-left: 4px solid #94a3b8; } .tab-toggle:hover { background: rgba(71, 85, 105, 0.4); }
+
+        .sidebar-tabs.right-aligned { left: auto; right: 0; }
+        .sidebar-tabs.right-aligned .vertical-tab { border-radius: 15px 0 0 15px; flex-direction: row-reverse; }
+        .sidebar-tabs.right-aligned .vertical-tab:hover { padding-right: 20px; padding-left: 15px; }
+        .sidebar-tabs.right-aligned .vertical-tab span.text { margin-left: 0; margin-right: 15px; text-align: right; }
+        
+        @media (max-width: 768px) {
+            .sidebar-tabs { top: 85%; gap: 8px; }
+            .vertical-tab { width: 50px; padding: 10px; }
+            .vertical-tab:hover, .sidebar-tabs.right-aligned .vertical-tab:hover { width: 280px; }
+        }
+
+        /* --- COMPONENTES LOGIA --- */
+        .logia-card { 
+            background: linear-gradient(145deg, rgba(10,10,10,0.85), rgba(20,20,20,0.85));
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.9), inset 0 0 20px rgba(212, 175, 55, 0.03);
+            backdrop-filter: blur(12px);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s ease;
+        }
+        .logia-card:hover { border-color: rgba(212, 175, 55, 0.4); box-shadow: 0 20px 40px rgba(0,0,0,0.9), inset 0 0 30px rgba(212, 175, 55, 0.05); }
+
+        .geometria-bg {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 100%; height: 100%; pointer-events: none; z-index: 0;
+            background: 
+                linear-gradient(30deg, transparent 49.5%, rgba(212, 175, 55, 0.03) 50%, transparent 50.5%),
+                linear-gradient(-30deg, transparent 49.5%, rgba(212, 175, 55, 0.03) 50%, transparent 50.5%);
+        }
+
+        /* iSADV41 Glitch / Restored */
+        @keyframes glitch {
+            0% { opacity: 1; transform: translate(0) }
+            20% { opacity: 0.8; transform: translate(-2px, 2px) }
+            40% { opacity: 0.9; transform: translate(-2px, -2px) }
+            60% { opacity: 1; transform: translate(2px, 2px) }
+            80% { opacity: 0.8; transform: translate(2px, -2px) }
+            100% { opacity: 1; transform: translate(0) }
+        }
+        .glitch-effect { animation: glitch 0.3s linear infinite; }
+        .loading-state { filter: grayscale(100%) blur(4px); opacity: 0.7; }
+        .restored { transition: all 2s cubic-bezier(0.4, 0, 0.2, 1); filter: grayscale(0%) blur(0px); opacity: 1; box-shadow: 0 0 40px rgba(0, 243, 255, 0.2); }
+
+        /* Triángulo Trinidad */
+        .triangulo-trinidad {
+            width: 0; height: 0;
+            border-left: 40px solid transparent; border-right: 40px solid transparent;
+            border-bottom: 69.3px solid rgba(212, 175, 55, 0.15); 
+            position: relative; margin: 0 auto;
+            animation: pulso-divino-trinidad 4s infinite alternate ease-in-out;
+        }
+        .triangulo-trinidad::after {
+            content: '1'; position: absolute; top: 35px; left: -5px;
+            color: var(--oro-alquimico); font-family: 'Cinzel', serif; font-size: 1.2rem;
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.8);
+        }
+        @keyframes pulso-divino-trinidad {
+            0% { filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.2)); transform: scale(1); }
+            100% { filter: drop-shadow(0 0 30px rgba(212, 175, 55, 0.9)); transform: scale(1.08); }
+        }
+
+        .marca-background {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1;
+            display: flex; justify-content: center; align-items: center; opacity: 0.15; pointer-events: none;
+        }
+
+        /* Acordeones */
+        .news-accordion-content { transition: max-height 0.4s ease-in-out, opacity 0.3s ease-in-out; opacity: 0; }
+        .news-accordion-content.expanded { opacity: 1; }
+
+        /* Fullscreen Hero */
+        #hero-header:-webkit-full-screen { width: 100%; height: 100%; }
+        #hero-header:-ms-fullscreen { width: 100%; height: 100%; }
+        #hero-header:fullscreen { width: 100%; height: 100%; }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-oro selection:text-navy overflow-x-hidden">
+
+    <div class="scanline"></div>
+
+    <!-- FONDO DE MARCA VECTORIAL GSADV41 -->
+    <div class="marca-background">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="100%" height="100%">
+          <defs>
+            <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#d4af37" stop-opacity="0.8"/>
+              <stop offset="100%" stop-color="#050505" stop-opacity="0"/>
+            </radialGradient>
+            <linearGradient id="beam" x1="50%" y1="0%" x2="50%" y2="100%">
+              <stop offset="0%" stop-color="#00f3ff" stop-opacity="0"/>
+              <stop offset="50%" stop-color="#00f3ff" stop-opacity="0.9"/>
+              <stop offset="100%" stop-color="#00f3ff" stop-opacity="0"/>
+            </linearGradient>
+            <filter id="neon">
+              <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+              <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+          <circle cx="400" cy="400" r="350" fill="url(#glow)"/>
+          <rect x="395" y="100" width="10" height="600" fill="url(#beam)" filter="url(#neon)"/>
+          <rect x="250" y="398" width="300" height="4" fill="#d4af37" filter="url(#neon)"/>
+          <polygon points="400,200 550,480 250,480" fill="none" stroke="#d4af37" stroke-width="2" stroke-opacity="0.5"/>
+          <text x="400" y="160" font-family="Cinzel, serif" font-size="24" fill="#d4af37" text-anchor="middle" letter-spacing="4">SADV41</text>
+          <text x="400" y="650" font-family="Cinzel, serif" font-size="32" fill="#00f3ff" text-anchor="middle" letter-spacing="8" filter="url(#neon)">ISAÍAS 43:19</text>
+          <text x="400" y="690" font-family="Courier New, monospace" font-size="14" fill="#f8fafc" text-anchor="middle" letter-spacing="2">ORIGEN [1027 = 10 = 1]</text>
+        </svg>
+    </div>
+
+    <!-- ==========================================
+         FASE 0: EL EMBUDO / EL VERDUGO SILENCIOSO (GATEKEEPER LOCAL)
+         ========================================== -->
+    <div id="gatekeeper-screen" class="fixed inset-0 z-[100] flex justify-center items-center p-4 bg-[#0d0f12]">
+        <div class="logia-card max-w-lg w-full p-8 md:p-10 text-center border-t-4 border-t-oro rounded-lg z-10 relative">
+            <div class="font-mono text-sm text-oro tracking-[0.15em] mb-3 uppercase">SADV41 // PROTOCOLO DE AFILIACIÓN</div>
+            <h1 class="text-2xl font-mason font-bold mb-4">¿Deseas afiliarte a la Logia?</h1>
+            
+            <p class="text-sm leading-relaxed text-slate-400 mb-6 text-justify font-sans">
+                Acceso exclusivo al sistema de información, cobertura y parámetros de seguridad. Este canal no es negociable ni está sujeto a filosofías externas. La solicitud otorga derecho a evaluación de perfil, asignación de insignias oficiales y cobertura dentro de la red.
+            </p>
+
+            <div class="bg-oro/5 border-l-2 border-oro p-4 text-xs text-left mb-6 text-slate-300">
+                <strong class="text-oro block mb-1 uppercase font-mono tracking-widest">Parámetro de Entrada (Filtro de Gravedad):</strong> 
+                Para asegurar la seriedad y el respeto por el sistema, la afiliación requiere un pago de <strong>$150</strong>. Gestiona tu pago vía WhatsApp o consulta métodos alternativos en el registro oficial.
+            </div>
+
+            <!-- Botones de Acción y Pago -->
+            <div class="space-y-3 mb-8">
+                <a href="https://wa.me/50769362166?text=Deseo%20solicitar%20mi%20afiliacion%20a%20la%20Logia%20SADV41.%20Comprendo%20el%20filtro%20de%20150%20al%20+50769362166" 
+                   class="block w-full bg-oro hover:bg-amber-500 text-black font-bold py-3 rounded transition-colors uppercase tracking-widest text-sm shadow-[0_0_15px_rgba(234,179,8,0.3)] text-center" target="_blank">
+                    1. Solicitar Vía WhatsApp (+507 6936-2166)
+                </a>
+                <a href="https://thesteef21.github.io/Lapizasuli/FUNDING.yml" 
+                   class="block w-full bg-slate-900 hover:bg-slate-800 text-emerald-400 border border-emerald-500/40 font-bold py-2.5 rounded transition-colors uppercase tracking-wider text-xs text-center" target="_blank">
+                    💳 Ver Más Formas de Pago (Funding)
+                </a>
+            </div>
+
+            <!-- Verificación con Contraseña -->
+            <div class="border-t border-slate-800 pt-6">
+                <label class="block text-xs text-slate-500 font-mono mb-2">Ingresa tu clave de acceso autorizada:</label>
+                <div class="flex gap-2">
+                    <input type="password" id="access-token" placeholder="•••••••••••••••••••••" class="w-full bg-black/50 border border-slate-700 rounded px-4 py-2 text-white font-mono text-xs focus:border-oro focus:outline-none text-center tracking-widest">
+                    <button id="btn-verificar" onclick="verificarLlaveLocal()" class="bg-slate-800 hover:bg-slate-700 text-white border border-slate-600 px-4 py-2 rounded font-bold transition-all cursor-pointer">➔</button>
+                </div>
+                <p id="token-error" class="text-red-500 text-xs mt-2 hidden font-mono">Clave incorrecta. Acceso denegado.</p>
+            </div>
+            
+            <div class="text-[10px] text-slate-600 mt-8 font-mono">El origen es 0. Transmisión protegida.</div>
+        </div>
+        
+        <!-- Fondo del Gatekeeper -->
+        <div class="absolute inset-0 bg-[url('https://y2s.onrender.com/api/graphics/mundial_bg.jpg')] bg-cover bg-center opacity-10 blur-sm"></div>
+    </div>
+
+
+    <!-- ==========================================
+         FASE 2: EL ECOSISTEMA GSADV41 (Oculto hasta pasar el Gatekeeper)
+         ========================================== -->
+    <div id="sistema-principal" class="hidden w-full min-h-screen">
+
+        <!-- POP-UP DE APOYO Y FACTURACIÓN -->
+        <div id="apoyo-popup" class="fixed inset-0 bg-black/80 backdrop-blur-md z-[9999] flex items-center justify-center transition-opacity duration-500 opacity-0 hidden">
+            <div class="bg-slate-900 border border-emerald-500/50 p-8 rounded-2xl text-center max-w-sm relative shadow-[0_0_40px_rgba(16,185,129,0.2)]">
+                <button onclick="cerrarPopupApoyo()" class="absolute top-3 right-4 text-slate-400 hover:text-white font-bold text-2xl transition-colors">&times;</button>
+                <div class="text-6xl mb-4 drop-shadow-[0_0_15px_rgba(212,175,55,0.5)]">🇵🇦🔯</div>
+                <h2 class="text-oro font-bold text-xl uppercase tracking-widest mb-4 font-mason">Misión SADV41</h2>
+                <p class="text-slate-300 text-sm mb-8 font-sans leading-relaxed">¿Te gusta nuestro proyecto? Puedes formar parte con tu apoyo, toda inversión retorna en bendición.</p>
+                
+                <a href="https://factura-88pp.onrender.com/" target="_blank" onclick="cerrarPopupApoyo()" class="block w-full bg-emerald-600 text-white font-bold py-3.5 rounded-lg hover:bg-emerald-500 transition-all shadow-[0_0_15px_rgba(16,185,129,0.4)] cursor-pointer tracking-wide">
+                    Apoyar Proyecto Ahora
+                </a>
+            </div>
+        </div>
+
+        <!-- BARRA LATERAL -->
+        <div id="main-sidebar" class="sidebar-tabs transition-all duration-500">
+            <a href="https://thesteef21.github.io/Lapizasuli/SLogia.html" target="_blank" class="vertical-tab tab-slogia">
+                <span class="icon">🎚️</span><span class="text text-cyan-300">SLogia | Conexión SADV41</span>
+            </a>
+            <a href="https://thesteef21.github.io/Lapizasuli/IMA.html" target="_blank" class="vertical-tab tab-ima">
+                <span class="icon">🍚</span><span class="text text-blue-200">Arroz barato cerca de ti! 🇵🇦</span>
+            </a>
+            <a href="https://thesteef21.github.io/Lapizasuli/ColombiaPTY.html" target="_blank" class="vertical-tab tab-col">
+                <span class="icon">💸</span><span class="text text-emerald-300">Préstamos 🇵🇦🇨🇴🇺🇸</span>
+            </a>
+            <a href="https://thesteef21.github.io/Lapizasuli/VSADV41.html" target="_blank" class="vertical-tab tab-ven">
+                <span class="icon">🇻🇪</span><span class="text text-yellow-300">Por Venezuela 🇻🇪</span>
+            </a>
+            <a href="https://thesteef21.github.io/Lapizasuli/CristoTeAma.html" target="_blank" class="vertical-tab tab-cristo">
+                <span class="icon">☦️</span><span class="text text-purple-300">Cristo Te Ama 🎚</span>
+            </a>
+            <a href="https://thesteef21.github.io/Lapizasuli/FIFA2026.html" target="_blank" class="vertical-tab tab-fifa">
+                <span class="icon">⚽</span><span class="text text-green-300">Mundial 2026 ⚽️</span>
+            </a>
+            <a href="https://factura-88pp.onrender.com/" target="_blank" class="vertical-tab tab-funding">
+                <span class="icon">💵</span><span class="text text-emerald-400">Invertir (FACTURA)</span>
+            </a>
+            <div onclick="toggleSidebar()" class="vertical-tab tab-toggle" title="Cambiar lado del menú">
+                <span class="icon">⇋</span><span class="text text-slate-300">Alternar Menú</span>
+            </div>
+        </div>
+
+        <!-- HEADER SUPERIOR -->
+        <header id="main-header" class="fixed top-0 left-0 w-full z-40 glass border-b border-oro/30 px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-4 transition-all duration-500">
+            <div class="flex items-center gap-3">
+                <span class="text-2xl">🛡️</span>
+                <div>
+                    <h1 class="font-serif text-xl tracking-wider text-oro font-bold">SOVEREIGN HUB</h1>
+                    <p class="text-[9px] text-slate-400 font-mono tracking-widest">SADV41 DIGITAL ARCHITECTURE</p>
+                </div>
+            </div>
+            
+            <div class="flex flex-col items-center gap-2 hidden lg:flex">
+                <nav class="flex gap-4 lg:gap-6 text-sm uppercase tracking-wider font-medium flex-wrap justify-center">
+                    <a href="#isadv41-seccion" class="hover:text-blue-400 transition-colors text-blue-300 font-bold">📖 Versículos</a>
+                    <a href="#historia-crece" class="hover:text-emerald-400 transition-colors text-emerald-300 font-bold">🌱 Burunga Crece</a>
+                    <a href="#noticias-seccion" class="hover:text-neonBlue transition-colors text-cyan-300">📰 Boletín</a>
+                    <a href="#world-cup-tracking" class="hover:text-emerald-400 transition-colors text-emerald-300 font-bold">⚽ Mundial</a>
+                </nav>
+            </div>
+
+            <div class="flex flex-wrap items-center justify-center gap-3">
+                <a href="https://factura-88pp.onrender.com/" target="_blank" class="bg-emerald-600/90 hover:bg-emerald-500 text-white font-bold text-xs px-4 py-2 rounded-lg border border-emerald-400/50 shadow-[0_0_15px_rgba(16,185,129,0.3)] flex items-center gap-2 animate-pulse">
+                    <span>🇵🇦</span> Apoyar <span>🔯</span>
+                </a>
+                <button onclick="simularTransito()" class="bg-slate-800 hover:bg-slate-700 text-white font-semibold text-xs px-3 py-2 rounded-lg transition-all flex items-center gap-1.5 border border-slate-700 cursor-pointer">
+                    💻 GitHub
+                </button>
+                <button id="btnConnect" onclick="connectBinance()" class="bg-oro hover:bg-amber-600 text-navy font-bold text-xs px-3 py-2 rounded-lg transition-all flex items-center gap-1.5 shadow-lg shadow-oro/20 cursor-pointer">
+                    ⚡ Web3 Wallet
+                </button>
+            </div>
+        </header>
+
+        <!-- HERO HEADER (PANTALLA COMPLETA) -->
+        <div id="hero-header" class="relative w-full h-[70vh] pt-24 overflow-hidden flex items-center justify-center bg-black border-b border-oro/30">
+            <img id="hero-asset" src="http://googleusercontent.com/generated_image_content/0" class="absolute inset-0 w-full h-full object-contain md:object-cover transition-opacity duration-[2000ms] ease-in-out opacity-100 z-10" alt="Mural en Honor a la Alcaldesa">
+
+            <div id="hero-svg" class="absolute inset-0 w-full h-full bg-navy flex items-center justify-center transition-opacity duration-[2000ms] ease-in-out opacity-0 z-10">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" class="w-full h-full object-cover">
+                    <defs>
+                        <radialGradient id="svg-glow" cx="50%" cy="50%" r="50%">
+                            <stop offset="0%" stop-color="#00f3ff" stop-opacity="0.3"/>
+                            <stop offset="100%" stop-color="#020617" stop-opacity="1"/>
+                        </radialGradient>
+                        <linearGradient id="svg-gold-line" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#eab308"/>
+                            <stop offset="50%" stop-color="#d4af37"/>
+                            <stop offset="100%" stop-color="#a16207"/>
+                        </linearGradient>
+                    </defs>
+                    <rect width="100%" height="100%" fill="url(#svg-glow)"/>
+                    <g stroke="#00f3ff" stroke-width="1" opacity="0.4">
+                        <line x1="960" y1="540" x2="400" y2="300"/>
+                        <line x1="960" y1="540" x2="1500" y2="200"/>
+                        <line x1="960" y1="540" x2="1600" y2="800"/>
+                        <line x1="960" y1="540" x2="300" y2="850"/>
+                    </g>
+                    <circle cx="960" cy="540" r="250" fill="none" stroke="url(#svg-gold-line)" stroke-width="2" stroke-dasharray="10 5" opacity="0.6">
+                        <animateTransform attributeName="transform" type="rotate" from="0 960 540" to="360 960 540" dur="60s" repeatCount="indefinite"/>
+                    </circle>
+                    <circle cx="960" cy="540" r="150" fill="none" stroke="#00f3ff" stroke-width="1" opacity="0.8">
+                        <animateTransform attributeName="transform" type="rotate" from="360 960 540" to="0 960 540" dur="40s" repeatCount="indefinite"/>
+                    </circle>
+                    <text x="960" y="520" fill="#eab308" font-family="Cinzel, serif" font-size="72" font-weight="bold" text-anchor="middle" letter-spacing="10">SADV41</text>
+                    <text x="960" y="580" fill="#00f3ff" font-family="Inter, sans-serif" font-size="24" font-weight="300" text-anchor="middle" letter-spacing="5">THE DIVINE WHISPER</text>
+                </svg>
+            </div>
+
+            <div class="absolute bottom-10 z-20 flex flex-col items-center justify-center w-full px-4">
+                <button onclick="toggleFullScreen('hero-header')" class="group relative px-8 py-3 bg-black/60 hover:bg-black/90 border border-oro/50 text-oro font-mason uppercase tracking-widest text-sm rounded-lg backdrop-blur-md transition-all duration-300 shadow-[0_0_20px_rgba(234,179,8,0.2)] hover:shadow-[0_0_30px_rgba(234,179,8,0.6)]">
+                    <span class="flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+                        </svg>
+                        Ver en Pantalla Completa
+                    </span>
+                </button>
+                <div class="mt-4 w-48 h-1 bg-white/10 rounded overflow-hidden">
+                    <div id="transition-progress" class="h-full bg-oro w-0 transition-all duration-[7000ms] ease-linear"></div>
+                </div>
+            </div>
+        </div>
+
+        <main id="main-content" class="pt-12 pb-12 px-4 md:px-12 max-w-5xl mx-auto space-y-16 transition-all duration-500">
+
+            <!-- INTRO: PALO VERTICAL -->
+            <div class="relative w-full bg-black/60 border-y border-oro/30 py-6 flex flex-col items-center justify-center overflow-hidden rounded-xl shadow-[0_0_20px_rgba(0,243,255,0.1)]">
+                <div class="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-900/20 to-transparent animate-pulse"></div>
+                <h2 class="text-neonBlue font-mason text-xl md:text-2xl tracking-[0.4em] uppercase esoterico-glow relative z-10 text-center flex items-center justify-center gap-3">
+                    <span class="text-xl">🎚️</span> PaloVertical <span class="text-white text-sm mx-1">|</span> Isaías 43:19
+                </h2>
+                <p class="text-xs md:text-sm text-slate-200 font-serif italic mt-3 max-w-2xl text-center relative z-10 px-4 leading-relaxed">
+                    "He aquí, yo hago cosa nueva; pronto saldrá a luz; ¿no la conoceréis? Otra vez abriré camino en el desierto, y ríos en la soledad."
+                </p>
+                <div class="text-[10px] text-oro font-mono tracking-widest mt-4 relative z-10 border border-oro/40 px-4 py-1 rounded-full bg-black/50 shadow-inner">
+                    LÍNEAS: 1018 ➞ ORIGEN: 10 ➞ [ 1 + 0 + 1 + 8 ]
+                </div>
+            </div>
+
+            <!-- SECCIÓN 0.5: DATOS DEL IMA (AGROFERIAS DE PRIMERO) -->
+            <section id="ima-seccion" class="flex flex-col items-center gap-6">
+                <div class="logia-card p-8 rounded-2xl w-full border-t-2 border-blue-500/50 relative overflow-hidden max-w-4xl shadow-[0_0_30px_rgba(59,130,246,0.15)]">
+                    <div class="absolute top-0 left-0 w-40 h-40 bg-blue-500/10 blur-[60px] pointer-events-none"></div>
+                    <div class="flex justify-between items-center mb-6 border-b border-gray-800 pb-4">
+                        <h2 class="text-2xl font-mason font-bold tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-200 flex items-center gap-3">
+                            <span class="text-3xl text-white">🍚</span> RUTA IMA: AGROFERIAS
+                        </h2>
+                        <span class="px-3 py-1 text-xs font-mono rounded-full bg-blue-900/50 text-blue-400 border border-blue-700 animate-pulse">
+                            NODO ACTIVO
+                        </span>
+                    </div>
+                    
+                    <p class="text-sm text-slate-300 font-mono tracking-widest mb-6 border-l-2 border-blue-500 pl-3">REPORTE OFICIAL: LUNES 17 Y MARTES 18 DE AGOSTO 2026 🇵🇦</p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <!-- Lunes 17 -->
+                        <div class="bg-black/50 border border-slate-800 p-5 rounded-xl hover:border-blue-500/50 transition-colors group">
+                            <h3 class="text-blue-400 font-bold font-mason tracking-wider mb-3 border-b border-slate-700 pb-2 group-hover:text-blue-300 transition-colors">📅 Lunes 17 de Agosto</h3>
+                            <ul class="text-xs text-slate-300 font-sans space-y-3">
+                                <li class="flex items-start gap-2">
+                                    <span class="text-blue-500 mt-0.5">📍</span>
+                                    <span><strong>Panamá Oeste:</strong> Cancha Deportiva de Burunga, Arraiján. <br><span class="text-blue-400/80 font-mono text-[10px]">Hora: 8:00 AM</span></span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="text-blue-500 mt-0.5">📍</span>
+                                    <span><strong>Panamá Centro:</strong> Sede del IMA, Pan de Azúcar, San Miguelito. <br><span class="text-blue-400/80 font-mono text-[10px]">Hora: 8:00 AM</span></span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Martes 18 -->
+                        <div class="bg-black/50 border border-slate-800 p-5 rounded-xl hover:border-blue-500/50 transition-colors group">
+                            <h3 class="text-blue-400 font-bold font-mason tracking-wider mb-3 border-b border-slate-700 pb-2 group-hover:text-blue-300 transition-colors">📅 Martes 18 de Agosto</h3>
+                            <ul class="text-xs text-slate-300 font-sans space-y-3">
+                                <li class="flex items-start gap-2">
+                                    <span class="text-blue-500 mt-0.5">📍</span>
+                                    <span><strong>Panamá Oeste:</strong> Predios de la Alcaldía de Arraiján. <br><span class="text-blue-400/80 font-mono text-[10px]">Hora: 8:00 AM</span></span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="text-blue-500 mt-0.5">📍</span>
+                                    <span><strong>Panamá Este:</strong> Junta Comunal de 24 de Diciembre. <br><span class="text-blue-400/80 font-mono text-[10px]">Hora: 8:00 AM</span></span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 text-center">
+                        <a href="https://thesteef21.github.io/Lapizasuli/IMA.html" target="_blank" class="inline-flex items-center gap-2 bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 border border-blue-500/30 text-xs font-bold px-6 py-2.5 rounded transition-colors font-mono tracking-widest uppercase cursor-pointer">
+                            <span>🔗</span> Acceder al Módulo Completo del IMA
+                        </a>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- SECCIÓN 1: iSADV41 (ALGORITMO DE VERSÍCULOS) -->
+            <section id="isadv41-seccion" class="flex flex-col items-center gap-10">
+                <div class="text-center space-y-2">
+                    <h2 class="text-cyan-400 font-mason text-xl md:text-2xl tracking-[0.4em] uppercase esoterico-glow flex items-center justify-center gap-3">
+                        <span class="text-2xl">🎚️</span> El Santísimo <span class="text-white text-sm mx-1">|</span> Atrio Digital
+                    </h2>
+                    <p class="text-xs text-slate-400 font-mono tracking-widest uppercase border-b border-oro/30 pb-4 inline-block">
+                        Flujo Directo del Espíritu — Sin Restricciones
+                    </p>
+                </div>
+
+                <div id="imageContainer" class="logia-card p-2 rounded-2xl max-w-md w-full loading-state glitch-effect transform transition-all duration-700">
+                    <div class="relative rounded-xl overflow-hidden border border-white/5 bg-black">
+                        <video autoplay loop muted playsinline class="w-full h-auto object-cover opacity-90 transition-opacity">
+                            <source src="https://thesteef21.github.io/Lapizasuli/assets/NOSTALGIA/VID-20260731-WA0202.mp4" type="video/mp4">
+                            <img src="https://thesteef21.github.io/Lapizasuli/assets/NOSTALGIA/Screenshot_20260731_215909_WhatsAppBusiness.jpg" alt="Reflexión de 16 años" class="w-full h-auto object-cover opacity-90 transition-opacity">
+                        </video>
+                    </div>
+                </div>
+
+                <div class="logia-card p-8 rounded-2xl w-full border-t-2 border-cyan-500/50 relative overflow-hidden max-w-4xl">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-cyan-500/10 blur-[50px] pointer-events-none"></div>
+                    <div class="flex justify-between items-center mb-8 border-b border-gray-800 pb-4">
+                        <h1 class="text-2xl font-mason font-bold tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-oro to-yellow-200">
+                            ALGORITMO DE VERSÍCULOS
+                        </h1>
+                        <span id="systemStatus" class="px-3 py-1 text-xs font-mono rounded-full bg-red-900/50 text-red-400 border border-red-700 animate-pulse">
+                            REINICIANDO SISTEMA...
+                        </span>
+                    </div>
+                    <div id="apiContent" class="space-y-6 font-mono text-sm hidden">
+                        <div class="border-l-4 border-cyan-500 pl-5 bg-black/40 p-4 rounded-r-lg">
+                            <p class="text-cyan-400 font-bold mb-2 tracking-widest">EXEC // JOSUÉ 1:9</p>
+                            <p id="fase1Text" class="text-gray-300 leading-relaxed font-sans text-base"></p>
+                        </div>
+                        <div class="border-l-4 border-oro pl-5 bg-black/40 p-4 rounded-r-lg mt-6">
+                            <p class="text-oro font-bold mb-2 tracking-widest">EXEC // PROVERBIOS 27:17</p>
+                            <p id="fase2Text" class="text-gray-300 leading-relaxed font-sans text-base"></p>
+                        </div>
+                        <div class="mt-10 text-center pt-6 border-t border-gray-800/50">
+                            <p id="mensajeCentral" class="text-xl font-mason font-bold text-white tracking-[0.2em] uppercase esoterico-glow"></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECCIÓN 2: TESSERACTO & BURUNGA -->
+            <section class="flex flex-col items-center gap-10">
+                <div class="logia-card p-8 rounded-2xl w-full max-w-4xl border-t-2 border-cyan-500/50 relative flex flex-col items-center overflow-hidden">
+                    <div class="absolute bottom-0 right-0 w-40 h-40 bg-cyan-500/10 blur-[60px] pointer-events-none"></div>
+                    <div class="w-full flex justify-between items-center mb-6 border-b border-gray-800 pb-4">
+                        <h3 class="text-xl font-mason font-bold tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-200">
+                            PROYECCIÓN TESSERACTO
+                        </h3>
+                        <span class="px-3 py-1 text-xs font-mono rounded-full bg-cyan-900/50 text-cyan-400 border border-cyan-700 animate-pulse">
+                            MOTOR 4D ACTIVO
+                        </span>
+                    </div>
+                    <div class="relative w-full flex justify-center mb-8">
+                        <svg id="tesseractCanvas" width="280" height="280" viewBox="-3 -3 6 6" class="overflow-visible drop-shadow-[0_0_20px_rgba(0,243,255,0.4)]">
+                            <g id="tesseractLines" stroke="rgba(0, 243, 255, 0.7)" stroke-width="0.03" stroke-linecap="round"></g>
+                            <g id="tesseractPoints" fill="#d4af37"></g>
+                        </svg>
+                    </div>
+                    <div class="w-full bg-black/50 p-6 rounded-xl border border-white/5 font-mono text-xs">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="flex flex-col gap-2"><label class="text-cyan-400 flex justify-between">Astral (XY) <span id="valXY">45°</span></label><input type="range" id="rotXY" min="0" max="360" value="45" class="accent-cyan-500"></div>
+                            <div class="flex flex-col gap-2"><label class="text-oro flex justify-between">Etérica (XZ) <span id="valXZ">45°</span></label><input type="range" id="rotXZ" min="0" max="360" value="45" class="accent-oro"></div>
+                            <div class="flex flex-col gap-2"><label class="text-cyan-400 flex justify-between">4D (XW) <span id="valXW">0°</span></label><input type="range" id="rotXW" min="0" max="360" value="0" class="accent-cyan-500"></div>
+                            <div class="flex flex-col gap-2"><label class="text-oro flex justify-between">Pliegue (ZW) <span id="valZW">0°</span></label><input type="range" id="rotZW" min="0" max="360" value="0" class="accent-oro"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECCIÓN 3: BURUNGA CRECE -->
+            <section id="historia-crece" class="flex flex-col items-center gap-10 pt-8">
+                <!-- Tarjeta Lohannyz Gaitán -->
+                <div class="flex flex-col items-center justify-center p-8 bg-white/95 backdrop-blur-md rounded-2xl shadow-[0_0_30px_rgba(16,185,129,0.3)] max-w-sm mx-auto border-b-8 border-green-600 transition-transform duration-300 hover:scale-105">
+                    <div class="text-center">
+                        <h1 class="text-3xl font-extrabold text-gray-800 tracking-tight uppercase leading-none">Burunga <span class="text-green-600">Crece</span></h1>
+                        <div class="flex items-center justify-center gap-2 mt-3">
+                            <div class="h-px w-8 bg-gray-300"></div>
+                            <h2 class="text-xl font-bold text-gray-700 tracking-wide">Lohannyz Gaitán</h2>
+                            <div class="h-px w-8 bg-gray-300"></div>
+                        </div>
+                        <p class="mt-4 text-xs font-bold text-amber-500 tracking-[0.3em] uppercase bg-amber-50 py-1 px-3 rounded-full inline-block">Comunidad Unida</p>
+                    </div>
+                </div>
+
+                <!-- Análisis Documental FEP -->
+                <div class="logia-card p-8 md:p-12 rounded-xl space-y-8 font-sans w-full max-w-4xl">
+                    <div>
+                        <h2 class="text-2xl font-mason text-oro tracking-wider uppercase mb-4 border-l-4 border-oro pl-3">Extracto del Documental (FEP)</h2>
+                        <p class="text-sm text-slate-300 leading-relaxed mb-3">El video documenta el proceso de elección de la primera Junta Local de Burunga. La comunidad, respaldada por la FEP y la Guardia Nacional, busca asegurar sus tierras (expropiadas a la familia Crespo).</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECCIÓN 4: EL SANTO (NOTICIAS & IA) -->
+            <section id="noticias-seccion" class="logia-card p-8 md:p-12 rounded-xl border-t-4 border-cyan-400">
+                <div class="geometria-bg"></div>
+                <div class="relative z-10">
+                    <h2 class="text-2xl text-cyan-500 mb-8 border-l-4 border-cyan-500 pl-5 tracking-widest flex items-center gap-3 font-mason text-shadow-blue">
+                        <span class="text-sm opacity-50 text-oro">II.</span> EL SANTO <span class="text-[10px] text-slate-500 font-mono tracking-normal ml-auto">(Boletín del Nodo & IA)</span>
+                    </h2>
+                    
+                    <div id="dynamicNewsContainer" class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+                        <div class="text-xs text-slate-400 font-mono p-6 bg-black/40 rounded-xl border border-slate-800 text-center col-span-2">
+                            Sincronizando flujo del Nodo SADV41...
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECCIÓN 5: SISMOLOGÍA & MAYORDOMÍA -->
+            <section id="monitor-sismico-seccion" class="max-w-4xl mx-auto p-6 bg-[#0d1117] border border-slate-800 rounded-2xl shadow-xl mt-12">
+                <div class="text-center py-4">
+                    <h2 class="text-renderRed font-bold text-2xl font-mason">Módulo SADV41T</h2>
+                    <p class="text-slate-400 text-xs border-b border-slate-800 pb-4">Detección de Familias Sísmicas (REDPy / USGS)</p>
+                </div>
+                <div class="flex justify-center items-center gap-4 my-4">
+                    <button id="btn-refrescar" class="bg-[#ff6b81] hover:bg-[#ff4757] text-white font-bold text-sm px-5 py-2.5 rounded-lg cursor-pointer" onclick="refrescarMonitor()">Refrescar Monitor</button>
+                    <div id="badge-estado" class="bg-renderRed/10 text-renderRed border border-renderRed/40 px-4 py-1.5 rounded-full font-bold text-xs">Sincronizando...</div>
+                </div>
+                <div id="contenedor-error" class="bg-red-500/10 border border-red-500 rounded-xl p-4 text-sm text-left hidden">
+                    <span class="font-bold text-red-500">⚠️ Modo Respaldo Activado.</span> Mostrando último registro local.
+                </div>
+                <div id="monitor-salida" class="space-y-4 mt-6"></div>
+            </section>
+
+            <section id="mayordomia-seccion" class="max-w-4xl mx-auto p-6 bg-[#0a0f1d] border border-gray-800 rounded-2xl shadow-xl mt-12 font-sans">
+                <h2 class="text-2xl font-bold border-l-4 border-oro pl-3 text-white font-mason">Administración Espiritual (Mayordomía)</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+                    <div class="bg-gray-950 p-4 rounded-xl border border-gray-800">
+                        <h4 class="text-[10px] font-semibold uppercase text-slate-400">Gobernanza Oficial (StevenDiorOficial)</h4>
+                        <p class="font-mono text-xs text-oro break-all mt-1">0x59cB5992c35d6cD0fE6Ea94436c6AAE41F6E5fDD</p>
+                    </div>
+                    <div class="bg-[#0d1117] p-4 rounded-xl border border-gray-700">
+                        <pre class="font-mono text-[11px] text-green-300"><code># .github/FUNDING.yml
+# El origen es 0, toda inversión retorna en bendición.</code></pre>
+                        <a href="https://factura-88pp.onrender.com/" target="_blank" class="block text-center mt-3 bg-emerald-600/20 hover:bg-emerald-600/40 transition-colors text-emerald-400 font-mono text-xs px-4 py-1.5 rounded">EJECUTAR INVERSIÓN (FACTURA)</a>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <footer class="text-center p-8 border-t border-white/5 opacity-50 font-mono text-[10px] uppercase">
+            <p>SADV41 Architecture © 2026 | El Origen es 0</p>
+        </footer>
+    </div>
+
+    <!-- SCRIPTS MAESTROS UNIFICADOS -->
+    <script>
+        /* === 0. VERIFICACIÓN DE CLAVE CON FILTRO GATEKEEPER === */
+        const CLAVE_ACCESO_ACTUAL = "GSADV41-2026-CHRIST0"; 
+
+        function verificarLlaveLocal() {
+            const tokenInput = document.getElementById('access-token').value.trim();
+            const errorMsg = document.getElementById('token-error');
+            const gatekeeper = document.getElementById('gatekeeper-screen');
+            const sistemaPrincipal = document.getElementById('sistema-principal');
+
+            if (!tokenInput) {
+                errorMsg.innerText = "Por favor ingresa una clave.";
+                errorMsg.classList.remove('hidden');
+                return;
+            }
+
+            if (tokenInput === CLAVE_ACCESO_ACTUAL) {
+                errorMsg.classList.add('hidden');
+                gatekeeper.classList.add('hidden');
+                sistemaPrincipal.classList.remove('hidden');
+                
+                // Ejecutar todo el ecosistema al pasar el gatekeeper
+                mostrarPopupApoyo();
+                initVersiculos();
+                initTesseract();
+                initNewsAccordions();
+                refrescarMonitor();
+                cargarNoticiasDelNodo();
+                
+                // Hero Transition Logic
+                setTimeout(() => {
+                    const progressBar = document.getElementById('transition-progress');
+                    if(progressBar) progressBar.style.width = '100%';
+                }, 50);
+
+                setTimeout(() => {
+                    const imgAsset = document.getElementById('hero-asset');
+                    const svgAsset = document.getElementById('hero-svg');
+                    if(imgAsset && svgAsset) {
+                        imgAsset.classList.replace('opacity-100', 'opacity-0');
+                        svgAsset.classList.replace('opacity-0', 'opacity-100');
+                    }
+                }, 7000);
+
+            } else {
+                errorMsg.innerText = "Clave incorrecta. Acceso denegado.";
+                errorMsg.classList.remove('hidden');
+            }
+        }
+
+        /* === 1. iSADV41 (VERSÍCULOS) === */
+        const VERSICULOS_API_URL = "https://nosadvtalgia41.onrender.com/api/estado-espiritual";
+        function initVersiculos() {
+            const imgContainer = document.getElementById("imageContainer");
+            const statusBadge = document.getElementById("systemStatus");
+            const apiContent = document.getElementById("apiContent");
+
+            if(imgContainer && apiContent) {
+                setTimeout(async () => {
+                    try {
+                        imgContainer.classList.remove("glitch-effect", "loading-state");
+                        imgContainer.classList.add("restored");
+                        let data;
+                        try {
+                            const response = await fetch(VERSICULOS_API_URL);
+                            data = await response.json();
+                        } catch (e) {
+                            data = {
+                                fase_1: { accion: "Mira que te mando que te esfuerces y seas valiente..." },
+                                fase_2: { accion: "Hierro con hierro se aguza; y así el hombre..." },
+                                mensaje_central: "El Espíritu Santo estando contigo y para ti."
+                            };
+                        }
+                        document.getElementById("fase1Text").innerText = data.fase_1.accion || data.fase_1;
+                        document.getElementById("fase2Text").innerText = data.fase_2.accion || data.fase_2;
+                        document.getElementById("mensajeCentral").innerText = data.mensaje_central || data.mensaje;
+                        apiContent.classList.remove("hidden");
+                        statusBadge.className = "px-3 py-1 text-xs font-mono rounded-full bg-green-900/50 text-green-400 border border-green-700";
+                        statusBadge.innerText = "SISTEMA RESTAURADO";
+                    } catch (error) { console.error(error); }
+                }, 2500);
+            }
+        }
+
+        /* === 2. TESSERACTO 4D === */
+        function initTesseract() {
+            const linesGroup = document.getElementById("tesseractLines");
+            if (!linesGroup) return; 
+            
+            const [rotXY, rotXZ, rotXW, rotZW] = [document.getElementById("rotXY"), document.getElementById("rotXZ"), document.getElementById("rotXW"), document.getElementById("rotZW")];
+            const [valXY, valXZ, valXW, valZW] = [document.getElementById("valXY"), document.getElementById("valXZ"), document.getElementById("valXW"), document.getElementById("valZW")];
+
+            const vertices4D = [];
+            for (let x = -1; x <= 1; x += 2) for (let y = -1; y <= 1; y += 2) for (let z = -1; z <= 1; z += 2) for (let w = -1; w <= 1; w += 2) vertices4D.push([x, y, z, w]);
+            
+            const edges = [];
+            for (let i = 0; i < 16; i++) for (let j = i + 1; j < 16; j++) {
+                let diff = i ^ j;
+                if (diff === 1 || diff === 2 || diff === 4 || diff === 8) edges.push([i, j]);
+            }
+
+            function rotate(v, angle, a1, a2) {
+                let res = [...v], rad = angle * (Math.PI / 180), cos = Math.cos(rad), sin = Math.sin(rad);
+                res[a1] = v[a1] * cos - v[a2] * sin; res[a2] = v[a1] * sin + v[a2] * cos;
+                return res;
+            }
+
+            function renderTesseract() {
+                valXY.innerText = `${rotXY.value}°`; valXZ.innerText = `${rotXZ.value}°`;
+                valXW.innerText = `${rotXW.value}°`; valZW.innerText = `${rotZW.value}°`;
+
+                let projected2D = [];
+                vertices4D.forEach(v => {
+                    let r = rotate(rotate(rotate(rotate([...v], rotXY.value, 0, 1), rotXZ.value, 0, 2), rotXW.value, 0, 3), rotZW.value, 2, 3);
+                    let distance = 2.5, w = 1 / (distance - r[3]);
+                    let x3 = r[0] * w, y3 = r[1] * w, z3 = r[2] * w;
+                    let z = 1 / (distance - z3);
+                    projected2D.push([x3 * z * 4, y3 * z * 4]);
+                });
+
+                linesGroup.innerHTML = '';
+                edges.forEach(e => {
+                    let p1 = projected2D[e[0]], p2 = projected2D[e[1]];
+                    let line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+                    line.setAttribute("x1", p1[0]); line.setAttribute("y1", p1[1]);
+                    line.setAttribute("x2", p2[0]); line.setAttribute("y2", p2[1]);
+                    linesGroup.appendChild(line);
+                });
+            }
+
+            [rotXY, rotXZ, rotXW, rotZW].forEach(s => s.addEventListener("input", renderTesseract));
+            renderTesseract();
+        }
+
+        /* === 3. POP-UP APOYO === */
+        function mostrarPopupApoyo() {
+            const p = document.getElementById("apoyo-popup");
+            if(p) {
+                p.classList.remove("hidden");
+                setTimeout(() => p.classList.remove("opacity-0"), 10);
+            }
+        }
+        function cerrarPopupApoyo() {
+            const p = document.getElementById("apoyo-popup");
+            if(p) {
+                p.classList.add("opacity-0");
+                setTimeout(() => p.classList.add("hidden"), 500);
+            }
+        }
+
+        /* === 4. UI: SIDEBAR & FULLSCREEN === */
+        function toggleSidebar() {
+            const s = document.getElementById('main-sidebar');
+            s.classList.toggle('right-aligned');
+            localStorage.setItem('sidebarPosition', s.classList.contains('right-aligned') ? 'right' : 'left');
+        }
+
+        function toggleFullScreen(elementId) {
+            const elem = document.getElementById(elementId);
+            if (!document.fullscreenElement) {
+                if (elem.requestFullscreen) { elem.requestFullscreen(); } 
+                else if (elem.webkitRequestFullscreen) { elem.webkitRequestFullscreen(); } 
+                else if (elem.msRequestFullscreen) { elem.msRequestFullscreen(); }
+            } else {
+                if (document.exitFullscreen) { document.exitFullscreen(); }
+            }
+        }
+
+        function initNewsAccordions() {
+            document.querySelectorAll('.news-accordion-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const content = this.nextElementSibling, arrow = this.querySelector('.arrow-icon');
+                    if (content.style.maxHeight) { 
+                        content.style.maxHeight = null; content.classList.remove('expanded'); 
+                        if(arrow) arrow.style.transform = 'rotate(0deg)'; 
+                    } else { 
+                        content.style.maxHeight = content.scrollHeight + "px"; content.classList.add('expanded'); 
+                        if(arrow) arrow.style.transform = 'rotate(180deg)'; 
+                    }
+                });
+            });
+        }
+
+        /* === 5. SISMOLOGÍA === */
+        async function refrescarMonitor() {
+            const s = document.getElementById("monitor-salida"), e = document.getElementById("contenedor-error"), b = document.getElementById("badge-estado");
+            if(!s) return;
+            s.innerHTML = `<div class="text-center text-xs text-slate-400 py-4">Sondeando red sísmica local...</div>`;
+            setTimeout(() => {
+                e.classList.remove("hidden");
+                b.innerText = "Modo Local";
+                b.className = "bg-red-500/10 text-red-500 border border-red-500/40 px-4 py-1.5 rounded-full font-bold text-xs tracking-wide";
+                s.innerHTML = `
+                    <div class="sismo-card border-l-4 border-cyan-500 p-4 rounded-r-xl text-left bg-slate-950/50 border border-y-slate-800 border-r-slate-800 font-sans shadow-lg">
+                        <div class="text-xs text-slate-200 font-semibold mb-1">📍 Ubicación: <span class="text-white">Zona de Subducción / Red USGS (Panamá)</span></div>
+                        <div class="text-xs text-slate-400 grid grid-cols-2 gap-y-1 font-mono mt-3">
+                            <div>📊 Magnitud: <span class="text-rose-400 font-bold">M 5.1</span></div>
+                            <div>📉 Profundidad: <span class="text-cyan-400 font-bold">26.2 km</span></div>
+                            <div class="mt-2">🔗 Familia: <span class="text-slate-300">#04 (RedPy)</span></div>
+                            <div class="mt-2">⏱️ Fecha: <span class="text-slate-300">2026-06-20</span></div>
+                        </div>
+                    </div>
+                `;
+            }, 1200);
+        }
+
+        /* === 6. NOTICIAS NODO RENDER === */
+        async function cargarNoticiasDelNodo() {
+            const container = document.getElementById("dynamicNewsContainer");
+            if (!container) return;
+            const noticiasIncrustadas = [
+                { "source": "Logia Oficial", "time": "Reciente", "title": "China reafirma apoyo a la soberanía del Canal de Panamá", "image": "https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?q=80&w=600&auto=format&fit=crop", "url": "https://share.google/TukyUrMF6z7mOFADN" },
+                { "source": "SADV41", "time": "Reciente", "title": "Pago del décimo tercer mes a servidores públicos será la próxima semana", "image": "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=600&auto=format&fit=crop", "url": "https://share.google/zBcbGErePtX1OZGNn" }
+            ];
+            let html = "";
+            noticiasIncrustadas.forEach(n => {
+                html += `
+                    <div class="bg-black/60 border border-slate-800 rounded-xl overflow-hidden shadow-lg flex flex-col justify-between group hover:border-cyan-500/50 transition-all">
+                        <div class="h-40 overflow-hidden relative">
+                            <img src="${n.image}" alt="${n.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <span class="absolute top-3 left-3 bg-black/70 backdrop-blur-md text-[10px] font-mono text-cyan-400 px-2.5 py-1 rounded-full border border-cyan-500/30">${n.source}</span>
+                        </div>
+                        <div class="p-5 flex flex-col justify-between flex-grow">
+                            <div><span class="text-[10px] text-slate-400 font-mono">${n.time}</span><h3 class="text-white font-bold text-sm md:text-base mt-1 line-clamp-2">${n.title}</h3></div>
+                            <div class="mt-4 pt-4 border-t border-slate-800 flex justify-between items-center"><a href="${n.url}" target="_blank" class="text-xs text-cyan-400 hover:text-cyan-300 font-mono font-bold">Ver Enlace ↗</a></div>
+                        </div>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
+
+        /* === 7. WEB3 Y AUTH === */
+        async function connectBinance() {
+            if (typeof window.ethereum !== 'undefined') {
+                try {
+                    const acc = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                    document.getElementById('walletAddress').innerText = acc[0];
+                    document.getElementById('walletStatus').classList.remove('hidden');
+                    document.getElementById('btnConnect').innerText = "🌐 Connected";
+                } catch (e) { console.log(e); }
+            } else window.open('https://web3.binance.com/en/referral?ref=ORCZSDLK', '_blank');
+        }
+
+        function handleCredentialResponse(response) {
+            sessionStorage.setItem("acceso_sadv41_origen", "GSADV41");
+            alert("Credencial verificada. El Atrio reconoce tu acceso.");
+        }
+        function simularTransito() { handleCredentialResponse({ credential: "mock" }); }
+
+        /* === ON LOAD === */
+        document.addEventListener("DOMContentLoaded", () => {
+            if(localStorage.getItem('sidebarPosition') === 'right') document.getElementById('main-sidebar').classList.add('right-aligned');
+        });
+    </script>
 </body>
 </html>
