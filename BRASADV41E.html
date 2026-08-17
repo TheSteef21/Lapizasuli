@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Espacio Personal Brave | SADV41 Sovereign Hub</title>
+    
+    <!-- Tipografías Sagradas -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    
+    <!-- Configuración Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#020617',
+                        oro: '#eab308',
+                        blanco: '#f8fafc',
+                        braveOrange: '#FB542B',
+                        braveBright: '#FF7B59',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                        mason: ['Cinzel', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root { 
+            --oro-alquimico: #d4af37; 
+            --obsidiana: #050505; 
+            --brave-accent: #FB542B;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            background-color: var(--obsidiana);
+            color: #f8fafc;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        .bg-brave-space {
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(251, 84, 43, 0.15) 0%, transparent 50%),
+                linear-gradient(rgba(2, 6, 23, 0.9), rgba(5, 5, 5, 0.95)), 
+                url('https://y2s.onrender.com/api/graphics/mundial_bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        
+        .glass { 
+            background: rgba(2, 6, 23, 0.85); 
+            backdrop-filter: blur(12px); 
+            border: 1px solid rgba(251, 84, 43, 0.3); 
+        }
+
+        .esoterico-glow { text-shadow: 0 0 25px rgba(251, 84, 43, 0.6); }
+        .gold-glow { filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.7)); }
+
+        .brave-card { 
+            background: linear-gradient(145deg, rgba(15,15,20,0.9), rgba(10,10,15,0.95));
+            border: 1px solid rgba(251, 84, 43, 0.2);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.8), inset 0 0 20px rgba(251, 84, 43, 0.03);
+            backdrop-filter: blur(12px);
+            transition: all 0.4s ease;
+        }
+        .brave-card:hover { 
+            border-color: rgba(251, 84, 43, 0.6); 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.9), inset 0 0 30px rgba(251, 84, 43, 0.08); 
+        }
+
+        .scanline {
+            width: 100%; height: 2px;
+            background: rgba(251, 84, 43, 0.2);
+            position: fixed; z-index: 99; top: 0;
+            pointer-events: none;
+            animation: scanline 8s linear infinite;
+        }
+        @keyframes scanline { 0% { top: 0; } 100% { top: 100%; } }
+    </style>
+</head>
+<body class="bg-brave-space min-h-screen text-slate-100 flex flex-col justify-between selection:bg-braveOrange selection:text-white">
+
+    <div class="scanline"></div>
+
+    <!-- NAVEGACIÓN SUPERIOR BRAVE x SADV41 -->
+    <header class="fixed top-0 left-0 w-full z-40 glass border-b border-braveOrange/40 px-6 py-4 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+            <span class="text-2xl">🦁</span>
+            <div>
+                <h1 class="font-mason text-lg tracking-wider text-braveOrange font-bold leading-none">ESPACIO PERSONAL BRAVE</h1>
+                <p class="text-[9px] text-slate-400 font-mono tracking-widest leading-none mt-1">SADV41 // FUSIÓN SOBERANA</p>
+            </div>
+        </div>
+        <div class="flex items-center gap-3">
+            <a href="https://brave.com/leo/?mtm_source=brave-browser&mtm_medium=brave-push&mtm_campaign=brave-leo-spanish&mtm_content=0a8887d9-daae-46e9-9ee3-26d4735f8dc2" target="_blank" class="bg-braveOrange hover:bg-orange-600 text-white font-bold text-xs px-4 py-2 rounded-lg transition-all shadow-[0_0_15px_rgba(251,84,43,0.4)]">
+                🦁 Leo AI
+            </a>
+            <a href="https://search.brave.com/?mtm_source=brave-browser&mtm_medium=brave-push&mtm_campaign=brave-search-spanish&mtm_content=d7c09610-3a8e-4a62-881e-8e1257834040" target="_blank" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 font-semibold text-xs px-4 py-2 rounded-lg transition-all">
+                🔍 Brave Search
+            </a>
+        </div>
+    </header>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="pt-28 pb-16 px-4 md:px-12 max-w-5xl mx-auto w-full space-y-12">
+        
+        <!-- SECCIÓN DE IDENTIDAD: LOGOTIPO VECTORIAL BRAVE x MOÁI x PANAMÁ -->
+        <section class="brave-card p-8 md:p-12 rounded-2xl text-center relative overflow-hidden flex flex-col items-center">
+            <div class="absolute inset-0 bg-gradient-to-b from-braveOrange/10 via-transparent to-transparent pointer-events-none"></div>
+            
+            <h2 class="text-3xl md:text-4xl text-transparent bg-clip-text bg-gradient-to-r from-braveOrange via-yellow-200 to-amber-500 font-mason font-bold tracking-[0.15em] uppercase mb-2 esoterico-glow">
+                La Novena Potencia
+            </h2>
+            <p class="text-xs md:text-sm text-slate-400 font-mono tracking-[0.2em] uppercase mb-8 border-b border-braveOrange/30 pb-4 inline-block">
+                Fusión León Brave 🦁 x Moái Monolítico 🗿 x Panamá 🇵🇦
+            </p>
+
+            <!-- CONTENEDOR SVG VECTORIAL -->
+            <div class="relative w-full max-w-[280px] aspect-square mx-auto mb-8 flex justify-center items-center p-2">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%" class="drop-shadow-[0_0_25px_rgba(251,84,43,0.4)]">
+                  <defs>
+                    <filter id="glow-brave" x="-20%" y="-20%" width="140%" height="140%">
+                      <feGaussianBlur stdDeviation="8" result="blur" />
+                      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                    </filter>
+                    <linearGradient id="moaiStone" x1="0%" y1="0%" x2="0%" y2="100%">
+                      <stop offset="0%" stop-color="#8E9399"/><stop offset="50%" stop-color="#5E656B"/><stop offset="100%" stop-color="#2A2F35"/>
+                    </linearGradient>
+                  </defs>
+                  
+                  <!-- Melena y Corona -->
+                  <polygon points="256,20 160,50 210,80 256,80" fill="#005293"/>
+                  <polygon points="256,20 352,50 302,80 256,80" fill="#C8102E"/>
+                  <polygon points="160,50 80,140 190,170 210,80" fill="#FB542B"/>
+                  <polygon points="352,50 432,140 322,170 302,80" fill="#FF7B59"/>
+                  <polygon points="80,140 90,270 190,260 190,170" fill="#003B6B"/>
+                  <polygon points="432,140 422,270 322,260 322,170" fill="#9B0C23"/>
+                  <polygon points="90,270 160,390 210,340 190,260" fill="#D3401B"/>
+                  <polygon points="422,270 352,390 302,340 322,260" fill="#E85A34"/>
+                  <polygon points="160,390 256,470 256,360 210,340" fill="#002644"/>
+                  <polygon points="352,390 256,470 256,360 302,340" fill="#6B0616"/>
+
+                  <!-- Rostro Moái -->
+                  <polygon points="210,80 302,80 302,130 210,130" fill="#7A7F85"/>
+                  <polygon points="210,130 302,130 302,170 256,190 210,170" fill="url(#moaiStone)"/>
+                  <polygon points="210,170 256,190 256,210 230,210" fill="#11151A"/>
+                  <polygon points="302,170 256,190 256,210 282,210" fill="#11151A"/>
+                  <polygon points="230,195 245,195 240,205 225,205" fill="#00f3ff" filter="url(#glow-brave)"/>
+                  <polygon points="282,195 267,195 272,205 287,205" fill="#00f3ff" filter="url(#glow-brave)"/>
+                  <polygon points="256,190 276,280 256,300 236,280" fill="#5E656B"/>
+                  <polygon points="256,190 276,280 256,300" fill="#7A7F85"/>
+                  <polygon points="210,170 236,280 256,300 256,360 210,340 190,260" fill="#4B5158"/>
+                  <polygon points="302,170 276,280 256,300 256,360 302,340 322,260" fill="#3A414A"/>
+                  <polygon points="236,280 276,280 256,310" fill="#1A1F24"/>
+                  <polygon points="230,330 282,330 270,345 242,345" fill="#202429"/>
+                  <polygon points="230,330 282,330 276,335 236,335" fill="#11151A"/>
+
+                  <!-- Estrellas Panamá -->
+                  <g transform="translate(100, 100) scale(0.6)">
+                    <polygon points="0,-20 5,-6 20,-6 8,3 12,18 0,9 -12,18 -8,3 -20,-6 -5,-6" fill="#005293" filter="url(#glow-brave)"/>
+                  </g>
+                  <g transform="translate(412, 100) scale(0.6)">
+                    <polygon points="0,-20 5,-6 20,-6 8,3 12,18 0,9 -12,18 -8,3 -20,-6 -5,-6" fill="#C8102E" filter="url(#glow-brave)"/>
+                  </g>
+                </svg>
+            </div>
+
+            <p class="text-sm text-slate-300 font-sans italic max-w-2xl mx-auto">
+                "Bajo el estandarte de la misión SADV41, el navegador Brave se integra como la herramienta soberana de privacidad, velocidad e inteligencia artificial libre de rastreadores."
+            </p>
+        </section>
+
+        <!-- ENLACES Y UTILIDADES DE BRAVE -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            
+            <!-- Tarjeta Leo AI -->
+            <div class="brave-card p-6 rounded-xl border-t-2 border-braveOrange flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="text-2xl">🦁</span>
+                        <h3 class="font-mason text-lg font-bold text-white tracking-wide">Brave Leo AI</h3>
+                    </div>
+                    <p class="text-xs text-slate-400 font-mono leading-relaxed mb-6">
+                        Inteligencia artificial integrada directamente en el navegador, diseñada para asistir sin comprometer tu privacidad ni registrar datos personales.
+                    </p>
+                </div>
+                <a href="https://brave.com/leo/?mtm_source=brave-browser&mtm_medium=brave-push&mtm_campaign=brave-leo-spanish&mtm_content=0a8887d9-daae-46e9-9ee3-26d4735f8dc2" target="_blank" class="block w-full bg-braveOrange hover:bg-orange-600 text-white font-bold py-2.5 rounded text-center text-xs transition-colors uppercase tracking-widest shadow-[0_0_15px_rgba(251,84,43,0.3)]">
+                    Acceder a Leo AI ↗
+                </a>
+            </div>
+
+            <!-- Tarjeta YouTube Ad Blocker / Escudo -->
+            <div class="brave-card p-6 rounded-xl border-t-2 border-amber-500 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="text-2xl">🛡️</span>
+                        <h3 class="font-mason text-lg font-bold text-white tracking-wide">YouTube Ad Blocker</h3>
+                    </div>
+                    <p class="text-xs text-slate-400 font-mono leading-relaxed mb-6">
+                        Disfruta de tus videos favoritos sin interrupciones publicitarias invasivas gracias al sistema de escudos nativos de Brave.
+                    </p>
+                </div>
+                <a href="https://brave.com/youtube-ad-blocker/?mtm_source=brave-browser&mtm_medium=brave-push&mtm_campaign=q2-2026&mtm_content=youtube-features" target="_blank" class="block w-full bg-amber-600 hover:bg-amber-500 text-black font-bold py-2.5 rounded text-center text-xs transition-colors uppercase tracking-widest shadow-[0_0_15px_rgba(234,179,8,0.3)]">
+                    Ver Funciones YouTube ↗
+                </a>
+            </div>
+
+        </div>
+
+        <!-- ACCESO DIRECTO A BRAVE SEARCH -->
+        <section class="brave-card p-6 rounded-xl text-center border-l-4 border-braveOrange">
+            <h3 class="text-sm font-mason uppercase tracking-widest text-braveOrange mb-2">Buscador Soberano</h3>
+            <p class="text-xs text-slate-300 mb-4 font-sans">Realiza consultas privadas y seguras con el motor de búsqueda independiente de Brave.</p>
+            <a href="https://search.brave.com/?mtm_source=brave-browser&mtm_medium=brave-push&mtm_campaign=brave-search-spanish&mtm_content=d7c09610-3a8e-4a62-881e-8e1257834040" target="_blank" class="inline-block bg-slate-900 hover:bg-slate-800 text-white border border-braveOrange/40 font-bold py-2 px-6 rounded text-xs transition-all tracking-wider uppercase">
+                Abrir Brave Search ↗
+            </a>
+        </section>
+
+    </main>
+
+    <!-- PIE DE PÁGINA -->
+    <footer class="text-center p-6 border-t border-white/5 opacity-50 font-mono text-[10px] uppercase">
+        <p>SADV41 Architecture x Brave Browser © 2026 | El Origen es 0</p>
+    </footer>
+
+</body>
+</html>
