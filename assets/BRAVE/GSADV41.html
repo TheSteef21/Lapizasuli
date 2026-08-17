@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transfiguración | SADV41 · Rostro Verdadero</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#020617',
+                        oro: '#eab308',
+                        blanco: '#f8fafc',
+                        braveOrange: '#FB542B',
+                        braveBright: '#FF7B59',
+                        gloria: '#fef3c7',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                        mason: ['Cinzel', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root { 
+            --oro-alquimico: #d4af37; 
+            --obsidiana: #050505; 
+            --brave-accent: #FB542B;
+            --luz-gloria: #fff8e7;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            background-color: var(--obsidiana);
+            color: #f8fafc;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        .bg-transfigurado {
+            background-image: 
+                radial-gradient(circle at 50% 20%, rgba(254, 243, 199, 0.12) 0%, transparent 55%),
+                radial-gradient(circle at 50% 80%, rgba(251, 84, 43, 0.08) 0%, transparent 50%),
+                linear-gradient(rgba(2, 6, 23, 0.92), rgba(5, 5, 5, 0.97));
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        
+        .glass { 
+            background: rgba(2, 6, 23, 0.88); 
+            backdrop-filter: blur(14px); 
+            border: 1px solid rgba(212, 175, 55, 0.25); 
+        }
+
+        .esoterico-glow { text-shadow: 0 0 30px rgba(254, 243, 199, 0.5), 0 0 15px rgba(251, 84, 43, 0.4); }
+        .gold-glow { filter: drop-shadow(0 0 25px rgba(212, 175, 55, 0.8)); }
+
+        .brave-card { 
+            background: linear-gradient(145deg, rgba(15,15,20,0.92), rgba(8,8,12,0.96));
+            border: 1px solid rgba(212, 175, 55, 0.18);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.85), inset 0 0 30px rgba(212, 175, 55, 0.03);
+            backdrop-filter: blur(14px);
+            transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .brave-card:hover { 
+            border-color: rgba(212, 175, 55, 0.45); 
+            box-shadow: 0 25px 50px rgba(0,0,0,0.9), inset 0 0 40px rgba(212, 175, 55, 0.07); 
+        }
+
+        /* ========== TRANSFIGURACIÓN SVG ========== */
+        .transfiguracion-container {
+            position: relative;
+            width: 100%;
+            max-width: 320px;
+            aspect-ratio: 1;
+            cursor: pointer;
+            transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .transfiguracion-container:hover {
+            transform: scale(1.04);
+        }
+
+        .svg-base, .svg-gloria {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1), filter 1.2s ease;
+        }
+
+        .svg-base {
+            opacity: 1;
+            filter: drop-shadow(0 0 20px rgba(251, 84, 43, 0.35));
+        }
+        .svg-gloria {
+            opacity: 0;
+            filter: drop-shadow(0 0 40px rgba(254, 243, 199, 0.7)) brightness(1.15);
+        }
+
+        .transfiguracion-container:hover .svg-base,
+        .transfiguracion-container.transfigurado .svg-base {
+            opacity: 0;
+        }
+        .transfiguracion-container:hover .svg-gloria,
+        .transfiguracion-container.transfigurado .svg-gloria {
+            opacity: 1;
+        }
+
+        /* Aura de luz */
+        .aura {
+            position: absolute;
+            inset: -30%;
+            background: radial-gradient(circle, rgba(254, 243, 199, 0.25) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 1.4s ease;
+            pointer-events: none;
+            border-radius: 50%;
+        }
+        .transfiguracion-container:hover .aura,
+        .transfiguracion-container.transfigurado .aura {
+            opacity: 1;
+            animation: pulso-gloria 3s ease-in-out infinite;
+        }
+
+        @keyframes pulso-gloria {
+            0%, 100% { transform: scale(1); opacity: 0.7; }
+            50% { transform: scale(1.08); opacity: 1; }
+        }
+
+        .scanline {
+            width: 100%; height: 1.5px;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.4), transparent);
+            position: fixed; z-index: 99; top: 0;
+            pointer-events: none;
+            animation: scanline 9s linear infinite;
+        }
+        @keyframes scanline { 0% { top: 0; } 100% { top: 100%; } }
+
+        .texto-revelacion {
+            opacity: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 1s ease 0.3s;
+        }
+        .transfiguracion-container:hover \~ .texto-revelacion,
+        .transfiguracion-container.transfigurado \~ .texto-revelacion {
+            opacity: 1;
+            max-height: 120px;
+        }
+    </style>
+</head>
+<body class="bg-transfigurado min-h-screen text-slate-100 flex flex-col justify-between selection:bg-oro selection:text-navy">
+
+    <div class="scanline"></div>
+
+    <!-- HEADER -->
+    <header class="fixed top-0 left-0 w-full z-40 glass border-b border-oro/30 px-6 py-4 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+            <span class="text-2xl">✝️</span>
+            <div>
+                <h1 class="font-mason text-lg tracking-wider text-oro font-bold leading-none">TRANSFIGURACIÓN</h1>
+                <p class="text-[9px] text-slate-400 font-mono tracking-widest leading-none mt-1">SADV41 // ROSTRO VERDADERO</p>
+            </div>
+        </div>
+        <div class="flex items-center gap-3">
+            <a href="https://brave.com/leo/?mtm_source=brave-browser&mtm_medium=brave-push&mtm_campaign=brave-leo-spanish&mtm_content=0a8887d9-daae-46e9-9ee3-26d4735f8dc2" target="_blank" class="bg-braveOrange hover:bg-orange-600 text-white font-bold text-xs px-4 py-2 rounded-lg transition-all shadow-[0_0_15px_rgba(251,84,43,0.4)]">
+                🦁 Leo AI
+            </a>
+            <a href="https://search.brave.com/?mtm_source=brave-browser&mtm_medium=brave-push&mtm_campaign=brave-search-spanish&mtm_content=d7c09610-3a8e-4a62-881e-8e1257834040" target="_blank" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 font-semibold text-xs px-4 py-2 rounded-lg transition-all">
+                🔍 Brave Search
+            </a>
+        </div>
+    </header>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="pt-28 pb-16 px-4 md:px-12 max-w-5xl mx-auto w-full space-y-12">
+        
+        <!-- SECCIÓN TRANSFIGURADA -->
+        <section class="brave-card p-8 md:p-12 rounded-2xl text-center relative overflow-hidden flex flex-col items-center">
+            <div class="absolute inset-0 bg-gradient-to-b from-oro/8 via-transparent to-transparent pointer-events-none"></div>
+            
+            <h2 class="text-3xl md:text-5xl text-transparent bg-clip-text bg-gradient-to-r from-oro via-yellow-100 to-amber-300 font-mason font-bold tracking-[0.12em] uppercase mb-2 esoterico-glow">
+                El Rostro Verdadero
+            </h2>
+            <p class="text-xs md:text-sm text-slate-400 font-mono tracking-[0.25em] uppercase mb-10 border-b border-oro/25 pb-4 inline-block">
+                Como es arriba · es abajo · Transfiguración
+            </p>
+
+            <!-- CONTENEDOR INTERACTIVO SVG -->
+            <div class="transfiguracion-container mx-auto mb-6" id="rostro" onclick="this.classList.toggle('transfigurado')">
+                <div class="aura"></div>
+
+                <!-- ESTADO BASE: Piedra · Moái · León -->
+                <svg class="svg-base" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                  <defs>
+                    <filter id="glow-base" x="-30%" y="-30%" width="160%" height="160%">
+                      <feGaussianBlur stdDeviation="6" result="blur"/>
+                      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                    </filter>
+                    <linearGradient id="piedra" x1="0%" y1="0%" x2="0%" y2="100%">
+                      <stop offset="0%" stop-color="#8E9399"/>
+                      <stop offset="50%" stop-color="#5E656B"/>
+                      <stop offset="100%" stop-color="#2A2F35"/>
+                    </linearGradient>
+                  </defs>
+                  
+                  <!-- Melena / Corona -->
+                  <polygon points="256,20 160,50 210,80 256,80" fill="#005293"/>
+                  <polygon points="256,20 352,50 302,80 256,80" fill="#C8102E"/>
+                  <polygon points="160,50 80,140 190,170 210,80" fill="#FB542B"/>
+                  <polygon points="352,50 432,140 322,170 302,80" fill="#FF7B59"/>
+                  <polygon points="80,140 90,270 190,260 190,170" fill="#003B6B"/>
+                  <polygon points="432,140 422,270 322,260 322,170" fill="#9B0C23"/>
+                  <polygon points="90,270 160,390 210,340 190,260" fill="#D3401B"/>
+                  <polygon points="422,270 352,390 302,340 322,260" fill="#E85A34"/>
+                  <polygon points="160,390 256,470 256,360 210,340" fill="#002644"/>
+                  <polygon points="352,390 256,470 256,360 302,340" fill="#6B0616"/>
+
+                  <!-- Rostro Moái -->
+                  <polygon points="210,80 302,80 302,130 210,130" fill="#7A7F85"/>
+                  <polygon points="210,130 302,130 302,170 256,190 210,170" fill="url(#piedra)"/>
+                  <polygon points="210,170 256,190 256,210 230,210" fill="#11151A"/>
+                  <polygon points="302,170 256,190 256,210 282,210" fill="#11151A"/>
+                  <polygon points="230,195 245,195 240,205 225,205" fill="#00f3ff" filter="url(#glow-base)"/>
+                  <polygon points="282,195 267,195 272,205 287,205" fill="#00f3ff" filter="url(#glow-base)"/>
+                  <polygon points="256,190 276,280 256,300 236,280" fill="#5E656B"/>
+                  <polygon points="256,190 276,280 256,300" fill="#7A7F85"/>
+                  <polygon points="210,170 236,280 256,300 256,360 210,340 190,260" fill="#4B5158"/>
+                  <polygon points="302,170 276,280 256,300 256,360 302,340 322,260" fill="#3A414A"/>
+                  <polygon points="236,280 276,280 256,310" fill="#1A1F24"/>
+                  <polygon points="230,330 282,330 270,345 242,345" fill="#202429"/>
+                  <polygon points="230,330 282,330 276,335 236,335" fill="#11151A"/>
+
+                  <!-- Estrellas -->
+                  <g transform="translate(100,100) scale(0.55)">
+                    <polygon points="0,-20 5,-6 20,-6 8,3 12,18 0,9 -12,18 -8,3 -20,-6 -5,-6" fill="#005293"/>
+                  </g>
+                  <g transform="translate(412,100) scale(0.55)">
+                    <polygon points="0,-20 5,-6 20,-6 8,3 12,18 0,9 -12,18 -8,3 -20,-6 -5,-6" fill="#C8102E"/>
+                  </g>
+                </svg>
+
+                <!-- ESTADO GLORIA: Rostro Transfigurado -->
+                <svg class="svg-gloria" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                  <defs>
+                    <filter id="glow-gloria" x="-40%" y="-40%" width="180%" height="180%">
+                      <feGaussianBlur stdDeviation="12" result="blur"/>
+                      <feMerge>
+                        <feMergeNode in="blur"/>
+                        <feMergeNode in="blur"/>
+                        <feMergeNode in="SourceGraphic"/>
+                      </feMerge>
+                    </filter>
+                    <linearGradient id="luz-divina" x1="0%" y1="0%" x2="0%" y2="100%">
+                      <stop offset="0%" stop-color="#fefce8"/>
+                      <stop offset="40%" stop-color="#fde68a"/>
+                      <stop offset="100%" stop-color="#d4af37"/>
+                    </linearGradient>
+                    <radialGradient id="ojo-fuego" cx="50%" cy="50%" r="50%">
+                      <stop offset="0%" stop-color="#ffffff"/>
+                      <stop offset="40%" stop-color="#fef3c7"/>
+                      <stop offset="100%" stop-color="#f59e0b"/>
+                    </radialGradient>
+                  </defs>
+
+                  <!-- Corona de Luz -->
+                  <polygon points="256,10 140,55 195,95 256,95" fill="#fef3c7" opacity="0.9"/>
+                  <polygon points="256,10 372,55 317,95 256,95" fill="#fde68a" opacity="0.9"/>
+                  <polygon points="140,55 55,150 180,185 195,95" fill="#fbbf24"/>
+                  <polygon points="372,55 457,150 332,185 317,95" fill="#f59e0b"/>
+                  <polygon points="55,150 70,290 185,275 180,185" fill="#d97706"/>
+                  <polygon points="457,150 442,290 327,275 332,185" fill="#b45309"/>
+                  <polygon points="70,290 145,410 210,355 185,275" fill="#92400e"/>
+                  <polygon points="442,290 367,410 302,355 327,275" fill="#78350f"/>
+                  <polygon points="145,410 256,490 256,380 210,355" fill="#451a03"/>
+                  <polygon points="367,410 256,490 256,380 302,355" fill="#451a03"/>
+
+                  <!-- Rostro de Luz -->
+                  <ellipse cx="256" cy="195" rx="95" ry="110" fill="url(#luz-divina)" filter="url(#glow-gloria)"/>
+                  
+                  <!-- Ojos de Gloria -->
+                  <ellipse cx="220" cy="175" rx="18" ry="14" fill="url(#ojo-fuego)" filter="url(#glow-gloria)"/>
+                  <ellipse cx="292" cy="175" rx="18" ry="14" fill="url(#ojo-fuego)" filter="url(#glow-gloria)"/>
+                  
+                  <!-- Nariz sutil -->
+                  <path d="M256 185 L268 240 L256 255 L244 240 Z" fill="#fef3c7" opacity="0.7"/>
+                  
+                  <!-- Boca serena -->
+                  <path d="M230 285 Q256 305 282 285" fill="none" stroke="#d4af37" stroke-width="4" stroke-linecap="round"/>
+                  
+                  <!-- Barba de luz -->
+                  <path d="M200 270 Q256 380 312 270 Q280 320 256 340 Q232 320 200 270" fill="#fde68a" opacity="0.6"/>
+                </svg>
+            </div>
+
+            <p class="texto-revelacion text-sm md:text-base text-oro/90 font-serif italic max-w-xl mx-auto mt-2 leading-relaxed">
+                “Y se transfiguró delante de ellos, y resplandeció su rostro como el sol, y sus vestiduras se hicieron blancas como la luz.”
+                <br><span class="text-xs text-slate-400 not-italic tracking-widest mt-2 block">— Mateo 17:2</span>
+            </p>
+
+            <p class="text-sm text-slate-300 font-sans italic max-w-2xl mx-auto mt-8">
+                Bajo el estandarte de la misión SADV41, el navegador Brave se integra como la herramienta soberana de privacidad, velocidad e inteligencia artificial libre de rastreadores.
+            </p>
+        </section>
+
+        <!-- TARJETAS -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="brave-card p-6 rounded-xl border-t-2 border-oro flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="text-2xl">🦁</span>
+                        <h3 class="font-mason text-lg font-bold text-white tracking-wide">Brave Leo AI</h3>
+                    </div>
+                    <p class="text-xs text-slate-400 font-mono leading-relaxed mb-6">
+                        Inteligencia artificial integrada directamente en el navegador, diseñada para asistir sin comprometer tu privacidad ni registrar datos personales.
+                    </p>
+                </div>
+                <a href="https://brave.com/leo/?mtm_source=brave-browser&mtm_medium=brave-push&mtm_campaign=brave-leo-spanish&mtm_content=0a8887d9-daae-46e9-9ee3-26d4735f8dc2" target="_blank" class="block w-full bg-braveOrange hover:bg-orange-600 text-white font-bold py-2.5 rounded text-center text-xs transition-colors uppercase tracking-widest shadow-[0_0_15px_rgba(251,84,43,0.3)]">
+                    Acceder a Leo AI ↗
+                </a>
+            </div>
+
+            <div class="brave-card p-6 rounded-xl border-t-2 border-amber-500 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="text-2xl">🛡️</span>
+                        <h3 class="font-mason text-lg font-bold text-white tracking-wide">YouTube Ad Blocker</h3>
+                    </div>
+                    <p class="text-xs text-slate-400 font-mono leading-relaxed mb-6">
+                        Disfruta de tus videos favoritos sin interrupciones publicitarias invasivas gracias al sistema de escudos nativos de Brave.
+                    </p>
+                </div>
+                <a href="https://brave.com/youtube-ad-blocker/?mtm_source=brave-browser&mtm_medium=brave-push&mtm_campaign=q2-2026&mtm_content=youtube-features" target="_blank" class="block w-full bg-amber-600 hover:bg-amber-500 text-black font-bold py-2.5 rounded text-center text-xs transition-colors uppercase tracking-widest shadow-[0_0_15px_rgba(234,179,8,0.3)]">
+                    Ver Funciones YouTube ↗
+                </a>
+            </div>
+        </div>
+
+        <!-- BUSCADOR -->
+        <section class="brave-card p-6 rounded-xl text-center border-l-4 border-oro">
+            <h3 class="text-sm font-mason uppercase tracking-widest text-oro mb-2">Buscador Soberano</h3>
+            <p class="text-xs text-slate-300 mb-4 font-sans">Realiza consultas privadas y seguras con el motor de búsqueda independiente de Brave.</p>
+            <a href="https://search.brave.com/?mtm_source=brave-browser&mtm_medium=brave-push&mtm_campaign=brave-search-spanish&mtm_content=d7c09610-3a8e-4a62-881e-8e1257834040" target="_blank" class="inline-block bg-slate-900 hover:bg-slate-800 text-white border border-oro/40 font-bold py-2 px-6 rounded text-xs transition-all tracking-wider uppercase">
+                Abrir Brave Search ↗
+            </a>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="text-center p-6 border-t border-white/5 opacity-60 font-mono text-[10px] uppercase">
+        <p>SADV41 Architecture × Transfiguración © 2026 | El Origen es 0 · Como es arriba, es abajo</p>
+    </footer>
+
+    <script>
+        // Permite mantener el estado transfigurado al hacer click (útil en móvil)
+        const rostro = document.getElementById('rostro');
+        rostro.addEventListener('click', () => {
+            // Ya se maneja con classList.toggle en el onclick
+        });
+    </script>
+</body>
+  </html>
