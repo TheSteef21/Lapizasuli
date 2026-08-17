@@ -1,0 +1,239 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="800" height="800">
+  <defs>
+    <!-- Gold Gradients -->
+    <linearGradient id="gold" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#D4AF37"/>
+      <stop offset="25%" stop-color="#FFF0A8"/>
+      <stop offset="50%" stop-color="#AA7C11"/>
+      <stop offset="75%" stop-color="#FCE17A"/>
+      <stop offset="100%" stop-color="#C59334"/>
+    </linearGradient>
+    <linearGradient id="gold_light" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF4CE"/>
+      <stop offset="50%" stop-color="#D4AF37"/>
+      <stop offset="100%" stop-color="#8A5A19"/>
+    </linearGradient>
+    <linearGradient id="gold_dark" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#B38B22"/>
+      <stop offset="50%" stop-color="#6B4F0B"/>
+      <stop offset="100%" stop-color="#2D2103"/>
+    </linearGradient>
+    <!-- Inner Light Glow -->
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.85"/>
+      <stop offset="15%" stop-color="#FCE17A" stop-opacity="0.65"/>
+      <stop offset="40%" stop-color="#AA7C11" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#091221" stop-opacity="0"/>
+    </radialGradient>
+    <!-- Soft outer glow -->
+    <filter id="softGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="3.5" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <!-- Drop Shadow for 3D effect -->
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#000000" flood-opacity="0.6"/>
+    </filter>
+  </defs>
+
+  <!-- Transparent background - no solid fill -->
+
+  <!-- Outer gold rings -->
+  <circle cx="400" cy="400" r="370" fill="none" stroke="url(#gold)" stroke-width="12" filter="url(#shadow)"/>
+  <circle cx="400" cy="400" r="350" fill="none" stroke="url(#gold_light)" stroke-width="2" stroke-dasharray="10 6"/>
+  <circle cx="400" cy="400" r="275" fill="none" stroke="url(#gold_light)" stroke-width="1.5" opacity="0.55"/>
+
+  <!-- Center Glow -->
+  <circle cx="400" cy="420" r="250" fill="url(#glow)" opacity="0.9"/>
+
+  <!-- Sun Rays -->
+  <g stroke="url(#gold)" stroke-width="1.6" opacity="0.7" filter="url(#softGlow)">
+    <line x1="442.00" y1="420.00" x2="660.00" y2="420.00"/>
+    <line x1="441.84" y1="423.66" x2="584.30" y2="436.12"/>
+    <line x1="441.36" y1="427.29" x2="656.05" y2="465.15"/>
+    <line x1="440.57" y1="430.87" x2="578.70" y2="467.88"/>
+    <line x1="439.47" y1="434.36" x2="644.32" y2="508.93"/>
+    <line x1="438.06" y1="437.75" x2="567.67" y2="498.18"/>
+    <line x1="436.37" y1="441.00" x2="625.17" y2="550.00"/>
+    <line x1="434.40" y1="444.09" x2="551.54" y2="526.11"/>
+    <line x1="432.17" y1="447.00" x2="599.17" y2="587.12"/>
+    <line x1="429.70" y1="449.70" x2="530.81" y2="550.81"/>
+    <line x1="427.00" y1="452.17" x2="567.12" y2="619.17"/>
+    <line x1="424.09" y1="454.40" x2="506.11" y2="571.54"/>
+    <line x1="421.00" y1="456.37" x2="530.00" y2="645.17"/>
+    <line x1="417.75" y1="458.06" x2="478.18" y2="587.67"/>
+    <line x1="414.36" y1="459.47" x2="488.93" y2="664.32"/>
+    <line x1="410.87" y1="460.57" x2="447.88" y2="598.70"/>
+    <line x1="407.29" y1="461.36" x2="445.15" y2="676.05"/>
+    <line x1="403.66" y1="461.84" x2="416.12" y2="604.30"/>
+    <line x1="400.00" y1="462.00" x2="400.00" y2="680.00"/>
+    <line x1="396.34" y1="461.84" x2="383.88" y2="604.30"/>
+    <line x1="392.71" y1="461.36" x2="354.85" y2="676.05"/>
+    <line x1="389.13" y1="460.57" x2="352.12" y2="598.70"/>
+    <line x1="385.64" y1="459.47" x2="311.07" y2="664.32"/>
+    <line x1="382.25" y1="458.06" x2="321.82" y2="587.67"/>
+    <line x1="379.00" y1="456.37" x2="270.00" y2="645.17"/>
+    <line x1="375.91" y1="454.40" x2="293.89" y2="571.54"/>
+    <line x1="373.00" y1="452.17" x2="232.88" y2="619.17"/>
+    <line x1="370.30" y1="449.70" x2="269.19" y2="550.81"/>
+    <line x1="367.83" y1="447.00" x2="200.83" y2="587.12"/>
+    <line x1="365.60" y1="444.09" x2="248.46" y2="526.11"/>
+    <line x1="363.63" y1="441.00" x2="174.83" y2="550.00"/>
+    <line x1="361.94" y1="437.75" x2="232.33" y2="498.18"/>
+    <line x1="360.53" y1="434.36" x2="155.68" y2="508.93"/>
+    <line x1="359.43" y1="430.87" x2="221.30" y2="467.88"/>
+    <line x1="358.64" y1="427.29" x2="143.95" y2="465.15"/>
+    <line x1="358.16" y1="423.66" x2="215.70" y2="436.12"/>
+    <line x1="358.00" y1="420.00" x2="140.00" y2="420.00"/>
+    <line x1="358.16" y1="416.34" x2="215.70" y2="403.88"/>
+    <line x1="358.64" y1="412.71" x2="143.95" y2="374.85"/>
+    <line x1="359.43" y1="409.13" x2="221.30" y2="372.12"/>
+    <line x1="360.53" y1="405.64" x2="155.68" y2="331.07"/>
+    <line x1="361.94" y1="402.25" x2="232.33" y2="341.82"/>
+    <line x1="363.63" y1="399.00" x2="174.83" y2="290.00"/>
+    <line x1="365.60" y1="395.91" x2="248.46" y2="313.89"/>
+    <line x1="367.83" y1="393.00" x2="200.83" y2="252.88"/>
+    <line x1="370.30" y1="390.30" x2="269.19" y2="289.19"/>
+    <line x1="373.00" y1="387.83" x2="232.88" y2="220.83"/>
+    <line x1="375.91" y1="385.60" x2="293.89" y2="268.46"/>
+    <line x1="379.00" y1="383.63" x2="270.00" y2="194.83"/>
+    <line x1="382.25" y1="381.94" x2="321.82" y2="252.33"/>
+    <line x1="385.64" y1="380.53" x2="311.07" y2="175.68"/>
+    <line x1="389.13" y1="379.43" x2="352.12" y2="241.30"/>
+    <line x1="392.71" y1="378.64" x2="354.85" y2="163.95"/>
+    <line x1="396.34" y1="378.16" x2="383.88" y2="235.70"/>
+    <line x1="400.00" y1="378.00" x2="400.00" y2="160.00"/>
+    <line x1="403.66" y1="378.16" x2="416.12" y2="235.70"/>
+    <line x1="407.29" y1="378.64" x2="445.15" y2="163.95"/>
+    <line x1="410.87" y1="379.43" x2="447.88" y2="241.30"/>
+    <line x1="414.36" y1="380.53" x2="488.93" y2="175.68"/>
+    <line x1="417.75" y1="381.94" x2="478.18" y2="252.33"/>
+    <line x1="421.00" y1="383.63" x2="530.00" y2="194.83"/>
+    <line x1="424.09" y1="385.60" x2="506.11" y2="268.46"/>
+    <line x1="427.00" y1="387.83" x2="567.12" y2="220.83"/>
+    <line x1="429.70" y1="390.30" x2="530.81" y2="289.19"/>
+    <line x1="432.17" y1="393.00" x2="599.17" y2="252.88"/>
+    <line x1="434.40" y1="395.91" x2="551.54" y2="313.89"/>
+    <line x1="436.37" y1="399.00" x2="625.17" y2="290.00"/>
+    <line x1="438.06" y1="402.25" x2="567.67" y2="341.82"/>
+    <line x1="439.47" y1="405.64" x2="644.32" y2="331.07"/>
+    <line x1="440.57" y1="409.13" x2="578.70" y2="372.12"/>
+    <line x1="441.36" y1="412.71" x2="656.05" y2="374.85"/>
+    <line x1="441.84" y1="416.34" x2="584.30" y2="403.88"/>
+  </g>
+
+  <!-- Stars in Background -->
+  <circle cx="180" cy="280" r="3.0" fill="#FFFFFF" opacity="0.8"/>
+  <path d="M 180 274 L 181.0 279.0 L 186 280 L 181.0 281.0 L 180 286 L 179.0 281.0 L 174 280 L 179.0 279.0 Z" fill="url(#gold_light)"/>
+  <circle cx="620" cy="280" r="3.75" fill="#FFFFFF" opacity="0.8"/>
+  <path d="M 620 272.5 L 621.25 278.75 L 627.5 280 L 621.25 281.25 L 620 287.5 L 618.75 281.25 L 612.5 280 L 618.75 278.75 Z" fill="url(#gold_light)"/>
+  <circle cx="140" cy="400" r="4.5" fill="#FFFFFF" opacity="0.8"/>
+  <path d="M 140 391 L 141.5 398.5 L 149 400 L 141.5 401.5 L 140 409 L 138.5 401.5 L 131 400 L 138.5 398.5 Z" fill="url(#gold_light)"/>
+  <circle cx="660" cy="400" r="2.25" fill="#FFFFFF" opacity="0.8"/>
+  <path d="M 660 395.5 L 660.75 399.25 L 664.5 400 L 660.75 400.75 L 660 404.5 L 659.25 400.75 L 655.5 400 L 659.25 399.25 Z" fill="url(#gold_light)"/>
+  <circle cx="240" cy="580" r="3.0" fill="#FFFFFF" opacity="0.8"/>
+  <path d="M 240 574 L 241.0 579.0 L 246 580 L 241.0 581.0 L 240 586 L 239.0 581.0 L 234 580 L 239.0 579.0 Z" fill="url(#gold_light)"/>
+  <circle cx="560" cy="580" r="3.75" fill="#FFFFFF" opacity="0.8"/>
+  <path d="M 560 572.5 L 561.25 578.75 L 567.5 580 L 561.25 581.25 L 560 587.5 L 558.75 581.25 L 552.5 580 L 558.75 578.75 Z" fill="url(#gold_light)"/>
+  <circle cx="300" cy="200" r="2.25" fill="#FFFFFF" opacity="0.8"/>
+  <path d="M 300 195.5 L 300.75 199.25 L 304.5 200 L 300.75 200.75 L 300 204.5 L 299.25 200.75 L 295.5 200 L 299.25 199.25 Z" fill="url(#gold_light)"/>
+  <circle cx="500" cy="200" r="3.0" fill="#FFFFFF" opacity="0.8"/>
+  <path d="M 500 194 L 501.0 199.0 L 506 200 L 501.0 201.0 L 500 206 L 499.0 201.0 L 494 200 L 499.0 199.0 Z" fill="url(#gold_light)"/>
+  <circle cx="320" cy="620" r="3.0" fill="#FFFFFF" opacity="0.8"/>
+  <path d="M 320 614 L 321.0 619.0 L 326 620 L 321.0 621.0 L 320 626 L 319.0 621.0 L 314 620 L 319.0 619.0 Z" fill="url(#gold_light)"/>
+  <circle cx="480" cy="620" r="2.25" fill="#FFFFFF" opacity="0.8"/>
+  <path d="M 480 615.5 L 480.75 619.25 L 484.5 620 L 480.75 620.75 L 480 624.5 L 479.25 620.75 L 475.5 620 L 479.25 619.25 Z" fill="url(#gold_light)"/>
+  <circle cx="200" cy="350" r="3.75" fill="#FFFFFF" opacity="0.8"/>
+  <path d="M 200 342.5 L 201.25 348.75 L 207.5 350 L 201.25 351.25 L 200 357.5 L 198.75 351.25 L 192.5 350 L 198.75 348.75 Z" fill="url(#gold_light)"/>
+  <circle cx="600" cy="350" r="3.0" fill="#FFFFFF" opacity="0.8"/>
+  <path d="M 600 344 L 601.0 349.0 L 606 350 L 601.0 351.0 L 600 356 L 599.0 351.0 L 594 350 L 599.0 349.0 Z" fill="url(#gold_light)"/>
+
+  <!-- Outer Text: PRINCIPADO DE FE Y PAZ -->
+  <path id="outerTextPath" d="M 120 400 A 280 280 0 1 1 680 400" fill="none"/>
+  <text font-family="Georgia, 'Times New Roman', serif" font-size="44" font-weight="bold" fill="url(#gold)" letter-spacing="4" filter="url(#shadow)">
+    <textPath href="#outerTextPath" startOffset="50%" text-anchor="middle">PRINCIPADO DE FE Y PAZ</textPath>
+  </text>
+
+  <!-- Inner Text: PPSADV41 -->
+  <path id="innerTextPath" d="M 230 400 A 170 170 0 0 1 570 400" fill="none"/>
+  <text font-family="Georgia, 'Times New Roman', serif" font-size="26" font-weight="bold" fill="url(#gold_light)" letter-spacing="3" filter="url(#shadow)">
+    <textPath href="#innerTextPath" startOffset="50%" text-anchor="middle">PPSADV41</textPath>
+  </text>
+
+  <!-- Laurel Wreaths -->
+  <g fill="url(#gold)" filter="url(#shadow)">
+    <path d="M 242.5 672.8 Q 224.5 654.8 242.5 637.8 Q 260.5 654.8 242.5 672.8 Z" transform="rotate(200.0 242.5 672.8)" opacity="0.95"/>
+    <path d="M 557.5 672.8 Q 539.5 654.8 557.5 637.8 Q 575.5 654.8 557.5 672.8 Z" transform="rotate(160.0 557.5 672.8)" opacity="0.95"/>
+    <path d="M 203.9 646.5 Q 185.9 628.5 203.9 611.5 Q 221.9 628.5 203.9 646.5 Z" transform="rotate(208.5 203.9 646.5)" opacity="0.95"/>
+    <path d="M 596.1 646.5 Q 578.1 628.5 596.1 611.5 Q 614.1 628.5 596.1 646.5 Z" transform="rotate(151.5 596.1 646.5)" opacity="0.95"/>
+    <path d="M 169.6 614.8 Q 151.6 596.8 169.6 579.8 Q 187.6 596.8 169.6 614.8 Z" transform="rotate(217.0 169.6 614.8)" opacity="0.95"/>
+    <path d="M 630.4 614.8 Q 612.4 596.8 630.4 579.8 Q 648.4 596.8 630.4 614.8 Z" transform="rotate(143.0 630.4 614.8)" opacity="0.95"/>
+    <path d="M 140.4 578.4 Q 122.4 560.4 140.4 543.4 Q 158.4 560.4 140.4 578.4 Z" transform="rotate(225.5 140.4 578.4)" opacity="0.95"/>
+    <path d="M 659.6 578.4 Q 641.6 560.4 659.6 543.4 Q 677.6 560.4 659.6 578.4 Z" transform="rotate(134.5 659.6 578.4)" opacity="0.95"/>
+    <path d="M 116.9 538.1 Q 98.9 520.1 116.9 503.1 Q 134.9 520.1 116.9 538.1 Z" transform="rotate(234.0 116.9 538.1)" opacity="0.95"/>
+    <path d="M 683.1 538.1 Q 665.1 520.1 683.1 503.1 Q 701.1 520.1 683.1 538.1 Z" transform="rotate(126.0 683.1 538.1)" opacity="0.95"/>
+    <path d="M 99.6 494.7 Q 81.6 476.7 99.6 459.7 Q 117.6 476.7 99.6 494.7 Z" transform="rotate(242.5 99.6 494.7)" opacity="0.95"/>
+    <path d="M 700.4 494.7 Q 682.4 476.7 700.4 459.7 Q 718.4 476.7 700.4 494.7 Z" transform="rotate(117.5 700.4 494.7)" opacity="0.95"/>
+    <path d="M 88.9 449.3 Q 70.9 431.3 88.9 414.3 Q 106.9 431.3 88.9 449.3 Z" transform="rotate(251.0 88.9 449.3)" opacity="0.95"/>
+    <path d="M 711.1 449.3 Q 693.1 431.3 711.1 414.3 Q 729.1 431.3 711.1 449.3 Z" transform="rotate(109.0 711.1 449.3)" opacity="0.95"/>
+    <path d="M 85.0 402.7 Q 67.0 384.7 85.0 367.7 Q 103.0 384.7 85.0 402.7 Z" transform="rotate(259.5 85.0 402.7)" opacity="0.95"/>
+    <path d="M 715.0 402.7 Q 697.0 384.7 715.0 367.7 Q 733.0 384.7 715.0 402.7 Z" transform="rotate(100.5 715.0 402.7)" opacity="0.95"/>
+    <path d="M 88.1 356.2 Q 70.1 338.2 88.1 321.2 Q 106.1 338.2 88.1 356.2 Z" transform="rotate(268.0 88.1 356.2)" opacity="0.95"/>
+    <path d="M 711.9 356.2 Q 693.9 338.2 711.9 321.2 Q 729.9 338.2 711.9 356.2 Z" transform="rotate(92.0 711.9 356.2)" opacity="0.95"/>
+    <path d="M 98.0 310.5 Q 80.0 292.5 98.0 275.5 Q 116.0 292.5 98.0 310.5 Z" transform="rotate(276.5 98.0 310.5)" opacity="0.95"/>
+    <path d="M 702.0 310.5 Q 684.0 292.5 702.0 275.5 Q 720.0 292.5 702.0 310.5 Z" transform="rotate(83.5 702.0 310.5)" opacity="0.95"/>
+    <path d="M 114.5 266.9 Q 96.5 248.9 114.5 231.9 Q 132.5 248.9 114.5 266.9 Z" transform="rotate(285.0 114.5 266.9)" opacity="0.95"/>
+    <path d="M 685.5 266.9 Q 667.5 248.9 685.5 231.9 Q 703.5 248.9 685.5 266.9 Z" transform="rotate(75.0 685.5 266.9)" opacity="0.95"/>
+    <path d="M 137.3 226.1 Q 119.3 208.1 137.3 191.1 Q 155.3 208.1 137.3 226.1 Z" transform="rotate(293.5 137.3 226.1)" opacity="0.95"/>
+    <path d="M 662.7 226.1 Q 644.7 208.1 662.7 191.1 Q 680.7 208.1 662.7 226.1 Z" transform="rotate(66.5 662.7 226.1)" opacity="0.95"/>
+    <path d="M 165.9 189.2 Q 147.9 171.2 165.9 154.2 Q 183.9 171.2 165.9 189.2 Z" transform="rotate(302.0 165.9 189.2)" opacity="0.95"/>
+    <path d="M 634.1 189.2 Q 616.1 171.2 634.1 154.2 Q 652.1 171.2 634.1 189.2 Z" transform="rotate(58.0 634.1 189.2)" opacity="0.95"/>
+    <path d="M 199.6 156.9 Q 181.6 138.9 199.6 121.9 Q 217.6 138.9 199.6 156.9 Z" transform="rotate(310.5 199.6 156.9)" opacity="0.95"/>
+    <path d="M 600.4 156.9 Q 582.4 138.9 600.4 121.9 Q 618.4 138.9 600.4 156.9 Z" transform="rotate(49.5 600.4 156.9)" opacity="0.95"/>
+    <path d="M 237.8 130.0 Q 219.8 112.0 237.8 95.0 Q 255.8 112.0 237.8 130.0 Z" transform="rotate(319.0 237.8 130.0)" opacity="0.95"/>
+    <path d="M 562.2 130.0 Q 544.2 112.0 562.2 95.0 Q 580.2 112.0 562.2 130.0 Z" transform="rotate(41.0 562.2 130.0)" opacity="0.95"/>
+    <path d="M 279.5 109.0 Q 261.5 91.0 279.5 74.0 Q 297.5 91.0 279.5 109.0 Z" transform="rotate(327.5 279.5 109.0)" opacity="0.95"/>
+    <path d="M 520.5 109.0 Q 502.5 91.0 520.5 74.0 Q 538.5 91.0 520.5 109.0 Z" transform="rotate(32.5 520.5 109.0)" opacity="0.95"/>
+  </g>
+
+  <!-- Center Symbol: Square, Compass, G, Eye -->
+  <g filter="url(#shadow)">
+    
+    <!-- Square -->
+    <path d="M 250 460 L 400 610 L 550 460 L 510 420 L 400 530 L 290 420 Z" fill="url(#gold_light)" stroke="#4A3408" stroke-width="2"/>
+    <!-- Compass -->
+    <path d="M 385 220 L 415 220 L 565 570 L 525 570 L 400 280 L 275 570 L 235 570 Z" fill="url(#gold)" stroke="#4A3408" stroke-width="2"/>
+    
+    <!-- Hinge of Compass -->
+    <circle cx="400" cy="235" r="22" fill="url(#gold_light)" stroke="#4A3408" stroke-width="2"/>
+    <circle cx="400" cy="235" r="8" fill="#4A3408"/>
+    
+    <!-- Letter G -->
+    <text x="400" y="340" font-family="Georgia, 'Times New Roman', serif" font-size="55" font-weight="bold" fill="url(#gold_light)" text-anchor="middle">G</text>
+
+    <!-- All-Seeing Eye -->
+    <g transform="translate(0, 40)">
+        <!-- Eye shape -->
+        <path d="M 330 430 Q 400 370 470 430 Q 400 490 330 430 Z" fill="#091221" stroke="url(#gold_light)" stroke-width="5"/>
+        <path d="M 345 430 Q 400 390 455 430 Q 400 470 345 430 Z" fill="url(#gold_dark)"/>
+        <!-- Iris -->
+        <circle cx="400" cy="430" r="18" fill="url(#gold_light)"/>
+        <!-- Pupil -->
+        <circle cx="400" cy="430" r="8" fill="#091221"/>
+        <!-- Eye Rays -->
+        <path d="M 400 360 L 400 330 M 440 370 L 460 345 M 360 370 L 340 345" stroke="url(#gold)" stroke-width="3" stroke-linecap="round"/>
+    </g>
+
+  </g>
+
+  <!-- Ornate Bottom Scroll/Decoration -->
+  <g filter="url(#shadow)">
+      <path d="M 230 650 C 300 700 350 720 400 730 C 450 720 500 700 570 650 C 600 680 500 770 400 770 C 300 770 200 680 230 650 Z" fill="url(#gold)"/>
+      <path d="M 300 690 Q 400 730 500 690 Q 400 740 300 690 Z" fill="#091221" opacity="0.55"/>
+      <circle cx="400" cy="740" r="6" fill="url(#gold_light)"/>
+  </g>
+
+</svg>
