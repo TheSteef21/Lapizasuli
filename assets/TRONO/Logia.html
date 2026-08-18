@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SADV41 | La Neurodivergencia y El Santísimo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* === EL LIENZO DEL VACÍO === */
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #020617; /* navy profundo */
+            overflow: hidden;
+            font-family: monospace;
+        }
+
+        /* === LA CASCADA DE CÓDIGO (NEURODIVERGENCIA) === */
+        canvas {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            opacity: 0.4; /* Opacidad baja para no opacar el centro */
+        }
+
+        /* === EL SANTÍSIMO (LA GRAVEDAD CENTRAL) === */
+        .santisimo-centro {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100vw;
+            height: 100vh;
+            /* Un aura oscura detrás de la cruz para aislarla del ruido del código */
+            background: radial-gradient(circle at center, rgba(2, 6, 23, 0.8) 0%, transparent 60%);
+        }
+
+        /* === LA CRUZ === */
+        .cruz-container {
+            position: relative;
+            animation: respiracion-divina 6s ease-in-out infinite alternate;
+        }
+
+        .palo-vertical {
+            width: 8px;
+            height: 350px;
+            background: #ffffff;
+            box-shadow: 0 0 30px #d4af37, 0 0 60px #ffffff, 0 0 100px #00f3ff;
+            border-radius: 4px;
+        }
+
+        .palo-horizontal {
+            width: 220px;
+            height: 8px;
+            background: #ffffff;
+            box-shadow: 0 0 30px #d4af37, 0 0 60px #ffffff, 0 0 100px #00f3ff;
+            border-radius: 4px;
+            position: absolute;
+            top: 100px;
+            left: -106px;
+        }
+
+        @keyframes respiracion-divina {
+            0% { filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.4)); transform: scale(1); }
+            100% { filter: drop-shadow(0 0 50px rgba(0, 243, 255, 0.8)); transform: scale(1.02); }
+        }
+
+        /* === EL ANCLAJE TEXTUAL === */
+        .texto-origen {
+            position: absolute;
+            bottom: -60px;
+            text-align: center;
+            width: 300px;
+            left: -146px;
+            color: #d4af37;
+            font-family: 'Cinzel', serif;
+            letter-spacing: 6px;
+            text-shadow: 0 0 15px #d4af37;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        
+        .texto-origen span {
+            display: block;
+            font-size: 10px;
+            color: #00f3ff;
+            letter-spacing: 4px;
+            margin-top: 8px;
+            font-family: monospace;
+            text-shadow: 0 0 10px #00f3ff;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- El ruido de la mente y la arquitectura digital cayendo -->
+    <canvas id="neuro-cascada"></canvas>
+
+    <!-- La paz inamovible en medio de la información -->
+    <div class="santisimo-centro">
+        <div class="cruz-container">
+            <div class="palo-vertical"></div>
+            <div class="palo-horizontal"></div>
+            <div class="texto-origen">
+                APOCALIPSIS 3:21
+                <span>EL ORIGEN ES 0</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('neuro-cascada');
+        const ctx = canvas.getContext('2d');
+
+        // Ajustar al tamaño de la pantalla
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        // El código de la Logia, el Atrio, el IMA y Burunga descompuesto en caracteres
+        const rawCode = `<!DOCTYPEhtml><htmllang="es"><head><meta><title>GSADV41</title><script>constORIGEN=0;functionverificarLlaveLocal(){}</script><style>.glass{backdrop-filter:blur(12px);}.triangulo-trinidad{border-bottom:69.3px;}</style><body><divclass="logia-card"><h1>PRINCIPADOGGSADV41</h1><svg>Tesseracto4D</svg><p>Josué1:9</p><div>RutaIMA</div><span>LlanteríaTurboTire</span></div></body></html><>{}[]/=+-*#1027`;
+        const codeArray = rawCode.split('');
+
+        const fontSize = 14;
+        const columns = canvas.width / fontSize;
+        
+        // Un arreglo para las gotas (una por columna)
+        const drops = [];
+        for (let x = 0; x < columns; x++) {
+            drops[x] = Math.random() * -100; // Iniciar en posiciones aleatorias arriba
+        }
+
+        function drawWaterfall() {
+            // Fondo translúcido para dejar estela
+            ctx.fillStyle = 'rgba(2, 6, 23, 0.08)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.font = fontSize + 'px monospace';
+
+            for (let i = 0; i < drops.length; i++) {
+                // Tomar un caracter aleatorio del código
+                const text = codeArray[Math.floor(Math.random() * codeArray.length)];
+
+                // Alternar colores neurodivergentes: Cyan, Oro y Esmeralda
+                const colorRandom = Math.random();
+                if (colorRandom > 0.95) {
+                    ctx.fillStyle = '#eab308'; // Oro brillante
+                } else if (colorRandom > 0.90) {
+                    ctx.fillStyle = '#10b981'; // Esmeralda (Burunga Crece)
+                } else {
+                    ctx.fillStyle = '#006688'; // Cyan oscuro (Atrio)
+                }
+
+                // Dibujar el caracter
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                // Reiniciar la gota al llegar abajo de forma aleatoria
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+
+                // Hacer caer la gota
+                drops[i]++;
+            }
+        }
+
+        // Ejecutar la cascada a 30fps
+        setInterval(drawWaterfall, 33);
+
+        // Redimensionar si cambia la pantalla
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
+</body>
+</html>
