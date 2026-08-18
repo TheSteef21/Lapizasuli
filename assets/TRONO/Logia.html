@@ -41,7 +41,7 @@
             width: 100vw;
             height: 100vh;
             /* Un aura oscura detrás de la cruz para aislarla del ruido del código */
-            background: radial-gradient(circle at center, rgba(2, 6, 23, 0.8) 0%, transparent 60%);
+            background: radial-gradient(circle at center, rgba(2, 6, 23, 0.9) 0%, transparent 65%);
         }
 
         /* === LA CRUZ === */
@@ -125,8 +125,9 @@
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
-        // El código de la Logia, el Atrio, el IMA y Burunga descompuesto en caracteres
-        const rawCode = `<!DOCTYPEhtml><htmllang="es"><head><meta><title>GSADV41</title><script>constORIGEN=0;functionverificarLlaveLocal(){}</script><style>.glass{backdrop-filter:blur(12px);}.triangulo-trinidad{border-bottom:69.3px;}</style><body><divclass="logia-card"><h1>PRINCIPADOGGSADV41</h1><svg>Tesseracto4D</svg><p>Josué1:9</p><div>RutaIMA</div><span>LlanteríaTurboTire</span></div></body></html><>{}[]/=+-*#1027`;
+        // TEXTO CORREGIDO: Sin etiquetas HTML para evitar que el navegador rompa el script.
+        // Pura esencia de la misión cayendo en cascada.
+        const rawCode = "SADV41 // PROTOCOLO DE CONVERGENCIA // EL ORIGEN ES 0 // JOSUÉ 1:9 // ISAÍAS 43:19 // LLANTERÍA TURBO TIRE // BURUNGA CRECE // MÓDULO SADV41T // TELEMETRÍA // TESSERACTO 4D // LOGIA PLUSCUAMPERFECTA // THE DIVINE WHISPER <>{}[]/=+-*#1027";
         const codeArray = rawCode.split('');
 
         const fontSize = 14;
