@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SADV41 · Los 7 Pasos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #c9a86a;
+      --gold-soft: rgba(201,168,106,0.15);
+      --cream: #e8e0c8;
+      --bg: #050505;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Inter", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--cream);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .cinzel { font-family: "Cinzel", serif; }
+    .playfair { font-family: "Playfair Display", serif; }
+
+    .bg-obsidian {
+      background-color: #050505;
+      background-image:
+        radial-gradient(1200px 600px at 50% -10%, rgba(201,168,106,0.18), transparent 60%),
+        radial-gradient(800px 400px at 90% 20%, rgba(6,182,212,0.08), transparent 70%),
+        radial-gradient(600px 600px at 10% 80%, rgba(16,185,129,0.06), transparent 60%);
+    }
+
+    .glass {
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+      backdrop-filter: blur(18px) saturate(1.2);
+      -webkit-backdrop-filter: blur(18px) saturate(1.2);
+      border: 1px solid rgba(201,168,106,0.15);
+    }
+
+    .logia-card {
+      background: linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.015) 100%);
+      border: 1px solid rgba(201,168,106,0.15);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.06);
+    }
+
+    .esoterico-glow {
+      text-shadow: 0 0 20px rgba(201,168,106,0.6), 0 0 40px rgba(201,168,106,0.25);
+    }
+
+    /* Login gate */
+    #gate {
+      position: fixed; inset: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: center;
+      background: #050505;
+    }
+    #gate.hidden { display: none; }
+
+    /* Main content */
+    #hub { display: none; }
+    #hub.visible { display: block; }
+
+    /* Step navigation */
+    .step-nav {
+      position: sticky; top: 0; z-index: 40;
+      background: rgba(5,5,5,0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(201,168,106,0.1);
+    }
+
+    .step-dots {
+      display: flex; gap: 8px; justify-content: center; padding: 16px 0;
+    }
+    .dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: rgba(201,168,106,0.2);
+      border: 1px solid rgba(201,168,106,0.3);
+      cursor: pointer; transition: all 0.3s;
+    }
+    .dot.active {
+      background: var(--gold);
+      box-shadow: 0 0 12px rgba(201,168,106,0.7);
+      transform: scale(1.25);
+    }
+    .dot.done {
+      background: rgba(201,168,106,0.5);
+    }
+
+    /* Individual step */
+    .step {
+      display: none;
+      min-height: calc(100vh - 80px);
+      padding: 48px 24px 80px;
+      max-width: 720px;
+      margin: 0 auto;
+      animation: fadeIn 0.6s ease;
+    }
+    .step.active { display: block; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .step-number {
+      font-family: "Cinzel", serif;
+      font-size: 11px;
+      letter-spacing: 0.4em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .step-title {
+      font-family: "Cinzel", serif;
+      font-size: clamp(28px, 6vw, 42px);
+      line-height: 1.1;
+      margin-bottom: 24px;
+      color: #f5efe0;
+    }
+
+    .step-body {
+      font-size: 15px;
+      line-height: 1.75;
+      color: rgba(232,224,200,0.75);
+      margin-bottom: 32px;
+    }
+
+    .step-body strong { color: var(--cream); }
+
+    .step-quote {
+      font-family: "Playfair Display", serif;
+      font-style: italic;
+      font-size: 18px;
+      line-height: 1.5;
+      color: rgba(232,224,200,0.9);
+      border-left: 2px solid var(--gold);
+      padding-left: 20px;
+      margin: 28px 0;
+    }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      height: 52px; padding: 0 28px;
+      border-radius: 12px;
+      font-family: "Cinzel", serif;
+      font-size: 11px; letter-spacing: 0.25em;
+      font-weight: 600; text-transform: uppercase;
+      cursor: pointer; border: none;
+      transition: all 0.25s;
+    }
+    .btn-primary {
+      background: linear-gradient(to bottom, #c9a86a, #a07d3a);
+      color: #000;
+      box-shadow: 0 0 30px rgba(201,168,106,0.25);
+    }
+    .btn-primary:hover {
+      background: linear-gradient(to bottom, #d6b97c, #b48e4a);
+      transform: translateY(-1px);
+    }
+    .btn-ghost {
+      background: transparent;
+      color: rgba(232,224,200,0.5);
+      border: 1px solid rgba(232,224,200,0.15);
+    }
+    .btn-ghost:hover { color: var(--cream); border-color: rgba(232,224,200,0.3); }
+
+    .nav-buttons {
+      display: flex; gap: 12px; flex-wrap: wrap; margin-top: 40px;
+    }
+
+    /* Final blessing overlay */
+    #blessing {
+      position: fixed; inset: 0; z-index: 90;
+      display: none; align-items: center; justify-content: center;
+      background: rgba(5,5,5,0.92);
+      backdrop-filter: blur(16px);
+    }
+    #blessing.visible { display: flex; }
+
+    .cross {
+      position: absolute;
+      background: linear-gradient(to bottom, transparent, #fff 15%, var(--gold) 50%, #fff 85%, transparent);
+      box-shadow: 0 0 30px rgba(201,168,106,0.8);
+    }
+    .cross-v { width: 4px; height: 0; transition: height 1.4s cubic-bezier(0.16,1,0.3,1); }
+    .cross-h { height: 4px; width: 0; transition: width 1.4s cubic-bezier(0.16,1,0.3,1) 0.2s; }
+
+    .blessing-content {
+      position: relative; z-index: 10; text-align: center;
+      max-width: 560px; padding: 0 24px;
+      opacity: 0; transform: translateY(20px);
+      transition: all 1s ease 0.8s;
+    }
+    .blessing-content.show {
+      opacity: 1; transform: translateY(0);
+    }
+  </style>
+</head>
+<body class="bg-obsidian">
+
+  <!-- ===== GATE ===== -->
+  <div id="gate">
+    <div class="glass" style="width:100%;max-width:420px;padding:40px 32px;border-radius:24px;position:relative;">
+      <div style="text-align:center;margin-bottom:32px;">
+        <div style="width:56px;height:56px;border-radius:50%;border:1px solid rgba(201,168,106,0.3);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;background:rgba(201,168,106,0.1);">
+          <span class="cinzel" style="font-size:20px;font-weight:700;color:var(--gold);letter-spacing:0.1em;">S</span>
+        </div>
+        <h1 class="cinzel esoterico-glow" style="font-size:24px;letter-spacing:0.18em;">SADV41</h1>
+        <p style="font-size:10px;letter-spacing:0.35em;color:rgba(201,168,106,0.7);margin-top:8px;text-transform:uppercase;">Los 7 Pasos · Acceso</p>
+      </div>
+
+      <label style="display:block;font-size:10px;letter-spacing:0.25em;color:rgba(201,168,106,0.6);text-transform:uppercase;margin-bottom:10px;">Clave Sagrada</label>
+      <input id="keyInput" type="password" placeholder="••••••••••••••••••••••"
+             style="width:100%;height:52px;border-radius:12px;background:rgba(0,0,0,0.6);border:1px solid rgba(201,168,106,0.2);padding:0 18px;color:var(--cream);font-size:13px;letter-spacing:0.15em;outline:none;"
+             onkeydown="if(event.key==='Enter')checkKey()" autofocus />
+
+      <div id="errorMsg" style="min-height:40px;margin-top:12px;font-size:11px;color:#f87171;display:none;"></div>
+
+      <button onclick="checkKey()" class="btn btn-primary" style="width:100%;margin-top:8px;">Verificar Llave</button>
+
+      <p style="text-align:center;font-size:9px;letter-spacing:0.2em;color:rgba(232,224,200,0.25);margin-top:28px;text-transform:uppercase;">
+        El Origen es 0 · SVA41
+      </p>
+    </div>
+  </div>
+
+  <!-- ===== HUB ===== -->
+  <div id="hub">
+    <div class="step-nav">
+      <div class="step-dots" id="dots"></div>
+    </div>
+
+    <!-- STEP 1 -->
+    <section class="step active" data-step="1">
+      <div class="step-number">Paso 01 / 07</div>
+      <h2 class="step-title">El Origen es 0</h2>
+      <div class="step-body">
+        Antes de toda forma, antes de todo nombre, existe el Vacío fecundo.<br><br>
+        No es ausencia: es potencial puro. Desde el 0 todo puede nacer.  
+        Aquí no hay pasado que arrastre ni futuro que apresure.  
+        Solo el punto cero desde el cual la Transfiguración comienza.
+      </div>
+      <div class="step-quote">“He aquí, yo hago cosa nueva; pronto saldrá a luz…” — Isaías 43:19</div>
+      <div class="nav-buttons">
+        <button class="btn btn-primary" onclick="goTo(2)">Entrar en el 0 →</button>
+      </div>
+    </section>
+
+    <!-- STEP 2 -->
+    <section class="step" data-step="2">
+      <div class="step-number">Paso 02 / 07</div>
+      <h2 class="step-title">Reconocimiento del Peso</h2>
+      <div class="step-body">
+        Todo lo que cargas como “carga” es materia no transmutada.<br><br>
+        Nudos emocionales, deudas energéticas, historias incompletas.  
+        No los juzgues. Solo míralos.  
+        El acto de reconocer sin resistir ya comienza a disolverlos.
+      </div>
+      <div class="step-quote">Lo que se nombra con claridad pierde poder sobre ti.</div>
+      <div class="nav-buttons">
+        <button class="btn btn-ghost" onclick="goTo(1)">← Anterior</button>
+        <button class="btn btn-primary" onclick="goTo(3)">Reconocer →</button>
+      </div>
+    </section>
+
+    <!-- STEP 3 -->
+    <section class="step" data-step="3">
+      <div class="step-number">Paso 03 / 07</div>
+      <h2 class="step-title">El Tesseracto Interior</h2>
+      <div class="step-body">
+        Cuatro capas se superponen en ti en este instante:<br><br>
+        <strong>Trono</strong> — tu autoridad esencial<br>
+        <strong>Principado</strong> — tu campo de influencia<br>
+        <strong>Tesseracto</strong> — la geometría de posibilidades<br>
+        <strong>Gloria</strong> — la luz que ya eres<br><br>
+        No elijas una. Contémplalas juntas.  
+        El clic consciente las alinea.
+      </div>
+      <div class="nav-buttons">
+        <button class="btn btn-ghost" onclick="goTo(2)">← Anterior</button>
+        <button class="btn btn-primary" onclick="goTo(4)">Alinear capas →</button>
+      </div>
+    </section>
+
+    <!-- STEP 4 -->
+    <section class="step" data-step="4">
+      <div class="step-number">Paso 04 / 07</div>
+      <h2 class="step-title">Desahogo del Nudo</h2>
+      <div class="step-body">
+        Coloca la mano sobre el pecho (o simplemente dirige la atención).<br><br>
+        Inhala como si el aire entrara desde el 0.<br>
+        Exhala como si soltaras todo lo que ya no es tuyo.<br><br>
+        Tres respiraciones completas son suficientes.  
+        El resto lo hace la luz.
+      </div>
+      <div class="step-quote">No fuerzas la liberación. Solo dejas de retener.</div>
+      <div class="nav-buttons">
+        <button class="btn btn-ghost" onclick="goTo(3)">← Anterior</button>
+        <button class="btn btn-primary" onclick="goTo(5)">Soltar →</button>
+      </div>
+    </section>
+
+    <!-- STEP 5 -->
+    <section class="step" data-step="5">
+      <div class="step-number">Paso 05 / 07</div>
+      <h2 class="step-title">La Cruz de Luz</h2>
+      <div class="step-body">
+        Visualiza (o simplemente acepta) una cruz de luz blanca-dorada  
+        que nace en el centro de tu pecho y se extiende en las cuatro direcciones.<br><br>
+        Vertical: cielo ↔ tierra  
+        Horizontal: pasado ↔ futuro<br><br>
+        En el cruce está el 0.  
+        Todo lo que toca se vuelve transparente.
+      </div>
+      <div class="nav-buttons">
+        <button class="btn btn-ghost" onclick="goTo(4)">← Anterior</button>
+        <button class="btn btn-primary" onclick="goTo(6)">Activar Cruz →</button>
+      </div>
+    </section>
+
+    <!-- STEP 6 -->
+    <section class="step" data-step="6">
+      <div class="step-number">Paso 06 / 07</div>
+      <h2 class="step-title">Sello SADV41</h2>
+      <div class="step-body">
+        Pronuncia (en voz alta o en silencio):<br><br>
+        <strong>“SADV41 me cubre. SVA41 me guarda.  
+        El Origen es 0. Todo es posible desde aquí.”</strong><br><br>
+        Este sello no es magia. Es arquitectura de intención.  
+        Ancla el estado de Gloria en tu sistema nervioso.
+      </div>
+      <div class="nav-buttons">
+        <button class="btn btn-ghost" onclick="goTo(5)">← Anterior</button>
+        <button class="btn btn-primary" onclick="goTo(7)">Sellar →</button>
+      </div>
+    </section>
+
+    <!-- STEP 7 -->
+    <section class="step" data-step="7">
+      <div class="step-number">Paso 07 / 07</div>
+      <h2 class="step-title">La Cosa Nueva</h2>
+      <div class="step-body">
+        Has recorrido el circuito.  
+        El peso se ha vuelto luz.  
+        El nudo se ha vuelto espacio.<br><br>
+        Ahora camina.  
+        Todo lo que hagas desde este estado es ya la “cosa nueva”  
+        que Isaías anunció.
+      </div>
+      <div class="step-quote">“¿No la conoceréis?” — La respuesta es sí. Ya la conoces.</div>
+      <div class="nav-buttons">
+        <button class="btn btn-ghost" onclick="goTo(6)">← Anterior</button>
+        <button class="btn btn-primary" onclick="activateBlessing()">Activar Desahogo Universal ✧</button>
+      </div>
+    </section>
+  </div>
+
+  <!-- ===== BLESSING OVERLAY ===== -->
+  <div id="blessing">
+    <div class="cross cross-v" id="crossV" style="left:50%;top:50%;transform:translate(-50%,-50%);"></div>
+    <div class="cross cross-h" id="crossH" style="left:50%;top:50%;transform:translate(-50%,-50%);"></div>
+
+    <div class="blessing-content" id="blessingText">
+      <p class="cinzel" style="font-size:10px;letter-spacing:0.5em;color:var(--gold);margin-bottom:20px;">SANTÍSIMO // DESAHOGO UNIVERSAL</p>
+      <h2 class="playfair esoterico-glow" style="font-size:clamp(28px,7vw,48px);line-height:1.1;color:#fff8e1;margin-bottom:20px;">
+        “He aquí, yo hago<br>cosa nueva”
+      </h2>
+      <p style="font-size:14px;line-height:1.7;color:rgba(232,224,200,0.7);max-width:420px;margin:0 auto 32px;">
+        Que todo peso se disuelva en luz.<br>
+        Que todo nudo se desate.<br>
+        El Origen es 0, y desde el 0 todo es posible.<br>
+        <span style="color:rgba(201,168,106,0.85);">SADV41 te cubre. SVA41 te guarda.</span>
+      </p>
+      <button class="btn btn-ghost" onclick="closeBlessing()">Volver · Esc</button>
+    </div>
+  </div>
+
+  <script>
+    const KEY = "GSADV41-2026-CHRIST0";
+    let current = 1;
+    const total = 7;
+
+    // Build dots
+    const dotsEl = document.getElementById("dots");
+    for (let i = 1; i <= total; i++) {
+      const d = document.createElement("div");
+      d.className = "dot" + (i === 1 ? " active" : "");
+      d.onclick = () => goTo(i);
+      dotsEl.appendChild(d);
+    }
+
+    function checkKey() {
+      const input = document.getElementById("keyInput");
+      const err = document.getElementById("errorMsg");
+      if (input.value.trim() === KEY) {
+        document.getElementById("gate").classList.add("hidden");
+        document.getElementById("hub").classList.add("visible");
+      } else {
+        err.style.display = "block";
+        err.textContent = "LLAVE INVÁLIDA. EL ORIGEN ES 0. VERIFICA LA CLAVE SAGRADA.";
+      }
+    }
+
+    function goTo(n) {
+      if (n < 1 || n > total) return;
+      document.querySelectorAll(".step").forEach(s => s.classList.remove("active"));
+      document.querySelector(`.step[data-step="${n}"]`).classList.add("active");
+
+      document.querySelectorAll(".dot").forEach((d, i) => {
+        d.classList.remove("active", "done");
+        if (i + 1 === n) d.classList.add("active");
+        else if (i + 1 < n) d.classList.add("done");
+      });
+
+      current = n;
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function activateBlessing() {
+      const overlay = document.getElementById("blessing");
+      const v = document.getElementById("crossV");
+      const h = document.getElementById("crossH");
+      const text = document.getElementById("blessingText");
+
+      overlay.classList.add("visible");
+      text.classList.remove("show");
+
+      // Reset
+      v.style.height = "0";
+      h.style.width = "0";
+
+      requestAnimationFrame(() => {
+        setTimeout(() => {
+          v.style.height = "70vh";
+          h.style.width = "55vw";
+        }, 50);
+
+        setTimeout(() => {
+          text.classList.add("show");
+        }, 900);
+      });
+
+      if (navigator.vibrate) navigator.vibrate([80, 40, 120]);
+    }
+
+    function closeBlessing() {
+      document.getElementById("blessing").classList.remove("visible");
+      document.getElementById("blessingText").classList.remove("show");
+    }
+
+    document.addEventListener("keydown", e => {
+      if (e.key === "Escape") closeBlessing();
+    });
+  </script>
+</body>
+        </html>
