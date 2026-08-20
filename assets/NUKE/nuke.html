@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SADV41 International - Bomba de Pruebas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="bomb-container">
+        <div class="header">
+            <img src="logo_placeholder.png" alt="SADV41 Logo" class="logo"> <!-- Puedes usar un logo de marcador de posición aquí -->
+            <h1>SADV41 International</h1>
+            <p>Simulación de Desactivación de Bomba</p>
+        </div>
+        
+        <div class="timer-display">
+            <span id="minutes">45</span>:<span id="seconds">00</span>
+        </div>
+
+        <div class="defuse-panel">
+            <label for="defuseCode">Código de Desactivación:</label>
+            <input type="text" id="defuseCode" maxlength="7" placeholder="7253597">
+            <button id="defuseButton">DESACTIVAR</button>
+            <p id="statusMessage"></p>
+        </div>
+        
+        <div class="warning-stripes"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
