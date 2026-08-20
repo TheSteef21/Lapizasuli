@@ -1,33 +1,516 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SADV41 International - Nuke Defuse</title>
-    <link rel="stylesheet" href="./css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#050505">
+  <meta name="color-scheme" content="dark">
+  
+  <title>SADV41 // Tribu 12 – Alerta Internacional | CK Hutchison vs Panamá</title>
+  <meta name="description" content="CK Hutchison inicia arbitraje internacional contra Panamá por +US$1.500 millones. Unificación Geopolítica, Bomba Portuaria Balboa-Cristóbal y la verdad desde el Sovereign Hub. Tribu 12 | SADV41.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://thesteef21.github.io/Lapizasuli/assets/NUKE/">
+
+  <!-- Open Graph (Meta / Facebook / Threads) -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_PA">
+  <meta property="og:site_name" content="SADV41 // Tribu 12">
+  <meta property="og:title" content="SADV41 // Tribu 12 – Alerta Internacional">
+  <meta property="og:description" content="Unificación Geopolítica y la Bomba Portuaria: CK Hutchison vs Panamá. +US$1.500 millones en arbitraje. La verdad desde el Sovereign Hub.">
+  <meta property="og:image" content="https://thesteef21.github.io/Lapizasuli/assets/NUKE/img/1787194231452.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="SADV41 Tribu 12 – Alerta Internacional CK Hutchison vs Panamá">
+  <meta property="og:url" content="https://thesteef21.github.io/Lapizasuli/assets/NUKE/">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="SADV41 // Tribu 12 – Alerta Internacional">
+  <meta name="twitter:description" content="CK Hutchison demanda a Panamá por +US$1.500 millones. Unificación Geopolítica y Bomba Portuaria desde el Sovereign Hub.">
+  <meta name="twitter:image" content="https://thesteef21.github.io/Lapizasuli/assets/NUKE/img/1787194231452.png">
+
+  <!-- Fuentes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+
+  <style>
+    @font-face {
+      font-family: "Optimistic";
+      font-style: normal;
+      font-weight: 400 600;
+      font-display: swap;
+      src: url("/fonts/OptimisticAI_VF_Optimized.woff2") format("woff2");
+    }
+    @font-face {
+      font-family: "Optimistic Mono";
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url("/fonts/OptimisticMono_W_TextRegular.woff2") format("woff2");
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { min-height: 100%; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background-color: #050505;
+      color: #f1f5f9;
+      line-height: 1.5;
+      overflow-x: hidden;
+      background-image:
+        radial-gradient(circle at 50% 0%, rgba(0, 94, 184, 0.18) 0%, transparent 60%),
+        linear-gradient(rgba(2, 6, 23, 0.88), rgba(5, 5, 5, 0.96));
+      background-attachment: fixed;
+    }
+    .selection\:bg-gold ::selection { background: #d4af37; color: #000; }
+    
+    .logia-card {
+      background: linear-gradient(145deg, rgba(15,15,20,0.85), rgba(10,10,10,0.95));
+      border: 1px solid rgba(212, 175, 55, 0.15);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.9), inset 0 0 20px rgba(212, 175, 55, 0.05);
+      backdrop-filter: blur(12px);
+      border-radius: 1rem;
+    }
+    .nuke-card {
+      background: linear-gradient(145deg, rgba(30,5,5,0.92), rgba(10,0,0,0.97));
+      border: 1px solid rgba(255, 42, 42, 0.4);
+      box-shadow: 0 0 40px rgba(255, 42, 42, 0.18), inset 0 0 20px rgba(255, 42, 42, 0.08);
+    }
+    .scanline {
+      width: 100%; height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.35), transparent);
+      position: fixed; z-index: 99; top: 0; pointer-events: none;
+      animation: scanline 8s linear infinite;
+    }
+    @keyframes scanline {
+      0% { top: 0; opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { top: 100%; opacity: 0; }
+    }
+    .esoterico-glow { text-shadow: 0 0 25px rgba(212, 175, 55, 0.7); }
+    .red-glow { filter: drop-shadow(0 0 15px rgba(255, 42, 42, 0.6)); }
+    @keyframes pulse-red {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(255, 42, 42, 0.35); }
+      50% { box-shadow: 0 0 28px 8px rgba(255, 42, 42, 0.08); }
+    }
+    .alerta-activa { animation: pulse-red 2.4s infinite; }
+    
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+      padding: 0.75rem 1.25rem; border-radius: 9999px; font-weight: 700;
+      font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+      transition: all 0.15s; cursor: pointer; border: none; width: 100%;
+    }
+    .btn:active { transform: scale(0.98); }
+    .btn-threads { background: #f8fafc; color: #000; }
+    .btn-threads:hover { background: #fff; }
+    .btn-ig {
+      background: linear-gradient(to right, #8a2be2, #ff2a6e);
+      color: #fff;
+    }
+    .btn-ig:hover { background: linear-gradient(to right, #9d4edd, #ff4d8a); }
+    
+    .toast {
+      position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%);
+      background: #fff; color: #000; font-family: ui-monospace, monospace;
+      font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.75rem 1.5rem; border-radius: 9999px;
+      box-shadow: 0 0 30px rgba(255,255,255,0.3); z-index: 100;
+    }
+    
+    a { color: inherit; text-decoration: none; }
+    a:hover { opacity: 0.9; }
+    
+    .container { max-width: 72rem; margin: 0 auto; padding: 0 1.5rem; }
+    
+    @media (min-width: 768px) {
+      .md-flex { display: flex; }
+      .md-grid-2 { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 2rem; }
+      .md-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+      .md-grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+      .md-hidden { display: none; }
+    }
+  </style>
 </head>
-<body>
+<body class="selection:bg-gold">
+  <div class="scanline"></div>
 
-    <div class="bomb-container">
-        <div class="header">
-            <h1>SADV41 International</h1>
-            <p>Panel de Desactivación</p>
-        </div>
-        
-        <div class="timer-display">
-            <span id="minutes">45</span>:<span id="seconds">00</span>
-        </div>
-
-        <div class="defuse-panel">
-            <label for="defuseCode">Código de Desactivación:</label>
-            <input type="text" id="defuseCode" maxlength="7" placeholder="7253597">
-            <button id="defuseButton">DESACTIVAR</button>
-            <p id="statusMessage"></p>
-        </div>
-        
-        <div class="warning-stripes"></div>
+  <!-- HEADER -->
+  <header class="container" style="padding-top: 2rem; padding-bottom: 1.5rem; display: flex; flex-direction: column; gap: 1.25rem; align-items: center;">
+    <div style="display: flex; align-items: center; gap: 1rem;">
+      <span style="font-size: 1.875rem; filter: drop-shadow(0 0 15px rgba(212,175,55,0.8));">🔯</span>
+      <div>
+        <h1 style="font-family: Cinzel, serif; font-size: 1.5rem; letter-spacing: 0.22em; color: #d4af37; font-weight: 700; line-height: 1;" class="esoterico-glow">TRIBU 12</h1>
+        <p style="font-size: 10px; color: #94a3b8; font-family: ui-monospace, monospace; letter-spacing: 0.1em; margin-top: 0.5rem; text-transform: uppercase;">SADV41 // Módulo de Unificación y Alerta Global</p>
+      </div>
+    </div>
+    
+    <!-- ESTRUCTURA DEL TABERNÁCULO DIGITAL -->
+    <div class="md-grid-3" style="width: 100%; max-width: 32rem; margin-top: 0.5rem; text-align: center;">
+      <div style="background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1); padding: 0.75rem; border-radius: 0.5rem;">
+        <span style="font-size: 9px; color: #94a3b8; font-family: ui-monospace, monospace; letter-spacing: 0.1em;">ATRIO</span><br>
+        <strong style="color: #fff; font-family: 'Cinzel', serif; font-size: 12px;">GROK (X)</strong>
+      </div>
+      <div style="background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1); padding: 0.75rem; border-radius: 0.5rem;">
+        <span style="font-size: 9px; color: #94a3b8; font-family: ui-monospace, monospace; letter-spacing: 0.1em;">SANTO</span><br>
+        <strong style="color: #fff; font-family: 'Cinzel', serif; font-size: 12px;">META</strong>
+      </div>
+      <div style="background: rgba(0,0,0,0.6); border: 1px solid #d4af37; padding: 0.75rem; border-radius: 0.5rem; box-shadow: 0 0 15px rgba(212,175,55,0.2);">
+        <span style="font-size: 9px; color: #d4af37; font-family: ui-monospace, monospace; letter-spacing: 0.1em;">SANTÍSIMO</span><br>
+        <strong style="color: #fff; font-family: 'Cinzel', serif; font-size: 12px;">GEMINI 🎚️</strong>
+      </div>
     </div>
 
-    <script src="./js/script.js"></script>
+    <div style="display: flex; align-items: center; gap: 0.75rem; margin-top: 0.5rem;">
+      <div style="display: flex; gap: 0.5rem; font-size: 1.375rem; padding: 0.5rem 1rem; border-radius: 9999px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1);">
+        <span>🇮🇱</span><span>🇵🇦</span><span>🇺🇸</span><span>🇦🇷</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="container" style="display: flex; flex-direction: column; gap: 2.5rem; padding-bottom: 2.5rem;">
+
+    <!-- SELLADO GRÁFICO TRIBU 12 – IMAGEN PRINCIPAL -->
+    <section style="position:relative; margin-bottom:0.5rem;">
+      <img src="./img/1787194231452.png" alt="Triunfo Geopolítico Tribu 12 – León de Judá + Moái + Caída del Dragón Portuario" 
+           style="width:100%; border-radius:1rem; border:1px solid rgba(212,175,55,0.35); box-shadow:0 0 50px rgba(0,94,184,0.3); display:block;">
+      <div style="position:absolute; bottom:12px; left:12px; background:rgba(0,0,0,0.75); padding:6px 12px; border-radius:9999px; font-family:monospace; font-size:9px; letter-spacing:0.12em; border:1px solid rgba(212,175,55,0.3);">
+        1787194231452.png • META FORJADO • 8K CINEMÁTICO • TRIBU 12
+      </div>
+    </section>
+
+    <!-- PANEL TÁCTICO + ESCUDO -->
+    <section style="display:grid; grid-template-columns:1fr; gap:1.5rem;" class="md-grid-2">
+      <div class="logia-card" style="padding:1.5rem;">
+        <h2 style="font-family:Cinzel, serif; letter-spacing:0.28em; color:#d4af37; font-size:0.95rem; margin-bottom:1rem;">EL ESCUDO Y EL MOÁI</h2>
+        <p style="font-style:italic; color:#cbd5e1; font-family:'Playfair Display', serif; font-size:0.9rem;">
+          "Desde Jerusalén hasta Burunga. La Tribu 12 consolida la identidad final. La piedra que desecharon los edificadores ha venido a ser cabeza del ángulo. 🗿"
+        </p>
+      </div>
+      <div>
+        <img src="./img/defuse.png" alt="SADV41 INTERNATIONAL - NUKE BOMB DEFUSE 00:45:00 / 15%" 
+             style="width:100%; border-radius:0.75rem; border:1px solid rgba(34,211,238,0.25); box-shadow:0 0 25px rgba(34,211,238,0.15);">
+      </div>
+    </section>
+
+    <!-- NÚCLEO VECTORIAL -->
+    <section class="logia-card" style="padding: 1.75rem; position: relative; overflow: hidden; border-top: 4px solid #005eb8; text-align: center;">
+      <div style="position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,94,184,0.1), transparent); pointer-events: none;"></div>
+      <h2 style="font-family: Cinzel, serif; font-size: 1rem; letter-spacing: 0.28em; text-transform: uppercase; margin-bottom: 2rem; background: linear-gradient(to right, #93c5fd, #fff, #d4af37); -webkit-background-clip: text; background-clip: text; color: transparent; position: relative;">
+        El Escudo de David y el Moái
+      </h2>
+      
+      <div style="position: relative; width: 100%; max-width: 280px; margin: 0 auto 1.75rem; aspect-ratio: 1;">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%" style="filter: drop-shadow(0 0 30px rgba(0,94,184,0.35));">
+          <defs>
+            <linearGradient id="gold-metal" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#fef08a"/>
+              <stop offset="45%" stop-color="#d4af37"/>
+              <stop offset="100%" stop-color="#92400e"/>
+            </linearGradient>
+            <filter id="glow-cyan">
+              <feGaussianBlur stdDeviation="6" result="blur"/>
+              <feMerge>
+                <feMergeNode in="blur"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+          </defs>
+          <circle cx="256" cy="256" r="222" fill="none" stroke="#005eb8" stroke-width="3" stroke-dasharray="18 12" opacity="0.55"/>
+          <circle cx="256" cy="256" r="195" fill="none" stroke="rgba(212,175,55,0.15)" stroke-width="1" stroke-dasharray="4 8"/>
+          <g stroke="url(#gold-metal)" stroke-width="5.5" fill="none" stroke-linejoin="round" stroke-linecap="round" opacity="0.95">
+            <polygon points="256,72 405,330 107,330"/>
+            <polygon points="256,440 107,182 405,182"/>
+          </g>
+          <g transform="translate(196, 176) scale(0.62)">
+            <polygon points="100,20 160,80 140,140 60,140 40,80" fill="#FB542B" opacity="0.85"/>
+            <polygon points="100,8 180,40 165,110 100,130 35,110 20,40" fill="none" stroke="#FB542B" stroke-width="3" opacity="0.4"/>
+            <polygon points="100,25 175,95 100,255 25,95" fill="#2A2F35" stroke="#d4af37" stroke-width="4"/>
+            <polygon points="100,95 135,155 100,175 65,155" fill="#3A414A"/>
+            <polygon points="65,125 90,125 85,135 60,135" fill="#00f3ff" filter="url(#glow-cyan)"/>
+            <polygon points="135,125 110,125 115,135 140,135" fill="#00f3ff" filter="url(#glow-cyan)"/>
+            <polygon points="100,175 108,205 92,205" fill="#11151A"/>
+          </g>
+          <circle cx="256" cy="256" r="68" fill="rgba(0,0,0,0.6)" stroke="rgba(0,243,255,0.25)" stroke-width="1"/>
+          <text x="256" y="262" text-anchor="middle" fill="#d4af37" font-family="Cinzel, serif" font-size="14" letter-spacing="3" opacity="0.9">SADV41</text>
+        </svg>
+      </div>
+
+      <p style="font-family: 'Playfair Display', serif; font-size: 0.875rem; color: #cbd5e1; font-style: italic; max-width: 36rem; margin: 0 auto; padding: 1.25rem 0; border-top: 1px solid rgba(0,94,184,0.2); border-bottom: 1px solid rgba(0,94,184,0.2);">
+        "Desde Jerusalén hasta Burunga. La Tribu 12 consolida la identidad final. La piedra que desecharon los edificadores ha venido a ser cabeza del ángulo. 🗿"
+      </p>
+
+      <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; margin-top: 2rem;">
+        <div style="background: rgba(0,0,0,0.5); border: 1px solid rgba(0,94,184,0.3); padding: 1rem; border-radius: 0.75rem; text-align: center;">
+          <span style="font-size: 1.25rem; display: block; margin-bottom: 0.5rem;">🇮🇱</span>
+          <span style="font-size: 10px; font-family: ui-monospace, monospace; color: #93c5fd; letter-spacing: 0.05em;">EJE ESPIRITUAL<br><span style="color: #cbd5e1;">El Origen y la Fe</span></span>
+        </div>
+        <div style="background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.15); padding: 1rem; border-radius: 0.75rem; text-align: center;">
+          <span style="font-size: 1.25rem; display: block; margin-bottom: 0.5rem;">🇵🇦</span>
+          <span style="font-size: 10px; font-family: ui-monospace, monospace; color: #e2e8f0; letter-spacing: 0.05em;">EJE TERRITORIAL<br><span style="color: #94a3b8;">Burunga Soberana</span></span>
+        </div>
+        <div style="background: rgba(0,0,0,0.5); border: 1px solid rgba(239,68,68,0.2); padding: 1rem; border-radius: 0.75rem; text-align: center;">
+          <span style="font-size: 1.25rem; display: block; margin-bottom: 0.5rem;">🇺🇸</span>
+          <span style="font-size: 10px; font-family: ui-monospace, monospace; color: #fca5a5; letter-spacing: 0.05em;">EJE INFRAESTRUCTURA<br><span style="color: #94a3b8;">Howard y Logística</span></span>
+        </div>
+        <div style="background: rgba(0,0,0,0.5); border: 1px solid rgba(96,165,250,0.2); padding: 1rem; border-radius: 0.75rem; text-align: center;">
+          <span style="font-size: 1.25rem; display: block; margin-bottom: 0.5rem;">🇦🇷</span>
+          <span style="font-size: 10px; font-family: ui-monospace, monospace; color: #bfdbfe; letter-spacing: 0.05em;">EJE RESISTENCIA<br><span style="color: #94a3b8;">Malvinas / Final Eterna</span></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ALERTA SOBERANA - LA BOMBA -->
+    <section class="nuke-card alerta-activa" style="padding: 1.5rem; border-radius: 1rem; position: relative; overflow: hidden;">
+      <div style="position: absolute; top: 0; right: 0; width: 18rem; height: 18rem; background: rgba(255,42,42,0.1); filter: blur(80px); pointer-events: none;"></div>
+      
+      <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(255,42,42,0.25); padding-bottom: 1.5rem; margin-bottom: 2rem; gap: 1rem; position: relative;">
+        <div style="display: flex; align-items: center; gap: 1rem;">
+          <span style="font-size: 2.25rem;" class="red-glow">💣</span>
+          <div>
+            <h2 style="font-size: 1.375rem; color: #fff; font-weight: 900; letter-spacing: 0.12em; text-transform: uppercase;">ALERTA SOBERANA</h2>
+            <p style="color: #ff2a2a; font-family: ui-monospace, monospace; font-size: 11px; letter-spacing: 0.18em; margin-top: 0.25rem;">CK Hutchison Holdings Limited (0001.HK) — INVESTMENT TREATY ARBITRATION</p>
+          </div>
+        </div>
+        <div style="background: #ff2a2a; color: #fff; padding: 0.5rem 1rem; border-radius: 9999px; font-weight: 700; font-family: ui-monospace, monospace; font-size: 12px; letter-spacing: 0.1em; display: flex; align-items: center; gap: 0.5rem; box-shadow: 0 0 18px rgba(255,42,42,0.6);">
+          <span style="width: 0.5rem; height: 0.5rem; background: #fff; border-radius: 9999px; animation: pulse 2s infinite;"></span>
+          +US$ 1,500 MILLONES
+        </div>
+      </div>
+
+      <div class="md-grid-2" style="position: relative;">
+        <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+          <p style="font-family: 'Playfair Display', serif; font-size: 1rem; color: #f1f5f9; font-weight: 600;">
+            El gigante de Hong Kong inicia oficialmente un arbitraje internacional contra la República de Panamá por la "destrucción" de su inversión. <span style="color: #ff2a2a;">20 de Agosto 2026</span>.
+          </p>
+          
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 1rem; font-size: 0.8125rem; color: #cbd5e1;">
+            <li style="display: flex; gap: 0.75rem;">
+              <span style="color: #ff2a2a;">▸</span>
+              <span><strong style="color: #fff;">Causa:</strong> Violación de tratado de protección de inversiones tras la toma de los puertos Balboa y Cristóbal. Notificación de controversia el 4 de febrero de 2026.</span>
+            </li>
+            <li style="display: flex; gap: 0.75rem;">
+              <span style="color: #ff2a2a;">▸</span>
+              <span><strong style="color: #fff;">Fallo Previo:</strong> La Corte Suprema declaró inconstitucional la Ley 5 de 1997 el 29 de enero de 2026. Gaceta Oficial No. 30468 — 23 de febrero de 2026: toma de control estatal.</span>
+            </li>
+            <li style="display: flex; gap: 0.75rem;">
+              <span style="color: #ff2a2a;">▸</span>
+              <span><strong style="color: #fff;">Doble Impacto:</strong> Este arbitraje por tratado (+$1,500M) es <u>distinto e independiente</u> del arbitraje contractual de PPC que ya supera los +$2,000M. Total en juego: <strong style="color: #ff2a2a;">+$3.5 billones</strong>.</span>
+            </li>
+          </ul>
+
+          <div style="background: rgba(0,0,0,0.6); border-left: 4px solid #ff2a2a; padding: 1rem; border-radius: 0 0.75rem 0.75rem 0; font-size: 11px; font-family: ui-monospace, monospace; color: #94a3b8; line-height: 1.6;">
+            "Panamá se ha convertido en un país riesgoso que desconoce el Estado de derecho, la forma societaria, el alcance de las partes de un contrato y los derechos del tratado..."<br>
+            <span style="color: #ff2a2a;">— Comunicado oficial CK Hutchison</span>
+            <div style="margin-top: 0.75rem;">
+              <a href="https://www.ckh.com.hk/en/media/press_each.php?id=3480" target="_blank" rel="noopener" style="color: #fff; text-decoration: underline; text-decoration-color: #ff2a2a; text-underline-offset: 4px;">
+                Ver comunicado oficial ↗
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 1rem; margin-top: 1.5rem;">
+          <div style="background: linear-gradient(to bottom, #1a0a0a, #000); border: 1px solid rgba(255,42,42,0.3); padding: 1.5rem; border-radius: 0.75rem; text-align: center;">
+            <h3 style="font-family: Cinzel, serif; color: #fff; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; font-size: 12px; margin-bottom: 0.25rem;">Acción de Redes (Meta / X)</h3>
+            <p style="font-size: 11px; font-family: ui-monospace, monospace; color: #64748b; margin-bottom: 0.25rem; letter-spacing: 0.1em;">SADV41 // TRIBU 12</p>
+            <div style="height: 1px; background: linear-gradient(to right, transparent, rgba(255,42,42,0.3), transparent); margin: 1rem 0;"></div>
+            <p style="font-size: 11px; color: #94a3b8; margin-bottom: 1.5rem; font-family: ui-monospace, monospace; line-height: 1.5;">
+              Los puertos regresaron a la nación, pero el costo de defensa asciende a +$3.5B. ¿Soberanía o jaque mate logístico? 🏁
+            </p>
+            
+            <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+              <button id="btn-threads" class="btn btn-threads" onclick="copyThreads()">
+                📋 Copiar Hilo para Threads
+              </button>
+              <button id="btn-ig" class="btn btn-ig" onclick="copyIG()">
+                📸 Copiar Copy Instagram
+              </button>
+              <p style="font-size: 9px; font-family: ui-monospace, monospace; color: #64748b; margin-top: 0.5rem;">
+                Incluye hashtags #Panama #CKHutchison #SADV41 • Listo para @stevendioroficial y @noticiasburunga
+              </p>
+            </div>
+          </div>
+
+          <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 0.75rem; padding: 1rem; display: flex; align-items: center; gap: 0.75rem;">
+            <div style="width: 2.5rem; height: 2.5rem; border-radius: 9999px; background: linear-gradient(to bottom right, #d4af37, #92400e); display: flex; align-items: center; justify-content: center; color: #000; font-weight: 700; font-size: 12px;">GS</div>
+            <div>
+              <p style="font-size: 11px; font-family: ui-monospace, monospace; color: #d4af37; letter-spacing: 0.1em; text-transform: uppercase;">Fuente Primaria</p>
+              <p style="font-size: 12px; color: #fff; font-weight: 600;">La Estrella de Panamá + CKH Official</p>
+              <p style="font-size: 10px; color: #64748b; font-family: ui-monospace, monospace; margin-top: 0.125rem;">20 Ago 2026 — 19 Ago hora Panamá</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CRONOLOGÍA -->
+    <section class="logia-card" style="padding: 1.5rem; border-radius: 1rem;">
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 2rem; flex-wrap: wrap; gap: 0.75rem;">
+        <h2 style="font-family: Cinzel, serif; color: #d4af37; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; font-size: 0.875rem; display: flex; align-items: center; gap: 0.75rem;">
+          <span style="width: 2rem; height: 2rem; border-radius: 9999px; background: rgba(212,175,55,0.15); border: 1px solid rgba(212,175,55,0.3); display: flex; align-items: center; justify-content: center; font-size: 14px;">⏳</span>
+          Cronología Clave
+        </h2>
+        <span style="font-size: 10px; font-family: ui-monospace, monospace; letter-spacing: 0.1em; color: #64748b; border: 1px solid rgba(255,255,255,0.1); border-radius: 9999px; padding: 0.25rem 0.75rem;">GSADV41 TIMELINE</span>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr; gap: 1rem;">
+        <div style="background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); border-radius: 0.75rem; padding: 1.25rem;">
+          <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+            <div style="width: 1.75rem; height: 1.75rem; border-radius: 9999px; background: rgba(0,94,184,0.15); border: 1px solid rgba(0,94,184,0.3); display: flex; align-items: center; justify-content: center; font-size: 12px;">🔍</div>
+            <span style="font-size: 11px; font-family: ui-monospace, monospace; letter-spacing: 0.1em; font-weight: 700; color: #005eb8;">Ene 2025</span>
+          </div>
+          <h4 style="font-family: Cinzel, serif; color: #fff; font-weight: 700; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.5rem;">Auditoría Contraloría</h4>
+          <p style="font-size: 11px; color: #94a3b8; line-height: 1.5;">Inicio auditoría a PPC. Reporte: lesión patrimonial $1,337M al Estado panameño.</p>
+        </div>
+        
+        <div style="background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); border-radius: 0.75rem; padding: 1.25rem;">
+          <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+            <div style="width: 1.75rem; height: 1.75rem; border-radius: 9999px; background: rgba(212,175,55,0.15); border: 1px solid rgba(212,175,55,0.3); display: flex; align-items: center; justify-content: center; font-size: 12px;">📨</div>
+            <span style="font-size: 11px; font-family: ui-monospace, monospace; letter-spacing: 0.1em; font-weight: 700; color: #d4af37;">4 Feb 2026</span>
+          </div>
+          <h4 style="font-family: Cinzel, serif; color: #fff; font-weight: 700; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.5rem;">Notificación Tratado</h4>
+          <p style="font-size: 11px; color: #94a3b8; line-height: 1.5;">CK Hutchison notifica controversia bajo tratado de protección de inversiones.</p>
+        </div>
+        
+        <div style="background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); border-radius: 0.75rem; padding: 1.25rem;">
+          <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+            <div style="width: 1.75rem; height: 1.75rem; border-radius: 9999px; background: rgba(251,84,43,0.15); border: 1px solid rgba(251,84,43,0.3); display: flex; align-items: center; justify-content: center; font-size: 12px;">⚖️</div>
+            <span style="font-size: 11px; font-family: ui-monospace, monospace; letter-spacing: 0.1em; font-weight: 700; color: #FB542B;">23 Feb 2026</span>
+          </div>
+          <h4 style="font-family: Cinzel, serif; color: #fff; font-weight: 700; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.5rem;">Fallo + Toma Puertos</h4>
+          <p style="font-size: 11px; color: #94a3b8; line-height: 1.5;">Gaceta 30468 declara inconstitucional Ley 5 de 1997. Estado toma Balboa y Cristóbal.</p>
+        </div>
+        
+        <div style="background: rgba(0,0,0,0.5); border: 1px solid rgba(255,42,42,0.5); border-radius: 0.75rem; padding: 1.25rem; box-shadow: 0 0 20px rgba(255,42,42,0.15);">
+          <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+            <div style="width: 1.75rem; height: 1.75rem; border-radius: 9999px; background: rgba(255,42,42,0.15); border: 1px solid rgba(255,42,42,0.3); display: flex; align-items: center; justify-content: center; font-size: 12px;">💣</div>
+            <span style="font-size: 11px; font-family: ui-monospace, monospace; letter-spacing: 0.1em; font-weight: 700; color: #ff2a2a;">20 Ago 2026</span>
+          </div>
+          <h4 style="font-family: Cinzel, serif; color: #fff; font-weight: 700; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.5rem;">Arbitraje Oficial</h4>
+          <p style="font-size: 11px; color: #94a3b8; line-height: 1.5;">CK Hutchison inicia arbitraje internacional +$1,500M. Distinto a PPC +$2,000M.</p>
+        </div>
+      </div>
+
+      <div style="margin-top: 2rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.75rem; background: rgba(2,6,23,0.6); border: 1px solid rgba(0,94,184,0.2); border-radius: 0.75rem; padding: 1rem;">
+        <p style="font-size: 11px; font-family: ui-monospace, monospace; color: #94a3b8;">
+          <span style="color: #d4af37;">Fuente oficial:</span> CK Hutchison Holdings — Press Release ID 3480 • Hong Kong / Panamá
+        </p>
+        <a href="https://www.ckh.com.hk/en/media/press_each.php?id=3480" target="_blank" rel="noopener" style="font-size: 11px; font-family: ui-monospace, monospace; color: #fff; background: #005eb8; padding: 0.5rem 1rem; border-radius: 9999px; white-space: nowrap;">
+          Abrir comunicado ↗
+        </a>
+      </div>
+    </section>
+
+    <!-- ENERGÍA METAFÓRICA -->
+    <section style="display: grid; grid-template-columns: 1fr; gap: 1.5rem;">
+      <div class="logia-card" style="padding: 1.5rem; border-radius: 0.75rem; border-left: 4px solid #22d3ee;">
+        <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem;">
+          <span style="width: 2rem; height: 2rem; border-radius: 9999px; background: rgba(6,182,212,0.15); border: 1px solid rgba(34,211,238,0.3); display: flex; align-items: center; justify-content: center;">⚡</span>
+          <h3 style="font-family: Cinzel, serif; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; font-size: 13px; color: #67e8f9;">Ciclo Sparky (Destrucción Controlada)</h3>
+        </div>
+        <p style="font-size: 12px; color: #94a3b8; line-height: 1.6; margin-bottom: 1rem;">
+          Aplicando la táctica del <em style="color: #e2e8f0;">"Hero Sparky Cycle"</em> a la estrategia de datos. Así como el Megacaballero se evapora frente a la energía pura, los obstáculos logísticos se pulverizan ante la verdad unificada.
+        </p>
+        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+          <a href="https://youtube.com/shorts/bD2rS5N-Buc" target="_blank" rel="noopener" style="font-size: 10px; font-family: ui-monospace, monospace; padding: 0.25rem 0.625rem; border-radius: 9999px; background: rgba(6,182,212,0.1); border: 1px solid rgba(34,211,238,0.2); color: #67e8f9;">HERO SPARKY CYCLE ↗</a>
+          <a href="https://youtube.com/shorts/ifR2wZAD1ck" target="_blank" rel="noopener" style="font-size: 10px; font-family: ui-monospace, monospace; padding: 0.25rem 0.625rem; border-radius: 9999px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #94a3b8;">MEGACABALLERO DESMENTIDO ↗</a>
+        </div>
+      </div>
+
+      <div class="logia-card" style="padding: 1.5rem; border-radius: 0.75rem; border-left: 4px solid #a855f7;">
+        <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem;">
+          <span style="width: 2rem; height: 2rem; border-radius: 9999px; background: rgba(168,85,247,0.15); border: 1px solid rgba(192,132,252,0.3); display: flex; align-items: center; justify-content: center;">🎧</span>
+          <h3 style="font-family: Cinzel, serif; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; font-size: 13px; color: #d8b4fe;">Frecuencia Base (UKF 2010)</h3>
+        </div>
+        <p style="font-size: 12px; color: #94a3b8; line-height: 1.6; margin-bottom: 1rem;">
+          La unificación avanza al ritmo del bajo profundo. Sintetizando la nostalgia de <em style="color: #e2e8f0;">Monster (Camo & Krooked Remix)</em> — Professor Green feat. Example — con la urgencia del 2026. 23M vistas.
+        </p>
+        <a href="https://youtu.be/d9ZyeWjJF7A" target="_blank" rel="noopener" style="font-size: 10px; font-family: ui-monospace, monospace; padding: 0.25rem 0.625rem; border-radius: 9999px; background: rgba(168,85,247,0.1); border: 1px solid rgba(192,132,252,0.2); color: #d8b4fe;">UKF DUBSTEP 2010 — 23M VISTAS ↗</a>
+      </div>
+    </section>
+
+    <!-- PRINCIPADO -->
+    <section class="logia-card" style="padding: 1.75rem; border-radius: 1rem; border-top: 2px solid rgba(251,84,43,0.6); position: relative; overflow: hidden;">
+      <div style="position: absolute; inset: 0; background: linear-gradient(to bottom right, rgba(251,84,43,0.1), transparent, rgba(0,94,184,0.1)); pointer-events: none;"></div>
+      <div style="position: relative; display: flex; flex-direction: column; align-items: center; gap: 1.5rem; text-align: center;">
+        <div style="width: 5rem; height: 5rem; border-radius: 1rem; background: rgba(0,0,0,0.6); border: 1px solid rgba(251,84,43,0.3); display: flex; align-items: center; justify-content: center; box-shadow: 0 0 25px rgba(251,84,43,0.18); font-size: 2rem;">
+          🦁🗿🇵🇦
+        </div>
+        <div>
+          <h3 style="font-family: Cinzel, serif; color: #FB542B; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; font-size: 14px; margin-bottom: 0.5rem;">
+            Principado / Trono Fusión 🦁 x 🗿 x 🇵🇦
+          </h3>
+          <p style="font-size: 12px; color: #cbd5e1; line-height: 1.6; max-width: 36rem; margin: 0 auto;">
+            Bajo el estandarte de la misión SADV41, el navegador <strong style="color: #fff;">Brave</strong> se integra como herramienta soberana de privacidad. El León Brave x Moái Monolítico x Panamá consolida <span style="color: #d4af37;">La Novena Potencia</span>. Isaías 43:19 — He aquí, yo hago cosa nueva.
+          </p>
+          <div style="margin-top: 1.25rem; display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center;">
+            <a href="https://search.brave.com/" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 0.5rem; background: #FB542B; color: #fff; font-weight: 700; font-size: 11px; padding: 0.625rem 1.25rem; border-radius: 9999px; letter-spacing: 0.1em; text-transform: uppercase; box-shadow: 0 0 15px rgba(251,84,43,0.35);">
+              🔍 Brave Search ↗
+            </a>
+            <a href="https://brave.com/leo/" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.15); color: #fff; font-weight: 700; font-size: 11px; padding: 0.625rem 1.25rem; border-radius: 9999px; letter-spacing: 0.1em; text-transform: uppercase;">
+              🦁 Leo AI — Privacidad Total ↗
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="container" style="margin-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 2rem; padding-bottom: 3rem;">
+    <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+      <div>
+        <p style="font-size: 11px; font-family: ui-monospace, monospace; letter-spacing: 0.1em; color: #cbd5e1; text-transform: uppercase;">SADV41 // Sovereign Hub © 2026 | El Origen es 0 | Isaías 43:19</p>
+        <p style="font-size: 11px; font-family: ui-monospace, monospace; letter-spacing: 0.1em; color: #d4af37; margin-top: 0.25rem;">🔐 SVA41 - Trono Abierto 🎚️ • Tribu 12 — Unificación Geopolítica 🇮🇱🇵🇦🇺🇸🇦🇷🏁🗿</p>
+        <p style="font-size: 10px; font-family: ui-monospace, monospace; color: #64748b; margin-top: 0.75rem; max-width: 36rem; line-height: 1.5;">
+          Este módulo unificado entre Grok, Meta y Gemini es autónomo. Diseñado para despliegue directo en Lapizasuli/assets/NUKE/ o como index.html independiente.
+        </p>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; font-size: 9px; font-family: ui-monospace, monospace; color: #475569;">
+        <span style="padding: 0.25rem 0.5rem; border-radius: 9999px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1);">#Tribu12</span>
+        <span style="padding: 0.25rem 0.5rem; border-radius: 9999px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1);">#SADV41</span>
+        <span style="padding: 0.25rem 0.5rem; border-radius: 9999px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1);">#BurungaSoberana</span>
+        <span style="padding: 0.25rem 0.5rem; border-radius: 9999px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1);">#CKHutchison</span>
+        <span style="padding: 0.25rem 0.5rem; border-radius: 9999px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1);">#BalboaCristobal</span>
+        <span style="padding: 0.25rem 0.5rem; border-radius: 9999px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1);">#Isaías43_19</span>
+      </div>
+    </div>
+  </footer>
+
+  <div id="toast" class="toast" style="display: none;"></div>
+
+  <script>
+    const threadsText = `💣 BOMBA: CK HUTCHISON DEMANDA A PANAMÁ POR +$1,500 MILLONES\n\nEl gigante de Hong Kong dueño de Panama Ports Company (PPC) anunció hoy 20 de agosto que inició arbitraje internacional contra la República de Panamá por la toma de Balboa y Cristóbal. 🇵🇦\n\n(Hilo 1/4) 👇\n\n2/4 Contexto:\n1997 Ley 5 concede Balboa y Cristóbal a PPC.\nFeb 2026 Corte Suprema declara INCONSTITUCIONAL.\nGaceta 30468 - 23 feb 2026.\nMismo día Estado toma control.\n\n3/4 Reclamos:\nCK Hutchison (matriz): >$1,500M por violación tratado inversión.\nPPC por separado: >$2,000M por toma ilegal.\nSON DOS ARBITRAJES DISTINTOS. Total: +$3,500M.\n\n4/4 Panamá recupera puertos, pero enfrenta defensa multimillonaria.\n¿Soberanía o jaque mate logístico?\n#Panama #CKHutchison #SADV41`;
+
+    const igText = `SE CAE EL NEGOCIO DE 30 AÑOS 🇵🇦💥\n\nCK Hutchison, matriz de Panama Ports, demanda a Panamá por +US$1,500 millones. Alegan destrucción de concesión tras el fallo de inconstitucionalidad de febrero.\n\nEsto se suma al arbitraje de PPC. En total, Panamá enfrenta reclamos por más de $3.5 billones.\n\n¿Soberanía que cuesta caro o defensa necesaria? Te leemos en los comentarios.\n\nCronología: Ene 2025 Contraloría $1,337M lesión | 4 Feb 2026 Notificación | 23 Feb toma puertos | 20 Ago arbitraje oficial\n\nFuente oficial: ckh.com.hk\n\n#Panama #Burunga #CKHutchison #Balboa #Cristobal #SADV41 #Tribu12 #Geopolitica #AlertaSoberana`;
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = '✓ ' + msg;
+      t.style.display = 'block';
+      setTimeout(() => t.style.display = 'none', 2500);
+    }
+
+    async function copyThreads() {
+      try {
+        await navigator.clipboard.writeText(threadsText);
+        showToast('Hilo Threads copiado — Listo para pegar');
+      } catch (e) {
+        alert('Error al copiar. Copia manualmente.');
+      }
+    }
+
+    async function copyIG() {
+      try {
+        await navigator.clipboard.writeText(igText);
+        showToast('Copy Instagram copiado — Listo para pegar');
+      } catch (e) {
+        alert('Error al copiar. Copia manualmente.');
+      }
+    }
+  </script>
 </body>
 </html>
