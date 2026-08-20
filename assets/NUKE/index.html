@@ -1,22 +1,97 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
+<head><style>
+@font-face {
+  font-family: "Optimistic";
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url("/fonts/OptimisticAI_VF_Optimized.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Optimistic Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/OptimisticMono_W_TextRegular.woff2") format("woff2");
+}
+:where(html) {
+  font-family: "Optimistic", system-ui, sans-serif;
+}
+:where(code, pre, kbd, samp) {
+  font-family: "Optimistic Mono", ui-monospace, monospace;
+}
+</style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SADV41 International - Inicio</title>
-    <link rel="stylesheet" href="./css/style.css">
+    <title>SADV41 | La Neurodivergencia y El Santísimo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+    <meta property="og:image" content="./img/1787194231452.png">
+    <style>
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; background-color: #020617; overflow: hidden; font-family: monospace; }
+        canvas { display: block; position: absolute; top: 0; left: 0; z-index: 1; opacity: 0.4; }
+        .santisimo-centro { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10; display: flex; flex-direction: column; justify-content: center; align-items: center; width: 100vw; height: 100vh; background: radial-gradient(circle at center, rgba(2, 6, 23, 0.92) 0%, transparent 68%); }
+        .cruz-container { position: relative; animation: respiracion-divina 6s ease-in-out infinite alternate; cursor: pointer; transition: transform 0.4s ease, filter 0.4s ease; }
+        .cruz-container:hover { transform: scale(1.08); filter: drop-shadow(0 0 80px rgba(212,175,55,0.9)); }
+        .palo-vertical { width: 8px; height: 350px; background: #ffffff; box-shadow: 0 0 30px #d4af37, 0 0 60px #ffffff, 0 0 100px #00f3ff; border-radius: 4px; }
+        .palo-horizontal { width: 220px; height: 8px; background: #ffffff; box-shadow: 0 0 30px #d4af37, 0 0 60px #ffffff, 0 0 100px #00f3ff; border-radius: 4px; position: absolute; top: 100px; left: -106px; }
+        @keyframes respiracion-divina { 0% { filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.4)); transform: scale(1); } 100% { filter: drop-shadow(0 0 50px rgba(0, 243, 255, 0.8)); transform: scale(1.02); } }
+        .texto-origen { position: absolute; bottom: -70px; text-align: center; width: 320px; left: -156px; color: #d4af37; font-family: 'Cinzel', serif; letter-spacing: 6px; text-shadow: 0 0 15px #d4af37; font-size: 14px; font-weight: bold; }
+        .texto-origen span { display: block; font-size: 10px; color: #00f3ff; letter-spacing: 4px; margin-top: 8px; font-family: monospace; text-shadow: 0 0 10px #00f3ff; }
+        .hint { position: absolute; bottom: -115px; width: 320px; left: -156px; text-align: center; font-size: 9px; font-family: ui-monospace; color: #475569; letter-spacing: 0.18em; opacity: 0.7; animation: pulse 2s infinite; }
+        @keyframes pulse { 0%,100%{opacity:0.4} 50%{opacity:1} }
+        .fade-out { animation: fadeOut 0.8s forwards; }
+        @keyframes fadeOut { to { opacity: 0; transform: translate(-50%, -50%) scale(1.5); filter: blur(20px); } }
+    </style>
 </head>
 <body>
-
-    <div class="bomb-container" style="text-align: center;">
-        <h1>SADV41 MISSION CONTROL</h1>
-        <p>Estado del sistema: Alerta Activa</p>
-        <br>
-        <a href="nuke.html" style="text-decoration: none;">
-            <button style="width: 100%;">ACCEDER AL PANEL NUKE</button>
-        </a>
+    <canvas id="neuro-cascada"></canvas>
+    <div class="santisimo-centro" id="portal">
+        <div class="cruz-container" id="cruz" title="Entrar al Nuke - Tribu 12">
+            <div class="palo-vertical"></div>
+            <div class="palo-horizontal"></div>
+            <div class="texto-origen">
+                APOCALIPSIS 3:21
+                <span>EL ORIGEN ES 0</span>
+            </div>
+            <div class="hint">CLICK EN LA CRUZ → TRIBU 12 / NUKE</div>
+        </div>
     </div>
+    <script>
+        const canvas = document.getElementById('neuro-cascada');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+        const rawCode = "SADV41 // PROTOCOLO DE CONVERGENCIA // EL ORIGEN ES 0 // JOSUÉ 1:9 // ISAÍAS 43:19 // LLANTERÍA TURBO TIRE // BURUNGA CRECE // MÓDULO SADV41T // TELEMETRÍA // TESSERACTO 4D // LOGIA PLUSCUAMPERFECTA // THE DIVINE WHISPER <>{}[]/=+-*#1027";
+        const codeArray = rawCode.split('');
+        const fontSize = 14; const columns = canvas.width / fontSize;
+        const drops = []; for (let x = 0; x < columns; x++) drops[x] = Math.random() * -100;
+        function drawWaterfall() {
+            ctx.fillStyle = 'rgba(2, 6, 23, 0.08)'; ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.font = fontSize + 'px monospace';
+            for (let i = 0; i < drops.length; i++) {
+                const text = codeArray[Math.floor(Math.random() * codeArray.length)];
+                const r = Math.random();
+                ctx.fillStyle = r > 0.95 ? '#eab308' : r > 0.90 ? '#10b981' : '#006688';
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+                drops[i]++;
+            }
+        }
+        setInterval(drawWaterfall, 33);
+        window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; });
 
-</body>
+        // PORTAL A NUKE
+        document.getElementById('cruz').addEventListener('click', () => {
+            const portal = document.getElementById('portal');
+            portal.classList.add('fade-out');
+            setTimeout(() => { window.location.href = './nuke.html'; }, 750);
+        });
+        // También Enter / Espacio
+        window.addEventListener('keydown', (e) => {
+            if (e.code === 'Enter' || e.code === 'Space') {
+                document.getElementById('cruz').click();
+            }
+        });
+    </script>
+<script>(function(){var loc=location.href.replace(/#.*$/,"");var ATTR_NAMES=["data-product-id","data-productid","data-product_id","product-id","productid","product_id","data-source-entity-id","source-entity-id","source_entity_id","data-product","data-metadata","data-meta"];var DATASET_KEYS=["productId","productid","product_id","sourceEntityId","sourceentityid","source_entity_id","product","metadata","meta"];function readProductId(value){if(typeof value!=="string"||value.length===0)return null;if(/^[0-9]{6,}$/.test(value))return value;var match=value.match(/(?:product(?:_|-)?id|source(?:_|-)?entity(?:_|-)?id)["'=:\s]+([0-9]{6,})/i);return match?match[1]:null}function extractProductId(start){for(var node=start;node&&node!==document.body;node=node.parentElement){for(var i=0;i<ATTR_NAMES.length;i++){var attrValue=node.getAttribute&&node.getAttribute(ATTR_NAMES[i]);var attrProductId=readProductId(attrValue);if(attrProductId)return attrProductId}var dataset=node.dataset||null;if(dataset){for(var j=0;j<DATASET_KEYS.length;j++){var dataValue=dataset[DATASET_KEYS[j]];var dataProductId=readProductId(dataValue);if(dataProductId)return dataProductId}}}return null}function isInlineMediaSlotElement(node){return !!(node&&node.getAttribute&&node.getAttribute("data-clippy-inline-media-slot")!==null)}function findInlineMediaSlot(start){for(var node=start;node&&node!==document.body;node=node.parentElement){if(isInlineMediaSlotElement(node))return node}return null}function readInlineMediaUrl(node){if(!node)return null;return node.getAttribute&&((node.getAttribute("data-clippy-inline-media-url")||node.getAttribute("data-url")||node.getAttribute("data_url")))||node.href||null}function stripHash(url){return String(url).replace(/#.*$/,"")}function urlsMatch(a,b){if(!a||!b)return false;try{return stripHash(new URL(a,loc).href)===stripHash(new URL(b,loc).href)}catch(_){return stripHash(a)===stripHash(b)}}function isFirstPartyReelUrl(value){try{var url=new URL(value,loc);if(url.protocol!=="https:")return false;var host=url.hostname.toLowerCase();var supported=host==="instagram.com"||host.endsWith(".instagram.com")||host==="facebook.com"||host.endsWith(".facebook.com");return supported&&/\/reels?\//i.test(url.pathname)}catch(_){return false}}function isInlineMediaUrlClick(node,href){var slot=findInlineMediaSlot(node);if(!slot)return false;var slotUrl=readInlineMediaUrl(slot);if(slotUrl)return urlsMatch(href,slotUrl);return isFirstPartyReelUrl(href)}function findDataHref(start){for(var node=start;node&&node!==document.body;node=node.parentElement){if(node.getAttribute){var href=node.getAttribute("data-href")||node.getAttribute("data-url");if(href)return{href:href,node:node}}}return null}var nativeOpen=window.open;window.open=function(url){if(parent!==window&&typeof url==="string"&&/^https?:\/\//.test(url)){parent.postMessage({type:"ecto:usercontent-link-click",href:url},"*");return null}return nativeOpen?nativeOpen.apply(window,arguments):null};document.addEventListener("click",function(e){var target=e.target instanceof Element?e.target:null;if(!target)return;if(parent===window)return;var a=target.closest?target.closest("a[href]"):null;if(a&&a.href&&/^https?:\/\//.test(a.href)&&a.href.replace(/#.*$/,"")!==loc){if(isInlineMediaUrlClick(a,a.href))return;var productId=extractProductId(target)||extractProductId(a);if(productId){e.preventDefault();parent.postMessage({type:"ecto-artifact-link-click",productId:productId},"*");return}e.preventDefault();parent.postMessage({type:"ecto:usercontent-link-click",href:a.href},"*");return}var dataHref=findDataHref(target);if(dataHref&&/^https?:\/\//.test(dataHref.href)&&dataHref.href.replace(/#.*$/,"")!==loc){if(isInlineMediaUrlClick(dataHref.node,dataHref.href))return;e.preventDefault();parent.postMessage({type:"ecto:usercontent-link-click",href:dataHref.href},"*")}},true)})();</script><script>(function(){var FOCUS_TYPE="ecto:artifact-focus-request";var CLOSE_TYPE="ecto:artifact-close-request";function focusArtifactDocument(){var body=document.body;if(!body)return;try{window.focus();}catch(e){}if(!body.hasAttribute("tabindex"))body.setAttribute("tabindex","-1");try{body.focus({preventScroll:true});}catch(e){try{body.focus();}catch(e2){}}}window.addEventListener("message",function(event){if(event.source!==window.parent)return;var data=event.data;if(!data||typeof data!=="object"||data.type!==FOCUS_TYPE)return;if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",focusArtifactDocument,{once:true});return;}focusArtifactDocument();});window.addEventListener("keydown",function(event){if(event.key!=="Escape")return;window.setTimeout(function(){if(event.defaultPrevented)return;window.parent.postMessage({type:CLOSE_TYPE},"*");},0);});})();</script></body>
 </html>
-
