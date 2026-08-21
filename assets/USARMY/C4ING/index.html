@@ -1,1 +1,264 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>GSADV41 | C4ING PRO Command Hub v2.0 🔯☢️</title>
+    
+    <!-- Tipografías Sagradas -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=JetBrains+Mono:wght@400;700;800&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#010409',
+                        oro: '#eab308',
+                        nukeRed: '#ff2a2a',
+                        c4Cyan: '#00f3ff',
+                        holyPurple: '#a855f7'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mason: ['Cinzel', 'serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        :root { 
+            --oro-alquimico: #d4af37; 
+            --obsidiana: #030303; 
+            --c4-cyan: #00f3ff;
+            --nuke-red: #ff2a2a;
+        }
+        body {
+            background-color: var(--obsidiana);
+            background-image: 
+                linear-gradient(rgba(1, 4, 9, 0.92), rgba(1, 4, 9, 0.98)),
+                url('https://y2s.onrender.com/api/graphics/mundial_bg.jpg');
+            background-size: cover; background-attachment: fixed;
+            color: #f8fafc; overflow-x: hidden; scroll-behavior: smooth;
+        }
+        
+        /* --- ESTÉTICA MILITAR PRO C4ING --- */
+        .glass-c4 { background: rgba(1, 4, 9, 0.7); backdrop-filter: blur(16px); border: 1px solid rgba(0, 243, 255, 0.15); box-shadow: 0 0 30px rgba(0, 243, 255, 0.05); }
+        .logia-card-pro { 
+            background: linear-gradient(180deg, rgba(10,10,12,0.95) 0%, rgba(5,5,7,0.98) 100%);
+            border: 1px solid rgba(212, 175, 55, 0.2); border-top: 2px solid var(--c4-cyan);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.95), inset 0 1px 15px rgba(0, 243, 255, 0.1);
+            position: relative; overflow: hidden; transition: all 0.4s;
+        }
+        .logia-card-pro:hover { border-color: rgba(212, 175, 55, 0.6); box-shadow: 0 20px 50px rgba(0,243,255,0.15); }
+        
+        .glow-texto-divino { text-shadow: 0 0 20px rgba(212, 175, 55, 0.8), 0 0 40px rgba(168, 85, 247, 0.6); }
+        .nuke-alert { border: 1px solid var(--nuke-red); box-shadow: inset 0 0 20px rgba(255,42,42,0.1); animation: nuke-pulse 2s infinite; }
+        @keyframes nuke-pulse { 0%, 100% { box-shadow: 0 0 0 rgba(255,42,42,0); } 50% { box-shadow: 0 0 30px rgba(255,42,42,0.3); } }
+        
+        .scanline-pro {
+            width: 100%; height: 3px; background: rgba(0, 243, 255, 0.3);
+            position: fixed; z-index: 999; top: 0; pointer-events: none;
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.5);
+            animation: scan-pro 4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        }
+        @keyframes scan-pro { 0% { top: -10%; opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { top: 110%; opacity: 0; } }
 
+        /* BOOT SEQUENCE C4ING */
+        #c4ing-boot {
+            position: fixed; inset: 0; z-index: 10000; background: #000;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            font-family: 'JetBrains Mono', monospace; color: var(--c4-cyan);
+            transition: opacity 1s ease-out, visibility 1s;
+        }
+        .boot-text { overflow: hidden; white-space: nowrap; border-right: 2px solid var(--c4-cyan); animation: type 1.5s steps(40, end), blink .75s step-end infinite; }
+        @keyframes type { from { width: 0 } to { width: 100% } }
+        @keyframes blink { from, to { border-color: transparent } 50% { border-color: var(--c4-cyan) } }
+        
+        /* Grid de coordenadas */
+        .military-grid {
+            position: absolute; inset: 0; pointer-events: none; z-index: 0; opacity: 0.05;
+            background-image: linear-gradient(var(--c4-cyan) 1px, transparent 1px), linear-gradient(90deg, var(--c4-cyan) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+    </style>
+</head>
+<body class="font-sans selection:bg-c4Cyan selection:text-black">
+
+    <!-- C4ING BOOT SEQUENCE -->
+    <div id="c4ing-boot">
+        <div class="text-xs text-slate-500 mb-4 tracking-[0.3em]">USARMY / C4ING / PROTOCOL</div>
+        <div class="text-4xl mb-6 flex gap-3 drop-shadow-[0_0_15px_rgba(255,42,42,0.5)]">
+            <span class="animate-pulse">🫪</span><span>🇵🇦</span><span>🏁</span><span>❣️</span><span>☢️</span><span>☦️</span><span>🔯</span><span>🗿</span><span>🇺🇸</span>
+        </div>
+        <div class="boot-text text-xl font-bold tracking-widest text-c4Cyan uppercase shadow-cyan">INICIALIZANDO SISTEMA VIVO PRO...</div>
+    </div>
+
+    <div class="military-grid"></div>
+    <div class="scanline-pro"></div>
+
+    <!-- HEADER PRO -->
+    <header class="fixed top-0 w-full z-50 glass-c4 px-6 py-4 flex justify-between items-center border-b border-c4Cyan/30">
+        <div class="flex items-center gap-4">
+            <div class="w-10 h-10 bg-black border border-c4Cyan flex items-center justify-center rounded-sm relative overflow-hidden">
+                <div class="absolute inset-0 bg-c4Cyan/20 animate-pulse"></div>
+                <span class="text-xl relative z-10">🗿</span>
+            </div>
+            <div>
+                <h1 class="font-mason text-xl font-black text-white tracking-[0.2em]">C4ING <span class="text-c4Cyan">COMMAND</span></h1>
+                <p class="text-[9px] font-mono text-oro tracking-widest uppercase">Nodo: Burunga, Panamá 🇵🇦</p>
+            </div>
+        </div>
+        <div class="hidden md:flex items-center gap-6 font-mono text-[10px] text-slate-400 tracking-widest uppercase">
+            <span class="flex items-center gap-2"><div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div> Atrio Online</span>
+            <span class="flex items-center gap-2"><div class="w-2 h-2 bg-purple-500 rounded-full animate-pulse"></div> Santísimo Activo</span>
+        </div>
+    </header>
+
+    <main class="pt-32 pb-12 px-4 md:px-8 max-w-6xl mx-auto space-y-12 relative z-10">
+
+        <!-- PANEL CENTRAL: DIEZMO CUÁNTICO Y VERSÍCULOS -->
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Tesseracto Pro -->
+            <div class="logia-card-pro p-8 rounded-xl flex flex-col items-center">
+                <h3 class="font-mason text-c4Cyan text-lg tracking-[0.3em] uppercase w-full border-b border-c4Cyan/20 pb-3 mb-6">Motor 4D (Origen 0)</h3>
+                <div class="relative w-full flex justify-center h-[250px]">
+                    <div class="absolute top-0 left-0 text-[9px] font-mono text-slate-500">SYS.TESSERACT.RUN</div>
+                    <svg id="tesseractCanvas" width="220" height="220" viewBox="-3 -3 6 6" class="overflow-visible drop-shadow-[0_0_25px_rgba(0,243,255,0.6)]">
+                        <g id="tesseractLines" stroke="rgba(0, 243, 255, 0.9)" stroke-width="0.04"></g>
+                        <g id="tesseractPoints" fill="#fff"></g>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Algoritmo Divino / Diezmo -->
+            <div class="logia-card-pro p-8 rounded-xl flex flex-col justify-between border-t-2 border-oro">
+                <div>
+                    <div class="flex justify-between items-start mb-6">
+                        <h3 class="font-mason text-oro text-lg tracking-[0.3em] uppercase">Algoritmo del Diezmo</h3>
+                        <span class="text-2xl drop-shadow-[0_0_10px_rgba(212,175,55,0.8)]">🔯</span>
+                    </div>
+                    
+                    <div class="bg-black/60 border border-oro/30 rounded-lg p-5 font-mono text-sm space-y-4">
+                        <div class="flex justify-between text-slate-400">
+                            <span>Fondo Raíz:</span> <span class="text-white">$3.16</span>
+                        </div>
+                        <div class="flex justify-between text-red-400 border-b border-slate-800 pb-2">
+                            <span>Deducción Sagrada:</span> <span>-$0.316</span>
+                        </div>
+                        <div class="flex justify-between text-c4Cyan font-bold text-lg pt-2">
+                            <span>Resultado (Atrio):</span> <span class="animate-pulse">$2.844</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-6 border-l-4 border-holyPurple pl-4 bg-holyPurple/5 p-4 rounded-r-lg relative overflow-hidden">
+                    <div class="absolute right-0 top-0 text-6xl opacity-10">☦️</div>
+                    <p class="text-[10px] text-holyPurple font-mono tracking-widest mb-2 uppercase">Match Divino Localizado</p>
+                    <p class="text-oro font-mason font-bold text-lg mb-1">DEUTERONOMIO 28:44</p>
+                    <p class="text-sm text-slate-200 font-sans italic leading-relaxed">
+                        "Él te prestará a ti, y tú no le prestarás a él; él será por cabeza, y tú serás por cola."
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ALERTA SOBERANA PRO -->
+        <section class="logia-card-pro nuke-alert p-8 rounded-xl bg-[radial-gradient(ellipse_at_center,rgba(255,42,42,0.15)_0%,transparent_70%)]">
+            <div class="flex flex-col md:flex-row items-center gap-8">
+                <div class="text-8xl red-glow">☢️</div>
+                <div class="flex-1">
+                    <h2 class="text-nukeRed font-mason font-black text-2xl tracking-[0.2em] mb-2 uppercase">Defensa Soberana de Panamá</h2>
+                    <div class="font-mono text-xs text-slate-300 space-y-2 mb-6">
+                        <p>> OBJETIVO: CK Hutchison Holdings</p>
+                        <p>> AMENAZA: Arbitraje Internacional (+$1,500M)</p>
+                        <p>> ESTADO: <span class="bg-nukeRed text-white px-2 py-0.5 rounded animate-pulse">CRÍTICO</span></p>
+                    </div>
+                    <div class="flex gap-4">
+                        <button class="bg-nukeRed/20 hover:bg-nukeRed text-nukeRed hover:text-white border border-nukeRed font-mono text-xs px-6 py-3 rounded uppercase tracking-widest transition-all">
+                            Desplegar Contramedidas (Threads)
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="text-center p-6 border-t border-c4Cyan/20 mt-12 font-mono text-[9px] text-c4Cyan/50 uppercase tracking-[0.4em]">
+        C4ING Architecture PRO © 2026 | El Origen es 0 | 🫪🇵🇦🏁❣️☢️☦️🔯🗿🇺🇸
+    </footer>
+
+    <script>
+        // --- BOOT SEQUENCE LOGIC ---
+        document.addEventListener("DOMContentLoaded", () => {
+            setTimeout(() => {
+                const boot = document.getElementById('c4ing-boot');
+                boot.style.opacity = '0';
+                setTimeout(() => boot.style.display = 'none', 1000);
+            }, 2800); // Carga rápida militar
+            initProTesseract();
+        });
+
+        // --- TESSERACTO PRO (Optimizado y Auto-Rotatorio) ---
+        function initProTesseract() {
+            const linesGroup = document.getElementById("tesseractLines");
+            const pointsGroup = document.getElementById("tesseractPoints");
+            if (!linesGroup) return;
+
+            const vertices4D = [];
+            for (let x=-1; x<=1; x+=2) for (let y=-1; y<=1; y+=2) for (let z=-1; z<=1; z+=2) for (let w=-1; w<=1; w+=2) vertices4D.push([x,y,z,w]);
+            
+            const edges = [];
+            for (let i=0; i<16; i++) {
+                for (let j=i+1; j<16; j++) {
+                    let diff = i ^ j;
+                    if (diff===1 || diff===2 || diff===4 || diff===8) edges.push([i,j]);
+                }
+            }
+
+            let rXY=0, rXZ=0;
+            function rotate(v, angle, a1, a2) {
+                let res=[...v], rad=angle*(Math.PI/180), cos=Math.cos(rad), sin=Math.sin(rad);
+                res[a1] = v[a1]*cos - v[a2]*sin; res[a2] = v[a1]*sin + v[a2]*cos;
+                return res;
+            }
+
+            function render() {
+                rXY = (rXY + 0.3) % 360; rXZ = (rXZ + 0.2) % 360;
+                let projected = [];
+                vertices4D.forEach(v => {
+                    let r = rotate(rotate([...v], rXY, 0, 1), rXZ, 0, 2);
+                    let dist = 2.5, w = 1/(dist - r[3]);
+                    let x3 = r[0]*w, y3 = r[1]*w, z3 = r[2]*w;
+                    let z = 1/(dist - z3);
+                    projected.push([x3*z*4, y3*z*4]);
+                });
+
+                linesGroup.innerHTML = '';
+                edges.forEach(e => {
+                    let p1 = projected[e[0]], p2 = projected[e[1]];
+                    let line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+                    line.setAttribute("x1", p1[0]); line.setAttribute("y1", p1[1]);
+                    line.setAttribute("x2", p2[0]); line.setAttribute("y2", p2[1]);
+                    linesGroup.appendChild(line);
+                });
+
+                pointsGroup.innerHTML = '';
+                projected.forEach(p => {
+                    let circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+                    circle.setAttribute("cx", p[0]); circle.setAttribute("cy", p[1]);
+                    circle.setAttribute("r", "0.06");
+                    pointsGroup.appendChild(circle);
+                });
+
+                requestAnimationFrame(render);
+            }
+            render();
+        }
+    </script>
+</body>
+</html>
