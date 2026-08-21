@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -48,6 +47,8 @@
             background-position: center;
             background-attachment: fixed;
             color: #f8fafc;
+            /* Previene el salto al traducir */
+            top: 0px !important; 
         }
         
         /* Efectos Logia SADV41 */
@@ -84,6 +85,11 @@
                 linear-gradient(30deg, transparent 49.5%, rgba(253, 185, 19, 0.03) 50%, transparent 50.5%),
                 linear-gradient(-30deg, transparent 49.5%, rgba(253, 185, 19, 0.03) 50%, transparent 50.5%);
         }
+
+        /* Ocultar barra de Google Translate y popups */
+        .goog-te-banner-frame.skiptranslate, .goog-te-gadget-icon { display: none !important; }
+        #goog-gt-tt, .goog-tooltip skiptranslate { display: none !important; top: 0px !important; }
+        .goog-text-highlight { background-color: transparent !important; box-shadow: none !important; }
     </style>
 </head>
 <body class="font-sans antialiased selection:bg-goldArmy selection:text-navy overflow-x-hidden">
@@ -107,6 +113,33 @@
         </div>
         
         <div class="flex items-center gap-3">
+            
+            <!-- Selector de Idioma (Mundial, Panamá Primero) -->
+            <div class="relative inline-block text-left z-50">
+                <select id="custom-lang-selector" onchange="doTranslate(this.value)" class="appearance-none bg-slate-900 text-goldArmy font-mono font-semibold text-[10px] uppercase tracking-widest px-8 py-2 rounded-lg border border-goldArmy/30 cursor-pointer outline-none focus:border-goldArmy shadow-[0_0_15px_rgba(253,185,19,0.15)] hover:bg-slate-800 transition-all">
+                    <option value="">🌐 IDIOMAS...</option>
+                    <option value="es">🇵🇦 ESPAÑOL (PANAMÁ)</option>
+                    <option value="en">🇺🇸 ENGLISH</option>
+                    <option value="zh-CN">🇨🇳 中文 (CHINESE)</option>
+                    <option value="hi">🇮🇳 हिन्दी (HINDI)</option>
+                    <option value="ar">🇸🇦 العربية (ARABIC)</option>
+                    <option value="pt">🇧🇷 PORTUGUÊS</option>
+                    <option value="ru">🇷🇺 РУССКИЙ (RUSSIAN)</option>
+                    <option value="ja">🇯🇵 日本語 (JAPANESE)</option>
+                    <option value="de">🇩🇪 DEUTSCH (GERMAN)</option>
+                    <option value="fr">🇫🇷 FRANÇAIS (FRENCH)</option>
+                    <option value="tr">🇹🇷 TÜRKÇE (TURKISH)</option>
+                    <option value="it">🇮🇹 ITALIANO</option>
+                    <option value="ko">🇰🇷 한국어 (KOREAN)</option>
+                    <option value="vi">🇻🇳 TIẾNG VIỆT (VIETNAMESE)</option>
+                    <option value="he">🇮🇱 עברית (HEBREW)</option>
+                    <option value="el">🇬🇷 ΕΛΛΗΝΙΚΑ (GREEK)</option>
+                </select>
+                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-goldArmy">
+                    <svg class="fill-current h-3 w-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                </div>
+            </div>
+
             <span class="text-[10px] text-goldArmy font-mono tracking-widest border border-goldArmy/30 px-3 py-1.5 rounded-full bg-black/50 hidden md:block">
                 LOGIA PLUSCUAMPERFECTA | SANTÍSIMO ACTIVO 🎚️
             </span>
@@ -290,6 +323,30 @@
         <p>SADV41 Architecture © 2026 | El Origen es 0 | Integración Logia Pluscuamperfecta</p>
         <p class="mt-2 text-goldArmy">SANTÍSIMO 🎚️</p>
     </footer>
+
+    <!-- WIDGET OCULTO Y SCRIPT DE GOOGLE TRANSLATE -->
+    <div id="google_translate_element" style="display:none;"></div>
+    
+    <script type="text/javascript">
+        // Inicializar Google Translate API
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en', 
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+
+        // Lógica de traducción
+        function doTranslate(lang) {
+            if (!lang) return;
+            var selectField = document.querySelector("#google_translate_element select");
+            if (selectField) {
+                selectField.value = lang;
+                selectField.dispatchEvent(new Event('change'));
+            }
+        }
+    </script>
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 </body>
 </html>
