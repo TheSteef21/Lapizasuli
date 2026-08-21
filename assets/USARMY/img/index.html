@@ -1,1 +1,295 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SADV41 | The Army Azimuth - U.S. Army Reserve</title>
+    
+    <!-- Tipografías Sagradas GSADV41 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    
+    <!-- Configuración Tailwind (Fusión SADV41 x Army) -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#020617',
+                        oro: '#eab308',
+                        goldArmy: '#FDB913',
+                        oliveArmy: '#384230',
+                        blanco: '#f8fafc',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                        mason: ['Cinzel', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root { 
+            --oro-alquimico: #FDB913; 
+            --obsidiana: #050505; 
+            --verde-tactico: #1a2315;
+        }
+
+        body {
+            background-color: var(--obsidiana);
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(253, 185, 19, 0.1) 0%, transparent 50%),
+                linear-gradient(rgba(2, 6, 23, 0.85), rgba(2, 6, 23, 0.95));
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #f8fafc;
+        }
+        
+        /* Efectos Logia SADV41 */
+        .glass { background: rgba(2, 6, 23, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(253, 185, 19, 0.2); }
+        .esoterico-glow { text-shadow: 0 0 25px rgba(253, 185, 19, 0.7); }
+        
+        .logia-card { 
+            background: linear-gradient(145deg, rgba(26,35,21,0.85), rgba(10,15,10,0.95));
+            border: 1px solid rgba(253, 185, 19, 0.2);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.9), inset 0 0 20px rgba(253, 185, 19, 0.05);
+            backdrop-filter: blur(12px);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s ease;
+        }
+        .logia-card:hover { 
+            border-color: rgba(253, 185, 19, 0.5); 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.9), inset 0 0 30px rgba(253, 185, 19, 0.1); 
+        }
+
+        .scanline {
+            width: 100%; height: 2px;
+            background: rgba(253, 185, 19, 0.15);
+            position: fixed; z-index: 50; top: 0;
+            pointer-events: none;
+            animation: scanline 8s linear infinite;
+        }
+        @keyframes scanline { 0% { top: 0; } 100% { top: 100%; } }
+
+        .geometria-bg {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 100%; height: 100%; pointer-events: none; z-index: 0;
+            background: 
+                linear-gradient(30deg, transparent 49.5%, rgba(253, 185, 19, 0.03) 50%, transparent 50.5%),
+                linear-gradient(-30deg, transparent 49.5%, rgba(253, 185, 19, 0.03) 50%, transparent 50.5%);
+        }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-goldArmy selection:text-navy overflow-x-hidden">
+
+    <div class="scanline"></div>
+
+    <!-- HEADER SOVEREIGN HUB -->
+    <header class="fixed top-0 left-0 w-full z-40 glass px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-4 transition-all duration-500">
+        <div class="flex items-center gap-3">
+            <!-- SVG de la U.S. ARMY Logo integrado al Hub -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 60" width="150" height="40">
+                <polygon points="30,5 38,23 58,23 42,35 48,54 30,42 12,54 18,35 2,23 22,23" fill="#FDB913"/>
+                <polygon points="30,10 36,25 52,25 39,35 44,50 30,41 16,50 21,35 8,25 24,25" fill="#1a1a1a"/>
+                <polygon points="30,13 34,26 47,26 37,34 41,46 30,39 19,46 23,34 13,26 26,26" fill="#FDB913"/>
+                <text x="65" y="40" font-family="Arial, sans-serif" font-size="28" font-weight="900" fill="#FFFFFF" letter-spacing="1">U.S. ARMY</text>
+            </svg>
+            <div class="border-l border-slate-700 pl-3 ml-1 hidden md:block">
+                <h1 class="font-serif text-sm tracking-wider text-goldArmy font-bold">SOVEREIGN HUB</h1>
+                <p class="text-[8px] text-slate-400 font-mono tracking-widest uppercase">Módulo Táctico SADV41</p>
+            </div>
+        </div>
+        
+        <div class="flex items-center gap-3">
+            <span class="text-[10px] text-goldArmy font-mono tracking-widest border border-goldArmy/30 px-3 py-1.5 rounded-full bg-black/50 hidden md:block">
+                LOGIA PLUSCUAMPERFECTA | SANTÍSIMO ACTIVO 🎚️
+            </span>
+            <button onclick="window.history.back()" class="bg-slate-800 hover:bg-slate-700 text-white font-semibold text-xs px-4 py-2 rounded-lg transition-all border border-slate-700">
+                Volver al Hub
+            </button>
+        </div>
+    </header>
+
+    <main class="pt-32 pb-12 px-4 md:px-12 max-w-5xl mx-auto space-y-12">
+
+        <!-- TÍTULO PRINCIPAL (The Army Azimuth) -->
+        <div class="text-center space-y-4 relative z-10">
+            <h1 class="text-3xl md:text-5xl font-mason font-bold text-white tracking-widest uppercase esoterico-glow">
+                The Army Azimuth
+            </h1>
+            <h2 class="text-lg md:text-xl font-serif text-goldArmy tracking-wide">
+                Vice Chief of Staff of the Army releases strategic direction for U.S. Army
+            </h2>
+            <div class="inline-block border-b border-slate-700 pb-4 mt-4">
+                <p class="text-sm text-slate-400 font-mono italic">
+                    By Gen. Christopher C. LaNeve, 40th Vice Chief of Staff of the Army | Aug. 20, 2026
+                </p>
+            </div>
+        </div>
+
+        <!-- INTRODUCCIÓN -->
+        <div class="logia-card p-8 md:p-10 rounded-2xl text-slate-300 font-serif leading-relaxed text-lg text-center shadow-2xl relative">
+            <div class="geometria-bg"></div>
+            <p class="relative z-10">
+                Since 1775, the United States Army has defended our republic and carried the torch of liberty through suffering and sacrifice. From the frozen Delaware at Trenton to the bluffs of Normandy, the jungles of Guadalcanal, and the winter hills of Chosin, American Soldiers faced enemies in brutal conditions and held the line. They answered the Nation’s call. One hundred and ninety campaign streamers fly from our Army flag, each testifying to the valor of our forebearers. Their legacy is ours to uphold.
+            </p>
+        </div>
+
+        <!-- PILARES: Answering the Nation's Call -->
+        <section class="space-y-8">
+            <div class="text-center mb-10">
+                <h2 class="text-2xl font-mason text-goldArmy tracking-[0.3em] uppercase border-b border-goldArmy/30 pb-3 inline-block">
+                    Answering the Nation’s Call
+                </h2>
+                <p class="text-sm text-slate-400 mt-4 max-w-3xl mx-auto font-sans">
+                    The Army serves the Nation. We preserve peace and security, support our national objectives, and overcome any force whose aggression imperils us. Our strategic direction is clear:
+                </p>
+            </div>
+
+            <!-- PILAR 1 -->
+            <div class="logia-card rounded-2xl flex flex-col md:flex-row overflow-hidden group">
+                <div class="md:w-1/2 relative overflow-hidden">
+                    <img src="img/InShot_20260821_000554076.jpg" alt="Defend the Homeland" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent md:bg-gradient-to-r"></div>
+                </div>
+                <div class="md:w-1/2 p-8 md:p-10 flex flex-col justify-center relative z-10">
+                    <span class="text-[10px] font-mono text-goldArmy tracking-widest uppercase mb-2">Pilar I</span>
+                    <h3 class="text-3xl font-mason font-bold text-white uppercase mb-4 esoterico-glow">Defend the Homeland</h3>
+                    <p class="text-sm text-slate-300 font-sans leading-relaxed">
+                        We secure our Nation’s borders, protect the American people against attack, and respond to domestic crises — these are our most sacred duties. A secure Western Hemisphere is a prerequisite for joint power projection.
+                    </p>
+                </div>
+            </div>
+
+            <!-- PILAR 2 -->
+            <div class="logia-card rounded-2xl flex flex-col md:flex-row-reverse overflow-hidden group">
+                <div class="md:w-1/2 relative overflow-hidden">
+                    <img src="img/InShot_20260821_000609839.jpg" alt="Warfighting" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent md:bg-gradient-to-l"></div>
+                </div>
+                <div class="md:w-1/2 p-8 md:p-10 flex flex-col justify-center relative z-10 text-right md:text-left">
+                    <span class="text-[10px] font-mono text-goldArmy tracking-widest uppercase mb-2">Pilar II</span>
+                    <h3 class="text-3xl font-mason font-bold text-white uppercase mb-4 esoterico-glow">Warfighting</h3>
+                    <p class="text-sm text-slate-300 font-sans leading-relaxed">
+                        America’s Army applies violence decisively on battlefields marked by unrelenting speed, precision lethality, and persistent observation. We dominate from the outset to control escalation, prevent prolonged war and counter enemies who employ stand-off weapons, including unmanned systems and WMD.
+                    </p>
+                </div>
+            </div>
+
+            <!-- PILAR 3 -->
+            <div class="logia-card rounded-2xl flex flex-col md:flex-row overflow-hidden group">
+                <div class="md:w-1/2 relative overflow-hidden">
+                    <img src="img/InShot_20260821_000628010.jpg" alt="Project Power On and From the Land" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent md:bg-gradient-to-r"></div>
+                </div>
+                <div class="md:w-1/2 p-8 md:p-10 flex flex-col justify-center relative z-10">
+                    <span class="text-[10px] font-mono text-goldArmy tracking-widest uppercase mb-2">Pilar III</span>
+                    <h3 class="text-3xl font-mason font-bold text-white uppercase mb-4 leading-tight esoterico-glow">Project Power <br>On & From the Land</h3>
+                    <p class="text-sm text-slate-300 font-sans leading-relaxed">
+                        The Army projects land power by generating combat credible formations, prepositioning capabilities where they matter most, and strengthening the capacity of our Allies and partners. The Army maintains units postured to respond immediately to crises and contingencies regionally and worldwide.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN: Foundation of the Joint Force -->
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12 items-start">
+            <div class="logia-card p-8 rounded-2xl h-full">
+                <h3 class="text-xl font-mason text-goldArmy tracking-wider uppercase mb-4 border-l-4 border-goldArmy pl-3">
+                    The Foundation of the Joint Force
+                </h3>
+                <div class="space-y-4 text-sm text-slate-300 font-sans">
+                    <p>
+                        The Army has aggressively pursued change to prepare for large scale combat operations. We shifted from brigade modularity to a force organized for multidomain operations at all echelons. We fielded long range precision fires that strike deep and sink ships at sea, evolved air defenses for skies saturated with unmanned systems, upgraded theater logistics, expanded terrestrial intelligence, and established new units integrating space, cyber, electronic warfare, and artificial intelligence into command and control.
+                    </p>
+                    <p>
+                        The work of change continues. Today we emphasize the fundamentals of Soldiering, ensuring a strong grounding in warrior ethos, individual Soldier readiness, and small unit tactical skills.
+                    </p>
+                    <p>
+                        A ready Army is the foundation of the Joint Force, providing a range of capabilities that underpin joint operations and give our leaders immediate options. We employ four operational warfighting elements — convergence, strike, close battle, and endurance.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Táctico Visual (Última Imagen) -->
+            <div class="logia-card rounded-2xl overflow-hidden relative h-full min-h-[300px] flex items-end">
+                <img src="img/InShot_20260821_000644605.jpg" alt="Soldiering and Tactical Skills" class="absolute inset-0 w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+                <div class="relative z-10 p-6">
+                    <p class="text-white font-serif italic tracking-wide">
+                        "As the Army campaigns around the world, we turn our focus to operational readiness to achieve our central task: To be ready to fight and win the battles and wars of the Nation."
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN: What Land Dominance Demands -->
+        <section class="logia-card p-8 md:p-12 rounded-2xl border-t-4 border-goldArmy mt-12 relative overflow-hidden">
+            <div class="absolute right-0 top-0 w-64 h-64 bg-goldArmy/10 blur-[80px] pointer-events-none"></div>
+            
+            <h2 class="text-2xl font-mason text-white tracking-widest uppercase mb-6 esoterico-glow">What Land Dominance Demands</h2>
+            <p class="text-slate-300 font-sans mb-8">
+                U.S. Army forces must be prepared to overcome the most complex challenges our adversaries can impose and master an operational environment that looks fundamentally different from the battlefields of yesterday. To prepare for modern war, the Army will:
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 font-sans">
+                <div class="bg-black/50 p-6 rounded-xl border border-slate-800 hover:border-goldArmy/50 transition-colors">
+                    <h4 class="text-goldArmy font-bold uppercase tracking-wider mb-3">Embrace a Warrior Mindset</h4>
+                    <p class="text-xs text-slate-300 leading-relaxed">
+                        We possess the grit to endure hardship and the courage to act honorably. Our Soldiers and Civilians uphold high standards and seek continuous development. Leaders see Soldiers as the decisive advantage.
+                    </p>
+                </div>
+                <div class="bg-black/50 p-6 rounded-xl border border-slate-800 hover:border-goldArmy/50 transition-colors">
+                    <h4 class="text-goldArmy font-bold uppercase tracking-wider mb-3">Outpace our Adversaries</h4>
+                    <p class="text-xs text-slate-300 leading-relaxed">
+                        We learn, innovate, and adapt faster by pairing human ingenuity with advanced technologies like autonomy and AI. Combat training centers validate readiness through crucibles designed to replicate the challenge of combat.
+                    </p>
+                </div>
+                <div class="bg-black/50 p-6 rounded-xl border border-slate-800 hover:border-goldArmy/50 transition-colors">
+                    <h4 class="text-goldArmy font-bold uppercase tracking-wider mb-3">Gain Positional Advantage</h4>
+                    <p class="text-xs text-slate-300 leading-relaxed">
+                        We gain advantage through posture that comes in many forms: from forward basing to campaigning to stockpiling supplies. We continually reinforce forward areas and harden lines of communication.
+                    </p>
+                </div>
+            </div>
+
+            <div class="mt-10 p-6 bg-red-900/10 border-l-4 border-red-600 rounded-r-xl">
+                <p class="text-sm text-slate-200 font-serif italic leading-relaxed">
+                    The next war will not look like our last. Yet there are timeless truths in war. The battlefield does not forgive weakness. Land combat in the modern era will demand every ounce of rigor, endurance, and courage we possess. Every shortcut in training and lapse in discipline will be paid for in blood.
+                </p>
+            </div>
+        </section>
+
+        <!-- CONCLUSIÓN Y FIRMA -->
+        <section class="text-center py-10">
+            <p class="text-lg text-slate-300 font-sans max-w-3xl mx-auto leading-relaxed mb-8">
+                This is the Army we must be: disciplined, lethal, and relentless — an Army that closes with and destroys the enemy, leaving no doubt about the will and power of the United States. As it has for more than 251 years, our Army will stand ready to fight, and win — whenever and wherever the Nation calls.
+            </p>
+            
+            <h2 class="text-3xl font-mason text-goldArmy font-bold tracking-[0.2em] uppercase esoterico-glow mb-8">
+                This We’ll Defend!
+            </h2>
+
+            <div class="inline-block text-left border-t border-slate-700 pt-6">
+                <p class="text-white font-mason tracking-wider text-xl">Christopher C. LaNeve</p>
+                <p class="text-goldArmy font-mono text-sm tracking-widest uppercase mt-1">40th Vice Chief of Staff</p>
+                <p class="text-slate-400 font-sans text-xs mt-1">General, United States Army</p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="text-center p-8 border-t border-white/5 opacity-50 font-mono text-[10px] uppercase mt-12 bg-black/60">
+        <p>SADV41 Architecture © 2026 | El Origen es 0 | Integración Logia Pluscuamperfecta</p>
+        <p class="mt-2 text-goldArmy">SANTÍSIMO 🎚️</p>
+    </footer>
+
+</body>
+</html>
