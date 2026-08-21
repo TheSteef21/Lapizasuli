@@ -37,6 +37,7 @@
       box-shadow: 0 15px 35px rgba(0,0,0,0.9), inset 0 0 20px rgba(212, 175, 55, 0.05);
       backdrop-filter: blur(12px);
       border-radius: 1rem;
+      overflow: hidden;
     }
     .nuke-card {
       background: linear-gradient(145deg, rgba(30,5,5,0.92), rgba(10,0,0,0.97));
@@ -83,6 +84,7 @@
     .btn-ig:hover { background: linear-gradient(to right, #9d4edd, #ff4d8a); }
     
     .container { max-width: 72rem; margin: 0 auto; padding: 0 1.5rem; }
+    .asset-img { width: 100%; height: auto; border-radius: 0.5rem; margin-bottom: 1rem; border: 1px solid rgba(255,255,255,0.1); object-fit: cover; }
     
     @media (min-width: 768px) {
       .md-flex { display: flex; }
@@ -129,18 +131,23 @@
 
   <main class="container" style="display: flex; flex-direction: column; gap: 2.5rem; padding-bottom: 2.5rem;">
 
-    <!-- MÓDULO 1: ALTA AURA & MÚSICA -->
+    <!-- MÓDULO 1: ALTA AURA & MÚSICA (DJ LIVI INTEGRATION) -->
     <section class="logia-card" style="padding: 1.75rem; border-top: 4px solid #1DB954;">
       <h2 style="font-family: Cinzel, serif; font-size: 1.25rem; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1.5rem; color: #fff; display: flex; align-items: center; gap: 0.75rem;">
         <span style="color: #1DB954;">🎵</span> IMPERIO PANAMEÑO
       </h2>
       <p style="font-family: ui-monospace, monospace; font-size: 11px; color: #94a3b8; margin-bottom: 1.5rem;">
-        Frecuencias reservadas estrictamente para artistas con ALTA AURA.
+        Frecuencias reservadas estrictamente para artistas con ALTA AURA. Señal activada por DJ Livi.
       </p>
+      
+      <!-- SPOTIFY EMBED (INTELIGENCIA MUSICAL) -->
+      <div style="margin-bottom: 1.5rem; border-radius: 0.75rem; overflow: hidden; box-shadow: 0 0 20px rgba(29, 185, 84, 0.2);">
+        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/3ADFSxa?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      </div>
       
       <div class="md-grid-3" style="gap: 1rem;">
         <a href="https://open.spotify.com/s/3ADFSxa" target="_blank" class="btn btn-spotify">
-          ▶️ Playlist Oficial
+          ▶️ Abrir en Spotify
         </a>
         <a href="https://songwhip.com/farruko/madrid-exclusive" target="_blank" class="btn" style="background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.2);">
           🎧 Farruko - Madrid (Exc)
@@ -168,6 +175,9 @@
 
       <div class="md-grid-2">
         <div>
+          <!-- ASSET REAL: ESTUDIANTES / AURA -->
+          <img src="img/InShot_20260820_202414132.png" alt="Instituto Nacional - Farmeo Aura" class="asset-img" style="border-color: rgba(168,85,247,0.3);">
+          
           <p style="font-family: 'Playfair Display', serif; font-size: 1rem; color: #f1f5f9; font-weight: 600; margin-bottom: 1rem;">
             ¿Qué es "Farmear Aura"? Los estudiantes del Instituto Nacional impiden protestas.
           </p>
@@ -187,6 +197,9 @@
           </ul>
         </div>
         <div style="background: rgba(0,0,0,0.6); border: 1px solid rgba(168,85,247,0.3); padding: 1rem; border-radius: 0.75rem;">
+           <!-- ASSET REAL: PROS / CONS -->
+           <img src="img/InShot_20260820_202308572.jpg" alt="Pros y Cons del Aura" class="asset-img" style="margin-bottom: 0.5rem; border:none;">
+           
            <h3 style="font-family: Cinzel, serif; color: #fff; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.5rem; text-align: center;">El Propósito es Ridículo (Y por eso funciona)</h3>
            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; text-align: center; font-family: ui-monospace, monospace; font-size: 10px;">
               <div style="background: rgba(34,197,94,0.1); border: 1px solid #22c55e; padding: 0.5rem; border-radius: 0.5rem;">
@@ -213,6 +226,7 @@
       <div class="md-grid-3">
         <!-- Martinelli -->
         <div style="background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); border-radius: 0.75rem; padding: 1.25rem;">
+          <img src="img/InShot_20260820_202045265.jpg" alt="Vitamina D - Martinelli" class="asset-img">
           <h4 style="font-family: Cinzel, serif; color: #fff; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.5rem;">☀️ Vitamina D</h4>
           <p style="font-size: 11px; color: #94a3b8; line-height: 1.5;">
             "Lento pero seguro como Pirulo". Reporte de recuperación de Ricardo Martinelli. Jeeves aterriza en Panamá.
@@ -221,6 +235,7 @@
         
         <!-- Bases Militares -->
         <div style="background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); border-radius: 0.75rem; padding: 1.25rem;">
+          <img src="img/InShot_20260820_202106123.jpg" alt="Comando Sur" class="asset-img">
           <h4 style="font-family: Cinzel, serif; color: #fff; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.5rem;">🪖 Comando Sur</h4>
           <p style="font-size: 11px; color: #94a3b8; line-height: 1.5;">
             Edwin Pitti reporta: ¿La reapertura de bases militares de EE.UU. en Panamá? Tensión territorial en el radar.
@@ -229,9 +244,10 @@
 
         <!-- HW Drilling -->
         <div style="background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); border-radius: 0.75rem; padding: 1.25rem;">
+          <img src="img/InShot_20260820_202129871.jpg" alt="HW Drilling" class="asset-img">
           <h4 style="font-family: Cinzel, serif; color: #fff; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.5rem;">🚜 Infraestructura</h4>
           <p style="font-size: 11px; color: #94a3b8; line-height: 1.5;">
-            HW Drilling: Maquinaria de perforación. Water level detector Max depth 800m. DTH Hammer 320mm. (WhatsApp +86 13563755530).
+            HW Drilling: Maquinaria de perforación. Water level detector Max depth 800m. DTH Hammer 320mm.
           </p>
         </div>
       </div>
@@ -257,6 +273,9 @@
 
       <div class="md-grid-2" style="position: relative;">
         <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+          <!-- ASSET REAL: CK HUTCHISON / ARBITRAJE -->
+          <img src="img/InShot_20260820_202247773.jpg" alt="Alerta CK Hutchison" class="asset-img" style="border-color: rgba(255,42,42,0.3);">
+          
           <p style="font-family: 'Playfair Display', serif; font-size: 1rem; color: #f1f5f9; font-weight: 600;">
             El gigante de Hong Kong inicia oficialmente un arbitraje internacional contra la República de Panamá por la "destrucción" de su inversión en los puertos Balboa y Cristóbal.
           </p>
@@ -274,6 +293,11 @@
             <div style="display: flex; flex-direction: column; gap: 0.75rem;">
               <button class="btn" style="background: #f8fafc; color: #000;" onclick="alert('Copiado hilo para Threads')">📋 Copiar Hilo para Threads</button>
               <button class="btn btn-ig" onclick="alert('Copiado para Instagram')">📸 Copiar Copy Instagram</button>
+            </div>
+            <!-- IMÁGENES SECUNDARIAS DE CONTEXTO TIKTOK / ALERTA -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-top: 1rem;">
+               <img src="img/InShot_20260820_202328377.jpg" alt="Data 1" class="asset-img" style="margin: 0;">
+               <img src="img/InShot_20260820_202346735.jpg" alt="Data 2" class="asset-img" style="margin: 0;">
             </div>
         </div>
       </div>
