@@ -223,49 +223,8 @@
 </head>
 <body class="font-sans antialiased selection:bg-oro selection:text-navy overflow-x-hidden">
 
-    <!-- FASE 0: EL EMBUDO / EL VERDUGO SILENCIOSO (GATEKEEPER LOCAL) -->
-    <div id="gatekeeper-screen" class="fixed inset-0 z-[100] flex justify-center items-center p-4 bg-[#0d0f12]">
-        <div class="logia-card max-w-lg w-full p-8 md:p-10 text-center border-t-4 border-t-oro rounded-lg z-10 relative">
-            <div class="font-mono text-sm text-oro tracking-[0.15em] mb-3 uppercase">SADV41 // PROTOCOLO DE AFILIACIÓN</div>
-            <h1 class="text-2xl font-mason font-bold mb-4">¿Deseas afiliarte a la Logia?</h1>
-            
-            <p class="text-sm leading-relaxed text-slate-400 mb-6 text-justify font-sans">
-                Acceso exclusivo al sistema de información, cobertura y parámetros de seguridad. Este canal no es negociable ni está sujeto a filosofías externas. La solicitud otorga derecho a evaluación de perfil, asignación de insignias oficiales y cobertura dentro de la red.
-            </p>
-
-            <div class="bg-oro/5 border-l-2 border-oro p-4 text-xs text-left mb-6 text-slate-300">
-                <strong class="text-oro block mb-1 uppercase font-mono tracking-widest">Parámetro de Entrada (Filtro de Gravedad):</strong> 
-                Para asegurar la seriedad y el respeto por el sistema, la afiliación requiere un pago de <strong>$150</strong>. Gestiona tu pago vía WhatsApp o consulta métodos alternativos en el registro oficial.
-            </div>
-
-            <div class="space-y-3 mb-8">
-                <a href="https://wa.me/50769362166?text=Deseo%20solicitar%20mi%20afiliacion%20a%20la%20Logia%20SADV41.%20Comprendo%20el%20filtro%20de%20150%20al%20+50769362166" 
-                   class="block w-full bg-oro hover:bg-amber-500 text-black font-bold py-3 rounded transition-colors uppercase tracking-widest text-sm shadow-[0_0_15px_rgba(234,179,8,0.3)] text-center" target="_blank">
-                    1. Solicitar Vía WhatsApp (+507 6936-2166)
-                </a>
-                <a href="https://thesteef21.github.io/Lapizasuli/FUNDING.yml" 
-                   class="block w-full bg-slate-900 hover:bg-slate-800 text-emerald-400 border border-emerald-500/40 font-bold py-2.5 rounded transition-colors uppercase tracking-wider text-xs text-center" target="_blank">
-                    💳 Ver Más Formas de Pago (Funding)
-                </a>
-            </div>
-
-            <div class="border-t border-slate-800 pt-6">
-                <label class="block text-xs text-slate-500 font-mono mb-2">Ingresa tu clave de acceso autorizada:</label>
-                <div class="flex gap-2">
-                    <input type="password" id="access-token" placeholder="•••••••••••••••••••••" class="w-full bg-black/50 border border-slate-700 rounded px-4 py-2 text-white font-mono text-xs focus:border-oro focus:outline-none text-center tracking-widest">
-                    <button id="btn-verificar" onclick="verificarLlaveLocal()" class="bg-slate-800 hover:bg-slate-700 text-white border border-slate-600 px-4 py-2 rounded font-bold transition-all cursor-pointer">➔</button>
-                </div>
-                <p id="token-error" class="text-red-500 text-xs mt-2 hidden font-mono">Clave incorrecta. Actualiza el código con tu nueva contraseña.</p>
-            </div>
-            
-            <div class="text-[10px] text-slate-600 mt-8 font-mono">El origen es 0. Transmisión protegida.</div>
-        </div>
-        <div class="absolute inset-0 bg-[url('https://y2s.onrender.com/api/graphics/mundial_bg.jpg')] bg-cover bg-center opacity-10 blur-sm"></div>
-    </div>
-
-
-    <!-- FASE 2: EL ECOSISTEMA GSADV41 -->
-    <div id="sistema-principal" class="hidden w-full min-h-screen">
+    <!-- FASE 2: EL ECOSISTEMA GSADV41 (ACCESO DIRECTO LIBRE) -->
+    <div id="sistema-principal" class="w-full min-h-screen">
 
         <!-- FONDO DE MARCA VECTORIAL GSADV41 -->
         <div class="marca-background fixed top-0 left-0 w-[100vw] h-[100vh] z-[-1] flex justify-center items-center opacity-15 pointer-events-none">
@@ -293,19 +252,6 @@
               <text x="400" y="650" font-family="Cinzel, serif" font-size="32" fill="#00f3ff" text-anchor="middle" letter-spacing="8" filter="url(#neon)">ISAÍAS 43:19</text>
               <text x="400" y="690" font-family="Courier New, monospace" font-size="14" fill="#f8fafc" text-anchor="middle" letter-spacing="2">ORIGEN [1027 = 10 = 1]</text>
             </svg>
-        </div>
-
-        <!-- POP-UP DE APOYO Y FACTURACIÓN -->
-        <div id="apoyo-popup" class="fixed inset-0 bg-black/80 backdrop-blur-md z-[9999] flex items-center justify-center transition-opacity duration-500 opacity-0 hidden">
-            <div class="bg-slate-900 border border-emerald-500/50 p-8 rounded-2xl text-center max-w-sm relative shadow-[0_0_40px_rgba(16,185,129,0.2)]">
-                <button onclick="cerrarPopupApoyo()" class="absolute top-3 right-4 text-slate-400 hover:text-white font-bold text-2xl transition-colors">&times;</button>
-                <div class="text-6xl mb-4 drop-shadow-[0_0_15px_rgba(212,175,55,0.5)]">🇵🇦🔯</div>
-                <h2 class="text-oro font-bold text-xl uppercase tracking-widest mb-4 font-mason">Misión SADV41</h2>
-                <p class="text-slate-300 text-sm mb-8 font-sans leading-relaxed">¿Te gusta nuestro proyecto? Puedes formar parte con tu apoyo, toda inversión retorna en bendición.</p>
-                <a href="https://factura-88pp.onrender.com/" target="_blank" onclick="cerrarPopupApoyo()" class="block w-full bg-emerald-600 text-white font-bold py-3.5 rounded-lg hover:bg-emerald-500 transition-all shadow-[0_0_15px_rgba(16,185,129,0.4)] cursor-pointer tracking-wide">
-                    Apoyar Proyecto Ahora
-                </a>
-            </div>
         </div>
         
         <div class="scanline"></div>
@@ -865,40 +811,6 @@
 
     <!-- SCRIPTS MAESTROS UNIFICADOS -->
     <script>
-        /* === 0. VERIFICACIÓN DE CLAVE LOCAL === */
-        const CLAVE_ACCESO_ACTUAL = "SADV41-2026"; 
-
-        function verificarLlaveLocal() {
-            const tokenInput = document.getElementById('access-token').value.trim();
-            const errorMsg = document.getElementById('token-error');
-            const gatekeeper = document.getElementById('gatekeeper-screen');
-            const sistemaPrincipal = document.getElementById('sistema-principal');
-            const dock = document.getElementById('spotify-dock');
-
-            if (!tokenInput) {
-                errorMsg.innerText = "Por favor ingresa una clave.";
-                errorMsg.classList.remove('hidden');
-                return;
-            }
-
-            if (tokenInput === CLAVE_ACCESO_ACTUAL) {
-                errorMsg.classList.add('hidden');
-                gatekeeper.classList.add('hidden');
-                sistemaPrincipal.classList.remove('hidden');
-                dock.classList.remove('hidden');
-                
-                // Inicializar componentes dinámicos al entrar
-                mostrarPopupApoyo();
-                initVersiculos();
-                initTesseract();
-                initNewsAccordions();
-                refrescarMonitor();
-            } else {
-                errorMsg.innerText = "Clave incorrecta. Actualiza el código con tu nueva contraseña.";
-                errorMsg.classList.remove('hidden');
-            }
-        }
-
         /* === 1. LÓGICA DE ALGORITMO VERSÍCULOS (iSADV41) === */
         const VERSICULOS_API_URL = "https://nosadvtalgia41.onrender.com/api/estado-espiritual";
         function initVersiculos() {
@@ -983,24 +895,7 @@
             renderTesseract();
         }
 
-        /* === 3. POP-UP DE APOYO === */
-        function mostrarPopupApoyo() {
-            const p = document.getElementById("apoyo-popup");
-            if(p) {
-                p.classList.remove("hidden");
-                setTimeout(() => p.classList.remove("opacity-0"), 10);
-            }
-        }
-
-        function cerrarPopupApoyo() {
-            const p = document.getElementById("apoyo-popup");
-            if(p) {
-                p.classList.add("opacity-0");
-                setTimeout(() => p.classList.add("hidden"), 500);
-            }
-        }
-
-        /* === 4. UI: ACORDEONES, LATERAL Y WEB3 === */
+        /* === 3. UI: ACORDEONES, LATERAL Y WEB3 === */
         function toggleSidebar() {
             const s = document.getElementById('main-sidebar');
             s.classList.toggle('right-aligned');
@@ -1031,7 +926,7 @@
             } else window.open('https://web3.binance.com/en/referral?ref=ORCZSDLK', '_blank');
         }
 
-        /* === 5. SISMOLOGÍA (SADV41T) === */
+        /* === 4. SISMOLOGÍA (SADV41T) === */
         async function refrescarMonitor() {
             const s = document.getElementById("monitor-salida"), e = document.getElementById("contenedor-error"), b = document.getElementById("badge-estado");
             try {
@@ -1056,7 +951,7 @@
             document.getElementById("monitor-salida").innerHTML = html;
         }
 
-        /* === 6. UTILIDADES ALERTA (COPY TO CLIPBOARD) === */
+        /* === 5. UTILIDADES ALERTA (COPY TO CLIPBOARD) === */
         function showToast(msg) {
             const t = document.getElementById('toast');
             t.textContent = '✓ ' + msg;
@@ -1070,7 +965,7 @@
         async function copyThreads() { try { await navigator.clipboard.writeText(threadsText); showToast('Hilo Threads copiado'); } catch (e) { alert('Copiado Manual Requerido'); } }
         async function copyIG() { try { await navigator.clipboard.writeText(igText); showToast('Copy Instagram copiado'); } catch (e) { alert('Copiado Manual Requerido'); } }
 
-        /* === 7. SPOTIFY AUTOPLAY DOCK === */
+        /* === 6. SPOTIFY AUTOPLAY DOCK === */
         let unlocked = false;
         function unlockAudio() {
             if (unlocked) return;
@@ -1085,12 +980,19 @@
         document.addEventListener('click', unlockAudio, {once: true});
         document.addEventListener('touchstart', unlockAudio, {once: true});
 
-        /* === INICIALIZACIÓN FINAL === */
+        /* === INICIALIZACIÓN FINAL AUTOMÁTICA === */
         document.addEventListener("DOMContentLoaded", () => {
             if(localStorage.getItem('sidebarPosition') === 'right') {
                 const sidebar = document.getElementById('main-sidebar');
                 if(sidebar) sidebar.classList.add('right-aligned');
             }
+            
+            // Inicializar todos los módulos dinámicos al cargar la página directamente
+            document.getElementById('spotify-dock').classList.remove('hidden');
+            initVersiculos();
+            initTesseract();
+            initNewsAccordions();
+            refrescarMonitor();
         });
     </script>
 </body>
