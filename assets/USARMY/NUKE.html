@@ -3,22 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>GSADV41 | C4ING PRO Command Hub v2.0 🔯☢️</title>
+    <title>SADV41 // NUKE HUB – USARMY PANAMÁ HYPERSEC</title>
     
-    <!-- Tipografías Sagradas -->
+    <!-- Tipografías Sagradas y Militares -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=JetBrains+Mono:wght@400;700;800&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     
+    <!-- Configuración Tailwind -->
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        navy: '#010409',
+                        navy: '#020617',
                         oro: '#eab308',
                         nukeRed: '#ff2a2a',
                         c4Cyan: '#00f3ff',
-                        holyPurple: '#a855f7'
+                        armyGreen: '#384230',
+                        panamaBlue: '#005293',
+                        panamaRed: '#C8102E'
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
@@ -29,236 +32,231 @@
             }
         }
     </script>
+
     <style>
         :root { 
             --oro-alquimico: #d4af37; 
-            --obsidiana: #030303; 
+            --obsidiana: #050505; 
             --c4-cyan: #00f3ff;
-            --nuke-red: #ff2a2a;
         }
+
         body {
             background-color: var(--obsidiana);
             background-image: 
-                linear-gradient(rgba(1, 4, 9, 0.92), rgba(1, 4, 9, 0.98)),
+                radial-gradient(circle at 50% 0%, rgba(0, 243, 255, 0.05) 0%, transparent 50%),
+                linear-gradient(rgba(2, 6, 23, 0.90), rgba(2, 6, 23, 0.98)), 
                 url('https://y2s.onrender.com/api/graphics/mundial_bg.jpg');
-            background-size: cover; background-attachment: fixed;
-            color: #f8fafc; overflow-x: hidden; scroll-behavior: smooth;
+            background-size: cover;
+            background-attachment: fixed;
+            color: #f8fafc;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
         }
         
-        /* --- ESTÉTICA MILITAR PRO C4ING --- */
-        .glass-c4 { background: rgba(1, 4, 9, 0.7); backdrop-filter: blur(16px); border: 1px solid rgba(0, 243, 255, 0.15); box-shadow: 0 0 30px rgba(0, 243, 255, 0.05); }
-        .logia-card-pro { 
-            background: linear-gradient(180deg, rgba(10,10,12,0.95) 0%, rgba(5,5,7,0.98) 100%);
-            border: 1px solid rgba(212, 175, 55, 0.2); border-top: 2px solid var(--c4-cyan);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.95), inset 0 1px 15px rgba(0, 243, 255, 0.1);
-            position: relative; overflow: hidden; transition: all 0.4s;
-        }
-        .logia-card-pro:hover { border-color: rgba(212, 175, 55, 0.6); box-shadow: 0 20px 50px rgba(0,243,255,0.15); }
+        .glass-nuke { background: rgba(5, 10, 15, 0.85); backdrop-filter: blur(12px); border: 1px solid rgba(255, 42, 42, 0.3); box-shadow: 0 0 30px rgba(255, 42, 42, 0.1); }
+        .glass-army { background: linear-gradient(145deg, #1a2015, #0f140a); border: 1px solid rgba(212, 175, 55, 0.2); }
         
-        .glow-texto-divino { text-shadow: 0 0 20px rgba(212, 175, 55, 0.8), 0 0 40px rgba(168, 85, 247, 0.6); }
-        .nuke-alert { border: 1px solid var(--nuke-red); box-shadow: inset 0 0 20px rgba(255,42,42,0.1); animation: nuke-pulse 2s infinite; }
-        @keyframes nuke-pulse { 0%, 100% { box-shadow: 0 0 0 rgba(255,42,42,0); } 50% { box-shadow: 0 0 30px rgba(255,42,42,0.3); } }
-        
-        .scanline-pro {
-            width: 100%; height: 3px; background: rgba(0, 243, 255, 0.3);
-            position: fixed; z-index: 999; top: 0; pointer-events: none;
-            box-shadow: 0 0 15px rgba(0, 243, 255, 0.5);
-            animation: scan-pro 4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-        }
-        @keyframes scan-pro { 0% { top: -10%; opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { top: 110%; opacity: 0; } }
+        .esoterico-glow { text-shadow: 0 0 25px rgba(212, 175, 55, 0.7); }
+        .cyan-glow { filter: drop-shadow(0 0 15px rgba(0, 243, 255, 0.6)); }
 
-        /* BOOT SEQUENCE C4ING */
-        #c4ing-boot {
-            position: fixed; inset: 0; z-index: 10000; background: #000;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            font-family: 'JetBrains Mono', monospace; color: var(--c4-cyan);
-            transition: opacity 1s ease-out, visibility 1s;
+        .scanline {
+            width: 100%; height: 2px;
+            background: rgba(0, 243, 255, 0.15);
+            position: fixed; z-index: 9999; top: 0;
+            pointer-events: none;
+            animation: scanline 6s linear infinite;
         }
-        .boot-text { overflow: hidden; white-space: nowrap; border-right: 2px solid var(--c4-cyan); animation: type 1.5s steps(40, end), blink .75s step-end infinite; }
-        @keyframes type { from { width: 0 } to { width: 100% } }
-        @keyframes blink { from, to { border-color: transparent } 50% { border-color: var(--c4-cyan) } }
+        @keyframes scanline { 0% { top: 0; } 100% { top: 100%; } }
+
+        /* Estilos del Dossier Militar */
+        .dossier-text p { margin-bottom: 1rem; line-height: 1.7; color: #cbd5e1; }
+        .dossier-text strong { color: var(--oro-alquimico); }
         
-        /* Grid de coordenadas */
-        .military-grid {
-            position: absolute; inset: 0; pointer-events: none; z-index: 0; opacity: 0.05;
-            background-image: linear-gradient(var(--c4-cyan) 1px, transparent 1px), linear-gradient(90deg, var(--c4-cyan) 1px, transparent 1px);
-            background-size: 40px 40px;
+        .pillar-card {
+            background-color: rgba(56, 66, 48, 0.4);
+            border-left: 4px solid var(--oro-alquimico);
+            transition: all 0.3s;
         }
+        .pillar-card:hover { background-color: rgba(56, 66, 48, 0.8); transform: translateX(5px); }
     </style>
 </head>
-<body class="font-sans selection:bg-c4Cyan selection:text-black">
+<body class="font-sans antialiased selection:bg-c4Cyan selection:text-navy">
 
-    <!-- C4ING BOOT SEQUENCE -->
-    <div id="c4ing-boot">
-        <div class="text-xs text-slate-500 mb-4 tracking-[0.3em]">USARMY / C4ING / PROTOCOL</div>
-        <div class="text-4xl mb-6 flex gap-3 drop-shadow-[0_0_15px_rgba(255,42,42,0.5)]">
-            <span class="animate-pulse">🫪</span><span>🇵🇦</span><span>🏁</span><span>❣️</span><span>☢️</span><span>☦️</span><span>🔯</span><span>🗿</span><span>🇺🇸</span>
-        </div>
-        <div class="boot-text text-xl font-bold tracking-widest text-c4Cyan uppercase shadow-cyan">INICIALIZANDO SISTEMA VIVO PRO...</div>
-    </div>
+    <div class="scanline"></div>
 
-    <div class="military-grid"></div>
-    <div class="scanline-pro"></div>
-
-    <!-- HEADER PRO -->
-    <header class="fixed top-0 w-full z-50 glass-c4 px-6 py-4 flex justify-between items-center border-b border-c4Cyan/30">
+    <!-- HEADER HYPERSEC -->
+    <header class="fixed top-0 left-0 w-full z-40 glass-nuke px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
         <div class="flex items-center gap-4">
-            <div class="w-10 h-10 bg-black border border-c4Cyan flex items-center justify-center rounded-sm relative overflow-hidden">
-                <div class="absolute inset-0 bg-c4Cyan/20 animate-pulse"></div>
-                <span class="text-xl relative z-10">🗿</span>
+            <div class="w-12 h-12 flex items-center justify-center relative">
+                <div class="absolute inset-0 bg-red-600/20 animate-pulse rounded-full blur-md"></div>
+                <span class="text-3xl relative z-10 drop-shadow-[0_0_10px_rgba(255,42,42,0.8)]">💣</span>
             </div>
             <div>
-                <h1 class="font-mason text-xl font-black text-white tracking-[0.2em]">C4ING <span class="text-c4Cyan">COMMAND</span></h1>
-                <p class="text-[9px] font-mono text-oro tracking-widest uppercase">Nodo: Burunga, Panamá 🇵🇦</p>
+                <h1 class="font-mason text-xl tracking-wider text-red-400 font-bold uppercase drop-shadow-[0_0_10px_rgba(255,42,42,0.4)]">NUKE HUB</h1>
+                <p class="text-[9px] text-slate-400 font-mono tracking-widest">USARMY PANAMÁ HYPERSEC DIVISION</p>
             </div>
         </div>
-        <div class="hidden md:flex items-center gap-6 font-mono text-[10px] text-slate-400 tracking-widest uppercase">
-            <span class="flex items-center gap-2"><div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div> Atrio Online</span>
-            <span class="flex items-center gap-2"><div class="w-2 h-2 bg-purple-500 rounded-full animate-pulse"></div> Santísimo Activo</span>
+        
+        <div class="flex items-center gap-4 font-mono text-[10px] text-slate-300 uppercase tracking-widest">
+            <span class="flex items-center gap-2"><div class="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div> DEFCON 1</span>
+            <span class="flex items-center gap-2"><div class="w-2 h-2 bg-c4Cyan rounded-full animate-pulse"></div> SATCOM LINKED</span>
         </div>
     </header>
 
-    <main class="pt-32 pb-12 px-4 md:px-8 max-w-6xl mx-auto space-y-12 relative z-10">
+    <main class="pt-32 pb-20 px-4 md:px-8 max-w-6xl mx-auto space-y-16 relative z-10">
 
-        <!-- PANEL CENTRAL: DIEZMO CUÁNTICO Y VERSÍCULOS -->
-        <section class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <!-- Tesseracto Pro -->
-            <div class="logia-card-pro p-8 rounded-xl flex flex-col items-center">
-                <h3 class="font-mason text-c4Cyan text-lg tracking-[0.3em] uppercase w-full border-b border-c4Cyan/20 pb-3 mb-6">Motor 4D (Origen 0)</h3>
-                <div class="relative w-full flex justify-center h-[250px]">
-                    <div class="absolute top-0 left-0 text-[9px] font-mono text-slate-500">SYS.TESSERACT.RUN</div>
-                    <svg id="tesseractCanvas" width="220" height="220" viewBox="-3 -3 6 6" class="overflow-visible drop-shadow-[0_0_25px_rgba(0,243,255,0.6)]">
-                        <g id="tesseractLines" stroke="rgba(0, 243, 255, 0.9)" stroke-width="0.04"></g>
-                        <g id="tesseractPoints" fill="#fff"></g>
-                    </svg>
-                </div>
-            </div>
-
-            <!-- Algoritmo Divino / Diezmo -->
-            <div class="logia-card-pro p-8 rounded-xl flex flex-col justify-between border-t-2 border-oro">
-                <div>
-                    <div class="flex justify-between items-start mb-6">
-                        <h3 class="font-mason text-oro text-lg tracking-[0.3em] uppercase">Algoritmo del Diezmo</h3>
-                        <span class="text-2xl drop-shadow-[0_0_10px_rgba(212,175,55,0.8)]">🔯</span>
-                    </div>
+        <!-- SVG CENTRAL: USARMY PANAMA HYPERSEC -->
+        <section class="flex flex-col items-center justify-center py-10">
+            <div class="relative w-full max-w-sm aspect-square flex justify-center items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="100%" height="100%" class="cyan-glow">
+                    <defs>
+                        <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#020617"/>
+                            <stop offset="50%" stop-color="#111827"/>
+                            <stop offset="100%" stop-color="#020617"/>
+                        </linearGradient>
+                        <filter id="neonGlow">
+                            <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+                            <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                        </filter>
+                    </defs>
                     
-                    <div class="bg-black/60 border border-oro/30 rounded-lg p-5 font-mono text-sm space-y-4">
-                        <div class="flex justify-between text-slate-400">
-                            <span>Fondo Raíz:</span> <span class="text-white">$3.16</span>
-                        </div>
-                        <div class="flex justify-between text-red-400 border-b border-slate-800 pb-2">
-                            <span>Deducción Sagrada:</span> <span>-$0.316</span>
-                        </div>
-                        <div class="flex justify-between text-c4Cyan font-bold text-lg pt-2">
-                            <span>Resultado (Atrio):</span> <span class="animate-pulse">$2.844</span>
-                        </div>
-                    </div>
-                </div>
+                    <!-- Hexágono Base (Cyber Shield) -->
+                    <polygon points="200,20 360,100 360,300 200,380 40,300 40,100" fill="url(#shieldGrad)" stroke="#00f3ff" stroke-width="3" filter="url(#neonGlow)"/>
+                    <polygon points="200,40 340,110 340,290 200,360 60,290 60,110" fill="none" stroke="#d4af37" stroke-width="1.5" stroke-dasharray="4,4"/>
+                    
+                    <!-- Textos Circulares (Aproximación SVG) -->
+                    <path id="curveUp" d="M 100,200 A 100,100 0 0,1 300,200" fill="transparent" />
+                    <text font-family="Cinzel, serif" font-size="18" fill="#d4af37" font-weight="bold" letter-spacing="3">
+                        <textPath href="#curveUp" startOffset="50%" text-anchor="middle">SADV41 COMMAND</textPath>
+                    </text>
 
-                <div class="mt-6 border-l-4 border-holyPurple pl-4 bg-holyPurple/5 p-4 rounded-r-lg relative overflow-hidden">
-                    <div class="absolute right-0 top-0 text-6xl opacity-10">☦️</div>
-                    <p class="text-[10px] text-holyPurple font-mono tracking-widest mb-2 uppercase">Match Divino Localizado</p>
-                    <p class="text-oro font-mason font-bold text-lg mb-1">DEUTERONOMIO 28:44</p>
-                    <p class="text-sm text-slate-200 font-sans italic leading-relaxed">
-                        "Él te prestará a ti, y tú no le prestarás a él; él será por cabeza, y tú serás por cola."
-                    </p>
+                    <!-- Estrella US ARMY Central -->
+                    <g transform="translate(200, 190) scale(1.6)">
+                        <!-- Outer Base -->
+                        <polygon points="0,-45 14,-15 45,-15 20,5 30,35 0,15 -30,35 -20,5 -45,-15 -14,-15" fill="#FDB913"/>
+                        <!-- Inner Shadow -->
+                        <polygon points="0,-35 10,-10 35,-10 15,5 23,28 0,12 -23,28 -15,5 -35,-10 -10,-10" fill="#1a1a1a"/>
+                        <!-- Inner Gold -->
+                        <polygon points="0,-28 7,-6 28,-6 11,6 18,22 0,10 -18,22 -11,6 -28,-6 -7,-6" fill="#FDB913"/>
+                    </g>
+
+                    <!-- Estrellas de Panamá Flanqueando -->
+                    <!-- Azul (Izquierda) -->
+                    <g transform="translate(100, 190) scale(0.7)">
+                        <polygon points="0,-25 7,-7 25,-7 11,5 17,23 0,12 -17,23 -11,5 -25,-7 -7,-7" fill="#005293" filter="url(#neonGlow)"/>
+                    </g>
+                    <!-- Roja (Derecha) -->
+                    <g transform="translate(300, 190) scale(0.7)">
+                        <polygon points="0,-25 7,-7 25,-7 11,5 17,23 0,12 -17,23 -11,5 -25,-7 -7,-7" fill="#C8102E" filter="url(#neonGlow)"/>
+                    </g>
+
+                    <!-- Textos Inferiores -->
+                    <text x="200" y="310" font-family="Cinzel, serif" font-size="28" fill="#f8fafc" text-anchor="middle" font-weight="900" letter-spacing="4">USARMY</text>
+                    <text x="200" y="330" font-family="Inter, sans-serif" font-size="14" fill="#C8102E" text-anchor="middle" font-weight="bold" letter-spacing="6">PANAMÁ</text>
+                    <text x="200" y="355" font-family="Courier New, monospace" font-size="16" fill="#00f3ff" text-anchor="middle" font-weight="bold" letter-spacing="8" filter="url(#neonGlow)">HYPERSEC</text>
+                </svg>
+            </div>
+            
+            <!-- Asset Screenshot GitHub Reference -->
+            <div class="mt-8 bg-black/60 border border-c4Cyan/30 p-4 rounded-xl flex items-center gap-4 w-full max-w-md shadow-[0_0_15px_rgba(0,243,255,0.1)]">
+                <div class="text-2xl">📂</div>
+                <div class="flex-1">
+                    <p class="text-xs text-c4Cyan font-mono uppercase tracking-widest mb-1">Asset Desplegado</p>
+                    <p class="text-[10px] text-slate-400 font-mono truncate">.../assets/USARMY/Screenshot_20260821_101808_Brave.jpg</p>
                 </div>
+                <div class="text-[10px] bg-green-500/20 text-green-400 px-2 py-1 rounded border border-green-500/30 font-mono">VERIFIED</div>
             </div>
         </section>
 
-        <!-- ALERTA SOBERANA PRO -->
-        <section class="logia-card-pro nuke-alert p-8 rounded-xl bg-[radial-gradient(ellipse_at_center,rgba(255,42,42,0.15)_0%,transparent_70%)]">
-            <div class="flex flex-col md:flex-row items-center gap-8">
-                <div class="text-8xl red-glow">☢️</div>
-                <div class="flex-1">
-                    <h2 class="text-nukeRed font-mason font-black text-2xl tracking-[0.2em] mb-2 uppercase">Defensa Soberana de Panamá</h2>
-                    <div class="font-mono text-xs text-slate-300 space-y-2 mb-6">
-                        <p>> OBJETIVO: CK Hutchison Holdings</p>
-                        <p>> AMENAZA: Arbitraje Internacional (+$1,500M)</p>
-                        <p>> ESTADO: <span class="bg-nukeRed text-white px-2 py-0.5 rounded animate-pulse">CRÍTICO</span></p>
+        <!-- THE ARMY AZIMUTH DOSSIER -->
+        <section class="glass-army rounded-2xl overflow-hidden shadow-2xl relative">
+            <div class="absolute top-0 right-0 w-64 h-64 bg-oro/5 blur-[80px] pointer-events-none"></div>
+            
+            <div class="bg-black/40 border-b border-oro/20 p-8 md:p-12 text-center">
+                <h2 class="font-mason text-3xl md:text-4xl text-white font-bold tracking-widest uppercase mb-4 esoterico-glow">The Army Azimuth</h2>
+                <p class="text-oro font-mono text-sm tracking-widest uppercase mb-6">Vice Chief of Staff of the Army releases strategic direction</p>
+                <div class="inline-block border-t border-b border-slate-700 py-3 px-6 text-xs font-serif italic text-slate-400">
+                    By Gen. Christopher C. LaNeve, 40th Vice Chief of Staff of the Army | Aug. 20, 2026
+                </div>
+            </div>
+
+            <div class="p-8 md:p-12 dossier-text font-sans">
+                <p class="text-lg font-serif text-slate-200 mb-8 border-l-4 border-c4Cyan pl-6 bg-c4Cyan/5 py-4 rounded-r-lg">
+                    Since 1775, the United States Army has defended our republic and carried the torch of liberty through suffering and sacrifice. From the frozen Delaware at Trenton to the bluffs of Normandy, the jungles of Guadalcanal, and the winter hills of Chosin, American Soldiers faced enemies in brutal conditions and held the line. They answered the Nation’s call. One hundred and ninety campaign streamers fly from our Army flag, each testifying to the valor of our forebearers. Their legacy is ours to uphold.
+                </p>
+
+                <h3 class="font-mason text-2xl text-oro uppercase tracking-wider mb-6 mt-12 border-b border-oro/30 pb-2 inline-block">Answering the Nation’s Call</h3>
+                <p>
+                    The Army serves the Nation. We preserve peace and security, support our national objectives, and overcome any force whose aggression imperils us. Our strategic direction is clear:
+                </p>
+
+                <!-- Pilares Estratégicos -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 my-10">
+                    <!-- Pillar 1 -->
+                    <div class="pillar-card p-6 rounded-xl flex flex-col justify-between">
+                        <div>
+                            <h4 class="font-mono text-[10px] text-oro tracking-widest uppercase mb-2">Pillar I</h4>
+                            <h3 class="font-mason font-bold text-lg text-white uppercase mb-4">Defend the Homeland</h3>
+                            <p class="text-sm text-slate-300">We secure our Nation’s borders, protect the American people against attack, and respond to domestic crises — these are our most sacred duties. A secure Western Hemisphere is a prerequisite for joint power projection.</p>
+                        </div>
                     </div>
-                    <div class="flex gap-4">
-                        <button class="bg-nukeRed/20 hover:bg-nukeRed text-nukeRed hover:text-white border border-nukeRed font-mono text-xs px-6 py-3 rounded uppercase tracking-widest transition-all">
-                            Desplegar Contramedidas (Threads)
-                        </button>
+                    <!-- Pillar 2 -->
+                    <div class="pillar-card p-6 rounded-xl flex flex-col justify-between border-l-c4Cyan">
+                        <div>
+                            <h4 class="font-mono text-[10px] text-c4Cyan tracking-widest uppercase mb-2">Pillar II</h4>
+                            <h3 class="font-mason font-bold text-lg text-white uppercase mb-4">Warfighting</h3>
+                            <p class="text-sm text-slate-300">America’s Army applies violence decisively on battlefields marked by unrelenting speed, precision lethality, and persistent observation. We dominate from the outset to control escalation and prevent prolonged war.</p>
+                        </div>
                     </div>
+                    <!-- Pillar 3 -->
+                    <div class="pillar-card p-6 rounded-xl flex flex-col justify-between border-l-red-500">
+                        <div>
+                            <h4 class="font-mono text-[10px] text-red-400 tracking-widest uppercase mb-2">Pillar III</h4>
+                            <h3 class="font-mason font-bold text-lg text-white uppercase mb-4">Project Power</h3>
+                            <p class="text-sm text-slate-300">The Army projects land power by generating combat credible formations, prepositioning capabilities where they matter most, and strengthening the capacity of our Allies and partners worldwide.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="font-mason text-2xl text-oro uppercase tracking-wider mb-6 mt-12 border-b border-oro/30 pb-2 inline-block">The Foundation of the Joint Force</h3>
+                <p>
+                    The Army has aggressively pursued change to prepare for large scale combat operations. We shifted from brigade modularity to a force organized for multidomain operations at all echelons. We fielded long range precision fires that strike deep and sink ships at sea, evolved air defenses for skies saturated with unmanned systems, upgraded theater logistics, expanded terrestrial intelligence, and established new units integrating space, cyber, electronic warfare, and artificial intelligence into command and control.
+                </p>
+                <p>
+                    A ready Army is the foundation of the Joint Force, providing a range of capabilities that underpin joint operations and give our leaders immediate options. We employ four operational warfighting elements — convergence, strike, close battle, and endurance — to deliver joint all domain maneuver.
+                </p>
+
+                <h3 class="font-mason text-2xl text-oro uppercase tracking-wider mb-6 mt-12 border-b border-oro/30 pb-2 inline-block">What Land Dominance Demands</h3>
+                <ul class="space-y-4 mb-8 text-slate-300">
+                    <li class="flex gap-4 bg-black/30 p-4 rounded-lg border border-slate-800">
+                        <span class="text-c4Cyan font-bold">▸</span>
+                        <div><strong class="text-white">Embrace a Warrior Mindset.</strong> We possess the grit to endure hardship and the courage to act honorably. Leaders at all echelons see Soldiers as the decisive advantage.</div>
+                    </li>
+                    <li class="flex gap-4 bg-black/30 p-4 rounded-lg border border-slate-800">
+                        <span class="text-c4Cyan font-bold">▸</span>
+                        <div><strong class="text-white">Outpace our Adversaries.</strong> We learn, innovate, and adapt faster by pairing our human ingenuity and judgment with advanced technologies like autonomy and artificial intelligence.</div>
+                    </li>
+                    <li class="flex gap-4 bg-black/30 p-4 rounded-lg border border-slate-800">
+                        <span class="text-c4Cyan font-bold">▸</span>
+                        <div><strong class="text-white">Gain Positional Advantage.</strong> We gain positional advantage through posture that comes in many forms: from forward basing to campaigning to stockpiling supplies.</div>
+                    </li>
+                </ul>
+
+                <div class="bg-gradient-to-r from-red-900/30 to-black/30 border-l-4 border-red-600 p-6 rounded-r-xl mt-10">
+                    <p class="text-slate-200 italic font-serif">
+                        "This is the Army we must be: disciplined, lethal, and relentless — an Army that closes with and destroys the enemy, leaving no doubt about the will and power of the United States. As it has for more than 251 years, our Army will stand ready to fight, and win — whenever and wherever the Nation calls."
+                    </p>
+                    <p class="text-oro font-mason font-bold text-xl mt-6 uppercase tracking-widest esoterico-glow">This We’ll Defend!</p>
                 </div>
             </div>
         </section>
 
     </main>
 
-    <footer class="text-center p-6 border-t border-c4Cyan/20 mt-12 font-mono text-[9px] text-c4Cyan/50 uppercase tracking-[0.4em]">
-        C4ING Architecture PRO © 2026 | El Origen es 0 | 🫪🇵🇦🏁❣️☢️☦️🔯🗿🇺🇸
+    <footer class="text-center p-8 border-t border-c4Cyan/20 mt-12 font-mono text-[9px] text-slate-500 uppercase tracking-[0.4em]">
+        USARMY PANAMÁ HYPERSEC © 2026 | S(ADV41) ARCHITECTURE | ORIGEN 0
     </footer>
 
-    <script>
-        // --- BOOT SEQUENCE LOGIC ---
-        document.addEventListener("DOMContentLoaded", () => {
-            setTimeout(() => {
-                const boot = document.getElementById('c4ing-boot');
-                boot.style.opacity = '0';
-                setTimeout(() => boot.style.display = 'none', 1000);
-            }, 2800); // Carga rápida militar
-            initProTesseract();
-        });
-
-        // --- TESSERACTO PRO (Optimizado y Auto-Rotatorio) ---
-        function initProTesseract() {
-            const linesGroup = document.getElementById("tesseractLines");
-            const pointsGroup = document.getElementById("tesseractPoints");
-            if (!linesGroup) return;
-
-            const vertices4D = [];
-            for (let x=-1; x<=1; x+=2) for (let y=-1; y<=1; y+=2) for (let z=-1; z<=1; z+=2) for (let w=-1; w<=1; w+=2) vertices4D.push([x,y,z,w]);
-            
-            const edges = [];
-            for (let i=0; i<16; i++) {
-                for (let j=i+1; j<16; j++) {
-                    let diff = i ^ j;
-                    if (diff===1 || diff===2 || diff===4 || diff===8) edges.push([i,j]);
-                }
-            }
-
-            let rXY=0, rXZ=0;
-            function rotate(v, angle, a1, a2) {
-                let res=[...v], rad=angle*(Math.PI/180), cos=Math.cos(rad), sin=Math.sin(rad);
-                res[a1] = v[a1]*cos - v[a2]*sin; res[a2] = v[a1]*sin + v[a2]*cos;
-                return res;
-            }
-
-            function render() {
-                rXY = (rXY + 0.3) % 360; rXZ = (rXZ + 0.2) % 360;
-                let projected = [];
-                vertices4D.forEach(v => {
-                    let r = rotate(rotate([...v], rXY, 0, 1), rXZ, 0, 2);
-                    let dist = 2.5, w = 1/(dist - r[3]);
-                    let x3 = r[0]*w, y3 = r[1]*w, z3 = r[2]*w;
-                    let z = 1/(dist - z3);
-                    projected.push([x3*z*4, y3*z*4]);
-                });
-
-                linesGroup.innerHTML = '';
-                edges.forEach(e => {
-                    let p1 = projected[e[0]], p2 = projected[e[1]];
-                    let line = document.createElementNS("http://www.w3.org/2000/svg", "line");
-                    line.setAttribute("x1", p1[0]); line.setAttribute("y1", p1[1]);
-                    line.setAttribute("x2", p2[0]); line.setAttribute("y2", p2[1]);
-                    linesGroup.appendChild(line);
-                });
-
-                pointsGroup.innerHTML = '';
-                projected.forEach(p => {
-                    let circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-                    circle.setAttribute("cx", p[0]); circle.setAttribute("cy", p[1]);
-                    circle.setAttribute("r", "0.06");
-                    pointsGroup.appendChild(circle);
-                });
-
-                requestAnimationFrame(render);
-            }
-            render();
-        }
-    </script>
 </body>
 </html>
