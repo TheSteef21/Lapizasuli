@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="es">
+<head><style>
+@font-face {
+  font-family: "Optimistic";
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url("/fonts/OptimisticAI_VF_Optimized.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Optimistic Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/OptimisticMono_W_TextRegular.woff2") format("woff2");
+}
+:where(html) {
+  font-family: "Optimistic", system-ui, sans-serif;
+}
+:where(code, pre, kbd, samp) {
+  font-family: "Optimistic Mono", ui-monospace, monospace;
+}
+</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SADV41 // FLOR DE LA VIDA 3D - MAPEO TOTAL</title>
+  <style>
+    @font-face { font-family: "Optimistic"; font-style: normal; font-weight: 400 600; font-display: swap; src: url("/fonts/OptimisticAI_VF_Optimized.woff2") format("woff2"); }
+    @font-face { font-family: "Optimistic Mono"; font-style: normal; font-weight: 400; font-display: swap; src: url("/fonts/OptimisticMono_W_TextRegular.woff2") format("woff2"); }
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=JetBrains+Mono:wght@300;400;500;700&family=Inter:wght@300;400;600;800&display=swap');
+    
+    :where(html) { font-family: "Inter", "Optimistic", system-ui, sans-serif; background-color: #050505; color: #f1f5f9; }
+    :where(code, pre, kbd, samp) { font-family: "JetBrains Mono", "Optimistic Mono", ui-monospace, monospace; }
+    
+    body { margin: 0; min-height: 100vh; overflow-x: hidden; background:#050505; }
+    * { box-sizing: border-box; }
+    a { text-decoration: none; color: inherit; }
+
+    .glass { background: rgba(8,8,12,0.84); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); }
+    .glass-strong { background: rgba(10,10,16,0.92); backdrop-filter: blur(22px); }
+    .gold-glow { box-shadow: 0 0 36px rgba(212,175,55,0.16), inset 0 0 22px rgba(212,175,55,0.04); }
+    .cyan-glow { box-shadow: 0 0 28px rgba(0,243,255,0.18), inset 0 0 18px rgba(0,243,255,0.05); }
+    .scanline { width:100%; height:2px; background: linear-gradient(90deg, transparent, rgba(251,84,43,0.35), transparent); position:fixed; left:0; z-index:60; pointer-events:none; animation: scan 8s linear infinite; }
+    .grid-pattern { background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px); background-size: 28px 28px; }
+    .cinzel { font-family: 'Cinzel', serif; }
+    .font-mono { font-family: 'JetBrains Mono', monospace !important; }
+    
+    @keyframes scan { 0% { top: 0; } 100% { top: 100%; } }
+    @keyframes pulse { 50% { opacity: 0.5; } }
+    .animate-pulse { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+
+    #flower-container {
+      perspective: 1400px;
+      width: 100%;
+      height: 620px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      z-index: 10;
+      overflow: visible;
+    }
+    #flower-scene {
+      width: 520px;
+      height: 520px;
+      transform-style: preserve-3d;
+      position: relative;
+      cursor: grab;
+      transition: transform 0.08s linear;
+    }
+    #flower-scene:active { cursor: grabbing; }
+    
+    .flower-plane {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      transform-style: preserve-3d;
+      opacity: 0.25;
+      pointer-events: none;
+    }
+    
+    .node-3d {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform-style: preserve-3d;
+      cursor: pointer;
+      pointer-events: all;
+      transition: all 0.25s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .node-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.9);
+      box-shadow: 0 0 12px currentColor;
+      transition: all 0.25s ease;
+    }
+    .node-label {
+      margin-top: 6px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8.5px;
+      letter-spacing: 0.08em;
+      font-weight: 700;
+      text-transform: uppercase;
+      white-space: nowrap;
+      padding: 2px 5px;
+      border-radius: 4px;
+      background: rgba(0,0,0,0.75);
+      border: 1px solid rgba(255,255,255,0.15);
+      pointer-events: none;
+    }
+    .node-3d:hover .node-dot {
+      width: 20px;
+      height: 20px;
+      box-shadow: 0 0 22px currentColor, 0 0 35px currentColor;
+      background: #fff !important;
+    }
+    .node-3d:hover .node-label {
+      background: #fff;
+      color: #000 !important;
+      transform: scale(1.15);
+    }
+    
+    .bg-gradient { background-image: radial-gradient(ellipse at 50% -10%, rgba(251,84,43,0.18), transparent 55%), radial-gradient(ellipse at 80% 100%, rgba(0,243,255,0.09), transparent 60%), radial-gradient(ellipse at 0 100%, rgba(212,175,55,0.08), transparent 50%); }
+  </style>
+</head>
+<body>
+
+  <div class="fixed" style="position:fixed; inset:0; pointer-events:none; z-index:0;">
+    <div class="bg-gradient" style="position:absolute; inset:0;"></div>
+    <div class="grid-pattern" style="position:absolute; inset:0; opacity:0.35;"></div>
+  </div>
+  <div class="scanline"></div>
+
+  <main style="position:relative; z-index:10; max-width: 1320px; margin: 0 auto; padding: 2rem 1.5rem;">
+    
+    <header style="border-bottom: 1px solid rgba(251,84,43,0.2); padding: 1rem 1.2rem; margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: center; border-radius:16px;" class="glass gold-glow">
+      <div>
+        <h1 class="cinzel" style="font-size: 1.25rem; font-weight: 900; letter-spacing: 0.15em; margin:0;">
+          LEVIATHAN // FLOR DE LA VIDA 4D - MAPEO TOTAL
+        </h1>
+        <p class="font-mono" style="font-size: 0.65rem; color: #94a3b8; letter-spacing: 0.2em; margin-top: 6px;">
+          51 NODOS DETECTADOS EN /assets | ORIGEN 1027=10=1 | ID 69362166 | PRO=Grok + META ULTRA
+        </p>
+      </div>
+      <div style="display:flex; gap:8px; align-items:center;">
+        <div class="font-mono" style="font-size: 0.68rem; padding: 6px 12px; border-radius: 999px; border: 1px solid rgba(212,175,55,0.3); background: rgba(212,175,55,0.1); color: #d4af37;">
+          🇵🇦🇺🇸🇮🇱🇦🇷🇻🇪☢️🔐
+        </div>
+        <button id="resetView" class="font-mono" style="font-size:0.65rem; padding:6px 12px; border-radius:999px; border:1px solid rgba(0,243,255,0.3); background: rgba(0,243,255,0.1); color:#00f3ff; cursor:pointer;">RESET 3D</button>
+      </div>
+    </header>
+
+    <section class="glass-strong gold-glow" style="border: 1px solid rgba(212,175,55,0.25); border-radius: 28px; padding: 1.6rem; margin-bottom: 2rem; text-align: center;">
+      <h2 class="cinzel" style="font-size: 22px; color: #FFF; letter-spacing: 0.12em; margin:0 0 6px 0;">ARQUITECTURA DE 51 PUNTOS INFINITOS</h2>
+      <p class="font-mono" style="font-size: 11px; color: #9ca3af; margin: 0 0 12px 0;">Haz clic y arrastra para rotar 360° (X,Y,Z) • Rueda para zoom • Click en nodo = GSADV41.html / Logia.html / index.html</p>
+      <div style="display:flex; justify-content:center; gap:10px; flex-wrap:wrap; margin-bottom:12px;" class="font-mono">
+        <span style="font-size:9px; color:#d4af37; border:1px solid rgba(212,175,55,0.3); padding:3px 8px; border-radius:999px; background:rgba(212,175,55,0.08);">● SADV41 FAMILY</span>
+        <span style="font-size:9px; color:#9d4edd; border:1px solid rgba(157,78,221,0.3); padding:3px 8px; border-radius:999px; background:rgba(157,78,221,0.08);">● TRONO/LOGIA/PROTOCOLO</span>
+        <span style="font-size:9px; color:#FB542B; border:1px solid rgba(251,84,43,0.3); padding:3px 8px; border-radius:999px; background:rgba(251,84,43,0.08);">● USARMY/NUKE/BOXING</span>
+        <span style="font-size:9px; color:#00f3ff; border:1px solid rgba(0,243,255,0.3); padding:3px 8px; border-radius:999px; background:rgba(0,243,255,0.08);">● AI/META/WEB3</span>
+        <span style="font-size:9px; color:#1DB954; border:1px solid rgba(29,185,84,0.3); padding:3px 8px; border-radius:999px; background:rgba(29,185,84,0.08);">● FUNDING/FACTURA/DGI</span>
+      </div>
+      
+      <div id="flower-container">
+        <div id="flower-scene"></div>
+      </div>
+      
+      <div id="selectedNode" class="glass font-mono" style="margin-top:16px; border:1px solid rgba(255,255,255,0.1); border-radius:16px; padding:12px 16px; display:none; text-align:left; max-width:720px; margin-left:auto; margin-right:auto;">
+        <div style="font-size:11px; color:#94a3b8; letter-spacing:0.1em;">NODO SELECCIONADO →</div>
+        <div id="selectedTitle" style="font-size:14px; font-weight:800; color:#fff; margin:6px 0;"></div>
+        <div id="selectedLinks" style="display:flex; flex-direction:column; gap:6px; margin-top:8px;"></div>
+      </div>
+    </section>
+
+    <section class="glass" style="border:1px solid rgba(255,255,255,0.08); border-radius:20px; padding:1.4rem;">
+      <h3 class="cinzel" style="font-size:13px; letter-spacing:0.15em; margin:0 0 12px 0;">ÍNDICE COMPLETO DE NODOS /assets →</h3>
+      <div id="nodeList" style="display:grid; grid-template-columns: repeat(auto-fill, minmax(220px,1fr)); gap:8px;"></div>
+    </section>
+
+  </main>
+
+  <script>
+    const nodesData = [
+      { id: "8", folder: "7/8", url: "https://thesteef21.github.io/Lapizasuli/assets/7/8/GSADV41.html", alt1: "https://thesteef21.github.io/Lapizasuli/assets/7/8/Logia.html", alt2: "https://thesteef21.github.io/Lapizasuli/assets/7/8/index.html", color: "#FFC26A" },
+      { id: "METO", folder: "AI/METO", url: "https://thesteef21.github.io/Lapizasuli/assets/AI/METO/GSADV41.html", alt1: "https://thesteef21.github.io/Lapizasuli/assets/AI/METO/Logia.html", alt2: "https://thesteef21.github.io/Lapizasuli/assets/AI/METO/index.html", color: "#00f3ff" },
+      { id: "ARRAIJAN", folder: "ARRAIJAN", url: "https://thesteef21.github.io/Lapizasuli/assets/ARRAIJAN/GSADV41.html", alt1: "https://thesteef21.github.io/Lapizasuli/assets/ARRAIJAN/Logia.html", alt2: "https://thesteef21.github.io/Lapizasuli/assets/ARRAIJAN/index.html", color: "#FB542B" },
+      { id: "BOXING", folder: "BOXING", url: "https://thesteef21.github.io/Lapizasuli/assets/BOXING/GSADV41.html", alt1: "https://thesteef21.github.io/Lapizasuli/assets/BOXING/Logia.html", alt2: "https://thesteef21.github.io/Lapizasuli/assets/BOXING/index.html", color: "#FB542B" },
+      { id: "BRAVE", folder: "BRAVE", url: "https://thesteef21.github.io/Lapizasuli/assets/BRAVE/GSADV41.html", alt1: "https://thesteef21.github.io/Lapizasuli/assets/BRAVE/Logia.html", alt2: "https://thesteef21.github.io/Lapizasuli/assets/BRAVE/index.html", color: "#00f3ff" },
+      { id: "BSADV41", folder: "BSADV41", url: "https://thesteef21.github.io/Lapizasuli/assets/BSADV41/GSADV41.html", alt1: "https://thesteef21.github.io/Lapizasuli/assets/BSADV41/Logia.html", alt2: "https://thesteef21.github.io/Lapizasuli/assets/BSADV41/index.html", color: "#d4af37" },
+      { id: "BUREP", folder: "BUREP", url: "https://thesteef21.github.io/Lapizasuli/assets/BUREP/GSADV41.html", alt1: "https://thesteef21.github.io/Lapizasuli/assets/BUREP/Logia.html", alt2: "https://thesteef21.github.io/Lapizasuli/assets/BUREP/index.html", color: "#FB542B" },
+      { id: "CHISTES", folder: "CHISTES", url: "https://thesteef21.github.io/Lapizasuli/assets/CHISTES/GSADV41.html", alt1: "https://thesteef21.github.io/Lapizasuli/assets/CHISTES/Logia.html", alt2: "https://thesteef21.github.io/Lapizasuli/assets/CHISTES/index.html", color: "#FFC26A" },
+      { id: "CREDISADV41", folder: "CREDISADV41", url: "https://thesteef21.github.io/Lapizasuli/assets/CREDISADV41/GSADV41.html", alt1: "https://thesteef21.github.io/Lapizasuli/assets/CREDISADV41/Logia.html", alt2: "https://thesteef21.github.io/Lapizasuli/assets/CREDISADV41/index.html", color: "#d4af37" },
+      { id: "CSADV41", folder: "CSADV41", url: "https://thesteef21.github.io/Lapizasuli/assets/CSADV41/GSADV41.html", alt1: "https://thesteef21.github.io/Lapizasuli/assets/CSADV41/Logia.html", alt2: "https://thesteef21.github.io/Lapizasuli/assets/CSADV41/index.html", color: "#d4af37" },
+      { id: "CASACRYPTO", folder: "CasaCrypto", url: "https://thesteef21.github.io/Lapizasuli/assets/CasaCrypto/GSADV41.html", alt1: "https://thesteef21.github.io/Lapizasuli/assets/CasaCrypto/Logia.html", alt2: "https://thesteef21.github.io/Lapizasuli/assets/CasaCrypto/index.html", color: "#7AF6FF" },
+      { id: "DGI", folder: "DGI", url: "https://thesteef21.github.io/Lapizasuli/assets/DGI/GSADV41.html", alt1: "https://thesteef21.github.io/Lapizasuli/assets/DGI/Logia.html", alt2: "https://thesteef21.github.io/Lapizasuli/assets/DGI/index.html", color: "#1DB954" },
+      { id: "E57", folder: "E57", url: "https://thesteef21.github.io/Lapizasuli/assets/E57/GSADV41.html", alt1: "https://thesteef21.github.io/Lapizasuli/assets/E57/Logia.html", alt2: "https://thesteef21.github.io/Lapizasuli/assets/E57/index.html", color: "#FFC26A" },
+      { id: "EMSC", folder: "EMSC", url: "https://thesteef21.github.io/Lapizasuli/assets/EMSC/GSADV41.html", alt1: "https://thesteef21.github.io/Lapizasuli/assets/EMSC/Logia.html", alt2: "https://thesteef21.github.io/Lapizasuli/assets/EMSC/index.html", color: "#00f3ff" },
+      { id: "FACTURA", folder: "FACTURA", url: "https://thesteef21.github.io/Lapizasuli/assets/FACTURA/GSADV41.html", alt1: "https://thesteef21.github.io/Lapizasuli/assets/FACTURA/Logia.html", alt2: "https://thesteef21.github.io/Lapizasuli/assets/FACTURA/index.html", color: "#1DB954" },
+      { id: "FIFA2026", folder: "FIFA2026", url: "https://thesteef21.github.io/Lapizasuli/assets/FIFA2026/GSADV41.html", alt1: "https://thesteef21.github.io/Lapizasuli/assets/FIFA2026/Logia.html", alt2: "https://thesteef21.github.io/Lapizasuli/assets/FIFA2026/index.html", color: "#1DB954" },
+      { id: "FUNDING", folder: "FUNDING", url: "https://thesteef21.github.io/Lapizasuli/assets/FUNDING/GSADV41.html", alt1: "https://thesteef21.github.io/Lapizasuli/assets/FUNDING/Logia.html", alt2: "https://thesteef21.github.io/Lapizasuli/assets/FUNDING/index.html", color: "#1DB954" },
+      { id: "GNOSADV41", folder: "GNOSADV41", url: "https://thesteef21.github.io/Lapizasuli/assets/GNOSADV41/GSADV41.html", alt1: "https://thesteef21.github.io/Lapizasuli/assets/GNOSADV41/Logia.html", alt2: "https://thesteef21.github.io/Lapizasuli/assets/GNOSADV41/index.html", color: "#d4af37" },
+      { id: "GSADV41", folder: "GSADV41", url: "https://thesteef21.github.io/Lapizasuli/assets/GSADV41/GSADV41.html", alt1: "https://thesteef21.github.io/Lapizasuli/assets/GSADV41/Logia.html", alt2: "https://thesteef21.github.io/Lapizasuli/assets/GSADV41/index.html", color: "#d4af37" },
+      { id: "GEOPOLÍTICA", folder: "Geopolítica", url: "https://thesteef21.github.io/Lapizasuli/assets/Geopolítica/GSADV41.html", alt1: "https://thesteef21.github.io/Lapizasuli/assets/Geopolítica/Logia.html", alt2: "https://thesteef21.github.io/Lapizasuli/assets/Geopolítica/index.html", color: "#FFC26A" },
+      { id: "HUMANIDADES", folder: "HUMANIDADES", url: "https://thesteef21.github.io/Lapizasuli/assets/HUMANIDADES/GSADV41.html", alt1: "https://thesteef21.github.io/Lapizasuli/assets/HUMANIDADES/Logia.html", alt2: "https://thesteef21.github.io/Lapizasuli/assets/HUMANIDADES/index.html", color: "#7AF6FF" },
+      { id: "HOY", folder: "Hoy", url: "https://thesteef21.github.io/Lapizasuli/assets/Hoy/GSADV41.html", alt1: "https://thesteef21.github.io/Lapizasuli/assets/Hoy/Logia.html", alt2: "https://thesteef21.github.io/Lapizasuli/assets/Hoy/index.html", color: "#7AF6FF" },
+      { id: "IA", folder: "IA", url: "https://thesteef21.github.io/Lapizasuli/assets/IA/GSADV41.html", alt1: "https://thesteef21.github.io/Lapizasuli/assets/IA/Logia.html", alt2: "https://thesteef21.github.io/Lapizasuli/assets/IA/index.html", color: "#00f3ff" },
+      { id: "IMA", folder: "IMA", url: "https://thesteef21.github.io/Lapizasuli/assets/IMA/GSADV41.html", alt1: "https://thesteef21.github.io/Lapizasuli/assets/IMA/Logia.html", alt2: "https://thesteef21.github.io/Lapizasuli/assets/IMA/index.html", color: "#00f3ff" },
+      { id: "IMPRESS", folder: "Impress", url: "https://thesteef21.github.io/Lapizasuli/assets/Impress/GSADV41.html", alt1: "https://thesteef21.github.io/Lapizasuli/assets/Impress/Logia.html", alt2: "https://thesteef21.github.io/Lapizasuli/assets/Impress/index.html", color: "#FFC26A" },
+      { id: "KSADV41", folder: "KSADV41", url: "https://thesteef21.github.io/Lapizasuli/assets/KSADV41/GSADV41.html", alt1: "https://thesteef21.github.io/Lapizasuli/assets/KSADV41/Logia.html", alt2: "https://thesteef21.github.io/Lapizasuli/assets/KSADV41/index.html", color: "#d4af37" },
+      { id: "LSADV41", folder: "LSADV41", url: "https://thesteef21.github.io/Lapizasuli/assets/LSADV41/GSADV41.html", alt1: "https://thesteef21.github.io/Lapizasuli/assets/LSADV41/Logia.html", alt2: "https://thesteef21.github.io/Lapizasuli/assets/LSADV41/index.html", color: "#d4af37" },
+      { id: "EXPEDIENTE", folder: "LoDeHoy/Expediente", url: "https://thesteef21.github.io/Lapizasuli/assets/LoDeHoy/Expediente/GSADV41.html", alt1: "https://thesteef21.github.io/Lapizasuli/assets/LoDeHoy/Expediente/Logia.html", alt2: "https://thesteef21.github.io/Lapizasuli/assets/LoDeHoy/Expediente/index.html", color: "#7AF6FF" },
+      { id: "LOGIA", folder: "Logia", url: "https://thesteef21.github.io/Lapizasuli/assets/Logia/GSADV41.html", alt1: "https://thesteef21.github.io/Lapizasuli/assets/Logia/Logia.html", alt2: "https://thesteef21.github.io/Lapizasuli/assets/Logia/index.html", color: "#9d4edd" },
+      { id: "META", folder: "META", url: "https://thesteef21.github.io/Lapizasuli/assets/META/GSADV41.html", alt1: "https://thesteef21.github.io/Lapizasuli/assets/META/Logia.html", alt2: "https://thesteef21.github.io/Lapizasuli/assets/META/index.html", color: "#00f3ff" },
+      { id: "MGSADV41", folder: "MGSADV41", url: "https://thesteef21.github.io/Lapizasuli/assets/MGSADV41/GSADV41.html", alt1: "https://thesteef21.github.io/Lapizasuli/assets/MGSADV41/Logia.html", alt2: "https://thesteef21.github.io/Lapizasuli/assets/MGSADV41/index.html", color: "#d4af37" },
+      { id: "MUSIC", folder: "MUSIC", url: "https://thesteef21.github.io/Lapizasuli/assets/MUSIC/GSADV41.html", alt1: "https://thesteef21.github.io/Lapizasuli/assets/MUSIC/Logia.html", alt2: "https://thesteef21.github.io/Lapizasuli/assets/MUSIC/index.html", color: "#00f3ff" },
+      { id: "MALVINAS", folder: "Malvinas", url: "https://thesteef21.github.io/Lapizasuli/assets/Malvinas/GSADV41.html", alt1: "https://thesteef21.github.io/Lapizasuli/assets/Malvinas/Logia.html", alt2: "https://thesteef21.github.io/Lapizasuli/assets/Malvinas/index.html", color: "#FFC26A" },
+      { id: "NOSTALGIA", folder: "NOSTALGIA", url: "https://thesteef21.github.io/Lapizasuli/assets/NOSTALGIA/GSADV41.html", alt1: "https://thesteef21.github.io/Lapizasuli/assets/NOSTALGIA/Logia.html", alt2: "https://thesteef21.github.io/Lapizasuli/assets/NOSTALGIA/index.html", color: "#00f3ff" },
+      { id: "NOTICIAS", folder: "NOTICIAS", url: "https://thesteef21.github.io/Lapizasuli/assets/NOTICIAS/GSADV41.html", alt1: "https://thesteef21.github.io/Lapizasuli/assets/NOTICIAS/Logia.html", alt2: "https://thesteef21.github.io/Lapizasuli/assets/NOTICIAS/index.html", color: "#00f3ff" },
+      { id: "NUKE", folder: "NUKE", url: "https://thesteef21.github.io/Lapizasuli/assets/NUKE/GSADV41.html", alt1: "https://thesteef21.github.io/Lapizasuli/assets/NUKE/Logia.html", alt2: "https://thesteef21.github.io/Lapizasuli/assets/NUKE/index.html", color: "#FB542B" },
+      { id: "OJSADV41", folder: "OJSADV41", url: "https://thesteef21.github.io/Lapizasuli/assets/OJSADV41/GSADV41.html", alt1: "https://thesteef21.github.io/Lapizasuli/assets/OJSADV41/Logia.html", alt2: "https://thesteef21.github.io/Lapizasuli/assets/OJSADV41/index.html", color: "#d4af37" },
+      { id: "PATENTSADV41", folder: "PATENTSADV41", url: "https://thesteef21.github.io/Lapizasuli/assets/PATENTSADV41/GSADV41.html", alt1: "https://thesteef21.github.io/Lapizasuli/assets/PATENTSADV41/Logia.html", alt2: "https://thesteef21.github.io/Lapizasuli/assets/PATENTSADV41/index.html", color: "#d4af37" },
+      { id: "PPSADV41", folder: "PPSADV41", url: "https://thesteef21.github.io/Lapizasuli/assets/PPSADV41/GSADV41.html", alt1: "https://thesteef21.github.io/Lapizasuli/assets/PPSADV41/Logia.html", alt2: "https://thesteef21.github.io/Lapizasuli/assets/PPSADV41/index.html", color: "#d4af37" },
+      { id: "PRINCIPADO", folder: "PRINCIPADO", url: "https://thesteef21.github.io/Lapizasuli/assets/PRINCIPADO/GSADV41.html", alt1: "https://thesteef21.github.io/Lapizasuli/assets/PRINCIPADO/Logia.html", alt2: "https://thesteef21.github.io/Lapizasuli/assets/PRINCIPADO/index.html", color: "#9d4edd" },
+      { id: "DECLARACIONES", folder: "PROTOCOLO/DECLARACIONES", url: "https://thesteef21.github.io/Lapizasuli/assets/PROTOCOLO/DECLARACIONES/GSADV41.html", alt1: "https://thesteef21.github.io/Lapizasuli/assets/PROTOCOLO/DECLARACIONES/Logia.html", alt2: "https://thesteef21.github.io/Lapizasuli/assets/PROTOCOLO/DECLARACIONES/index.html", color: "#9d4edd" },
+      { id: "RUC", folder: "RUC", url: "https://thesteef21.github.io/Lapizasuli/assets/RUC/GSADV41.html", alt1: "https://thesteef21.github.io/Lapizasuli/assets/RUC/Logia.html", alt2: "https://thesteef21.github.io/Lapizasuli/assets/RUC/index.html", color: "#1DB954" },
+      { id: "SADV41TT", folder: "SADV41TT", url: "https://thesteef21.github.io/Lapizasuli/assets/SADV41TT/GSADV41.html", alt1: "https://thesteef21.github.io/Lapizasuli/assets/SADV41TT/Logia.html", alt2: "https://thesteef21.github.io/Lapizasuli/assets/SADV41TT/index.html", color: "#d4af37" },
+      { id: "SVA41", folder: "SVA41", url: "https://thesteef21.github.io/Lapizasuli/assets/SVA41/GSADV41.html", alt1: "https://thesteef21.github.io/Lapizasuli/assets/SVA41/Logia.html", alt2: "https://thesteef21.github.io/Lapizasuli/assets/SVA41/index.html", color: "#FFC26A" },
+      { id: "TRANSFIGURACION", folder: "TRANSFIGURACION", url: "https://thesteef21.github.io/Lapizasuli/assets/TRANSFIGURACION/GSADV41.html", alt1: "https://thesteef21.github.io/Lapizasuli/assets/TRANSFIGURACION/Logia.html", alt2: "https://thesteef21.github.io/Lapizasuli/assets/TRANSFIGURACION/index.html", color: "#9d4edd" },
+      { id: "TRONO", folder: "TRONO", url: "https://thesteef21.github.io/Lapizasuli/assets/TRONO/GSADV41.html", alt1: "https://thesteef21.github.io/Lapizasuli/assets/TRONO/Logia.html", alt2: "https://thesteef21.github.io/Lapizasuli/assets/TRONO/index.html", color: "#9d4edd" },
+      { id: "TSADV41", folder: "TSADV41", url: "https://thesteef21.github.io/Lapizasuli/assets/TSADV41/GSADV41.html", alt1: "https://thesteef21.github.io/Lapizasuli/assets/TSADV41/Logia.html", alt2: "https://thesteef21.github.io/Lapizasuli/assets/TSADV41/index.html", color: "#d4af37" },
+      { id: "USARMY", folder: "USARMY", url: "https://thesteef21.github.io/Lapizasuli/assets/USARMY/GSADV41.html", alt1: "https://thesteef21.github.io/Lapizasuli/assets/USARMY/Logia.html", alt2: "https://thesteef21.github.io/Lapizasuli/assets/USARMY/index.html", color: "#FB542B" },
+      { id: "VSADV41", folder: "VSADV41", url: "https://thesteef21.github.io/Lapizasuli/assets/VSADV41/GSADV41.html", alt1: "https://thesteef21.github.io/Lapizasuli/assets/VSADV41/Logia.html", alt2: "https://thesteef21.github.io/Lapizasuli/assets/VSADV41/index.html", color: "#d4af37" },
+      { id: "WEB3", folder: "WEB3", url: "https://thesteef21.github.io/Lapizasuli/assets/WEB3/GSADV41.html", alt1: "https://thesteef21.github.io/Lapizasuli/assets/WEB3/Logia.html", alt2: "https://thesteef21.github.io/Lapizasuli/assets/WEB3/index.html", color: "#00f3ff" },
+      { id: "X", folder: "X", url: "https://thesteef21.github.io/Lapizasuli/assets/X/GSADV41.html", alt1: "https://thesteef21.github.io/Lapizasuli/assets/X/Logia.html", alt2: "https://thesteef21.github.io/Lapizasuli/assets/X/index.html", color: "#FFC26A" }
+    ];
+
+    const scene = document.getElementById('flower-scene');
+    const container = document.getElementById('flower-container');
+    const radius = 62;
+    
+    function createFlowerPlane(transformStyle) {
+      const svgNS = "http://www.w3.org/2000/svg";
+      const svg = document.createElementNS(svgNS, "svg");
+      svg.setAttribute("viewBox", "-220 -220 440 440");
+      svg.setAttribute("class", "flower-plane");
+      svg.style.transform = transformStyle;
+      const centers = [{x: 0, y: 0}];
+      for (let i = 0; i < 6; i++) {
+        const angle = (Math.PI / 3) * i;
+        centers.push({ x: radius * Math.cos(angle), y: radius * Math.sin(angle) });
+      }
+      for (let i = 0; i < 12; i++) {
+        const angle = (Math.PI / 6) * i;
+        const dist = (i % 2 === 0) ? radius * 2 : radius * Math.sqrt(3);
+        centers.push({ x: dist * Math.cos(angle), y: dist * Math.sin(angle) });
+      }
+      centers.forEach((center) => {
+        const g = document.createElementNS(svgNS, "g");
+        const circle = document.createElementNS(svgNS, "circle");
+        circle.setAttribute("cx", center.x);
+        circle.setAttribute("cy", center.y);
+        circle.setAttribute("r", radius);
+        circle.setAttribute("fill", "none");
+        circle.setAttribute("stroke", "rgba(212, 175, 55, 0.18)");
+        circle.setAttribute("stroke-width", "0.8");
+        g.appendChild(circle);
+        svg.appendChild(g);
+      });
+      return svg;
+    }
+
+    scene.appendChild(createFlowerPlane("rotateY(0deg) translateZ(-20px)"));
+    scene.appendChild(createFlowerPlane("rotateY(60deg) translateZ(-20px)"));
+    scene.appendChild(createFlowerPlane("rotateY(120deg) translateZ(-20px)"));
+    scene.appendChild(createFlowerPlane("rotateX(90deg) translateZ(-20px)"));
+
+    // Fibonacci sphere distribution for 51 nodes
+    const nodeElements = [];
+    const sphereRadius = 210;
+    const goldenAngle = Math.PI * (3 - Math.sqrt(5));
+
+    nodesData.forEach((node, i) => {
+      const y = 1 - (i / (nodesData.length - 1)) * 2;
+      const radiusAtY = Math.sqrt(1 - y * y);
+      const theta = goldenAngle * i;
+      const x = Math.cos(theta) * radiusAtY;
+      const z = Math.sin(theta) * radiusAtY;
+
+      const el = document.createElement('div');
+      el.className = 'node-3d';
+      el.dataset.index = i;
+      el.innerHTML = `
+        <div class="node-dot" style="background:${node.color}; color:${node.color}"></div>
+        <div class="node-label" style="color:${node.color}">${node.id}</div>
+      `;
+      // store 3d pos
+      el._pos = { x: x * sphereRadius, y: y * sphereRadius, z: z * sphereRadius };
+      el._node = node;
+      
+      el.addEventListener('click', (e) => {
+        e.stopPropagation();
+        openNode(node);
+      });
+
+      scene.appendChild(el);
+      nodeElements.push(el);
+    });
+
+    function openNode(node) {
+      const sel = document.getElementById('selectedNode');
+      const title = document.getElementById('selectedTitle');
+      const links = document.getElementById('selectedLinks');
+      sel.style.display = 'block';
+      title.textContent = `${node.folder} → ${node.id}`;
+      const enc = (u) => encodeURI(u);
+      links.innerHTML = `
+        <a href="${enc(node.url)}" target="_blank" style="padding:8px 12px; border-radius:10px; background:rgba(212,175,55,0.12); border:1px solid ${node.color}; color:#fff; font-size:11px;">▶ PRIMARY: GSADV41.html — ${node.url}</a>
+        <a href="${enc(node.alt1)}" target="_blank" style="padding:8px 12px; border-radius:10px; background:rgba(157,78,221,0.1); border:1px solid rgba(157,78,221,0.4); color:#e9d5ff; font-size:11px;">◆ ALT: Logia.html — ${node.alt1}</a>
+        <a href="${enc(node.alt2)}" target="_blank" style="padding:8px 12px; border-radius:10px; background:rgba(0,243,255,0.08); border:1px solid rgba(0,243,255,0.3); color:#a5f3fc; font-size:11px;">◇ INDEX: index.html — ${node.alt2}</a>
+      `;
+      // auto open primary
+      window.open(enc(node.url), '_blank');
+    }
+
+    // Populate list below
+    const list = document.getElementById('nodeList');
+    nodesData.forEach(node => {
+      const div = document.createElement('div');
+      div.className = 'glass';
+      div.style.cssText = 'border:1px solid rgba(255,255,255,0.06); border-radius:12px; padding:10px 12px; display:flex; justify-content:space-between; align-items:center; cursor:pointer;';
+      div.innerHTML = `<div><div style="font-size:11px; font-weight:700; color:${node.color}; letter-spacing:0.08em;">${node.id}</div><div style="font-size:9px; color:#94a3b8; margin-top:2px;">${node.folder}</div></div><div style="width:8px; height:8px; border-radius:50%; background:${node.color}; box-shadow:0 0 8px ${node.color}"></div>`;
+      div.onclick = () => openNode(node);
+      list.appendChild(div);
+    });
+
+    // 3D rotation logic
+    let isDragging = false;
+    let prev = { x: 0, y: 0 };
+    let rot = { x: -18, y: 24, z: 0 };
+    let scale = 1;
+
+    function updateTransform() {
+      scene.style.transform = `scale3d(${scale},${scale},${scale}) rotateX(${rot.x}deg) rotateY(${rot.y}deg) rotateZ(${rot.z}deg)`;
+      // depth sort + projection
+      nodeElements.forEach(el => {
+        const p = el._pos;
+        // rotate point manually for depth calc? simplified: use z after rotation approximation
+        // We'll just apply 3D translate and let CSS handle, but sort by z
+        // Compute rotated Z for sorting
+        const radX = rot.x * Math.PI/180;
+        const radY = rot.y * Math.PI/180;
+        let x = p.x, y = p.y, z = p.z;
+        // Y rotation
+        const cosY = Math.cos(radY), sinY = Math.sin(radY);
+        const x1 = x * cosY + z * sinY;
+        const z1 = -x * sinY + z * cosY;
+        x = x1; z = z1;
+        // X rotation
+        const cosX = Math.cos(radX), sinX = Math.sin(radX);
+        const y1 = y * cosX - z * sinX;
+        const z2 = y * sinX + z * cosX;
+        y = y1; z = z2;
+        el.style.transform = `translate3d(${p.x}px, ${p.y}px, ${p.z}px) translate(-50%, -50%)`;
+        el.style.zIndex = Math.floor(z + 400);
+        el.style.opacity = z > -80 ? 1 : 0.35;
+      });
+      // sort DOM by zIndex for proper overlapping
+      nodeElements.sort((a,b) => (a.style.zIndex - b.style.zIndex)).forEach(el => scene.appendChild(el));
+      // re-append flower planes behind
+      scene.querySelectorAll('.flower-plane').forEach(pl => { pl.style.zIndex = -100; });
+    }
+    updateTransform();
+
+    function onDown(e) {
+      isDragging = true;
+      const cx = e.clientX || (e.touches && e.touches[0].clientX);
+      const cy = e.clientY || (e.touches && e.touches[0].clientY);
+      prev = { x: cx, y: cy };
+    }
+    function onMove(e) {
+      if (!isDragging) return;
+      const cx = e.clientX || (e.touches && e.touches[0].clientX);
+      const cy = e.clientY || (e.touches && e.touches[0].clientY);
+      const dx = cx - prev.x;
+      const dy = cy - prev.y;
+      rot.y += dx * 0.45;
+      rot.x -= dy * 0.45;
+      updateTransform();
+      prev = { x: cx, y: cy };
+    }
+    function onUp() { isDragging = false; }
+
+    container.addEventListener('mousedown', onDown);
+    window.addEventListener('mousemove', onMove);
+    window.addEventListener('mouseup', onUp);
+    container.addEventListener('touchstart', onDown, {passive:true});
+    window.addEventListener('touchmove', onMove, {passive:true});
+    window.addEventListener('touchend', onUp);
+    container.addEventListener('wheel', (e) => {
+      e.preventDefault();
+      scale += e.deltaY * -0.001;
+      scale = Math.min(Math.max(0.6, scale), 2.2);
+      updateTransform();
+    }, {passive:false});
+
+    document.getElementById('resetView').onclick = () => { rot={x:-18,y:24,z:0}; scale=1; updateTransform(); };
+
+    let autoRot = true;
+    setInterval(() => {
+      if (!isDragging && autoRot) {
+        rot.y += 0.22;
+        rot.z += 0.03;
+        updateTransform();
+      }
+    }, 32);
+    container.addEventListener('mouseenter', ()=> autoRot=false);
+    container.addEventListener('mouseleave', ()=> autoRot=true);
+  </script>
+<script>(function(){var loc=location.href.replace(/#.*$/,"");var ATTR_NAMES=["data-product-id","data-productid","data-product_id","product-id","productid","product_id","data-source-entity-id","source-entity-id","source_entity_id","data-product","data-metadata","data-meta"];var DATASET_KEYS=["productId","productid","product_id","sourceEntityId","sourceentityid","source_entity_id","product","metadata","meta"];function readProductId(value){if(typeof value!=="string"||value.length===0)return null;if(/^[0-9]{6,}$/.test(value))return value;var match=value.match(/(?:product(?:_|-)?id|source(?:_|-)?entity(?:_|-)?id)["'=:\s]+([0-9]{6,})/i);return match?match[1]:null}function extractProductId(start){for(var node=start;node&&node!==document.body;node=node.parentElement){for(var i=0;i<ATTR_NAMES.length;i++){var attrValue=node.getAttribute&&node.getAttribute(ATTR_NAMES[i]);var attrProductId=readProductId(attrValue);if(attrProductId)return attrProductId}var dataset=node.dataset||null;if(dataset){for(var j=0;j<DATASET_KEYS.length;j++){var dataValue=dataset[DATASET_KEYS[j]];var dataProductId=readProductId(dataValue);if(dataProductId)return dataProductId}}}return null}function isInlineMediaSlotElement(node){return !!(node&&node.getAttribute&&node.getAttribute("data-clippy-inline-media-slot")!==null)}function findInlineMediaSlot(start){for(var node=start;node&&node!==document.body;node=node.parentElement){if(isInlineMediaSlotElement(node))return node}return null}function readInlineMediaUrl(node){if(!node)return null;return node.getAttribute&&((node.getAttribute("data-clippy-inline-media-url")||node.getAttribute("data-url")||node.getAttribute("data_url")))||node.href||null}function stripHash(url){return String(url).replace(/#.*$/,"")}function urlsMatch(a,b){if(!a||!b)return false;try{return stripHash(new URL(a,loc).href)===stripHash(new URL(b,loc).href)}catch(_){return stripHash(a)===stripHash(b)}}function isFirstPartyReelUrl(value){try{var url=new URL(value,loc);if(url.protocol!=="https:")return false;var host=url.hostname.toLowerCase();var supported=host==="instagram.com"||host.endsWith(".instagram.com")||host==="facebook.com"||host.endsWith(".facebook.com");return supported&&/\/reels?\//i.test(url.pathname)}catch(_){return false}}function isInlineMediaUrlClick(node,href){var slot=findInlineMediaSlot(node);if(!slot)return false;var slotUrl=readInlineMediaUrl(slot);if(slotUrl)return urlsMatch(href,slotUrl);return isFirstPartyReelUrl(href)}function findDataHref(start){for(var node=start;node&&node!==document.body;node=node.parentElement){if(node.getAttribute){var href=node.getAttribute("data-href")||node.getAttribute("data-url");if(href)return{href:href,node:node}}}return null}var nativeOpen=window.open;window.open=function(url){if(parent!==window&&typeof url==="string"&&/^https?:\/\//.test(url)){parent.postMessage({type:"ecto:usercontent-link-click",href:url},"*");return null}return nativeOpen?nativeOpen.apply(window,arguments):null};document.addEventListener("click",function(e){var target=e.target instanceof Element?e.target:null;if(!target)return;if(parent===window)return;var a=target.closest?target.closest("a[href]"):null;if(a&&a.href&&/^https?:\/\//.test(a.href)&&a.href.replace(/#.*$/,"")!==loc){if(isInlineMediaUrlClick(a,a.href))return;var productId=extractProductId(target)||extractProductId(a);if(productId){e.preventDefault();parent.postMessage({type:"ecto-artifact-link-click",productId:productId},"*");return}e.preventDefault();parent.postMessage({type:"ecto:usercontent-link-click",href:a.href},"*");return}var dataHref=findDataHref(target);if(dataHref&&/^https?:\/\//.test(dataHref.href)&&dataHref.href.replace(/#.*$/,"")!==loc){if(isInlineMediaUrlClick(dataHref.node,dataHref.href))return;e.preventDefault();parent.postMessage({type:"ecto:usercontent-link-click",href:dataHref.href},"*")}},true)})();</script><script>(function(){var FOCUS_TYPE="ecto:artifact-focus-request";var CLOSE_TYPE="ecto:artifact-close-request";function focusArtifactDocument(){var body=document.body;if(!body)return;try{window.focus();}catch(e){}if(!body.hasAttribute("tabindex"))body.setAttribute("tabindex","-1");try{body.focus({preventScroll:true});}catch(e){try{body.focus();}catch(e2){}}}window.addEventListener("message",function(event){if(event.source!==window.parent)return;var data=event.data;if(!data||typeof data!=="object"||data.type!==FOCUS_TYPE)return;if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",focusArtifactDocument,{once:true});return;}focusArtifactDocument();});window.addEventListener("keydown",function(event){if(event.key!=="Escape")return;window.setTimeout(function(){if(event.defaultPrevented)return;window.parent.postMessage({type:CLOSE_TYPE},"*");},0);});})();</script></body>
+</html>
