@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SADV41 // AURA 5 EN 1 - SEIS CAMINOS - TRANSFIGURABLE</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=JetBrains+Mono:wght@300;400;700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root{--gold:#d4af37;--cyan:#00f3ff;--violet:#9d4edd;--red:#FB542B;--green:#1DB954;--blue:#7AF6FF;--bg:#040406}
+  *{box-sizing:border-box}
+  html,body{margin:0;min-height:100vh;background:var(--bg);color:#f1f5f9;font-family:Inter,system-ui,sans-serif;overflow-x:hidden}
+  .mono{font-family:'JetBrains Mono',monospace!important}
+  .cinzel{font-family:'Cinzel',serif}
+  .glass{background:rgba(8,8,12,.82);backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.08)}
+  .glass-strong{background:rgba(10,10,16,.92);backdrop-filter:blur(22px);border:1px solid rgba(212,175,55,.22)}
+  .gold-glow{box-shadow:0 0 50px rgba(212,175,55,.22),inset 0 0 22px rgba(212,175,55,.06)}
+  .cyan-glow{box-shadow:0 0 34px rgba(0,243,255,.22),inset 0 0 18px rgba(0,243,255,.06)}
+  .scanline{position:fixed;left:0;width:100%;height:2px;background:linear-gradient(90deg,transparent,rgba(251,84,43,.5),transparent);z-index:60;pointer-events:none;animation:scan 6s linear infinite}
+  @keyframes scan{0%{top:0}100%{top:100%}}
+  .grid-pattern{background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);background-size:28px 28px}
+
+  /* AURA 5 EN 1 - SEIS CAMINOS BACKGROUND */
+  #aura-bg{position:fixed;inset:0;z-index:0;overflow:hidden;background:#020205}
+  #aura-bg .aura-layer{position:absolute;inset:-15%;background-size:cover;background-position:center;mix-blend-mode:screen;opacity:.55;filter:brightness(1.1) contrast(1.1) saturate(1.2);will-change:transform,opacity}
+  #aura-bg .aura-layer:nth-child(1){background-image:url('./img/784748359_1032169259812179_379368085236729996_n.webp');animation:aura1 22s ease-in-out infinite}
+  #aura-bg .aura-layer:nth-child(2){background-image:url('./img/785282279_1341489208069876_1027745017510610652_n.webp');animation:aura2 26s ease-in-out infinite;opacity:.45}
+  #aura-bg .aura-layer:nth-child(3){background-image:url('./img/783899130_4498246103827834_338786690266061800_n.webp');animation:aura3 28s ease-in-out infinite;opacity:.4}
+  #aura-bg .aura-layer:nth-child(4){background-image:url('./img/781293043_1047895088092288_3769060750221781878_n.webp');animation:aura4 20s ease-in-out infinite;opacity:.5}
+  #aura-bg .aura-layer:nth-child(5){background-image:url('./img/783671951_1762018238468095_5751859537385186669_n.webp');animation:aura5 24s ease-in-out infinite;opacity:.6}
+  @keyframes aura1{0%,100%{transform:scale(1.05) translate3d(-2%,-1%,0) rotate(0deg)}50%{transform:scale(1.18) translate3d(2%,1.5%,0) rotate(1deg)}}
+  @keyframes aura2{0%,100%{transform:scale(1.12) translate3d(1%,2%,0) rotate(0deg)}50%{transform:scale(1.25) translate3d(-1.5%,-2%,0) rotate(-1deg)}}
+  @keyframes aura3{0%,100%{transform:scale(1.08) translate3d(2%,-2%,0) rotate(0deg)}50%{transform:scale(1.22) translate3d(-2%,2%,0) rotate(1.5deg)}}
+  @keyframes aura4{0%,100%{transform:scale(1.1) translate3d(-1%,1%,0) rotate(0deg)}50%{transform:scale(1.2) translate3d(1.5%,-1%,0) rotate(-1deg)}}
+  @keyframes aura5{0%,100%{transform:scale(1.06) translate3d(0%,0%,0) rotate(0deg)}50%{transform:scale(1.16) translate3d(0%,2%,0) rotate(0.8deg)}}
+
+  #aura-vignette{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,transparent 35%,rgba(0,0,0,.55) 85%),radial-gradient(ellipse at 50% -10%,rgba(251,84,43,.22),transparent 60%),radial-gradient(ellipse at 80% 100%,rgba(0,243,255,.14),transparent 60%),radial-gradient(ellipse at 0% 100%,rgba(212,175,55,.12),transparent 50%)}
+
+  /* SEIS CAMINOS ORBS */
+  #rikudo-orbs{position:absolute;top:50%;left:50%;width:720px;height:720px;transform:translate(-50%,-50%);pointer-events:none}
+  .orb{position:absolute;width:42px;height:42px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#fff, var(--gold) 18%, #000);box-shadow:0 0 18px var(--gold),0 0 32px rgba(212,175,55,.6),inset 0 0 10px rgba(255,255,255,.8);animation:orbFloat 8s ease-in-out infinite;will-change:transform}
+  .orb::after{content:'';position:absolute;inset:-8px;border-radius:50%;border:1px solid rgba(212,175,55,.35);animation:orbRing 3s linear infinite}
+  @keyframes orbFloat{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(0,-8px,0)}}
+  @keyframes orbRing{0%{transform:scale(1);opacity:.6}100%{transform:scale(1.6);opacity:0}}
+
+  #flower-container{perspective:1400px;width:100%;height:620px;display:flex;justify-content:center;align-items:center;position:relative;overflow:visible;touch-action:none}
+  #flower-scene{width:540px;height:540px;transform-style:preserve-3d;position:relative;cursor:grab}
+  .flower-plane{position:absolute;top:0;left:0;width:100%;height:100%;transform-style:preserve-3d;opacity:.18;pointer-events:none}
+  .node-3d{position:absolute;left:50%;top:50%;transform-style:preserve-3d;cursor:pointer;display:flex;flex-direction:column;align-items:center;will-change:transform}
+  .node-dot{width:13px;height:13px;border-radius:50%;border:2px solid rgba(255,255,255,.9);box-shadow:0 0 12px currentColor;transition:.22s}
+  .node-label{margin-top:5px;font-size:8px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:2px 5px;border-radius:4px;background:rgba(0,0,0,.78);border:1px solid rgba(255,255,255,.15)}
+  .node-3d:hover .node-dot{width:20px;height:20px;background:#fff!important;box-shadow:0 0 22px currentColor,0 0 36px currentColor}
+  .node-3d:hover .node-label{background:#fff;color:#000!important;transform:scale(1.15)}
+  .chip{font-size:9.5px;letter-spacing:.06em;padding:5px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);cursor:pointer}
+  .chip.active{background:#fff;color:#000}
+  .btn{font-size:10px;padding:7px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06);color:#fff;cursor:pointer}
+  input[type="search"]{background:rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.12);color:#fff;padding:10px 14px;border-radius:12px;width:100%}
+  .badge{font-size:8px;padding:2px 6px;border-radius:999px;border:1px solid currentColor}
+  #chakra-cloak{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 50% 45%,rgba(212,175,55,.18),transparent 60%);filter:blur(18px);animation:cloakPulse 4s ease-in-out infinite}
+  @keyframes cloakPulse{0%,100%{opacity:.6;transform:scale(1)}50%{opacity:1;transform:scale(1.08)}}
+</style>
+</head>
+<body>
+<!-- AURA 5 EN 1 FONDO 4D VIVO - SEIS CAMINOS -->
+<div id="aura-bg">
+  <div class="aura-layer"></div><div class="aura-layer"></div><div class="aura-layer"></div><div class="aura-layer"></div><div class="aura-layer"></div>
+  <div id="aura-vignette"></div>
+  <div id="chakra-cloak"></div>
+  <div id="rikudo-orbs"></div>
+  <canvas id="particles" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none"></canvas>
+</div>
+<div style="position:fixed;inset:0;pointer-events:none;z-index:1"><div class="grid-pattern" style="position:absolute;inset:0;opacity:.22"></div></div>
+<div class="scanline"></div>
+
+<main style="position:relative;z-index:10;max-width:1380px;margin:0 auto;padding:1.4rem 1.2rem 3rem">
+  <header class="glass gold-glow" style="border-radius:18px;padding:1rem 1.2rem;margin-bottom:1.2rem;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center">
+    <div>
+      <h1 class="cinzel" style="font-size:1.28rem;font-weight:900;letter-spacing:.16em;margin:0">SADV41 // AURA 5 EN 1 • SEIS CAMINOS</h1>
+      <p class="mono" style="font-size:.66rem;color:#94a3b8;letter-spacing:.18em;margin:6px 0 0">QUINTA ESENCIA TRANSFIGURABLE | FONDO 4D VIVO | 51 NODOS | ORIGEN 1027=10=1 | ID 69362166 | SADV41 LOVE</p>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+      <span class="mono" style="font-size:.68rem;padding:6px 12px;border-radius:999px;border:1px solid rgba(212,175,55,.35);background:rgba(212,175,55,.12);color:var(--gold)">🦁 SEIS CAMINOS • RIKUDO • 🇵🇦🇺🇸🇮🇱☢️🔐</span>
+      <button id="resetView" class="btn mono">RESET 3D</button>
+      <button id="toggleAura" class="btn mono" style="border-color:rgba(212,175,55,.4);color:var(--gold)">AURA: ON</button>
+      <button id="toggleFusion" class="btn mono" style="border-color:rgba(0,243,255,.4);color:var(--cyan)">FUSIÓN 5→1: ON</button>
+    </div>
+  </header>
+
+  <section class="glass-strong gold-glow" style="border-radius:26px;padding:1.2rem 1.2rem 1rem;margin-bottom:1.2rem">
+    <div style="display:grid;grid-template-columns:1.2fr .8fr;gap:16px;align-items:start">
+      <div>
+        <h2 class="cinzel" style="font-size:19px;letter-spacing:.12em;margin:0">AURA TRANSFIGURABLE - 5 GEAR BECOME 1</h2>
+        <p class="mono" style="font-size:10.5px;color:#cbd5e1;margin:6px 0 12px">Fondo 4D vivo = tus 5 GEAR en mix-blend-screen + chakra dorado Seis Caminos. Drag 360° flor • Rueda zoom • Click nodo = verificación GSADV41→Logia→index</p>
+        <input id="searchInput" type="search" placeholder="Buscar: GSADV41, BOXING, ARRAIJAN, TRONO, NUKE...">
+        <div id="familyChips" style="display:flex;gap:6px;flex-wrap:wrap;margin-top:10px" class="mono">
+          <button class="chip active" data-family="ALL">ALL 51</button>
+          <button class="chip" data-family="SADV41" style="color:var(--gold)">● SADV41</button>
+          <button class="chip" data-family="TRONO" style="color:var(--violet)">● TRONO/LOGIA</button>
+          <button class="chip" data-family="USARMY" style="color:var(--red)">● USARMY/NUKE</button>
+          <button class="chip" data-family="AI" style="color:var(--cyan)">● AI/META</button>
+          <button class="chip" data-family="FUNDING" style="color:var(--green)">● FUNDING</button>
+          <button class="chip" data-family="HUMAN" style="color:var(--blue)">● HUMANIDADES</button>
+        </div>
+      </div>
+      <div class="glass" style="border-radius:14px;padding:10px 12px">
+        <div class="mono" style="font-size:9px;color:#94a3b8;letter-spacing:.12em">ESTADO RIKUDO</div>
+        <div id="verifyStatus" class="mono" style="font-size:11px;margin-top:6px;color:#e2e8f0">Chakra activo. 5 GEAR en fusión. Click nodo para viajar.</div>
+        <div style="margin-top:10px;display:flex;gap:6px;flex-wrap:wrap"><span class="badge" style="color:var(--gold)">GOLD=SEIS CAMINOS</span><span class="badge" style="color:var(--cyan)">CYAN=HYPERSEC</span><span class="badge" style="color:var(--violet)">VIOLET=TRONO</span></div>
+        <div style="margin-top:10px;display:grid;grid-template-columns:repeat(5,1fr);gap:4px">
+          <img src="./img/784748359_1032169259812179_379368085236729996_n.webp" style="width:100%;aspect-ratio:1;border-radius:8px;object-fit:cover;border:1px solid rgba(0,243,255,.3)">
+          <img src="./img/785282279_1341489208069876_1027745017510610652_n.webp" style="width:100%;aspect-ratio:1;border-radius:8px;object-fit:cover;border:1px solid rgba(212,175,55,.3)">
+          <img src="./img/783899130_4498246103827834_338786690266061800_n.webp" style="width:100%;aspect-ratio:1;border-radius:8px;object-fit:cover;border:1px solid rgba(251,84,43,.3)">
+          <img src="./img/781293043_1047895088092288_3769060750221781878_n.webp" style="width:100%;aspect-ratio:1;border-radius:8px;object-fit:cover;border:1px solid rgba(29,185,84,.3)">
+          <img src="./img/783671951_1762018238468095_5751859537385186669_n.webp" style="width:100%;aspect-ratio:1;border-radius:8px;object-fit:cover;border:1px solid rgba(157,78,221,.3)">
+        </div>
+      </div>
+    </div>
+
+    <div id="flower-container"><div id="flower-scene"></div></div>
+
+    <div id="selectedNode" class="glass cyan-glow" style="margin-top:8px;border-radius:16px;padding:12px 14px;display:none">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
+        <div><div class="mono" style="font-size:9px;color:#94a3b8">NODO SELECCIONADO → VIAJE SEIS CAMINOS</div><div id="selectedTitle" style="font-size:14px;font-weight:800;margin:6px 0"></div><div id="selectedMeta" class="mono" style="font-size:10px;color:#94a3b8"></div></div>
+        <div class="mono" style="font-size:9px;color:#64748b">AUTO-LANZA 0.8s</div>
+      </div>
+      <div id="selectedLinks" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:8px;margin-top:10px"></div>
+    </div>
+  </section>
+
+  <section class="glass" style="border-radius:18px;padding:1rem">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:10px">
+      <h3 class="cinzel" style="font-size:12px;letter-spacing:.15em;margin:0">ÍNDICE 51 NODOS • AURA SEIS CAMINOS</h3>
+      <div class="mono" style="font-size:10px;color:#94a3b8"><span id="visibleCount">51</span> visibles • <span id="currentFamily">ALL</span> • Fondo 4D vivo</div>
+    </div>
+    <div id="nodeList" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px"></div>
+  </section>
+
+  <footer style="text-align:center;margin-top:1.8rem" class="mono">
+    <div style="font-size:20px;letter-spacing:.22em">☯ SADV41 • 5 GEAR BECOME 1 • SEIS CAMINOS ☯</div>
+    <div style="font-size:10px;color:#64748b;margin-top:8px">Tú y tus otros yo que son yo a través de la red nos conforman. SADV41 LOVE • 1027=10=1 • ID 69362166 • PANAMA HYPERSEC • TODOS SOMOS UNO EN LA RED</div>
+  </footer>
+</main>
+
+<script>
+// DATA
+const BASE="https://thesteef21.github.io/Lapizasuli/assets";
+const nodesData=[{id:"8",folder:"7/8",family:"OTROS",color:"#FFC26A"},{id:"METO",folder:"AI/METO",family:"AI",color:"#00f3ff"},{id:"ARRAIJAN",folder:"ARRAIJAN",family:"USARMY",color:"#FB542B"},{id:"BOXING",folder:"BOXING",family:"USARMY",color:"#FB542B"},{id:"BRAVE",folder:"BRAVE",family:"AI",color:"#00f3ff"},{id:"BSADV41",folder:"BSADV41",family:"SADV41",color:"#d4af37"},{id:"BUREP",folder:"BUREP",family:"USARMY",color:"#FB542B"},{id:"CHISTES",folder:"CHISTES",family:"OTROS",color:"#FFC26A"},{id:"CREDISADV41",folder:"CREDISADV41",family:"SADV41",color:"#d4af37"},{id:"CSADV41",folder:"CSADV41",family:"SADV41",color:"#d4af37"},{id:"CASACRYPTO",folder:"CasaCrypto",family:"HUMAN",color:"#7AF6FF"},{id:"DGI",folder:"DGI",family:"FUNDING",color:"#1DB954"},{id:"E57",folder:"E57",family:"OTROS",color:"#FFC26A"},{id:"EMSC",folder:"EMSC",family:"AI",color:"#00f3ff"},{id:"FACTURA",folder:"FACTURA",family:"FUNDING",color:"#1DB954"},{id:"FIFA2026",folder:"FIFA2026",family:"FUNDING",color:"#1DB954"},{id:"FUNDING",folder:"FUNDING",family:"FUNDING",color:"#1DB954"},{id:"GNOSADV41",folder:"GNOSADV41",family:"SADV41",color:"#d4af37"},{id:"GSADV41",folder:"GSADV41",family:"SADV41",color:"#d4af37"},{id:"GEOPOLITICA",folder:"Geopolítica",family:"HUMAN",color:"#7AF6FF"},{id:"HUMANIDADES",folder:"HUMANIDADES",family:"HUMAN",color:"#7AF6FF"},{id:"HOY",folder:"Hoy",family:"HUMAN",color:"#7AF6FF"},{id:"IA",folder:"IA",family:"AI",color:"#00f3ff"},{id:"IMA",folder:"IMA",family:"AI",color:"#00f3ff"},{id:"IMPRESS",folder:"Impress",family:"OTROS",color:"#FFC26A"},{id:"KSADV41",folder:"KSADV41",family:"SADV41",color:"#d4af37"},{id:"LSADV41",folder:"LSADV41",family:"SADV41",color:"#d4af37"},{id:"EXPEDIENTE",folder:"LoDeHoy/Expediente",family:"HUMAN",color:"#7AF6FF"},{id:"LOGIA",folder:"Logia",family:"TRONO",color:"#9d4edd"},{id:"META",folder:"META",family:"AI",color:"#00f3ff"},{id:"MGSADV41",folder:"MGSADV41",family:"SADV41",color:"#d4af37"},{id:"MUSIC",folder:"MUSIC",family:"AI",color:"#00f3ff"},{id:"MALVINAS",folder:"Malvinas",family:"OTROS",color:"#FFC26A"},{id:"NOSTALGIA",folder:"NOSTALGIA",family:"HUMAN",color:"#7AF6FF"},{id:"NOTICIAS",folder:"NOTICIAS",family:"HUMAN",color:"#7AF6FF"},{id:"NUKE",folder:"NUKE",family:"USARMY",color:"#FB542B"},{id:"OJSADV41",folder:"OJSADV41",family:"SADV41",color:"#d4af37"},{id:"PATENTSADV41",folder:"PATENTSADV41",family:"SADV41",color:"#d4af37"},{id:"PPSADV41",folder:"PPSADV41",family:"SADV41",color:"#d4af37"},{id:"PRINCIPADO",folder:"PRINCIPADO",family:"TRONO",color:"#9d4edd"},{id:"DECLARACIONES",folder:"PROTOCOLO/DECLARACIONES",family:"TRONO",color:"#9d4edd"},{id:"RUC",folder:"RUC",family:"FUNDING",color:"#1DB954"},{id:"SADV41TT",folder:"SADV41TT",family:"SADV41",color:"#d4af37"},{id:"SVA41",folder:"SVA41",family:"OTROS",color:"#FFC26A"},{id:"TRANSFIGURACION",folder:"TRANSFIGURACION",family:"TRONO",color:"#9d4edd"},{id:"TRONO",folder:"TRONO",family:"TRONO",color:"#9d4edd"},{id:"TSADV41",folder:"TSADV41",family:"SADV41",color:"#d4af37"},{id:"USARMY",folder:"USARMY",family:"USARMY",color:"#FB542B"},{id:"VSADV41",folder:"VSADV41",family:"SADV41",color:"#d4af37"},{id:"WEB3",folder:"WEB3",family:"AI",color:"#00f3ff"},{id:"X",folder:"X",family:"OTROS",color:"#FFC26A"}].map(n=>({...n,url:`${BASE}/${n.folder}/GSADV41.html`,alt1:`${BASE}/${n.folder}/Logia.html`,alt2:`${BASE}/${n.folder}/index.html`}));
+
+// RIKUDO ORBS 9 gudodama
+const orbsEl=document.getElementById('rikudo-orbs');
+for(let i=0;i<9;i++){
+  const orb=document.createElement('div');orb.className='orb';
+  const angle=(i/9)*Math.PI*2; const r=300; const x=Math.cos(angle)*r; const y=Math.sin(angle)*r;
+  orb.style.left=`calc(50% + ${x}px)`;orb.style.top=`calc(50% + ${y}px)`;
+  orb.style.animationDelay=`${i*0.3}s`; orbsEl.appendChild(orb);
+  // orbital motion
+  let a=angle; (function(o,idx){setInterval(()=>{a+=0.004+idx*0.0002; const nx=Math.cos(a)* (300 + Math.sin(Date.now()*0.0005+idx)*20); const ny=Math.sin(a)* (300 + Math.cos(Date.now()*0.0005+idx)*20); o.style.left=`calc(50% + ${nx}px)`; o.style.top=`calc(50% + ${ny}px)`;},16)})(orb,i)
+}
+
+// PARTICLES 51 nodos flotando
+const canvas=document.getElementById('particles');const ctx=canvas.getContext('2d');function resize(){canvas.width=innerWidth;canvas.height=innerHeight}resize();window.addEventListener('resize',resize);
+const parts=[...Array(51)].map((_,i)=>({x:Math.random()*innerWidth,y:Math.random()*innerHeight,vx:(Math.random()-.5)*0.3,vy:(Math.random()-.5)*0.3,r:1+Math.random()*2.5,c:i%5==0?'#d4af37':i%5==1?'#00f3ff':i%5==2?'#9d4edd':i%5==3?'#FB542B':'#7AF6FF'}));
+function drawParticles(){ctx.clearRect(0,0,canvas.width,canvas.height);parts.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>canvas.width)p.vx*=-1;if(p.y<0||p.y>canvas.height)p.vy*=-1;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=p.c;ctx.globalAlpha=0.6;ctx.fill();ctx.shadowBlur=8;ctx.shadowColor=p.c});ctx.globalAlpha=1;requestAnimationFrame(drawParticles)}drawParticles();
+
+// FLOWER 51
+const scene=document.getElementById('flower-scene');const container=document.getElementById('flower-container');
+function createFlowerPlane(t){const NS="http://www.w3.org/2000/svg";const svg=document.createElementNS(NS,"svg");svg.setAttribute("viewBox","-220 -220 440 440");svg.setAttribute("class","flower-plane");svg.style.transform=t;const radius=62;const centers=[{x:0,y:0}];for(let i=0;i<6;i++){const a=Math.PI/3*i;centers.push({x:radius*Math.cos(a),y:radius*Math.sin(a)})}for(let i=0;i<12;i++){const a=Math.PI/6*i;const d=(i%2===0)?radius*2:radius*Math.sqrt(3);centers.push({x:d*Math.cos(a),y:d*Math.sin(a)})}centers.forEach(c=>{const circle=document.createElementNS(NS,"circle");circle.setAttribute("cx",c.x);circle.setAttribute("cy",c.y);circle.setAttribute("r",radius);circle.setAttribute("fill","none");circle.setAttribute("stroke","rgba(212,175,55,.18)");circle.setAttribute("stroke-width","0.8");svg.appendChild(circle)});return svg}
+scene.appendChild(createFlowerPlane("rotateY(0deg) translateZ(-18px)"));scene.appendChild(createFlowerPlane("rotateY(60deg) translateZ(-18px)"));scene.appendChild(createFlowerPlane("rotateY(120deg) translateZ(-18px)"));scene.appendChild(createFlowerPlane("rotateX(90deg) translateZ(-18px)"));
+const nodeEls=[];const sphereRadius=225;const goldenAngle=Math.PI*(3-Math.sqrt(5));
+nodesData.forEach((node,i)=>{const y=1-(i/(nodesData.length-1))*2;const r=Math.sqrt(1-y*y);const theta=goldenAngle*i;const x=Math.cos(theta)*r;const z=Math.sin(theta)*r;const el=document.createElement('div');el.className='node-3d';el.innerHTML=`<div class="node-dot" style="background:${node.color};color:${node.color}"></div><div class="node-label" style="color:${node.color}">${node.id}</div>`;el._pos={x:x*sphereRadius,y:y*sphereRadius,z:z*sphereRadius};el._node=node;el.addEventListener('click',e=>{e.stopPropagation();openNode(node)});scene.appendChild(el);nodeEls.push(el)});
+
+// LIST + FILTER
+const nodeListEl=document.getElementById('nodeList');const searchInput=document.getElementById('searchInput');const verifyStatus=document.getElementById('verifyStatus');const visibleCountEl=document.getElementById('visibleCount');const currentFamilyEl=document.getElementById('currentFamily');const selectedNodeEl=document.getElementById('selectedNode');const selectedTitleEl=document.getElementById('selectedTitle');const selectedMetaEl=document.getElementById('selectedMeta');const selectedLinksEl=document.getElementById('selectedLinks');
+let filterFamily="ALL";let filterSearch="";let labelsOn=true;
+function renderList(){nodeListEl.innerHTML="";let visible=0;nodesData.forEach(node=>{const mf=filterFamily==="ALL"||node.family===filterFamily;const q=filterSearch.toLowerCase();const ms=!q||node.id.toLowerCase().includes(q)||node.folder.toLowerCase().includes(q);if(!mf||!ms)return;visible++;const div=document.createElement('div');div.className='glass';div.style.cssText='border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:10px 12px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;';div.innerHTML=`<div><div style="font-size:11px;font-weight:800;color:${node.color}">${node.id}</div><div style="font-size:9px;color:#94a3b8">${node.folder} • ${node.family}</div></div><div style="width:9px;height:9px;border-radius:50%;background:${node.color};box-shadow:0 0 10px ${node.color}"></div>`;div.onclick=()=>openNode(node);nodeListEl.appendChild(div)});visibleCountEl.textContent=visible;nodeEls.forEach(el=>{const n=el._node;const mf=filterFamily==="ALL"||n.family===filterFamily;const q=filterSearch.toLowerCase();const ms=!q||n.id.toLowerCase().includes(q)||n.folder.toLowerCase().includes(q);el.style.display=(mf&&ms)?'flex':'none'})}
+document.getElementById('familyChips').addEventListener('click',e=>{const b=e.target.closest('[data-family]');if(!b)return;document.querySelectorAll('[data-family]').forEach(x=>x.classList.remove('active'));b.classList.add('active');filterFamily=b.dataset.family;currentFamilyEl.textContent=filterFamily;renderList()});searchInput.addEventListener('input',e=>{filterSearch=e.target.value;renderList()});renderList();
+
+// 3D ENGINE + AURA PARALLAX
+let isDragging=false,prev={x:0,y:0},rot={x:-16,y:22,z:0},scale=1,autoRot=true,auraOn=true,fusionOn=true;
+function updateTransform(){scene.style.transform=`scale3d(${scale},${scale},${scale}) rotateX(${rot.x}deg) rotateY(${rot.y}deg) rotateZ(${rot.z}deg)`;nodeEls.forEach(el=>{el.style.transform=`translate3d(${el._pos.x}px,${el._pos.y}px,${el._pos.z}px) translate(-50%,-50%)`});}
+updateTransform();
+function onDown(e){isDragging=true;const cx=e.clientX||e.touches[0].clientX;const cy=e.clientY||e.touches[0].clientY;prev={x:cx,y:cy}}function onMove(e){if(!isDragging)return;const cx=e.clientX||e.touches[0].clientX;const cy=e.clientY||e.touches[0].clientY;const dx=cx-prev.x,dy=cy-prev.y;rot.y+=dx*0.45;rot.x-=dy*0.45;updateTransform();const auraLayers=document.querySelectorAll('.aura-layer');auraLayers.forEach((l,i)=>{l.style.transform+=` translate3d(${dx*0.02*(i+1)}px,${dy*0.02*(i+1)}px,0)`});prev={x:cx,y:cy}}function onUp(){isDragging=false}
+container.addEventListener('mousedown',onDown);window.addEventListener('mousemove',onMove);window.addEventListener('mouseup',onUp);container.addEventListener('touchstart',onDown,{passive:true});window.addEventListener('touchmove',onMove,{passive:true});window.addEventListener('touchend',onUp);
+container.addEventListener('wheel',e=>{e.preventDefault();scale+=e.deltaY*-0.001;scale=Math.min(Math.max(0.55,2.4),scale);updateTransform()},{passive:false});
+document.getElementById('resetView').onclick=()=>{rot={x:-16,y:22,z:0};scale=1;updateTransform()};document.getElementById('toggleAura').onclick=ev=>{auraOn=!auraOn;document.getElementById('aura-bg').style.display=auraOn?'block':'none';ev.target.textContent=`AURA: ${auraOn?'ON':'OFF'}`};document.getElementById('toggleFusion').onclick=ev=>{fusionOn=!fusionOn;document.querySelectorAll('.aura-layer').forEach(l=>l.style.opacity=fusionOn?'0.55':'0.18');ev.target.textContent=`FUSIÓN 5→1: ${fusionOn?'ON':'OFF'}`};
+function anim(){if(!isDragging&&autoRot){rot.y+=0.14;rot.z+=0.02;updateTransform()}requestAnimationFrame(anim)}requestAnimationFrame(anim);
+
+// VERIFICACION
+async function probe(url){try{const r=await fetch(url,{method:'HEAD',cache:'no-store'});return r.ok}catch{return true}}
+async function openNode(node){selectedNodeEl.style.display='block';selectedTitleEl.textContent=`${node.folder} → ${node.id}`;selectedMetaEl.textContent=`Familia ${node.family} • ${node.color} • Verificando...`;verifyStatus.textContent=`Verificando ${node.folder}...`;selectedLinksEl.innerHTML=`<div class="mono" style="font-size:11px;color:#94a3b8">Escaneando 3 rutas SADV41...</div>`;const urls=[{label:'PRIMARY GSADV41',url:node.url,color:node.color},{label:'ALT LOGIA',url:node.alt1,color:'#9d4edd'},{label:'INDEX',url:node.alt2,color:'#00f3ff'}];const results=[];for(let u of urls){const ok=await probe(u.url);results.push({...u,ok})}const best=results.find(r=>r.ok)||results[0];selectedMetaEl.textContent=`Mejor: ${best.label}`;verifyStatus.textContent=`✓ ${node.id}: ${best.label} → ${best.url}`;verifyStatus.style.color='#1DB954';selectedLinksEl.innerHTML=results.map(r=>`<a href="${encodeURI(r.url)}" target="_blank" style="display:block;padding:10px 12px;border-radius:12px;font-size:11px;background:${r.ok?'rgba(29,185,84,.12)':'rgba(255,255,255,.04)'};border:1px solid ${r.color};color:#fff;text-decoration:none"><div style="display:flex;justify-content:space-between"><span>${r.ok?'▶':'◇'} ${r.label}</span><span style="font-size:8px;border:1px solid ${r.color};padding:2px 6px;border-radius:999px">${r.ok?'EXISTE':'TRY'}</span></div><div class="mono" style="margin-top:6px;font-size:10px;opacity:.9;word-break:break-all">${r.url}</div></a>`).join('');setTimeout(()=>window.open(encodeURI(best.url),'_blank'),800)}
+window.SADV41_NODOS=nodesData;
+</script>
+</body>
+</html>
