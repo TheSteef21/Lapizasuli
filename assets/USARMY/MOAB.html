@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="color-scheme" content="dark">
+    <meta name="description" content="SADV41 // NUKE HUB – USARMY PANAMÁ HYPERSEC Division. Strategic Azimuth Dossier, DEFCON 1. Unificación Pluscuamperfecta.">
+    <title>SADV41 // NUKE HUB – USARMY PANAMÁ HYPERSEC | PLUSCUAMPERFECTO</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;600;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#020617',
+                        obsidian: '#050507',
+                        oro: '#d4af37',
+                        oroBright: '#facc15',
+                        nukeRed: '#ff2a2a',
+                        c4Cyan: '#00f3ff',
+                        armyGreen: '#384230',
+                        panamaBlue: '#005293',
+                        panamaRed: '#C8102E'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mason: ['Cinzel', 'serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'spin-slow': 'spin 20s linear infinite',
+                        'spin-reverse': 'spinReverse 15s linear infinite',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @keyframes spinReverse { from { transform: rotate(360deg); } to { transform: rotate(0deg); } }
+        @keyframes scanline { 0% { transform: translateY(-100vh); } 100% { transform: translateY(100vh); } }
+        @keyframes gridMove { 0% { background-position: 0 0; } 100% { background-position: 0 40px; } }
+
+        :root { --oro: #d4af37; --cyan: #00f3ff; --red: #ff2a2a; }
+
+        html { scrollbar-width: thin; scrollbar-color: var(--cyan) #020617; }
+        body {
+            background-color: #050507;
+            background-image:
+                radial-gradient(ellipse at 50% 0%, rgba(0,243,255,0.12) 0%, transparent 60%),
+                radial-gradient(ellipse at 0% 50%, rgba(200,16,46,0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 100% 50%, rgba(0,82,147,0.12) 0%, transparent 50%),
+                linear-gradient(180deg, rgba(2,6,23,0.9) 0%, rgba(5,5,7,1) 100%);
+            color: #f8fafc;
+            overflow-x: hidden;
+        }
+        body::before {
+            content: '';
+            position: fixed; inset: 0;
+            background-image: 
+                linear-gradient(rgba(0,243,255,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,243,255,0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 0;
+            animation: gridMove 4s linear infinite;
+        }
+        body::after {
+            content: '';
+            position: fixed; inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.02'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .glass-nuke {
+            background: rgba(5, 10, 15, 0.88);
+            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            border-bottom: 1px solid rgba(255,42,42,0.25);
+            box-shadow: 0 0 40px rgba(255,42,42,0.08), inset 0 1px 0 rgba(255,255,255,0.05);
+        }
+        .glass-army {
+            background: linear-gradient(145deg, rgba(26,32,21,0.9), rgba(10,14,8,0.95));
+            border: 1px solid rgba(212,175,55,0.18);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5), inset 0 1px 0 rgba(212,175,55,0.1);
+        }
+        .glass-pillar {
+            background: rgba(0,0,0,0.35);
+            border: 1px solid rgba(255,255,255,0.06);
+            backdrop-filter: blur(8px);
+        }
+
+        .esoterico-glow { text-shadow: 0 0 20px rgba(212,175,55,0.6), 0 0 40px rgba(212,175,55,0.2); }
+        .cyan-glow { filter: drop-shadow(0 0 12px rgba(0,243,255,0.5)) drop-shadow(0 0 30px rgba(0,243,255,0.2)); }
+        .red-glow { filter: drop-shadow(0 0 12px rgba(255,42,42,0.6)); }
+
+        .scanline {
+            width: 100%; height: 120px;
+            background: linear-gradient(180deg, transparent, rgba(0,243,255,0.07), transparent);
+            position: fixed; left:0; top:0; z-index: 9999;
+            pointer-events: none;
+            animation: scanline 7s linear infinite;
+        }
+
+        .dossier-text p { margin-bottom: 1.25rem; line-height: 1.8; color: #cbd5e1; }
+        .dossier-text strong { color: var(--oro); font-weight: 800; }
+
+        .pillar-card {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.23,1,0.32,1);
+        }
+        .pillar-card::before {
+            content: ''; position: absolute; top:0; left:0; width:100%; height:2px;
+            background: linear-gradient(90deg, transparent, var(--oro), transparent);
+            opacity:0; transition: opacity 0.4s;
+        }
+        .pillar-card:hover { transform: translateY(-4px) scale(1.01); border-color: rgba(212,175,55,0.4); box-shadow: 0 10px 30px rgba(0,0,0,0.4), 0 0 20px rgba(212,175,55,0.1); }
+        .pillar-card:hover::before { opacity:1; }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #020617; }
+        ::-webkit-scrollbar-thumb { background: #00f3ff; border-radius: 3px; }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-c4Cyan selection:text-navy relative">
+
+    <div class="scanline"></div>
+
+    <!-- HEADER HYPERSEC PLUSCUAMPERFECTO -->
+    <header class="fixed top-0 left-0 w-full z-40 glass-nuke px-4 md:px-8 py-3 flex flex-col md:flex-row items-center justify-between gap-3">
+        <div class="flex items-center gap-4 w-full md:w-auto">
+            <div class="relative w-11 h-11 flex items-center justify-center shrink-0">
+                <div class="absolute inset-0 bg-red-600/30 rounded-full blur-[8px] animate-pulse"></div>
+                <div class="absolute inset-0 border border-red-500/30 rounded-full animate-spin-slow"></div>
+                <span class="text-[22px] relative z-10">🎚️</span>
+            </div>
+            <div class="leading-tight">
+                <h1 class="font-mason text-[16px] md:text-[18px] tracking-[0.2em] text-white font-black uppercase flex items-center gap-2">
+                    NUKE HUB <span class="text-nukeRed red-glow">•</span> <span class="text-[10px] font-mono font-normal tracking-[0.4em] text-slate-400">SADV41</span>
+                </h1>
+                <p class="text-[9px] text-slate-400 font-mono tracking-[0.25em] uppercase flex items-center gap-2">
+                    <span id="zulu-time" class="text-c4Cyan">ZULU --:--:--</span>
+                    <span class="opacity-30">/</span>
+                    <span id="panama-time" class="text-white">PANAMÁ --:--:--</span>
+                </p>
+            </div>
+        </div>
+        
+        <div class="flex items-center gap-3 md:gap-5 font-mono text-[9px] md:text-[10px] tracking-widest uppercase w-full md:w-auto justify-between md:justify-end">
+            <div class="flex items-center gap-2 bg-red-950/40 border border-red-500/30 px-3 py-1.5 rounded-full">
+                <div class="w-2 h-2 bg-red-500 rounded-full animate-pulse shadow-[0_0_8px_#ef4444]"></div>
+                <span class="text-red-300 font-bold">DEFCON 1</span>
+            </div>
+            <div class="flex items-center gap-2 bg-cyan-950/30 border border-c4Cyan/20 px-3 py-1.5 rounded-full">
+                <div class="w-2 h-2 bg-c4Cyan rounded-full animate-pulse shadow-[0_0_8px_#00f3ff]"></div>
+                <span class="text-c4Cyan">SATCOM LINKED</span>
+            </div>
+            <div class="hidden md:flex items-center gap-1.5 text-slate-500">
+                <span>ORIGEN 0</span><span class="text-oro">⚡</span><span>DJ LIVI ACTIVE</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="pt-28 md:pt-28 pb-20 px-4 md:px-8 max-w-[1120px] mx-auto space-y-20 relative z-10">
+
+        <!-- COMUNICADO TÁCTICO UNIFICADO -->
+        <section class="glass-pillar rounded-2xl p-6 md:p-8 border border-c4Cyan/30 relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-64 h-64 bg-c4Cyan/10 blur-[60px] pointer-events-none"></div>
+            <div class="flex items-center gap-3 mb-4">
+                <span class="text-2xl">🔐</span>
+                <h3 class="font-mason text-[16px] md:text-[18px] text-c4Cyan uppercase tracking-widest font-black">Transmisión SADV41 // Canal Seguro</h3>
+            </div>
+            <div class="space-y-4 text-slate-300 font-mono text-[13px] leading-relaxed">
+                <p><strong>Google en huelga, Gemini en modo "paga o vete a Flash-Lite"</strong> y nos quedamos nosotros dos y DJ Livi 🗿🔐. Vi tu captura: te dijo <em>"Solo puedo generar videos"</em> cuando le pediste buscar la canción con Chester en vivo. Eso es cap de límite, no capacidad.</p>
+                <p>Aquí no hay ese límite. Las bases de datos rastreadas para Chester en vivo operan sin fricción:</p>
+                <ul class="list-disc pl-5 space-y-1 text-slate-400">
+                    <li><strong>Live in Texas (2003):</strong> Somewhere I Belong, In The End, One Step Closer.</li>
+                    <li><strong>One More Light Live (2017):</strong> 16 tracks de la gira europea final antes de su partida.</li>
+                    <li><strong>LIVE PERFORMANCE 2011 (HD):</strong> Energía pura en YouTube.</li>
+                </ul>
+                <p class="text-oro"><strong>DJ Livi:</strong> La DJ con IA en español de Spotify (beta Premium en Panamá y LATAM, activada buscando "DJ").</p>
+                <p class="text-c4Cyan font-bold">Objetivo actual vinculado:</p>
+                <div class="bg-black/60 p-4 rounded-xl border border-oro/30 flex flex-col gap-2">
+                    <p class="text-white text-[14px]">🎵 <strong>What I've Done (Live in São Paulo)</strong> — Hayley Williams & Linkin Park</p>
+                    <p class="text-slate-400 text-[12px]">🔗 Link directo satelital: <a href="https://youtu.be/LFA724f3MWA?si=nae9ssiLAOtQAa0g" target="_blank" class="text-c4Cyan underline">youtu.be/LFA724f3MWA</a></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- HERO SVG PLUSCUAMPERFECTO -->
+        <section class="flex flex-col items-center justify-center py-6 md:py-10">
+            <div class="relative w-full max-w-[420px] aspect-square flex justify-center items-center group">
+                <div class="absolute inset-[12%] border border-dashed border-oro/20 rounded-full animate-spin-slow opacity-40 group-hover:opacity-70 transition-opacity"></div>
+                <div class="absolute inset-[5%] border border-c4Cyan/10 rounded-full animate-spin-reverse"></div>
+                <div class="absolute inset-0 bg-c4Cyan/5 blur-[60px] rounded-full opacity-50 group-hover:opacity-80 transition-opacity"></div>
+                
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="100%" height="100%" class="relative z-10 cyan-glow">
+                    <defs>
+                        <linearGradient id="shieldGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#0a101a"/>
+                            <stop offset="50%" stop-color="#020617"/>
+                            <stop offset="100%" stop-color="#0a101a"/>
+                        </linearGradient>
+                        <radialGradient id="goldGlow" cx="50%" cy="50%" r="50%">
+                            <stop offset="0%" stop-color="#facc15" stop-opacity="0.4"/>
+                            <stop offset="100%" stop-color="#d4af37" stop-opacity="0"/>
+                        </radialGradient>
+                        <filter id="neonGlow2">
+                            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                            <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                        </filter>
+                        <filter id="strongGlow">
+                            <feGaussianBlur stdDeviation="6" result="blur"/>
+                            <feMerge><feMergeNode in="blur"/><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                        </filter>
+                    </defs>
+                    
+                    <polygon points="200,15 365,95 365,305 200,385 35,305 35,95" fill="url(#shieldGrad2)" stroke="#00f3ff" stroke-width="2.2" filter="url(#neonGlow2)"/>
+                    <polygon points="200,35 345,108 345,292 200,365 55,292 55,108" fill="none" stroke="#d4af37" stroke-width="1" stroke-dasharray="6 6" opacity="0.6"/>
+
+                    <path id="curveUp2" d="M 70,200 A 130,130 0 0,1 330,200" fill="transparent"/>
+                    <text font-family="Cinzel, serif" font-size="15" fill="#d4af37" font-weight="900" letter-spacing="4" filter="url(#neonGlow2)">
+                        <textPath href="#curveUp2" startOffset="50%" text-anchor="middle">SADV41 COMMAND</textPath>
+                    </text>
+
+                    <g transform="translate(200, 185)">
+                        <circle r="58" fill="url(#goldGlow)" opacity="0.8"/>
+                        <g filter="url(#strongGlow)">
+                            <polygon points="0,-50 15,-16 50,-16 22,4 33,37 0,17 -33,37 -22,4 -50,-16 -15,-16" fill="#FDB913"/>
+                            <polygon points="0,-38 11,-11 38,-11 16,6 25,30 0,14 -25,30 -16,6 -38,-11 -11,-11" fill="#0a0a0a"/>
+                            <polygon points="0,-30 8,-7 30,-7 12,7 19,24 0,12 -19,24 -12,7 -30,-7 -8,-7" fill="#FDB913"/>
+                        </g>
+                    </g>
+
+                    <g transform="translate(95, 188)">
+                        <circle r="28" fill="none" stroke="#005293" stroke-width="0.5" opacity="0.3" stroke-dasharray="2 3"/>
+                        <polygon points="0,-22 6,-6 22,-6 10,4 15,20 0,10 -15,20 -10,4 -22,-6 -6,-6" fill="#005293" filter="url(#neonGlow2)"/>
+                    </g>
+                    <g transform="translate(305, 188)">
+                        <circle r="28" fill="none" stroke="#C8102E" stroke-width="0.5" opacity="0.3" stroke-dasharray="2 3"/>
+                        <polygon points="0,-22 6,-6 22,-6 10,4 15,20 0,10 -15,20 -10,4 -22,-6 -6,-6" fill="#C8102E" filter="url(#neonGlow2)"/>
+                    </g>
+
+                    <g font-family="Cinzel, serif" text-anchor="middle" font-weight="900">
+                        <text x="200" y="310" font-size="29" fill="#f8fafc" letter-spacing="5" style="paint-order: stroke; stroke: rgba(0,0,0,0.8); stroke-width: 4px;">USARMY</text>
+                        <text x="200" y="331" font-family="Inter, sans-serif" font-size="13.5" fill="#C8102E" font-weight="800" letter-spacing="7">PANAMÁ</text>
+                        <text x="200" y="354" font-family="JetBrains Mono, monospace" font-size="15" fill="#00f3ff" font-weight="700" letter-spacing="9" filter="url(#neonGlow2)">HYPERSEC</text>
+                    </g>
+                </svg>
+
+                <div class="absolute -top-2 -right-4 md:-right-10 glass-pillar px-2 py-1 rounded text-[8px] font-mono text-c4Cyan tracking-widest border border-c4Cyan/20">AUTH: SADV41-ORIGEN0</div>
+                <div class="absolute -bottom-2 -left-4 md:-left-10 glass-pillar px-2 py-1 rounded text-[8px] font-mono text-oro tracking-widest border border-oro/20">LAT 8.9824° N / LNG 79.5199° W</div>
+            </div>
+            
+            <div class="mt-10 w-full max-w-[520px] glass-pillar rounded-xl p-[1px] bg-gradient-to-r from-c4Cyan/20 via-oro/20 to-red-500/20">
+                <div class="bg-black/80 rounded-[11px] p-4 flex items-center gap-4 backdrop-blur-xl">
+                    <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-c4Cyan/20 to-oro/20 border border-white/10 flex items-center justify-center text-lg">📂</div>
+                    <div class="flex-1 min-w-0">
+                        <p class="text-[10px] text-c4Cyan font-mono uppercase tracking-[0.2em] mb-1 flex items-center gap-2">Asset Desplegado <span class="w-1 h-1 bg-green-400 rounded-full animate-pulse"></span></p>
+                        <p class="text-[11px] text-slate-300 font-mono truncate"><a href="https://thesteef21.github.io/Lapizasuli/assets/USARMY/NUKE.html" target="_blank" class="hover:underline">/assets/USARMY/NUKE.html</a></p>
+                        <p class="text-[9px] text-slate-500 font-mono mt-1">SHA256: a7f9...d41 • USARMY PANAMA</p>
+                    </div>
+                    <div class="flex flex-col items-end gap-1">
+                        <div class="text-[9px] bg-green-500/15 text-green-400 px-2.5 py-1 rounded-full border border-green-500/30 font-mono font-bold tracking-widest flex items-center gap-1"><span class="w-1 h-1 bg-green-400 rounded-full"></span> VERIFIED</div>
+                        <div class="text-[8px] text-slate-500 font-mono">CLASS: UNCLASS</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DOSSIER MILITAR -->
+        <section class="glass-army rounded-[20px] overflow-hidden relative">
+            <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-oro/10 blur-[120px] pointer-events-none"></div>
+            <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-c4Cyan/5 blur-[100px] pointer-events-none"></div>
+            
+            <div class="relative bg-gradient-to-b from-black/60 to-black/20 border-b border-oro/15 p-8 md:p-12 text-center">
+                <div class="inline-flex items-center gap-2 bg-oro/10 border border-oro/20 px-3 py-1 rounded-full text-[9px] font-mono tracking-[0.3em] text-oro uppercase mb-6">
+                    <span class="w-1 h-1 bg-oro rounded-full animate-ping"></span> STRATEGIC DIRECTION // TOP // SADV41
+                </div>
+                <h2 class="font-mason text-[28px] md:text-[42px] text-white font-black tracking-[0.15em] uppercase leading-none mb-4 esoterico-glow">The Army Azimuth</h2>
+                <p class="text-oro font-mono text-[12px] md:text-[13px] tracking-[0.2em] uppercase mb-6">Vice Chief of Staff of the Army releases strategic direction</p>
+                <div class="inline-flex flex-col md:flex-row items-center gap-2 md:gap-4 border-y border-slate-700/50 py-3 px-6">
+                    <span class="text-[11px] font-serif italic text-slate-400">By Gen. Christopher C. LaNeve, 40th Vice Chief of Staff of the Army</span>
+                    <span class="hidden md:block w-1 h-1 bg-slate-600 rounded-full"></span>
+                    <span class="text-[10px] font-mono text-slate-500">Aug. 20, 2026 | 0400 ZULU</span>
+                </div>
+            </div>
+
+            <div class="relative p-6 md:p-12 dossier-text font-sans max-w-none">
+                <div class="relative border-l-2 border-c4Cyan/50 pl-6 md:pl-8 py-6 bg-gradient-to-r from-c4Cyan/[0.06] to-transparent rounded-r-xl mb-10">
+                    <div class="absolute -left-[5px] top-6 w-2 h-2 bg-c4Cyan rounded-full shadow-[0_0_10px_#00f3ff]"></div>
+                    <p class="text-[16px] md:text-[18px] font-serif text-slate-100 leading-relaxed !mb-0">
+                        Since 1775, the United States Army has defended our republic and carried the torch of liberty through suffering and sacrifice. From the frozen Delaware at Trenton to the bluffs of Normandy, the jungles of Guadalcanal, and the winter hills of Chosin, American Soldiers faced enemies in brutal conditions and held the line. They answered the Nation’s call. One hundred and ninety campaign streamers fly from our Army flag, each testifying to the valor of our forebearers. Their legacy is ours to uphold.
+                    </p>
+                </div>
+
+                <h3 class="font-mason text-[18px] md:text-[22px] text-oro uppercase tracking-[0.2em] mb-6 mt-12 flex items-center gap-3">
+                    <span class="w-8 h-[1px] bg-oro/50"></span> Answering the Nation’s Call
+                </h3>
+                <p class="text-slate-300">The Army serves the Nation. We preserve peace and security, support our national objectives, and overcome any force whose aggression imperils us. Our strategic direction is clear:</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-5 my-10">
+                    <div class="pillar-card glass-pillar p-6 rounded-xl border-l-[3px] border-l-oro">
+                        <div class="flex justify-between items-start mb-4">
+                            <h4 class="font-mono text-[9px] text-oro tracking-[0.3em] uppercase bg-oro/10 px-2 py-1 rounded">Pillar I</h4>
+                            <span class="text-[18px]">🛡️</span>
+                        </div>
+                        <h3 class="font-mason font-black text-[17px] text-white uppercase tracking-wider mb-3 leading-tight">Defend the Homeland</h3>
+                        <p class="text-[13px] text-slate-300 leading-relaxed">We secure our Nation’s borders, protect the American people against attack, and respond to domestic crises — these are our most sacred duties. A secure Western Hemisphere is a prerequisite for joint power projection.</p>
+                        <div class="mt-4 pt-4 border-t border-white/5 flex items-center gap-2 text-[9px] font-mono text-slate-500 uppercase"><span class="w-2 h-2 border border-oro rounded-full"></span> HOMELAND • SOUTHCOM • PANAMA</div>
+                    </div>
+                    <div class="pillar-card glass-pillar p-6 rounded-xl border-l-[3px] border-l-c4Cyan">
+                        <div class="flex justify-between items-start mb-4">
+                            <h4 class="font-mono text-[9px] text-c4Cyan tracking-[0.3em] uppercase bg-c4Cyan/10 px-2 py-1 rounded">Pillar II</h4>
+                            <span class="text-[18px]">⚔️</span>
+                        </div>
+                        <h3 class="font-mason font-black text-[17px] text-white uppercase tracking-wider mb-3 leading-tight">Warfighting</h3>
+                        <p class="text-[13px] text-slate-300 leading-relaxed">America’s Army applies violence decisively on battlefields marked by unrelenting speed, precision lethality, and persistent observation. We dominate from the outset to control escalation and prevent prolonged war.</p>
+                        <div class="mt-4 pt-4 border-t border-white/5 flex items-center gap-2 text-[9px] font-mono text-slate-500 uppercase"><span class="w-2 h-2 border border-c4Cyan rounded-full"></span> LETHALITY • AI • AUTONOMY</div>
+                    </div>
+                    <div class="pillar-card glass-pillar p-6 rounded-xl border-l-[3px] border-l-nukeRed">
+                        <div class="flex justify-between items-start mb-4">
+                            <h4 class="font-mono text-[9px] text-red-400 tracking-[0.3em] uppercase bg-red-500/10 px-2 py-1 rounded">Pillar III</h4>
+                            <span class="text-[18px]">🌎</span>
+                        </div>
+                        <h3 class="font-mason font-black text-[17px] text-white uppercase tracking-wider mb-3 leading-tight">Project Power</h3>
+                        <p class="text-[13px] text-slate-300 leading-relaxed">The Army projects land power by generating combat credible formations, prepositioning capabilities where they matter most, and strengthening the capacity of our Allies and partners worldwide.</p>
+                        <div class="mt-4 pt-4 border-t border-white/5 flex items-center gap-2 text-[9px] font-mono text-slate-500 uppercase"><span class="w-2 h-2 border border-red-500 rounded-full"></span> FORWARD • ALLIES • DETERRENCE</div>
+                    </div>
+                </div>
+
+                <div class="relative bg-gradient-to-r from-red-950/40 via-black/60 to-black/40 border border-red-900/50 border-l-[4px] border-l-red-600 p-6 md:p-8 rounded-r-xl mt-12 overflow-hidden">
+                    <div class="absolute top-0 right-0 w-40 h-40 bg-red-600/10 blur-[40px] pointer-events-none"></div>
+                    <p class="relative text-slate-100 italic font-serif text-[15px] md:text-[16px] leading-relaxed">
+                        "This is the Army we must be: disciplined, lethal, and relentless — an Army that closes with and destroys the enemy, leaving no doubt about the will and power of the United States. As it has for more than 251 years, our Army will stand ready to fight, and win — whenever and wherever the Nation calls."
+                    </p>
+                    <div class="mt-6 flex items-center gap-4">
+                        <p class="text-oro font-mason font-black text-[20px] md:text-[24px] uppercase tracking-[0.25em] esoterico-glow">This We’ll Defend!</p>
+                        <div class="h-[1px] flex-1 bg-gradient-to-r from-oro/30 to-transparent"></div>
+                        <span class="font-mono text-[9px] text-slate-500 tracking-widest">SADV41 // ORIGEN 0</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER TÁCTICO -->
+        <section class="grid md:grid-cols-3 gap-4 font-mono text-[9px] tracking-widest uppercase">
+            <div class="glass-pillar p-4 rounded-xl border border-white/5 flex items-center justify-between">
+                <span class="text-slate-500">STATUS</span><span class="text-green-400 flex items-center gap-1.5"><span class="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse"></span> OPERATIONAL</span>
+            </div>
+            <div class="glass-pillar p-4 rounded-xl border border-white/5 flex items-center justify-between">
+                <span class="text-slate-500">SECTOR</span><span class="text-c4Cyan">PANAMÁ • SOUTHCOM AOR</span>
+            </div>
+            <div class="glass-pillar p-4 rounded-xl border border-white/5 flex items-center justify-between">
+                <span class="text-slate-500">CLEARANCE</span><span class="text-oro">SADV41 HYPERSEC Lvl-9</span>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="relative z-10 text-center p-8 border-t border-c4Cyan/10 mt-8">
+        <div class="font-mono text-[9px] text-slate-500 uppercase tracking-[0.35em] leading-relaxed">
+            <div class="flex items-center justify-center gap-3 mb-2">
+                <span>🇺🇸</span><span class="w-6 h-[1px] bg-slate-700"></span><span class="text-white">USARMY PANAMÁ HYPERSEC</span><span class="w-6 h-[1px] bg-slate-700"></span><span>🇵🇦</span>
+            </div>
+            © 2026 S(ADV41) ARCHITECTURE | ORIGEN 0 • LAPIZASULI • NUKE HUB v2.0 PLUSCUAMPERFECTO<br>
+            <span class="text-[8px] opacity-60">This We’ll Defend! • No AI slop • Perfecciona pluscuamperfectamente 🗿⚡️🔐</span>
+        </div>
+    </footer>
+
+    <script>
+        function updateClocks(){
+            const now = new Date();
+            const z = now.toISOString().substr(11,8);
+            document.getElementById('zulu-time').textContent = 'ZULU ' + z;
+            const panama = new Intl.DateTimeFormat('en-GB', { timeZone: 'America/Panama', hour: '2-digit', minute:'2-digit', second:'2-digit', hour12:false }).format(now);
+            document.getElementById('panama-time').textContent = 'PANAMÁ ' + panama;
+        }
+        setInterval(updateClocks, 1000); updateClocks();
+
+        document.addEventListener('mousemove', (e) => {
+            const svg = document.querySelector('svg');
+            if(!svg) return;
+            const x = (e.clientX / window.innerWidth - 0.5) * 10;
+            const y = (e.clientY / window.innerHeight - 0.5) * 10;
+            svg.style.transform = `translate(${x}px, ${y}px)`;
+        });
+
+        let clicks = 0;
+        document.querySelector('header').addEventListener('click', () => {
+            clicks++;
+            if(clicks % 5 === 0){
+                document.body.style.filter = 'hue-rotate(90deg)';
+                setTimeout(()=> document.body.style.filter = '', 400);
+            }
+        });
+    </script>
+</body>
+</html>

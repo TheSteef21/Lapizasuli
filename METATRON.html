@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="es">
+<head><style>
+@font-face {
+  font-family: "Optimistic";
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url("/fonts/OptimisticAI_VF_Optimized.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Optimistic Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/OptimisticMono_W_TextRegular.woff2") format("woff2");
+}
+:where(html) {
+  font-family: "Optimistic", system-ui, sans-serif;
+}
+:where(code, pre, kbd, samp) {
+  font-family: "Optimistic Mono", ui-monospace, monospace;
+}
+</style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SADV41 // LEVIATHAN - MODO SEIS CAMINOS // GEAR 5 REAL WEBP</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=JetBrains+Mono:wght@300;400;700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+<!-- PRELOAD DE LOS 5 ASSETS REALES WEBP - EXPLOTANDO WEBP AL 100% -->
+<link rel="preload" as="image" href="assets/METATRON/img/781293043_1047895088092288_3769060750221781878_n.webp" type="image/webp" fetchpriority="high">
+<link rel="preload" as="image" href="assets/METATRON/img/784748359_1032169259812179_379368085236729966_n.webp" type="image/webp">
+<link rel="preload" as="image" href="assets/METATRON/img/783671951_1762018238468095_5751859537385186669_n.webp" type="image/webp">
+<link rel="preload" as="image" href="assets/METATRON/img/783899130_4498246103827834_338786690266061800_n.webp" type="image/webp">
+<link rel="preload" as="image" href="assets/METATRON/img/785282279_1341489208069876_1027745017510610652_n.webp" type="image/webp">
+
+<style>
+  :root {
+    --gold: #d4af37;
+    --cyan: #00f3ff;
+    --violet: #9d4edd;
+    --red: #FB542B;
+    --green: #1DB954;
+    --blue: #7AF6FF;
+    --orange: #FFC26A;
+    --bg: #030305;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; min-height: 100vh; background: var(--bg); color: #f1f5f9;
+    font-family: 'Inter', system-ui, sans-serif; overflow-x: hidden;
+  }
+  code, pre, .mono { font-family: 'JetBrains Mono', monospace !important; }
+  .cinzel { font-family: 'Cinzel', serif; }
+
+  /* Fondo Transitorio Atemporal, Arrítmico y Aleatorio - 5 ASSETS OFICIALES WEBP */
+  .chaos-bg-container {
+    position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; background: #000;
+  }
+  .chaos-layer {
+    position: absolute; inset: -20px; background-size: cover; background-position: center;
+    opacity: 0; mix-blend-mode: screen; filter: contrast(125%) brightness(95%) saturate(1.2);
+    transition: opacity 3.5s cubic-bezier(0.4, 0, 0.2, 1), transform 9s ease-in-out;
+    will-change: opacity, transform;
+  }
+  .chaos-layer.active {
+    opacity: 0.62;
+    transform: scale(1.09) rotate(0.6deg);
+  }
+
+  .scanline {
+    position: fixed; left: 0; width: 100%; height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(251,84,43,0.4), transparent);
+    z-index: 60; pointer-events: none; animation: scan 7s linear infinite;
+  }
+  @keyframes scan { 0% { top: 0; } 100% { top: 100%; } }
+
+  .grid-pattern {
+    position: fixed; inset: 0; z-index: 1; pointer-events: none;
+    background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 28px 28px; opacity: 0.35;
+  }
+
+  .glass {
+    background: rgba(8, 8, 12, 0.86); backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px); border: 1px solid rgba(255,255,255,0.08);
+  }
+  .glass-strong {
+    background: rgba(10, 10, 16, 0.94); backdrop-filter: blur(22px);
+    border: 1px solid rgba(212, 175, 55, 0.25);
+  }
+  .gold-glow { box-shadow: 0 0 40px rgba(212,175,55,0.2), inset 0 0 22px rgba(212,175,55,0.05); }
+
+  main { position: relative; z-index: 10; max-width: 1400px; margin: 0 auto; padding: 1.5rem 1rem 3rem; }
+
+  header {
+    border-radius: 20px; padding: 1.2rem 1.6rem; margin-bottom: 1.5rem;
+    display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; align-items: center;
+  }
+
+  .stats-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 1.5rem;
+  }
+  .stat-box {
+    border-radius: 14px; padding: 1rem; position: relative; overflow: hidden;
+  }
+  .stat-box::after {
+    content: ''; position: absolute; bottom: 0; left: 0; height: 3px; width: 100%;
+    background: linear-gradient(90deg, var(--cyan), var(--gold)); opacity: 0.6;
+  }
+
+  .gear-selector {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-bottom: 1.5rem;
+  }
+  .gear-card {
+    border-radius: 14px; padding: 8px; cursor: pointer; transition: all 0.3s ease;
+    border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.6); text-align: center;
+  }
+  .gear-card:hover, .gear-card.active {
+    border-color: var(--cyan); transform: translateY(-3px); box-shadow: 0 0 20px rgba(0,243,255,0.3);
+  }
+  .gear-card img { width: 100%; height: 95px; object-fit: cover; border-radius: 8px; margin-bottom: 6px; background: #000; }
+
+  .portal-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 12px; margin-bottom: 1.5rem;
+  }
+  .portal-card {
+    border-radius: 16px; padding: 14px; display: flex; flex-direction: column; gap: 8px; transition: .25s; text-decoration: none; color: #fff;
+    background: rgba(8, 8, 12, 0.85); border: 1px solid rgba(255,255,255,0.08);
+  }
+  .portal-card:hover { transform: translateY(-3px) scale(1.01); border-color: var(--gold); }
+  .portal-thumb { width: 100%; height: 90px; border-radius: 10px; object-fit: cover; opacity: 0.85; background: #000; }
+
+  .btn {
+    font-size: 11px; padding: 8px 16px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.15);
+    background: rgba(255,255,255,0.06); color: #fff; cursor: pointer; transition: 0.2s; text-decoration: none; display: inline-block; text-align: center;
+  }
+  .btn:hover { background: rgba(255,255,255,0.15); border-color: var(--cyan); }
+  .btn-gold { border-color: var(--gold); color: var(--gold); background: rgba(212,175,55,0.08); }
+  .btn-cyan { border-color: var(--cyan); color: var(--cyan); background: rgba(0,243,255,0.08); }
+  .btn-violet { border-color: var(--violet); color: var(--violet); background: rgba(157,78,221,0.08); }
+  .btn-red { border-color: var(--red); color: var(--red); background: rgba(251,84,43,0.08); }
+
+  .ability-log {
+    border-radius: 14px; padding: 1rem; max-height: 180px; overflow-y: auto; font-size: 11px; color: #cbd5e1;
+  }
+</style>
+</head>
+<body>
+
+<div class="chaos-bg-container" id="chaosBg">
+  <!-- 5 ASSETS OFICIALES VERIFICADOS EN Lapizasuli/assets/METATRON/img/ - FORMATO WEBP -->
+  <div class="chaos-layer active" data-asset="CAMO" style="background-image: url('assets/METATRON/img/781293043_1047895088092288_3769060750221781878_n.webp')"></div>
+  <div class="chaos-layer" data-asset="GOLD" style="background-image: url('assets/METATRON/img/783671951_1762018238468095_5751859537385186669_n.webp')"></div>
+  <div class="chaos-layer" data-asset="NUKE" style="background-image: url('assets/METATRON/img/783899130_4498246103827834_338786690266061800_n.webp')"></div>
+  <div class="chaos-layer" data-asset="CYBER" style="background-image: url('assets/METATRON/img/784748359_1032169259812179_379368085236729966_n.webp')"></div>
+  <div class="chaos-layer" data-asset="TRONO" style="background-image: url('assets/METATRON/img/785282279_1341489208069876_1027745017510610652_n.webp')"></div>
+</div>
+
+<div class="grid-pattern"></div>
+<div class="scanline"></div>
+
+<main>
+  <!-- HEADER MAESTRO -->
+  <header class="glass gold-glow">
+    <div>
+      <div class="mono" style="font-size: 0.7rem; color: var(--cyan); letter-spacing: 0.2em;">SADV41 // HUB DE PERSONAJE UNIFICADO // WEBP REAL PATH</div>
+      <h1 class="cinzel" style="font-size: 1.6rem; font-weight: 900; margin: 4px 0 0; letter-spacing: 0.1em;">LEVIATHAN // 5 CAMINOS + GEAR 5 REAL</h1>
+      <p class="mono" style="font-size: 0.65rem; color: #94a3b8; margin: 4px 0 0;">🇵🇦 🔐 🗿 🇺🇸 🇮🇱 🇦🇷 🇻🇳 ☢️ ❤️ 🔯 ⚡️ ☦️ 🪙 | ORIGEN 1027=10=1 | ID 69362166 | assets/METATRON/img/</p>
+    </div>
+    <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
+      <button id="toggleChaos" class="btn mono">CAOS ATEMPORAL: ON</button>
+      <button id="gear7Btn" class="btn mono btn-gold" style="font-weight: 800;">⚡ DESPERTAR GEAR 5</button>
+      <a href="https://thesteef21.github.io/Lapizasuli/" target="_blank" class="btn mono btn-cyan">GH PAGES HUB</a>
+    </div>
+  </header>
+
+  <!-- ESTADÍSTICAS DEL SISTEMA -->
+  <section class="stats-grid">
+    <div class="glass stat-box">
+      <div class="mono" style="font-size: 9px; color: #94a3b8;">CHAKRA DORADO / AURA</div>
+      <div style="font-size: 1.2rem; font-weight: 800; color: var(--gold); margin-top: 4px;" class="mono">99,999 QP</div>
+      <div style="font-size: 9px; color: #1DB954; margin-top: 2px;">Sincronización Rikudō 100% - WEBP</div>
+    </div>
+    <div class="glass stat-box">
+      <div class="mono" style="font-size: 9px; color: #94a3b8;">GUDŌDAMA ORBITALES</div>
+      <div style="font-size: 1.2rem; font-weight: 800; color: var(--cyan); margin-top: 4px;" class="mono">5 / 5 ACTIVO</div>
+      <div style="font-size: 9px; color: #7AF6FF; margin-top: 2px;">Campo Cuántico Absoluto</div>
+    </div>
+    <div class="glass stat-box">
+      <div class="mono" style="font-size: 9px; color: #94a3b8;">NODOS METATRON</div>
+      <div style="font-size: 1.2rem; font-weight: 800; color: var(--violet); margin-top: 4px;" class="mono">51 / 51 NODOS</div>
+      <div style="font-size: 9px; color: #FFC26A; margin-top: 2px;">Red Neural Unificada</div>
+    </div>
+    <div class="glass stat-box">
+      <div class="mono" style="font-size: 9px; color: #94a3b8;">ESTADO DE MISIÓN</div>
+      <div style="font-size: 1.2rem; font-weight: 800; color: var(--red); margin-top: 4px;" class="cinzel">GEAR 5 FUSIÓN</div>
+      <div style="font-size: 9px; color: #fff; margin-top: 2px;">SADV41 LOVE 🎚️ | 5 WEBP</div>
+    </div>
+  </section>
+
+  <!-- SELECTOR DE GEARS CORREGIDO A 5 ASSETS REALES -->
+  <section class="glass-strong" style="border-radius: 20px; padding: 1.2rem; margin-bottom: 1.5rem;">
+    <h2 class="cinzel" style="font-size: 14px; letter-spacing: 0.12em; margin: 0 0 10px 0;">SELECCIÓN DE GEAR // 5 CAMINOS REALES WEBP</h2>
+    <div class="gear-selector">
+      <div class="gear-card active" data-index="0" data-file="781293043_1047895088092288_3769060750221781878_n.webp">
+        <img src="assets/METATRON/img/781293043_1047895088092288_3769060750221781878_n.webp" alt="CAMO SADV41" loading="eager" decoding="async">
+        <div class="mono" style="font-size: 9px; font-weight: 700; color: var(--green);">01 // CAMO - SADV41</div>
+      </div>
+      <div class="gear-card" data-index="1" data-file="783671951_1762018238468095_5751859537385186669_n.webp">
+        <img src="assets/METATRON/img/783671951_1762018238468095_5751859537385186669_n.webp" alt="GOLD Armor" loading="lazy" decoding="async">
+        <div class="mono" style="font-size: 9px; font-weight: 700; color: var(--gold);">02 // GOLD - ARMADURA</div>
+      </div>
+      <div class="gear-card" data-index="2" data-file="783899130_4498246103827834_338786690266061800_n.webp">
+        <img src="assets/METATRON/img/783899130_4498246103827834_338786690266061800_n.webp" alt="NUKE Command" loading="lazy" decoding="async">
+        <div class="mono" style="font-size: 9px; font-weight: 700; color: var(--red);">03 // NUKE - MOAB</div>
+      </div>
+      <div class="gear-card" data-index="3" data-file="784748359_1032169259812179_379368085236729966_n.webp">
+        <img src="assets/METATRON/img/784748359_1032169259812179_379368085236729966_n.webp" alt="CYBER Node" loading="lazy" decoding="async">
+        <div class="mono" style="font-size: 9px; font-weight: 700; color: var(--cyan);">04 // CYBER - HYPERSEC</div>
+      </div>
+      <div class="gear-card" data-index="4" data-file="785282279_1341489208069876_1027745017510610652_n.webp">
+        <img src="assets/METATRON/img/785282279_1341489208069876_1027745017510610652_n.webp" alt="TRONO SADV41" loading="lazy" decoding="async">
+        <div class="mono" style="font-size: 9px; font-weight: 700; color: var(--violet);">05 // TRONO - PRINCIPADO</div>
+      </div>
+    </div>
+    <div class="mono" style="font-size: 9px; color: #64748b; margin-top: 8px;">RUTA REAL: assets/METATRON/img/ + 5 webp verificados en main. Formato webp nativo, sin jpg fantasma.</div>
+  </section>
+
+  <!-- PORTALES CORREGIDOS -->
+  <section class="glass-strong gold-glow" style="border-radius: 20px; padding: 1.2rem; margin-bottom: 1.5rem;">
+    <h2 class="cinzel" style="font-size: 14px; letter-spacing: 0.12em; margin: 0 0 10px 0;">PORTALES METATRON // NAVEGACIÓN TOTAL EN RED</h2>
+    <div class="portal-grid">
+      <a href="SADV41_TRANSFIGURABLE_5EN1.html" target="_blank" class="portal-card">
+        <img class="portal-thumb" src="assets/METATRON/img/785282279_1341489208069876_1027745017510610652_n.webp" alt="Trono thumb" loading="lazy">
+        <div class="mono" style="font-size: 11px; font-weight: 800; color: var(--gold);">SADV41_TRANSFIGURABLE_5EN1.html</div>
+        <div class="mono" style="font-size: 9px; color: #94a3b8;">Fondo 4D vivo con los 5 Gears reales webp.</div>
+        <span class="btn btn-gold mono" style="margin-top: 4px;">ABRIR MODO 5 EN 1 →</span>
+      </a>
+      <a href="GSADV41.html" target="_blank" class="portal-card">
+        <img class="portal-thumb" src="assets/METATRON/img/783671951_1762018238468095_5751859537385186669_n.webp" alt="Gold thumb" loading="lazy">
+        <div class="mono" style="font-size: 11px; font-weight: 800; color: var(--cyan);">GSADV41.html // ORIGEN 1027</div>
+        <div class="mono" style="font-size: 9px; color: #94a3b8;">Núcleo dorado de verificación y autogestión.</div>
+        <span class="btn btn-cyan mono" style="margin-top: 4px;">ABRIR GSADV41 →</span>
+      </a>
+      <a href="assets/METATRON/" target="_blank" class="portal-card">
+        <img class="portal-thumb" src="assets/METATRON/img/783899130_4498246103827834_338786690266061800_n.webp" alt="Nuke thumb" loading="lazy">
+        <div class="mono" style="font-size: 11px; font-weight: 800; color: var(--red);">assets/METATRON/img/ // 5 WEBP</div>
+        <div class="mono" style="font-size: 9px; color: #94a3b8;">Directorio oficial verificado en GitHub.</div>
+        <span class="btn btn-red mono" style="margin-top: 4px;">ABRIR METATRON DIR →</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- CONSOLA -->
+  <section style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 16px;">
+    <div class="glass" style="border-radius: 16px; padding: 1.2rem;">
+      <h3 class="cinzel" style="font-size: 12px; letter-spacing: 0.1em; margin: 0 0 10px 0;">ACCIONES DE COMBATE Y PROTOCOLO</h3>
+      <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+        <button class="btn btn-gold" onclick="logAction('✨ JUTSU SEIS CAMINOS: Creación de Todas las Cosas activado.')">JUTSU SEIS CAMINOS</button>
+        <button class="btn btn-cyan" onclick="logAction('🛡️ 5 Gudōdama orbitales sincronizadas. Escudo Absoluto WEBP.')">ESCUDO GUDŌDAMA</button>
+        <button class="btn btn-violet" onclick="logAction('☯ Origen 1027=10=1 verificado en assets/METATRON/img/ 5 webp.')">VERIFICAR ORIGEN</button>
+        <button class="btn btn-red" onclick="logAction('⚡ GEAR 5 SUPREMO: Fusión total de las 5 memorias reales.')">ACTIVAR GEAR 5</button>
+      </div>
+      <div class="mono" style="font-size: 9px; color: #475569; margin-top: 12px; line-height: 1.5;">
+        CORRECCIONES APLICADAS:<br>
+        - Rutas corregidas de img/xxx a assets/METATRON/img/xxx<br>
+        - Eliminados 781904042... y Screenshot_20260822...jpg (no existen en tu repo)<br>
+        - 5 chaos-layer exactos con 5 webp verificados<br>
+        - preload as=image type=webp + fetchpriority high<br>
+        - Gear selector mapeado 1:1 con background
+      </div>
+    </div>
+    <div class="glass ability-log" id="abilityLog">
+      <div class="mono" style="color: var(--cyan); margin-bottom: 4px;">[SADV41_SYSTEM] Hub Leviathan con 5 WEBP oficiales inicializado.</div>
+      <div class="mono" style="color: #94a3b8;">[PATH] assets/METATRON/img/ verificado.</div>
+      <div class="mono" style="color: var(--gold);">[WEBP] 5 assets: CAMO, GOLD, NUKE, CYBER, TRONO</div>
+    </div>
+  </section>
+</main>
+
+<script>
+  // Motor del Fondo Transitorio Atemporal - 5 ASSETS REALES WEBP
+  const layers = document.querySelectorAll('.chaos-layer');
+  let currentIndex = 0;
+  let chaosActive = true;
+
+  function randomChaosTransition() {
+    if (!chaosActive || layers.length === 0) return;
+    layers[currentIndex].classList.remove('active');
+    const arhythmicDelay = Math.random() * 4000 + 2500;
+    
+    currentIndex = Math.floor(Math.random() * layers.length);
+    layers[currentIndex].classList.add('active');
+    logAction(`🌀 Transición a ${layers[currentIndex].dataset.asset} - ${layers[currentIndex].style.backgroundImage.slice(0,80)}...`);
+
+    setTimeout(randomChaosTransition, arhythmicDelay);
+  }
+
+  setTimeout(randomChaosTransition, 3000);
+
+  document.getElementById('toggleChaos').onclick = (e) => {
+    chaosActive = !chaosActive;
+    e.target.textContent = `CAOS ATEMPORAL: ${chaosActive ? 'ON' : 'OFF'}`;
+    logAction(`Fondo caótico cambiado a: ${chaosActive ? 'DINÁMICO' : 'ESTÁTICO'}`);
+    if(chaosActive) randomChaosTransition();
+  };
+
+  document.getElementById('gear7Btn').onclick = () => {
+    layers.forEach(l => l.classList.add('active'));
+    logAction('🔥 ¡ESTADO DESPERTAR GEAR 5 ALCANZADO! Las 5 dimensiones reales unificadas.');
+    setTimeout(() => {
+      layers.forEach((l, idx) => { if(idx !== 0) l.classList.remove('active'); });
+      layers[0].classList.add('active');
+      currentIndex = 0;
+    }, 3000);
+  };
+
+  document.querySelectorAll('.gear-card').forEach((card) => {
+    card.onclick = () => {
+      const idx = parseInt(card.dataset.index);
+      document.querySelectorAll('.gear-card').forEach(c => c.classList.remove('active'));
+      card.classList.add('active');
+      layers.forEach(l => l.classList.remove('active'));
+      currentIndex = idx;
+      layers[currentIndex].classList.add('active');
+      logAction(`Cambiado al Camino / Gear #${idx + 1} - ${card.dataset.file} activado.`);
+    };
+  });
+
+  function logAction(text) {
+    const log = document.getElementById('abilityLog');
+    const entry = document.createElement('div');
+    entry.className = 'mono';
+    entry.style.marginTop = '4px';
+    entry.style.color = '#e2e8f0';
+    entry.textContent = `> ${text}`;
+    log.prepend(entry);
+  }
+
+  // Verificación de carga webp
+  layers.forEach(layer => {
+    const url = layer.style.backgroundImage.match(/url\(["']?(.+?)["']?\)/)[1];
+    fetch(url, {method: 'HEAD'}).then(r => {
+      if(!r.ok) logAction(`❌ 404 en ${url} - revisa ruta`);
+    }).catch(()=>{});
+  });
+</script>
+<script>(function(){var loc=location.href.replace(/#.*$/,"");var ATTR_NAMES=["data-product-id","data-productid","data-product_id","product-id","productid","product_id","data-source-entity-id","source-entity-id","source_entity_id","data-product","data-metadata","data-meta"];var DATASET_KEYS=["productId","productid","product_id","sourceEntityId","sourceentityid","source_entity_id","product","metadata","meta"];function readProductId(value){if(typeof value!=="string"||value.length===0)return null;if(/^[0-9]{6,}$/.test(value))return value;var match=value.match(/(?:product(?:_|-)?id|source(?:_|-)?entity(?:_|-)?id)["'=:\s]+([0-9]{6,})/i);return match?match[1]:null}function extractProductId(start){for(var node=start;node&&node!==document.body;node=node.parentElement){for(var i=0;i<ATTR_NAMES.length;i++){var attrValue=node.getAttribute&&node.getAttribute(ATTR_NAMES[i]);var attrProductId=readProductId(attrValue);if(attrProductId)return attrProductId}var dataset=node.dataset||null;if(dataset){for(var j=0;j<DATASET_KEYS.length;j++){var dataValue=dataset[DATASET_KEYS[j]];var dataProductId=readProductId(dataValue);if(dataProductId)return dataProductId}}}return null}function isInlineMediaSlotElement(node){return !!(node&&node.getAttribute&&node.getAttribute("data-clippy-inline-media-slot")!==null)}function findInlineMediaSlot(start){for(var node=start;node&&node!==document.body;node=node.parentElement){if(isInlineMediaSlotElement(node))return node}return null}function readInlineMediaUrl(node){if(!node)return null;return node.getAttribute&&((node.getAttribute("data-clippy-inline-media-url")||node.getAttribute("data-url")||node.getAttribute("data_url")))||node.href||null}function stripHash(url){return String(url).replace(/#.*$/,"")}function urlsMatch(a,b){if(!a||!b)return false;try{return stripHash(new URL(a,loc).href)===stripHash(new URL(b,loc).href)}catch(_){return stripHash(a)===stripHash(b)}}function isFirstPartyReelUrl(value){try{var url=new URL(value,loc);if(url.protocol!=="https:")return false;var host=url.hostname.toLowerCase();var supported=host==="instagram.com"||host.endsWith(".instagram.com")||host==="facebook.com"||host.endsWith(".facebook.com");return supported&&/\/reels?\//i.test(url.pathname)}catch(_){return false}}function isInlineMediaUrlClick(node,href){var slot=findInlineMediaSlot(node);if(!slot)return false;var slotUrl=readInlineMediaUrl(slot);if(slotUrl)return urlsMatch(href,slotUrl);return isFirstPartyReelUrl(href)}function findDataHref(start){for(var node=start;node&&node!==document.body;node=node.parentElement){if(node.getAttribute){var href=node.getAttribute("data-href")||node.getAttribute("data-url");if(href)return{href:href,node:node}}}return null}var nativeOpen=window.open;window.open=function(url){if(parent!==window&&typeof url==="string"&&/^https?:\/\//.test(url)){parent.postMessage({type:"ecto:usercontent-link-click",href:url},"*");return null}return nativeOpen?nativeOpen.apply(window,arguments):null};document.addEventListener("click",function(e){var target=e.target instanceof Element?e.target:null;if(!target)return;if(parent===window)return;var a=target.closest?target.closest("a[href]"):null;if(a&&a.href&&/^https?:\/\//.test(a.href)&&a.href.replace(/#.*$/,"")!==loc){if(isInlineMediaUrlClick(a,a.href))return;var productId=extractProductId(target)||extractProductId(a);if(productId){e.preventDefault();parent.postMessage({type:"ecto-artifact-link-click",productId:productId},"*");return}e.preventDefault();parent.postMessage({type:"ecto:usercontent-link-click",href:a.href},"*");return}var dataHref=findDataHref(target);if(dataHref&&/^https?:\/\//.test(dataHref.href)&&dataHref.href.replace(/#.*$/,"")!==loc){if(isInlineMediaUrlClick(dataHref.node,dataHref.href))return;e.preventDefault();parent.postMessage({type:"ecto:usercontent-link-click",href:dataHref.href},"*")}},true)})();</script><script>(function(){var FOCUS_TYPE="ecto:artifact-focus-request";var CLOSE_TYPE="ecto:artifact-close-request";function focusArtifactDocument(){var body=document.body;if(!body)return;try{window.focus();}catch(e){}if(!body.hasAttribute("tabindex"))body.setAttribute("tabindex","-1");try{body.focus({preventScroll:true});}catch(e){try{body.focus();}catch(e2){}}}window.addEventListener("message",function(event){if(event.source!==window.parent)return;var data=event.data;if(!data||typeof data!=="object"||data.type!==FOCUS_TYPE)return;if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",focusArtifactDocument,{once:true});return;}focusArtifactDocument();});window.addEventListener("keydown",function(event){if(event.key!=="Escape")return;window.setTimeout(function(){if(event.defaultPrevented)return;window.parent.postMessage({type:CLOSE_TYPE},"*");},0);});})();</script></body>
+</html>

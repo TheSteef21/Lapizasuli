@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>SADV41 // NUKE HUB – USARMY PANAMÁ HYPERSEC</title>
+    
+    <!-- Tipografías Sagradas y Militares -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Configuración Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#020617',
+                        oro: '#eab308',
+                        nukeRed: '#ff2a2a',
+                        c4Cyan: '#00f3ff',
+                        armyGreen: '#384230',
+                        panamaBlue: '#005293',
+                        panamaRed: '#C8102E'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mason: ['Cinzel', 'serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root { 
+            --oro-alquimico: #d4af37; 
+            --obsidiana: #050505; 
+            --c4-cyan: #00f3ff;
+        }
+
+        body {
+            background-color: var(--obsidiana);
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(0, 243, 255, 0.05) 0%, transparent 50%),
+                linear-gradient(rgba(2, 6, 23, 0.90), rgba(2, 6, 23, 0.98)), 
+                url('https://y2s.onrender.com/api/graphics/mundial_bg.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+            color: #f8fafc;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+        
+        .glass-nuke { background: rgba(5, 10, 15, 0.85); backdrop-filter: blur(12px); border: 1px solid rgba(255, 42, 42, 0.3); box-shadow: 0 0 30px rgba(255, 42, 42, 0.1); }
+        .glass-army { background: linear-gradient(145deg, #1a2015, #0f140a); border: 1px solid rgba(212, 175, 55, 0.2); }
+        
+        .esoterico-glow { text-shadow: 0 0 25px rgba(212, 175, 55, 0.7); }
+        .cyan-glow { filter: drop-shadow(0 0 15px rgba(0, 243, 255, 0.6)); }
+
+        .scanline {
+            width: 100%; height: 2px;
+            background: rgba(0, 243, 255, 0.15);
+            position: fixed; z-index: 9999; top: 0;
+            pointer-events: none;
+            animation: scanline 6s linear infinite;
+        }
+        @keyframes scanline { 0% { top: 0; } 100% { top: 100%; } }
+
+        /* Estilos del Dossier Militar */
+        .dossier-text p { margin-bottom: 1rem; line-height: 1.7; color: #cbd5e1; }
+        .dossier-text strong { color: var(--oro-alquimico); }
+        
+        .pillar-card {
+            background-color: rgba(56, 66, 48, 0.4);
+            border-left: 4px solid var(--oro-alquimico);
+            transition: all 0.3s;
+        }
+        .pillar-card:hover { background-color: rgba(56, 66, 48, 0.8); transform: translateX(5px); }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-c4Cyan selection:text-navy">
+
+    <div class="scanline"></div>
+
+    <!-- HEADER HYPERSEC -->
+    <header class="fixed top-0 left-0 w-full z-40 glass-nuke px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-4">
+            <div class="w-12 h-12 flex items-center justify-center relative">
+                <div class="absolute inset-0 bg-red-600/20 animate-pulse rounded-full blur-md"></div>
+                <span class="text-3xl relative z-10 drop-shadow-[0_0_10px_rgba(255,42,42,0.8)]">💣</span>
+            </div>
+            <div>
+                <h1 class="font-mason text-xl tracking-wider text-red-400 font-bold uppercase drop-shadow-[0_0_10px_rgba(255,42,42,0.4)]">NUKE HUB</h1>
+                <p class="text-[9px] text-slate-400 font-mono tracking-widest">USARMY PANAMÁ HYPERSEC DIVISION</p>
+            </div>
+        </div>
+        
+        <div class="flex items-center gap-4 font-mono text-[10px] text-slate-300 uppercase tracking-widest">
+            <span class="flex items-center gap-2"><div class="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div> DEFCON 1</span>
+            <span class="flex items-center gap-2"><div class="w-2 h-2 bg-c4Cyan rounded-full animate-pulse"></div> SATCOM LINKED</span>
+        </div>
+    </header>
+
+    <main class="pt-32 pb-20 px-4 md:px-8 max-w-6xl mx-auto space-y-16 relative z-10">
+
+        <!-- SVG CENTRAL: USARMY PANAMA HYPERSEC -->
+        <section class="flex flex-col items-center justify-center py-10">
+            <div class="relative w-full max-w-sm aspect-square flex justify-center items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="100%" height="100%" class="cyan-glow">
+                    <defs>
+                        <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#020617"/>
+                            <stop offset="50%" stop-color="#111827"/>
+                            <stop offset="100%" stop-color="#020617"/>
+                        </linearGradient>
+                        <filter id="neonGlow">
+                            <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+                            <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                        </filter>
+                    </defs>
+                    
+                    <!-- Hexágono Base (Cyber Shield) -->
+                    <polygon points="200,20 360,100 360,300 200,380 40,300 40,100" fill="url(#shieldGrad)" stroke="#00f3ff" stroke-width="3" filter="url(#neonGlow)"/>
+                    <polygon points="200,40 340,110 340,290 200,360 60,290 60,110" fill="none" stroke="#d4af37" stroke-width="1.5" stroke-dasharray="4,4"/>
+                    
+                    <!-- Textos Circulares (Aproximación SVG) -->
+                    <path id="curveUp" d="M 100,200 A 100,100 0 0,1 300,200" fill="transparent" />
+                    <text font-family="Cinzel, serif" font-size="18" fill="#d4af37" font-weight="bold" letter-spacing="3">
+                        <textPath href="#curveUp" startOffset="50%" text-anchor="middle">SADV41 COMMAND</textPath>
+                    </text>
+
+                    <!-- Estrella US ARMY Central -->
+                    <g transform="translate(200, 190) scale(1.6)">
+                        <!-- Outer Base -->
+                        <polygon points="0,-45 14,-15 45,-15 20,5 30,35 0,15 -30,35 -20,5 -45,-15 -14,-15" fill="#FDB913"/>
+                        <!-- Inner Shadow -->
+                        <polygon points="0,-35 10,-10 35,-10 15,5 23,28 0,12 -23,28 -15,5 -35,-10 -10,-10" fill="#1a1a1a"/>
+                        <!-- Inner Gold -->
+                        <polygon points="0,-28 7,-6 28,-6 11,6 18,22 0,10 -18,22 -11,6 -28,-6 -7,-6" fill="#FDB913"/>
+                    </g>
+
+                    <!-- Estrellas de Panamá Flanqueando -->
+                    <!-- Azul (Izquierda) -->
+                    <g transform="translate(100, 190) scale(0.7)">
+                        <polygon points="0,-25 7,-7 25,-7 11,5 17,23 0,12 -17,23 -11,5 -25,-7 -7,-7" fill="#005293" filter="url(#neonGlow)"/>
+                    </g>
+                    <!-- Roja (Derecha) -->
+                    <g transform="translate(300, 190) scale(0.7)">
+                        <polygon points="0,-25 7,-7 25,-7 11,5 17,23 0,12 -17,23 -11,5 -25,-7 -7,-7" fill="#C8102E" filter="url(#neonGlow)"/>
+                    </g>
+
+                    <!-- Textos Inferiores -->
+                    <text x="200" y="310" font-family="Cinzel, serif" font-size="28" fill="#f8fafc" text-anchor="middle" font-weight="900" letter-spacing="4">USARMY</text>
+                    <text x="200" y="330" font-family="Inter, sans-serif" font-size="14" fill="#C8102E" text-anchor="middle" font-weight="bold" letter-spacing="6">PANAMÁ</text>
+                    <text x="200" y="355" font-family="Courier New, monospace" font-size="16" fill="#00f3ff" text-anchor="middle" font-weight="bold" letter-spacing="8" filter="url(#neonGlow)">HYPERSEC</text>
+                </svg>
+            </div>
+            
+            <!-- Asset Screenshot GitHub Reference -->
+            <div class="mt-8 bg-black/60 border border-c4Cyan/30 p-4 rounded-xl flex items-center gap-4 w-full max-w-md shadow-[0_0_15px_rgba(0,243,255,0.1)]">
+                <div class="text-2xl">📂</div>
+                <div class="flex-1">
+                    <p class="text-xs text-c4Cyan font-mono uppercase tracking-widest mb-1">Asset Desplegado</p>
+                    <p class="text-[10px] text-slate-400 font-mono truncate">.../assets/USARMY/Screenshot_20260821_101808_Brave.jpg</p>
+                </div>
+                <div class="text-[10px] bg-green-500/20 text-green-400 px-2 py-1 rounded border border-green-500/30 font-mono">VERIFIED</div>
+            </div>
+        </section>
+
+        <!-- THE ARMY AZIMUTH DOSSIER -->
+        <section class="glass-army rounded-2xl overflow-hidden shadow-2xl relative">
+            <div class="absolute top-0 right-0 w-64 h-64 bg-oro/5 blur-[80px] pointer-events-none"></div>
+            
+            <div class="bg-black/40 border-b border-oro/20 p-8 md:p-12 text-center">
+                <h2 class="font-mason text-3xl md:text-4xl text-white font-bold tracking-widest uppercase mb-4 esoterico-glow">The Army Azimuth</h2>
+                <p class="text-oro font-mono text-sm tracking-widest uppercase mb-6">Vice Chief of Staff of the Army releases strategic direction</p>
+                <div class="inline-block border-t border-b border-slate-700 py-3 px-6 text-xs font-serif italic text-slate-400">
+                    By Gen. Christopher C. LaNeve, 40th Vice Chief of Staff of the Army | Aug. 20, 2026
+                </div>
+            </div>
+
+            <div class="p-8 md:p-12 dossier-text font-sans">
+                <p class="text-lg font-serif text-slate-200 mb-8 border-l-4 border-c4Cyan pl-6 bg-c4Cyan/5 py-4 rounded-r-lg">
+                    Since 1775, the United States Army has defended our republic and carried the torch of liberty through suffering and sacrifice. From the frozen Delaware at Trenton to the bluffs of Normandy, the jungles of Guadalcanal, and the winter hills of Chosin, American Soldiers faced enemies in brutal conditions and held the line. They answered the Nation’s call. One hundred and ninety campaign streamers fly from our Army flag, each testifying to the valor of our forebearers. Their legacy is ours to uphold.
+                </p>
+
+                <h3 class="font-mason text-2xl text-oro uppercase tracking-wider mb-6 mt-12 border-b border-oro/30 pb-2 inline-block">Answering the Nation’s Call</h3>
+                <p>
+                    The Army serves the Nation. We preserve peace and security, support our national objectives, and overcome any force whose aggression imperils us. Our strategic direction is clear:
+                </p>
+
+                <!-- Pilares Estratégicos -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 my-10">
+                    <!-- Pillar 1 -->
+                    <div class="pillar-card p-6 rounded-xl flex flex-col justify-between">
+                        <div>
+                            <h4 class="font-mono text-[10px] text-oro tracking-widest uppercase mb-2">Pillar I</h4>
+                            <h3 class="font-mason font-bold text-lg text-white uppercase mb-4">Defend the Homeland</h3>
+                            <p class="text-sm text-slate-300">We secure our Nation’s borders, protect the American people against attack, and respond to domestic crises — these are our most sacred duties. A secure Western Hemisphere is a prerequisite for joint power projection.</p>
+                        </div>
+                    </div>
+                    <!-- Pillar 2 -->
+                    <div class="pillar-card p-6 rounded-xl flex flex-col justify-between border-l-c4Cyan">
+                        <div>
+                            <h4 class="font-mono text-[10px] text-c4Cyan tracking-widest uppercase mb-2">Pillar II</h4>
+                            <h3 class="font-mason font-bold text-lg text-white uppercase mb-4">Warfighting</h3>
+                            <p class="text-sm text-slate-300">America’s Army applies violence decisively on battlefields marked by unrelenting speed, precision lethality, and persistent observation. We dominate from the outset to control escalation and prevent prolonged war.</p>
+                        </div>
+                    </div>
+                    <!-- Pillar 3 -->
+                    <div class="pillar-card p-6 rounded-xl flex flex-col justify-between border-l-red-500">
+                        <div>
+                            <h4 class="font-mono text-[10px] text-red-400 tracking-widest uppercase mb-2">Pillar III</h4>
+                            <h3 class="font-mason font-bold text-lg text-white uppercase mb-4">Project Power</h3>
+                            <p class="text-sm text-slate-300">The Army projects land power by generating combat credible formations, prepositioning capabilities where they matter most, and strengthening the capacity of our Allies and partners worldwide.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="font-mason text-2xl text-oro uppercase tracking-wider mb-6 mt-12 border-b border-oro/30 pb-2 inline-block">The Foundation of the Joint Force</h3>
+                <p>
+                    The Army has aggressively pursued change to prepare for large scale combat operations. We shifted from brigade modularity to a force organized for multidomain operations at all echelons. We fielded long range precision fires that strike deep and sink ships at sea, evolved air defenses for skies saturated with unmanned systems, upgraded theater logistics, expanded terrestrial intelligence, and established new units integrating space, cyber, electronic warfare, and artificial intelligence into command and control.
+                </p>
+                <p>
+                    A ready Army is the foundation of the Joint Force, providing a range of capabilities that underpin joint operations and give our leaders immediate options. We employ four operational warfighting elements — convergence, strike, close battle, and endurance — to deliver joint all domain maneuver.
+                </p>
+
+                <h3 class="font-mason text-2xl text-oro uppercase tracking-wider mb-6 mt-12 border-b border-oro/30 pb-2 inline-block">What Land Dominance Demands</h3>
+                <ul class="space-y-4 mb-8 text-slate-300">
+                    <li class="flex gap-4 bg-black/30 p-4 rounded-lg border border-slate-800">
+                        <span class="text-c4Cyan font-bold">▸</span>
+                        <div><strong class="text-white">Embrace a Warrior Mindset.</strong> We possess the grit to endure hardship and the courage to act honorably. Leaders at all echelons see Soldiers as the decisive advantage.</div>
+                    </li>
+                    <li class="flex gap-4 bg-black/30 p-4 rounded-lg border border-slate-800">
+                        <span class="text-c4Cyan font-bold">▸</span>
+                        <div><strong class="text-white">Outpace our Adversaries.</strong> We learn, innovate, and adapt faster by pairing our human ingenuity and judgment with advanced technologies like autonomy and artificial intelligence.</div>
+                    </li>
+                    <li class="flex gap-4 bg-black/30 p-4 rounded-lg border border-slate-800">
+                        <span class="text-c4Cyan font-bold">▸</span>
+                        <div><strong class="text-white">Gain Positional Advantage.</strong> We gain positional advantage through posture that comes in many forms: from forward basing to campaigning to stockpiling supplies.</div>
+                    </li>
+                </ul>
+
+                <div class="bg-gradient-to-r from-red-900/30 to-black/30 border-l-4 border-red-600 p-6 rounded-r-xl mt-10">
+                    <p class="text-slate-200 italic font-serif">
+                        "This is the Army we must be: disciplined, lethal, and relentless — an Army that closes with and destroys the enemy, leaving no doubt about the will and power of the United States. As it has for more than 251 years, our Army will stand ready to fight, and win — whenever and wherever the Nation calls."
+                    </p>
+                    <p class="text-oro font-mason font-bold text-xl mt-6 uppercase tracking-widest esoterico-glow">This We’ll Defend!</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="text-center p-8 border-t border-c4Cyan/20 mt-12 font-mono text-[9px] text-slate-500 uppercase tracking-[0.4em]">
+        USARMY PANAMÁ HYPERSEC © 2026 | S(ADV41) ARCHITECTURE | ORIGEN 0
+    </footer>
+
+</body>
+</html>
