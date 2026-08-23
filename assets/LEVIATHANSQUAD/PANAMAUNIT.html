@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SADV41 // LEVIATHAN - MODO SEIS CAMINOS // GEAR 5 REAL WEBP - UNIFICADO</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=JetBrains+Mono:wght@300;400;700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+<link rel="preload" as="image" href="https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/785282279_1341489208069876_1027745017510610652_n.webp" type="image/webp" fetchpriority="high">
+<link rel="preload" as="image" href="https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/784748359_1032169259812179_379368085236729966_n.webp" type="image/webp">
+<link rel="preload" as="image" href="https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/783899130_4498246103827834_338786690266061800_n.webp" type="image/webp">
+<link rel="preload" as="image" href="https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/783671951_1762018238468095_5751859537385186669_n.webp" type="image/webp">
+<link rel="preload" as="image" href="https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/781904042_37804958575816522_4524605149493257178_n.webp" type="image/webp">
+<link rel="preload" as="image" href="https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/781293043_1047895088092288_3769060750221781878_n.webp" type="image/webp">
+
+<link rel="preload" as="image" href="https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/783452785_1869516164012118_6490546162878603454_n.webp" type="image/webp">
+<link rel="preload" as="image" href="https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/783727612_2366186827520797_564029208255039114_n-1.webp" type="image/webp">
+
+<style>
+  :root {
+    --gold: #d4af37;
+    --cyan: #00f3ff;
+    --violet: #9d4edd;
+    --red: #FB542B;
+    --green: #1DB954;
+    --blue: #7AF6FF;
+    --orange: #FFC26A;
+    --bg: #030305;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; min-height: 100vh; background: var(--bg); color: #f1f5f9;
+    font-family: 'Inter', system-ui, sans-serif; overflow-x: hidden;
+  }
+  code, pre, .mono { font-family: 'JetBrains Mono', monospace !important; }
+  .cinzel { font-family: 'Cinzel', serif; }
+
+  /* Fondo Transitorio Atemporal - 6 ASSETS OFICIALES WEBP */
+  .chaos-bg-container {
+    position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; background: #000;
+  }
+  .chaos-layer {
+    position: absolute; inset: -20px; background-size: cover; background-position: center;
+    opacity: 0; mix-blend-mode: screen; filter: contrast(125%) brightness(95%) saturate(1.2);
+    transition: opacity 3.5s cubic-bezier(0.4, 0, 0.2, 1), transform 9s ease-in-out, filter 0.3s;
+    will-change: opacity, transform, filter;
+  }
+  .chaos-layer.active {
+    opacity: 0.62;
+    transform: scale(1.09) rotate(0.6deg);
+  }
+
+  /* SISTEMA DE GLITCH */
+  @keyframes pageGlitch {
+    0% { transform: translate(0) skew(0deg); filter: hue-rotate(0deg); }
+    20% { transform: translate(-8px, 5px) skew(-4deg); filter: hue-rotate(90deg) contrast(150%) invert(0.1); }
+    40% { transform: translate(8px, -5px) skew(4deg); filter: hue-rotate(-90deg) invert(0.2); }
+    60% { transform: translate(-3px, 3px) skew(-2deg); filter: hue-rotate(45deg); }
+    80% { transform: translate(3px, -3px) skew(2deg); filter: hue-rotate(-45deg); }
+    100% { transform: translate(0) skew(0deg); filter: hue-rotate(0deg); }
+  }
+  .glitch-active {
+    animation: pageGlitch 0.6s cubic-bezier(.25, .46, .45, .94) both;
+  }
+  .layer-glitch {
+    mix-blend-mode: exclusion !important;
+    transform: scale(1.15) rotate(-3deg) !important;
+    filter: contrast(200%) saturate(300%) hue-rotate(180deg) !important;
+    opacity: 0.9 !important;
+  }
+
+  .scanline {
+    position: fixed; left: 0; width: 100%; height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(251,84,43,0.4), transparent);
+    z-index: 60; pointer-events: none; animation: scan 7s linear infinite;
+  }
+  @keyframes scan { 0% { top: 0; } 100% { top: 100%; } }
+
+  .grid-pattern {
+    position: fixed; inset: 0; z-index: 1; pointer-events: none;
+    background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 28px 28px; opacity: 0.35;
+  }
+
+  .glass {
+    background: rgba(8, 8, 12, 0.86); backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px); border: 1px solid rgba(255,255,255,0.08);
+  }
+  .glass-strong {
+    background: rgba(10, 10, 16, 0.94); backdrop-filter: blur(22px);
+    border: 1px solid rgba(212, 175, 55, 0.25);
+  }
+  .gold-glow { box-shadow: 0 0 40px rgba(212,175,55,0.2), inset 0 0 22px rgba(212,175,55,0.05); }
+  .cyan-glow { box-shadow: 0 0 40px rgba(0,243,255,0.1), inset 0 0 22px rgba(0,243,255,0.05); border-color: rgba(0, 243, 255, 0.25); }
+
+  main { position: relative; z-index: 10; max-width: 1400px; margin: 0 auto; padding: 1.5rem 1rem 3rem; }
+
+  header {
+    border-radius: 20px; padding: 1.2rem 1.6rem; margin-bottom: 1.5rem;
+    display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; align-items: center;
+  }
+
+  .k9-unit {
+    display: flex; align-items: center; gap: 1rem; padding: 1rem; border-radius: 16px;
+    background: linear-gradient(90deg, rgba(12,12,20,0.95), rgba(0,243,255,0.05));
+    border: 1px solid rgba(0,243,255,0.3); margin-bottom: 1.5rem;
+  }
+  .k9-img {
+    width: 60px; height: 60px; border-radius: 50%; object-fit: cover;
+    border: 2px solid var(--cyan); box-shadow: 0 0 15px rgba(0,243,255,0.4);
+  }
+
+  /* NUEVA SECCIÓN: UNIDAD DE SEGURIDAD INTERNACIONAL Y DEFENSA PROVINCIAL */
+  .security-squad-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; margin-bottom: 1.5rem;
+  }
+  .security-card {
+    border-radius: 18px; padding: 16px; background: rgba(10, 10, 18, 0.95);
+    border: 1px solid rgba(0, 243, 255, 0.3); position: relative; overflow: hidden;
+  }
+  .security-card img {
+    width: 100%; height: 220px; object-fit: cover; border-radius: 12px; margin-bottom: 12px; border: 1px solid rgba(255,255,255,0.1);
+  }
+  .security-card video {
+    width: 100%; height: 220px; object-fit: cover; border-radius: 12px; margin-bottom: 12px; border: 1px solid rgba(251,84,43,0.3); background: #000;
+  }
+
+  .news-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; margin-bottom: 1.5rem;
+  }
+  .news-card {
+    border-radius: 16px; padding: 14px; display: flex; flex-direction: column; gap: 8px; transition: .25s; text-decoration: none; color: #fff;
+    background: rgba(12, 12, 20, 0.9); border: 1px solid rgba(0, 243, 255, 0.25);
+  }
+  .news-card:hover { transform: translateY(-3px) scale(1.01); border-color: var(--cyan); box-shadow: 0 0 20px rgba(0,243,255,0.2); }
+
+  .stats-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 1.5rem;
+  }
+  .stat-box {
+    border-radius: 14px; padding: 1rem; position: relative; overflow: hidden;
+  }
+  .stat-box::after {
+    content: ''; position: absolute; bottom: 0; left: 0; height: 3px; width: 100%;
+    background: linear-gradient(90deg, var(--cyan), var(--gold)); opacity: 0.6;
+  }
+
+  .gear-selector {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-bottom: 1.5rem;
+  }
+  .gear-card {
+    border-radius: 14px; padding: 8px; cursor: pointer; transition: all 0.3s ease;
+    border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.6); text-align: center;
+  }
+  .gear-card:hover, .gear-card.active {
+    border-color: var(--cyan); transform: translateY(-3px); box-shadow: 0 0 20px rgba(0,243,255,0.3);
+  }
+  .gear-card img { width: 100%; height: 80px; object-fit: cover; border-radius: 8px; margin-bottom: 6px; background: #000; }
+
+  .portal-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 12px; margin-bottom: 1.5rem;
+  }
+  .portal-card {
+    border-radius: 16px; padding: 14px; display: flex; flex-direction: column; gap: 8px; transition: .25s; text-decoration: none; color: #fff;
+    background: rgba(8, 8, 12, 0.85); border: 1px solid rgba(255,255,255,0.08);
+  }
+  .portal-card:hover { transform: translateY(-3px) scale(1.01); border-color: var(--gold); }
+  .portal-thumb { width: 100%; height: 90px; border-radius: 10px; object-fit: cover; opacity: 0.85; background: #000; }
+
+  .btn {
+    font-size: 11px; padding: 8px 16px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.15);
+    background: rgba(255,255,255,0.06); color: #fff; cursor: pointer; transition: 0.2s; text-decoration: none; display: inline-block; text-align: center;
+  }
+  .btn:hover { background: rgba(255,255,255,0.15); border-color: var(--cyan); }
+  .btn-gold { border-color: var(--gold); color: var(--gold); background: rgba(212,175,55,0.08); }
+  .btn-cyan { border-color: var(--cyan); color: var(--cyan); background: rgba(0,243,255,0.08); }
+  .btn-violet { border-color: var(--violet); color: var(--violet); background: rgba(157,78,221,0.08); }
+  .btn-red { border-color: var(--red); color: var(--red); background: rgba(251,84,43,0.08); }
+
+  .ability-log {
+    border-radius: 14px; padding: 1rem; max-height: 180px; overflow-y: auto; font-size: 11px; color: #cbd5e1;
+  }
+</style>
+</head>
+<body id="mainBody">
+
+<div class="chaos-bg-container" id="chaosBg">
+  <div class="chaos-layer active" data-asset="TRONO" style="background-image: url('https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/785282279_1341489208069876_1027745017510610652_n.webp')"></div>
+  <div class="chaos-layer" data-asset="CYBER" style="background-image: url('https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/784748359_1032169259812179_379368085236729966_n.webp')"></div>
+  <div class="chaos-layer" data-asset="NUKE" style="background-image: url('https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/783899130_4498246103827834_338786690266061800_n.webp')"></div>
+  <div class="chaos-layer" data-asset="GOLD" style="background-image: url('https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/783671951_1762018238468095_5751859537385186669_n.webp')"></div>
+  <div class="chaos-layer" data-asset="SQUAD" style="background-image: url('https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/781904042_37804958575816522_4524605149493257178_n.webp')"></div>
+  <div class="chaos-layer" data-asset="CAMO" style="background-image: url('https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/781293043_1047895088092288_3769060750221781878_n.webp')"></div>
+</div>
+
+<div class="grid-pattern"></div>
+<div class="scanline"></div>
+
+<main>
+  <header class="glass gold-glow">
+    <div>
+      <div class="mono" style="font-size: 0.7rem; color: var(--cyan); letter-spacing: 0.2em;">SADV41 // ROOT HUB // LEVIATHANSQUAD</div>
+      <h1 class="cinzel" style="font-size: 1.6rem; font-weight: 900; margin: 4px 0 0; letter-spacing: 0.1em;">LEVIATHAN // SEIS CAMINOS REALES</h1>
+      <p class="mono" style="font-size: 0.65rem; color: #94a3b8; margin: 4px 0 0;">🇵🇦🗿🪙☦️⚡️🔐🔐❤️☢️🇻🇳🇦🇷🇮🇱🇺🇸😎 | ORIGEN 1027=10=1 | ID 69362166</p>
+    </div>
+    <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
+      <button id="toggleChaos" class="btn mono">CICLO GLITCH: ON</button>
+      <button id="gear7Btn" class="btn mono btn-gold" style="font-weight: 800;">⚡ DESPERTAR GEAR 5</button>
+      <a href="https://thesteef21.github.io/Lapizasuli/" target="_blank" class="btn mono btn-cyan">GH PAGES HUB</a>
+    </div>
+  </header>
+
+  <div class="k9-unit">
+    <img src="https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/IMG_20260822_203238_454.jpg" alt="Hogan K9" class="k9-img">
+    <div>
+      <h3 class="cinzel" style="margin: 0; font-size: 14px; color: var(--cyan); letter-spacing: 0.05em;">PERRO UNIDAD ANTIEXPLOSIVOS HOGAN 🇺🇸</h3>
+      <div class="mono" style="font-size: 10px; color: #cbd5e1; margin-top: 4px;">Agente Canino Desplegado | Protección de perímetro del Hub confirmada.</div>
+    </div>
+  </div>
+
+  <section class="glass-strong cyan-glow" style="border-radius: 20px; padding: 1.2rem; margin-bottom: 1.5rem;">
+    <h2 class="cinzel" style="font-size: 14px; margin: 0 0 12px 0; color: var(--gold);">🛡️ UNIDAD DE SEGURIDAD INTERNACIONAL & DEFENSA PROVINCIAL DE PANAMÁ</h2>
+    <div class="security-squad-grid">
+      <div class="security-card">
+        <div class="mono" style="font-size: 9px; color: var(--cyan); margin-bottom: 6px;">[COMMIT: 5 HOURS AGO] // SEGURIDAD INTERNACIONAL // SADV41</div>
+        <img src="https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/783452785_1869516164012118_6490546162878603454_n.webp" alt="Seguridad Internacional Avatar" loading="lazy">
+        <div class="cinzel" style="font-size: 12px; font-weight: 700; color: #fff;">SADV41 // PROTOCOLO DE IDENTIDAD HÍBRIDA</div>
+        <div class="mono" style="font-size: 10px; color: #94a3b8; margin-top: 4px;">Sincronización cuántica del avatar con los circuitos de energía y la marca oficial de misión.</div>
+      </div>
+
+      <div class="security-card">
+        <div class="mono" style="font-size: 9px; color: var(--violet); margin-bottom: 6px;">[COMMIT: 5 HOURS AGO] // MODO CAÓTICO // 5 ESENCIAS</div>
+        <img src="https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/783727612_2366186827520797_564029208255039114_n-1.webp" alt="SADV5 Unidad Fantasma" loading="lazy">
+        <div class="cinzel" style="font-size: 12px; font-weight: 700; color: #fff;">SADV5 // UNIDAD FANTASMA MODO CAÓTICO</div>
+        <div class="mono" style="font-size: 10px; color: #94a3b8; margin-top: 4px;">Fusión de 5 esencias en 1 transfigruación. Interfaz Hypersec Panamá activa al 100%.</div>
+      </div>
+
+      <div class="security-card" style="border-color: rgba(251,84,43,0.4);">
+        <div class="mono" style="font-size: 9px; color: var(--red); margin-bottom: 6px;">[COMMIT: NOW] // DEFENSA PROVINCIAL PANAMÁ // PATRULLA</div>
+        <video src="https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/gemini_generated_video_b7957ca6.mp4" controls autoplay loop muted playsinline></video>
+        <div class="cinzel" style="font-size: 12px; font-weight: 700; color: #fff;">PATRULLA TÁCTICA // POLICÍA NACIONAL</div>
+        <div class="mono" style="font-size: 10px; color: #94a3b8; margin-top: 4px;">Despliegue operativo vehicular en entorno urbano con integración táctica HUD.</div>
+      </div>
+
+      <div class="security-card" style="border-color: rgba(251,84,43,0.4);">
+        <div class="mono" style="font-size: 9px; color: var(--red); margin-bottom: 6px;">[COMMIT: NOW] // OPERACIÓN TÁCTICA // WATERMARK</div>
+        <video src="https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/watermark-2026-08-22-213642655.mp4" controls loop muted playsinline></video>
+        <div class="cinzel" style="font-size: 12px; font-weight: 700; color: #fff;">MONITOREO DE DEFENSA PROVINCIAL</div>
+        <div class="mono" style="font-size: 10px; color: #94a3b8; margin-top: 4px;">Registro en tiempo real de unidades de seguridad en sector asignado.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="glass-strong cyan-glow" style="border-radius: 20px; padding: 1.2rem; margin-bottom: 1.5rem;">
+    <h2 class="cinzel" style="font-size: 14px; margin: 0 0 10px 0; color: var(--cyan);">🚨 NOTICIAS RECIENTES // FEED PRIORITARIO SADV41</h2>
+    <div class="news-grid">
+      <a href="https://www.laestrella.com.pa/panama/nacional/sinaproc-alerta-por-lluvias-y-tormentas-electricas-en-panama-tras-ingreso-de-la-onda-tropical-n-37-HO25098834#pk_campaign=MASwpn&pk_kwd=%C3%9ALTIMA+HORA" target="_blank" class="news-card">
+        <div class="mono" style="font-size: 9px; color: var(--red);">PANAMÁ // ÚLTIMA HORA</div>
+        <div class="mono" style="font-size: 11px; font-weight: 800; color: #fff;">SINAPROC alerta por lluvias y tormentas eléctricas en Panamá tras ingreso de la Onda Tropical N.° 37</div>
+        <span class="btn btn-red mono" style="margin-top: 4px;">LEER EN LA ESTRELLA →</span>
+      </a>
+      <a href="https://share.google/xOP17f5qoVi9JDUUY" target="_blank" class="news-card">
+        <div class="mono" style="font-size: 9px; color: var(--gold);">INTERNACIONAL // GEORGINA & CR7</div>
+        <div class="mono" style="font-size: 11px; font-weight: 800; color: #fff;">Georgina Rodríguez da el paso definitivo tras su boda con Cristiano Ronaldo adoptando a sus tres hijos mayores</div>
+        <span class="btn btn-gold mono" style="margin-top: 4px;">VER DETALLES →</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="stats-grid">
+    <div class="glass stat-box">
+      <div class="mono" style="font-size: 9px; color: #94a3b8;">CHAKRA DORADO / AURA</div>
+      <div style="font-size: 1.2rem; font-weight: 800; color: var(--gold); margin-top: 4px;" class="mono">99,999 QP</div>
+      <div style="font-size: 9px; color: #1DB954; margin-top: 2px;">Sincronización Rikudō 100%</div>
+    </div>
+    <div class="glass stat-box">
+      <div class="mono" style="font-size: 9px; color: #94a3b8;">GUDŌDAMA ORBITALES</div>
+      <div style="font-size: 1.2rem; font-weight: 800; color: var(--cyan); margin-top: 4px;" class="mono">6 / 6 ACTIVO</div>
+      <div style="font-size: 9px; color: #7AF6FF; margin-top: 2px;">Campo Cuántico Expandido</div>
+    </div>
+    <div class="glass stat-box">
+      <div class="mono" style="font-size: 9px; color: #94a3b8;">NODOS METATRON</div>
+      <div style="font-size: 1.2rem; font-weight: 800; color: var(--violet); margin-top: 4px;" class="mono">51 / 51 NODOS</div>
+      <div style="font-size: 9px; color: #FFC26A; margin-top: 2px;">Red Neural Unificada</div>
+    </div>
+    <div class="glass stat-box">
+      <div class="mono" style="font-size: 9px; color: #94a3b8;">ESTADO DE MISIÓN</div>
+      <div style="font-size: 1.2rem; font-weight: 800; color: var(--red); margin-top: 4px;" class="cinzel">GEAR 5 FUSIÓN</div>
+      <div style="font-size: 9px; color: #fff; margin-top: 2px;">SADV41 LOVE 🎚️ | ROOT</div>
+    </div>
+  </section>
+
+  <section class="glass-strong" style="border-radius: 20px; padding: 1.2rem; margin-bottom: 1.5rem;">
+    <h2 class="cinzel" style="font-size: 14px; letter-spacing: 0.12em; margin: 0 0 10px 0;">SELECCIÓN DE GEAR // 6 CAMINOS REALES WEBP</h2>
+    <div class="gear-selector">
+      <div class="gear-card active" data-index="0">
+        <img src="https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/785282279_1341489208069876_1027745017510610652_n.webp" alt="TRONO" loading="eager" decoding="async">
+        <div class="mono" style="font-size: 9px; font-weight: 700; color: var(--violet);">01 // TRONO</div>
+      </div>
+      <div class="gear-card" data-index="1">
+        <img src="https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/784748359_1032169259812179_379368085236729966_n.webp" alt="CYBER" loading="lazy" decoding="async">
+        <div class="mono" style="font-size: 9px; font-weight: 700; color: var(--cyan);">02 // CYBER</div>
+      </div>
+      <div class="gear-card" data-index="2">
+        <img src="https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/783899130_4498246103827834_338786690266061800_n.webp" alt="NUKE" loading="lazy" decoding="async">
+        <div class="mono" style="font-size: 9px; font-weight: 700; color: var(--red);">03 // NUKE</div>
+      </div>
+      <div class="gear-card" data-index="3">
+        <img src="https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/783671951_1762018238468095_5751859537385186669_n.webp" alt="GOLD" loading="lazy" decoding="async">
+        <div class="mono" style="font-size: 9px; font-weight: 700; color: var(--gold);">04 // GOLD</div>
+      </div>
+      <div class="gear-card" data-index="4">
+        <img src="https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/781904042_37804958575816522_4524605149493257178_n.webp" alt="SQUAD" loading="lazy" decoding="async">
+        <div class="mono" style="font-size: 9px; font-weight: 700; color: var(--blue);">05 // SQUAD</div>
+      </div>
+      <div class="gear-card" data-index="5">
+        <img src="https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/781293043_1047895088092288_3769060750221781878_n.webp" alt="CAMO" loading="lazy" decoding="async">
+        <div class="mono" style="font-size: 9px; font-weight: 700; color: var(--green);">06 // CAMO</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="glass-strong gold-glow" style="border-radius: 20px; padding: 1.2rem; margin-bottom: 1.5rem;">
+    <h2 class="cinzel" style="font-size: 14px; letter-spacing: 0.12em; margin: 0 0 10px 0;">PORTALES METATRON // ROOT LINKS</h2>
+    <div class="portal-grid">
+      <a href="https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/SADV41_TRANSFIGURABLE_5EN1.html" target="_blank" class="portal-card">
+        <img class="portal-thumb" src="https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/785282279_1341489208069876_1027745017510610652_n.webp" alt="Trono thumb" loading="lazy">
+        <div class="mono" style="font-size: 11px; font-weight: 800; color: var(--gold);">SADV41_TRANSFIGURABLE_5EN1.html</div>
+        <div class="mono" style="font-size: 9px; color: #94a3b8;">Fondo 4D vivo con los Gears reales webp.</div>
+        <span class="btn btn-gold mono" style="margin-top: 4px;">ABRIR MODO MÚLTIPLE →</span>
+      </a>
+      <a href="https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/GSADV41.html" target="_blank" class="portal-card">
+        <img class="portal-thumb" src="https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/783671951_1762018238468095_5751859537385186669_n.webp" alt="Gold thumb" loading="lazy">
+        <div class="mono" style="font-size: 11px; font-weight: 800; color: var(--cyan);">GSADV41.html</div>
+        <div class="mono" style="font-size: 9px; color: #94a3b8;">Núcleo dorado de verificación y autogestión.</div>
+        <span class="btn btn-cyan mono" style="margin-top: 4px;">ABRIR GSADV41 →</span>
+      </a>
+      <a href="https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/SADV41_PERSONAJE_HUB_FINAL.html" target="_blank" class="portal-card">
+        <img class="portal-thumb" src="https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/781293043_1047895088092288_3769060750221781878_n.webp" alt="Hub thumb" loading="lazy">
+        <div class="mono" style="font-size: 11px; font-weight: 800; color: var(--green);">SADV41_PERSONAJE_HUB_FINAL.html</div>
+        <div class="mono" style="font-size: 9px; color: #94a3b8;">Hub final centralizado en la red.</div>
+        <span class="btn btn-red mono" style="margin-top: 4px;">ABRIR HUB FINAL →</span>
+      </a>
+    </div>
+  </section>
+
+  <section style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 16px;">
+    <div class="glass" style="border-radius: 16px; padding: 1.2rem;">
+      <h3 class="cinzel" style="font-size: 12px; letter-spacing: 0.1em; margin: 0 0 10px 0;">ACCIONES DE COMBATE Y PROTOCOLO</h3>
+      <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+        <button class="btn btn-gold" onclick="logAction('✨ JUTSU SEIS CAMINOS: Creación de Todas las Cosas activado.')">JUTSU SEIS CAMINOS</button>
+        <button class="btn btn-cyan" onclick="logAction('🛡️ 6 Gudōdama orbitales sincronizadas. Escudo Absoluto WEBP.')">ESCUDO GUDŌDAMA</button>
+        <button class="btn btn-violet" onclick="logAction('☯ Origen 1027=10=1 verificado en LEVIATHANSQUAD GH Pages.')">VERIFICAR ORIGEN</button>
+        <button class="btn btn-red" onclick="logAction('⚡ GEAR 5 SUPREMO: Fusión total de las memorias reales.')">ACTIVAR GEAR 5</button>
+      </div>
+      <div class="mono" style="font-size: 9px; color: #475569; margin-top: 12px; line-height: 1.5;">
+        ROOT VERSION PLUSCUAMPERFECTA:<br>
+        - Sección de Seguridad Internacional (5 hrs) y Defensa Provincial (Now) añadida<br>
+        - Videos de Policía Nacional y Avatares de Unidad Fantasma integrados<br>
+        - Ciclo Glitch intacto con 6 WebP reales<br>
+        - Agente HOGAN 🇺🇸 100% visible
+      </div>
+    </div>
+    <div class="glass ability-log" id="abilityLog">
+      <div class="mono" style="color: var(--cyan); margin-bottom: 4px;">[SADV41_SYSTEM] Hub Leviathan 6 Caminos Inmortal.</div>
+      <div class="mono" style="color: #94a3b8;">[PATH] Rutas absolutas y nuevos assets de seguridad inyectados.</div>
+      <div class="mono" style="color: var(--gold);">[K9] Agente HOGAN patrullando sector principal.</div>
+    </div>
+  </section>
+</main>
+
+<script>
+  // Motor Transitorio Secuencial con Modo Glitch
+  const layers = document.querySelectorAll('.chaos-layer');
+  const mainBody = document.getElementById('mainBody');
+  let currentIndex = 0;
+  let transitionCount = 0;
+  let chaosActive = true;
+
+  function randomChaosTransition() {
+    if (!chaosActive || layers.length === 0) return;
+    
+    // Limpiar clases anteriores
+    layers.forEach(l => l.classList.remove('active', 'layer-glitch'));
+    
+    // Avanzar al siguiente en el ciclo de 6
+    currentIndex = (currentIndex + 1) % layers.length;
+    transitionCount++;
+
+    // Si completó el ciclo (múltiplo de 6), desencadenar el glitch
+    if (transitionCount % layers.length === 0) {
+      layers[currentIndex].classList.add('active', 'layer-glitch');
+      mainBody.classList.add('glitch-active');
+      logAction('⚠️ ANOMALÍA DETECTADA: Ciclo completado. Glitch de sistema en efecto.');
+      
+      // Remover glitch de la página tras 600ms
+      setTimeout(() => {
+        mainBody.classList.remove('glitch-active');
+        layers[currentIndex].classList.remove('layer-glitch');
+      }, 600);
+    } else {
+      layers[currentIndex].classList.add('active');
+    }
+
+    // Actualizar selector visual de los gears automáticamente
+    document.querySelectorAll('.gear-card').forEach(c => c.classList.remove('active'));
+    document.querySelector(`.gear-card[data-index="${currentIndex}"]`).classList.add('active');
+
+    // Tiempo arrítmico entre 2.5s y 6.5s
+    const arhythmicDelay = Math.random() * 4000 + 2500;
+    setTimeout(randomChaosTransition, arhythmicDelay);
+  }
+
+  // Iniciar ciclo
+  setTimeout(randomChaosTransition, 3000);
+
+  document.getElementById('toggleChaos').onclick = (e) => {
+    chaosActive = !chaosActive;
+    e.target.textContent = `CICLO GLITCH: ${chaosActive ? 'ON' : 'OFF'}`;
+    logAction(`Motor de transición cambiado a: ${chaosActive ? 'DINÁMICO' : 'ESTÁTICO'}`);
+    if(chaosActive) randomChaosTransition();
+  };
+
+  document.getElementById('gear7Btn').onclick = () => {
+    layers.forEach(l => l.classList.add('active', 'layer-glitch'));
+    mainBody.classList.add('glitch-active');
+    logAction('🔥 ¡ESTADO DESPERTAR GEAR 5 ALCANZADO! Realidad distorsionada.');
+    
+    setTimeout(() => {
+      mainBody.classList.remove('glitch-active');
+      layers.forEach((l, idx) => {
+        l.classList.remove('layer-glitch');
+        if(idx !== currentIndex) l.classList.remove('active');
+      });
+    }, 1500);
+  };
+
+  // Selector manual de Gear
+  document.querySelectorAll('.gear-card').forEach((card) => {
+    card.onclick = () => {
+      currentIndex = parseInt(card.dataset.index);
+      document.querySelectorAll('.gear-card').forEach(c => c.classList.remove('active'));
+      card.classList.add('active');
+      
+      layers.forEach(l => l.classList.remove('active', 'layer-glitch'));
+      layers[currentIndex].classList.add('active');
+      logAction(`Forzado el Cambio al Camino / Gear #${currentIndex + 1}.`);
+    };
+  });
+
+  function logAction(text) {
+    const log = document.getElementById('abilityLog');
+    const entry = document.createElement('div');
+    entry.className = 'mono';
+    entry.style.marginTop = '4px';
+    entry.style.color = '#e2e8f0';
+    entry.textContent = `> ${text}`;
+    log.prepend(entry);
+  }
+</script>
+</body>
+</html>
