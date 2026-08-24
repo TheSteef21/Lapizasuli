@@ -224,35 +224,9 @@
     <div class="scanline"></div>
 
     <!-- ==========================================
-         FASE 0: GATEKEEPER DE SEGURIDAD LOCAL
+         SISTEMA PRINCIPAL GSADV41 (ENTRADA DIRECTA)
          ========================================== -->
-    <div id="gatekeeper-screen" class="fixed inset-0 z-[100] flex justify-center items-center p-4 bg-[#0d0f12]">
-        <div class="logia-card max-w-lg w-full p-8 md:p-10 text-center border-t-4 border-t-oro rounded-lg z-10 relative">
-            <div class="font-mono text-sm text-oro tracking-[0.15em] mb-3 uppercase">SADV41 // PROTOCOLO DE AFILIACIÓN UNIFICADA</div>
-            <h1 class="text-2xl font-mason font-bold mb-4">Acceso al Sovereign Hub & Logia</h1>
-            
-            <p class="text-sm leading-relaxed text-slate-400 mb-6 text-justify font-sans">
-                Acceso exclusivo al sistema unificado. Cada asset, raíz ancestral y telemetría se conectan al núcleo GSADV41. Ingresa tu clave para abrir el Tabernáculo.
-            </p>
-
-            <div class="border-t border-slate-800 pt-6">
-                <label class="block text-xs text-slate-500 font-mono mb-2">Ingresa tu clave de acceso autorizada:</label>
-                <div class="flex gap-2">
-                    <input type="password" id="access-token" placeholder="SADV41-2026" class="w-full bg-black/50 border border-slate-700 rounded px-4 py-2 text-white font-mono text-xs focus:border-oro focus:outline-none text-center tracking-widest">
-                    <button id="btn-verificar" onclick="verificarLlaveLocal()" class="bg-oro hover:bg-amber-600 text-navy font-bold px-4 py-2 rounded transition-all cursor-pointer font-mono">➔</button>
-                </div>
-                <p id="token-error" class="text-red-500 text-xs mt-2 hidden font-mono">Clave incorrecta. Usa SADV41-2026</p>
-            </div>
-            
-            <div class="text-[10px] text-slate-600 mt-8 font-mono">El origen es 0. Transmisión protegida bajo ley SADV41.</div>
-        </div>
-        <div class="absolute inset-0 bg-[url('https://y2s.onrender.com/api/graphics/mundial_bg.jpg')] bg-cover bg-center opacity-10 blur-sm pointer-events-none"></div>
-    </div>
-
-    <!-- ==========================================
-         SISTEMA PRINCIPAL GSADV41
-         ========================================== -->
-    <div id="sistema-principal" class="hidden w-full min-h-screen">
+    <div id="sistema-principal" class="w-full min-h-screen">
 
         <!-- BARRA LATERAL BILATERAL -->
         <div id="main-sidebar" class="sidebar-tabs transition-all duration-500">
@@ -563,27 +537,6 @@
 
     <!-- SCRIPTS MAESTROS UNIFICADOS -->
     <script>
-        const CLAVE_ACCESO_ACTUAL = "SADV41-2026"; 
-
-        function verificarLlaveLocal() {
-            const tokenInput = document.getElementById('access-token').value.trim();
-            const errorMsg = document.getElementById('token-error');
-            const gatekeeper = document.getElementById('gatekeeper-screen');
-            const sistemaPrincipal = document.getElementById('sistema-principal');
-
-            if (tokenInput === CLAVE_ACCESO_ACTUAL) {
-                errorMsg.classList.add('hidden');
-                gatekeeper.classList.add('hidden');
-                sistemaPrincipal.classList.remove('hidden');
-                startDivineGlitch();
-                initVersiculos();
-                initTesseract();
-                refrescarMonitor();
-            } else {
-                errorMsg.classList.remove('hidden');
-            }
-        }
-
         // Chaos background cycle (7)
         const layers = document.querySelectorAll('.chaos-layer');
         let currentIndex = 0, transitionCount = 0;
@@ -738,8 +691,11 @@
             }, nextTime);
         }
 
-        document.getElementById('access-token').addEventListener('keydown', e => {
-            if(e.key === 'Enter') verificarLlaveLocal();
+        // --- EJECUCIÓN AUTOMÁTICA (ENTRADA DIRECTA) ---
+        document.addEventListener('DOMContentLoaded', () => {
+            startDivineGlitch();
+            initVersiculos();
+            refrescarMonitor();
         });
     </script>
 </body>
