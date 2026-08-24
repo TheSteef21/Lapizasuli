@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GSADV41 | Logia Pluscuamperfecta & Sistema de Acceso</title>
+    <title>GSADV41 | Logia Pluscuamperfecta & Metatron 4D Unificado</title>
     
     <!-- Tipografías Sagradas -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=JetBrains+Mono:wght@300;400;700&family=Inter:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
     
     <!-- Scripts Externos -->
     <script src="https://accounts.google.com/gsi/client" async defer></script>
@@ -21,18 +21,20 @@
                 extend: {
                     colors: {
                         navy: '#020617',
-                        oro: '#eab308',
+                        oro: '#d4af37',
                         blanco: '#f8fafc',
+                        cyanNeon: '#00f3ff',
+                        violetNeon: '#9d4edd',
+                        redNeon: '#FB542B',
                         borgona: '#4a0010',
                         neonGreen: '#10b981',
-                        neonBlue: '#00f3ff',
                         renderRed: '#da3637',
-                        violeta: '#6d28d9',
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
                         serif: ['Playfair Display', 'serif'],
                         mason: ['Cinzel', 'serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
                     }
                 }
             }
@@ -41,77 +43,110 @@
 
     <style>
         :root { 
-            --oro-alquimico: #d4af37; 
+            --oro: #d4af37; 
             --obsidiana: #050505; 
-            --luz-divina: #7f5af0;
-            --luz-santo: #00f3ff;
-            --borgona-sacro: #4a0010;
+            --cyan: #00f3ff;
+            --violet: #9d4edd;
+            --red: #FB542B;
+            --green: #1DB954;
+            --blue: #7AF6FF;
+            --orange: #FFC26A;
         }
 
         body {
             background-color: var(--obsidiana);
             color: #f8fafc;
-            position: relative;
+            font-family: 'Inter', system-ui, sans-serif;
             overflow-x: hidden;
+            position: relative;
         }
 
-        /* --- FONDOS Y EFECTOS --- */
-        .bg-logia {
-            background-image: 
-                radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
-                linear-gradient(rgba(2, 6, 23, 0.85), rgba(2, 6, 23, 0.95)), 
-                url('https://y2s.onrender.com/api/graphics/mundial_bg.jpg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+        /* --- FONDOS Y EFECTOS UNIFICADOS --- */
+        .chaos-bg-container { position: fixed; inset: 0; z-index: 0; background: #000; pointer-events: none; overflow: hidden; }
+        .chaos-layer {
+            position: absolute; inset: -20px;
+            background-size: cover; background-position: center;
+            opacity: 0; mix-blend-mode: screen;
+            filter: contrast(125%) brightness(95%) saturate(1.2);
+            transition: opacity 3.5s, transform 9s, filter 0.3s;
         }
-        
-        .glass { background: rgba(2, 6, 23, 0.85); backdrop-filter: blur(12px); border: 1px solid rgba(234, 179, 8, 0.2); }
-        .text-shadow-oro { text-shadow: 0 0 10px rgba(234, 179, 8, 0.5); }
-        .text-shadow-blue { text-shadow: 0 0 10px rgba(0, 243, 255, 0.6); }
+        .chaos-layer.active { opacity: 0.35; transform: scale(1.09) rotate(0.6deg); }
+        .chaos-layer.now-asset-glitch { animation: assetNowGlitch 0.38s infinite alternate; }
+
+        .grid-pattern { background-image: linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px); background-size: 28px 28px; }
+        .bg-gradient { background-image: radial-gradient(ellipse at 50% -10%, rgba(251,84,43,.15), transparent 55%), radial-gradient(ellipse at 80% 100%, rgba(0,243,255,.08), transparent 60%), radial-gradient(ellipse at 0 100%, rgba(212,175,55,.07), transparent 50%); }
+
+        @keyframes assetNowGlitch {
+            0% { filter: hue-rotate(0deg) contrast(180%) saturate(200%); }
+            100% { filter: hue-rotate(90deg) contrast(250%) invert(0.12) saturate(300%); transform: scale(1.13) translate(-4px,4px); }
+        }
+        @keyframes divineGlory {
+            0% { filter: brightness(1); }
+            35% { filter: brightness(4.2) contrast(240%) saturate(280%) drop-shadow(0 0 140px #fff) drop-shadow(0 0 80px var(--oro)); transform: scale(1.22); }
+            100% { filter: brightness(1); }
+        }
+        .divine-glory-active { animation: divineGlory 2.2s forwards; }
+
+        .glass { background: rgba(2, 6, 23, 0.88); backdrop-filter: blur(16px); border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 16px; }
+        .glass-strong { background: rgba(10,10,16,.94); backdrop-filter: blur(22px); border: 1px solid rgba(212,175,55,.3); }
+        .gold-glow { box-shadow: 0 0 40px rgba(212,175,55,.18), inset 0 0 22px rgba(212,175,55,.05); }
+        .cyan-glow { box-shadow: 0 0 28px rgba(0,243,255,.18), inset 0 0 18px rgba(0,243,255,.05); }
+
         .esoterico-glow { text-shadow: 0 0 25px rgba(212, 175, 55, 0.7); }
+        .text-shadow-blue { text-shadow: 0 0 10px rgba(0, 243, 255, 0.6); }
 
         .scanline {
             width: 100%; height: 2px;
-            background: rgba(0, 209, 255, 0.15);
-            position: fixed; z-index: 9999; top: 0;
+            background: linear-gradient(90deg, transparent, rgba(0,243,255,0.3), transparent);
+            position: fixed; z-index: 60; top: 0;
             pointer-events: none;
             animation: scanline 8s linear infinite;
         }
         @keyframes scanline { 0% { top: 0; } 100% { top: 100%; } }
 
-        /* --- MENÚ LATERAL --- */
-        .sidebar-tabs { position: fixed; left: 0; top: 50%; transform: translateY(-50%); z-index: 60; display: flex; flex-direction: column; gap: 12px; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
-        .vertical-tab { display: flex; align-items: center; background: rgba(2, 6, 23, 0.95); padding: 12px 15px; border-radius: 0 15px 15px 0; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); width: 60px; overflow: hidden; white-space: nowrap; box-shadow: 4px 4px 15px rgba(0,0,0,0.5); cursor: pointer; }
-        .vertical-tab:hover { width: 340px; padding-left: 20px; }
-        .vertical-tab span.icon { font-size: 1.5rem; min-width: 30px; display: flex; justify-content: center; }
-        .vertical-tab span.text { margin-left: 15px; font-weight: bold; opacity: 0; transition: opacity 0.3s; font-size: 0.85rem; letter-spacing: 0.05em; }
+        /* --- METATRON 3D FLOWER --- */
+        #flower-container { perspective: 1400px; width: 100%; height: 560px; display: flex; justify-content: center; align-items: center; position: relative; overflow: visible; touch-action: none; }
+        #flower-scene { width: 520px; height: 520px; transform-style: preserve-3d; position: relative; cursor: grab; }
+        #flower-scene:active { cursor: grabbing; }
+        .flower-plane { position: absolute; top: 0; left: 0; width: 100%; height: 100%; transform-style: preserve-3d; opacity: .22; pointer-events: none; }
+        .node-3d { position: absolute; left: 50%; top: 50%; transform-style: preserve-3d; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; will-change: transform, z-index, opacity; }
+        .node-dot { width: 14px; height: 14px; border-radius: 50%; border: 2px solid rgba(255,255,255,.9); box-shadow: 0 0 12px currentColor; transition: all .22s ease; }
+        .node-label { margin-top: 6px; font-size: 8.5px; letter-spacing: .08em; font-weight: 700; text-transform: uppercase; white-space: nowrap; padding: 2px 5px; border-radius: 4px; background: rgba(0,0,0,.78); border: 1px solid rgba(255,255,255,.15); pointer-events: none; transition: all .22s; font-family: 'JetBrains Mono', monospace; }
+        .node-3d:hover .node-dot { width: 22px; height: 22px; box-shadow: 0 0 22px currentColor, 0 0 36px currentColor; background: #fff !important; }
+        .node-3d:hover .node-label { background: #fff; color: #000 !important; transform: scale(1.15); }
+        .node-3d.dimmed { opacity: .12 !important; filter: grayscale(.6); }
+        
+        .chip { font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: .06em; padding: 5px 10px; border-radius: 999px; border: 1px solid rgba(255,255,255,.12); background: rgba(255,255,255,.04); cursor: pointer; transition: .2s; }
+        .chip.active { background: #fff; color: #000; border-color: #fff; }
+        .metatron-search { background: rgba(0,0,0,.6); border: 1px solid rgba(255,255,255,.12); color: #fff; padding: 10px 14px; border-radius: 12px; width: 100%; outline: none; font-family: 'JetBrains Mono', monospace; }
+        .metatron-search:focus { border-color: var(--cyan); box-shadow: 0 0 0 3px rgba(0,243,255,.15); }
+        .link-card { display: block; padding: 10px 12px; border-radius: 12px; font-size: 11px; line-height: 1.4; transition: .2s; word-break: break-all; text-decoration: none; }
+        .link-card:hover { transform: translateY(-2px); }
+
+        /* --- MENÚ LATERAL BILATERAL --- */
+        .sidebar-tabs { position: fixed; left: 0; top: 50%; transform: translateY(-50%); z-index: 55; display: flex; flex-direction: column; gap: 10px; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+        .vertical-tab { display: flex; align-items: center; background: rgba(2, 6, 23, 0.95); padding: 10px 14px; border-radius: 0 12px 12px 0; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); width: 55px; overflow: hidden; white-space: nowrap; box-shadow: 4px 4px 15px rgba(0,0,0,0.5); cursor: pointer; border-left: 3px solid var(--cyan); text-decoration: none; color: #fff; }
+        .vertical-tab:hover { width: 340px; padding-left: 18px; background: rgba(0, 243, 255, 0.2); }
+        .vertical-tab span.icon { font-size: 1.4rem; min-width: 28px; display: flex; justify-content: center; }
+        .vertical-tab span.text { margin-left: 14px; font-weight: bold; opacity: 0; transition: opacity 0.3s; font-size: 0.8rem; letter-spacing: 0.05em; font-family: 'JetBrains Mono', monospace; }
         .vertical-tab:hover span.text { opacity: 1; transition-delay: 0.1s; }
         
         .sidebar-tabs.right-aligned { left: auto; right: 0; }
-        .sidebar-tabs.right-aligned .vertical-tab { border-radius: 15px 0 0 15px; flex-direction: row-reverse; }
-        .sidebar-tabs.right-aligned .vertical-tab:hover { padding-right: 20px; padding-left: 15px; }
-        .sidebar-tabs.right-aligned .vertical-tab span.text { margin-left: 0; margin-right: 15px; text-align: right; }
+        .sidebar-tabs.right-aligned .vertical-tab { border-radius: 12px 0 0 12px; border-left: none; border-right: 3px solid var(--cyan); flex-direction: row-reverse; }
+        .sidebar-tabs.right-aligned .vertical-tab:hover { padding-right: 18px; padding-left: 14px; }
+        .sidebar-tabs.right-aligned .vertical-tab span.text { margin-left: 0; margin-right: 14px; text-align: right; }
 
         /* --- COMPONENTES LOGIA --- */
         .logia-card { 
-            background: linear-gradient(145deg, rgba(10,10,10,0.85), rgba(20,20,20,0.85));
-            border: 1px solid rgba(212, 175, 55, 0.15);
+            background: linear-gradient(145deg, rgba(10,10,10,0.88), rgba(20,20,20,0.88));
+            border: 1px solid rgba(212, 175, 55, 0.18);
             box-shadow: 0 15px 35px rgba(0,0,0,0.9), inset 0 0 20px rgba(212, 175, 55, 0.03);
             backdrop-filter: blur(12px);
             position: relative;
             overflow: hidden;
             transition: all 0.5s ease;
         }
-        .logia-card:hover { border-color: rgba(212, 175, 55, 0.4); box-shadow: 0 20px 40px rgba(0,0,0,0.9), inset 0 0 30px rgba(212, 175, 55, 0.05); }
-
-        .geometria-bg {
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            width: 100%; height: 100%; pointer-events: none; z-index: 0;
-            background: 
-                linear-gradient(30deg, transparent 49.5%, rgba(212, 175, 55, 0.03) 50%, transparent 50.5%),
-                linear-gradient(-30deg, transparent 49.5%, rgba(212, 175, 55, 0.03) 50%, transparent 50.5%);
-        }
+        .logia-card:hover { border-color: rgba(212, 175, 55, 0.45); box-shadow: 0 20px 40px rgba(0,0,0,0.9), inset 0 0 30px rgba(212, 175, 55, 0.05); }
 
         .triangulo-trinidad {
             width: 0; height: 0;
@@ -122,7 +157,7 @@
         }
         .triangulo-trinidad::after {
             content: '1'; position: absolute; top: 35px; left: -5px;
-            color: var(--oro-alquimico); font-family: 'Cinzel', serif; font-size: 1.2rem;
+            color: var(--oro); font-family: 'Cinzel', serif; font-size: 1.2rem;
             text-shadow: 0 0 10px rgba(212, 175, 55, 0.8);
         }
         @keyframes pulso-divino-trinidad {
@@ -130,295 +165,460 @@
             100% { filter: drop-shadow(0 0 30px rgba(212, 175, 55, 0.9)); transform: scale(1.08); }
         }
 
-        .marca-background {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1;
-            display: flex; justify-content: center; align-items: center; opacity: 0.15; pointer-events: none;
-        }
+        .asset-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+        .asset-card { border-radius: 16px; padding: 12px; background: rgba(10,10,18,0.92); border: 1px solid rgba(0,243,255,0.3); cursor: pointer; transition: 0.3s; position: relative; overflow: hidden; }
+        .asset-card:hover { border-color: var(--oro); box-shadow: 0 0 25px rgba(212,175,55,0.3); transform: translateY(-2px); }
+        .asset-card img, .asset-card video { width: 100%; height: 180px; object-fit: cover; border-radius: 10px; margin-bottom: 8px; background: #000; }
+        .gear-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 8px; }
+        .gear-item { border-radius: 12px; padding: 6px; background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.1); text-align: center; cursor: pointer; transition: 0.3s; }
+        .gear-item:hover, .gear-item.active { border-color: var(--cyan); box-shadow: 0 0 15px rgba(0,243,255,0.3); }
+        .gear-item img { width: 100%; height: 65px; object-fit: cover; border-radius: 6px; margin-bottom: 4px; }
     </style>
 </head>
-<body class="font-sans antialiased selection:bg-oro selection:text-navy">
+<body class="antialiased selection:bg-oro selection:text-navy" id="mainBody">
+
+    <!-- FONDO DE CAOS VIVO + METATRON GRID -->
+    <div class="chaos-bg-container" id="chaosBg">
+        <div class="chaos-layer active" data-asset="TRONO" style="background-image:url('https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/785282279_1341489208069876_1027745017510610652_n.webp')"></div>
+        <div class="chaos-layer" data-asset="CYBER" style="background-image:url('https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/784748359_1032169259812179_379368085236729966_n.webp')"></div>
+        <div class="chaos-layer" data-asset="NUKE" style="background-image:url('https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/783899130_4498246103827834_338786690266061800_n.webp')"></div>
+        <div class="chaos-layer" data-asset="GOLD" style="background-image:url('https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/783671951_1762018238468095_5751859537385186669_n.webp')"></div>
+    </div>
+    
+    <div style="position:fixed;inset:0;pointer-events:none;z-index:1;">
+        <div class="bg-gradient" style="position:absolute;inset:0"></div>
+        <div class="grid-pattern" style="position:absolute;inset:0;opacity:.25"></div>
+    </div>
+
     <div class="scanline"></div>
 
     <!-- ==========================================
-         FASE 1: EL EMBUDO / EL VERDUGO SILENCIOSO 
+         SISTEMA PRINCIPAL GSADV41 (ACCESO DIRECTO)
          ========================================== -->
-    <div id="gatekeeper-screen" class="fixed inset-0 z-[100] flex justify-center items-center p-4 bg-[#0d0f12]">
-        <div class="logia-card max-w-lg w-full p-8 md:p-10 text-center border-t-4 border-t-oro rounded-lg z-10 relative">
-            <div class="font-mono text-sm text-oro tracking-[0.15em] mb-3 uppercase">SADV41 // PROTOCOLO DE AFILIACIÓN</div>
-            <h1 class="text-2xl font-mason font-bold mb-4">¿Deseas afiliarte a la Logia?</h1>
-            
-            <p class="text-sm leading-relaxed text-slate-400 mb-6 text-justify font-sans">
-                Acceso exclusivo al sistema de información, cobertura y parámetros de seguridad. Este canal no es negociable ni está sujeto a filosofías externas. La solicitud otorga derecho a evaluación de perfil, asignación de insignias oficiales y cobertura dentro de la red.
-            </p>
-
-            <div class="bg-oro/5 border-l-2 border-oro p-4 text-xs text-left mb-6 text-slate-300">
-                <strong class="text-oro block mb-1 uppercase font-mono tracking-widest">Parámetro de Entrada (Filtro de Gravedad):</strong> 
-                Para asegurar la seriedad y el respeto por el sistema, la afiliación requiere un pago de <strong>$150</strong>. Gestiona tu pago vía WhatsApp o consulta métodos alternativos en el registro oficial.
-            </div>
-
-            <!-- Botones de Acción y Pago -->
-            <div class="space-y-3 mb-8">
-                <a href="https://wa.me/50769362166?text=Deseo%20solicitar%20mi%20afiliacion%20a%20la%20Logia%20SADV41.%20Comprendo%20el%20filtro%20de%20150%20al%20+50769362166" 
-                   class="block w-full bg-oro hover:bg-amber-500 text-black font-bold py-3 rounded transition-colors uppercase tracking-widest text-sm shadow-[0_0_15px_rgba(234,179,8,0.3)] text-center" target="_blank">
-                    1. Solicitar Vía WhatsApp (+507 6936-2166)
-                </a>
-                <a href="https://thesteef21.github.io/Lapizasuli/FUNDING.yml" 
-                   class="block w-full bg-slate-900 hover:bg-slate-800 text-emerald-400 border border-emerald-500/40 font-bold py-2.5 rounded transition-colors uppercase tracking-wider text-xs text-center" target="_blank">
-                    💳 Ver Más Formas de Pago (Funding)
-                </a>
-            </div>
-
-            <!-- Verificación con Contraseña Segura (Oculta con Puntos) -->
-            <div class="border-t border-slate-800 pt-6">
-                <label class="block text-xs text-slate-500 font-mono mb-2">Ingresa tu clave de acceso autorizada:</label>
-                <div class="flex gap-2">
-                    <input type="password" id="access-token" placeholder="•••••••••••••••••••••" class="w-full bg-black/50 border border-slate-700 rounded px-4 py-2 text-white font-mono text-xs focus:border-oro focus:outline-none text-center tracking-widest">
-                    <button onclick="verificarLlave()" class="bg-slate-800 hover:bg-slate-700 text-white border border-slate-600 px-4 py-2 rounded font-bold transition-all cursor-pointer">➔</button>
-                </div>
-                <p id="token-error" class="text-red-500 text-xs mt-2 hidden font-mono">Clave incorrecta o no autorizada.</p>
-            </div>
-            
-            <div class="text-[10px] text-slate-600 mt-8 font-mono">El origen es 0. Transmisión protegida.</div>
-        </div>
-        
-        <!-- Fondo del Gatekeeper -->
-        <div class="absolute inset-0 bg-[url('https://y2s.onrender.com/api/graphics/mundial_bg.jpg')] bg-cover bg-center opacity-10 blur-sm"></div>
-    </div>
-
-
-    <!-- ==========================================
-         FASE 2: EL ECOSISTEMA GSADV41 (Oculto)
-         ========================================== -->
-    <div id="sistema-principal" class="hidden bg-logia w-full min-h-screen">
-        
-        <!-- FONDO VECTORIAL GLOBAL -->
-        <div class="marca-background">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="100%" height="100%">
-            <defs>
-                <radialGradient id="glow" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stop-color="#d4af37" stop-opacity="0.8"/>
-                <stop offset="100%" stop-color="#050505" stop-opacity="0"/>
-                </radialGradient>
-                <linearGradient id="beam" x1="50%" y1="0%" x2="50%" y2="100%">
-                <stop offset="0%" stop-color="#00f3ff" stop-opacity="0"/>
-                <stop offset="50%" stop-color="#00f3ff" stop-opacity="0.9"/>
-                <stop offset="100%" stop-color="#00f3ff" stop-opacity="0"/>
-                </linearGradient>
-                <filter id="neon">
-                <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
-                <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
-                </filter>
-            </defs>
-            <circle cx="400" cy="400" r="350" fill="url(#glow)"/>
-            <rect x="395" y="100" width="10" height="600" fill="url(#beam)" filter="url(#neon)"/>
-            <rect x="250" y="398" width="300" height="4" fill="#d4af37" filter="url(#neon)"/>
-            <polygon points="400,200 550,480 250,480" fill="none" stroke="#d4af37" stroke-width="2" stroke-opacity="0.5"/>
-            <text x="400" y="160" font-family="Cinzel, serif" font-size="24" fill="#d4af37" text-anchor="middle" letter-spacing="4">SADV41</text>
-            <text x="400" y="650" font-family="Cinzel, serif" font-size="32" fill="#00f3ff" text-anchor="middle" letter-spacing="8" filter="url(#neon)">ISAÍAS 43:19</text>
-            <text x="400" y="690" font-family="Courier New, monospace" font-size="14" fill="#f8fafc" text-anchor="middle" letter-spacing="2">ORIGEN [1027 = 10 = 1]</text>
-            </svg>
-        </div>
+    <div id="sistema-principal" class="w-full min-h-screen relative z-10">
 
         <!-- MENÚ LATERAL BILATERAL -->
-        <div id="main-sidebar" class="sidebar-tabs">
-            <a href="https://thesteef21.github.io/Lapizasuli/FUNDING.yml" target="_blank" class="vertical-tab border-l-4 border-emerald-400 hover:bg-emerald-900/40">
-                <span class="icon">💵</span><span class="text text-emerald-400">Invertir / Funding (Formas de Pago)</span>
+        <div id="main-sidebar" class="sidebar-tabs transition-all duration-500">
+            <a href="https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/LEVIATHAN_SADV41_GEAR5_DIVINO.html" target="_blank" class="vertical-tab" style="border-left: 3px solid #00f3ff;">
+                <span class="icon">👁️</span><span class="text text-cyan-300">Leviathan Gear 5 Divino</span>
             </a>
-            <div onclick="toggleSidebar()" class="vertical-tab border-l-4 border-slate-400 hover:bg-slate-800/40" title="Cambiar lado del menú">
+            <a href="https://thesteef21.github.io/Lapizasuli/assets/PRINCIPADO/index.html" target="_blank" class="vertical-tab" style="border-left: 3px solid #d4af37;">
+                <span class="icon">🏛️</span><span class="text text-oro">Principado Divino</span>
+            </a>
+            <a href="https://thesteef21.github.io/Lapizasuli/SLogia.html" target="_blank" class="vertical-tab">
+                <span class="icon">🎚️</span><span class="text text-cyan-300">SLogia | Conexión SADV41</span>
+            </a>
+            <a href="https://thesteef21.github.io/Lapizasuli/IMA.html" target="_blank" class="vertical-tab">
+                <span class="icon">🍚</span><span class="text text-blue-200">Arroz barato cerca de ti!</span>
+            </a>
+            <a href="https://thesteef21.github.io/Lapizasuli/ColombiaPTY.html" target="_blank" class="vertical-tab">
+                <span class="icon">💸</span><span class="text text-emerald-300">Préstamos 🇵🇦🇨🇴🇺🇸</span>
+            </a>
+            <a href="https://thesteef21.github.io/Lapizasuli/VSADV41.html" target="_blank" class="vertical-tab">
+                <span class="icon">🇻🇪</span><span class="text text-yellow-300">Por Venezuela 🇻🇪</span>
+            </a>
+            <a href="https://thesteef21.github.io/Lapizasuli/CristoTeAma.html" target="_blank" class="vertical-tab">
+                <span class="icon">☦️</span><span class="text text-purple-300">Cristo Te Ama 🎚</span>
+            </a>
+            <a href="https://thesteef21.github.io/Lapizasuli/FIFA2026.html" target="_blank" class="vertical-tab">
+                <span class="icon">⚽</span><span class="text text-green-300">Mundial 2026</span>
+            </a>
+            <a href="https://factura-88pp.onrender.com/" target="_blank" class="vertical-tab">
+                <span class="icon">💵</span><span class="text text-emerald-400">Invertir (FACTURA)</span>
+            </a>
+            <div onclick="toggleSidebar()" class="vertical-tab" title="Cambiar lado del menú">
                 <span class="icon">⇋</span><span class="text text-slate-300">Alternar Menú</span>
             </div>
         </div>
 
-        <!-- NAVEGACIÓN SUPERIOR UNIFICADA -->
-        <header class="fixed w-full z-50 glass border-b border-oro/30 px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+        <!-- HEADER SUPERIOR -->
+        <header id="main-header" class="fixed top-0 left-0 w-full z-40 glass border-b border-oro/30 px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
             <div class="flex items-center gap-3">
                 <span class="text-2xl">🛡️</span>
                 <div>
-                    <h1 class="font-serif text-xl tracking-wider text-oro font-bold leading-none">SOVEREIGN HUB</h1>
-                    <p class="text-[9px] text-slate-400 font-mono tracking-widest leading-none mt-1">LOGIA SADV41 | GSADV41</p>
+                    <h1 class="font-serif text-xl tracking-wider text-oro font-bold">LOGIA SADV41</h1>
+                    <p class="text-[9px] text-slate-400 font-mono tracking-widest">PLUSCUAMPERFECTA UNIFICADA</p>
                 </div>
             </div>
             
-            <div class="flex flex-col items-center gap-2 hidden xl:flex">
-                <nav class="flex gap-5 text-sm uppercase tracking-wider font-medium flex-wrap justify-center">
-                    <a href="#el-atrio" class="hover:text-oro transition-colors text-amber-200">I. El Atrio</a>
-                    <a href="#el-santo" class="hover:text-neonBlue transition-colors text-cyan-300">II. El Santo</a>
-                    <a href="#el-santisimo" class="hover:text-purple-400 transition-colors text-purple-300">III. El Santísimo</a>
-                </nav>
-            </div>
+            <nav class="hidden lg:flex gap-6 text-sm uppercase tracking-wider font-medium">
+                <a href="#el-atrio" class="hover:text-oro transition-colors text-amber-300">I. El Atrio</a>
+                <a href="#metatron-seccion" class="hover:text-cyanNeon transition-colors text-cyan-300">II. Metatron 4D</a>
+                <a href="#el-santisimo" class="hover:text-purple-400 transition-colors text-purple-300">III. El Santísimo</a>
+            </nav>
 
-            <div class="flex flex-col items-center justify-center gap-2">
-                <div id="status" class="text-[10px] text-oro font-mono text-center tracking-widest uppercase">Protocolo V.S. Activo...</div>
-                <div class="flex flex-wrap gap-2 justify-center">
-                    <button id="btnConnect" onclick="connectBinance()" class="bg-oro hover:bg-amber-600 text-navy font-bold text-xs px-3 py-2 rounded transition-all flex items-center gap-1.5 shadow-lg shadow-oro/20 cursor-pointer">
-                        ⚡ Web3 Wallet
-                    </button>
-                </div>
+            <div class="flex items-center gap-3">
+                <span class="mono text-xs bg-black/60 px-3 py-1.5 rounded-full border border-oro/30 text-oro" id="cycleCounter">CICLO 0 / 7</span>
+                <button id="btnConnect" onclick="connectBinance()" class="bg-oro hover:bg-amber-600 text-navy font-bold text-xs px-3 py-2 rounded-lg transition-all flex items-center gap-1.5 shadow-lg shadow-oro/20 cursor-pointer font-mono">
+                    ⚡ Web3 Wallet
+                </button>
             </div>
         </header>
 
-        <!-- HERO HEADER -->
-        <div id="hero-header" class="relative w-full h-[70vh] pt-24 overflow-hidden flex items-center justify-center bg-black border-b border-oro/30">
-            <div id="hero-svg" class="absolute inset-0 w-full h-full bg-navy flex items-center justify-center transition-opacity duration-[2000ms] ease-in-out opacity-100 z-10">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" class="w-full h-full object-cover">
-                    <defs>
-                        <radialGradient id="svg-glow" cx="50%" cy="50%" r="50%">
-                            <stop offset="0%" stop-color="#00f3ff" stop-opacity="0.3"/>
-                            <stop offset="100%" stop-color="#020617" stop-opacity="1"/>
-                        </radialGradient>
-                        <linearGradient id="svg-gold-line" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stop-color="#eab308"/>
-                            <stop offset="50%" stop-color="#d4af37"/>
-                            <stop offset="100%" stop-color="#a16207"/>
-                        </linearGradient>
-                    </defs>
-                    <rect width="100%" height="100%" fill="url(#svg-glow)"/>
-                    <text x="960" y="520" fill="#eab308" font-family="Cinzel, serif" font-size="72" font-weight="bold" text-anchor="middle" letter-spacing="10">SADV41</text>
-                    <text x="960" y="580" fill="#00f3ff" font-family="Inter, sans-serif" font-size="24" font-weight="300" text-anchor="middle" letter-spacing="5">THE DIVINE WHISPER</text>
-                </svg>
-            </div>
-        </div>
+        <main class="pt-40 pb-20 px-4 md:px-12 max-w-6xl mx-auto space-y-16">
 
-        <!-- CONTENIDO PRINCIPAL -->
-        <main class="pt-8 pb-12 px-4 md:px-12 max-w-6xl mx-auto space-y-16">
-
-            <!-- HEADER LOGIA -->
-            <header class="p-12 border border-oro/20 text-center relative overflow-hidden rounded-2xl logia-card">
+            <!-- INTRO LOGIA & PALO VERTICAL -->
+            <header class="p-10 border border-oro/30 text-center relative overflow-hidden rounded-2xl logia-card">
                 <div class="absolute inset-0 bg-gradient-to-b from-yellow-900/10 to-transparent pointer-events-none"></div>
-                <div class="triangulo-trinidad mb-8"></div>
-                <h1 class="text-4xl md:text-5xl font-mason text-oro esoterico-glow uppercase tracking-[0.25em]">Logia SADV41</h1>
-                <p class="text-xs md:text-sm uppercase tracking-[0.6em] text-slate-400 mt-4 border-t border-oro/30 inline-block pt-3">Arquitectura Pluscuamperfecta de la Verdad</p>
+                <div class="triangulo-trinidad mb-6"></div>
+                <h1 class="text-3xl md:text-5xl font-mason text-oro esoterico-glow uppercase tracking-[0.2em]">Logia Pluscuamperfecta</h1>
+                <p class="text-xs md:text-sm uppercase tracking-[0.4em] text-slate-400 mt-4 border-t border-oro/30 inline-block pt-3 font-mono">Isaías 43:19 | El Origen es 0</p>
             </header>
 
-            <!-- I. EL ATRIO -->
-            <section id="el-atrio" class="logia-card p-8 md:p-12 rounded-xl">
-                <div class="geometria-bg"></div>
-                <div class="relative z-10">
-                    <h2 class="text-2xl text-oro mb-8 border-l-4 border-oro pl-5 tracking-widest flex items-center gap-3 font-mason">
-                        <span class="text-sm opacity-50">I.</span> EL ATRIO <span class="text-[10px] text-slate-500 font-mono tracking-normal ml-auto">(La Manifestación)</span>
-                    </h2>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="p-6 bg-black/40 border border-slate-800 hover:border-oro/50 transition-all rounded-lg group">
-                            <div class="flex items-center gap-4 mb-3">
-                                <span class="text-3xl grayscale group-hover:grayscale-0 transition-all">📡</span>
-                                <h3 class="font-bold text-lg tracking-wide text-slate-200">Identidad Confirmada</h3>
-                            </div>
-                            <p class="text-xs text-slate-400 font-mono leading-relaxed mb-6">Punto de contacto terrenal. Vincula tu identidad digital real a tu acceso pagado para establecer la trazabilidad.</p>
-                            <div class="pt-4 border-t border-slate-800 flex flex-col items-center gap-3 w-full">
-                                <div id="auth-container" style="display: flex; justify-content: center; width: 100%;">
-                                    <div id="g_id_onload" data-client_id="328306412185-lumsfeg3eclqq72blifegpog41rk5tl6.apps.googleusercontent.com" data-callback="handleCredentialResponse"></div>
-                                    <div class="g_id_signin" data-type="standard" data-theme="filled_black" data-shape="rectangular"></div>
-                                </div>
-                            </div>
+            <!-- I. EL ATRIO (Autenticación e Identidad) -->
+            <section id="el-atrio" class="glass p-8 md:p-12 rounded-xl">
+                <h2 class="text-2xl text-oro mb-6 border-l-4 border-oro pl-5 tracking-widest font-mason flex items-center gap-3">
+                    <span>I.</span> EL ATRIO <span class="text-[10px] text-slate-500 font-mono tracking-normal ml-auto">(Identificación & Acceso)</span>
+                </h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="p-6 bg-black/40 border border-slate-800 rounded-lg">
+                        <h3 class="font-bold text-lg tracking-wide text-slate-200 mb-2">📡 Verificación de Identidad</h3>
+                        <p class="text-xs text-slate-400 font-mono leading-relaxed mb-4">Conecta tu perfil para asegurar la trazabilidad oficial en la Logia SADV41.</p>
+                        <div id="auth-container" class="flex justify-center w-full">
+                            <div id="g_id_onload" data-client_id="328306412185-lumsfeg3eclqq72blifegpog41rk5tl6.apps.googleusercontent.com" data-callback="handleCredentialResponse"></div>
+                            <div class="g_id_signin" data-type="standard" data-theme="filled_black" data-shape="rectangular"></div>
                         </div>
+                    </div>
 
-                        <div class="p-6 bg-black/40 border border-slate-800 hover:border-cyan-500/50 transition-all rounded-lg group flex flex-col justify-between">
-                            <div>
-                                <div class="flex items-center gap-4 mb-3">
-                                    <span class="text-3xl grayscale group-hover:grayscale-0 transition-all">🤖</span>
-                                    <h3 class="font-bold text-lg tracking-wide text-slate-200">Intersección Gemini</h3>
-                                </div>
-                                <p class="text-xs text-slate-400 font-mono leading-relaxed">El primer nivel de diálogo social y código. Lógica de programación y asistencia de IA.</p>
-                            </div>
-                            <div id="walletStatus" class="hidden mt-4 p-4 bg-gray-900/90 border border-oro/40 rounded-xl font-mono shadow-2xl w-full">
-                                <p class="text-xs text-slate-300 break-all">Dirección: <span id="walletAddress" class="text-oro font-bold select-all"></span></p>
-                            </div>
+                    <div class="p-6 bg-black/40 border border-slate-800 rounded-lg flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-bold text-lg tracking-wide text-slate-200 mb-2">🤖 Enlace Web3 & Red</h3>
+                            <p class="text-xs text-slate-400 font-mono leading-relaxed">Sincronización con la red descentralizada de nodos y finanzas.</p>
+                        </div>
+                        <div id="walletStatus" class="hidden mt-4 p-3 bg-gray-900 border border-oro/40 rounded-xl font-mono text-xs">
+                            <p class="text-slate-300 break-all">Wallet: <span id="walletAddress" class="text-oro font-bold"></span></p>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- II. EL SANTO -->
-            <section id="el-santo" class="logia-card p-8 md:p-12 rounded-xl border-t-4 border-cyan-400">
-                <div class="geometria-bg"></div>
-                <div class="relative z-10">
-                    <h2 class="text-2xl text-cyan-500 mb-8 border-l-4 border-cyan-500 pl-5 tracking-widest flex items-center gap-3 font-mason text-shadow-blue">
-                        <span class="text-sm opacity-50 text-oro">II.</span> EL SANTO <span class="text-[10px] text-slate-500 font-mono tracking-normal ml-auto">(Boletín del Nodo & IA)</span>
-                    </h2>
-                    <p class="text-sm text-slate-300 leading-relaxed font-sans mb-6 border-b border-slate-800 pb-4">
-                        El flujo de información estructurada. A través del nodo en Render, comprendemos la realidad sociopolítica, Burunga Crece y las vanguardias.
-                    </p>
+            <!-- II. EL SANTO (METATRON 4D - 51 NODOS) -->
+            <section id="metatron-seccion" class="glass-strong gold-glow rounded-3xl p-6 md:p-8 relative z-20">
+                <header class="glass gold-glow rounded-2xl p-4 md:p-5 mb-6 flex flex-wrap gap-4 justify-between items-center">
+                    <div>
+                        <h2 class="cinzel text-xl md:text-2xl font-black tracking-[0.16em] m-0 text-white">II. EL SANTO // METATRON 4D - 51 NODOS</h2>
+                        <p class="mono text-[0.66rem] text-slate-400 tracking-[0.18em] mt-1">Exploración Interactiva de la Red /assets | SADV41 LOVE</p>
+                    </div>
+                    <div class="flex gap-2 flex-wrap items-center">
+                        <button id="resetView" class="chip hover:bg-white/20">RESET 3D</button>
+                        <button id="toggleAuto" class="chip" style="border-color:rgba(0,243,255,.3);color:var(--cyan)">AUTO: ON</button>
+                        <button id="toggleLabels" class="chip">LABELS: ON</button>
+                    </div>
+                </header>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                    <div class="lg:col-span-5 flex flex-col gap-4">
+                        <div>
+                            <input id="searchInput" type="search" class="metatron-search mb-3" placeholder="Buscar nodo: GSADV41, BOXING, TRONO...">
+                            <div id="familyChips" class="flex flex-wrap gap-2 mono">
+                                <button class="chip active" data-family="ALL">ALL 51</button>
+                                <button class="chip" data-family="SADV41" style="color:var(--oro)">● SADV41</button>
+                                <button class="chip" data-family="TRONO" style="color:var(--violet)">● TRONO</button>
+                                <button class="chip" data-family="USARMY" style="color:var(--red)">● USARMY</button>
+                                <button class="chip" data-family="AI" style="color:var(--cyan)">● AI/WEB3</button>
+                            </div>
+                        </div>
+
+                        <div class="glass rounded-xl p-4">
+                            <div class="mono text-[9px] text-slate-400 tracking-[0.12em]">ESTADO DE VERIFICACIÓN</div>
+                            <div id="verifyStatus" class="mono text-[11px] text-slate-200 mt-1">Click en un nodo para verificar ruta.</div>
+                        </div>
+
+                        <div id="selectedNode" class="glass cyan-glow rounded-2xl p-4 hidden">
+                            <div id="selectedTitle" class="text-sm font-bold text-white mb-1"></div>
+                            <div id="selectedMeta" class="mono text-[10px] text-slate-400 mb-2"></div>
+                            <div id="selectedLinks" class="grid grid-cols-1 gap-2"></div>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-7 flex justify-center items-center">
+                        <div id="flower-container">
+                            <div id="flower-scene"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass rounded-2xl p-4 mt-6">
+                    <div class="flex justify-between items-center mb-3">
+                        <h3 class="cinzel text-xs tracking-[0.15em] text-white m-0">ÍNDICE DE NODOS</h3>
+                        <div class="mono text-[10px] text-slate-400"><span id="visibleCount">51</span> visibles</div>
+                    </div>
+                    <div id="nodeList" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2"></div>
                 </div>
             </section>
 
-            <!-- III. EL SANTÍSIMO -->
-            <section id="el-santisimo" class="logia-card p-12 md:p-16 rounded-xl text-center relative">
-                <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 bg-purple-900/20 blur-[80px] rounded-full pointer-events-none"></div>
-                <div class="relative z-10">
-                    <h2 class="text-3xl text-oro mb-10 uppercase tracking-[0.3em] font-mason esoterico-glow">
-                        <span class="text-sm opacity-50 block mb-2 tracking-widest">III.</span> EL SANTÍSIMO
-                    </h2>
-                    <div class="max-w-2xl mx-auto space-y-6 bg-gradient-to-b from-black/80 to-transparent p-10 rounded-2xl border border-oro/20">
-                        <h3 class="text-2xl md:text-3xl font-bold text-white font-mason tracking-wider uppercase mb-6">La Final Eterna</h3>
-                        <p class="text-sm md:text-base text-slate-200 leading-relaxed font-sans italic">
-                            El núcleo intocable del sistema. <br><br>
-                            <span class="text-lg md:text-xl font-bold text-oro esoterico-glow not-italic block my-4">ÆRGENTÆNA vs S(ADV41)PAIN</span>
-                        </p>
-                        <div class="pt-8 border-t border-oro/20 mt-8">
-                            <p class="text-xl font-bold text-white uppercase tracking-widest">¡Cristo está por venir!</p>
-                            <div class="text-5xl mt-6 animate-[pulse_3s_infinite]">🎚️</div>
-                        </div>
+            <!-- III. EL SANTÍSIMO (Refugio & Final Eterna) -->
+            <section id="el-santisimo" class="logia-card p-12 md:p-16 rounded-xl text-center relative border-t-4 border-purple-500">
+                <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 bg-purple-900/20 blur-[90px] rounded-full pointer-events-none"></div>
+                <div class="relative z-10 max-w-2xl mx-auto space-y-6">
+                    <h2 class="text-3xl text-oro uppercase tracking-[0.3em] font-mason esoterico-glow">III. EL SANTÍSIMO</h2>
+                    <p class="text-base text-slate-200 leading-relaxed font-sans italic">
+                        "La verdadera seguridad reside en el corazón inmensamente cálido que custodia este recinto. Como Moisés tras la roca (Éxodo 33:22)."
+                    </p>
+                    <div class="pt-6 border-t border-oro/20 mt-6">
+                        <p class="text-xl font-bold text-white uppercase tracking-widest font-mason">¡Cristo está por venir!</p>
+                        <div class="text-5xl mt-4 animate-pulse">🎚️</div>
                     </div>
                 </div>
             </section>
 
         </main>
         
-        <footer class="text-center p-8 mt-12 border-t border-white/5 opacity-50 font-mono text-[10px]">
+        <footer class="text-center p-8 border-t border-white/5 opacity-50 font-mono text-[10px] uppercase">
             <p>SADV41 Architecture © 2026 | El Origen es 0</p>
         </footer>
     </div>
 
-    <!-- LÓGICA DEL SISTEMA -->
+    <!-- SCRIPTS UNIFICADOS -->
     <script>
-        function verificarLlave() {
-            const tokenInput = document.getElementById('access-token').value.trim();
-            const errorMsg = document.getElementById('token-error');
-            const gatekeeper = document.getElementById('gatekeeper-screen');
-            const sistemaPrincipal = document.getElementById('sistema-principal');
+        // 1. DATA METATRON (51 Nodos)
+        const BASE = "https://thesteef21.github.io/Lapizasuli/assets";
+        const nodesData = [
+            { id:"8", folder:"7/8", family:"OTROS", color:"#FFC26A" },
+            { id:"METO", folder:"AI/METO", family:"AI", color:"#00f3ff" },
+            { id:"ARRAIJAN", folder:"ARRAIJAN", family:"USARMY", color:"#FB542B" },
+            { id:"BOXING", folder:"BOXING", family:"USARMY", color:"#FB542B" },
+            { id:"BRAVE", folder:"BRAVE", family:"AI", color:"#00f3ff" },
+            { id:"BSADV41", folder:"BSADV41", family:"SADV41", color:"#d4af37" },
+            { id:"BUREP", folder:"BUREP", family:"USARMY", color:"#FB542B" },
+            { id:"CHISTES", folder:"CHISTES", family:"OTROS", color:"#FFC26A" },
+            { id:"CREDISADV41", folder:"CREDISADV41", family:"SADV41", color:"#d4af37" },
+            { id:"CSADV41", folder:"CSADV41", family:"SADV41", color:"#d4af37" },
+            { id:"CASACRYPTO", folder:"CasaCrypto", family:"HUMAN", color:"#7AF6FF" },
+            { id:"DGI", folder:"DGI", family:"FUNDING", color:"#1DB954" },
+            { id:"E57", folder:"E57", family:"OTROS", color:"#FFC26A" },
+            { id:"EMSC", folder:"EMSC", family:"AI", color:"#00f3ff" },
+            { id:"FACTURA", folder:"FACTURA", family:"FUNDING", color:"#1DB954" },
+            { id:"FIFA2026", folder:"FIFA2026", family:"FUNDING", color:"#1DB954" },
+            { id:"FUNDING", folder:"FUNDING", family:"FUNDING", color:"#1DB954" },
+            { id:"GNOSADV41", folder:"GNOSADV41", family:"SADV41", color:"#d4af37" },
+            { id:"GSADV41", folder:"GSADV41", family:"SADV41", color:"#d4af37" },
+            { id:"GEOPOLITICA", folder:"Geopolítica", family:"HUMAN", color:"#7AF6FF" },
+            { id:"HUMANIDADES", folder:"HUMANIDADES", family:"HUMAN", color:"#7AF6FF" },
+            { id:"HOY", folder:"Hoy", family:"HUMAN", color:"#7AF6FF" },
+            { id:"IA", folder:"IA", family:"AI", color:"#00f3ff" },
+            { id:"IMA", folder:"IMA", family:"AI", color:"#00f3ff" },
+            { id:"IMPRESS", folder:"Impress", family:"OTROS", color:"#FFC26A" },
+            { id:"KSADV41", folder:"KSADV41", family:"SADV41", color:"#d4af37" },
+            { id:"LSADV41", folder:"LSADV41", family:"SADV41", color:"#d4af37" },
+            { id:"EXPEDIENTE", folder:"LoDeHoy/Expediente", family:"HUMAN", color:"#7AF6FF" },
+            { id:"LOGIA", folder:"Logia", family:"TRONO", color:"#9d4edd" },
+            { id:"META", folder:"META", family:"AI", color:"#00f3ff" },
+            { id:"MGSADV41", folder:"MGSADV41", family:"SADV41", color:"#d4af37" },
+            { id:"MUSIC", folder:"MUSIC", family:"AI", color:"#00f3ff" },
+            { id:"MALVINAS", folder:"Malvinas", family:"OTROS", color:"#FFC26A" },
+            { id:"NOSTALGIA", folder:"NOSTALGIA", family:"HUMAN", color:"#7AF6FF" },
+            { id:"NOTICIAS", folder:"NOTICIAS", family:"HUMAN", color:"#7AF6FF" },
+            { id:"NUKE", folder:"NUKE", family:"USARMY", color:"#FB542B" },
+            { id:"OJSADV41", folder:"OJSADV41", family:"SADV41", color:"#d4af37" },
+            { id:"PATENTSADV41", folder:"PATENTSADV41", family:"SADV41", color:"#d4af37" },
+            { id:"PPSADV41", folder:"PPSADV41", family:"SADV41", color:"#d4af37" },
+            { id:"PRINCIPADO", folder:"PRINCIPADO", family:"TRONO", color:"#9d4edd" },
+            { id:"DECLARACIONES", folder:"PROTOCOLO/DECLARACIONES", family:"TRONO", color:"#9d4edd" },
+            { id:"RUC", folder:"RUC", family:"FUNDING", color:"#1DB954" },
+            { id:"SADV41TT", folder:"SADV41TT", family:"SADV41", color:"#d4af37" },
+            { id:"SVA41", folder:"SVA41", family:"OTROS", color:"#FFC26A" },
+            { id:"TRANSFIGURACION", folder:"TRANSFIGURACION", family:"TRONO", color:"#9d4edd" },
+            { id:"TRONO", folder:"TRONO", family:"TRONO", color:"#9d4edd" },
+            { id:"TSADV41", folder:"TSADV41", family:"SADV41", color:"#d4af37" },
+            { id:"USARMY", folder:"USARMY", family:"USARMY", color:"#FB542B" },
+            { id:"VSADV41", folder:"VSADV41", family:"SADV41", color:"#d4af37" },
+            { id:"WEB3", folder:"WEB3", family:"AI", color:"#00f3ff" },
+            { id:"X", folder:"X", family:"OTROS", color:"#FFC26A" },
+        ].map(n=>({
+            ...n,
+            url:`${BASE}/${n.folder}/GSADV41.html`,
+            alt1:`${BASE}/${n.folder}/Logia.html`,
+            alt2:`${BASE}/${n.folder}/index.html`
+        }));
 
-            // Clave maestra protegida en la lógica del script (no visible en texto plano en la interfaz)
-            const claveMaestra = "GSADV41-2026-CHRIST0";
+        const scene = document.getElementById('flower-scene');
+        const container = document.getElementById('flower-container');
+        const nodeListEl = document.getElementById('nodeList');
+        const searchInput = document.getElementById('searchInput');
+        const verifyStatus = document.getElementById('verifyStatus');
+        const visibleCountEl = document.getElementById('visibleCount');
+        const selectedNodeEl = document.getElementById('selectedNode');
+        const selectedTitleEl = document.getElementById('selectedTitle');
+        const selectedMetaEl = document.getElementById('selectedMeta');
+        const selectedLinksEl = document.getElementById('selectedLinks');
 
-            if (tokenInput === claveMaestra) {
-                gatekeeper.classList.add('hidden');
-                sistemaPrincipal.classList.remove('hidden');
-            } else {
-                errorMsg.classList.remove('hidden');
-            }
+        let filterFamily = "ALL";
+        let filterSearch = "";
+        let labelsOn = true;
+
+        function createFlowerPlane(transformStyle){
+            const NS="http://www.w3.org/2000/svg";
+            const svg=document.createElementNS(NS,"svg");
+            svg.setAttribute("viewBox","-220 -220 440 440");
+            svg.setAttribute("class","flower-plane");
+            svg.style.transform=transformStyle;
+            const radius=62;
+            const centers=[{x:0,y:0}];
+            for(let i=0;i<6;i++){const a=Math.PI/3*i;centers.push({x:radius*Math.cos(a),y:radius*Math.sin(a)})}
+            for(let i=0;i<12;i++){const a=Math.PI/6*i;const d=(i%2===0)?radius*2:radius*Math.sqrt(3);centers.push({x:d*Math.cos(a),y:d*Math.sin(a)})}
+            centers.forEach(c=>{
+                const g=document.createElementNS(NS,"g");
+                const circle=document.createElementNS(NS,"circle");
+                circle.setAttribute("cx",c.x);circle.setAttribute("cy",c.y);circle.setAttribute("r",radius);
+                circle.setAttribute("fill","none");circle.setAttribute("stroke","rgba(212,175,55,.18)");circle.setAttribute("stroke-width","0.8");
+                g.appendChild(circle);svg.appendChild(g);
+            });
+            return svg;
         }
 
+        if(scene) {
+            scene.appendChild(createFlowerPlane("rotateY(0deg) translateZ(-18px)"));
+            scene.appendChild(createFlowerPlane("rotateY(60deg) translateZ(-18px)"));
+            scene.appendChild(createFlowerPlane("rotateY(120deg) translateZ(-18px)"));
+            scene.appendChild(createFlowerPlane("rotateX(90deg) translateZ(-18px)"));
+        }
+
+        const nodeEls=[];
+        const sphereRadius=210;
+        const goldenAngle=Math.PI*(3-Math.sqrt(5));
+        nodesData.forEach((node,i)=>{
+            const y=1-(i/(nodesData.length-1))*2;
+            const r=Math.sqrt(1-y*y);
+            const theta=goldenAngle*i;
+            const x=Math.cos(theta)*r;
+            const z=Math.sin(theta)*r;
+            const el=document.createElement('div');
+            el.className='node-3d';
+            el.dataset.family=node.family;
+            el.innerHTML=`<div class="node-dot" style="background:${node.color};color:${node.color}"></div><div class="node-label" style="color:${node.color}">${node.id}</div>`;
+            el._pos={x:x*sphereRadius,y:y*sphereRadius,z:z*sphereRadius};
+            el._node=node;
+            el.addEventListener('click',(e)=>{e.stopPropagation();openNode(node)});
+            if(scene) scene.appendChild(el);
+            nodeEls.push(el);
+        });
+
+        function renderList(){
+            if(!nodeListEl) return;
+            nodeListEl.innerHTML="";
+            let visible=0;
+            nodesData.forEach(node=>{
+                const matchesFamily = filterFamily==="ALL" || node.family===filterFamily;
+                const q=filterSearch.toLowerCase();
+                const matchesSearch = !q || node.id.toLowerCase().includes(q) || node.folder.toLowerCase().includes(q);
+                if(!matchesFamily || !matchesSearch) return;
+                visible++;
+                const div=document.createElement('div');
+                div.className='glass hover:bg-white/5';
+                div.style.cssText='border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:8px 10px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;';
+                div.innerHTML=`<div><div style="font-size:10px;font-weight:800;color:${node.color};font-family:'JetBrains Mono',monospace;">${node.id}</div><div style="font-size:8px;color:#94a3b8;font-family:'JetBrains Mono',monospace;">${node.family}</div></div><div style="width:7px;height:7px;border-radius:50%;background:${node.color}"></div>`;
+                div.onclick=()=>openNode(node);
+                nodeListEl.appendChild(div);
+            });
+            visibleCountEl.textContent=visible;
+            nodeEls.forEach(el=>{
+                const n=el._node;
+                const mf = filterFamily==="ALL" || n.family===filterFamily;
+                const q=filterSearch.toLowerCase();
+                const ms = !q || n.id.toLowerCase().includes(q) || n.folder.toLowerCase().includes(q);
+                el.classList.toggle('dimmed', !(mf && ms));
+            });
+        }
+
+        if(document.getElementById('familyChips')) {
+            document.getElementById('familyChips').addEventListener('click', (e)=>{
+                const b=e.target.closest('[data-family]');
+                if(!b) return;
+                document.querySelectorAll('[data-family]').forEach(x=>x.classList.remove('active'));
+                b.classList.add('active');
+                filterFamily=b.dataset.family;
+                renderList();
+            });
+        }
+        if(searchInput) searchInput.addEventListener('input', (e)=>{filterSearch=e.target.value;renderList()});
+        renderList();
+
+        let isDragging=false, prev={x:0,y:0}, metatronRot={x:-18,y:24,z:0}, scale=1, autoRot=true;
+        function updateTransform(){
+            if(!scene) return;
+            scene.style.transform=`scale3d(${scale},${scale},${scale}) rotateX(${metatronRot.x}deg) rotateY(${metatronRot.y}deg) rotateZ(${metatronRot.z}deg)`;
+            nodeEls.forEach(el=>{
+                const p=el._pos;
+                const radY=metatronRot.y*Math.PI/180, radX=metatronRot.x*Math.PI/180;
+                let x=p.x,y=p.y,z=p.z;
+                let x1=x*Math.cos(radY)+z*Math.sin(radY); let z1=-x*Math.sin(radY)+z*Math.cos(radY); x=x1;z=z1;
+                let y1=y*Math.cos(radX)-z*Math.sin(radX); let z2=y*Math.sin(radX)+z*Math.cos(radX); y=y1;z=z2;
+                el.style.transform=`translate3d(${p.x}px,${p.y}px,${p.z}px) translate(-50%,-50%)`;
+                el.style.zIndex=Math.floor(z+500);
+            });
+            const sorted=[...nodeEls].sort((a,b)=>a.style.zIndex-b.style.zIndex);
+            sorted.forEach(el=>scene.appendChild(el));
+        }
+        updateTransform();
+
+        function onDown(e){ isDragging=true; prev={x:e.clientX||e.touches[0].clientX, y:e.clientY||e.touches[0].clientY}; }
+        function onMove(e){
+            if(!isDragging) return;
+            const cx=e.clientX||e.touches[0].clientX, cy=e.clientY||e.touches[0].clientY;
+            metatronRot.y+=(cx-prev.x)*0.45; metatronRot.x-=(cy-prev.y)*0.45;
+            updateTransform();
+            prev={x:cx,y:cy};
+        }
+        function onUp(){ isDragging=false; }
+
+        if(container) {
+            container.addEventListener('mousedown',onDown);
+            window.addEventListener('mousemove',onMove);
+            window.addEventListener('mouseup',onUp);
+            container.addEventListener('touchstart',onDown,{passive:true});
+            window.addEventListener('touchmove',onMove,{passive:true});
+            window.addEventListener('touchend',onUp);
+        }
+
+        if(document.getElementById('resetView')) document.getElementById('resetView').onclick=()=>{metatronRot={x:-18,y:24,z:0};scale=1;updateTransform()};
+        if(document.getElementById('toggleAuto')) document.getElementById('toggleAuto').onclick=(ev)=>{ autoRot=!autoRot; ev.target.textContent=`AUTO: ${autoRot?'ON':'OFF'}`; };
+
+        function globalLoop() {
+            if(!isDragging && autoRot){ metatronRot.y+=0.18; metatronRot.z+=0.03; updateTransform(); }
+            requestAnimationFrame(globalLoop);
+        }
+        requestAnimationFrame(globalLoop);
+
+        async function openNode(node){
+            if(!selectedNodeEl) return;
+            selectedNodeEl.classList.remove('hidden');
+            selectedTitleEl.textContent=`${node.folder} → ${node.id}`;
+            selectedMetaEl.textContent=`Familia ${node.family} • Verificando...`;
+            
+            const urls=[{label:'GSADV41',url:node.url,color:node.color},{label:'Logia',url:node.alt1,color:'#9d4edd'}];
+            selectedLinksEl.innerHTML = urls.map(r=>`
+                <a href="${encodeURI(r.url)}" target="_blank" class="link-card font-mono text-[10px]" style="background:rgba(255,255,255,.05);border:1px solid ${r.color};color:#fff">
+                    ▶ Abrir ${r.label}: ${r.url}
+                </a>
+            `).join('');
+
+            setTimeout(()=>{window.open(encodeURI(node.url),'_blank')}, 700);
+        }
+
+        // Sidebar Toggle
         function toggleSidebar() {
-            const sidebar = document.getElementById('main-sidebar');
-            sidebar.classList.toggle('right-aligned');
-            localStorage.setItem('sidebarPosition', sidebar.classList.contains('right-aligned') ? 'right' : 'left');
+            const s = document.getElementById('main-sidebar');
+            s.classList.toggle('right-aligned');
+            localStorage.setItem('sidebarPos', s.classList.contains('right-aligned') ? 'right' : 'left');
         }
+        if(localStorage.getItem('sidebarPos') === 'right') document.getElementById('main-sidebar').classList.add('right-aligned');
 
-        function handleCredentialResponse(response) {
-            sessionStorage.setItem("acceso_sadv41_origen", "GSADV41_AUTH");
-            alert("Identidad verificada. El Atrio reconoce tu registro digital.");
-        }
-
+        // Web3 Wallet
         async function connectBinance() {
-            const statusBox = document.getElementById('walletStatus');
-            const addressSpan = document.getElementById('walletAddress');
-            const btnConnect = document.getElementById('btnConnect');
-
             if (typeof window.ethereum !== 'undefined') {
                 try {
                     const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-                    addressSpan.innerText = accounts[0];
-                    statusBox.classList.remove('hidden');
-                    btnConnect.innerHTML = '🌐 Wallet Connected';
-                    btnConnect.classList.replace('bg-oro', 'bg-emerald-500');
-                } catch (e) {
-                    console.error("Conexión rechazada", e);
-                }
-            } else {
-                window.open('https://web3.binance.com/en/referral?ref=ORCZSDLK', '_blank');
-            }
+                    document.getElementById('walletAddress').innerText = accounts[0];
+                    document.getElementById('walletStatus').classList.remove('hidden');
+                } catch (e) { console.log(e); }
+            } else { window.open('https://web3.binance.com/en/referral?ref=ORCZSDLK', '_blank'); }
+        }
+
+        function handleCredentialResponse(response) {
+            alert("Identidad verificada en El Atrio.");
         }
     </script>
 </body>
-                                </html>
+</html>
