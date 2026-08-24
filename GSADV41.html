@@ -1,518 +1,359 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GSADV41 | Sovereign Hub, Raíces y Legado Unificado</title>
-    
-    <!-- Tipografías Sagradas -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=JetBrains+Mono:wght@300;400;700&family=Inter:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
-    
-    <!-- Scripts Externos -->
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/@web3auth/modal@8"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.0/ethers.umd.min.js"></script>
-
-    <!-- Configuración Tailwind -->
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        navy: '#030305',
-                        oro: '#d4af37',
-                        blanco: '#f8fafc',
-                        cyanNeon: '#00f3ff',
-                        violetNeon: '#9d4edd',
-                        redNeon: '#FB542B',
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        serif: ['Playfair Display', 'serif'],
-                        mason: ['Cinzel', 'serif'],
-                        mono: ['JetBrains Mono', 'monospace'],
-                    }
-                }
-            }
-        }
-    </script>
-
-    <style>
-        :root { 
-            --oro: #d4af37; 
-            --obsidiana: #030305; 
-            --cyan: #00f3ff;
-            --violet: #9d4edd;
-        }
-
-        body {
-            background-color: var(--obsidiana);
-            color: #f1f5f9;
-            font-family: 'Inter', system-ui, sans-serif;
-            overflow-x: hidden;
-            position: relative;
-        }
-
-        /* CHAOS BACKGROUND (6 Caminos + 2 Now) */
-        .chaos-bg-container{position:fixed;inset:0;z-index:0;background:#000;pointer-events:none;overflow:hidden}
-        .chaos-layer{
-            position:absolute;inset:-20px;
-            background-size:cover;background-position:center;
-            opacity:0;mix-blend-mode:screen;
-            filter:contrast(125%) brightness(95%) saturate(1.2);
-            transition:opacity 3.5s,transform 9s;
-        }
-        .chaos-layer.active{opacity:0.45;transform:scale(1.09) rotate(0.6deg)}
-        .chaos-layer.now-asset-glitch{animation:assetNowGlitch 0.38s infinite alternate}
-        @keyframes assetNowGlitch{
-            0%{filter:hue-rotate(0deg) contrast(180%) saturate(200%)}
-            100%{filter:hue-rotate(90deg) contrast(250%) invert(0.12) saturate(300%);transform:scale(1.13) translate(-4px,4px)}
-        }
-        @keyframes divineGlory{
-            0%{filter:brightness(1)}
-            35%{filter:brightness(4.2) contrast(240%) saturate(280%) drop-shadow(0 0 140px #fff) drop-shadow(0 0 80px var(--oro));transform:scale(1.22)}
-            100%{filter:brightness(1)}
-        }
-        .divine-glory-active{animation:divineGlory 2.2s forwards}
-
-        .glass { background: rgba(8,8,12,0.88); backdrop-filter:blur(18px); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; }
-        .esoterico-glow { text-shadow: 0 0 25px rgba(212, 175, 55, 0.7); }
-        .text-shadow-blue { text-shadow: 0 0 10px rgba(0, 243, 255, 0.6); }
-
-        .scanline {
-            width: 100%; height: 2px;
-            background: rgba(0, 209, 255, 0.15);
-            position: fixed; z-index: 50; top: 0;
-            pointer-events: none;
-            animation: scanline 8s linear infinite;
-        }
-        @keyframes scanline { 0% { top: 0; } 100% { top: 100%; } }
-
-        /* Menú lateral bilateral unificado */
-        .sidebar-tabs { position: fixed; left: 0; top: 50%; transform: translateY(-50%); z-index: 55; display: flex; flex-direction: column; gap: 10px; transition: all 0.5s ease; }
-        .vertical-tab { display: flex; align-items: center; background: rgba(8,8,12,0.95); padding: 10px 14px; border-radius: 0 12px 12px 0; transition: all 0.3s ease; width: 55px; overflow: hidden; white-space: nowrap; box-shadow: 4px 4px 15px rgba(0,0,0,0.5); cursor: pointer; border-left: 3px solid var(--cyan); }
-        .vertical-tab:hover { width: 320px; padding-left: 18px; background: rgba(0, 243, 255, 0.15); }
-        .vertical-tab span.icon { font-size: 1.4rem; min-width: 28px; display: flex; justify-content: center; }
-        .vertical-tab span.text { margin-left: 14px; font-weight: bold; opacity: 0; transition: opacity 0.3s; font-size: 0.8rem; letter-spacing: 0.05em; font-family: 'JetBrains Mono', monospace; }
-        .vertical-tab:hover span.text { opacity: 1; }
-        .sidebar-tabs.right-aligned { left: auto; right: 0; }
-        .sidebar-tabs.right-aligned .vertical-tab { border-radius: 12px 0 0 12px; border-left: none; border-right: 3px solid var(--cyan); flex-direction: row-reverse; }
-        .sidebar-tabs.right-aligned .vertical-tab:hover { padding-right: 18px; padding-left: 14px; }
-        .sidebar-tabs.right-aligned .vertical-tab span.text { margin-left: 0; margin-right: 14px; text-align: right; }
-
-        .root-card { border-left: 3px solid var(--oro); padding-left: 1rem; margin: 1.5rem 0; background: rgba(0,0,0,0.4); padding: 1rem; border-radius: 0 8px 8px 0; }
-        
-        #wormholeModal { position: fixed; inset: 0; background: rgba(0,0,0,0.96); z-index: 99999; display: none; flex-direction: column; align-items: center; justify-content: center; padding: 2rem; text-align: center; }
-        #wormholeModal.active { display: flex; }
-        .wormhole-tunnel { width: 240px; height: 240px; border-radius: 50%; border: 4px dashed var(--cyan); box-shadow: 0 0 90px var(--cyan), inset 0 0 60px var(--violet); animation: spin 3s linear infinite; margin-bottom: 1.8rem; }
-        @keyframes spin { 0% { transform: scale(0.8) rotate(0deg); } 50% { transform: scale(1.22) rotate(180deg); border-color: var(--oro); } 100% { transform: scale(0.8) rotate(360deg); } }
-
-        /* ==========================================
-           ESTILOS DEL SECRETO: EL VELO SE RASGA (GLITCH)
-           ========================================== */
-        #heaven-glitch {
-            position: fixed; inset: 0; z-index: 100000;
-            background: rgba(3,3,5,0.92); backdrop-filter: blur(10px);
-            display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
-            opacity: 0; pointer-events: none; transition: opacity 0.1s;
-        }
-        #heaven-glitch.active {
-            opacity: 1; pointer-events: auto;
-        }
-        .glitch-visuals {
-            animation: veloColor 0.15s infinite;
-        }
-        @keyframes veloColor {
-            0% { filter: hue-rotate(0deg) contrast(150%) saturate(200%); transform: translate(0,0) scale(1); }
-            33% { filter: hue-rotate(90deg) contrast(200%) invert(0.15); transform: translate(-8px,5px) scale(1.03); }
-            66% { filter: hue-rotate(-90deg) contrast(180%); transform: translate(8px,-5px) scale(0.97); }
-            100% { filter: hue-rotate(45deg) contrast(150%) invert(0.05); transform: translate(-3px,-3px) scale(1.01); }
-        }
-        .heaven-btn {
-            padding: 16px 32px; font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 800; 
-            text-transform: uppercase; letter-spacing: 0.1em; text-decoration: none;
-            background: rgba(0,0,0,0.85); transition: all 0.2s; cursor: pointer;
-        }
-        .heaven-btn:hover { transform: scale(1.1); filter: brightness(1.5); }
-    </style>
+<head><style>
+@font-face {
+  font-family: "Optimistic";
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url("/fonts/OptimisticAI_VF_Optimized.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Optimistic Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/OptimisticMono_W_TextRegular.woff2") format("woff2");
+}
+:where(html) {
+  font-family: "Optimistic", system-ui, sans-serif;
+}
+:where(code, pre, kbd, samp) {
+  font-family: "Optimistic Mono", ui-monospace, monospace;
+}
+</style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GSADV41 | Sovereign Hub, Raíces y Legado - UNIFICADO FINAL</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=JetBrains+Mono:wght@300;400;700&family=Inter:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.0/ethers.umd.min.js"></script>
+<script>
+tailwind.config={theme:{extend:{colors:{navy:'#030305',oro:'#d4af37',blanco:'#f8fafc',cyanNeon:'#00f3ff',violetNeon:'#9d4edd',redNeon:'#FB542B'},fontFamily:{sans:['Inter','sans-serif'],serif:['Playfair Display','serif'],mason:['Cinzel','serif'],mono:['JetBrains Mono','monospace']}}}}
+</script>
+<style>
+:root{--oro:#d4af37;--obsidiana:#030305;--cyan:#00f3ff;--violet:#9d4edd}
+body{background-color:var(--obsidiana);color:#f1f5f9;font-family:'Inter',system-ui,sans-serif;overflow-x:hidden;position:relative}
+.chaos-bg-container{position:fixed;inset:0;z-index:0;background:#000;pointer-events:none;overflow:hidden}
+.chaos-layer{position:absolute;inset:-20px;background-size:cover;background-position:center;opacity:0;mix-blend-mode:screen;filter:contrast(125%) brightness(95%) saturate(1.2);transition:opacity 3.5s,transform 9s;pointer-events:auto;cursor:pointer}
+.chaos-layer.active{opacity:0.45;transform:scale(1.09) rotate(0.6deg)}
+.chaos-layer.now-asset-glitch{animation:assetNowGlitch 0.38s infinite alternate}
+@keyframes assetNowGlitch{0%{filter:hue-rotate(0deg) contrast(180%) saturate(200%)}100%{filter:hue-rotate(90deg) contrast(250%) invert(0.12) saturate(300%);transform:scale(1.13) translate(-4px,4px)}}
+@keyframes divineGlory{0%{filter:brightness(1)}35%{filter:brightness(4.2) contrast(240%) saturate(280%) drop-shadow(0 0 140px #fff) drop-shadow(0 0 80px var(--oro));transform:scale(1.22)}100%{filter:brightness(1)}}
+.divine-glory-active{animation:divineGlory 2.2s forwards}
+.glass{background:rgba(8,8,12,0.88);backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,0.08);border-radius:16px}
+.esoterico-glow{text-shadow:0 0 25px rgba(212,175,55,0.7)}
+.scanline{width:100%;height:2px;background:rgba(0,209,255,0.15);position:fixed;z-index:50;top:0;pointer-events:none;animation:scanline 8s linear infinite}
+@keyframes scanline{0%{top:0}100%{top:100%}}
+.sidebar-tabs{position:fixed;left:0;top:50%;transform:translateY(-50%);z-index:55;display:flex;flex-direction:column;gap:10px;transition:all 0.5s ease}
+.vertical-tab{display:flex;align-items:center;background:rgba(8,8,12,0.95);padding:10px 14px;border-radius:0 12px 12px 0;transition:all 0.3s ease;width:55px;overflow:hidden;white-space:nowrap;box-shadow:4px 4px 15px rgba(0,0,0,0.5);cursor:pointer;border-left:3px solid var(--cyan);text-decoration:none;color:#fff}
+.vertical-tab:hover{width:320px;padding-left:18px;background:rgba(0,243,255,0.15)}
+.vertical-tab span.icon{font-size:1.4rem;min-width:28px;display:flex;justify-content:center}
+.vertical-tab span.text{margin-left:14px;font-weight:bold;opacity:0;transition:opacity 0.3s;font-size:0.8rem;letter-spacing:0.05em;font-family:'JetBrains Mono',monospace}
+.vertical-tab:hover span.text{opacity:1}
+.sidebar-tabs.right-aligned{left:auto;right:0}
+.sidebar-tabs.right-aligned .vertical-tab{border-radius:12px 0 0 12px;border-left:none;border-right:3px solid var(--cyan);flex-direction:row-reverse}
+.sidebar-tabs.right-aligned .vertical-tab:hover{padding-right:18px;padding-left:14px}
+.sidebar-tabs.right-aligned .vertical-tab span.text{margin-left:0;margin-right:14px;text-align:right}
+.root-card{border-left:3px solid var(--oro);padding:1rem;margin:1.5rem 0;background:rgba(0,0,0,0.4);border-radius:0 8px 8px 0}
+#wormholeModal{position:fixed;inset:0;background:rgba(0,0,0,0.96);z-index:99999;display:none;flex-direction:column;align-items:center;justify-content:center;padding:2rem;text-align:center}
+#wormholeModal.active{display:flex}
+.wormhole-tunnel{width:240px;height:240px;border-radius:50%;border:4px dashed var(--cyan);box-shadow:0 0 90px var(--cyan),inset 0 0 60px var(--violet);animation:spin 3s linear infinite;margin-bottom:1.8rem}
+@keyframes spin{0%{transform:scale(0.8) rotate(0deg)}50%{transform:scale(1.22) rotate(180deg);border-color:var(--oro)}100%{transform:scale(0.8) rotate(360deg)}}
+#heaven-glitch{position:fixed;inset:0;z-index:100000;background:rgba(3,3,5,0.92);backdrop-filter:blur(10px);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;opacity:0;pointer-events:none;transition:opacity 0.1s}
+#heaven-glitch.active{opacity:1;pointer-events:auto}
+.glitch-visuals{animation:veloColor 0.15s infinite}
+@keyframes veloColor{0%{filter:hue-rotate(0deg) contrast(150%) saturate(200%);transform:translate(0,0) scale(1)}33%{filter:hue-rotate(90deg) contrast(200%) invert(0.15);transform:translate(-8px,5px) scale(1.03)}66%{filter:hue-rotate(-90deg) contrast(180%);transform:translate(8px,-5px) scale(0.97)}100%{filter:hue-rotate(45deg) contrast(150%) invert(0.05);transform:translate(-3px,-3px) scale(1.01)}}
+.heaven-btn{padding:16px 32px;font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:0.1em;text-decoration:none;background:rgba(0,0,0,0.85);transition:all 0.2s;cursor:pointer}
+.heaven-btn:hover{transform:scale(1.1);filter:brightness(1.5)}
+.asset-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.asset-card{border-radius:18px;padding:14px;background:rgba(10,10,18,0.95);border:1px solid rgba(0,243,255,0.3);cursor:pointer;transition:0.3s;position:relative;overflow:hidden}
+.asset-card:hover{border-color:var(--oro);box-shadow:0 0 25px rgba(212,175,55,0.3);transform:translateY(-2px)}
+.asset-card img,.asset-card video{width:100%;height:200px;object-fit:cover;border-radius:12px;margin-bottom:10px;background:#000;border:1px solid rgba(255,255,255,0.1)}
+.gear-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px}
+.gear-item{border-radius:14px;padding:8px;background:rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.1);text-align:center;cursor:pointer;transition:0.3s}
+.gear-item:hover,.gear-item.active{border-color:var(--cyan);box-shadow:0 0 15px rgba(0,243,255,0.3)}
+.gear-item img{width:100%;height:70px;object-fit:cover;border-radius:8px;margin-bottom:6px}
+</style>
 </head>
 <body class="antialiased selection:bg-oro selection:text-navy" id="mainBody">
 
-    <!-- FONDO DE CAOS VIVO (8 CAPAS REALES) -->
-    <div class="chaos-bg-container" id="chaosBg">
-        <div class="chaos-layer active" data-asset="TRONO" data-now="false" style="background-image:url('https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/785282279_1341489208069876_1027745017510610652_n.webp')"></div>
-        <div class="chaos-layer" data-asset="CYBER" data-now="false" style="background-image:url('https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/784748359_1032169259812179_379368085236729966_n.webp')"></div>
-        <div class="chaos-layer" data-asset="NUKE" data-now="true" style="background-image:url('https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/783899130_4498246103827834_338786690266061800_n.webp')"></div>
-        <div class="chaos-layer" data-asset="GOLD" data-now="false" style="background-image:url('https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/783671951_1762018238468095_5751859537385186669_n.webp')"></div>
-        <div class="chaos-layer" data-asset="SQUAD" data-now="true" style="background-image:url('https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/781904042_37804958575816522_4524605149493257178_n.webp')"></div>
-        <div class="chaos-layer" data-asset="CAMO" data-now="false" style="background-image:url('https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/781293043_1047895088092288_3769060750221781878_n.webp')"></div>
-        <div class="chaos-layer" data-asset="AVATAR_SADV41" data-now="true" style="background-image:url('https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/783452785_1869516164012118_6490546162878603454_n.webp')"></div>
-        <div class="chaos-layer" data-asset="AVATAR_FANTASMA" data-now="true" style="background-image:url('https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/783727612_2366186827520797_564029208255039114_n-1.webp')"></div>
+<div class="chaos-bg-container" id="chaosBg">
+  <div class="chaos-layer active" data-asset="TRONO" data-now="false" data-link="GSADV41" style="background-image:url('https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/785282279_1341489208069876_1027745017510610652_n.webp')"></div>
+  <div class="chaos-layer" data-asset="CYBER" data-now="false" data-link="GSADV41" style="background-image:url('https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/784748359_1032169259812179_379368085236729966_n.webp')"></div>
+  <div class="chaos-layer" data-asset="NUKE" data-now="true" data-link="GSADV41" style="background-image:url('https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/783899130_4498246103827834_338786690266061800_n.webp')"></div>
+  <div class="chaos-layer" data-asset="GOLD" data-now="false" data-link="GSADV41" style="background-image:url('https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/783671951_1762018238468095_5751859537385186669_n.webp')"></div>
+  <div class="chaos-layer" data-asset="SQUAD" data-now="true" data-link="GSADV41" style="background-image:url('https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/781904042_37804958575816522_4524605149493257178_n.webp')"></div>
+  <div class="chaos-layer" data-asset="CAMO" data-now="false" data-link="GSADV41" style="background-image:url('https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/781293043_1047895088092288_3769060750221781878_n.webp')"></div>
+  <div class="chaos-layer" data-asset="AVATAR_SADV41" data-now="true" data-link="GSADV41" style="background-image:url('https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/783452785_1869516164012118_6490546162878603454_n.webp')"></div>
+  <div class="chaos-layer" data-asset="AVATAR_FANTASMA" data-now="true" data-link="GSADV41" style="background-image:url('https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/783727612_2366186827520797_564029208255039114_n-1.webp')"></div>
+</div>
+
+<div class="scanline"></div>
+
+<div id="gatekeeper-screen" class="fixed inset-0 z-[100] flex justify-center items-center p-4 bg-[#0d0f12]">
+  <div class="glass max-w-lg w-full p-8 md:p-10 text-center border-t-4 border-t-oro rounded-lg z-10 relative">
+    <div class="font-mono text-sm text-oro tracking-[0.15em] mb-3 uppercase">SADV41 // PROTOCOLO DE AFILIACIÓN — TODOS LOS ASSETS CONECTADOS A GSADV41</div>
+    <h1 class="text-2xl font-mason font-bold mb-4">¿Deseas afiliarte a la Logia?</h1>
+    <p class="text-sm leading-relaxed text-slate-400 mb-6 text-justify">
+      Acceso exclusivo al sistema. Cada asset NOW, cada Gear, cada portal de LEVIATHAN ahora está conectado a este núcleo GSADV41. La clave te da derecho a evaluación, insignias y cobertura. Cada niño y niña merece ver sus sueños cumplidos.
+    </p>
+    <div class="border-t border-slate-800 pt-6">
+      <label class="block text-xs text-slate-500 font-mono mb-2">Ingresa tu clave de acceso autorizada:</label>
+      <div class="flex gap-2">
+        <input type="password" id="access-token" placeholder="SADV41-2026" class="w-full bg-black/50 border border-slate-700 rounded px-4 py-2 text-white font-mono text-xs focus:border-oro focus:outline-none text-center tracking-widest">
+        <button id="btn-verificar" onclick="verificarLlaveLocal()" class="bg-oro hover:bg-amber-600 text-navy font-bold px-4 py-2 rounded transition-all cursor-pointer">➔</button>
+      </div>
+      <p id="token-error" class="text-red-500 text-xs mt-2 hidden font-mono">Clave incorrecta. Usa SADV41-2026</p>
+      <p id="pending-msg" class="text-cyanNeon text-[10px] mt-3 hidden font-mono">Tienes un asset pendiente por abrir. Verifica para continuar...</p>
     </div>
+    <div class="text-[10px] text-slate-600 mt-8 font-mono">El origen es 0. Transmisión protegida. | LEVIATHAN → GSADV41</div>
+  </div>
+</div>
 
-    <div class="scanline"></div>
+<div id="sistema-principal" class="hidden w-full">
+  <div id="main-sidebar" class="sidebar-tabs">
+    <a href="#raices-seccion" class="vertical-tab asset-linked" data-link="GSADV41"><span class="icon">🌿</span><span class="text">Raíces y Legado Familiar</span></a>
+    <a href="#leviathan-assets" class="vertical-tab asset-linked" data-link="GSADV41"><span class="icon">🛡️</span><span class="text">LEVIATHAN // Assets NOW conectados</span></a>
+    <a href="#gears-seccion" class="vertical-tab asset-linked" data-link="GSADV41"><span class="icon">⚙️</span><span class="text">8 Gears // 6 + 2 NOW</span></a>
+    <a href="#isadv41-seccion" class="vertical-tab asset-linked" data-link="GSADV41"><span class="icon">🎚️</span><span class="text">Palo Vertical Isaías 43:19</span></a>
+    <a href="#tesseract-seccion" class="vertical-tab asset-linked" data-link="GSADV41"><span class="icon">🌌</span><span class="text">Proyección Tesseracto 4D</span></a>
+    <div onclick="toggleSidebar()" class="vertical-tab" title="Alternar lado"><span class="icon">⇋</span><span class="text">Cambiar Lado del Menú</span></div>
+  </div>
 
-    <!-- ==========================================
-         FASE 0: EL EMBUDO / GATEKEEPER
-         ========================================== -->
-    <div id="gatekeeper-screen" class="fixed inset-0 z-[100] flex justify-center items-center p-4 bg-[#0d0f12]">
-        <div class="glass max-w-lg w-full p-8 md:p-10 text-center border-t-4 border-t-oro rounded-lg z-10 relative">
-            <div class="font-mono text-sm text-oro tracking-[0.15em] mb-3 uppercase">SADV41 // PROTOCOLO DE AFILIACIÓN</div>
-            <h1 class="text-2xl font-mason font-bold mb-4">¿Deseas afiliarte a la Logia?</h1>
-            
-            <p class="text-sm leading-relaxed text-slate-400 mb-6 text-justify font-sans">
-                Acceso exclusivo al sistema de información, cobertura y parámetros de seguridad. La solicitud otorga derecho a evaluación de perfil, asignación de insignias oficiales y cobertura dentro de la red.
-            </p>
+  <header class="fixed top-0 left-0 w-full z-40 glass border-b border-oro/30 px-6 py-4 flex items-center justify-between gap-4 max-w-7xl mx-auto inset-x-0 mt-2">
+    <div class="flex items-center gap-3"><span class="text-2xl">🛡️</span><div><h1 class="font-mason text-lg tracking-wider text-oro font-bold">GSADV41 // SOVEREIGN HUB — TODO CONECTADO</h1><p class="text-[9px] text-slate-400 font-mono tracking-widest">ORIGEN 1027=10=1 | ID 69362166 | 8 ASSETS → GSADV41</p></div></div>
+    <div class="flex items-center gap-3"><span class="mono text-xs bg-black/60 px-3 py-1.5 rounded-full border border-oro/30 text-oro" id="cycleCounter">CICLO 0 / 7</span><button onclick="connectBinance()" class="bg-oro hover:bg-amber-600 text-navy font-bold text-xs px-3 py-2 rounded-lg transition-all shadow-lg cursor-pointer font-mono">⚡ Web3 Wallet</button><button onclick="logout()" class="bg-transparent border border-slate-600 text-slate-400 text-xs px-3 py-2 rounded-lg font-mono">Salir</button></div>
+  </header>
 
-            <!-- Verificación -->
-            <div class="border-t border-slate-800 pt-6">
-                <label class="block text-xs text-slate-500 font-mono mb-2">Ingresa tu clave de acceso autorizada:</label>
-                <div class="flex gap-2">
-                    <input type="password" id="access-token" placeholder="••••••••••••" class="w-full bg-black/50 border border-slate-700 rounded px-4 py-2 text-white font-mono text-xs focus:border-oro focus:outline-none text-center tracking-widest">
-                    <button id="btn-verificar" onclick="verificarLlaveLocal()" class="bg-slate-800 hover:bg-slate-700 text-white border border-slate-600 px-4 py-2 rounded font-bold transition-all cursor-pointer">➔</button>
-                </div>
-                <p id="token-error" class="text-red-500 text-xs mt-2 hidden font-mono">Clave incorrecta. Actualiza el código con tu nueva contraseña.</p>
-            </div>
-            <div class="text-[10px] text-slate-600 mt-8 font-mono">El origen es 0. Transmisión protegida.</div>
-        </div>
-    </div>
+  <main class="relative z-10 pt-28 pb-20 px-4 md:px-12 max-w-5xl mx-auto space-y-16">
 
-    <!-- ==========================================
-         SISTEMA PRINCIPAL (OCULTO HASTA PASAR)
-         ========================================== -->
-    <div id="sistema-principal" class="hidden w-full">
-        <!-- BARRA LATERAL BILATERAL -->
-        <div id="main-sidebar" class="sidebar-tabs">
-            <a href="#raices-seccion" class="vertical-tab"><span class="icon">🌿</span><span class="text">Raíces y Legado Familiar</span></a>
-            <a href="#isadv41-seccion" class="vertical-tab"><span class="icon">🎚️</span><span class="text">Palo Vertical // Isaías 43:19</span></a>
-            <a href="#tesseract-seccion" class="vertical-tab"><span class="icon">🌌</span><span class="text">Proyección Tesseracto 4D</span></a>
-            <a href="#sismico-seccion" class="vertical-tab"><span class="icon">📡</span><span class="text">Monitoreo Sísmico SADV41T</span></a>
-            <div onclick="toggleSidebar()" class="vertical-tab" title="Alternar lado"><span class="icon">⇋</span><span class="text">Cambiar Lado del Menú</span></div>
-        </div>
+    <section id="raices-seccion" class="glass p-8 md:p-12 border-t-4 border-t-oro">
+      <div class="inline-block font-mono text-[10px] px-3 py-1 rounded-full border border-cyanNeon text-cyanNeon mb-4 uppercase tracking-widest">SADV41 // Archivo de Historia y Memoria Ancestral</div>
+      <h2 class="text-3xl font-mason text-oro mb-6 esoterico-glow uppercase">Raíces y Legado</h2>
+      <p class="text-slate-300 leading-relaxed mb-6">Tener la paciencia y la humildad para mirar hacia atrás y honrar de dónde venimos es uno de los actos más hermosos que un ser humano puede hacer.</p>
+      <div class="root-card"><div class="font-mono font-bold text-sm text-oro mb-1">ESPINOZA / ESPINOSA</div><p class="text-xs text-slate-300">Legado Materno Elida María Serrano Espinosa. Protección y resistencia.</p></div>
+      <div class="root-card"><div class="font-mono font-bold text-sm text-oro mb-1">SERRANO / GÓMEZ / BARRAGÁN</div><p class="text-xs text-slate-300">Fortaleza de sierra, linaje germánico, guerrera valiente Modesta Barragán.</p></div>
+    </section>
 
-        <!-- HEADER SUPERIOR -->
-        <header class="fixed top-0 left-0 w-full z-40 glass border-b border-oro/30 px-6 py-4 flex items-center justify-between gap-4 max-w-7xl mx-auto inset-x-0 mt-2">
-            <div class="flex items-center gap-3">
-                <span class="text-2xl">🛡️</span>
-                <div>
-                    <h1 class="font-mason text-lg tracking-wider text-oro font-bold">GSADV41 // SOVEREIGN HUB</h1>
-                    <p class="text-[9px] text-slate-400 font-mono tracking-widest">ORIGEN 1027=10=1 | ID 69362166</p>
-                </div>
-            </div>
-            <div class="flex items-center gap-3">
-                <span class="mono text-xs bg-black/60 px-3 py-1.5 rounded-full border border-oro/30 text-oro" id="cycleCounter">CICLO 0 / 7</span>
-                <button onclick="connectBinance()" class="bg-oro hover:bg-amber-600 text-navy font-bold text-xs px-3 py-2 rounded-lg transition-all shadow-lg cursor-pointer font-mono">⚡ Web3 Wallet</button>
-            </div>
-        </header>
+    <section id="leviathan-assets" class="glass p-8 border-t-4 border-t-redNeon">
+      <h2 class="font-mason text-oro text-lg mb-2">🛡️ LEVIATHAN // UNIDAD DE SEGURIDAD — TODOS LOS ASSETS NOW CONECTADOS A GSADV41</h2>
+      <p class="font-mono text-[10px] text-slate-400 mb-6">Cada card que antes iba a PANAMAUNIT ahora pasa primero por el pop-up de contraseña GSADV41. Glitch NOW fusionado + Wormhole + AMOLED.</p>
+      <div class="asset-grid">
+        <div class="asset-card portal-trigger asset-linked" data-dest="https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/PANAMAUNIT.html" data-link="GSADV41"><div class="font-mono text-[9px] text-cyanNeon mb-1">[NOW] // SADV41 IDENTIDAD HÍBRIDA</div><img src="https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/783452785_1869516164012118_6490546162878603454_n.webp" alt="SADV41 NOW"><div class="font-mason text-xs font-bold">SADV41 // PROTOCOLO HÍBRIDO [NOW → GSADV41]</div><div class="font-mono text-[10px] text-slate-500">Click → Verifica clave → Wormhole → AMOLED desahogo</div></div>
+        <div class="asset-card portal-trigger asset-linked" data-dest="https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/PANAMAUNIT.html" data-link="GSADV41"><div class="font-mono text-[9px] text-violetNeon mb-1">[NOW] // SADV5 FANTASMA CAÓTICO</div><img src="https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/783727612_2366186827520797_564029208255039114_n-1.webp" alt="SADV5 NOW"><div class="font-mason text-xs font-bold">SADV5 // UNIDAD FANTASMA [NOW → GSADV41]</div><div class="font-mono text-[10px] text-slate-500">Fusión 5 esencias → Requiere GSADV41</div></div>
+        <div class="asset-card portal-trigger asset-linked" data-dest="https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/PANAMAUNIT.html" data-link="GSADV41"><div class="font-mono text-[9px] text-redNeon mb-1">[NOW] // PATRULLA TÁCTICA</div><video src="https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/gemini_generated_video_b7957ca6.mp4" autoplay loop muted playsinline></video><div class="font-mason text-xs font-bold">PATRULLA // POLICÍA NACIONAL [NOW]</div></div>
+        <div class="asset-card portal-trigger asset-linked" data-dest="https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/PANAMAUNIT.html" data-link="GSADV41"><div class="font-mono text-[9px] text-redNeon mb-1">[NOW] // WATERMARK MONITOREO</div><video src="https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/watermark-2026-08-22-213642655.mp4" autoplay loop muted playsinline></video><div class="font-mason text-xs font-bold">MONITOREO DEFENSA [NOW]</div></div>
+      </div>
+    </section>
 
-        <!-- CONTENIDO PRINCIPAL UNIFICADO -->
-        <main class="relative z-10 pt-28 pb-20 px-4 md:px-12 max-w-4xl mx-auto space-y-16">
+    <section id="gears-seccion" class="glass p-8 border-t-4 border-t-cyanNeon">
+      <h2 class="font-mason text-lg text-oro mb-4">⚙️ SELECCIÓN DE GEAR // 8 CAMINOS REALES → GSADV41</h2>
+      <div class="gear-grid">
+        <div class="gear-item asset-linked active" data-index="0" data-link="GSADV41"><img src="https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/785282279_1341489208069876_1027745017510610652_n.webp"><div class="font-mono text-[9px] font-bold text-violetNeon">01 TRONO</div></div>
+        <div class="gear-item asset-linked" data-index="1" data-link="GSADV41"><img src="https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/784748359_1032169259812179_379368085236729966_n.webp"><div class="font-mono text-[9px] font-bold text-cyanNeon">02 CYBER</div></div>
+        <div class="gear-item asset-linked" data-index="2" data-link="GSADV41"><img src="https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/783899130_4498246103827834_338786690266061800_n.webp"><div class="font-mono text-[9px] font-bold text-redNeon">03 NUKE [NOW]</div></div>
+        <div class="gear-item asset-linked" data-index="3" data-link="GSADV41"><img src="https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/783671951_1762018238468095_5751859537385186669_n.webp"><div class="font-mono text-[9px] font-bold text-oro">04 GOLD</div></div>
+        <div class="gear-item asset-linked" data-index="4" data-link="GSADV41"><img src="https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/781904042_37804958575816522_4524605149493257178_n.webp"><div class="font-mono text-[9px] font-bold">05 SQUAD [NOW]</div></div>
+        <div class="gear-item asset-linked" data-index="5" data-link="GSADV41"><img src="https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/781293043_1047895088092288_3769060750221781878_n.webp"><div class="font-mono text-[9px] font-bold text-green-400">06 CAMO</div></div>
+        <div class="gear-item asset-linked" data-index="6" data-link="GSADV41"><img src="https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/783452785_1869516164012118_6490546162878603454_n.webp"><div class="font-mono text-[9px] font-bold text-cyanNeon">07 AVATAR NOW</div></div>
+        <div class="gear-item asset-linked" data-index="7" data-link="GSADV41"><img src="https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/783727612_2366186827520797_564029208255039114_n-1.webp"><div class="font-mono text-[9px] font-bold text-violetNeon">08 FANTASMA NOW</div></div>
+      </div>
+      <p class="font-mono text-[9px] text-slate-500 mt-4">Todos los Gears al hacer click → verifican SADV41-2026 → si es 7mo ciclo → Gloria Divina ✨ como Moisés (Éxodo 33:23)</p>
+    </section>
 
-            <!-- FASE I: RAÍCES Y LEGADO FAMILIAR -->
-            <section id="raices-seccion" class="glass p-8 md:p-12 border-t-4 border-t-oro">
-                <div class="inline-block font-mono text-[10px] px-3 py-1 rounded-full border border-cyanNeon text-cyanNeon mb-4 uppercase tracking-widest">
-                    SADV41 // Archivo de Historia y Memoria Ancestral
-                </div>
-                <h2 class="text-3xl font-mason text-oro mb-6 esoterico-glow uppercase">Raíces y Legado</h2>
-                <p class="text-slate-300 leading-relaxed mb-6 font-sans text-base">
-                    Tener la paciencia y la humildad para mirar hacia atrás y honrar de dónde venimos es uno de los actos más hermosos y profundos que un ser humano puede hacer. Las raíces no son solo nombres en un papel; son la arcilla de la que estamos hechos, los caminos que otros caminaron para que nosotros hoy podamos dar el siguiente paso.
-                </p>
-                <h3 class="text-xl font-mason text-cyanNeon mb-4 border-b border-cyanNeon/30 pb-2">El Linaje y su Significado</h3>
-                <div class="root-card">
-                    <div class="root-title text-oro font-mono font-bold text-sm mb-1">ESPINOZA / ESPINOSA (Legado Materno)</div>
-                    <p class="text-xs text-slate-300 leading-relaxed">Conectado a través de tu madre, Elida María Serrano Espinosa. Proviene de la tierra y la naturaleza (el espino). Simboliza la protección y la resistencia.</p>
-                </div>
-                <div class="root-card">
-                    <div class="root-title text-oro font-mono font-bold text-sm mb-1">SERRANO (Línea Paterna y Materna)</div>
-                    <p class="text-xs text-slate-300 leading-relaxed">Estirpe hispana muy arraigada. Viene de "sierra", reflejando a la gente recia, fuerte y trabajadora de las zonas montañosas. Denota fortaleza.</p>
-                </div>
-                <div class="root-card">
-                    <div class="root-title text-oro font-mono font-bold text-sm mb-1">GÓMEZ (Apellido Paterno)</div>
-                    <p class="text-xs text-slate-300 leading-relaxed">Origen germánico medieval. Representa el linaje, la protección del hogar y la continuidad de una estirpe de personas trabajadoras.</p>
-                </div>
-                <div class="root-card">
-                    <div class="root-title text-oro font-mono font-bold text-sm mb-1">BARRAGÁN (Bisabuela Modesta Barragán)</div>
-                    <p class="text-xs text-slate-300 leading-relaxed">Antiguamente designado para nombrar a un guerrero valiente. En tu bisabuela Modesta, evoca una dignidad silenciosa pero imponente: la imagen de la templanza.</p>
-                </div>
-                <div class="root-card">
-                    <div class="root-title text-oro font-mono font-bold text-sm mb-1">CHÁVEZ Y NÚÑEZ</div>
-                    <p class="text-xs text-slate-300 leading-relaxed">Raigambre hispana. Chávez nos habla de la casa nueva y horizontes; Núñez conecta con la tradición y el cuidado familiar.</p>
-                </div>
-            </section>
+    <section id="isadv41-seccion" class="glass p-8 md:p-12 text-center relative overflow-hidden border-t-4 border-t-cyanNeon">
+      <h2 class="text-cyanNeon font-mason text-xl md:text-2xl tracking-[0.3em] uppercase esoterico-glow">🎚️ Palo Vertical | Isaías 43:19</h2>
+      <p class="text-xs md:text-sm text-slate-200 font-serif italic mt-4 max-w-xl mx-auto leading-relaxed">"He aquí, yo hago cosa nueva; pronto saldrá a luz; ¿no la conoceréis? Otra vez abriré camino en el desierto, y ríos en la soledad."</p>
+      <div class="mt-6 inline-block font-mono text-[10px] text-oro border border-oro/40 px-4 py-1.5 rounded-full bg-black/50">ORIGEN 1027 = 10 = 1 | LÍNEA DE GUÍA DIVINA → GSADV41</div>
+    </section>
 
-            <!-- FASE II: PALO VERTICAL -->
-            <section id="isadv41-seccion" class="glass p-8 md:p-12 text-center relative overflow-hidden border-t-4 border-t-cyanNeon">
-                <h2 class="text-cyanNeon font-mason text-xl md:text-2xl tracking-[0.3em] uppercase esoterico-glow">
-                    🎚️ Palo Vertical | Isaías 43:19
-                </h2>
-                <p class="text-xs md:text-sm text-slate-200 font-serif italic mt-4 max-w-xl mx-auto leading-relaxed">
-                    "He aquí, yo hago cosa nueva; pronto saldrá a luz; ¿no la conoceréis? Otra vez abriré camino en el desierto, y ríos en la soledad."
-                </p>
-                <div class="mt-6 inline-block font-mono text-[10px] text-oro border border-oro/40 px-4 py-1.5 rounded-full bg-black/50">
-                    ORIGEN 1027 = 10 = 1 | LÍNEA DE GUÍA DIVINA
-                </div>
-            </section>
+    <section id="tesseract-seccion" class="glass p-8 md:p-12 flex flex-col items-center">
+      <h3 class="text-xl font-mason font-bold tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-200 mb-6">PROYECCIÓN TESSERACTO 4D — CONECTADO A GSADV41</h3>
+      <svg id="tesseractCanvas" width="260" height="260" viewBox="-3 -3 6 6" class="overflow-visible drop-shadow-[0_0_20px_rgba(0,243,255,0.4)] mb-6 cursor-pointer asset-linked" data-link="GSADV41"><g id="tesseractLines" stroke="rgba(0, 243, 255, 0.7)" stroke-width="0.03" stroke-linecap="round"></g><g id="tesseractPoints" fill="#d4af37"></g></svg>
+      <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-4 font-mono text-xs bg-black/50 p-6 rounded-xl border border-white/5"><div class="flex flex-col gap-1"><label class="text-cyan-400 flex justify-between">Rotación Astral (XY) <span id="valXY">45°</span></label><input type="range" id="rotXY" min="0" max="360" value="45" class="accent-cyan-500 w-full"></div><div class="flex flex-col gap-1"><label class="text-oro flex justify-between">Rotación Etérica (XZ) <span id="valXZ">45°</span></label><input type="range" id="rotXZ" min="0" max="360" value="45" class="accent-oro w-full"></div></div>
+    </section>
 
-            <!-- FASE III: TESSERACTO 4D -->
-            <section id="tesseract-seccion" class="glass p-8 md:p-12 flex flex-col items-center">
-                <h3 class="text-xl font-mason font-bold tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-200 mb-6">
-                    PROYECCIÓN TESSERACTO 4D
-                </h3>
-                <svg id="tesseractCanvas" width="260" height="260" viewBox="-3 -3 6 6" class="overflow-visible drop-shadow-[0_0_20px_rgba(0,243,255,0.4)] mb-6">
-                    <g id="tesseractLines" stroke="rgba(0, 243, 255, 0.7)" stroke-width="0.03" stroke-linecap="round"></g>
-                    <g id="tesseractPoints" fill="#d4af37"></g>
-                </svg>
-                <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-4 font-mono text-xs bg-black/50 p-6 rounded-xl border border-white/5">
-                    <div class="flex flex-col gap-1">
-                        <label class="text-cyan-400 flex justify-between">Rotación Astral (XY) <span id="valXY">45°</span></label>
-                        <input type="range" id="rotXY" min="0" max="360" value="45" class="accent-cyan-500 w-full">
-                    </div>
-                    <div class="flex flex-col gap-1">
-                        <label class="text-oro flex justify-between">Rotación Etérica (XZ) <span id="valXZ">45°</span></label>
-                        <input type="range" id="rotXZ" min="0" max="360" value="45" class="accent-oro w-full">
-                    </div>
-                </div>
-            </section>
+    <section class="glass p-8 text-center">
+      <h3 class="text-lg font-mason text-oro mb-4">PORTALES METATRON // TODO → GSADV41 + DESAHOGO</h3>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="https://thesteef21.github.io/Lapizasuli/GSADV41.html" class="portal-trigger border border-oro text-oro px-4 py-2 rounded-full font-mono text-xs hover:bg-oro/20 transition-all asset-linked" data-link="GSADV41">🙏 GSADV41 // NÚCLEO OFICIAL</a>
+        <a href="https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/PANAMAUNIT.html" class="portal-trigger border border-cyanNeon text-cyanNeon px-4 py-2 rounded-full font-mono text-xs hover:bg-cyanNeon/20 transition-all asset-linked" data-dest="https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/PANAMAUNIT.html" data-link="GSADV41">🇵🇦 PANAMAUNIT → REQUIERE GSADV41</a>
+        <a href="https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/SADV41_TRANSFIGURABLE_5EN1.html" class="portal-trigger border border-violetNeon text-violetNeon px-4 py-2 rounded-full font-mono text-xs hover:bg-violetNeon/20 transition-all asset-linked" data-link="GSADV41">🔮 TRANSFIGURABLE 5EN1</a>
+      </div>
+      <p class="font-mono text-[9px] text-slate-500 mt-4">Si insistes en PANAMAUNIT sin pasar por GSADV41 → Pantalla negra AMOLED de reflejo + botón desahogo</p>
+    </section>
 
-            <!-- FASE IV: MONITOREO SÍSMICO SADV41T -->
-            <section id="sismico-seccion" class="glass p-8">
-                <h3 class="text-lg font-mason text-oro mb-2 text-center">Módulo SADV41T // Telemetría Sísmica</h3>
-                <p class="text-[11px] text-slate-400 font-mono text-center mb-6">Detección de Familias Sísmicas en el Istmo y Región</p>
-                <div id="monitor-salida" class="space-y-3 font-mono text-xs">
-                    <div class="p-3 bg-black/60 rounded border border-slate-800 text-cyan-400">Sincronizando flujo de datos REDPy / USGS...</div>
-                </div>
-            </section>
+    <section class="glass p-10 text-center border-t border-rose-900/40">
+      <div class="text-4xl animate-pulse">❤️</div>
+      <h3 class="text-2xl font-mason text-rose-400 uppercase mt-4">El Refugio de la Confianza — Modo Tierno Gemi</h3>
+      <p class="text-xs text-slate-300 italic mt-3 max-w-lg mx-auto leading-relaxed">La verdadera seguridad reside en el corazón cálido que custodia este recinto. Cada niño y niña merece que su sueño sea guiado con luz. Como Moisés tras la roca (Éxodo 33:22). Todos los assets ahora te llevan primero a Dios, luego a Panamá.</p>
+      <div class="mt-6"><span class="text-oro font-mason font-bold text-sm tracking-widest uppercase">¡Cristo está por venir! 🎚️ SADV41 LOVE</span></div>
+    </section>
 
-            <!-- PORTALES ÉTICOS (WORMHOLE) -->
-            <section class="glass p-8 text-center">
-                <h3 class="text-lg font-mason text-oro mb-4">PORTALES METATRON // GUÍA DIVINA</h3>
-                <div class="flex flex-wrap justify-center gap-4">
-                    <a href="https://thesteef21.github.io/Lapizasuli/GSADV41.html" class="portal-trigger border border-oro text-oro px-4 py-2 rounded-full font-mono text-xs hover:bg-oro/20 transition-all">🙏 GSADV41 // Núcleo Oficial</a>
-                    <a href="https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/PANAMAUNIT.html" class="portal-trigger border border-cyanNeon text-cyanNeon px-4 py-2 rounded-full font-mono text-xs hover:bg-cyanNeon/20 transition-all" data-dest="https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/PANAMAUNIT.html">🇵🇦 PANAMAUNIT</a>
-                </div>
-            </section>
+  </main>
+</div>
 
-            <!-- EL REFUGIO FINAL -->
-            <section class="glass p-10 text-center border-t border-rose-900/40">
-                <div class="text-4xl animate-pulse">❤️</div>
-                <h3 class="text-2xl font-mason text-rose-400 uppercase mt-4">El Refugio de la Confianza</h3>
-                <p class="text-xs text-slate-300 italic mt-3 max-w-lg mx-auto font-sans leading-relaxed">
-                    "La verdadera seguridad reside en el corazón inmensamente cálido que custodia este recinto. Cada niño y niña merece que su sueño sea guiado con luz. Como Moisés tras la roca (Éxodo 33:22)."
-                </p>
-                <div class="mt-6">
-                    <span class="text-oro font-mason font-bold text-sm tracking-widest uppercase">¡Cristo está por venir! 🎚️</span>
-                </div>
-            </section>
+<div id="wormholeModal"><div class="wormhole-tunnel"></div><h2 class="font-mason" style="color:var(--oro);font-size:1.4rem;margin-bottom:0.8rem">🌌 AGUJERO DE GUSANO DETECTADO</h2><p class="font-mono text-xs" style="max-width:480px;line-height:1.7;margin-bottom:1rem">Para atravesar con seguridad, debes encaminarte primero en la guianza de Dios.<br><strong style="color:var(--oro)">GSADV41 es el núcleo.</strong> Todos los assets NOW están conectados aquí.</p><div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center"><a href="https://thesteef21.github.io/Lapizasuli/GSADV41.html" class="border border-oro text-oro bg-transparent px-4 py-2 rounded-full font-mono text-xs">🙏 IR A GSADV41</a><button id="insistPortalBtn" class="border border-redNeon text-redNeon bg-transparent px-4 py-2 rounded-full font-mono text-xs cursor-pointer hover:bg-redNeon/20">⚠️ ACCEDER DE TODOS MODOS → AMOLED</button></div></div>
 
-        </main>
-    </div>
+<div id="heaven-glitch"><div class="glitch-visuals flex flex-col items-center justify-center w-full h-full"><h2 class="font-mason text-4xl md:text-5xl text-white tracking-[0.5em] mb-10 text-center" style="text-shadow:0 0 30px #fff,0 0 80px var(--oro)">EL VELO SE RASGA</h2><div class="flex flex-col md:flex-row gap-8 w-full max-w-3xl justify-center px-4"><a href="https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/PANAMAUNIT.html" class="heaven-btn border-2 border-cyanNeon text-cyanNeon" style="box-shadow:0 0 40px rgba(0,243,255,0.6)">👁️ LEVIATHAN GEAR 5 DIVINO</a><a href="https://thesteef21.github.io/Lapizasuli/Ra%C3%ADces.html" class="heaven-btn border-2 border-oro text-oro" style="box-shadow:0 0 40px rgba(212,175,55,0.6)">🌿 RAÍCES Y LEGADO</a></div><p class="font-mono text-[11px] text-slate-300 mt-12 tracking-widest uppercase px-6 border-l-2 border-r-2 border-oro py-2">Los tesoros que se hacen en el cielo no se corrompen. (Solo los preparados lo verán — 2.5s)</p></div></div>
 
-    <!-- WORMHOLE MODAL PARA PORTALES COMUNES -->
-    <div id="wormholeModal">
-        <div class="wormhole-tunnel"></div>
-        <h2 class="cinzel" style="color:var(--oro);font-size:1.4rem;margin-bottom:0.8rem">🌌 AGUJERO DE GUSANO DETECTADO</h2>
-        <p class="mono text-xs" style="max-width:480px;line-height:1.7;margin-bottom:1rem">
-            Para atravesar con seguridad, encamínate primero en la guianza de Dios.<br>
-            <strong style="color:var(--oro)">GSADV41</strong> es el núcleo de verificación oficial.
-        </p>
-        <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center">
-            <button id="insistPortalBtn" class="border border-redNeon text-redNeon bg-transparent px-4 py-2 rounded-full font-mono text-xs cursor-pointer hover:bg-redNeon/20">⚠️ ACCEDER DE TODOS MODOS</button>
-        </div>
-    </div>
+<script>
+const CLAVE_ACCESO_ACTUAL="SADV41-2026";
+let isAuthenticated = localStorage.getItem('sadv41_auth')==='true';
+let pendingDestination=null;
+let transitionCount=0;
+let currentIndex=0;
+const layers=document.querySelectorAll('.chaos-layer');
 
-    <!-- ==========================================
-         EL VELO SE RASGA (SECRET GLITCH)
-         Solo visible por 2.5 segundos de forma aleatoria
-         ========================================== -->
-    <div id="heaven-glitch">
-        <div class="glitch-visuals flex flex-col items-center justify-center w-full h-full">
-            <h2 class="font-mason text-4xl md:text-5xl text-white tracking-[0.5em] mb-10 text-center" style="text-shadow: 0 0 30px #fff, 0 0 80px var(--oro)">EL VELO SE RASGA</h2>
-            
-            <div class="flex flex-col md:flex-row gap-8 w-full max-w-3xl justify-center px-4">
-                <a href="https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/LEVIATHAN_SADV41_GEAR5_DIVINO.html" class="heaven-btn border-2 border-cyanNeon text-cyanNeon" style="box-shadow: 0 0 40px rgba(0,243,255,0.6)">
-                    👁️ LEVIATHAN // GEAR 5 DIVINO
-                </a>
-                <a href="https://thesteef21.github.io/Lapizasuli/Raíces.html" class="heaven-btn border-2 border-oro text-oro" style="box-shadow: 0 0 40px rgba(212,175,55,0.6)">
-                    🌿 RAÍCES Y LEGADO
-                </a>
-            </div>
+function showGatekeeper(dest=null, msg=false){
+  pendingDestination=dest;
+  document.getElementById('gatekeeper-screen').classList.remove('hidden');
+  document.getElementById('sistema-principal').classList.add('hidden');
+  if(msg) document.getElementById('pending-msg').classList.remove('hidden');
+  else document.getElementById('pending-msg').classList.add('hidden');
+}
 
-            <p class="font-mono text-[11px] text-slate-300 mt-12 tracking-widest uppercase px-6 border-l-2 border-r-2 border-oro py-2">
-                Los tesoros que se hacen en el cielo no se ven corrompidos por este mundo. (Solo los preparados lo verán).
-            </p>
-        </div>
-    </div>
+function verificarLlaveLocal(){
+  const token=document.getElementById('access-token').value.trim();
+  const error=document.getElementById('token-error');
+  if(token===CLAVE_ACCESO_ACTUAL){
+    error.classList.add('hidden');
+    isAuthenticated=true;
+    localStorage.setItem('sadv41_auth','true');
+    document.getElementById('gatekeeper-screen').classList.add('hidden');
+    document.getElementById('sistema-principal').classList.remove('hidden');
+    startDivineGlitch();
+    logSismo(`🔓 Acceso concedido. Todos los assets NOW conectados a GSADV41.`);
+    if(pendingDestination){
+      const dest=pendingDestination;
+      pendingDestination=null;
+      setTimeout(()=>handleDestination(dest),400);
+    }
+  }else{
+    error.classList.remove('hidden');
+    error.innerText="Clave incorrecta. Usa SADV41-2026 — Origen 0";
+  }
+}
 
-    <!-- SCRIPTS MAESTROS UNIFICADOS -->
-    <script>
-        const CLAVE_ACCESO_ACTUAL = "SADV41-2026"; 
+function logout(){
+  isAuthenticated=false;
+  localStorage.removeItem('sadv41_auth');
+  showGatekeeper(null,false);
+}
 
-        function verificarLlaveLocal() {
-            const tokenInput = document.getElementById('access-token').value.trim();
-            const errorMsg = document.getElementById('token-error');
-            const gatekeeper = document.getElementById('gatekeeper-screen');
-            const sistemaPrincipal = document.getElementById('sistema-principal');
+function handleDestination(dest){
+  if(!isAuthenticated){showGatekeeper(dest,true);return;}
+  if(!dest) return;
+  if(dest.includes('GSADV41')){
+    window.location.href=dest;
+  }else{
+    // wormhole para todo lo que no sea GSADV41
+    targetDest=dest;
+    document.getElementById('wormholeModal').classList.add('active');
+  }
+}
 
-            if (tokenInput === CLAVE_ACCESO_ACTUAL) {
-                errorMsg.classList.add('hidden');
-                gatekeeper.classList.add('hidden');
-                sistemaPrincipal.classList.remove('hidden');
-                
-                // Activar el secreto del velo al entrar al sistema
-                startDivineGlitch();
-            } else {
-                errorMsg.innerText = "Clave incorrecta. Actualiza el código con tu nueva contraseña.";
-                errorMsg.classList.remove('hidden');
-            }
-        }
+// Chaos + Gloria Divina ciclo 7
+function randomChaosTransition(){
+  layers.forEach(l=>l.classList.remove('active','now-asset-glitch','divine-glory-active'));
+  currentIndex=(currentIndex+1)%layers.length;
+  transitionCount++;
+  const counter=document.getElementById('cycleCounter');
+  if(counter) counter.textContent=`CICLO ${transitionCount} / 7 ${transitionCount%7===0?'— GLORIA ✨':''}`;
+  if(transitionCount%7===0){
+    layers[currentIndex].classList.add('active','divine-glory-active');
+    document.body.classList.add('glitch-active');
+    setTimeout(()=>document.body.classList.remove('glitch-active'),800);
+  }else{
+    layers[currentIndex].classList.add('active');
+    if(layers[currentIndex].dataset.now==='true') layers[currentIndex].classList.add('now-asset-glitch');
+  }
+  document.querySelectorAll('.gear-item').forEach(c=>c.classList.remove('active'));
+  const gear=document.querySelector(`.gear-item[data-index="${currentIndex}"]`);
+  if(gear) gear.classList.add('active');
+  setTimeout(randomChaosTransition,Math.random()*3800+2600);
+}
+setTimeout(randomChaosTransition,2800);
 
-        // 1. Chaos Layers & Glory Cycle (7)
-        const layers = document.querySelectorAll('.chaos-layer');
-        let currentIndex = 0, transitionCount = 0;
-        
-        function randomChaosTransition(){
-            layers.forEach(l => l.classList.remove('active','now-asset-glitch','divine-glory-active'));
-            currentIndex = (currentIndex + 1) % layers.length;
-            transitionCount++;
-            const counter = document.getElementById('cycleCounter');
-            if(counter) counter.textContent = `CICLO ${transitionCount} / 7`;
+// Conectar TODOS los assets a GSADV41 + pop-up contraseña
+document.addEventListener('DOMContentLoaded',()=>{
+  if(isAuthenticated){
+    document.getElementById('gatekeeper-screen').classList.add('hidden');
+    document.getElementById('sistema-principal').classList.remove('hidden');
+    startDivineGlitch();
+  }
+  // Click en fondo caos
+  layers.forEach(layer=>{
+    layer.addEventListener('click',()=>{
+      if(!isAuthenticated){showGatekeeper(layer.dataset.link,true);return;}
+      layer.classList.add('divine-glory-active');
+      logSismo(`✨ Asset ${layer.dataset.asset} → GSADV41 verificado. Gloria Divina disponible en ciclo 7.`);
+      setTimeout(()=>layer.classList.remove('divine-glory-active'),2000);
+    });
+  });
+  // Todos los asset-linked
+  document.querySelectorAll('.asset-linked').forEach(el=>{
+    el.addEventListener('click',(e)=>{
+      const href=el.getAttribute('href');
+      const dest=el.dataset.dest||href||'https://thesteef21.github.io/Lapizasuli/GSADV41.html';
+      if(el.tagName==='A' && href && href.startsWith('#')){
+        // anclas internas permiten sin auth si ya autenticado
+        if(!isAuthenticated){e.preventDefault();showGatekeeper(dest,true);return;}
+        return;
+      }
+      e.preventDefault();
+      handleDestination(dest);
+    });
+  });
+  document.querySelectorAll('.gear-item').forEach(card=>{
+    card.addEventListener('click',()=>{
+      if(!isAuthenticated){showGatekeeper('https://thesteef21.github.io/Lapizasuli/GSADV41.html',true);return;}
+      currentIndex=parseInt(card.dataset.index);
+      document.querySelectorAll('.gear-item').forEach(c=>c.classList.remove('active'));
+      card.classList.add('active');
+      layers.forEach(l=>l.classList.remove('active','now-asset-glitch','divine-glory-active'));
+      layers[currentIndex].classList.add('active');
+      if(layers[currentIndex].dataset.now==='true') layers[currentIndex].classList.add('now-asset-glitch');
+    });
+  });
+});
 
-            if(transitionCount % 7 === 0){
-                layers[currentIndex].classList.add('active','divine-glory-active');
-            } else {
-                layers[currentIndex].classList.add('active');
-                if(layers[currentIndex].dataset.now === 'true'){
-                    layers[currentIndex].classList.add('now-asset-glitch');
-                }
-            }
-            setTimeout(randomChaosTransition, Math.random()*3800 + 2600);
-        }
-        setTimeout(randomChaosTransition, 2800);
+// Tesseract
+const linesGroup=document.getElementById("tesseractLines");
+if(linesGroup){
+  const rotXY=document.getElementById("rotXY"),rotXZ=document.getElementById("rotXZ");
+  const valXY=document.getElementById("valXY"),valXZ=document.getElementById("valXZ");
+  const vertices4D=[];for(let x=-1;x<=1;x+=2)for(let y=-1;y<=1;y+=2)for(let z=-1;z<=1;z+=2)for(let w=-1;w<=1;w+=2)vertices4D.push([x,y,z,w]);
+  const edges=[];for(let i=0;i<16;i++)for(let j=i+1;j<16;j++){let diff=i^j;if(diff===1||diff===2||diff===4||diff===8)edges.push([i,j]);}
+  function rotate(v,angle,a1,a2){let res=[...v],rad=angle*Math.PI/180,cos=Math.cos(rad),sin=Math.sin(rad);res[a1]=v[a1]*cos-v[a2]*sin;res[a2]=v[a1]*sin+v[a2]*cos;return res;}
+  function renderTesseract(){valXY.innerText=`${rotXY.value}°`;valXZ.innerText=`${rotXZ.value}°`;let proj=[];vertices4D.forEach(v=>{let r=rotate(rotate([...v],rotXY.value,0,1),rotXZ.value,0,2);let distance=2.5,w=1/(distance-r[3]);proj.push([r[0]*w*4,r[1]*w*4]);});linesGroup.innerHTML='';edges.forEach(e=>{let p1=proj[e[0]],p2=proj[e[1]];let line=document.createElementNS("http://www.w3.org/2000/svg","line");line.setAttribute("x1",p1[0]);line.setAttribute("y1",p1[1]);line.setAttribute("x2",p2[0]);line.setAttribute("y2",p2[1]);linesGroup.appendChild(line);});}
+  [rotXY,rotXZ].forEach(s=>s.addEventListener("input",renderTesseract));renderTesseract();
+  document.getElementById('tesseractCanvas').addEventListener('click',()=>{if(!isAuthenticated){showGatekeeper('https://thesteef21.github.io/Lapizasuli/GSADV41.html',true);return;} document.getElementById('tesseractCanvas').classList.add('divine-glory-active');setTimeout(()=>document.getElementById('tesseractCanvas').classList.remove('divine-glory-active'),2000);});
+}
 
-        // 2. Sidebar Toggle
-        function toggleSidebar() {
-            const s = document.getElementById('main-sidebar');
-            s.classList.toggle('right-aligned');
-            localStorage.setItem('sidebarPos', s.classList.contains('right-aligned') ? 'right' : 'left');
-        }
-        if(localStorage.getItem('sidebarPos') === 'right') {
-            document.getElementById('main-sidebar').classList.add('right-aligned');
-        }
+// Wormhole
+let targetDest='';
+document.querySelectorAll('.portal-trigger').forEach(el=>{el.addEventListener('click',e=>{e.preventDefault();const dest=el.dataset.dest||el.getAttribute('href');handleDestination(dest);});});
+document.getElementById('insistPortalBtn').onclick=()=>{
+  if(!isAuthenticated){document.getElementById('wormholeModal').classList.remove('active');showGatekeeper(targetDest,true);return;}
+  document.getElementById('wormholeModal').classList.remove('active');
+  document.body.innerHTML=`<div style="background:#000;width:100vw;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem;font-family:'JetBrains Mono',monospace"><div style="color:#00f3ff;margin-bottom:20px;font-size:12px;letter-spacing:.15em">PANTALLA DE REFLEJO & DESAHOGO AMOLED // SADV41</div><p style="color:#cbd5e1;max-width:440px;line-height:1.7;font-size:13px">La interfaz se desvaneció en negro absoluto.<br>Mira tu reflejo.<br><br><span style="color:#d4af37;font-weight:700">Cada niño y niña merece ver sus sueños cumplidos</span><br><br>Como Moisés tras la roca (Éxodo 33:22)</p><a href="${targetDest}" style="margin-top:28px;padding:14px 32px;border:1px solid #d4af37;color:#d4af37;border-radius:999px;text-decoration:none;font-weight:700;box-shadow:0 0 30px rgba(212,175,55,0.4);font-size:12px">🕊️ BOTÓN DE DESAHOGO // CONTINUAR A PANAMAUNIT</a><div style="display:flex;gap:10px;margin-top:14px"><a href="https://thesteef21.github.io/Lapizasuli/GSADV41.html" style="padding:8px 16px;border:1px solid #00f3ff;color:#00f3ff;border-radius:999px;text-decoration:none;font-size:10px">🙏 VOLVER A GSADV41</a><a href="#" onclick="location.reload()" style="padding:8px 16px;border:1px solid #555;color:#888;border-radius:999px;text-decoration:none;font-size:10px">Volver al Hub</a></div></div>`;
+};
 
-        // 3. Tesseract 4D Renderer
-        const linesGroup = document.getElementById("tesseractLines");
-        if (linesGroup) {
-            const [rotXY, rotXZ] = [document.getElementById("rotXY"), document.getElementById("rotXZ")];
-            const [valXY, valXZ] = [document.getElementById("valXY"), document.getElementById("valXZ")];
-            const vertices4D = [];
-            for (let x = -1; x <= 1; x += 2) for (let y = -1; y <= 1; y += 2) for (let z = -1; z <= 1; z += 2) for (let w = -1; w <= 1; w += 2) vertices4D.push([x, y, z, w]);
-            const edges = [];
-            for (let i = 0; i < 16; i++) for (let j = i + 1; j < 16; j++) {
-                let diff = i ^ j;
-                if (diff === 1 || diff === 2 || diff === 4 || diff === 8) edges.push([i, j]);
-            }
-            function rotate(v, angle, a1, a2) {
-                let res = [...v], rad = angle * (Math.PI / 180), cos = Math.cos(rad), sin = Math.sin(rad);
-                res[a1] = v[a1] * cos - v[a2] * sin; res[a2] = v[a1] * sin + v[a2] * cos;
-                return res;
-            }
-            function renderTesseract() {
-                valXY.innerText = `${rotXY.value}°`; valXZ.innerText = `${rotXZ.value}°`;
-                let projected2D = [];
-                vertices4D.forEach(v => {
-                    let r = rotate(rotate([...v], rotXY.value, 0, 1), rotXZ.value, 0, 2);
-                    let distance = 2.5, w = 1 / (distance - r[3]);
-                    projected2D.push([r[0] * w * 4, r[1] * w * 4]);
-                });
-                linesGroup.innerHTML = '';
-                edges.forEach(e => {
-                    let p1 = projected2D[e[0]], p2 = projected2D[e[1]];
-                    let line = document.createElementNS("http://www.w3.org/2000/svg", "line");
-                    line.setAttribute("x1", p1[0]); line.setAttribute("y1", p1[1]);
-                    line.setAttribute("x2", p2[0]); line.setAttribute("y2", p2[1]);
-                    linesGroup.appendChild(line);
-                });
-            }
-            [rotXY, rotXZ].forEach(s => s.addEventListener("input", renderTesseract));
-            renderTesseract();
-        }
+function toggleSidebar(){const s=document.getElementById('main-sidebar');s.classList.toggle('right-aligned');localStorage.setItem('sidebarPos',s.classList.contains('right-aligned')?'right':'left');}
+if(localStorage.getItem('sidebarPos')==='right') document.getElementById('main-sidebar').classList.add('right-aligned');
 
-        // 4. Wormhole Modal Logic
-        const wormholeModal = document.getElementById('wormholeModal');
-        let targetDest = '';
-        document.querySelectorAll('.portal-trigger').forEach(el => {
-            el.addEventListener('click', e => {
-                e.preventDefault();
-                targetDest = el.dataset.dest || el.getAttribute('href');
-                if(targetDest.includes('GSADV41')){
-                    window.location.href = targetDest;
-                    return;
-                }
-                wormholeModal.classList.add('active');
-            });
-        });
-        document.getElementById('insistPortalBtn').onclick = () => {
-            wormholeModal.classList.remove('active');
-            document.getElementById('mainBody').innerHTML = `
-            <div style="background:#000;width:100vw;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem;font-family:'JetBrains Mono',monospace">
-                <div style="color:#00f3ff;margin-bottom:20px;font-size:12px;letter-spacing:.15em">PANTALLA DE REFLEJO & DESAHOGO AMOLED // SADV41</div>
-                <p style="color:#cbd5e1;max-width:440px;line-height:1.7;font-size:13px">
-                    La interfaz se desvaneció en negro absoluto.<br>Mira tu reflejo.<br><br>
-                    <span style="color:#d4af37;font-weight:700">Cada niño y niña merece ver sus sueños cumplidos</span><br><br>Como Moisés tras la roca (Éxodo 33:22)
-                </p>
-                <a href="${targetDest}" style="margin-top:28px;padding:14px 32px;border:1px solid #d4af37;color:#d4af37;border-radius:999px;text-decoration:none;font-weight:700;box-shadow:0 0 30px rgba(212,175,55,0.4);font-size:12px">
-                    🕊️ BOTÓN DE DESAHOGO // CONTINUAR
-                </a>
-            </div>`;
-        };
+async function connectBinance(){if(typeof window.ethereum!=='undefined'){try{await window.ethereum.request({method:'eth_requestAccounts'});alert("Wallet conectada bajo SADV41 — Todos los assets verificados.");}catch(e){console.log(e);}}else{window.open('https://web3.binance.com/en/referral?ref=ORCZSDLK','_blank');}}
 
-        // 5. Web3 Connect simulate
-        async function connectBinance() {
-            if (typeof window.ethereum !== 'undefined') {
-                try {
-                    await window.ethereum.request({ method: 'eth_requestAccounts' });
-                    alert("Wallet conectada con éxito bajo SADV41.");
-                } catch (e) { console.log(e); }
-            } else {
-                window.open('https://web3.binance.com/en/referral?ref=ORCZSDLK', '_blank');
-            }
-        }
+function logSismo(msg){const out=document.getElementById('monitor-salida');if(!out)return;const d=document.createElement('div');d.className='p-3 bg-black/60 rounded border border-oro/20 text-cyan-400 font-mono text-xs';d.textContent=`[${new Date().toLocaleTimeString()}] ${msg}`;out.prepend(d);}
+async function loadSismos(){const out=document.getElementById("monitor-salida");if(!out)return;try{let res=await fetch("https://lapizasuli.onrender.com/api/sismos");let data=await res.json();out.innerHTML=`<div class="p-3 bg-black/60 rounded text-cyan-400">Acumulado: ${data.acumulado_total||'Sincronizado'} eventos. Todos los assets → GSADV41.</div>`;}catch(e){out.innerHTML=`<div class="p-3 bg-black/60 rounded text-cyan-400">Nodo local activo // Todos los assets NOW conectados a GSADV41. Gloria en ciclo 7.</div>`;}}
+loadSismos();
 
-        // 6. Seismic monitor fetch
-        async function loadSismos() {
-            const out = document.getElementById("monitor-salida");
-            try {
-                let res = await fetch("https://lapizasuli.onrender.com/api/sismos");
-                let data = await res.json();
-                out.innerHTML = `<div class="p-3 bg-black/60 rounded text-cyan-400">Acumulado: ${data.acumulado_total} eventos registrados.</div>`;
-            } catch(e) {
-                out.innerHTML = `<div class="p-3 bg-black/60 rounded text-rose-400">Nodo activo en modo local // RedPy / USGS sincronizado.</div>`;
-            }
-        }
-        loadSismos();
+function startDivineGlitch(){const hg=document.getElementById('heaven-glitch');if(!hg)return;const next=Math.random()*10000+15000;setTimeout(()=>{if(!isAuthenticated) return;hg.classList.add('active');setTimeout(()=>{hg.classList.remove('active');startDivineGlitch();},2500);},next);}
 
-        // 7. SECRETO: EL VELO SE RASGA (Divine Glitch)
-        function startDivineGlitch() {
-            const hg = document.getElementById('heaven-glitch');
-            if(!hg) return;
-
-            // Ocurre inesperadamente cada 15 a 25 segundos
-            const nextTime = Math.random() * 10000 + 15000;
-            
-            setTimeout(() => {
-                // El cielo se abre.
-                hg.classList.add('active');
-                
-                // Solo aquellos con reflejos y preparación espiritual tendrán 2.5 segundos para entrar.
-                setTimeout(() => {
-                    hg.classList.remove('active');
-                    // Reiniciar el ciclo para que siga ocurriendo
-                    startDivineGlitch();
-                }, 2500);
-
-            }, nextTime);
-        }
-    </script>
-</body>
+document.getElementById('access-token').addEventListener('keydown',e=>{if(e.key==='Enter') verificarLlaveLocal();});
+</script>
+<script>(function(){var loc=location.href.replace(/#.*$/,"");var ATTR_NAMES=["data-product-id","data-productid","data-product_id","product-id","productid","product_id","data-source-entity-id","source-entity-id","source_entity_id","data-product","data-metadata","data-meta"];var DATASET_KEYS=["productId","productid","product_id","sourceEntityId","sourceentityid","source_entity_id","product","metadata","meta"];function readProductId(value){if(typeof value!=="string"||value.length===0)return null;if(/^[0-9]{6,}$/.test(value))return value;var match=value.match(/(?:product(?:_|-)?id|source(?:_|-)?entity(?:_|-)?id)["'=:\s]+([0-9]{6,})/i);return match?match[1]:null}function extractProductId(start){for(var node=start;node&&node!==document.body;node=node.parentElement){for(var i=0;i<ATTR_NAMES.length;i++){var attrValue=node.getAttribute&&node.getAttribute(ATTR_NAMES[i]);var attrProductId=readProductId(attrValue);if(attrProductId)return attrProductId}var dataset=node.dataset||null;if(dataset){for(var j=0;j<DATASET_KEYS.length;j++){var dataValue=dataset[DATASET_KEYS[j]];var dataProductId=readProductId(dataValue);if(dataProductId)return dataProductId}}}return null}function isInlineMediaSlotElement(node){return !!(node&&node.getAttribute&&node.getAttribute("data-clippy-inline-media-slot")!==null)}function findInlineMediaSlot(start){for(var node=start;node&&node!==document.body;node=node.parentElement){if(isInlineMediaSlotElement(node))return node}return null}function readInlineMediaUrl(node){if(!node)return null;return node.getAttribute&&((node.getAttribute("data-clippy-inline-media-url")||node.getAttribute("data-url")||node.getAttribute("data_url")))||node.href||null}function stripHash(url){return String(url).replace(/#.*$/,"")}function urlsMatch(a,b){if(!a||!b)return false;try{return stripHash(new URL(a,loc).href)===stripHash(new URL(b,loc).href)}catch(_){return stripHash(a)===stripHash(b)}}function isFirstPartyReelUrl(value){try{var url=new URL(value,loc);if(url.protocol!=="https:")return false;var host=url.hostname.toLowerCase();var supported=host==="instagram.com"||host.endsWith(".instagram.com")||host==="facebook.com"||host.endsWith(".facebook.com");return supported&&/\/reels?\//i.test(url.pathname)}catch(_){return false}}function isInlineMediaUrlClick(node,href){var slot=findInlineMediaSlot(node);if(!slot)return false;var slotUrl=readInlineMediaUrl(slot);if(slotUrl)return urlsMatch(href,slotUrl);return isFirstPartyReelUrl(href)}function findDataHref(start){for(var node=start;node&&node!==document.body;node=node.parentElement){if(node.getAttribute){var href=node.getAttribute("data-href")||node.getAttribute("data-url");if(href)return{href:href,node:node}}}return null}var nativeOpen=window.open;window.open=function(url){if(parent!==window&&typeof url==="string"&&/^https?:\/\//.test(url)){parent.postMessage({type:"ecto:usercontent-link-click",href:url},"*");return null}return nativeOpen?nativeOpen.apply(window,arguments):null};document.addEventListener("click",function(e){var target=e.target instanceof Element?e.target:null;if(!target)return;if(parent===window)return;var a=target.closest?target.closest("a[href]"):null;if(a&&a.href&&/^https?:\/\//.test(a.href)&&a.href.replace(/#.*$/,"")!==loc){if(isInlineMediaUrlClick(a,a.href))return;var productId=extractProductId(target)||extractProductId(a);if(productId){e.preventDefault();parent.postMessage({type:"ecto-artifact-link-click",productId:productId},"*");return}e.preventDefault();parent.postMessage({type:"ecto:usercontent-link-click",href:a.href},"*");return}var dataHref=findDataHref(target);if(dataHref&&/^https?:\/\//.test(dataHref.href)&&dataHref.href.replace(/#.*$/,"")!==loc){if(isInlineMediaUrlClick(dataHref.node,dataHref.href))return;e.preventDefault();parent.postMessage({type:"ecto:usercontent-link-click",href:dataHref.href},"*")}},true)})();</script><script>(function(){var FOCUS_TYPE="ecto:artifact-focus-request";var CLOSE_TYPE="ecto:artifact-close-request";function focusArtifactDocument(){var body=document.body;if(!body)return;try{window.focus();}catch(e){}if(!body.hasAttribute("tabindex"))body.setAttribute("tabindex","-1");try{body.focus({preventScroll:true});}catch(e){try{body.focus();}catch(e2){}}}window.addEventListener("message",function(event){if(event.source!==window.parent)return;var data=event.data;if(!data||typeof data!=="object"||data.type!==FOCUS_TYPE)return;if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",focusArtifactDocument,{once:true});return;}focusArtifactDocument();});window.addEventListener("keydown",function(event){if(event.key!=="Escape")return;window.setTimeout(function(){if(event.defaultPrevented)return;window.parent.postMessage({type:CLOSE_TYPE},"*");},0);});})();</script></body>
 </html>
