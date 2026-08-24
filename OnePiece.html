@@ -55,7 +55,7 @@
             position: relative;
         }
 
-        /* --- FONDOS Y EFECTOS GRAND LINE + METATRON --- */
+        /* --- FONDOS Y EFECTOS GRAND LINE + ASSET BRAVE --- */
         .grand-line-bg {
             position: fixed; inset: 0; z-index: 0;
             background: 
@@ -73,7 +73,7 @@
             filter: contrast(125%) brightness(95%) saturate(1.2);
             transition: opacity 3.5s, transform 9s;
         }
-        .chaos-layer.active { opacity: 0.25; transform: scale(1.08) rotate(0.5deg); }
+        .chaos-layer.active { opacity: 0.3; transform: scale(1.08) rotate(0.5deg); }
 
         .grid-pattern { background-image: linear-gradient(rgba(255,255,255,.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.02) 1px, transparent 1px); background-size: 32px 32px; }
 
@@ -151,7 +151,8 @@
 
     <div class="grand-line-bg"></div>
     <div class="chaos-bg-container" id="chaosBg">
-        <div class="chaos-layer active" style="background-image:url('https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/785282279_1341489208069876_1027745017510610652_n.webp')"></div>
+        <div class="chaos-layer active" style="background-image:url('Assets/OnePiece/img/Screenshot_20260823_234322_Brave.jpg')"></div>
+        <div class="chaos-layer" style="background-image:url('https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/785282279_1341489208069876_1027745017510610652_n.webp')"></div>
     </div>
     <div style="position:fixed;inset:0;pointer-events:none;z-index:1;" class="grid-pattern"></div>
     <div class="scanline"></div>
@@ -192,7 +193,7 @@
                 <span class="text-3xl gear5-pulse">🏴‍☠️</span>
                 <div>
                     <h1 class="font-pirate text-2xl tracking-widest text-sunGold">GRAND LINE SADV41</h1>
-                    <p class="text-[9px] text-slate-400 font-mono tracking-widest">METATRON 4D & LOGIA UNIFICADA</p>
+                    <p class="text-[9px] text-slate-400 font-mono tracking-widest">ASSETS / ONE PIECE UNIFICADO</p>
                 </div>
             </div>
             
@@ -200,7 +201,7 @@
                 <a href="#log-pose" class="hover:text-sunGold transition-colors text-amber-300">I. Log Pose</a>
                 <a href="#metatron-seccion" class="hover:text-logPoseBlue transition-colors text-cyan-300">II. Metatron 4D</a>
                 <a href="#tripulacion" class="hover:text-purple-400 transition-colors text-purple-300">III. Tripulación</a>
-                <a href="#poneglyphs" class="hover:text-emerald-400 transition-colors text-emerald-300">IV. Poneglyphs</a>
+                <a href="#poneglyphs" class="hover:text-emerald-400 transition-colors text-emerald-300">IV. Poneglyphs & Assets</a>
             </nav>
 
             <div class="flex items-center gap-3">
@@ -344,15 +345,27 @@
                 </div>
             </section>
 
-            <!-- IV. LOS PONEGLYPHS (Archivos Históricos & Enlaces Compartidos) -->
+            <!-- IV. PONEGLYPHS & ASSETS DE LA MISIÓN -->
             <section id="poneglyphs" class="glass-strong p-8 md:p-12 rounded-3xl relative border-t-4 border-emerald-500">
                 <div class="relative z-10 space-y-6">
                     <h2 class="text-2xl text-emerald-400 mb-4 border-l-4 border-emerald-400 pl-5 tracking-widest font-mason flex items-center gap-3">
-                        <span>IV.</span> PONEGLYPHS HISTÓRICOS <span class="text-[10px] text-slate-400 font-mono tracking-normal ml-auto">(Bits de Memoria)</span>
+                        <span>IV.</span> PONEGLYPHS & ASSETS <span class="text-[10px] text-slate-400 font-mono tracking-normal ml-auto">(Archivos de la Tripulación)</span>
                     </h2>
-                    <p class="text-sm text-slate-300 leading-relaxed font-sans">
-                        Piedras indestructibles que guardan la historia verdadera de nuestra travesía. Accede directamente a las ramificaciones compartidas de este chat:
-                    </p>
+                    
+                    <!-- Showcase de la Imagen Fuente -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center p-6 bg-black/60 border border-emerald-500/40 rounded-2xl">
+                        <div class="md:col-span-1">
+                            <img src="Assets/OnePiece/img/Screenshot_20260823_234322_Brave.jpg" alt="Asset One Piece Brave" class="w-full h-40 object-cover rounded-xl border border-emerald-400/50 shadow-lg">
+                        </div>
+                        <div class="md:col-span-2 space-y-2">
+                            <span class="text-xs text-emerald-400 font-mono font-bold block">📸 ASSET OFICIAL DE LA MISIÓN</span>
+                            <h3 class="text-lg font-bold text-white font-mason">Assets/OnePiece/img/Screenshot_20260823_234322_Brave.jpg</h3>
+                            <p class="text-xs text-slate-300 font-sans leading-relaxed">
+                                Captura integrada en el fondo dinámico del Grand Line y establecida como el núcleo visual de nuestra ruta en el repositorio.
+                            </p>
+                        </div>
+                    </div>
+
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 font-mono text-xs">
                         <a href="https://gemini.google.com/share/febb5f63a856?skid=0e035439-5603-4b72-8486-769e106621c0" target="_blank" class="p-4 bg-black/60 border border-emerald-500/40 rounded-xl hover:border-emerald-400 transition-all flex items-center gap-3">
                             <span class="text-2xl">📜</span>
