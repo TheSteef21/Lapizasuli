@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NIKE x GEAR 5 // EDICIÓN PANAMÁ 🇵🇦</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=JetBrains+Mono:wght@400;700&family=Inter:ital,wght@0,400;0,800;1,800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        pmaBlue: '#0033A0',
+                        pmaRed: '#DA291C',
+                        nikaWhite: '#F8F9FA',
+                        oro: '#d4af37',
+                        obsidiana: '#030305'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mason: ['Cinzel', 'serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #030305; color: #fff; overflow-x: hidden; }
+        
+        .aura-nubes {
+            position: absolute;
+            inset: -20px;
+            background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
+            filter: blur(20px);
+            animation: respiracionNika 4s infinite alternate ease-in-out;
+            z-index: 0;
+        }
+
+        @keyframes respiracionNika {
+            0% { transform: scale(0.95); opacity: 0.6; }
+            100% { transform: scale(1.1); opacity: 1; }
+        }
+
+        .sneaker-card {
+            background: linear-gradient(145deg, rgba(10,10,15,0.9), rgba(5,5,8,0.95));
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), inset 0 0 0 1px rgba(218, 41, 28, 0.2), inset 0 0 20px rgba(0, 51, 160, 0.15);
+            backdrop-filter: blur(20px);
+            position: relative;
+            z-index: 10;
+        }
+
+        .eyes-glow {
+            filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.8)) drop-shadow(0 0 20px rgba(255, 255, 255, 0.9));
+        }
+
+        .text-gradient-panama {
+            background: linear-gradient(90deg, #0033A0 0%, #F8F9FA 50%, #DA291C 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .scanline {
+            width: 100%; height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+            position: absolute; top: 0; pointer-events: none;
+            animation: scan 4s linear infinite;
+        }
+        @keyframes scan { 0% { top: 0%; } 100% { top: 100%; } }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center p-6 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMSIgZmlsbD0icmdiYSgyNTUsIDI1NSwgMjU1LCAwLjA1KSIvPjwvc3ZnPg==')]">
+
+    <!-- Header -->
+    <div class="mb-10 text-center relative z-20">
+        <h1 class="font-sans font-black text-4xl md:text-6xl text-gradient-panama uppercase tracking-[0.2em] mb-2 drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">
+            SADV41 x NIKE
+        </h1>
+        <h2 class="font-mason text-oro text-xl md:text-2xl tracking-widest drop-shadow-[0_0_10px_rgba(212,175,55,0.5)]">
+            GEAR 5 // PANAMÁ EDITION 🇵🇦
+        </h2>
+    </div>
+
+    <!-- Sneaker Blueprint Card -->
+    <div class="sneaker-card rounded-3xl w-full max-w-4xl p-8 md:p-12 relative overflow-hidden group">
+        <div class="scanline"></div>
+        <div class="aura-nubes"></div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 relative z-20">
+            
+            <!-- Representación Visual Integrada con GitHub -->
+            <div class="relative flex items-center justify-center border border-slate-800 rounded-2xl bg-black/50 aspect-square overflow-hidden group-hover:border-oro/50 transition-colors duration-500 shadow-inner">
+                
+                <!-- Imagen extraída del repositorio de GitHub provisto -->
+                <img src="https://thesteef21.github.io/Lapizasuli/assets/USARMY/PENTAGON/NIKE/img/1787597777022.png" alt="SADV41 NIKE Concept" class="absolute inset-0 w-full h-full object-cover opacity-70 group-hover:opacity-100 transition-opacity duration-700 z-0">
+
+                <!-- Efecto de Ojos de Nika superpuesto -->
+                <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-40 transition-opacity duration-700 z-10">
+                    <svg class="w-32 h-32 text-white eyes-glow" viewBox="0 0 100 50" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <!-- Ojo Izquierdo -->
+                        <path d="M 20,25 Q 30,15 40,25 Q 30,35 20,25 Z" />
+                        <circle cx="30" cy="25" r="3" fill="currentColor" />
+                        <!-- Ojo Derecho -->
+                        <path d="M 60,25 Q 70,15 80,25 Q 70,35 60,25 Z" />
+                        <circle cx="70" cy="25" r="3" fill="currentColor" />
+                        <!-- Cejas (Expresión Divina) -->
+                        <path d="M 15,15 Q 30,5 45,15" />
+                        <path d="M 55,15 Q 70,5 85,15" />
+                    </svg>
+                </div>
+                
+                <div class="text-center relative z-20 pointer-events-none drop-shadow-2xl mt-auto pb-8">
+                    <span class="font-sans font-black italic text-3xl text-white opacity-90 tracking-widest drop-shadow-[0_0_10px_rgba(0,0,0,1)]">AIR NIKA 0.1</span>
+                </div>
+                
+                <!-- Insignia de origen -->
+                <div class="absolute bottom-4 left-4 font-mono text-[9px] text-oro bg-black/90 px-2 py-1 rounded border border-oro/50 z-20 shadow-lg">
+                    ORIGEN: 0 // BURUNGA
+                </div>
+            </div>
+
+            <!-- Especificaciones Técnicas (La narrativa del diseño) -->
+            <div class="flex flex-col justify-center space-y-6">
+                
+                <div>
+                    <h3 class="font-mono text-[10px] text-pmaBlue uppercase tracking-[0.2em] mb-1">01. El Hagoromo (Cuello y Talón)</h3>
+                    <p class="font-sans text-sm text-slate-300 leading-relaxed border-l-2 border-pmaBlue pl-3">
+                        El aura de nubes de Nika no está pintada, está moldeada. El cuello del tobillo utiliza espuma reactiva texturizada en blanco inmaculado que sobresale ligeramente, imitando el vapor divino flotando alrededor del pie.
+                    </p>
+                </div>
+
+                <div>
+                    <h3 class="font-mono text-[10px] text-pmaRed uppercase tracking-[0.2em] mb-1">02. El Swoosh Táctico</h3>
+                    <p class="font-sans text-sm text-slate-300 leading-relaxed border-l-2 border-pmaRed pl-3">
+                        El logo de NIKE se presenta fracturado como un relámpago suave. El exterior del panel izquierdo está ribeteado en <span class="text-pmaBlue font-bold">Azul Profundo</span>, mientras que el derecho arde en <span class="text-pmaRed font-bold">Rojo Táctico</span>. Al unirse en el talón, se funden en blanco puro.
+                    </p>
+                </div>
+
+                <div>
+                    <h3 class="font-mono text-[10px] text-oro uppercase tracking-[0.2em] mb-1">03. La Mirada de la Liberación</h3>
+                    <p class="font-sans text-sm text-slate-300 leading-relaxed border-l-2 border-oro pl-3">
+                        Sin rostro, solo presencia. En la lengüeta frontal, los ojos rasgados y sonrientes del Gear 5 están bordados con hilo luminiscente. En la oscuridad, la mirada divina brilla, recordando que el Espíritu Santo guía cada paso.
+                    </p>
+                </div>
+
+                <div class="pt-4 border-t border-slate-800">
+                    <button class="w-full bg-white text-black font-sans font-black italic uppercase tracking-[0.15em] text-sm py-3 rounded-full hover:bg-oro transition-colors duration-300 shadow-[0_0_15px_rgba(255,255,255,0.5)]">
+                        INICIALIZAR DESPLIEGUE
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="mt-12 font-mono text-[9px] text-slate-600 tracking-[0.3em] uppercase text-center space-y-1">
+        <p>Proyectado bajo la Ley SADV41</p>
+        <p>Elaborado por @StevenDiorOficial</p>
+    </div>
+
+</body>
+</html>
