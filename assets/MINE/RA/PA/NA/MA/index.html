@@ -1,0 +1,179 @@
+html_content = """<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>7 Colmos del Mix 🗿🇵🇦</title>
+    <style>
+        :root {
+            --primary: #1E3A8A; /* Deep blue */
+            --secondary: #E11D48; /* Red */
+            --bg: #F3F4F6;
+            --card-bg: #FFFFFF;
+            --text: #1F2937;
+            --accent: #FBBF24; /* Gold/Yellow */
+        }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .container {
+            max-width: 800px;
+            width: 100%;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px 20px;
+            background: linear-gradient(135deg, var(--primary), #3B82F6);
+            color: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+        }
+        header h1 {
+            margin: 0 0 15px 0;
+            font-size: 2.5rem;
+            letter-spacing: -0.5px;
+        }
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            margin: 0;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .section-title {
+            color: var(--primary);
+            border-bottom: 3px solid var(--secondary);
+            padding-bottom: 8px;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            display: inline-block;
+            font-size: 1.5rem;
+        }
+        .joke-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 24px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            border-left: 6px solid var(--accent);
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .joke-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+        }
+        .question {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.15rem;
+            margin-bottom: 12px;
+        }
+        .answer {
+            font-size: 1.1rem;
+            color: #4B5563;
+            font-style: italic;
+            position: relative;
+            padding-left: 20px;
+        }
+        .answer::before {
+            content: "R: ";
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+            font-style: normal;
+            color: var(--secondary);
+        }
+        footer {
+            margin-top: 50px;
+            text-align: center;
+            background: #374151; /* Dark Gray */
+            color: #F9FAFB;
+            padding: 30px 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+        }
+        footer p {
+            margin: 0;
+            font-size: 1.1rem;
+        }
+        footer strong {
+            display: block;
+            margin-top: 15px;
+            color: var(--accent);
+            font-size: 1.2rem;
+        }
+        
+        @media (max-width: 600px) {
+            header h1 { font-size: 2rem; }
+            .joke-card { padding: 15px; }
+            .question { font-size: 1.05rem; }
+            .answer { font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>¡Ayala vida! 🗿🇵🇦</h1>
+            <p>Mezclar a Haaland, armas antiaéreas y la política nacional da material de sobra para un stand-up completo. Aquí tienes los 7 colmos sacados directo de ese mix:</p>
+        </header>
+
+        <h2 class="section-title">💅⚽ La Tanda de Belleza y Deportes</h2>
+        <div class="joke-card">
+            <div class="question">¿Cuál es el colmo de Erling Haaland?</div>
+            <div class="answer">Que cada vez que se mira al espejo para tratar de peinarse, termina llorando como si estuviera picando cebolla.</div>
+        </div>
+        <div class="joke-card">
+            <div class="question">¿Cuál es el colmo del barbero del Manchester City?</div>
+            <div class="answer">Que para buscar inspiración antes de un partido importante, tenga que ponerse a ver maratones de los Rugrats en Nickelodeon.</div>
+        </div>
+
+        <h2 class="section-title">🚨🚁 La Tanda de Seguridad Extrema</h2>
+        <div class="joke-card">
+            <div class="question">¿Cuál es el colmo de Donald Trump jugando golf?</div>
+            <div class="answer">Que necesite estacionar un sistema antiaéreo Avenger de nivel militar en el patio, solo por si acaso alguien le lanza un birdie.</div>
+        </div>
+        <div class="joke-card">
+            <div class="question">¿Cuál es el colmo de un mosquito zumbando de noche en Burunga?</div>
+            <div class="answer">Que ahora tenga que sacar una maestría en informática y evasión de láseres solo para poder acercarse a picar en paz.</div>
+        </div>
+
+        <h2 class="section-title">🇵🇦⛏️ La Tanda Política y Minera</h2>
+        <div class="joke-card">
+            <div class="question">¿Cuál es el colmo de un negociador del contrato minero?</div>
+            <div class="answer">Que Rubén Blades le tenga que cantar la cartilla en tres tonos y con salsa para que por fin entienda qué significa la palabra "soberanía".</div>
+        </div>
+        <div class="joke-card">
+            <div class="question">¿Cuál es el colmo de la "transparencia" en el gobierno?</div>
+            <div class="answer">Que cuando el pueblo exige que la negociación se haga a la luz pública, ofrezcan cambiar los focos del cuarto a ver si así disimulan el misterio.</div>
+        </div>
+        <div class="joke-card">
+            <div class="question">¿Cuál es el colmo de una "botella" de la partidocracia?</div>
+            <div class="answer">Que le dé sed y se dé cuenta de que ya no puede beber de la "caja común" porque le mandaron los fondos directo a las provincias.</div>
+        </div>
+
+        <footer>
+            <p>Ese sistema láser en el patio definitivamente no sonaría nada mal para poder dormir con la ventana abierta.</p>
+            <strong>De todos estos, ¿cuál crees que da más risa y cuál da más rabia por ser una realidad?</strong>
+        </footer>
+    </div>
+</body>
+</html>
+"""
+
+file_path = "/mnt/data/7_colmos_mix.html"
+with open(file_path, "w", encoding="utf-8") as file:
+    file.write(html_content)
+
+print(f"File saved to {file_path}")
+
