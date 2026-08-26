@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="es">
+<head><style>
+@font-face {
+  font-family: "Optimistic";
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url("/fonts/OptimisticAI_VF_Optimized.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Optimistic Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/OptimisticMono_W_TextRegular.woff2") format("woff2");
+}
+:where(html) {
+  font-family: "Optimistic", system-ui, sans-serif;
+}
+:where(code, pre, kbd, samp) {
+  font-family: "Optimistic Mono", ui-monospace, monospace;
+}
+</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GSADV41 | Sovereign Hub & Logia Pluscuamperfecta Unificada</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=JetBrains+Mono:wght@300;400;700&family=Inter:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,700;1,700&family=Pirata+One&display=swap" rel="stylesheet">
+    
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@web3auth/modal@8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.0/ethers.umd.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#030305',
+                        oro: '#d4af37',
+                        blanco: '#f8fafc',
+                        cyanNeon: '#00f3ff',
+                        violetNeon: '#9d4edd',
+                        redNeon: '#FB542B',
+                        borgona: '#4a0010',
+                        neonGreen: '#10b981',
+                        renderRed: '#da3637',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                        mason: ['Cinzel', 'serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                        pirate: ['Pirata One', 'cursive'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root { --oro:#d4af37; --obsidiana:#030305; --cyan:#00f3ff; --violet:#9d4edd; --red:#FB542B; }
+        body { background-color: var(--obsidiana); color:#f1f5f9; font-family:'Inter',system-ui,sans-serif; overflow-x:hidden; position:relative; }
+        
+        /* FONDO CAOS VIVO 8 CAPAS */
+        .chaos-bg-container { position:fixed; inset:0; z-index:0; background:#000; pointer-events:none; overflow:hidden; }
+        .chaos-layer { position:absolute; inset:-25px; background-size:cover; background-position:center; opacity:0; mix-blend-mode:screen; filter:contrast(125%) brightness(95%) saturate(1.2); transition:opacity 3.5s, transform 9s, filter 0.3s; pointer-events:auto; cursor:pointer; }
+        .chaos-layer.active { opacity:0.52; transform:scale(1.09) rotate(0.6deg); }
+        .chaos-layer.now-asset-glitch { animation:assetNowGlitch 0.38s infinite alternate; }
+        @keyframes assetNowGlitch { 0%{filter:hue-rotate(0deg) contrast(180%) saturate(200%)} 100%{filter:hue-rotate(90deg) contrast(250%) invert(0.12) saturate(300%); transform:scale(1.13) translate(-4px,4px)} }
+        @keyframes divineGlory { 0%{filter:brightness(1)} 35%{filter:brightness(4.2) contrast(240%) saturate(280%) drop-shadow(0 0 140px #fff) drop-shadow(0 0 80px var(--oro)); transform:scale(1.22)} 100%{filter:brightness(1)} }
+        .divine-glory-active { animation:divineGlory 2.2s forwards; }
+        @keyframes pageGlitch { 0%{transform:translate(0)} 20%{transform:translate(-8px,5px) skew(-4deg); filter:hue-rotate(90deg)} 40%{transform:translate(8px,-5px) skew(4deg)} 100%{transform:translate(0)} }
+        .glitch-active { animation:pageGlitch 0.7s both; }
+
+        .glass { background:rgba(8,8,12,0.88); backdrop-filter:blur(18px); border:1px solid rgba(255,255,255,0.08); border-radius:16px; }
+        .esoterico-glow { text-shadow:0 0 25px rgba(212,175,55,0.7); }
+        .scanline { width:100%; height:2px; background:rgba(0,209,255,0.15); position:fixed; z-index:50; top:0; pointer-events:none; animation:scanline 8s linear infinite; }
+        @keyframes scanline { 0%{top:0} 100%{top:100%} }
+
+        /* SIDEBAR BILATERAL */
+        .sidebar-tabs { position:fixed; left:0; top:50%; transform:translateY(-50%); z-index:55; display:flex; flex-direction:column; gap:10px; transition:all 0.5s cubic-bezier(0.4,0,0.2,1); }
+        .vertical-tab { display:flex; align-items:center; background:rgba(8,8,12,0.95); padding:10px 14px; border-radius:0 12px 12px 0; transition:all 0.3s cubic-bezier(0.4,0,0.2,1); width:55px; overflow:hidden; white-space:nowrap; box-shadow:4px 4px 15px rgba(0,0,0,0.5); cursor:pointer; border-left:3px solid var(--cyan); text-decoration:none; color:#fff; }
+        .vertical-tab:hover { width:340px; padding-left:18px; background:rgba(0,243,255,0.2); }
+        .vertical-tab span.icon { font-size:1.4rem; min-width:28px; display:flex; justify-content:center; }
+        .vertical-tab span.text { margin-left:14px; font-weight:bold; opacity:0; transition:opacity 0.3s; font-size:0.8rem; letter-spacing:0.05em; font-family:'JetBrains Mono',monospace; }
+        .vertical-tab:hover span.text { opacity:1; transition-delay:0.1s; }
+        .sidebar-tabs.right-aligned { left:auto; right:0; }
+        .sidebar-tabs.right-aligned .vertical-tab { border-radius:12px 0 0 12px; border-left:none; border-right:3px solid var(--cyan); flex-direction:row-reverse; }
+        .sidebar-tabs.right-aligned .vertical-tab:hover { padding-right:18px; padding-left:14px; }
+        .sidebar-tabs.right-aligned .vertical-tab span.text { margin-left:0; margin-right:14px; text-align:right; }
+        @media (max-width:768px){ .sidebar-tabs{top:85%; gap:6px} .vertical-tab{width:45px; padding:8px} .vertical-tab:hover,.sidebar-tabs.right-aligned .vertical-tab:hover{width:280px} }
+
+        .logia-card { background:linear-gradient(145deg, rgba(10,10,10,0.88), rgba(20,20,20,0.88)); border:1px solid rgba(212,175,55,0.18); box-shadow:0 15px 35px rgba(0,0,0,0.9), inset 0 0 20px rgba(212,175,55,0.03); backdrop-filter:blur(12px); position:relative; overflow:hidden; transition:all 0.5s ease; }
+        .logia-card:hover { border-color:rgba(212,175,55,0.45); box-shadow:0 20px 40px rgba(0,0,0,0.9), inset 0 0 30px rgba(212,175,55,0.05); }
+        .root-card { border-left:3px solid var(--oro); padding:1rem; margin:1.2rem 0; background:rgba(0,0,0,0.4); border-radius:0 8px 8px 0; }
+        .root-title { color:#fff; font-weight:700; font-family:'JetBrains Mono',monospace; font-size:1rem; margin-bottom:0.3rem; }
+
+        #wormholeModal { position:fixed; inset:0; background:rgba(0,0,0,0.96); z-index:99999; display:none; flex-direction:column; align-items:center; justify-content:center; padding:2rem; text-align:center; }
+        #wormholeModal.active { display:flex; }
+        .wormhole-tunnel { width:240px; height:240px; border-radius:50%; border:4px dashed var(--cyan); box-shadow:0 0 90px var(--cyan), inset 0 0 60px var(--violet); animation:spin 3s linear infinite; margin-bottom:1.8rem; }
+        @keyframes spin { 0%{transform:scale(0.8) rotate(0deg)} 50%{transform:scale(1.22) rotate(180deg); border-color:var(--oro)} 100%{transform:scale(0.8) rotate(360deg)} }
+
+        #heaven-glitch { position:fixed; inset:0; z-index:100000; background:rgba(3,3,5,0.94); backdrop-filter:blur(12px); display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; opacity:0; pointer-events:none; transition:opacity 0.1s; }
+        #heaven-glitch.active { opacity:1; pointer-events:auto; }
+        .glitch-visuals { animation:veloColor 0.15s infinite; }
+        @keyframes veloColor { 0%{filter:hue-rotate(0deg) contrast(150%) saturate(200%); transform:translate(0,0) scale(1)} 33%{filter:hue-rotate(90deg) contrast(200%) invert(0.15); transform:translate(-8px,5px) scale(1.03)} 66%{filter:hue-rotate(-90deg) contrast(180%); transform:translate(8px,-5px) scale(0.97)} 100%{filter:hue-rotate(45deg) contrast(150%) invert(0.05); transform:translate(-3px,-3px) scale(1.01)} }
+        .heaven-btn { padding:16px 32px; font-family:'JetBrains Mono',monospace; font-size:13px; font-weight:800; text-transform:uppercase; letter-spacing:0.1em; text-decoration:none; background:rgba(0,0,0,0.85); transition:all 0.2s; cursor:pointer; border-radius:999px; }
+        .heaven-btn:hover { transform:scale(1.1); filter:brightness(1.5); }
+
+        .asset-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+        .asset-card{border-radius:16px;padding:12px;background:rgba(10,10,18,0.92);border:1px solid rgba(0,243,255,0.3);cursor:pointer;transition:0.3s;position:relative;overflow:hidden}
+        .asset-card:hover{border-color:var(--oro);box-shadow:0 0 25px rgba(212,175,55,0.3);transform:translateY(-2px)}
+        .asset-card img,.asset-card video{width:100%;height:180px;object-fit:cover;border-radius:10px;margin-bottom:8px;background:#000}
+        .gear-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px}
+        .gear-item{border-radius:12px;padding:8px;background:rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.1);text-align:center;cursor:pointer;transition:0.3s}
+        .gear-item:hover,.gear-item.active{border-color:var(--cyan);box-shadow:0 0 15px rgba(0,243,255,0.3); transform:translateY(-2px)}
+        .gear-item img{width:100%;height:70px;object-fit:cover;border-radius:6px;margin-bottom:6px}
+
+        /* WhatsApp Float */
+        .wa-float { position:fixed; bottom:22px; right:22px; z-index:60; background:#25D366; color:#fff; width:58px; height:58px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:28px; box-shadow:0 8px 20px rgba(37,211,102,0.4); transition:0.3s; text-decoration:none; }
+        .wa-float:hover { transform:scale(1.1); box-shadow:0 12px 30px rgba(37,211,102,0.6); }
+    </style>
+</head>
+<body class="antialiased selection:bg-oro selection:text-navy" id="mainBody">
+
+    <!-- FONDO DE CAOS VIVO 8 CAPAS REALES -->
+    <div class="chaos-bg-container" id="chaosBg">
+        <div class="chaos-layer active" data-asset="TRONO" data-now="false" style="background-image:url('https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/785282279_1341489208069876_1027745017510610652_n.webp')"></div>
+        <div class="chaos-layer" data-asset="CYBER" data-now="false" style="background-image:url('https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/784748359_1032169259812179_379368085236729966_n.webp')"></div>
+        <div class="chaos-layer" data-asset="NUKE" data-now="true" style="background-image:url('https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/783899130_4498246103827834_338786690266061800_n.webp')"></div>
+        <div class="chaos-layer" data-asset="GOLD" data-now="false" style="background-image:url('https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/783671951_1762018238468095_5751859537385186669_n.webp')"></div>
+        <div class="chaos-layer" data-asset="SQUAD" data-now="true" style="background-image:url('https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/781904042_37804958575816522_4524605149493257178_n.webp')"></div>
+        <div class="chaos-layer" data-asset="CAMO" data-now="false" style="background-image:url('https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/781293043_1047895088092288_3769060750221781878_n.webp')"></div>
+        <div class="chaos-layer" data-asset="AVATAR_SADV41" data-now="true" style="background-image:url('https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/783452785_1869516164012118_6490546162878603454_n.webp')"></div>
+        <div class="chaos-layer" data-asset="AVATAR_FANTASMA" data-now="true" style="background-image:url('https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/783727612_2366186827520797_564029208255039114_n-1.webp')"></div>
+    </div>
+
+    <div class="scanline"></div>
+
+    <!-- BARRA LATERAL BILATERAL UNIFICADA -->
+    <div id="main-sidebar" class="sidebar-tabs">
+        <a href="https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/LEVIATHAN_SADV41_GEAR5_DIVINO.html" target="_blank" class="vertical-tab" style="border-left:3px solid #00f3ff;"><span class="icon">👁️</span><span class="text text-cyan-300">Leviathan Gear 5 Divino</span></a>
+        <a href="https://thesteef21.github.io/Lapizasuli/assets/PRINCIPADO/index.html" target="_blank" class="vertical-tab" style="border-left:3px solid #d4af37;"><span class="icon">🏛️</span><span class="text text-oro">Principado Divino</span></a>
+        <a href="https://thesteef21.github.io/Lapizasuli/SLogia.html" target="_blank" class="vertical-tab"><span class="icon">🎚️</span><span class="text text-cyan-300">SLogia | Conexión SADV41</span></a>
+        <a href="https://thesteef21.github.io/Lapizasuli/IMA.html" target="_blank" class="vertical-tab"><span class="icon">🍚</span><span class="text text-blue-200">Arroz barato cerca de ti! 🇵🇦</span></a>
+        <a href="https://thesteef21.github.io/Lapizasuli/ColombiaPTY.html" target="_blank" class="vertical-tab"><span class="icon">💸</span><span class="text text-emerald-300">Préstamos 🇵🇦🇨🇴🇺🇸</span></a>
+        <a href="https://thesteef21.github.io/Lapizasuli/VSADV41.html" target="_blank" class="vertical-tab"><span class="icon">🇻🇪</span><span class="text text-yellow-300">Por Venezuela 🇻🇪</span></a>
+        <a href="https://thesteef21.github.io/Lapizasuli/CristoTeAma.html" target="_blank" class="vertical-tab"><span class="icon">☦️</span><span class="text text-purple-300">Cristo Te Ama 🎚</span></a>
+        <a href="https://thesteef21.github.io/Lapizasuli/FIFA2026.html" target="_blank" class="vertical-tab"><span class="icon">⚽</span><span class="text text-green-300">Mundial 2026 ⚽️</span></a>
+        <a href="https://brave.com/evi088" target="_blank" class="vertical-tab"><span class="icon">🦁</span><span class="text text-orange-400">Navegador = Brave</span></a>
+        <a href="https://thesteef21.github.io/Lapizasuli/assets/Malvinas/" target="_blank" class="vertical-tab"><span class="icon">🇦🇷</span><span class="text text-blue-300">Malvinas Argentinas</span></a>
+        <a href="https://thesteef21.github.io/Lapizasuli/CasaCrypto.html" target="_blank" class="vertical-tab"><span class="icon">🪙</span><span class="text text-amber-400">La Casa Cripto</span></a>
+        <a href="https://thesteef21.github.io/Lapizasuli/RubenGuerraBox.html" target="_blank" class="vertical-tab"><span class="icon">🥊</span><span class="text text-red-400">Rubén Guerra Box</span></a>
+        <a href="https://factura-88pp.onrender.com/" target="_blank" class="vertical-tab"><span class="icon">💵</span><span class="text text-emerald-400">Invertir (FACTURA)</span></a>
+        <a href="https://wa.me/50769362166?text=Hola%20SADV41%20quiero%20cotizar%20rines%20y%20llantas%20para%20Burunga" target="_blank" class="vertical-tab" style="border-left:3px solid #25D366;"><span class="icon">💬</span><span class="text text-green-300">WhatsApp Llantas +50769362166</span></a>
+        <div onclick="toggleSidebar()" class="vertical-tab" title="Cambiar lado del menú"><span class="icon">⇋</span><span class="text text-slate-300">Alternar Menú</span></div>
+    </div>
+
+    <!-- HEADER -->
+    <header id="main-header" class="fixed top-0 left-0 w-full z-40 glass border-b border-oro/30 px-4 md:px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-3">
+        <div class="flex items-center gap-3">
+            <span class="text-2xl">🛡️</span>
+            <div>
+                <h1 class="font-serif text-xl tracking-wider text-oro font-bold">SOVEREIGN HUB</h1>
+                <p class="text-[9px] text-slate-400 font-mono tracking-widest">SADV41 DIGITAL ARCHITECTURE • PANAMÁ 507</p>
+            </div>
+        </div>
+        <nav class="hidden lg:flex gap-5 text-[12px] uppercase tracking-wider font-bold flex-wrap justify-center">
+            <a href="#raices-seccion" class="hover:text-oro text-amber-300">🌿 Raíces</a>
+            <a href="#leviathan-assets" class="hover:text-cyanNeon text-cyan-300">🛡️ Leviathan</a>
+            <a href="#rines-marketplace" class="hover:text-neonGreen text-green-300">🛞 Rines</a>
+            <a href="#isadv41-seccion" class="hover:text-blue-400 text-blue-300">📖 Versículos</a>
+            <a href="https://wa.me/50769362166" target="_blank" class="text-green-400 hover:text-white">💬 WhatsApp</a>
+        </nav>
+        <div class="flex flex-wrap items-center justify-center gap-2">
+            <span class="mono text-[10px] bg-black/60 px-3 py-1.5 rounded-full border border-oro/30 text-oro" id="cycleCounter">CICLO 0 / 7</span>
+            <a href="https://factura-88pp.onrender.com/" target="_blank" class="bg-emerald-600/90 hover:bg-emerald-500 text-white font-bold text-[11px] px-3 py-2 rounded-lg border border-emerald-400/50 flex items-center gap-1">🇵🇦 Apoyar 🔯</a>
+            <button id="btnConnect" onclick="connectBinance()" class="bg-oro hover:bg-amber-600 text-navy font-bold text-[11px] px-3 py-2 rounded-lg shadow-lg shadow-oro/20 cursor-pointer font-mono">⚡ Web3</button>
+        </div>
+    </header>
+
+    <main class="pt-36 md:pt-32 pb-20 px-4 md:px-12 max-w-5xl mx-auto space-y-14 relative z-10">
+
+        <!-- PALO VERTICAL -->
+        <div class="relative w-full bg-black/60 border-y border-oro/30 py-6 flex flex-col items-center justify-center overflow-hidden rounded-xl shadow-[0_0_20px_rgba(0,243,255,0.1)]">
+            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-900/20 to-transparent animate-pulse"></div>
+            <h2 class="text-cyanNeon font-mason text-lg md:text-2xl tracking-[0.3em] uppercase esoterico-glow relative z-10 text-center flex items-center justify-center gap-3">🎚️ PaloVertical | Isaías 43:19</h2>
+            <p class="text-xs md:text-sm text-slate-200 font-serif italic mt-3 max-w-2xl text-center relative z-10 px-4 leading-relaxed">"He aquí, yo hago cosa nueva; pronto saldrá a luz; ¿no la conoceréis? Otra vez abriré camino en el desierto, y ríos en la soledad."</p>
+        </div>
+
+        <!-- RAÍCES -->
+        <section id="raices-seccion" class="glass p-6 md:p-10 border-t-4 border-t-oro">
+            <div class="inline-block font-mono text-[10px] px-3 py-1 rounded-full border border-cyanNeon text-cyanNeon mb-4 uppercase tracking-widest">SADV41 // Archivo de Historia y Memoria Ancestral</div>
+            <h2 class="text-3xl font-mason text-oro mb-4 esoterico-glow uppercase">Raíces y Legado</h2>
+            <p class="text-slate-300 leading-relaxed mb-6 text-[14px]">Tener la paciencia y la humildad para mirar hacia atrás y honrar de dónde venimos es uno de los actos más hermosos y profundos que un ser humano puede hacer. Arcilla que sostiene nuestros pasos.</p>
+            <div class="root-card"><div class="root-title text-oro">ESPINOZA / ESPINOSA (Legado Materno)</div><p class="text-xs text-slate-300 leading-relaxed">Conectado a través de tu madre, Elida María Serrano Espinosa. Protección y resiliencia.</p></div>
+            <div class="root-card"><div class="root-title text-oro">SERRANO (Línea Paterna y Materna)</div><p class="text-xs text-slate-300 leading-relaxed">Estirpe fuerte y trabajadora de zonas montañosas. Firmeza ante adversidades.</p></div>
+            <div class="root-card"><div class="root-title text-oro">GÓMEZ (Apellido Paterno)</div><p class="text-xs text-slate-300 leading-relaxed">Origen germánico medieval. Linaje, protección del hogar y continuidad. SADV41.</p></div>
+        </section>
+
+        <!-- LEVIATHAN ASSETS -->
+        <section id="leviathan-assets" class="glass p-6 md:p-8 border-t-4 border-t-redNeon">
+            <h2 class="font-mason text-oro text-xl mb-2">🛡️ LEVIATHAN // ASSETS NOW & GEARS DIVINOS</h2>
+            <p class="font-mono text-[11px] text-slate-400 mb-6">Unidad de seguridad unificada de la red SADV41. Click en [NOW] activa el glitch del Caos Vivo.</p>
+            
+            <div class="asset-grid mb-8">
+                <div class="asset-card portal-trigger" data-dest="https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/PANAMAUNIT.html">
+                    <div class="font-mono text-[9px] text-cyanNeon mb-1">[NOW] // SADV41 HÍBRIDO</div>
+                    <img src="https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/783452785_1869516164012118_6490546162878603454_n.webp" alt="SADV41 Híbrido">
+                    <div class="font-mason text-xs font-bold">PROTOCOLO HÍBRIDO PANAMA UNIT</div>
+                    <div class="font-mono text-[10px] text-slate-400 mt-1">Wormhole → AMOLED Desahogo</div>
+                </div>
+                <div class="asset-card portal-trigger" data-dest="https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/LEVIATHAN_SADV41_GEAR5_DIVINO.html">
+                    <div class="font-mono text-[9px] text-oro mb-1">[DIVINO] // GEAR 5</div>
+                    <img src="https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/785282279_1341489208069876_1027745017510610652_n.webp" alt="Trono">
+                    <div class="font-mason text-xs font-bold">LEVIATHAN GEAR 5 DIVINO</div>
+                    <div class="font-mono text-[10px] text-slate-400 mt-1">Directo → Principado</div>
+                </div>
+                <div class="asset-card portal-trigger" data-dest="https://thesteef21.github.io/Lapizasuli/assets/PRINCIPADO/index.html">
+                    <div class="font-mono text-[9px] text-violetNeon mb-1">[ORO] // PRINCIPADO</div>
+                    <img src="https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/783671951_1762018238468095_5751859537385186669_n.webp" alt="Gold">
+                    <div class="font-mason text-xs font-bold">PRINCIPADO DIVINO</div>
+                    <div class="font-mono text-[10px] text-slate-400 mt-1">Validación GSADV41</div>
+                </div>
+                <div class="asset-card portal-trigger" data-dest="https://thesteef21.github.io/Lapizasuli/RubenGuerraBox.html">
+                    <div class="font-mono text-[9px] text-redNeon mb-1">[NOW] // SQUAD CAMO</div>
+                    <img src="https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/781904042_37804958575816522_4524605149493257178_n.webp" alt="Squad">
+                    <div class="font-mason text-xs font-bold">SQUAD BURUNGA BOX</div>
+                    <div class="font-mono text-[10px] text-slate-400 mt-1">Rubén Guerra Escuela</div>
+                </div>
+            </div>
+
+            <div class="mt-4">
+                <h3 class="font-mono text-[11px] text-cyanNeon uppercase tracking-widest mb-3">⚙️ GEARS // Selección Táctica</h3>
+                <div class="gear-grid" id="gearGrid">
+                    <!-- Se llenará por JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- RINES MARKETPLACE - LLANTERO BURUNGA -->
+        <section id="rines-marketplace" class="glass p-6 md:p-8 border-t-4 border-t-neonGreen">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-3 mb-6">
+                <div>
+                    <h2 class="font-mason text-neonGreen text-xl">🛞 LLANTERO BURUNGA // RINES MARKETPLACE</h2>
+                    <p class="font-mono text-[11px] text-slate-400">Sostenible • Segunda mano verificada • Arraiján • Envío nacional 🇵🇦</p>
+                </div>
+                <a href="https://wa.me/50769362166?text=Hola%20Steven%20quiero%20cotizar%20RINES%20medida%20..." target="_blank" class="bg-[#25D366] hover:bg-green-600 text-white font-bold text-xs px-5 py-3 rounded-full flex items-center gap-2 shadow">💬 Cotizar por WhatsApp +50769362166</a>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-4">
+                <div class="logia-card p-4 rounded-xl">
+                    <h4 class="font-mono text-xs font-bold text-oro mb-2">📏 MEDIDAS POPULARES</h4>
+                    <ul class="font-mono text-[11px] text-slate-300 space-y-1">
+                        <li>• Rin 13 - 14 - 15 para sedán</li>
+                        <li>• Rin 16 - 17 para SUV / Pickup</li>
+                        <li>• 4x100 • 4x114 • 5x114 • 5x120</li>
+                        <li>• Con llantas 185/65R15, 195/65R15, 205/55R16</li>
+                    </ul>
+                    <button onclick="waCotizar('Rines 15 4x100')" class="mt-3 w-full bg-white/5 border border-neonGreen/40 hover:bg-neonGreen/20 text-neonGreen text-[11px] py-2 rounded-lg font-mono">COTIZAR 15s → WA</button>
+                </div>
+                <div class="logia-card p-4 rounded-xl">
+                    <h4 class="font-mono text-xs font-bold text-oro mb-2">♻️ PROTOCOLO SADV41 VERDE</h4>
+                    <p class="font-mono text-[11px] text-slate-300 leading-relaxed">Reacondicionamiento, balanceo y pintura. Cada juego pasa por validación Leviathan: sin fisuras, sin golpes estructurales. Factura digital en <a href="https://factura-88pp.onrender.com/" target="_blank" class="text-emerald-400 underline">factura-88pp</a></p>
+                    <button onclick="waCotizar('Rines reacondicionados con factura')" class="mt-3 w-full bg-white/5 border border-oro/40 hover:bg-oro/20 text-oro text-[11px] py-2 rounded-lg font-mono">SOLICITAR FACTURA → WA</button>
+                </div>
+                <div class="logia-card p-4 rounded-xl">
+                    <h4 class="font-mono text-xs font-bold text-oro mb-2">📍 BURUNGA - ARRAIJÁN</h4>
+                    <p class="font-mono text-[11px] text-slate-300 leading-relaxed">Retiro en Energy Gym Burunga o delivery. Horario: Lun-Sáb 8am-6pm. Soporte técnico + instalación.</p>
+                    <a href="https://www.instagram.com/llanteroburunga" target="_blank" class="mt-3 block w-full text-center bg-white/5 border border-white/10 hover:bg-white/10 text-white text-[11px] py-2 rounded-lg font-mono">Ver Instagram @llanteroburunga</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- VERSÍCULOS -->
+        <section id="isadv41-seccion" class="flex flex-col items-center gap-8">
+            <div class="text-center space-y-2">
+                <h2 class="text-cyan-400 font-mason text-xl md:text-2xl tracking-[0.4em] uppercase esoterico-glow flex items-center justify-center gap-3">🎚️ El Santísimo | Atrio Digital</h2>
+            </div>
+            <div class="logia-card p-6 md:p-8 rounded-2xl w-full border-t-2 border-cyan-500/50 max-w-4xl">
+                <div class="flex justify-between items-center mb-6 border-b border-gray-800 pb-4">
+                    <h1 class="text-xl md:text-2xl font-mason font-bold tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-oro to-yellow-200">ALGORITMO DE VERSÍCULOS</h1>
+                    <span id="systemStatus" class="px-3 py-1 text-[10px] font-mono rounded-full bg-red-900/50 text-red-400 border border-red-700 animate-pulse">REINICIANDO SISTEMA...</span>
+                </div>
+                <div id="apiContent" class="space-y-6 font-mono text-sm hidden">
+                    <div class="border-l-4 border-cyan-500 pl-5 bg-black/40 p-4 rounded-r-lg">
+                        <p class="text-cyan-400 font-bold mb-2 tracking-widest">EXEC // JOSUÉ 1:9</p>
+                        <p id="fase1Text" class="text-gray-300 leading-relaxed font-sans text-base"></p>
+                    </div>
+                    <div class="border-l-4 border-oro pl-5 bg-black/40 p-4 rounded-r-lg">
+                        <p class="text-oro font-bold mb-2 tracking-widest">EXEC // PROVERBIOS 27:17</p>
+                        <p id="fase2Text" class="text-gray-300 leading-relaxed font-sans text-base"></p>
+                    </div>
+                    <div class="flex gap-3 mt-4">
+                        <a href="https://wa.me/50769362166?text=Hola%20SADV41%20quiero%20un%20versiculo%20hoy%20🙏" target="_blank" class="text-[11px] font-mono border border-green-500/50 text-green-400 px-4 py-2 rounded-full hover:bg-green-500/20">💬 Pedir Versículo por WhatsApp</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACTO CTA -->
+        <section class="glass p-6 rounded-2xl border border-oro/20 text-center">
+            <h3 class="font-mason text-oro text-lg mb-2">¿Listo para activar el Sovereign Hub?</h3>
+            <p class="font-mono text-xs text-slate-400 mb-4">GSADV41 • Leviathan • Llantas • Principado Divino • Burunga</p>
+            <div class="flex flex-wrap gap-3 justify-center">
+                <a href="https://wa.me/50769362166?text=Hola%20SADV41%20vengo%20del%20Sovereign%20Hub%20🛡️" target="_blank" class="bg-[#25D366] text-white font-bold px-6 py-3 rounded-full text-sm">WhatsApp +507 6936-2166</a>
+                <a href="https://thesteef21.github.io/Lapizasuli/GSADV41.html" class="bg-oro text-navy font-bold px-6 py-3 rounded-full text-sm">Ir a GSADV41 Núcleo</a>
+            </div>
+        </section>
+
+    </main>
+    
+    <footer class="text-center p-8 border-t border-white/5 opacity-60 font-mono text-[10px] uppercase relative z-10">
+        <p>GSADV41 Architecture © 2026 | El Origen es 0 | Burunga - Arraiján, Panamá 🇵🇦 | WA +50769362166</p>
+        <p class="mt-1 text-[9px] text-slate-500">Sovereign Hub & Logia Pluscuamperfecta Unificada • Leviathan Squad</p>
+    </footer>
+
+    <a href="https://wa.me/50769362166?text=Hola%20SADV41%20Sovereign%20Hub%20🛡️" target="_blank" class="wa-float" aria-label="WhatsApp">💬</a>
+
+    <!-- WORMHOLE MODAL -->
+    <div id="wormholeModal">
+        <div class="wormhole-tunnel"></div>
+        <h2 class="font-mason" style="color:var(--oro);font-size:1.4rem;margin-bottom:0.8rem">🌌 AGUJERO DE GUSANO DETECTADO</h2>
+        <p class="font-mono text-xs" style="max-width:480px;line-height:1.7;margin-bottom:1rem;color:#cbd5e1">
+            Para atravesar con seguridad, encamínate primero en la guianza de Dios.<br>
+            <strong style="color:var(--oro)">GSADV41</strong> es el núcleo de verificación oficial.<br>
+            ¿Deseas continuar hacia el destino externo?
+        </p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center">
+            <a href="https://thesteef21.github.io/Lapizasuli/GSADV41.html" class="border border-oro text-oro px-5 py-2 rounded-full font-mono text-xs">🙏 IR A GSADV41</a>
+            <button id="insistPortalBtn" class="border border-redNeon text-redNeon bg-transparent px-5 py-2 rounded-full font-mono text-xs cursor-pointer hover:bg-redNeon/20">⚠️ ACCEDER DE TODOS MODOS → AMOLED</button>
+            <button onclick="document.getElementById('wormholeModal').classList.remove('active')" class="border border-white/20 text-white px-5 py-2 rounded-full font-mono text-xs">✖ CERRAR</button>
+        </div>
+    </div>
+
+    <!-- EL VELO SE RASGA -->
+    <div id="heaven-glitch">
+        <div class="glitch-visuals flex flex-col items-center justify-center w-full h-full">
+            <h2 class="font-mason text-4xl md:text-5xl text-white tracking-[0.5em] mb-10 text-center" style="text-shadow:0 0 30px #fff,0 0 80px var(--oro)">EL VELO SE RASGA</h2>
+            <div class="flex flex-col md:flex-row gap-8 w-full max-w-3xl justify-center px-4">
+                <a href="https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/LEVIATHAN_SADV41_GEAR5_DIVINO.html" class="heaven-btn border-2 border-cyanNeon text-cyanNeon" style="box-shadow:0 0 40px rgba(0,243,255,0.6)">👁️ LEVIATHAN GEAR 5 DIVINO</a>
+                <a href="https://thesteef21.github.io/Lapizasuli/assets/PRINCIPADO/index.html" class="heaven-btn border-2 border-oro text-oro" style="box-shadow:0 0 40px rgba(212,175,55,0.6)">🏛️ PRINCIPADO DIVINO</a>
+            </div>
+            <button onclick="document.getElementById('heaven-glitch').classList.remove('active')" class="mt-12 font-mono text-[10px] text-white/50 border border-white/20 px-4 py-2 rounded-full">CERRAR VISIÓN</button>
+        </div>
+    </div>
+
+    <script>
+        // CHAOS 8 CAPAS
+        const layers = document.querySelectorAll('.chaos-layer');
+        let currentIndex = 0, transitionCount = 0;
+        function randomChaosTransition(){
+            layers.forEach(l => l.classList.remove('active','now-asset-glitch','divine-glory-active'));
+            currentIndex = (currentIndex + 1) % layers.length;
+            transitionCount++;
+            const counter = document.getElementById('cycleCounter');
+            if(counter) counter.textContent = `CICLO ${transitionCount} / 7`;
+            if(transitionCount % 7 === 0){
+                layers[currentIndex].classList.add('active','divine-glory-active');
+                document.getElementById('mainBody').classList.add('glitch-active');
+                setTimeout(()=>document.getElementById('mainBody').classList.remove('glitch-active'),800);
+            } else {
+                layers[currentIndex].classList.add('active');
+                if(layers[currentIndex].dataset.now === 'true') layers[currentIndex].classList.add('now-asset-glitch');
+            }
+            setTimeout(randomChaosTransition, Math.random()*3800 + 2600);
+        }
+        setTimeout(randomChaosTransition, 2800);
+
+        // SIDEBAR
+        function toggleSidebar() {
+            const s = document.getElementById('main-sidebar');
+            s.classList.toggle('right-aligned');
+            localStorage.setItem('sidebarPos', s.classList.contains('right-aligned') ? 'right' : 'left');
+        }
+        if(localStorage.getItem('sidebarPos') === 'right') {
+            document.getElementById('main-sidebar').classList.add('right-aligned');
+        }
+
+        // WORMHOLE
+        const wormholeModal = document.getElementById('wormholeModal');
+        let targetDest = '';
+        document.querySelectorAll('.portal-trigger').forEach(el => {
+            el.addEventListener('click', e => {
+                e.preventDefault();
+                targetDest = el.dataset.dest || el.getAttribute('href');
+                if(targetDest && targetDest.includes('GSADV41.html')){ window.location.href = targetDest; return; }
+                wormholeModal.classList.add('active');
+            });
+        });
+        document.getElementById('insistPortalBtn').onclick = () => {
+            wormholeModal.classList.remove('active');
+            document.body.innerHTML = `
+            <div style="background:#000;width:100vw;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem;font-family:'JetBrains Mono',monospace">
+                <div style="color:#00f3ff;margin-bottom:20px;font-size:12px;letter-spacing:.15em">PANTALLA DE REFLEJO & DESAHOGO AMOLED // SADV41</div>
+                <p style="color:#cbd5e1;max-width:440px;line-height:1.7;font-size:13px">
+                    La interfaz se desvaneció en negro absoluto.<br>Mira tu reflejo.<br><br>
+                    <span style="color:#d4af37;font-weight:700">Cada niño y niña merece ver sus sueños cumplidos</span><br><br>Como Moisés tras la roca (Éxodo 33:22)
+                </p>
+                <a href="${targetDest}" style="margin-top:28px;padding:14px 32px;border:1px solid #d4af37;color:#d4af37;border-radius:999px;text-decoration:none;font-weight:700;box-shadow:0 0 30px rgba(212,175,55,0.4);font-size:12px">
+                    🕊️ BOTÓN DE DESAHOGO // CONTINUAR A ${targetDest}
+                </a>
+                <a href="https://wa.me/50769362166" style="margin-top:14px;color:#25D366;font-size:12px;text-decoration:none">💬 Hablar por WhatsApp +50769362166</a>
+            </div>`;
+        };
+
+        // WEB3
+        async function connectBinance() {
+            if (typeof window.ethereum !== 'undefined') {
+                try {
+                    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                    alert("Wallet conectada: " + accounts[0] + " bajo SADV41.");
+                } catch (e) { console.log(e); alert("Error conectando wallet"); }
+            } else {
+                window.open('https://web3.binance.com/en/referral?ref=ORCZSDLK', '_blank');
+            }
+        }
+
+        // VERSICULOS
+        function initVersiculos() {
+            const apiContent = document.getElementById("apiContent");
+            const statusBadge = document.getElementById("systemStatus");
+            if(apiContent) {
+                setTimeout(() => {
+                    document.getElementById("fase1Text").innerText = "Mira que te mando que te esfuerces y seas valiente; no temas ni desmayes, porque Jehová tu Dios estará contigo en donde quiera que vayas.";
+                    document.getElementById("fase2Text").innerText = "Hierro con hierro se aguza; y así el hombre aguza el rostro de su amigo.";
+                    apiContent.classList.remove("hidden");
+                    statusBadge.className = "px-3 py-1 text-[10px] font-mono rounded-full bg-green-900/50 text-green-400 border border-green-700";
+                    statusBadge.innerText = "SISTEMA RESTAURADO";
+                }, 1800);
+            }
+        }
+
+        // GEARS GRID (usando tus assets)
+        const gears = [
+            {name:"TRONO CYBER", img:"https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/784748359_1032169259812179_379368085236729966_n.webp"},
+            {name:"NUKE PROTOCOL", img:"https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/783899130_4498246103827834_338786690266061800_n.webp"},
+            {name:"SADV41 HÍBRIDO", img:"https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/783452785_1869516164012118_6490546162878603454_n.webp"},
+            {name:"CAMO UNIT", img:"https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/781293043_1047895088092288_3769060750221781878_n.webp"},
+            {name:"FANTASMA", img:"https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/783727612_2366186827520797_564029208255039114_n-1.webp"},
+            {name:"GOLD RESERVE", img:"https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/783671951_1762018238468095_5751859537385186669_n.webp"},
+        ];
+        function renderGears(){
+            const grid = document.getElementById('gearGrid');
+            if(!grid) return;
+            grid.innerHTML = gears.map(g => `
+                <div class="gear-item portal-trigger" data-dest="https://wa.me/50769362166?text=Quiero%20info%20de%20${encodeURIComponent(g.name)}">
+                    <img src="${g.img}" alt="${g.name}" loading="lazy">
+                    <div class="font-mono text-[9px] font-bold text-white truncate">${g.name}</div>
+                    <div class="font-mono text-[8px] text-cyanNeon">WA COTIZAR</div>
+                </div>
+            `).join('');
+            // re-bind
+            grid.querySelectorAll('.portal-trigger').forEach(el => {
+                el.addEventListener('click', e => {
+                    e.preventDefault();
+                    targetDest = el.dataset.dest;
+                    if(targetDest.includes('wa.me')){ window.open(targetDest,'_blank'); return; }
+                    wormholeModal.classList.add('active');
+                });
+            });
+        }
+
+        function waCotizar(medida){
+            window.open(`https://wa.me/50769362166?text=Hola%20Steven%20vengo%20de%20SADV41%20Sovereign%20Hub%20quiero%20cotizar%20${encodeURIComponent(medida)}%20para%20Burunga%20Arraijan`,'_blank');
+        }
+
+        function startDivineGlitch() {
+            const hg = document.getElementById('heaven-glitch');
+            if(!hg) return;
+            const nextTime = Math.random() * 10000 + 15000;
+            setTimeout(() => {
+                hg.classList.add('active');
+                setTimeout(() => {
+                    hg.classList.remove('active');
+                    startDivineGlitch();
+                }, 3000);
+            }, nextTime);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            startDivineGlitch();
+            initVersiculos();
+            renderGears();
+        });
+    </script>
+<script>(function(){var loc=location.href.replace(/#.*$/,"");var ATTR_NAMES=["data-product-id","data-productid","data-product_id","product-id","productid","product_id","data-source-entity-id","source-entity-id","source_entity_id","data-product","data-metadata","data-meta"];var DATASET_KEYS=["productId","productid","product_id","sourceEntityId","sourceentityid","source_entity_id","product","metadata","meta"];function readProductId(value){if(typeof value!=="string"||value.length===0)return null;if(/^[0-9]{6,}$/.test(value))return value;var match=value.match(/(?:product(?:_|-)?id|source(?:_|-)?entity(?:_|-)?id)["'=:\s]+([0-9]{6,})/i);return match?match[1]:null}function extractProductId(start){for(var node=start;node&&node!==document.body;node=node.parentElement){for(var i=0;i<ATTR_NAMES.length;i++){var attrValue=node.getAttribute&&node.getAttribute(ATTR_NAMES[i]);var attrProductId=readProductId(attrValue);if(attrProductId)return attrProductId}var dataset=node.dataset||null;if(dataset){for(var j=0;j<DATASET_KEYS.length;j++){var dataValue=dataset[DATASET_KEYS[j]];var dataProductId=readProductId(dataValue);if(dataProductId)return dataProductId}}}return null}function isInlineMediaSlotElement(node){return !!(node&&node.getAttribute&&node.getAttribute("data-clippy-inline-media-slot")!==null)}function findInlineMediaSlot(start){for(var node=start;node&&node!==document.body;node=node.parentElement){if(isInlineMediaSlotElement(node))return node}return null}function readInlineMediaUrl(node){if(!node)return null;return node.getAttribute&&((node.getAttribute("data-clippy-inline-media-url")||node.getAttribute("data-url")||node.getAttribute("data_url")))||node.href||null}function stripHash(url){return String(url).replace(/#.*$/,"")}function urlsMatch(a,b){if(!a||!b)return false;try{return stripHash(new URL(a,loc).href)===stripHash(new URL(b,loc).href)}catch(_){return stripHash(a)===stripHash(b)}}function isFirstPartyReelUrl(value){try{var url=new URL(value,loc);if(url.protocol!=="https:")return false;var host=url.hostname.toLowerCase();var supported=host==="instagram.com"||host.endsWith(".instagram.com")||host==="facebook.com"||host.endsWith(".facebook.com");return supported&&/\/reels?\//i.test(url.pathname)}catch(_){return false}}function isInlineMediaUrlClick(node,href){var slot=findInlineMediaSlot(node);if(!slot)return false;var slotUrl=readInlineMediaUrl(slot);if(slotUrl)return urlsMatch(href,slotUrl);return isFirstPartyReelUrl(href)}function findDataHref(start){for(var node=start;node&&node!==document.body;node=node.parentElement){if(node.getAttribute){var href=node.getAttribute("data-href")||node.getAttribute("data-url");if(href)return{href:href,node:node}}}return null}var nativeOpen=window.open;window.open=function(url){if(parent!==window&&typeof url==="string"&&/^https?:\/\//.test(url)){parent.postMessage({type:"ecto:usercontent-link-click",href:url},"*");return null}return nativeOpen?nativeOpen.apply(window,arguments):null};document.addEventListener("click",function(e){var target=e.target instanceof Element?e.target:null;if(!target)return;if(parent===window)return;var a=target.closest?target.closest("a[href]"):null;if(a&&a.href&&/^https?:\/\//.test(a.href)&&a.href.replace(/#.*$/,"")!==loc){if(isInlineMediaUrlClick(a,a.href))return;var productId=extractProductId(target)||extractProductId(a);if(productId){e.preventDefault();parent.postMessage({type:"ecto-artifact-link-click",productId:productId},"*");return}e.preventDefault();parent.postMessage({type:"ecto:usercontent-link-click",href:a.href},"*");return}var dataHref=findDataHref(target);if(dataHref&&/^https?:\/\//.test(dataHref.href)&&dataHref.href.replace(/#.*$/,"")!==loc){if(isInlineMediaUrlClick(dataHref.node,dataHref.href))return;e.preventDefault();parent.postMessage({type:"ecto:usercontent-link-click",href:dataHref.href},"*")}},true)})();</script><script>(function(){var FOCUS_TYPE="ecto:artifact-focus-request";var CLOSE_TYPE="ecto:artifact-close-request";function focusArtifactDocument(){var body=document.body;if(!body)return;try{window.focus();}catch(e){}if(!body.hasAttribute("tabindex"))body.setAttribute("tabindex","-1");try{body.focus({preventScroll:true});}catch(e){try{body.focus();}catch(e2){}}}window.addEventListener("message",function(event){if(event.source!==window.parent)return;var data=event.data;if(!data||typeof data!=="object"||data.type!==FOCUS_TYPE)return;if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",focusArtifactDocument,{once:true});return;}focusArtifactDocument();});window.addEventListener("keydown",function(event){if(event.key!=="Escape")return;window.setTimeout(function(){if(event.defaultPrevented)return;window.parent.postMessage({type:CLOSE_TYPE},"*");},0);});})();</script></body>
+</html>
