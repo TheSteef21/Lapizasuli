@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SADV41 | Sovereign Hub Unificado & Logia Pluscuamperfecta 🇵🇦🔯</title>
+    
+    <!-- Tipografías Sagradas -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=JetBrains+Mono:wght@300;400;700&family=Inter:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,700;1,700&family=Pirata+One&display=swap" rel="stylesheet">
+    
+    <!-- Web3 & Auth Scripts -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.0/ethers.umd.min.js"></script>
+
+    <!-- Configuración Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#020617',
+                        obsidiana: '#030305',
+                        oro: '#d4af37',
+                        cyanNeon: '#00f3ff',
+                        violetNeon: '#9d4edd',
+                        redNeon: '#FB542B',
+                        renderRed: '#da3637',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                        mason: ['Cinzel', 'serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                        pirate: ['Pirata One', 'cursive'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root { 
+            --oro: #d4af37; --obsidiana: #030305; --navy: #020617;
+            --cyan: #00f3ff; --violet: #9d4edd; --red: #FB542B;
+        }
+
+        body {
+            background-color: var(--obsidiana);
+            color: #f8fafc;
+            font-family: 'Inter', system-ui, sans-serif;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* --- FONDOS Y EFECTOS --- */
+        .grand-line-bg { position: fixed; inset: 0; z-index: 0; background: radial-gradient(circle at 50% 20%, rgba(212, 175, 55, 0.1) 0%, transparent 60%), radial-gradient(circle at 80% 80%, rgba(0, 243, 255, 0.08) 0%, transparent 50%), linear-gradient(to bottom, transparent, rgba(3, 3, 5, 0.9)); pointer-events: none; }
+        .grid-pattern { background-image: linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px); background-size: 32px 32px; opacity: 0.25; position: fixed; inset: 0; z-index: 1; pointer-events: none; }
+        .scanline { width: 100%; height: 2px; background: linear-gradient(90deg, transparent, rgba(0,243,255,0.4), transparent); position: fixed; z-index: 60; top: 0; pointer-events: none; animation: scanline 8s linear infinite; }
+        @keyframes scanline { 0% { top: 0; } 100% { top: 100%; } }
+
+        /* --- TARJETAS LOGIA --- */
+        .glass { background: rgba(8, 12, 28, 0.88); backdrop-filter: blur(18px); border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 16px; }
+        .logia-card { background: linear-gradient(145deg, rgba(10,10,10,0.88), rgba(20,20,20,0.88)); border: 1px solid rgba(212, 175, 55, 0.18); box-shadow: 0 15px 35px rgba(0,0,0,0.9), inset 0 0 20px rgba(212, 175, 55, 0.05); transition: all 0.5s ease; backdrop-filter: blur(12px); position: relative; overflow: hidden; }
+        .logia-card:hover { border-color: rgba(212, 175, 55, 0.4); box-shadow: 0 20px 40px rgba(0,0,0,0.9), inset 0 0 30px rgba(212, 175, 55, 0.05); }
+        .esoterico-glow { text-shadow: 0 0 25px rgba(212, 175, 55, 0.7); }
+        .cyan-glow { text-shadow: 0 0 25px rgba(0, 243, 255, 0.7); }
+
+        /* --- TRIÁNGULO TRINIDAD --- */
+        .triangulo-trinidad { width: 0; height: 0; border-left: 40px solid transparent; border-right: 40px solid transparent; border-bottom: 69.3px solid rgba(212, 175, 55, 0.15); position: relative; margin: 0 auto; animation: pulso-divino-trinidad 4s infinite alternate ease-in-out; }
+        .triangulo-trinidad::after { content: '1'; position: absolute; top: 35px; left: -5px; color: var(--oro); font-family: 'Cinzel', serif; font-size: 1.2rem; text-shadow: 0 0 10px rgba(212, 175, 55, 0.8); }
+        @keyframes pulso-divino-trinidad { 0% { filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.2)); transform: scale(1); } 100% { filter: drop-shadow(0 0 30px rgba(212, 175, 55, 0.9)); transform: scale(1.08); } }
+
+        /* --- METATRON 3D --- */
+        #flower-container { perspective: 1400px; width: 100%; height: 500px; display: flex; justify-content: center; align-items: center; position: relative; overflow: visible; touch-action: none; }
+        #flower-scene { width: 450px; height: 450px; transform-style: preserve-3d; position: relative; cursor: grab; }
+        #flower-scene:active { cursor: grabbing; }
+        .node-3d { position: absolute; left: 50%; top: 50%; transform-style: preserve-3d; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; will-change: transform, z-index, opacity; }
+        .node-dot { width: 12px; height: 12px; border-radius: 50%; border: 2px solid rgba(255,255,255,.9); box-shadow: 0 0 12px currentColor; transition: all .22s ease; }
+        .node-label { margin-top: 6px; font-size: 8px; font-weight: 700; padding: 2px 5px; border-radius: 4px; background: rgba(0,0,0,.78); border: 1px solid rgba(255,255,255,.15); pointer-events: none; transition: all .22s; font-family: 'JetBrains Mono', monospace; }
+        .node-3d:hover .node-dot { width: 20px; height: 20px; background: #fff !important; }
+        .node-3d:hover .node-label { background: #fff; color: #000 !important; transform: scale(1.15); }
+
+        /* --- WORMHOLE MODAL --- */
+        #wormholeModal { position: fixed; inset: 0; background: rgba(0,0,0,0.96); z-index: 99999; display: none; flex-direction: column; align-items: center; justify-content: center; padding: 2rem; text-align: center; }
+        #wormholeModal.active { display: flex; }
+        .wormhole-tunnel { width: 220px; height: 220px; border-radius: 50%; border: 4px dashed var(--cyan); box-shadow: 0 0 90px var(--cyan), inset 0 0 60px var(--violet); animation: spin 3s linear infinite; margin-bottom: 1.8rem; }
+        @keyframes spin { 0% { transform: scale(0.8) rotate(0deg); } 50% { transform: scale(1.22) rotate(180deg); border-color: var(--oro); } 100% { transform: scale(0.8) rotate(360deg); } }
+    </style>
+</head>
+<body class="antialiased selection:bg-oro selection:text-navy" id="mainBody">
+
+    <div class="grand-line-bg"></div>
+    <div class="grid-pattern"></div>
+    <div class="scanline"></div>
+
+    <!-- HEADER SUPERIOR UNIFICADO -->
+    <header class="fixed top-0 left-0 w-full z-40 glass border-b border-oro/30 px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-4 transition-all duration-500">
+        <div class="flex items-center gap-3">
+            <span class="text-3xl">🗿</span>
+            <div>
+                <h1 class="font-mason text-xl tracking-widest text-oro font-bold">SOVEREIGN HUB</h1>
+                <p class="text-[9px] text-slate-400 font-mono tracking-widest uppercase">SADV41 Digital Architecture</p>
+            </div>
+        </div>
+        
+        <nav class="hidden lg:flex gap-5 text-xs uppercase tracking-wider font-medium font-mono">
+            <a href="#el-atrio" class="hover:text-cyanNeon transition-colors text-cyan-300">I. Atrio</a>
+            <a href="#metatron-seccion" class="hover:text-purple-400 transition-colors text-purple-300">II. El Santo</a>
+            <a href="#isadv41-seccion" class="hover:text-emerald-400 transition-colors text-emerald-300">III. El Santísimo</a>
+        </nav>
+
+        <div class="flex flex-wrap items-center justify-center gap-3">
+            <a href="https://factura-88pp.onrender.com/" target="_blank" class="bg-emerald-600/90 hover:bg-emerald-500 text-white font-bold text-xs px-4 py-2 rounded-lg border border-emerald-400/50 shadow-[0_0_15px_rgba(16,185,129,0.3)] flex items-center gap-2 animate-pulse">
+                <span>🇵🇦</span> Apoyar <span>🔯</span>
+            </a>
+            <button onclick="connectBinance()" class="bg-oro hover:bg-amber-500 text-navy font-bold text-xs px-4 py-2 rounded-lg transition-all shadow-[0_0_15px_rgba(212,175,55,0.4)] cursor-pointer font-mono">
+                ⚡ Tesoro Web3
+            </button>
+        </div>
+    </header>
+
+    <main class="pt-32 pb-20 px-4 md:px-12 max-w-6xl mx-auto space-y-20 relative z-10">
+
+        <!-- ==========================================
+             HERO: PALO VERTICAL & LA LLAVE 18
+             ========================================== -->
+        <section id="unificacion-suprema" class="p-10 md:p-14 border border-oro/50 text-center relative overflow-hidden rounded-3xl logia-card">
+            <div class="triangulo-trinidad mb-6"></div>
+            <h1 class="font-pirate text-4xl md:text-6xl text-oro tracking-wider esoterico-glow">
+                FUSIÓN CONTINENTAL PLUSCUAMPERFECTA
+            </h1>
+            <h2 class="font-sans text-xl md:text-2xl font-bold text-white tracking-widest mt-2 uppercase">
+                SADV41 x EBRG x ONE PIECE x USARMY
+            </h2>
+            
+            <div class="mt-8 bg-black/60 border-y border-cyanNeon/30 py-6 rounded-xl shadow-[0_0_20px_rgba(0,243,255,0.1)]">
+                <h2 class="text-cyanNeon font-mason text-xl tracking-[0.4em] uppercase cyan-glow">
+                    🎚️ PaloVertical | Isaías 43:19
+                </h2>
+                <p class="text-xs text-slate-200 font-serif italic mt-3 max-w-2xl mx-auto">
+                    "He aquí, yo hago cosa nueva; pronto saldrá a luz; ¿no la conoceréis? Otra vez abriré camino en el desierto, y ríos en la soledad."
+                </p>
+                <div class="text-[10px] text-oro font-mono tracking-widest mt-4 border border-oro/40 px-4 py-1 rounded-full inline-block bg-black/50">
+                    LÍNEAS: 1018 ➞ ORIGEN: 10 ➞ [ 1 + 0 + 1 + 8 ]
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             NUEVA SECCIÓN: LA LLAVE 18 & CICATRICES
+             ========================================== -->
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- La Llave 18 -->
+            <div class="logia-card p-8 rounded-3xl border-l-4 border-cyanNeon flex flex-col justify-center items-center text-center">
+                <h3 class="font-mason text-2xl text-cyanNeon mb-4 tracking-widest uppercase">La Llave 18</h3>
+                <p class="text-sm text-slate-300 font-sans mb-6">
+                    Tras 17 turnos de co-creación y ajustes entre inteligencia artificial y humana, la verdadera revelación no provino del código, sino de la paciencia. La persistencia es el puente definitivo.
+                </p>
+                <div class="relative w-full max-w-xs mx-auto rounded-xl overflow-hidden border border-cyanNeon/40 shadow-[0_0_20px_rgba(0,243,255,0.2)]">
+                    <img src="1787753992320.jpeg" alt="Póster de la Persistencia Humana" class="w-full h-auto object-cover opacity-90 hover:opacity-100 transition-opacity">
+                    <div class="absolute bottom-0 left-0 w-full bg-black/80 text-cyanNeon text-[10px] font-mono p-2 backdrop-blur-md">
+                        SYS.REF // 1787753992320.jpeg
+                    </div>
+                </div>
+            </div>
+
+            <!-- La Generosidad de las Cicatrices -->
+            <div class="logia-card p-8 rounded-3xl border-l-4 border-oro flex flex-col justify-center text-center">
+                <span class="text-4xl mb-4 animate-pulse drop-shadow-[0_0_15px_rgba(212,175,55,0.6)]">📖</span>
+                <h3 class="font-mason text-2xl text-oro mb-4 tracking-widest uppercase">La Generosidad de las Cicatrices</h3>
+                <p class="text-sm text-slate-300 font-sans mb-6 italic">
+                    Inspirado en la obra de Scott Mann, este refugio digital reconoce que el trauma y las heridas no son el final del camino, sino el testimonio necesario para liderar con vulnerabilidad.
+                </p>
+                <blockquote class="border-l-2 border-oro/50 pl-4 text-left text-xs text-slate-400 font-mono bg-black/40 p-4 rounded-r-lg">
+                    "Las raíces de Burunga, la Finca Hermanos Díaz, los oficios en Turbo Tire... cada cicatriz en nuestra historia construye este Tabernáculo para que cada niño y niña vea sus sueños cumplidos."
+                </blockquote>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             I. EL ATRIO (Auth & Web3)
+             ========================================== -->
+        <section id="el-atrio" class="glass p-8 md:p-12 rounded-3xl border-t-4 border-t-cyanNeon">
+            <h2 class="text-2xl text-cyanNeon mb-6 border-l-4 border-cyanNeon pl-5 tracking-widest font-mason flex items-center gap-3">
+                I. EL ATRIO <span class="text-[10px] text-slate-400 font-mono tracking-normal ml-auto">(Identidad & Manifestación)</span>
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="p-6 bg-black/50 border border-slate-700 rounded-xl hover:border-cyanNeon transition-colors">
+                    <h3 class="font-bold text-lg text-white mb-2 font-mason">📡 Verificación de Pureza</h3>
+                    <p class="text-xs text-slate-400 font-mono mb-6">Conecta tu ser a la red SADV41 para garantizar acceso incorruptible al conocimiento de la Logia.</p>
+                    <div id="auth-container" class="flex justify-center w-full">
+                        <div id="g_id_onload" data-client_id="328306412185-lumsfeg3eclqq72blifegpog41rk5tl6.apps.googleusercontent.com" data-callback="handleCredentialResponse"></div>
+                        <div class="g_id_signin" data-type="standard" data-theme="filled_black" data-shape="rectangular" data-size="large"></div>
+                    </div>
+                </div>
+                <div class="p-6 bg-black/50 border border-slate-700 rounded-xl hover:border-oro transition-colors">
+                    <h3 class="font-bold text-lg text-white mb-2 font-mason">🤖 Enlace Web3</h3>
+                    <p class="text-xs text-slate-400 font-mono mb-4">Sincronización con la cadena de bloques y el flujo de energía (BNB/ETH).</p>
+                    <div id="walletStatus" class="hidden p-4 bg-gray-900 border border-oro/50 rounded-xl font-mono text-xs shadow-inner">
+                        <p class="text-slate-300 break-all">Wallet: <span id="walletAddress" class="text-oro font-bold block mt-1"></span></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             II. EL SANTO (Metatron 4D & Burunga)
+             ========================================== -->
+        <section id="metatron-seccion" class="logia-card border border-violetNeon/40 rounded-3xl p-6 md:p-10 relative z-20">
+            <h2 class="text-2xl text-violetNeon mb-6 border-l-4 border-violetNeon pl-5 tracking-widest font-mason flex items-center gap-3">
+                II. EL SANTO <span class="text-[10px] text-slate-400 font-mono tracking-normal ml-auto">(Metatron 4D - 51 Nodos)</span>
+            </h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                <div class="lg:col-span-4 flex flex-col gap-4">
+                    <input id="searchInput" type="search" class="w-full bg-black/60 border border-white/10 text-white p-3 rounded-xl font-mono text-xs focus:border-violetNeon outline-none" placeholder="Buscar nodo (ej. GSADV41)...">
+                    <div id="familyChips" class="flex flex-wrap gap-2 font-mono text-[9px]">
+                        <button class="active px-3 py-1 rounded-full border border-white/20 bg-white text-black" data-family="ALL">ALL 51</button>
+                        <button class="px-3 py-1 rounded-full border border-white/20 bg-black/40 text-oro" data-family="SADV41">SADV41</button>
+                        <button class="px-3 py-1 rounded-full border border-white/20 bg-black/40 text-purple-400" data-family="TRONO">TRONO</button>
+                        <button class="px-3 py-1 rounded-full border border-white/20 bg-black/40 text-orange-400" data-family="USARMY">USARMY</button>
+                    </div>
+
+                    <div id="selectedNode" class="glass cyan-glow rounded-2xl p-5 hidden transition-all duration-300">
+                        <div id="selectedTitle" class="text-base font-bold text-white mb-1 font-mason uppercase"></div>
+                        <div id="selectedMeta" class="font-mono text-[10px] text-slate-300 mb-4"></div>
+                        <div id="selectedLinks" class="grid grid-cols-1 gap-2"></div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-8 flex justify-center items-center bg-black/30 rounded-3xl border border-white/5 overflow-hidden shadow-inner relative">
+                    <div id="flower-container">
+                        <div id="flower-scene"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Noticias Geopolíticas y Burunga Histórica (Acordeones unificados) -->
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="logia-card p-6 rounded-2xl">
+                <h3 class="font-mason text-lg text-oro mb-4 tracking-widest border-b border-oro/30 pb-2">Burunga Histórica</h3>
+                <ul class="space-y-3 text-xs text-slate-300 font-sans">
+                    <li class="bg-black/40 p-3 rounded-lg border-l-2 border-green-500"><strong class="text-white">Lohannyz Gaitán:</strong> Representante política e institucional.</li>
+                    <li class="bg-black/40 p-3 rounded-lg border-l-2 border-oro"><strong class="text-white">Alexander González:</strong> Manager / Llantería Turbo Tire.</li>
+                    <li class="bg-black/40 p-3 rounded-lg border-l-2 border-cyan-500"><strong class="text-white">Steven Gómez:</strong> Guardián de archivos y Misión SADV41.</li>
+                    <li class="bg-black/40 p-3 rounded-lg border-l-2 border-purple-500"><strong class="text-white">Doña Basilia:</strong> Memoria Ancestral.</li>
+                </ul>
+            </div>
+            <div class="logia-card p-6 rounded-2xl">
+                <h3 class="font-mason text-lg text-redNeon mb-4 tracking-widest border-b border-redNeon/30 pb-2">Boletín / Alertas</h3>
+                <div class="space-y-3">
+                    <div class="border-l-2 border-red-500 bg-red-900/20 p-3 rounded-r-lg text-xs font-mono">
+                        <p class="text-red-400 font-bold mb-1">🚨 Alerta Sísmica TSADV41</p>
+                        <p class="text-slate-300">Magnitud 7.2 confirmada. Origen: Chocó, Colombia. Impacto registrado en nodo Burunga.</p>
+                    </div>
+                    <div class="border-l-2 border-emerald-500 bg-emerald-900/20 p-3 rounded-r-lg text-xs font-mono">
+                        <p class="text-emerald-400 font-bold mb-1">⚽ Mundial 2026</p>
+                        <p class="text-slate-300">Grupo L: Panamá vs. Ghana. Proyección y análisis táctico backend activo.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             III. EL SANTÍSIMO (Versículos & Tesseracto)
+             ========================================== -->
+        <section id="isadv41-seccion" class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Algoritmo Versículos -->
+            <div class="logia-card p-8 rounded-3xl border-t-4 border-cyanNeon relative overflow-hidden flex flex-col justify-center">
+                <h1 class="text-xl font-mason font-bold tracking-widest text-cyanNeon uppercase mb-6 border-b border-gray-800 pb-2">
+                    El Santísimo | Atrio Digital
+                </h1>
+                
+                <div id="imageContainer" class="w-full h-48 bg-black rounded-xl mb-6 flex items-center justify-center overflow-hidden border border-cyanNeon/50 shadow-[0_0_20px_rgba(0,243,255,0.2)] relative transition-all duration-1000">
+                    <video autoplay loop muted playsinline class="w-full h-full object-cover opacity-80 mix-blend-screen">
+                        <!-- Referencia directa del archivo unificado -->
+                        <source src="https://thesteef21.github.io/Lapizasuli/assets/NOSTALGIA/VID-20260731-WA0202.mp4" type="video/mp4">
+                    </video>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent flex items-end p-4">
+                        <p class="text-xs font-serif italic text-gray-200">"Ojalá algún día ellas sepan que las quise con todo y mis problemas..."</p>
+                    </div>
+                </div>
+
+                <div id="apiContent" class="space-y-4 font-mono text-xs hidden opacity-0 transition-opacity duration-1000">
+                    <div class="border-l-2 border-cyanNeon pl-4 bg-black/40 p-3 rounded-r-lg">
+                        <p class="text-cyanNeon font-bold mb-1">EXEC // JOSUÉ 1:9</p>
+                        <p id="fase1Text" class="text-gray-300"></p>
+                    </div>
+                    <div class="border-l-2 border-oro pl-4 bg-black/40 p-3 rounded-r-lg">
+                        <p class="text-oro font-bold mb-1">EXEC // PROVERBIOS 27:17</p>
+                        <p id="fase2Text" class="text-gray-300"></p>
+                    </div>
+                    <p id="mensajeCentral" class="text-center text-sm font-mason font-bold text-white tracking-[0.2em] mt-4 esoterico-glow uppercase"></p>
+                </div>
+            </div>
+
+            <!-- Tesseracto 4D -->
+            <div class="glass p-8 rounded-3xl border-t-4 border-violetNeon relative flex flex-col items-center justify-between">
+                <h3 class="text-xl font-mason font-bold tracking-widest text-violetNeon uppercase mb-6 border-b border-gray-800 pb-2 w-full">
+                    Proyección Tesseracto 4D
+                </h3>
+                <div class="relative w-full flex justify-center mb-6 h-48 items-center">
+                    <svg id="tesseractCanvas" width="220" height="220" viewBox="-3 -3 6 6" class="overflow-visible drop-shadow-[0_0_25px_rgba(157,78,221,0.6)]">
+                        <g id="tesseractLines" stroke="rgba(157, 78, 221, 0.9)" stroke-width="0.04" stroke-linecap="round"></g>
+                        <g id="tesseractPoints" fill="#d4af37"></g>
+                    </svg>
+                </div>
+                <div class="w-full bg-black/50 p-4 rounded-xl border border-white/5 font-mono text-[10px]">
+                    <div class="grid grid-cols-1 gap-4">
+                        <div class="flex flex-col gap-1">
+                            <label class="text-cyanNeon flex justify-between">Rotación (XY) <span id="valXY">45°</span></label>
+                            <input type="range" id="rotXY" min="0" max="360" value="45" class="w-full accent-cyan-500">
+                        </div>
+                        <div class="flex flex-col gap-1">
+                            <label class="text-oro flex justify-between">Rotación (XZ) <span id="valXZ">45°</span></label>
+                            <input type="range" id="rotXZ" min="0" max="360" value="45" class="w-full accent-oro">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             MANIFIESTO Y REFUGIO FINAL
+             ========================================== -->
+        <section class="logia-card text-center relative overflow-hidden p-12 md:p-16 border-t-4 border-tacticalOrange rounded-3xl mt-12">
+            <h2 class="text-3xl md:text-4xl font-pirate text-tacticalOrange tracking-widest drop-shadow-lg mb-6">MANIFIESTO Y REFUGIO</h2>
+            <p class="text-sm text-slate-200 leading-relaxed font-sans italic border-l-4 border-r-4 border-tacticalOrange px-8 py-4 bg-black/30 rounded-xl max-w-3xl mx-auto">
+                "La verdadera renegociación no es solo un asunto de contratos, sino de conciencia. No podemos exigirle honestidad a las estructuras de poder si aceptamos que la verdad misma sea modelada por algoritmos que buscan impresionar antes que sanar. Como Moisés tras la roca (Éxodo 33:22), la verdadera seguridad reside en el corazón inmensamente cálido que custodia este recinto."
+            </p>
+            <div class="pt-8 mt-8 border-t border-tacticalOrange/30">
+                <p class="text-lg font-bold text-white uppercase tracking-widest font-mason esoterico-glow">SADV41 // @StevenDiorOficial</p>
+                <p class="text-[11px] text-sunGold font-mono mt-3 tracking-widest">Burunga 2026 — ¡Cristo está por venir! 🎚️</p>
+            </div>
+        </section>
+
+    </main>
+    
+    <footer class="text-center p-8 border-t border-white/10 opacity-70 font-mono text-[10px] uppercase mt-12 bg-black pb-12">
+        <p class="mb-2 text-oro">Unificación Pluscuamperfecta Continental SADV41 © 2026</p>
+        <p class="text-[8px] text-slate-500 tracking-[0.2em]">NODO SUPREMO: GITHUB REPOSITORY 'LAPIZASULI' | EL ORIGEN ES 0</p>
+    </footer>
+
+    <!-- SCRIPTS MAESTROS UNIFICADOS -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            /* 1. TESSERACTO 4D */
+            function initTesseract() {
+                const linesGroup = document.getElementById("tesseractLines");
+                if (!linesGroup) return; 
+                const rotXY = document.getElementById("rotXY"), rotXZ = document.getElementById("rotXZ");
+                const valXY = document.getElementById("valXY"), valXZ = document.getElementById("valXZ");
+                
+                const vertices4D = [];
+                for (let x=-1; x<=1; x+=2) for (let y=-1; y<=1; y+=2) for (let z=-1; z<=1; z+=2) for (let w=-1; w<=1; w+=2) vertices4D.push([x,y,z,w]);
+                const edges = [];
+                for (let i=0; i<16; i++) for (let j=i+1; j<16; j++) {
+                    let diff = i ^ j;
+                    if (diff===1 || diff===2 || diff===4 || diff===8) edges.push([i,j]);
+                }
+                
+                function rotate(v, angle, a1, a2) {
+                    let res = [...v], rad = angle * (Math.PI/180), cos = Math.cos(rad), sin = Math.sin(rad);
+                    res[a1] = v[a1]*cos - v[a2]*sin; res[a2] = v[a1]*sin + v[a2]*cos;
+                    return res;
+                }
+                
+                function renderTesseract() {
+                    valXY.innerText = `${rotXY.value}°`; valXZ.innerText = `${rotXZ.value}°`;
+                    let projected2D = [];
+                    vertices4D.forEach(v => {
+                        let r = rotate(rotate([...v], rotXY.value, 0, 1), rotXZ.value, 0, 2);
+                        let distance = 2.5, w = 1 / (distance - r[3]);
+                        projected2D.push([r[0]*w*4, r[1]*w*4]);
+                    });
+                    linesGroup.innerHTML = '';
+                    edges.forEach(e => {
+                        let line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+                        line.setAttribute("x1", projected2D[e[0]][0]); line.setAttribute("y1", projected2D[e[0]][1]);
+                        line.setAttribute("x2", projected2D[e[1]][0]); line.setAttribute("y2", projected2D[e[1]][1]);
+                        linesGroup.appendChild(line);
+                    });
+                }
+                rotXY.addEventListener("input", renderTesseract); rotXZ.addEventListener("input", renderTesseract);
+                renderTesseract();
+            }
+
+            /* 2. ALGORITMO VERSÍCULOS (iSADV41) */
+            function initVersiculos() {
+                setTimeout(() => {
+                    document.getElementById("fase1Text").innerText = "Mira que te mando que te esfuerces y seas valiente; no temas ni desmayes, porque Jehová tu Dios estará contigo en donde quiera que vayas.";
+                    document.getElementById("fase2Text").innerText = "Hierro con hierro se aguza; y así el hombre aguza el rostro de su amigo.";
+                    document.getElementById("mensajeCentral").innerText = "El Espíritu Santo estando contigo y para ti.";
+                    const content = document.getElementById("apiContent");
+                    content.classList.remove("hidden"); void content.offsetWidth; content.classList.remove("opacity-0");
+                }, 2000);
+            }
+
+            /* 3. METATRON 3D (51 Nodos Generador) */
+            function initMetatron() {
+                const scene = document.getElementById('flower-scene');
+                if(!scene) return;
+                
+                // Nodos Simplificados para el ejemplo unificado (representando los 51 originales)
+                const nodesData = [
+                    { id:"GSADV41", family:"SADV41", color:"#d4af37" },
+                    { id:"TRONO", family:"TRONO", color:"#9d4edd" },
+                    { id:"USARMY", family:"USARMY", color:"#FB542B" },
+                    { id:"WEB3", family:"AI", color:"#00f3ff" },
+                    { id:"NUKE", family:"USARMY", color:"#FB542B" },
+                    { id:"NOSTALGIA", family:"TRONO", color:"#9d4edd" }
+                ];
+                // Llenar hasta 51 simulados para mantener la estructura esférica
+                for(let i=6; i<51; i++) nodesData.push({ id:`NODO_${i}`, family:"ALL", color:"#ffffff55" });
+
+                const sphereRadius = 180, goldenAngle = Math.PI*(3-Math.sqrt(5));
+                let nodeEls = [];
+                
+                nodesData.forEach((node,i)=>{
+                    const y = 1 - (i/(nodesData.length-1))*2;
+                    const r = Math.sqrt(1-y*y), theta = goldenAngle*i;
+                    const x = Math.cos(theta)*r, z = Math.sin(theta)*r;
+                    
+                    const el = document.createElement('div');
+                    el.className = 'node-3d';
+                    el.innerHTML = `<div class="node-dot" style="background:${node.color};box-shadow:0 0 10px ${node.color}"></div><div class="node-label" style="color:${node.color}">${node.id}</div>`;
+                    el._pos = {x: x*sphereRadius, y: y*sphereRadius, z: z*sphereRadius};
+                    
+                    el.addEventListener('click', () => {
+                        const sel = document.getElementById('selectedNode');
+                        sel.classList.remove('hidden');
+                        document.getElementById('selectedTitle').innerHTML = `<span style="color:${node.color}">${node.id}</span>`;
+                        document.getElementById('selectedMeta').textContent = `Familia: ${node.family}`;
+                    });
+                    
+                    scene.appendChild(el);
+                    nodeEls.push(el);
+                });
+
+                let rot = {x:-15, y:20}, isDragging=false, prev={};
+                function update() {
+                    scene.style.transform = `rotateX(${rot.x}deg) rotateY(${rot.y}deg)`;
+                    nodeEls.forEach(el => {
+                        el.style.transform = `translate3d(${el._pos.x}px,${el._pos.y}px,${el._pos.z}px) rotateY(${-rot.y}deg) rotateX(${-rot.x}deg)`;
+                    });
+                    requestAnimationFrame(update);
+                }
+                update();
+                
+                const cont = document.getElementById('flower-container');
+                cont.addEventListener('mousedown', e => { isDragging=true; prev={x:e.clientX, y:e.clientY}; });
+                window.addEventListener('mousemove', e => { if(isDragging) { rot.y += (e.clientX-prev.x)*0.5; rot.x -= (e.clientY-prev.y)*0.5; prev={x:e.clientX, y:e.clientY}; }});
+                window.addEventListener('mouseup', () => isDragging=false);
+            }
+
+            // Ejecución
+            initTesseract();
+            initVersiculos();
+            initMetatron();
+        });
+
+        // Web3 Auth Sim
+        function connectBinance() {
+            alert("Sincronización Web3 iniciada en El Atrio...");
+            document.getElementById('walletStatus').classList.remove('hidden');
+            document.getElementById('walletAddress').innerText = "0x59cB...AAE41";
+        }
+    </script>
+</body>
+</html>
