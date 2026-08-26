@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SADV41 | Sovereign Hub & Logia Pluscuamperfecta Unificada 🇵🇦🔯</title>
+    
+    <!-- Tipografías Sagradas -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=JetBrains+Mono:wght@300;400;700&family=Inter:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,700;1,700&family=Pirata+One&display=swap" rel="stylesheet">
+    
+    <!-- Scripts Externos -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@web3auth/modal@8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.0/ethers.umd.min.js"></script>
+
+    <!-- Configuración Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#030305',
+                        oro: '#d4af37',
+                        blanco: '#f8fafc',
+                        cyanNeon: '#00f3ff',
+                        violetNeon: '#9d4edd',
+                        redNeon: '#FB542B',
+                        borgona: '#4a0010',
+                        neonGreen: '#10b981',
+                        renderRed: '#da3637',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                        mason: ['Cinzel', 'serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                        pirate: ['Pirata One', 'cursive'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root { 
+            --oro: #d4af37; 
+            --obsidiana: #030305; 
+            --cyan: #00f3ff;
+            --violet: #9d4edd;
+            --red: #FB542B;
+        }
+
+        body {
+            background-color: var(--obsidiana);
+            color: #f1f5f9;
+            font-family: 'Inter', system-ui, sans-serif;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* --- FONDO DE CAOS VIVO (8 CAPAS REALES) --- */
+        .chaos-bg-container { position: fixed; inset: 0; z-index: 0; background: #000; pointer-events: none; overflow: hidden; }
+        .chaos-layer {
+            position: absolute; inset: -20px;
+            background-size: cover; background-position: center;
+            opacity: 0; mix-blend-mode: screen;
+            filter: contrast(125%) brightness(95%) saturate(1.2);
+            transition: opacity 3.5s, transform 9s, filter 0.3s;
+            pointer-events: auto; cursor: pointer;
+        }
+        .chaos-layer.active { opacity: 0.5; transform: scale(1.09) rotate(0.6deg); }
+        .chaos-layer.now-asset-glitch { animation: assetNowGlitch 0.38s infinite alternate; }
+        @keyframes assetNowGlitch {
+            0% { filter: hue-rotate(0deg) contrast(180%) saturate(200%); }
+            100% { filter: hue-rotate(90deg) contrast(250%) invert(0.12) saturate(300%); transform: scale(1.13) translate(-4px,4px); }
+        }
+        @keyframes divineGlory {
+            0% { filter: brightness(1); }
+            35% { filter: brightness(4.2) contrast(240%) saturate(280%) drop-shadow(0 0 140px #fff) drop-shadow(0 0 80px var(--oro)); transform: scale(1.22); }
+            100% { filter: brightness(1); }
+        }
+        .divine-glory-active { animation: divineGlory 2.2s forwards; }
+
+        @keyframes pageGlitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-8px,5px) skew(-4deg); filter: hue-rotate(90deg); }
+            40% { transform: translate(8px,-5px) skew(4deg); }
+            100% { transform: translate(0); }
+        }
+        .glitch-active { animation: pageGlitch 0.7s both; }
+
+        /* --- UTILIDADES Y EFECTOS --- */
+        .glass { background: rgba(8,8,12,0.88); backdrop-filter: blur(18px); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; }
+        .esoterico-glow { text-shadow: 0 0 25px rgba(212, 175, 55, 0.7); }
+        
+        .scanline {
+            width: 100%; height: 2px;
+            background: rgba(0, 209, 255, 0.15);
+            position: fixed; z-index: 50; top: 0;
+            pointer-events: none;
+            animation: scanline 8s linear infinite;
+        }
+        @keyframes scanline { 0% { top: 0; } 100% { top: 100%; } }
+
+        /* --- MENÚ LATERAL BILATERAL UNIFICADO --- */
+        .sidebar-tabs { position: fixed; left: 0; top: 50%; transform: translateY(-50%); z-index: 55; display: flex; flex-direction: column; gap: 10px; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+        .vertical-tab { display: flex; align-items: center; background: rgba(8, 8, 12, 0.95); padding: 10px 14px; border-radius: 0 12px 12px 0; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); width: 55px; overflow: hidden; white-space: nowrap; box-shadow: 4px 4px 15px rgba(0,0,0,0.5); cursor: pointer; border-left: 3px solid var(--cyan); text-decoration: none; color: #fff; }
+        .vertical-tab:hover { width: 340px; padding-left: 18px; background: rgba(0, 243, 255, 0.2); }
+        .vertical-tab span.icon { font-size: 1.4rem; min-width: 28px; display: flex; justify-content: center; }
+        .vertical-tab span.text { margin-left: 14px; font-weight: bold; opacity: 0; transition: opacity 0.3s; font-size: 0.8rem; letter-spacing: 0.05em; font-family: 'JetBrains Mono', monospace; }
+        .vertical-tab:hover span.text { opacity: 1; transition-delay: 0.1s; }
+        
+        .sidebar-tabs.right-aligned { left: auto; right: 0; }
+        .sidebar-tabs.right-aligned .vertical-tab { border-radius: 12px 0 0 12px; border-left: none; border-right: 3px solid var(--cyan); flex-direction: row-reverse; }
+        .sidebar-tabs.right-aligned .vertical-tab:hover { padding-right: 18px; padding-left: 14px; }
+        .sidebar-tabs.right-aligned .vertical-tab span.text { margin-left: 0; margin-right: 14px; text-align: right; }
+        
+        @media (max-width: 768px) {
+            .sidebar-tabs { top: 85%; gap: 6px; }
+            .vertical-tab { width: 45px; padding: 8px; }
+            .vertical-tab:hover, .sidebar-tabs.right-aligned .vertical-tab:hover { width: 280px; }
+        }
+
+        /* --- TARJETAS LOGIA Y RAÍCES --- */
+        .logia-card { 
+            background: linear-gradient(145deg, rgba(10,10,10,0.88), rgba(20,20,20,0.88));
+            border: 1px solid rgba(212, 175, 55, 0.18);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.9), inset 0 0 20px rgba(212, 175, 55, 0.03);
+            backdrop-filter: blur(12px);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s ease;
+        }
+        .logia-card:hover { border-color: rgba(212, 175, 55, 0.45); box-shadow: 0 20px 40px rgba(0,0,0,0.9), inset 0 0 30px rgba(212, 175, 55, 0.05); }
+
+        .root-card { border-left: 3px solid var(--oro); padding: 1rem; margin: 1.5rem 0; background: rgba(0,0,0,0.4); border-radius: 0 8px 8px 0; }
+        .root-title { color: #fff; font-weight: 700; font-family: 'JetBrains Mono', monospace; font-size: 1rem; margin-bottom: 0.3rem; }
+
+        /* --- WORMHOLE MODAL Y AMOLED --- */
+        #wormholeModal {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.96); z-index: 99999;
+            display: none; flex-direction: column; align-items: center; justify-content: center; padding: 2rem; text-align: center;
+        }
+        #wormholeModal.active { display: flex; }
+        .wormhole-tunnel {
+            width: 240px; height: 240px; border-radius: 50%; border: 4px dashed var(--cyan);
+            box-shadow: 0 0 90px var(--cyan), inset 0 0 60px var(--violet); animation: spin 3s linear infinite; margin-bottom: 1.8rem;
+        }
+        @keyframes spin { 0% { transform: scale(0.8) rotate(0deg); } 50% { transform: scale(1.22) rotate(180deg); border-color: var(--oro); } 100% { transform: scale(0.8) rotate(360deg); } }
+
+        /* --- EL VELO SE RASGA (DIVINE GLITCH) --- */
+        #heaven-glitch {
+            position: fixed; inset: 0; z-index: 100000;
+            background: rgba(3,3,5,0.94); backdrop-filter: blur(12px);
+            display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
+            opacity: 0; pointer-events: none; transition: opacity 0.1s;
+        }
+        #heaven-glitch.active { opacity: 1; pointer-events: auto; }
+        .glitch-visuals { animation: veloColor 0.15s infinite; }
+        @keyframes veloColor {
+            0% { filter: hue-rotate(0deg) contrast(150%) saturate(200%); transform: translate(0,0) scale(1); }
+            33% { filter: hue-rotate(90deg) contrast(200%) invert(0.15); transform: translate(-8px,5px) scale(1.03); }
+            66% { filter: hue-rotate(-90deg) contrast(180%); transform: translate(8px,-5px) scale(0.97); }
+            100% { filter: hue-rotate(45deg) contrast(150%) invert(0.05); transform: translate(-3px,-3px) scale(1.01); }
+        }
+        .heaven-btn {
+            padding: 16px 32px; font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 800;
+            text-transform: uppercase; letter-spacing: 0.1em; text-decoration: none;
+            background: rgba(0,0,0,0.85); transition: all 0.2s; cursor: pointer; border-radius: 999px;
+        }
+        .heaven-btn:hover { transform: scale(1.1); filter: brightness(1.5); }
+
+        .asset-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+        .asset-card { border-radius: 16px; padding: 12px; background: rgba(10,10,18,0.92); border: 1px solid rgba(0,243,255,0.3); cursor: pointer; transition: 0.3s; position: relative; overflow: hidden; }
+        .asset-card:hover { border-color: var(--oro); box-shadow: 0 0 25px rgba(212,175,55,0.3); transform: translateY(-2px); }
+        .asset-card img, .asset-card video { width: 100%; height: 180px; object-fit: cover; border-radius: 10px; margin-bottom: 8px; background: #000; }
+        
+        .gear-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 8px; }
+        .gear-item { border-radius: 12px; padding: 6px; background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.1); text-align: center; cursor: pointer; transition: 0.3s; }
+        .gear-item:hover, .gear-item.active { border-color: var(--cyan); box-shadow: 0 0 15px rgba(0,243,255,0.3); }
+        .gear-item img { width: 100%; height: 65px; object-fit: cover; border-radius: 6px; margin-bottom: 4px; }
+    </style>
+</head>
+<body class="antialiased selection:bg-oro selection:text-navy" id="mainBody">
+
+    <!-- FONDO DE CAOS VIVO -->
+    <div class="chaos-bg-container" id="chaosBg">
+        <div class="chaos-layer active" data-asset="TRONO" style="background-image:url('https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/785282279_1341489208069876_1027745017510610652_n.webp')"></div>
+        <div class="chaos-layer" data-asset="CYBER" style="background-image:url('https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/784748359_1032169259812179_379368085236729966_n.webp')"></div>
+        <div class="chaos-layer" data-asset="NUKE" data-now="true" style="background-image:url('https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/783899130_4498246103827834_338786690266061800_n.webp')"></div>
+        <div class="chaos-layer" data-asset="GOLD" style="background-image:url('https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/783671951_1762018238468095_5751859537385186669_n.webp')"></div>
+        <div class="chaos-layer" data-asset="SQUAD" data-now="true" style="background-image:url('https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/781904042_37804958575816522_4524605149493257178_n.webp')"></div>
+    </div>
+
+    <div class="scanline"></div>
+
+    <!-- MENÚ LATERAL BILATERAL UNIFICADO -->
+    <div id="main-sidebar" class="sidebar-tabs transition-all duration-500">
+        <a href="https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/LEVIATHAN_SADV41_GEAR5_DIVINO.html" target="_blank" class="vertical-tab" style="border-left: 3px solid #00f3ff;">
+            <span class="icon">👁️</span><span class="text text-cyan-300">Leviathan Gear 5 Divino</span>
+        </a>
+        <a href="https://thesteef21.github.io/Lapizasuli/assets/PRINCIPADO/index.html" target="_blank" class="vertical-tab" style="border-left: 3px solid #d4af37;">
+            <span class="icon">🏛️</span><span class="text text-oro">Principado Divino</span>
+        </a>
+        <a href="https://thesteef21.github.io/Lapizasuli/SLogia.html" target="_blank" class="vertical-tab">
+            <span class="icon">🎚️</span><span class="text text-cyan-300">SLogia | Conexión SADV41</span>
+        </a>
+        <a href="https://thesteef21.github.io/Lapizasuli/IMA.html" target="_blank" class="vertical-tab">
+            <span class="icon">🍚</span><span class="text text-blue-200">Arroz barato cerca de ti! 🇵🇦</span>
+        </a>
+        <a href="https://thesteef21.github.io/Lapizasuli/ColombiaPTY.html" target="_blank" class="vertical-tab">
+            <span class="icon">💸</span><span class="text text-emerald-300">Préstamos 🇵🇦🇨🇴🇺🇸</span>
+        </a>
+        <a href="https://thesteef21.github.io/Lapizasuli/FIFA2026.html" target="_blank" class="vertical-tab">
+            <span class="icon">⚽</span><span class="text text-green-300">Mundial 2026 ⚽️</span>
+        </a>
+        <a href="https://factura-88pp.onrender.com/" target="_blank" class="vertical-tab">
+            <span class="icon">💵</span><span class="text text-emerald-400">Invertir (FACTURA)</span>
+        </a>
+        <div onclick="toggleSidebar()" class="vertical-tab" title="Cambiar lado del menú">
+            <span class="icon">⇋</span><span class="text text-slate-300">Alternar Menú</span>
+        </div>
+    </div>
+
+    <!-- HEADER SUPERIOR -->
+    <header class="fixed top-0 left-0 w-full z-40 glass border-b border-oro/30 px-6 py-4 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+            <span class="text-2xl">🛡️</span>
+            <div>
+                <h1 class="font-serif text-xl tracking-wider text-oro font-bold">SOVEREIGN HUB</h1>
+                <p class="text-[9px] text-slate-400 font-mono tracking-widest">SADV41 DIGITAL ARCHITECTURE</p>
+            </div>
+        </div>
+        
+        <nav class="hidden lg:flex gap-6 text-sm uppercase tracking-wider font-medium">
+            <a href="#raices-seccion" class="hover:text-oro text-amber-300 font-bold">🌿 Raíces</a>
+            <a href="#leviathan-assets" class="hover:text-cyanNeon text-cyan-300 font-bold">🛡️ Leviathan Assets</a>
+            <a href="#isadv41-seccion" class="hover:text-blue-400 text-blue-300">📖 Versículos</a>
+        </nav>
+
+        <div class="flex items-center gap-3">
+            <span class="mono text-xs bg-black/60 px-3 py-1.5 rounded-full border border-oro/30 text-oro" id="cycleCounter">CICLO 0 / 7</span>
+            <button onclick="connectBinance()" class="bg-oro hover:bg-amber-600 text-navy font-bold text-xs px-3 py-2 rounded-lg cursor-pointer font-mono">
+                ⚡ Web3 Wallet
+            </button>
+        </div>
+    </header>
+
+    <main class="pt-40 pb-20 px-4 md:px-12 max-w-5xl mx-auto space-y-16">
+
+        <!-- PALO VERTICAL -->
+        <div class="relative w-full bg-black/60 border-y border-oro/30 py-6 flex flex-col items-center justify-center rounded-xl shadow-[0_0_20px_rgba(0,243,255,0.1)]">
+            <h2 class="text-cyanNeon font-mason text-xl md:text-2xl tracking-[0.4em] uppercase esoterico-glow text-center flex items-center gap-3">
+                <span>🎚️</span> PaloVertical <span>|</span> Isaías 43:19
+            </h2>
+            <p class="text-xs md:text-sm text-slate-200 font-serif italic mt-3 max-w-2xl text-center px-4 leading-relaxed">
+                "He aquí, yo hago cosa nueva; pronto saldrá a luz; ¿no la conoceréis? Otra vez abriré camino en el desierto, y ríos en la soledad."
+            </p>
+        </div>
+
+        <!-- RAÍCES Y LEGADO -->
+        <section id="raices-seccion" class="glass p-8 md:p-12 border-t-4 border-t-oro">
+            <h2 class="text-3xl font-mason text-oro mb-6 esoterico-glow uppercase">Raíces y Legado</h2>
+            <p class="text-slate-300 leading-relaxed mb-6">
+                Honrar de dónde venimos es la arcilla que sostiene nuestros pasos y da sentido a nuestra misión de servicio.
+            </p>
+            <div class="root-card">
+                <div class="root-title text-oro">ESPINOZA / ESPINOSA (Legado Materno)</div>
+                <p class="text-xs text-slate-300">Conectado a través de tu madre, Elida María Serrano Espinosa. Símbolo de protección, resiliencia y constancia.</p>
+            </div>
+            <div class="root-card">
+                <div class="root-title text-oro">SERRANO & GÓMEZ</div>
+                <p class="text-xs text-slate-300">Fortaleza montañosa y continuidad del hogar.</p>
+            </div>
+        </section>
+
+        <!-- LEVIATHAN ASSETS & RINES MARKETPLACE -->
+        <section id="leviathan-assets" class="glass p-8 border-t-4 border-t-redNeon">
+            <h2 class="font-mason text-oro text-xl mb-2">🛡️ LEVIATHAN // ASSETS & MÓDULO RINES</h2>
+            <p class="font-mono text-[11px] text-slate-400 mb-6">Integración comercial y soporte técnico para accesorios automotrices sostenibles.</p>
+            <div class="asset-grid mb-8">
+                <div class="asset-card portal-trigger" data-dest="https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/PANAMAUNIT.html">
+                    <div class="font-mono text-[9px] text-cyanNeon mb-1">[NOW] // SADV41 HÍBRIDO</div>
+                    <img src="https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/783452785_1869516164012118_6490546162878603454_n.webp" alt="SADV41">
+                    <div class="font-mason text-xs font-bold">PROTOCOLO HÍBRIDO</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- iSADV41: VERSÍCULOS -->
+        <section id="isadv41-seccion" class="flex flex-col items-center gap-10">
+            <div class="logia-card p-8 rounded-2xl w-full border-t-2 border-cyan-500/50 relative overflow-hidden max-w-4xl">
+                <div class="flex justify-between items-center mb-8 border-b border-gray-800 pb-4">
+                    <h1 class="text-2xl font-mason font-bold tracking-widest text-oro">
+                        ALGORITMO DE VERSÍCULOS
+                    </h1>
+                    <span id="systemStatus" class="px-3 py-1 text-xs font-mono rounded-full bg-red-900/50 text-red-400 border border-red-700 animate-pulse">
+                        REINICIANDO SISTEMA...
+                    </span>
+                </div>
+                <div id="apiContent" class="space-y-6 font-mono text-sm hidden">
+                    <div class="border-l-4 border-cyan-500 pl-5 bg-black/40 p-4 rounded-r-lg">
+                        <p class="text-cyan-400 font-bold mb-2 tracking-widest">EXEC // JOSUÉ 1:9</p>
+                        <p id="fase1Text" class="text-gray-300 leading-relaxed font-sans text-base"></p>
+                    </div>
+                    <div class="border-l-4 border-oro pl-5 bg-black/40 p-4 rounded-r-lg mt-6">
+                        <p class="text-oro font-bold mb-2 tracking-widest">EXEC // PROVERBIOS 27:17</p>
+                        <p id="fase2Text" class="text-gray-300 leading-relaxed font-sans text-base"></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- WORMHOLE MODAL -->
+    <div id="wormholeModal">
+        <div class="wormhole-tunnel"></div>
+        <h2 class="cinzel text-oro text-xl mb-3">🌌 AGUJERO DE GUSANO DETECTADO</h2>
+        <p class="mono text-xs max-w-md mb-4 leading-relaxed">
+            Para atravesar con seguridad, encamínate primero en la guianza de Dios.<br>
+            <strong class="text-oro">GSADV41</strong> es el núcleo de verificación oficial.
+        </p>
+        <div class="flex gap-4 justify-center">
+            <a href="https://thesteef21.github.io/Lapizasuli/GSADV41.html" class="border border-oro text-oro px-4 py-2 rounded-full font-mono text-xs">🙏 IR A GSADV41</a>
+            <button id="insistPortalBtn" class="border border-redNeon text-redNeon px-4 py-2 rounded-full font-mono text-xs">⚠️ ACCEDER → AMOLED</button>
+        </div>
+    </div>
+
+    <!-- SCRIPTS DE CONTROL -->
+    <script>
+        function toggleSidebar() {
+            const s = document.getElementById('main-sidebar');
+            s.classList.toggle('right-aligned');
+            localStorage.setItem('sidebarPos', s.classList.contains('right-aligned') ? 'right' : 'left');
+        }
+        if(localStorage.getItem('sidebarPos') === 'right') {
+            document.getElementById('main-sidebar').classList.add('right-aligned');
+        }
+
+        async function connectBinance() {
+            if (typeof window.ethereum !== 'undefined') {
+                try {
+                    await window.ethereum.request({ method: 'eth_requestAccounts' });
+                    alert("Wallet conectada con éxito bajo SADV41.");
+                } catch (e) { console.log(e); }
+            } else {
+                window.open('https://web3.binance.com/en/referral?ref=ORCZSDLK', '_blank');
+            }
+        }
+
+        function initVersiculos() {
+            const apiContent = document.getElementById("apiContent");
+            const statusBadge = document.getElementById("systemStatus");
+            if(apiContent) {
+                setTimeout(() => {
+                    document.getElementById("fase1Text").innerText = "Mira que te mando que te esfuerces y seas valiente; no temas ni desmayes, porque Jehová tu Dios estará contigo en donde quiera que vayas.";
+                    document.getElementById("fase2Text").innerText = "Hierro con hierro se aguza; y así el hombre aguza el rostro de su amigo.";
+                    apiContent.classList.remove("hidden");
+                    statusBadge.className = "px-3 py-1 text-xs font-mono rounded-full bg-green-900/50 text-green-400 border border-green-700";
+                    statusBadge.innerText = "SISTEMA RESTAURADO";
+                }, 2000);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initVersiculos();
+        });
+    </script>
+</body>
+</html>
