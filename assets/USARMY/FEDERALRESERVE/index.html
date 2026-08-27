@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="es">
+<head><style>
+@font-face {
+  font-family: "Optimistic";
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url("/fonts/OptimisticAI_VF_Optimized.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Optimistic Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/OptimisticMono_W_TextRegular.woff2") format("woff2");
+}
+:where(html) {
+  font-family: "Optimistic", system-ui, sans-serif;
+}
+:where(code, pre, kbd, samp) {
+  font-family: "Optimistic Mono", ui-monospace, monospace;
+}
+</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GSADV41 | Sovereign Hub & Logia Pluscuamperfecta Unificada</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=JetBrains+Mono:wght@300;400;700&family=Inter:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,700;1,700&family=Pirata+One&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#030305',
+                        oro: '#d4af37',
+                        cyanNeon: '#00f3ff',
+                        violetNeon: '#9d4edd',
+                        redNeon: '#FB542B',
+                        neonGreen: '#10b981',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                        mason: ['Cinzel', 'serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root { --oro:#d4af37; --obsidiana:#030305; --cyan:#00f3ff; --violet:#9d4edd; --red:#FB542B; }
+        html { scroll-behavior: smooth; }
+        body { background-color: var(--obsidiana); color:#f1f5f9; font-family:'Inter',system-ui,sans-serif; overflow-x:hidden; position:relative; }
+        
+        .glass { background:rgba(8,8,12,0.88); backdrop-filter:blur(18px); border:1px solid rgba(255,255,255,0.08); border-radius:16px; }
+        .glass-modal { background:rgba(10,10,15,0.65); backdrop-filter:blur(24px); -webkit-backdrop-filter:blur(24px); border:1px solid rgba(0,243,255,0.2); box-shadow: 0 25px 50px -12px rgba(0,0,0,0.8), inset 0 0 20px rgba(0,243,255,0.05); }
+        .esoterico-glow { text-shadow:0 0 25px rgba(212,175,55,0.7); }
+        .scanline { width:100%; height:2px; background:rgba(0,209,255,0.15); position:fixed; z-index:50; top:0; pointer-events:none; animation:scanline 8s linear infinite; }
+        @keyframes scanline { 0%{top:0} 100%{top:100%} }
+        
+        .sidebar-tabs { position:fixed; left:0; top:50%; transform:translateY(-50%); z-index:55; display:flex; flex-direction:column; gap:10px; transition:all 0.5s; }
+        .vertical-tab { display:flex; align-items:center; background:rgba(8,8,12,0.95); padding:10px 14px; border-radius:0 12px 12px 0; transition:all 0.3s; width:55px; overflow:hidden; white-space:nowrap; box-shadow:4px 4px 15px rgba(0,0,0,0.5); cursor:pointer; border-left:3px solid var(--cyan); text-decoration:none; color:#fff; }
+        .vertical-tab:hover { width:340px; padding-left:18px; background:rgba(0,243,255,0.2); }
+        .vertical-tab span.icon { font-size:1.4rem; min-width:28px; display:flex; justify-content:center; }
+        .vertical-tab span.text { margin-left:14px; font-weight:bold; opacity:0; transition:opacity 0.3s; font-size:0.8rem; letter-spacing:0.05em; font-family:'JetBrains Mono',monospace; }
+        .vertical-tab:hover span.text { opacity:1; transition-delay:0.1s; }
+        
+        .logia-card { background:linear-gradient(145deg, rgba(10,10,10,0.88), rgba(20,20,20,0.88)); border:1px solid rgba(212,175,55,0.18); box-shadow:0 15px 35px rgba(0,0,0,0.9), inset 0 0 20px rgba(212,175,55,0.03); border-radius: 16px; padding: 1.5rem; transition:all 0.5s ease; }
+        .logia-card:hover { border-color:rgba(212,175,55,0.45); box-shadow:0 20px 40px rgba(0,0,0,0.9); }
+        
+        .wa-float { position:fixed; bottom:22px; right:22px; z-index:60; background:#25D366; color:#fff; width:58px; height:58px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:28px; box-shadow:0 8px 20px rgba(37,211,102,0.4); transition:0.3s; text-decoration:none; }
+        .wa-float:hover { transform:scale(1.1); box-shadow:0 12px 30px rgba(37,211,102,0.6); }
+
+        .corner-crypto { position: fixed; top: 0; left: 0; z-index: 100; cursor: pointer; transition: all 0.3s ease; }
+        .corner-crypto:hover { filter: drop-shadow(0 0 15px rgba(0,243,255,0.8)); transform: scale(1.05); }
+    </style>
+</head>
+<body class="antialiased selection:bg-oro selection:text-navy" id="mainBody">
+
+    <div class="scanline"></div>
+
+    <!-- ESQUINA CRYPTO (MINI SVG TRIGGER) -->
+    <div id="cryptoBtn" class="corner-crypto" title="Mercado Crypto & FWA">
+        <svg width="70" height="70" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="0,0 100,0 0,100" fill="rgba(8,8,12,0.95)" stroke="#00f3ff" stroke-width="2"/>
+            <text x="12" y="32" font-family="'JetBrains Mono', monospace" font-size="13" fill="#00f3ff" transform="rotate(-45 25 25)" font-weight="bold" letter-spacing="1">CRYPTO</text>
+        </svg>
+    </div>
+
+    <!-- MODAL GLASSMORPHISM CRYPTO -->
+    <div id="cryptoModal" class="fixed inset-0 z-[999999] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300 bg-black/60 backdrop-blur-sm p-4">
+        <div class="glass-modal relative w-full max-w-3xl rounded-2xl p-6 md:p-8 overflow-hidden">
+            <button id="closeCryptoBtn" class="absolute top-4 right-5 text-cyanNeon hover:text-white font-mono text-xl transition-colors">✖</button>
+            
+            <h2 class="font-mason text-2xl md:text-3xl text-oro mb-2 esoterico-glow">24h Majors & Movers</h2>
+            <p class="font-mono text-xs text-slate-400 mb-6 uppercase tracking-widest border-b border-white/10 pb-2">Mercado en Tiempo Real • Sovereign Hub</p>
+            
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-3 font-mono text-sm mb-8">
+                <div class="bg-black/40 border border-white/10 rounded-lg p-3 hover:border-cyanNeon/50 transition-colors">
+                    <span class="text-white font-bold block mb-1">BTC</span>
+                    <span class="text-slate-300">$78.4k</span> <span class="text-red-400 float-right">↘ 1%</span>
+                </div>
+                <div class="bg-black/40 border border-white/10 rounded-lg p-3 hover:border-cyanNeon/50 transition-colors">
+                    <span class="text-white font-bold block mb-1">ETH</span>
+                    <span class="text-slate-300">$2.46k</span> <span class="text-red-400 float-right">↘ 0.4%</span>
+                </div>
+                <div class="bg-black/40 border border-white/10 rounded-lg p-3 hover:border-cyanNeon/50 transition-colors">
+                    <span class="text-white font-bold block mb-1">SOL</span>
+                    <span class="text-slate-300">$96.7</span> <span class="text-red-400 float-right">↘ 1%</span>
+                </div>
+                <div class="bg-black/40 border border-white/10 rounded-lg p-3 hover:border-cyanNeon/50 transition-colors">
+                    <span class="text-white font-bold block mb-1">HYPE</span>
+                    <span class="text-slate-300">$80.9</span> <span class="text-red-400 float-right">↘ 1%</span>
+                </div>
+                <div class="bg-black/40 border border-white/10 rounded-lg p-3 hover:border-cyanNeon/50 transition-colors">
+                    <span class="text-white font-bold block mb-1">ENA</span>
+                    <span class="text-slate-300">$0.14</span> <span class="text-red-400 float-right">↘ 11%</span>
+                </div>
+                <div class="bg-black/40 border border-white/10 rounded-lg p-3 hover:border-cyanNeon/50 transition-colors">
+                    <span class="text-white font-bold block mb-1">PUMP</span>
+                    <span class="text-slate-300">$0.0048</span> <span class="text-green-400 float-right">↗ 7%</span>
+                </div>
+            </div>
+
+            <div class="border-t border-cyanNeon/20 pt-5">
+                <h3 class="font-mason text-cyanNeon text-lg mb-3 flex items-center gap-2">🧩 The Bull Case for Fake World Assets</h3>
+                <div class="text-[13px] text-slate-300 leading-relaxed font-sans space-y-3 h-48 overflow-y-auto pr-2" style="scrollbar-width: thin; scrollbar-color: var(--cyan) transparent;">
+                    <p>Protocols that bootstrap with token incentives all face the same moment of truth, namely what happens when the easy tokens stop?</p>
+                    <p>Fake World Assets, the new onchain gacha on Ethereum, passed that threshold recently and has been holding up well since. FWA's intro emissions have come to a conclusion, but the gacha's broader tokenomics flywheel has continued to spin, letting the platform gain real fundamentals and a growing ecosystem of extensions.</p>
+                    <p><strong class="text-oro">📈 Fundamentals:</strong> FWA has processed +17,239 ETH in total volume across +162,000 settled "opens" with ~1,108 ETH in TVL. On its wildest day, it briefly became Ethereum's single largest gas consumer.</p>
+                    <p><strong class="text-oro">🎟️ FWAIR Launches:</strong> A new distribution avenue that lets a new NFT collection launch directly into its shared gacha pool instead of running its own solo mint.</p>
+                    <p class="text-xs text-slate-500 italic mt-4">— Análisis vía Bankless / William Peaster ✍️</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BARRA LATERAL BILATERAL UNIFICADA -->
+    <div id="main-sidebar" class="sidebar-tabs">
+        <a href="https://thesteef21.github.io/Lapizasuli/assets/COMMANDO/GSADV41.html" target="_blank" class="vertical-tab" style="border-left:3px solid #00f3ff;"><span class="icon">🛡️</span><span class="text text-cyan-300">Commando GSADV41</span></a>
+        <a href="https://thesteef21.github.io/Lapizasuli/NikexOnePiece/museo_x5f_v4_x5f_ultra_x5f_sadv41.html" target="_blank" class="vertical-tab" style="border-left:3px solid #d4af37;"><span class="icon">🏛️</span><span class="text text-oro">Museo Ultra SADV41</span></a>
+        <a href="https://thesteef21.github.io/Lapizasuli/IMA.html" target="_blank" class="vertical-tab"><span class="icon">🍚</span><span class="text text-blue-200">Arroz barato IMA 🇵🇦</span></a>
+        <a href="https://panama.awsentrena.com/#/content-item?id=64db6b8f-6ad4-4975-84d1-1833eb26412b&action=login" target="_blank" class="vertical-tab"><span class="icon">☁️</span><span class="text text-orange-400">AWS Entrena LATAM</span></a>
+        <a href="https://factura-88pp.onrender.com/" target="_blank" class="vertical-tab"><span class="icon">💵</span><span class="text text-emerald-400">Invertir (FACTURA)</span></a>
+        <a href="https://wa.me/50769362166?text=Hola%20SADV41%20quiero%20cotizar%20rines%20y%20llantas%20para%20Burunga" target="_blank" class="vertical-tab" style="border-left:3px solid #25D366;"><span class="icon">💬</span><span class="text text-green-300">WhatsApp Llantas +50769362166</span></a>
+    </div>
+
+    <!-- HEADER UNIFICADO (con padding para el crypto corner) -->
+    <header id="main-header" class="fixed top-0 left-0 w-full z-40 glass border-b border-oro/30 pl-20 pr-4 md:px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-3">
+        <div class="flex items-center gap-3">
+            <span class="text-2xl hidden md:inline">🛡️</span>
+            <div>
+                <h1 class="font-serif text-xl tracking-wider text-oro font-bold">SOVEREIGN HUB</h1>
+                <p class="text-[9px] text-slate-400 font-mono tracking-widest">SADV41 DIGITAL ARCHITECTURE • PANAMÁ 507 • UNIFIED</p>
+            </div>
+        </div>
+        <nav class="hidden lg:flex gap-5 text-[12px] uppercase tracking-wider font-bold flex-wrap justify-center">
+            <a href="#aws-event" class="hover:text-cyanNeon text-cyan-300 transition-colors">☁️ AWS Entrena</a>
+            <a href="#ima-news" class="hover:text-neonGreen text-green-300 transition-colors">🌾 IMA Agroferias</a>
+            <a href="#rines-marketplace" class="hover:text-oro text-oro transition-colors">🛞 Llantas Burunga</a>
+        </nav>
+        <div class="flex flex-wrap items-center justify-center gap-2">
+            <a href="https://factura-88pp.onrender.com/" target="_blank" class="bg-emerald-600/90 hover:bg-emerald-500 text-white font-bold text-[11px] px-3 py-2 rounded-lg border border-emerald-400/50 flex items-center gap-1 transition-colors">🇵🇦 Apoyar 🔯</a>
+        </div>
+    </header>
+
+    <main class="pt-36 md:pt-32 pb-20 px-4 md:px-12 max-w-5xl mx-auto space-y-10 relative z-10">
+        <!-- PALO VERTICAL -->
+        <div class="relative w-full bg-black/60 border-y border-oro/30 py-6 flex flex-col items-center justify-center overflow-hidden rounded-xl shadow-[0_0_20px_rgba(0,243,255,0.1)]">
+            <h2 class="text-cyanNeon font-mason text-lg md:text-2xl tracking-[0.3em] uppercase esoterico-glow relative z-10 text-center flex items-center justify-center gap-3">🎚️ PaloVertical | Isaías 43:19</h2>
+            <p class="text-xs md:text-sm text-slate-200 font-serif italic mt-3 max-w-2xl text-center relative z-10 px-4 leading-relaxed">"He aquí, yo hago cosa nueva; pronto saldrá a luz; ¿no la conoceréis? Otra vez abriré camino en el desierto, y ríos en la soledad."</p>
+        </div>
+
+        <!-- EVENTO AWS ENTRENA LATAM -->
+        <section id="aws-event" class="glass p-6 md:p-10 border-t-4 border-t-cyanNeon">
+            <div class="inline-block font-mono text-[10px] px-3 py-1 rounded-full border border-cyanNeon text-cyanNeon mb-4 uppercase tracking-widest">Sesión en Vivo // Tecnología & Narrativa</div>
+            <h2 class="text-3xl font-mason text-oro mb-2 esoterico-glow uppercase">Storytelling: cómo contar tu historia en la era de IA</h2>
+            <p class="font-mono text-[13px] text-cyan-400 mb-6">📅 Fecha y Hora: 26 de agosto de 2026, de 22:00 a 23:30 UTC</p>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-lg font-bold text-white mb-2">Detalles del Evento</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed mb-4">En un mundo donde la inteligencia artificial está en todas partes, saber contar historias sigue marcando la diferencia. En esta sesión en vivo descubrirás cómo construir y comunicar tu historia de manera auténtica, ya seas estudiante, profesional o pyme.</p>
+                    <p class="text-slate-300 text-sm leading-relaxed">Aprende técnicas de storytelling y llévate consejos prácticos para conectar mejor con tu audiencia, comunicar tus ideas con impacto y dejar una impresión memorable.</p>
+                </div>
+                <div class="bg-black/50 p-5 rounded-xl border border-cyanNeon/30">
+                    <h3 class="font-mono text-cyanNeon text-sm mb-4 border-b border-cyanNeon/30 pb-2">Información Clave</h3>
+                    <ul class="space-y-3 font-mono text-[11px] text-slate-300">
+                        <li><strong class="text-white">Invitado:</strong> Alfonso Paredes, Líder de Comunicación en AWS México.</li>
+                        <li><strong class="text-white">Horarios:</strong> 16:00 PM México | 17:00 PM Colombia | 19:00 PM Argentina.</li>
+                        <li><strong class="text-white">Iniciativa:</strong> AWS Entrena LATAM, capacitación en la nube de Amazon Web Services.</li>
+                    </ul>
+                    <a href="https://panama.awsentrena.com/#/content-item?id=64db6b8f-6ad4-4975-84d1-1833eb26412b&action=login" target="_blank" class="mt-5 block text-center bg-cyanNeon text-navy font-bold py-2 rounded-lg hover:bg-cyan-400 transition-colors text-xs">🔗 Acceder al Enlace Oficial</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- NOTICIAS IMA AGROFERIAS -->
+        <section id="ima-news" class="glass p-6 md:p-8 border-t-4 border-t-neonGreen">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-3 mb-6">
+                <div>
+                    <div class="inline-block font-mono text-[10px] px-3 py-1 rounded-full border border-neonGreen text-neonGreen mb-2 uppercase tracking-widest">Información Útil • Panamá 🇵🇦</div>
+                    <h2 class="font-mason text-neonGreen text-2xl">¿Dónde habrá agroferias este viernes 28 de agosto?</h2>
+                    <p class="font-mono text-[11px] text-slate-400 mt-1">El IMA revela los puntos de venta a nivel nacional. Jornadas desde las 8:00 a.m.</p>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-4">
+                <div class="logia-card">
+                    <h4 class="font-mono text-sm font-bold text-oro mb-3">📍 Puntos de Venta (Parte 1)</h4>
+                    <ul class="font-mono text-[11px] text-slate-300 space-y-2">
+                        <li><strong class="text-white">Chiriquí:</strong> Cancha comunal de San Lorenzo.</li>
+                        <li><strong class="text-white">Panamá Oeste:</strong> Casa comunal de Tres Hermanas en Ciri de Los Sotos (Capira).</li>
+                        <li><strong class="text-white">Comarca Ngäbe Buglé:</strong> Pueblo Mesa en Mancreek (Jirondai).</li>
+                        <li><strong class="text-white">Veraguas:</strong> Cancha techada de La Peña (Santiago) y casa local de Campana (Las Palmas).</li>
+                    </ul>
+                </div>
+                <div class="logia-card">
+                    <h4 class="font-mono text-sm font-bold text-oro mb-3">📍 Puntos de Venta (Parte 2)</h4>
+                    <ul class="font-mono text-[11px] text-slate-300 space-y-2">
+                        <li><strong class="text-white">Coclé:</strong> Casa local de La Soledad en La Pava (Olá).</li>
+                        <li><strong class="text-white">Darién:</strong> Junta Comunal de Cucunatí (Santa Fe).</li>
+                        <li><strong class="text-white">Panamá:</strong> Cancha de la cantera de Nuevo Caimitillo (Caimitillo).</li>
+                        <li><strong class="text-white">Bocas del Toro:</strong> Frente al Municipio de Almirante (calle principal).</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="mt-4 bg-[#4a0010]/40 border border-redNeon/30 rounded-xl p-4">
+                <p class="font-mono text-xs text-red-200">⚠️ <strong>Recomendaciones del IMA:</strong> Presentar cédula de identidad personal al momento de adquirir los productos y llevar bolsas reutilizables.</p>
+            </div>
+        </section>
+
+        <!-- RINES MARKETPLACE -->
+        <section id="rines-marketplace" class="glass p-6 md:p-8 border-t-4 border-t-oro">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-3 mb-6">
+                <div>
+                    <h2 class="font-mason text-oro text-2xl">🛞 LLANTERO BURUNGA // MARKETPLACE</h2>
+                    <p class="font-mono text-[11px] text-slate-400 mt-1">Sostenible • Segunda mano verificada • Arraiján • Envío nacional 🇵🇦</p>
+                </div>
+                <a href="https://wa.me/50769362166?text=Hola%20Steven%20quiero%20cotizar%20RINES" target="_blank" class="bg-[#25D366] hover:bg-green-600 text-white font-bold text-xs px-5 py-3 rounded-full flex items-center gap-2 shadow transition-colors">💬 Cotizar WhatsApp +50769362166</a>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-4">
+                <div class="logia-card">
+                    <h4 class="font-mono text-xs font-bold text-cyanNeon mb-2">📏 MEDIDAS POPULARES & PROTOCOLO VERDE</h4>
+                    <p class="font-mono text-[11px] text-slate-300 leading-relaxed mb-2">Rin 13, 14, 15 para sedán y 16, 17 para SUV. Cada juego pasa por validación de seguridad: sin fisuras ni golpes estructurales.</p>
+                    <p class="font-mono text-[11px] text-slate-300 leading-relaxed">Factura digital en <a href="https://factura-88pp.onrender.com/" target="_blank" class="text-emerald-400 underline">factura-88pp</a></p>
+                </div>
+                <div class="logia-card">
+                    <h4 class="font-mono text-xs font-bold text-cyanNeon mb-2">📍 UBICACIÓN Y SOPORTE</h4>
+                    <p class="font-mono text-[11px] text-slate-300 leading-relaxed">Retiro en Burunga, Arraiján. Horario: Lunes a Sábado de 8:00 a.m. a 6:00 p.m. Ofrecemos soporte técnico e instalación completa.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <footer class="text-center p-8 border-t border-white/5 opacity-60 font-mono text-[10px] uppercase relative z-10">
+        <p>SADV41 Architecture © 2026 | El Origen es 0 | Burunga - Arraiján, Panamá 🇵🇦 | WA +50769362166</p>
+        <p class="mt-1 text-[9px] text-slate-500">Sovereign Hub & Logia Pluscuamperfecta Unificada • Leviathan Squad • UNIFIED BUILD</p>
+    </footer>
+
+    <a href="https://wa.me/50769362166?text=Hola%20SADV41%20Sovereign%20Hub%20🛡️" target="_blank" class="wa-float" aria-label="WhatsApp">💬</a>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const btnOpen = document.getElementById('cryptoBtn');
+            const btnClose = document.getElementById('closeCryptoBtn');
+            const modal = document.getElementById('cryptoModal');
+
+            function openModal() {
+                modal.classList.remove('opacity-0', 'pointer-events-none');
+            }
+            function closeModal() {
+                modal.classList.add('opacity-0', 'pointer-events-none');
+            }
+
+            btnOpen.addEventListener('click', openModal);
+            btnClose.addEventListener('click', closeModal);
+
+            modal.addEventListener('click', (e) => {
+                if(e.target === modal) closeModal();
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if(e.key === 'Escape') closeModal();
+            });
+        });
+    </script>
+<script>(function(){var loc=location.href.replace(/#.*$/,"");var ATTR_NAMES=["data-product-id","data-productid","data-product_id","product-id","productid","product_id","data-source-entity-id","source-entity-id","source_entity_id","data-product","data-metadata","data-meta"];var DATASET_KEYS=["productId","productid","product_id","sourceEntityId","sourceentityid","source_entity_id","product","metadata","meta"];function readProductId(value){if(typeof value!=="string"||value.length===0)return null;if(/^[0-9]{6,}$/.test(value))return value;var match=value.match(/(?:product(?:_|-)?id|source(?:_|-)?entity(?:_|-)?id)["'=:\s]+([0-9]{6,})/i);return match?match[1]:null}function extractProductId(start){for(var node=start;node&&node!==document.body;node=node.parentElement){for(var i=0;i<ATTR_NAMES.length;i++){var attrValue=node.getAttribute&&node.getAttribute(ATTR_NAMES[i]);var attrProductId=readProductId(attrValue);if(attrProductId)return attrProductId}var dataset=node.dataset||null;if(dataset){for(var j=0;j<DATASET_KEYS.length;j++){var dataValue=dataset[DATASET_KEYS[j]];var dataProductId=readProductId(dataValue);if(dataProductId)return dataProductId}}}return null}function isInlineMediaSlotElement(node){return !!(node&&node.getAttribute&&node.getAttribute("data-clippy-inline-media-slot")!==null)}function findInlineMediaSlot(start){for(var node=start;node&&node!==document.body;node=node.parentElement){if(isInlineMediaSlotElement(node))return node}return null}function readInlineMediaUrl(node){if(!node)return null;return node.getAttribute&&((node.getAttribute("data-clippy-inline-media-url")||node.getAttribute("data-url")||node.getAttribute("data_url")))||node.href||null}function stripHash(url){return String(url).replace(/#.*$/,"")}function urlsMatch(a,b){if(!a||!b)return false;try{return stripHash(new URL(a,loc).href)===stripHash(new URL(b,loc).href)}catch(_){return stripHash(a)===stripHash(b)}}function isFirstPartyReelUrl(value){try{var url=new URL(value,loc);if(url.protocol!=="https:")return false;var host=url.hostname.toLowerCase();var supported=host==="instagram.com"||host.endsWith(".instagram.com")||host==="facebook.com"||host.endsWith(".facebook.com");return supported&&/\/reels?\//i.test(url.pathname)}catch(_){return false}}function isInlineMediaUrlClick(node,href){var slot=findInlineMediaSlot(node);if(!slot)return false;var slotUrl=readInlineMediaUrl(slot);if(slotUrl)return urlsMatch(href,slotUrl);return isFirstPartyReelUrl(href)}function findDataHref(start){for(var node=start;node&&node!==document.body;node=node.parentElement){if(node.getAttribute){var href=node.getAttribute("data-href")||node.getAttribute("data-url");if(href)return{href:href,node:node}}}return null}var nativeOpen=window.open;window.open=function(url){if(parent!==window&&typeof url==="string"&&/^https?:\/\//.test(url)){parent.postMessage({type:"ecto:usercontent-link-click",href:url},"*");return null}return nativeOpen?nativeOpen.apply(window,arguments):null};document.addEventListener("click",function(e){var target=e.target instanceof Element?e.target:null;if(!target)return;if(parent===window)return;var a=target.closest?target.closest("a[href]"):null;if(a&&a.href&&/^https?:\/\//.test(a.href)&&a.href.replace(/#.*$/,"")!==loc){if(isInlineMediaUrlClick(a,a.href))return;var productId=extractProductId(target)||extractProductId(a);if(productId){e.preventDefault();parent.postMessage({type:"ecto-artifact-link-click",productId:productId},"*");return}e.preventDefault();parent.postMessage({type:"ecto:usercontent-link-click",href:a.href},"*");return}var dataHref=findDataHref(target);if(dataHref&&/^https?:\/\//.test(dataHref.href)&&dataHref.href.replace(/#.*$/,"")!==loc){if(isInlineMediaUrlClick(dataHref.node,dataHref.href))return;e.preventDefault();parent.postMessage({type:"ecto:usercontent-link-click",href:dataHref.href},"*")}},true)})();</script><script>(function(){var FOCUS_TYPE="ecto:artifact-focus-request";var CLOSE_TYPE="ecto:artifact-close-request";function focusArtifactDocument(){var body=document.body;if(!body)return;try{window.focus();}catch(e){}if(!body.hasAttribute("tabindex"))body.setAttribute("tabindex","-1");try{body.focus({preventScroll:true});}catch(e){try{body.focus();}catch(e2){}}}window.addEventListener("message",function(event){if(event.source!==window.parent)return;var data=event.data;if(!data||typeof data!=="object"||data.type!==FOCUS_TYPE)return;if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",focusArtifactDocument,{once:true});return;}focusArtifactDocument();});window.addEventListener("keydown",function(event){if(event.key!=="Escape")return;window.setTimeout(function(){if(event.defaultPrevented)return;window.parent.postMessage({type:CLOSE_TYPE},"*");},0);});})();</script></body>
+</html>
