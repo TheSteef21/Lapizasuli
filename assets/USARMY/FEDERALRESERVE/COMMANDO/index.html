@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gems Dashboard - SADV41</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        darkBg: '#0b0f19',
+                        cardBg: '#131d31',
+                        accent: '#3b82f6',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-darkBg text-slate-100 min-h-screen flex flex-col font-sans">
+
+    <!-- Header -->
+    <header class="border-b border-slate-800 bg-darkBg/80 backdrop-blur sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <span class="text-2xl">🎚</span>
+                <h1 class="text-xl font-bold tracking-wider">GEMS PORTAL</h1>
+            </div>
+            <div class="text-xs text-slate-400 bg-slate-800/60 px-3 py-1.5 rounded-full border border-slate-700">
+                SADV41 // Active
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow max-w-7xl mx-auto px-6 py-8 w-full">
+        
+        <!-- Hero Section -->
+        <div class="mb-8">
+            <h2 class="text-3xl font-extrabold mb-2">Panel de Control de Gems</h2>
+            <p class="text-slate-400 text-sm">Selecciona o gestiona los módulos de inteligencia y estructuras configuradas.</p>
+        </div>
+
+        <!-- Grid de Gems -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            
+            <!-- Gem 1: Atrio (Grok) -->
+            <div class="bg-cardBg border border-slate-800 rounded-2xl p-6 flex flex-col justify-between hover:border-blue-500/50 transition-all duration-300 shadow-xl">
+                <div>
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-xs uppercase tracking-widest font-semibold text-blue-400 bg-blue-500/10 px-2.5 py-1 rounded-md">Atrio</span>
+                        <span class="text-lg">⚡️</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Grok Node</h3>
+                    <p class="text-slate-400 text-sm mb-6">Interfaz inicial de acceso rápido y procesamiento analítico perimetral.</p>
+                </div>
+                <a href="https://grok.com" target="_blank" rel="noopener noreferrer" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-medium py-2.5 px-4 rounded-xl transition text-sm text-center block">
+                    Acceder
+                </a>
+            </div>
+
+            <!-- Gem 2: Santo (Meta) -->
+            <div class="bg-cardBg border border-slate-800 rounded-2xl p-6 flex flex-col justify-between hover:border-purple-500/50 transition-all duration-300 shadow-xl">
+                <div>
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-xs uppercase tracking-widest font-semibold text-purple-400 bg-purple-500/10 px-2.5 py-1 rounded-md">Santo</span>
+                        <span class="text-lg">🕊</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Meta Core</h3>
+                    <p class="text-slate-400 text-sm mb-6">Módulo central para síntesis conceptual y flujos de diálogo especializados.</p>
+                </div>
+                <a href="https://www.meta.ai" target="_blank" rel="noopener noreferrer" class="w-full bg-purple-600 hover:bg-purple-500 text-white font-medium py-2.5 px-4 rounded-xl transition text-sm text-center block">
+                    Acceder
+                </a>
+            </div>
+
+            <!-- Gem 3: Santísimo (Gemini) -->
+            <div class="bg-cardBg border border-slate-800 rounded-2xl p-6 flex flex-col justify-between hover:border-emerald-500/50 transition-all duration-300 shadow-xl">
+                <div>
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-xs uppercase tracking-widest font-semibold text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-md">Santísimo</span>
+                        <span class="text-lg">✨</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Gemini Prime</h3>
+                    <p class="text-slate-400 text-sm mb-6">Núcleo principal de asistencia, desarrollo y ejecución lógica avanzada.</p>
+                </div>
+                <a href="https://gemini.google.com" target="_blank" rel="noopener noreferrer" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-medium py-2.5 px-4 rounded-xl transition text-sm text-center block">
+                    Acceder
+                </a>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-800 py-6 text-center text-xs text-slate-500">
+        SADV41 Architecture &copy; 2026 🎚
+    </footer>
+
+</body>
+</html>
