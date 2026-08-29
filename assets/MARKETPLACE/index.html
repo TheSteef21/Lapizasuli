@@ -1,1 +1,635 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Steven "Dior" Gómez Serrano | SADV41 Marketplace</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#fdf8f6',
+                            100: '#fbe8e6',
+                            500: '#d97706',
+                            600: '#b45309',
+                            900: '#78350f',
+                        },
+                        turbo: {
+                            dark: '#0f172a',
+                            card: '#1e293b',
+                            accent: '#3b82f6',
+                            gold: '#f59e0b'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .light .glass-panel {
+            background: rgba(255, 255, 255, 0.85);
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+        }
+        .floating { animation: float 4s ease-in-out infinite; }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 dark:bg-slate-950 dark:text-slate-100 min-h-screen flex flex-col transition-colors duration-300">
+
+    <header class="sticky top-0 z-50 glass-panel border-b border-slate-800 shadow-xl">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-500 to-blue-600 flex items-center justify-center shadow-lg shadow-amber-500/20">
+                    <i class="fa-solid fa-crown text-white text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-semibold tracking-wider text-amber-500 uppercase block">SADV41 Mission</span>
+                    <h1 class="text-lg font-bold tracking-tight text-slate-100 leading-none">Steven "Dior" Gómez Serrano</h1>
+                </div>
+            </div>
+
+            <!-- Desktop Navigation Links & Actions -->
+            <div class="hidden md:flex items-center space-x-6">
+                <a href="#catalogo" class="text-sm font-medium text-slate-300 hover:text-amber-400 transition">Catálogo</a>
+                <a href="#mision" class="text-sm font-medium text-slate-300 hover:text-amber-400 transition">Misión SADV41</a>
+                <a href="https://wa.me/50769362166" target="_blank" class="text-sm font-medium text-slate-300 hover:text-amber-400 transition flex items-center gap-1.5">
+                    <i class="fa-brands fa-whatsapp text-emerald-400"></i> Soporte Directo
+                </a>
+            </div>
+
+            <div class="flex items-center space-x-3">
+                <!-- Theme Toggle -->
+                <button onclick="toggleTheme()" id="themeToggleBtn" class="p-2.5 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-300 transition shadow-inner">
+                    <i class="fa-solid fa-moon" id="themeIcon"></i>
+                </button>
+                <!-- Cart Button -->
+                <button onclick="toggleCartModal()" class="relative p-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-medium shadow-lg shadow-amber-500/20 transition flex items-center gap-2">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="hidden sm:inline text-xs font-bold">Carrito</span>
+                    <span id="cartBadge" class="absolute -top-1.5 -right-1.5 bg-rose-500 text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center border-2 border-slate-950 shadow">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <section class="relative overflow-hidden py-16 lg:py-24 border-b border-slate-900 bg-gradient-to-b from-slate-900/50 to-slate-950">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(217,119,6,0.1),transparent_50%)]"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/20 mb-6 shadow-sm">
+                <i class="fa-solid fa-bolt text-amber-400"></i> Marketplace Oficial • Steven "Dior" Gómez Serrano
+            </span>
+            <h2 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white mb-6">
+                Estilo Exclusivo & <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-orange-400 to-blue-500">Alta Gama</span>
+            </h2>
+            <p class="max-w-2xl mx-auto text-base sm:text-lg text-slate-300 mb-8 font-normal leading-relaxed">
+                Calzado de marca (Michael Kors, Guess, Crocs), conjuntos urbanos Lacoste & Tommy, y camisetas de fútbol oficiales (Barça, Real Madrid - Mbappé & Valverde). Pide directo al WhatsApp <span class="text-amber-400 font-bold">69362166</span>.
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="#catalogo" class="px-8 py-3.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-semibold shadow-lg shadow-amber-500/25 transition transform hover:-translate-y-0.5">
+                    Ver Catálogo Completo
+                </a>
+                <a href="https://wa.me/50769362166?text=Hola,%20vengo%20desde%20el%20marketplace%20de%20Steven%20Dior%20y%20deseo%20realizar%20un%20pedido." target="_blank" class="px-8 py-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold border border-slate-700 shadow transition flex items-center gap-2">
+                    <i class="fa-brands fa-whatsapp text-emerald-400 text-lg"></i> Chat WhatsApp 69362166
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full" id="catalogo">
+        <div class="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
+            <div>
+                <h3 class="text-2xl font-bold tracking-tight text-white flex items-center gap-2">
+                    <i class="fa-solid fa-shirt text-amber-500"></i> Productos Disponibles
+                </h3>
+                <p class="text-sm text-slate-400">Imágenes sincronizadas con Lapizasuli/assets/MARKETPLACE/img/</p>
+            </div>
+            <!-- Category Filter Tabs -->
+            <div class="flex flex-wrap gap-2 bg-slate-900 p-1.5 rounded-2xl border border-slate-800 shadow-inner">
+                <button onclick="filterProducts('all')" id="btn-all" class="px-4 py-2 rounded-xl text-xs font-semibold bg-amber-500 text-white shadow transition">Todos</button>
+                <button onclick="filterProducts('calzado')" id="btn-calzado" class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800 transition">Calzado</button>
+                <button onclick="filterProducts('conjuntos')" id="btn-conjuntos" class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800 transition">Conjuntos</button>
+                <button onclick="filterProducts('camisetas')" id="btn-camisetas" class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800 transition">Camisetas de Fútbol</button>
+            </div>
+        </div>
+
+        <!-- Product Grid -->
+        <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <!-- Dynamic JavaScript Product Cards Insertion -->
+        </div>
+    </main>
+
+    <section id="mision" class="border-t border-slate-900 bg-slate-900/40 py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="glass-panel p-6 rounded-2xl border border-slate-800 shadow-xl">
+                    <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-500 flex items-center justify-center mb-4 text-xl">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-white mb-2">Misión SADV41</h4>
+                    <p class="text-sm text-slate-400 leading-relaxed">
+                        Compromiso absoluto con la excelencia operativa, seguridad y tecnología de punta integrada bajo la dirección de Steven "Dior" Gómez Serrano.
+                    </p>
+                </div>
+                <div class="glass-panel p-6 rounded-2xl border border-slate-800 shadow-xl">
+                    <div class="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 text-blue-500 flex items-center justify-center mb-4 text-xl">
+                        <i class="fa-solid fa-truck-fast"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-white mb-2">Envíos & Entregas</h4>
+                    <p class="text-sm text-slate-400 leading-relaxed">
+                        Sincronización directa con atención al cliente vía WhatsApp <span class="text-amber-400 font-semibold">69362166</span> para coordinar entregas rápidas y seguras.
+                    </p>
+                </div>
+                <div class="glass-panel p-6 rounded-2xl border border-slate-800 shadow-xl">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 flex items-center justify-center mb-4 text-xl">
+                        <i class="fa-solid fa-code-commit"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-white mb-2">GitHub Repository</h4>
+                    <p class="text-sm text-slate-400 leading-relaxed">
+                        Arquitectura web optimizada para <code class="text-xs bg-slate-800 px-2 py-1 rounded text-amber-400">Lapizasuli/assets/MARKETPLACE/img/</code> con rutas absolutas e imágenes responsivas.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-slate-950 border-t border-slate-900 py-12 text-center text-sm text-slate-500">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
+            <p class="font-medium text-slate-400">© 2026 Steven "Dior" Gómez Serrano. Todos los derechos reservados.</p>
+            <p class="text-xs text-amber-500/80 font-mono">SADV41 • 🏁🇯🇴🇮🇶🇦🇪🇳🇱🇸🇦🇮🇱🇺🇸🇵🇦💯❣️⚡️✅️🔯🧨🇨🇦🪙☦️</p>
+        </div>
+    </footer>
+
+    <div id="cartModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex justify-end transition-all duration-300">
+        <div class="w-full max-w-md bg-slate-900 border-l border-slate-800 h-full flex flex-col shadow-2xl transform translate-x-full transition-transform duration-300" id="cartContainer">
+            <!-- Cart Header -->
+            <div class="p-6 border-b border-slate-800 flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                    <i class="fa-solid fa-bag-shopping text-amber-500 text-xl"></i>
+                    <h3 class="text-lg font-bold text-white">Tu Carrito de Compras</h3>
+                </div>
+                <button onclick="toggleCartModal()" class="w-9 h-9 rounded-xl bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center transition">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+            <!-- Cart Items List -->
+            <div id="cartItemsList" class="flex-grow overflow-y-auto p-6 space-y-4 divide-y divide-slate-800/60">
+                <!-- Dynamic cart items -->
+            </div>
+            <!-- Cart Footer & Checkout -->
+            <div class="p-6 border-t border-slate-800 bg-slate-950/50 space-y-4">
+                <div class="flex items-center justify-between text-base font-medium">
+                    <span class="text-slate-400">Subtotal</span>
+                    <span id="cartSubtotal" class="text-white font-bold text-lg">$0.00</span>
+                </div>
+                <button onclick="checkoutWhatsApp()" class="w-full py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold shadow-lg shadow-emerald-600/30 transition flex items-center justify-center gap-2">
+                    <i class="fa-brands fa-whatsapp text-xl"></i> Finalizar Pedido por WhatsApp (69362166)
+                </button>
+                <button onclick="clearCart()" class="w-full py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white text-xs font-semibold transition">
+                    Vaciar Carrito
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="detailModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 max-w-2xl w-full rounded-2xl overflow-hidden shadow-2xl relative animate-in fade-in zoom-in duration-200" id="detailContainer">
+            <button onclick="closeDetailModal()" class="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-slate-950/80 text-slate-300 hover:text-white flex items-center justify-center transition backdrop-blur">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div id="detailContent" class="grid grid-cols-1 md:grid-cols-2">
+                <!-- Dynamic Product Details -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Database of Marketplace Products mapped to GitHub repository images
+        const products = [
+            {
+                id: 1,
+                name: "Sandalias Michael Kors (Blanco/Monograma)",
+                category: "calzado",
+                price: 25.00,
+                image: "https://raw.githubusercontent.com/Lapizasuli/assets/main/MARKETPLACE/img/InShot_20260829_182904803.jpg",
+                sizes: ["36", "37", "38", "39", "40"],
+                description: "Elegantes sandalias Michael Kors con monograma clásico y suela confortable de alta durabilidad."
+            },
+            {
+                id: 2,
+                name: "Sandalias Michael Kors (Rosa Pastel)",
+                category: "calzado",
+                price: 25.00,
+                image: "https://raw.githubusercontent.com/Lapizasuli/assets/main/MARKETPLACE/img/InShot_20260829_182918528.jpg",
+                sizes: ["36", "37", "38", "39"],
+                description: "Diseño delicado en tono rosa pastel con tiras acolchadas y logo metálico distintivo."
+            },
+            {
+                id: 3,
+                name: "Sandalias Michael Kors (Marrón Clásico)",
+                category: "calzado",
+                price: 25.00,
+                image: "https://raw.githubusercontent.com/Lapizasuli/assets/main/MARKETPLACE/img/InShot_20260829_182931340.jpg",
+                sizes: ["36", "37", "38", "39", "40"],
+                description: "Acabado en cuero marrón con hebillas ajustables y confort ergonómico."
+            },
+            {
+                id: 4,
+                name: "Sandalias Guess Black Gold Platform",
+                category: "calzado",
+                price: 22.00,
+                image: "https://raw.githubusercontent.com/Lapizasuli/assets/main/MARKETPLACE/img/InShot_20260829_182945891.jpg",
+                sizes: ["36", "37", "38", "39", "40"],
+                description: "Sandalias de plataforma Guess en color negro con detalles dorados y tira con inscripción de la marca."
+            },
+            {
+                id: 5,
+                name: "Sandalias Michael Kors Denim Blue",
+                category: "calzado",
+                price: 24.00,
+                image: "https://raw.githubusercontent.com/Lapizasuli/assets/main/MARKETPLACE/img/InShot_20260829_182958375.jpg",
+                sizes: ["37", "38", "39", "40"],
+                description: "Estilo denim con estampa MK grabada en relieve. Ideales para uso diario veraniego."
+            },
+            {
+                id: 6,
+                name: "Sandalias Guess Urban Gray",
+                category: "calzado",
+                price: 22.00,
+                image: "https://raw.githubusercontent.com/Lapizasuli/assets/main/MARKETPLACE/img/InShot_20260829_183010315.jpg",
+                sizes: ["36", "37", "38", "39", "40"],
+                description: "Confort y diseño moderno en tono gris oscuro con patrón monograma Guess."
+            },
+            {
+                id: 7,
+                name: "Crocs Special Edition con Accesorios Jibbitz",
+                category: "calzado",
+                price: 18.00,
+                image: "https://raw.githubusercontent.com/Lapizasuli/assets/main/MARKETPLACE/img/InShot_20260829_183021799.jpg",
+                sizes: ["M4/W6", "M5/W7", "M6/W8", "M7/W9"],
+                description: "Comodidad legendaria con accesorios decorativos incluidos y forro interno suave."
+            },
+            {
+                id: 8,
+                name: "Conjunto Deportivo Lacoste Black & Cap",
+                category: "conjuntos",
+                price: 15.00,
+                image: "https://raw.githubusercontent.com/Lapizasuli/assets/main/MARKETPLACE/img/InShot_20260829_183100010.jpg",
+                sizes: ["S", "M", "L", "XL"],
+                description: "Conjunto completo que incluye suéter Lacoste, pantalón corto deportivo y gorra haciendo juego."
+            },
+            {
+                id: 9,
+                name: "Conjunto Tommy Hilfiger Streetwear Set",
+                category: "conjuntos",
+                price: 15.00,
+                image: "https://raw.githubusercontent.com/Lapizasuli/assets/main/MARKETPLACE/img/InShot_20260829_183115011.jpg",
+                sizes: ["S", "M", "L", "XL"],
+                description: "Pack completo de suéter y shorts Tommy Hilfiger con calzado y gorra a juego. ¡Excelente relación calidad-precio!"
+            },
+            {
+                id: 10,
+                name: "Conjunto Deportivo Adidas Minimalist",
+                category: "conjuntos",
+                price: 15.00,
+                image: "https://raw.githubusercontent.com/Lapizasuli/assets/main/MARKETPLACE/img/InShot_20260829_183128469.jpg",
+                sizes: ["S", "M", "L", "XL"],
+                description: "Estilo deportivo impecable con el sello clásico de Adidas y gorra ajustable."
+            },
+            {
+                id: 11,
+                name: "Zapatillas Nike Air Max TN Black Edition",
+                category: "calzado",
+                price: 35.00,
+                image: "https://raw.githubusercontent.com/Lapizasuli/assets/main/MARKETPLACE/img/InShot_20260829_183141308.jpg",
+                sizes: ["40", "41", "42", "43", "44", "45"],
+                description: "Amortiguación avanzada Air Max, diseño futurista totalmente en color negro."
+            },
+            {
+                id: 12,
+                name: "Zapatillas Nike Air Force 1 All White",
+                category: "calzado",
+                price: 30.00,
+                image: "https://raw.githubusercontent.com/Lapizasuli/assets/main/MARKETPLACE/img/InShot_20260829_183210247.jpg",
+                sizes: ["36", "37", "38", "39", "40", "41", "42", "43", "44", "45"],
+                description: "El clásico indiscutible. Zapatillas Nike Air Force 1 en blanco impecable, alta durabilidad."
+            },
+            {
+                id: 13,
+                name: "Camiseta de Fútbol Real Madrid - Mbappé (#9)",
+                category: "camisetas",
+                price: 18.00,
+                image: "https://raw.githubusercontent.com/Lapizasuli/assets/main/MARKETPLACE/img/InShot_20260829_183220689.jpg",
+                sizes: ["S", "M", "L", "XL", "2XL"],
+                description: "Camiseta oficial local del Real Madrid temporada actual con estampado de Kylian Mbappé."
+            },
+            {
+                id: 14,
+                name: "Camiseta de Fútbol Real Madrid - Valverde (#8)",
+                category: "camisetas",
+                price: 18.00,
+                image: "https://raw.githubusercontent.com/Lapizasuli/assets/main/MARKETPLACE/img/InShot_20260829_183231730.jpg",
+                sizes: ["S", "M", "L", "XL"],
+                description: "Camiseta de visita color vino tinto de Federico Valverde con tecnología antitranspirante."
+            },
+            {
+                id: 15,
+                name: "Camiseta FC Barcelona Home Edition",
+                category: "camisetas",
+                price: 18.00,
+                image: "https://raw.githubusercontent.com/Lapizasuli/assets/main/MARKETPLACE/img/InShot_20260829_183306141.jpg",
+                sizes: ["S", "M", "L", "XL", "2XL"],
+                description: "Camiseta blaugrana del FC Barcelona con detalles de alta calidad y patrocinador oficial."
+            }
+        ];
+
+        let cart = [];
+        let currentFilter = 'all';
+
+        // Initialize application on load
+        window.onload = function() {
+            renderProducts(products);
+            updateCartUI();
+        };
+
+        // Render products into grid with fallback image handling
+        function renderProducts(items) {
+            const grid = document.getElementById('productGrid');
+            grid.innerHTML = '';
+
+            if(items.length === 0) {
+                grid.innerHTML = `<div class="col-span-full text-center py-12 text-slate-400">No se encontraron productos en esta categoría.</div>`;
+                return;
+            }
+
+            items.forEach(product => {
+                const card = document.createElement('div');
+                card.className = "glass-panel rounded-2xl border border-slate-800 overflow-hidden shadow-xl hover:border-amber-500/50 transition duration-300 flex flex-col group";
+                card.innerHTML = `
+                    <div class="relative aspect-square overflow-hidden bg-slate-900 cursor-pointer" onclick="openDetailModal(${product.id})">
+                        <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.onerror=null; this.src='https://placehold.co/400x400/1e293b/f59e0b?text=Steven+Dior';">
+                        <span class="absolute top-3 left-3 bg-slate-950/80 backdrop-blur text-amber-400 text-[11px] font-bold px-2.5 py-1 rounded-lg border border-slate-700 uppercase tracking-wider">${product.category}</span>
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-4">
+                            <span class="text-xs font-semibold text-white bg-amber-500 px-3 py-1.5 rounded-xl shadow">Ver Detalles y Tallas</span>
+                        </div>
+                    </div>
+                    <div class="p-5 flex flex-col flex-grow justify-between">
+                        <div>
+                            <h4 class="font-bold text-white text-base mb-1 line-clamp-1 group-hover:text-amber-400 transition cursor-pointer" onclick="openDetailModal(${product.id})">${product.name}</h4>
+                            <p class="text-xs text-slate-400 line-clamp-2 mb-4">${product.description}</p>
+                        </div>
+                        <div class="flex items-center justify-between pt-4 border-t border-slate-800/60">
+                            <div>
+                                <span class="text-xs text-slate-400 block">Precio</span>
+                                <span class="text-lg font-extrabold text-amber-400">$${product.price.toFixed(2)}</span>
+                            </div>
+                            <button onclick="quickAddToCart(${product.id})" class="px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-600 text-white font-semibold text-xs shadow-md shadow-amber-500/20 transition flex items-center gap-1.5">
+                                <i class="fa-solid fa-cart-plus"></i> Añadir
+                            </button>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Filter products by category
+        function filterProducts(category) {
+            currentFilter = category;
+            
+            // Update button styles
+            ['all', 'calzado', 'conjuntos', 'camisetas'].forEach(cat => {
+                const btn = document.getElementById(`btn-${cat}`);
+                if(cat === category) {
+                    btn.className = "px-4 py-2 rounded-xl text-xs font-semibold bg-amber-500 text-white shadow transition";
+                } else {
+                    btn.className = "px-4 py-2 rounded-xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800 transition";
+                }
+            });
+
+            if(category === 'all') {
+                renderProducts(products);
+            } else {
+                const filtered = products.filter(p => p.category === category);
+                renderProducts(filtered);
+            }
+        }
+
+        // Open Product Detail Modal
+        function openDetailModal(id) {
+            const product = products.find(p => p.id === id);
+            if(!product) return;
+
+            const content = document.getElementById('detailContent');
+            content.innerHTML = `
+                <div class="aspect-square bg-slate-950 overflow-hidden">
+                    <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x400/1e293b/f59e0b?text=Steven+Dior';">
+                </div>
+                <div class="p-6 sm:p-8 flex flex-col justify-between">
+                    <div>
+                        <span class="text-xs font-bold text-amber-500 uppercase tracking-widest block mb-1">${product.category}</span>
+                        <h3 class="text-2xl font-bold text-white mb-3">${product.name}</h3>
+                        <p class="text-2xl font-extrabold text-amber-400 mb-4">$${product.price.toFixed(2)}</p>
+                        <p class="text-sm text-slate-300 mb-6 leading-relaxed">${product.description}</p>
+                        
+                        <div class="mb-6">
+                            <label class="block text-xs font-semibold text-slate-400 mb-2 uppercase">Seleccionar Talla:</label>
+                            <div class="flex flex-wrap gap-2" id="sizeSelector">
+                                ${product.sizes.map((size, index) => `
+                                    <button onclick="selectSize('${size}')" id="size-btn-${size}" class="size-option px-3.5 py-2 rounded-xl text-xs font-bold border ${index === 0 ? 'bg-amber-500 text-white border-amber-500' : 'bg-slate-800 text-slate-300 border-slate-700 hover:border-slate-500'} transition">${size}</button>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-3 pt-4 border-t border-slate-800">
+                        <button onclick="addToCartFromDetail(${product.id})" class="w-full py-3.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-white font-bold shadow-lg shadow-amber-500/25 transition flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-cart-shopping"></i> Agregar al Carrito
+                        </button>
+                        <a href="https://wa.me/50769362166?text=Hola,%20estoy%20interesado%20en%20el%20producto:%20${encodeURIComponent(product.name)}%20(Precio:%20$${product.price.toFixed(2)})" target="_blank" class="w-full py-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-emerald-400 font-semibold text-xs border border-slate-700 transition flex items-center justify-center gap-2">
+                            <i class="fa-brands fa-whatsapp text-lg"></i> Comprar Directo WhatsApp (69362166)
+                        </a>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('detailModal').classList.remove('hidden');
+        }
+
+        let selectedSizeTemp = null;
+        function selectSize(size) {
+            selectedSizeTemp = size;
+            document.querySelectorAll('.size-option').forEach(btn => {
+                if(btn.innerText === size) {
+                    btn.className = "size-option px-3.5 py-2 rounded-xl text-xs font-bold border bg-amber-500 text-white border-amber-500 transition";
+                } else {
+                    btn.className = "size-option px-3.5 py-2 rounded-xl text-xs font-bold border bg-slate-800 text-slate-300 border-slate-700 hover:border-slate-500 transition";
+                }
+            });
+        }
+
+        function closeDetailModal() {
+            document.getElementById('detailModal').classList.add('hidden');
+            selectedSizeTemp = null;
+        }
+
+        // Add to cart helpers
+        function quickAddToCart(id) {
+            const product = products.find(p => p.id === id);
+            if(!product) return;
+            const defaultSize = product.sizes[0];
+            
+            const existingItem = cart.find(item => item.id === id && item.size === defaultSize);
+            if(existingItem) {
+                existingItem.qty += 1;
+            } else {
+                cart.push({ ...product, size: defaultSize, qty: 1 });
+            }
+            updateCartUI();
+            toggleCartModal();
+        }
+
+        function addToCartFromDetail(id) {
+            const product = products.find(p => p.id === id);
+            if(!product) return;
+            const size = selectedSizeTemp || product.sizes[0];
+
+            const existingItem = cart.find(item => item.id === id && item.size === size);
+            if(existingItem) {
+                existingItem.qty += 1;
+            } else {
+                cart.push({ ...product, size: size, qty: 1 });
+            }
+            closeDetailModal();
+            updateCartUI();
+            toggleCartModal();
+        }
+
+        // Cart UI & Management
+        function toggleCartModal() {
+            const modal = document.getElementById('cartModal');
+            const container = document.getElementById('cartContainer');
+            if(modal.classList.contains('hidden')) {
+                modal.classList.remove('hidden');
+                setTimeout(() => container.classList.remove('translate-x-full'), 10);
+            } else {
+                container.classList.add('translate-x-full');
+                setTimeout(() => modal.classList.add('hidden'), 300);
+            }
+        }
+
+        function updateCartUI() {
+            const badge = document.getElementById('cartBadge');
+            const list = document.getElementById('cartItemsList');
+            const subtotalEl = document.getElementById('cartSubtotal');
+
+            const totalCount = cart.reduce((sum, item) => sum + item.qty, 0);
+            badge.innerText = totalCount;
+
+            if(cart.length === 0) {
+                list.innerHTML = `<div class="text-center py-12 text-slate-500 text-sm">Tu carrito está vacío.</div>`;
+                subtotalEl.innerText = "$0.00";
+                return;
+            }
+
+            let subtotal = 0;
+            list.innerHTML = '';
+
+            cart.forEach((item, index) => {
+                subtotal += item.price * item.qty;
+                const itemDiv = document.createElement('div');
+                itemDiv.className = "py-4 flex items-center gap-4";
+                itemDiv.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded-xl bg-slate-800" onerror="this.onerror=null; this.src='https://placehold.co/100x100/1e293b/f59e0b?text=Item';">
+                    <div class="flex-grow">
+                        <h5 class="text-sm font-bold text-white line-clamp-1">${item.name}</h5>
+                        <p class="text-xs text-slate-400">Talla: <span class="text-amber-400 font-semibold">${item.size}</span></p>
+                        <div class="flex items-center justify-between mt-2">
+                            <span class="text-sm font-bold text-amber-400">$${(item.price * item.qty).toFixed(2)}</span>
+                            <div class="flex items-center space-x-2 bg-slate-800 px-2.5 py-1 rounded-lg">
+                                <button onclick="updateQty(${index}, -1)" class="text-slate-400 hover:text-white"><i class="fa-solid fa-minus text-xs"></i></button>
+                                <span class="text-xs font-bold text-white w-5 text-center">${item.qty}</span>
+                                <button onclick="updateQty(${index}, 1)" class="text-slate-400 hover:text-white"><i class="fa-solid fa-plus text-xs"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                list.appendChild(itemDiv);
+            });
+
+            subtotalEl.innerText = `$${subtotal.toFixed(2)}`;
+        }
+
+        function updateQty(index, change) {
+            cart[index].qty += change;
+            if(cart[index].qty <= 0) {
+                cart.splice(index, 1);
+            }
+            updateCartUI();
+        }
+
+        function clearCart() {
+            cart = [];
+            updateCartUI();
+        }
+
+        // WhatsApp Checkout Integration with number 69362166
+        function checkoutWhatsApp() {
+            if(cart.length === 0) {
+                alert("Tu carrito está vacío.");
+                return;
+            }
+
+            let message = "🏁 *NUEVO PEDIDO - Steven \"Dior\" Gómez Serrano* (SADV41)\n\n";
+            let total = 0;
+
+            cart.forEach((item, i) => {
+                const itemTotal = item.price * item.qty;
+                total += itemTotal;
+                message += `${i+1}. *${item.name}*\n   Talla: ${item.size} | Cant: ${item.qty} | Subtotal: $${itemTotal.toFixed(2)}\n\n`;
+            });
+
+            message += `💰 *TOTAL A PAGAR: $${total.toFixed(2)}*\n\n¡Gracias por preferirnos!`;
+
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappUrl = `https://wa.me/50769362166?text=${encodedMessage}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        // Theme Toggle Functionality
+        function toggleTheme() {
+            const html = document.documentElement;
+            const icon = document.getElementById('themeIcon');
+            if(html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                html.classList.add('light');
+                icon.className = "fa-solid fa-sun";
+            } else {
+                html.classList.remove('light');
+                html.classList.add('dark');
+                icon.className = "fa-solid fa-moon";
+            }
+        }
+    </script>
+</body>
+</html>
 
