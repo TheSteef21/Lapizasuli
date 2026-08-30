@@ -1,1 +1,275 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>SADV41 | Colmos de la República y Atrio Pluscuamperfecto</title>
+    
+    <!-- Tipografías Sagradas -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+
+    <!-- Configuración Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#020617',
+                        oro: '#eab308',
+                        blanco: '#f8fafc',
+                        neonBlue: '#00f3ff',
+                        renderRed: '#da3637',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                        mason: ['Cinzel', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root { 
+            --oro-alquimico: #d4af37; 
+            --obsidiana: #050505; 
+        }
+
+        body {
+            background-color: var(--obsidiana);
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+                linear-gradient(rgba(2, 6, 23, 0.88), rgba(2, 6, 23, 0.96)), 
+                url('https://y2s.onrender.com/api/graphics/mundial_bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #f8fafc;
+            position: relative;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+        
+        .glass { background: rgba(2, 6, 23, 0.85); backdrop-filter: blur(12px); border: 1px solid rgba(234, 179, 8, 0.2); }
+        .esoterico-glow { text-shadow: 0 0 25px rgba(212, 175, 55, 0.7); }
+        .text-shadow-blue { text-shadow: 0 0 10px rgba(0, 243, 255, 0.6); }
+
+        .scanline {
+            width: 100%; height: 2px;
+            background: rgba(0, 209, 255, 0.15);
+            position: fixed; z-index: 50; top: 0;
+            pointer-events: none;
+            animation: scanline 8s linear infinite;
+        }
+        @keyframes scanline { 0% { top: 0; } 100% { top: 100%; } }
+
+        .colmo-card { 
+            background: linear-gradient(145deg, rgba(10,10,10,0.85), rgba(20,20,20,0.85));
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.9), inset 0 0 20px rgba(212, 175, 55, 0.03);
+            backdrop-filter: blur(12px);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+        .colmo-card:hover { border-color: rgba(212, 175, 55, 0.4); box-shadow: 0 20px 40px rgba(0,0,0,0.9), inset 0 0 30px rgba(212, 175, 55, 0.05); }
+
+        .triangulo-trinidad {
+            width: 0; height: 0;
+            border-left: 40px solid transparent; border-right: 40px solid transparent;
+            border-bottom: 69.3px solid rgba(212, 175, 55, 0.15); 
+            position: relative; margin: 0 auto;
+            animation: pulso-divino-trinidad 4s infinite alternate ease-in-out;
+        }
+        .triangulo-trinidad::after {
+            content: '1'; position: absolute; top: 35px; left: -5px;
+            color: var(--oro-alquimico); font-family: 'Cinzel', serif; font-size: 1.2rem;
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.8);
+        }
+        @keyframes pulso-divino-trinidad {
+            0% { filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.2)); transform: scale(1); }
+            100% { filter: drop-shadow(0 0 30px rgba(212, 175, 55, 0.9)); transform: scale(1.08); }
+        }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-oro selection:text-navy">
+
+    <!-- FONDO VECTORIAL GSADV41 -->
+    <div class="fixed top-0 left-0 w-[100vw] h-[100vh] z-[-1] flex justify-center items-center opacity-10 pointer-events-none">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="100%" height="100%">
+          <defs>
+            <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#d4af37" stop-opacity="0.8"/>
+              <stop offset="100%" stop-color="#050505" stop-opacity="0"/>
+            </radialGradient>
+            <linearGradient id="beam" x1="50%" y1="0%" x2="50%" y2="100%">
+              <stop offset="0%" stop-color="#00f3ff" stop-opacity="0"/>
+              <stop offset="50%" stop-color="#00f3ff" stop-opacity="0.9"/>
+              <stop offset="100%" stop-color="#00f3ff" stop-opacity="0"/>
+            </linearGradient>
+            <filter id="neon">
+              <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+              <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+          <circle cx="400" cy="400" r="350" fill="url(#glow)"/>
+          <rect x="395" y="100" width="10" height="600" fill="url(#beam)" filter="url(#neon)"/>
+          <rect x="250" y="398" width="300" height="4" fill="#d4af37" filter="url(#neon)"/>
+          <polygon points="400,200 550,480 250,480" fill="none" stroke="#d4af37" stroke-width="2" stroke-opacity="0.5"/>
+          <text x="400" y="160" font-family="Cinzel, serif" font-size="24" fill="#d4af37" text-anchor="middle" letter-spacing="4">SADV41</text>
+          <text x="400" y="650" font-family="Cinzel, serif" font-size="32" fill="#00f3ff" text-anchor="middle" letter-spacing="8" filter="url(#neon)">ISAÍAS 43:19</text>
+        </svg>
+    </div>
+
+    <div class="scanline"></div>
+
+    <!-- HEADER SUPERIOR -->
+    <header class="fixed top-0 left-0 w-full z-40 glass border-b border-oro/30 px-6 py-4 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+            <span class="text-2xl">🛡️</span>
+            <div>
+                <h1 class="font-serif text-xl tracking-wider text-oro font-bold leading-none">LOGIA PLUSCUAMPERFECTA</h1>
+                <p class="text-[9px] text-slate-400 font-mono tracking-widest mt-1">SADV41 // ARCHIVO DE COLMOS</p>
+            </div>
+        </div>
+        <div class="flex items-center gap-3">
+            <a href="https://thesteef21.github.io/Lapizasuli/GSADV41.html" target="_blank" class="bg-oro hover:bg-amber-600 text-navy font-bold text-xs px-4 py-2 rounded-lg transition-all shadow-lg shadow-oro/20">
+                ⚡ Sovereign Hub
+            </a>
+        </div>
+    </header>
+
+    <main class="pt-32 pb-16 px-4 md:px-12 max-w-5xl mx-auto space-y-16">
+
+        <!-- CABECERA DEL TEMPLO -->
+        <header class="p-12 border border-oro/20 text-center relative overflow-hidden rounded-2xl colmo-card">
+            <div class="absolute inset-0 bg-gradient-to-b from-yellow-900/10 to-transparent pointer-events-none"></div>
+            <div class="triangulo-trinidad mb-8"></div>
+            <h1 class="text-3xl md:text-5xl font-mason text-oro esoterico-glow uppercase tracking-[0.2em]">Los Colmos de la República</h1>
+            <p class="text-xs md:text-sm uppercase tracking-[0.4em] text-slate-400 mt-4 border-t border-oro/30 inline-block pt-3">
+                🇵🇦🇮🇱🇺🇸🇸🇦🔯☦️ Archivo Pluscuamperfecto Unificado
+            </p>
+        </header>
+
+        <!-- COLMO PRINCIPAL: EDISON BROCE -->
+        <section class="colmo-card p-8 md:p-12 rounded-2xl border-t-2 border-oro">
+            <div class="absolute top-0 right-0 w-40 h-40 bg-oro/10 blur-[60px] pointer-events-none"></div>
+            <div class="flex items-center gap-3 mb-6">
+                <span class="text-3xl">🏛️</span>
+                <h2 class="text-xl md:text-2xl font-mason text-oro tracking-wider uppercase">El Colmo de Edison Broce</h2>
+            </div>
+            
+            <p class="text-sm md:text-base text-slate-200 leading-relaxed font-sans mb-6">
+                El colmo de Edison Broce es que, tras pregonar que ser "proveedor" es una cuestión de "cultura, valores y caballerosidad" y no solo de dinero, se descubra que su campaña para la Alcaldía estaba siendo "proveída" por los mismos donantes anónimos y millonarios que él prometía combatir, y que todo su discurso de "mentalidad de proveedor" era solo una fachada para proveerse a sí mismo de poder y prestigio.
+            </p>
+            <p class="text-xs md:text-sm text-cyan-300 font-mono italic border-l-2 border-cyan-400 pl-4 py-2 bg-cyan-950/20 rounded-r-lg">
+                Es el colmo de la ironía: el hombre que quiere cambiar la mentalidad de la ciudad termina siendo financiado por la mentalidad tradicional del "proveedor" político de siempre, el que da a cambio de favores.
+            </p>
+
+            <div class="mt-8 pt-6 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-mono text-slate-400">
+                <div><span>📡 Alerta Sísmica:</span> Delta registrada ayer a las 11:40 PM. Embalse en la India llenándose. Sismo en San Miguelito como señal.</div>
+                <span class="text-oro font-bold">PANAMÁ PREPARADO ANTE INUNDACIONES</span>
+            </div>
+        </section>
+
+        <!-- 12 COLMOS DE LAS LEYES DE LA REPÚBLICA -->
+        <section class="space-y-8">
+            <div class="text-center">
+                <h2 class="text-2xl font-mason text-cyan-400 tracking-[0.2em] uppercase text-shadow-blue">Los 12 Colmos de las Leyes de la República</h2>
+                <p class="text-xs text-slate-400 font-mono mt-2">Basado en la codificación visual y legislativa del Sovereign Hub</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                
+                <!-- Protección a la niñez y víctimas -->
+                <div class="colmo-card p-6 rounded-xl border-t-2 border-red-500">
+                    <span class="text-xs font-mono text-red-400 uppercase tracking-widest block mb-1">Ley 474 // Endurecimiento de penas</span>
+                    <h3 class="font-bold text-base text-white mb-2">Cadena Perpetua Alérgica</h3>
+                    <p class="text-xs text-slate-300 font-sans leading-relaxed">¡Es que un delincuente pida cadena perpetua para las celdas frías porque siente que le da alergia la reja!</p>
+                </div>
+
+                <div class="colmo-card p-6 rounded-xl border-t-2 border-blue-500">
+                    <span class="text-xs font-mono text-blue-400 uppercase tracking-widest block mb-1">Ley 501 // Registro de Ofensores</span>
+                    <h3 class="font-bold text-base text-white mb-2">Notificación Vecinal Errónea</h3>
+                    <p class="text-xs text-slate-300 font-sans leading-relaxed">¡Es que el sistema falle porque el ofensor anotó mal su dirección y ahora le llegan las notificaciones al vecino de al lado!</p>
+                </div>
+
+                <div class="colmo-card p-6 rounded-xl border-t-2 border-emerald-500">
+                    <span class="text-xs font-mono text-emerald-400 uppercase tracking-widest block mb-1">Ley 510 // Acogimiento</span>
+                    <h3 class="font-bold text-base text-white mb-2">Currículum para Mascotas</h3>
+                    <p class="text-xs text-slate-300 font-sans leading-relaxed">¡Es que la familia de acogida sea tan estricta que le pida currículum al niño para poder adoptar una mascota!</p>
+                </div>
+
+                <div class="colmo-card p-6 rounded-xl border-t-2 border-purple-500">
+                    <span class="text-xs font-mono text-purple-400 uppercase tracking-widest block mb-1">Ley 512 // Peritos Virtuales</span>
+                    <h3 class="font-bold text-base text-white mb-2">Perito con Mala Conexión</h3>
+                    <p class="text-xs text-slate-300 font-sans leading-relaxed">¡Es que el perito virtual aparezca en la audiencia con la cámara apagada diciendo que "tiene mal el internet"!</p>
+                </div>
+
+                <!-- Transparencia y consumidor -->
+                <div class="colmo-card p-6 rounded-xl border-t-2 border-amber-500">
+                    <span class="text-xs font-mono text-amber-400 uppercase tracking-widest block mb-1">Ley 524 // Delito de Estafa</span>
+                    <h3 class="font-bold text-base text-white mb-2">Multa con Billetes Falsos</h3>
+                    <p class="text-xs text-slate-300 font-sans leading-relaxed">¡Es que el estafador intente pagar la multa de su condena con billetes falsos de lotería!</p>
+                </div>
+
+                <div class="colmo-card p-6 rounded-xl border-t-2 border-oro">
+                    <span class="text-xs font-mono text-oro uppercase tracking-widest block mb-1">Ley 473 // Precio Marcado</span>
+                    <h3 class="font-bold text-base text-white mb-2">El Precio Real</h3>
+                    <p class="text-xs text-slate-300 font-sans leading-relaxed">¡Es que el cajero te cobre de más y cuando le reclames, te diga que el precio real solo lo sabe Dios!</p>
+                </div>
+
+                <!-- Deporte y ciencia -->
+                <div class="colmo-card p-6 rounded-xl border-t-2 border-green-500">
+                    <span class="text-xs font-mono text-green-400 uppercase tracking-widest block mb-1">Ley 452 // Antidopaje</span>
+                    <h3 class="font-bold text-base text-white mb-2">Positivo en Café con Leche</h3>
+                    <p class="text-xs text-slate-300 font-sans leading-relaxed">¡Es que un atleta dé positivo en el control y resulte que lo único que se inyectó fue sobredosis de café con leche!</p>
+                </div>
+
+                <div class="colmo-card p-6 rounded-xl border-t-2 border-teal-500">
+                    <span class="text-xs font-mono text-teal-400 uppercase tracking-widest block mb-1">Ley 488 // Alto Rendimiento</span>
+                    <h3 class="font-bold text-base text-white mb-2">Récord Mundial al Baño</h3>
+                    <p class="text-xs text-slate-300 font-sans leading-relaxed">¡Es que el deportista sea tan rápido que rompa la marca mundial... corriendo directo al baño!</p>
+                </div>
+
+                <div class="colmo-card p-6 rounded-xl border-t-2 border-indigo-500">
+                    <span class="text-xs font-mono text-indigo-400 uppercase tracking-widest block mb-1">Ley 509 // Estudiantes-Atletas</span>
+                    <h3 class="font-bold text-base text-white mb-2">Esquivando Libros</h3>
+                    <p class="text-xs text-slate-300 font-sans leading-relaxed">¡Es que el estudiante pase más tiempo esquivando los libros que corriendo en la pista!</p>
+                </div>
+
+                <div class="colmo-card p-6 rounded-xl border-t-2 border-rose-500">
+                    <span class="text-xs font-mono text-rose-400 uppercase tracking-widest block mb-1">Ley 475 // Becas SENACYT</span>
+                    <h3 class="font-bold text-base text-white mb-2">La Máquina Anti-Lunes</h3>
+                    <p class="text-xs text-slate-300 font-sans leading-relaxed">¡Es que el científico se gane la beca internacional y lo primero que invente sea una máquina para no madrugar los lunes!</p>
+                </div>
+
+                <!-- Salud y Turismo -->
+                <div class="colmo-card p-6 rounded-xl border-t-2 border-sky-500">
+                    <span class="text-xs font-mono text-sky-400 uppercase tracking-widest block mb-1">Ley 522 // Enfermedades No Transmisibles</span>
+                    <h3 class="font-bold text-base text-white mb-2">Receta para Paciencia</h3>
+                    <p class="text-xs text-slate-300 font-sans leading-relaxed">¡Es que vayas al doctor a prevenir enfermedades y salgas con una receta para comprar paciencia en farmacias!</p>
+                </div>
+
+                <div class="colmo-card p-6 rounded-xl border-t-2 border-yellow-500">
+                    <span class="text-xs font-mono text-yellow-400 uppercase tracking-widest block mb-1">Ley 541 // Paraísos del Istmo</span>
+                    <h3 class="font-bold text-base text-white mb-2">Perdidos en Burunga</h3>
+                    <p class="text-xs text-slate-300 font-sans leading-relaxed">¡Es que los turistas vengan buscando un paraíso tropical y terminen perdiéndose en el tranque de la vía principal de Burunga!</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- PIE DE PÁGINA / VINCULACIÓN SOBERANA -->
+        <footer class="text-center p-8 border-t border-white/5 opacity-60 font-mono text-[10px] uppercase space-y-2">
+            <p>SADV41 Architecture © 2026 | El Origen es 0 | Isaías 43:19</p>
+            <p class="text-oro">Repositorio Oficial: <a href="https://thesteef21.github.io/Lapizasuli/GSADV41.html" class="underline">GSADV41.html</a></p>
+        </footer>
+
+    </main>
+
+</body>
+</html>
 
