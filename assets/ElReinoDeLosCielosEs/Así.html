@@ -121,6 +121,9 @@
                 <button role="tab" aria-selected="false" aria-controls="tab-spiritual" id="btn-spiritual" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-slate-900 text-slate-300 hover:bg-slate-800 transition focus:ring-2 focus:ring-green-400">
                     ✨ Fe y Elevación
                 </button>
+                <button role="tab" aria-selected="false" aria-controls="tab-deporte" id="btn-deporte" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-slate-900 text-slate-300 hover:bg-slate-800 transition focus:ring-2 focus:ring-green-400">
+                    🏄‍♂️ Hazañas & Victoria
+                </button>
             </div>
 
             <div id="storiesContainer" class="space-y-6" tabindex="0" aria-label="Lista de reflexiones y crónicas">
@@ -188,6 +191,37 @@
                         <p class="text-slate-300 text-xs sm:text-sm">
                             Así como las ficciones o los símbolos deportivos representan la cúspide de la superación y el control corporal, en el plano espiritual toda potestad y dificultad terrenal halla su respuesta en la paz y la soberanía superior de la fe.
                         </p>
+                    </div>
+                </article>
+
+                <!-- Story 4: Sports History & Panamanian Glory -->
+                <article class="story-card bg-slate-900/90 border border-slate-800 rounded-2xl p-6 shadow-xl transition hover:border-slate-700" data-category="deporte">
+                    <div class="flex items-start justify-between gap-4 mb-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-green-500/20 text-green-400 flex items-center justify-center font-bold text-sm border border-green-500/30">
+                                🏄‍♂️
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-white text-sm sm:text-base">Hazañas Juveniles y Orgullo de Nación</h3>
+                                <p class="text-xs text-slate-400">Inspiración desde las olas del norte</p>
+                            </div>
+                        </div>
+                        <span class="px-2.5 py-1 rounded-full bg-slate-800 text-amber-400 text-xs font-semibold border border-slate-700">Deporte & Unidad</span>
+                    </div>
+                    <div class="space-y-3 text-slate-200 text-sm sm:text-base leading-relaxed">
+                        <p class="font-medium text-amber-300">"Superando las barreras internacionales, el talento de la juventud plasma el nombre de la patria en lo más alto."</p>
+                        <p class="text-slate-300 text-xs sm:text-sm">
+                            Cada triunfo en el surf juvenil de Norteamérica demuestra que la constancia y la disciplina abren brechas donde antes solo había incertidumbre. Pero la verdadera grandeza de este logro trasciende la medalla o el podio individual.
+                        </p>
+                        <!-- Added section at the bottom as requested -->
+                        <div class="mt-4 pt-4 border-t border-slate-800/80 bg-slate-950/40 p-4 rounded-xl">
+                            <p class="text-xs sm:text-sm text-green-300 font-medium italic">
+                                "Lo que hace grande a Panamá es compartir con otros tus victorias, tus derrotas, tu persistencia."
+                            </p>
+                            <p class="text-[11px] text-slate-400 mt-1">
+                                Porque el verdadero espíritu nacional se forja abrazando al prójimo en cada caída y celebrando juntos cada ola conquistada.
+                            </p>
+                        </div>
                     </div>
                 </article>
 
@@ -320,7 +354,6 @@
             submitReflectionBtn.addEventListener('click', () => {
                 const text = userReflectionInput.value.trim();
                 if (text) {
-                    // Safe local notification box replacement without alert()
                     const notif = document.createElement('div');
                     notif.className = 'fixed bottom-4 right-4 bg-green-500 text-black px-4 py-3 rounded-xl font-bold shadow-2xl z-50 transition transform duration-300';
                     notif.textContent = '🕊️ Tu reflexión ha sido guardada en tu espacio privado de paz.';
@@ -338,7 +371,6 @@
                 }
             });
 
-            // Close modal on outside click
             modal.addEventListener('click', (e) => {
                 if (e.target === modal) {
                     modal.classList.add('hidden');
@@ -347,4 +379,4 @@
         });
     </script>
 </body>
-  </html>
+</html>
