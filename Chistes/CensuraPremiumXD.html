@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Censura Premium | SADV41</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        oro: '#d4af37',
+                        igBg: '#000000',
+                        igGray: '#262626',
+                        igText: '#f5f5f5',
+                        igError: '#ed4956',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                        mason: ['Cinzel', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { background-color: #050505; color: #f8fafc; }
+        
+        .logia-card { 
+            background: linear-gradient(145deg, rgba(15,15,20,0.9), rgba(10,10,15,0.95));
+            border: 1px solid rgba(237, 73, 86, 0.3);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.8), inset 0 0 20px rgba(237, 73, 86, 0.05);
+            backdrop-filter: blur(12px);
+        }
+
+        .glitch-error {
+            animation: pulse-red 2s infinite;
+        }
+
+        @keyframes pulse-red {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; filter: drop-shadow(0 0 5px rgba(237,73,86,0.8)); }
+        }
+
+        .scanline {
+            width: 100%; height: 2px;
+            background: rgba(237, 73, 86, 0.2);
+            position: absolute; z-index: 99; top: 0;
+            pointer-events: none;
+            animation: scanline 6s linear infinite;
+        }
+        @keyframes scanline { 0% { top: 0; } 100% { top: 100%; } }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4 selection:bg-igError selection:text-white relative overflow-hidden">
+
+    <!-- Fondo Matrix/Logia Red -->
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(237,73,86,0.05)_0%,transparent_60%)] pointer-events-none"></div>
+
+    <div class="logia-card max-w-2xl w-full rounded-2xl relative overflow-hidden">
+        <div class="scanline"></div>
+        
+        <!-- Header del Módulo -->
+        <div class="border-b border-igError/30 bg-red-950/20 p-4 md:p-6 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <span class="text-2xl glitch-error">⚠️</span>
+                <div>
+                    <h2 class="font-mason text-igError font-bold tracking-widest uppercase">Módulo de Intercepción</h2>
+                    <p class="text-[10px] text-slate-400 font-mono tracking-widest uppercase mt-1">Status: Censura Premium Activada</p>
+                </div>
+            </div>
+            <div class="text-[10px] font-mono bg-red-950 text-red-400 border border-red-800 px-2 py-1 rounded">
+                LOG: IG-BLOCK-041
+            </div>
+        </div>
+
+        <!-- Contenido Central: La Simulación del Comentario -->
+        <div class="p-6 md:p-8 space-y-6">
+            
+            <div class="font-mono text-xs text-slate-500 mb-2 uppercase tracking-wider border-l-2 border-slate-700 pl-3">
+                Contexto: Debate del 2% vs. Realidad Nacional.
+            </div>
+
+            <!-- Interfaz Fake IG -->
+            <div class="bg-igBg border border-igGray rounded-xl p-4 shadow-2xl relative">
+                <div class="flex items-start gap-3">
+                    <!-- Avatar Genérico / Placeholder -->
+                    <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-oro to-slate-800 flex-shrink-0 border border-slate-700 flex items-center justify-center text-[10px]">SD</div>
+                    
+                    <div class="flex-1">
+                        <p class="text-sm text-igText font-sans leading-snug">
+                            <span class="font-semibold text-white mr-1">stevendioroficial</span> 
+                            Cómo compro una casa con salario de 600? 
+                            <a href="#" class="text-blue-400 hover:underline">@irmahernandezb</a> 
+                            <a href="#" class="text-blue-400 hover:underline">@eduardoagaitan</a> 
+                            xd pa sa ve na má xddd 
+                            <a href="#" class="text-blue-400 hover:underline">@jorgeibloise</a> 
+                            <a href="#" class="text-blue-400 hover:underline">@jdvasquezgut</a> 
+                            sin tanto papeleo que las neuronas mías no le he pagado el premium 🇵🇦🇮🇱
+                        </p>
+                        
+                        <!-- El Error Fatídico -->
+                        <div class="mt-2 flex items-center gap-2 cursor-pointer group">
+                            <span class="text-xs text-igError font-semibold glitch-error transition-all group-hover:text-red-400">
+                                No se pudo publicar. Toca para volver a intentarlo.
+                            </span>
+                            <svg class="w-3 h-3 text-igError glitch-error" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Análisis del Sistema SADV41 -->
+            <div class="bg-black/50 border border-slate-800 rounded-lg p-5">
+                <h3 class="text-oro font-mason text-sm uppercase tracking-widest mb-3 border-b border-oro/20 pb-2">Diagnóstico del Sistema</h3>
+                <ul class="space-y-3 font-mono text-xs text-slate-300">
+                    <li class="flex gap-2">
+                        <span class="text-igError">▸</span> 
+                        <span><strong class="text-white">Anomalía Detectada:</strong> Exceso de verdad en una sola cadena de texto.</span>
+                    </li>
+                    <li class="flex gap-2">
+                        <span class="text-igError">▸</span> 
+                        <span><strong class="text-white">Causa del Bloqueo:</strong> Etiquetar a media Asamblea Nacional exigiendo la fórmula secreta para sobrevivir con $600 mientras ellos debaten millones.</span>
+                    </li>
+                    <li class="flex gap-2">
+                        <span class="text-igError">▸</span> 
+                        <span><strong class="text-white">Estado Neural:</strong> "Premium no pagado". Burocracia excedió la capacidad de procesamiento.</span>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+        <!-- Footer Acción -->
+        <div class="bg-slate-900/50 border-t border-slate-800 p-4 md:px-8 flex justify-between items-center">
+            <span class="text-[10px] text-slate-500 font-mono">
+                La matrix no soporta el cuestionamiento directo.
+            </span>
+            <button onclick="alert('Conexión rechazada por el servidor central de Instagram. La verdad duele demasiado.')" class="bg-igError/10 hover:bg-igError/20 text-igError border border-igError/40 font-mono text-xs px-4 py-2 rounded transition-colors uppercase tracking-widest">
+                Forzar Reintento ↻
+            </button>
+        </div>
+
+    </div>
+
+</body>
+</html>
