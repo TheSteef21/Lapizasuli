@@ -1,1 +1,350 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crónicas y Reflexiones - El Atrio de la Paz</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0fdf4',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            900: '#14532d',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        @keyframes jumpmanFloat {
+            0% { transform: translateY(0px) scale(1); filter: drop-shadow(0 5px 5px rgba(34, 197, 94, 0.2)); }
+            50% { transform: translateY(-24px) scale(1.05); filter: drop-shadow(0 25px 15px rgba(34, 197, 94, 0.4)); }
+            100% { transform: translateY(0px) scale(1); filter: drop-shadow(0 5px 5px rgba(34, 197, 94, 0.2)); }
+        }
+        .animate-jumpman {
+            animation: jumpmanFloat 3s ease-in-out infinite;
+        }
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+        .animate-pulse-glow {
+            animation: pulseGlow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col selection:bg-green-500 selection:text-black">
 
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:p-4 focus:bg-green-500 focus:text-black focus:font-bold">
+        Saltar al contenido principal
+    </a>
+
+    <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur sticky top-0 z-40">
+        <div class="max-w-5xl mx-auto px-4 py-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="flex items-center space-x-3">
+                <span class="text-3xl" role="img" aria-label="Silueta de baloncesto">🏀</span>
+                <div>
+                    <h1 class="text-xl font-bold tracking-tight text-white">Crónicas de Sanación</h1>
+                    <p class="text-xs text-slate-400">Protegiendo la privacidad, observando con sabiduría y trascendiendo fronteras</p>
+                </div>
+            </div>
+            
+            <!-- Accessibility Controls -->
+            <div class="flex items-center space-x-2 bg-slate-800/80 p-1.5 rounded-xl border border-slate-700">
+                <button id="toggleContrast" aria-label="Cambiar alto contraste" class="px-3 py-1.5 rounded-lg text-xs font-medium hover:bg-slate-700 transition focus:ring-2 focus:ring-green-400">
+                    🌓 Contraste
+                </button>
+                <button id="toggleTextSize" aria-label="Aumentar tamaño de texto" class="px-3 py-1.5 rounded-lg text-xs font-medium hover:bg-slate-700 transition focus:ring-2 focus:ring-green-400">
+                    A+ Tamaño
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-content" class="flex-grow max-w-4xl mx-auto w-full px-4 py-8 space-y-10">
+        
+        <section aria-labelledby="hero-title" class="bg-gradient-to-br from-slate-900 to-slate-900/50 border border-slate-800 rounded-2xl p-6 sm:p-8 shadow-2xl relative overflow-hidden">
+            <div class="absolute -right-10 -bottom-10 opacity-10 pointer-events-none select-none text-9xl">
+                ⛹️‍♂️
+            </div>
+            <div class="max-w-xl space-y-4">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-500/10 border border-green-500/30 text-green-400 text-xs font-semibold uppercase tracking-wider">
+                    <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                    Espacio Privado de Reflexión & Paz
+                </div>
+                <h2 id="hero-title" class="text-2xl sm:text-4xl font-extrabold tracking-tight text-white leading-tight">
+                    El Silencio que Protege y el Poder de Sanar
+                </h2>
+                <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                    Un registro interactivo dedicado a la discreción, el respeto a las comunidades, la superación de los prejuicios colectivos y la elevación espiritual por encima de las tormentas terrenales.
+                </p>
+                
+                <!-- Animated Interactive Jordan Element -->
+                <div class="pt-2 flex items-center gap-4">
+                    <div id="jordanContainer" class="cursor-pointer bg-slate-800/90 hover:bg-slate-800 border border-green-500/40 p-3.5 rounded-2xl flex items-center gap-3 transition transform hover:scale-105 shadow-lg group" role="button" tabindex="0" aria-label="Activar animación de suspensión en el aire inspirada en el Jumpman">
+                        <span class="text-3xl animate-jumpman inline-block" role="img" aria-label="Emoji de Jumpman en suspensión">⛹️‍♂️</span>
+                        <div>
+                            <p class="text-xs font-bold text-green-400 group-hover:text-green-300">滞空能力 - Suspensión en el Aire</p>
+                            <p class="text-[11px] text-slate-400">Haz clic o presiona Enter para impulsar el salto</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="space-y-6">
+            <div class="flex flex-wrap gap-2 border-b border-slate-800 pb-4" role="tablist" aria-label="Categorías de crónicas">
+                <button role="tab" aria-selected="true" aria-controls="tab-todos" id="btn-todos" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-green-600 text-black transition shadow focus:ring-2 focus:ring-green-400">
+                    Todas las Reflexiones
+                </button>
+                <button role="tab" aria-selected="false" aria-controls="tab-comunidad" id="btn-comunidad" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-slate-900 text-slate-300 hover:bg-slate-800 transition focus:ring-2 focus:ring-green-400">
+                    📍 Comunidades & Respeto
+                </button>
+                <button role="tab" aria-selected="false" aria-controls="tab-global" id="btn-global" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-slate-900 text-slate-300 hover:bg-slate-800 transition focus:ring-2 focus:ring-green-400">
+                    🌐 Esferas & Privacidad
+                </button>
+                <button role="tab" aria-selected="false" aria-controls="tab-spiritual" id="btn-spiritual" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-slate-900 text-slate-300 hover:bg-slate-800 transition focus:ring-2 focus:ring-green-400">
+                    ✨ Fe y Elevación
+                </button>
+            </div>
+
+            <div id="storiesContainer" class="space-y-6" tabindex="0" aria-label="Lista de reflexiones y crónicas">
+                
+                <!-- Story 1: Community & Respect -->
+                <article class="story-card bg-slate-900/90 border border-slate-800 rounded-2xl p-6 shadow-xl transition hover:border-slate-700" data-category="comunidad">
+                    <div class="flex items-start justify-between gap-4 mb-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-green-500/20 text-green-400 flex items-center justify-center font-bold text-sm border border-green-500/30">
+                                🕊️
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-white text-sm sm:text-base">Reflexión Comunitaria</h3>
+                                <p class="text-xs text-slate-400">Sanando los prejuicios territoriales</p>
+                            </div>
+                        </div>
+                        <span class="px-2.5 py-1 rounded-full bg-slate-800 text-green-400 text-xs font-semibold border border-slate-700">Comunidad</span>
+                    </div>
+                    <div class="space-y-3 text-slate-200 text-sm sm:text-base leading-relaxed">
+                        <p class="font-medium text-green-300">"Quien guarda silencio y aconseja prudencia busca proteger el honor y dar tiempo al tiempo."</p>
+                        <p class="text-slate-300 text-xs sm:text-sm">
+                            Hay regiones enteras cargadas de etiquetas injustas por parte de la opinión pública. Sin embargo, el trabajo diario de la gente honesta rompe esas cadenas de odio. La verdadera inteligencia no condena a las comunidades por estereotipos, sino que fomenta la paciencia para que el mal se desvanezca en paz.
+                        </p>
+                    </div>
+                </article>
+
+                <!-- Story 2: Global Power & Privacy -->
+                <article class="story-card bg-slate-900/90 border border-slate-800 rounded-2xl p-6 shadow-xl transition hover:border-slate-700" data-category="global">
+                    <div class="flex items-start justify-between gap-4 mb-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-green-500/20 text-green-400 flex items-center justify-center font-bold text-sm border border-green-500/30">
+                                🌐
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-white text-sm sm:text-base">Esferas de Poder y Discreción</h3>
+                                <p class="text-xs text-slate-400">Comprendiendo los niveles de seguridad</p>
+                            </div>
+                        </div>
+                        <span class="px-2.5 py-1 rounded-full bg-slate-800 text-blue-400 text-xs font-semibold border border-slate-700">Privacidad Global</span>
+                    </div>
+                    <div class="space-y-3 text-slate-200 text-sm sm:text-base leading-relaxed">
+                        <p class="font-medium text-blue-300">"La protección de la dignidad exige no alimentar el morbo, sino entender que la discreción resguarda vidas."</p>
+                        <p class="text-slate-300 text-xs sm:text-sm">
+                            Las dinámicas de seguridad en las altas esferas mundiales responden a lógicas complejas donde la privacidad y el silencio son escudos protectores. Mantener el respeto a la intimidad humana es fundamental para evitar el juicio superficial y permitir procesos de sanación genuinos.
+                        </p>
+                    </div>
+                </article>
+
+                <!-- Story 3: Spiritual & Suspension -->
+                <article class="story-card bg-slate-900/90 border border-slate-800 rounded-2xl p-6 shadow-xl transition hover:border-slate-700" data-category="spiritual">
+                    <div class="flex items-start justify-between gap-4 mb-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-green-500/20 text-green-400 flex items-center justify-center font-bold text-sm border border-green-500/30">
+                                ✨
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-white text-sm sm:text-base">Fe y Suspensión en el Aire</h3>
+                                <p class="text-xs text-slate-400">Trascendencia y paz interior</p>
+                            </div>
+                        </div>
+                        <span class="px-2.5 py-1 rounded-full bg-slate-800 text-purple-400 text-xs font-semibold border border-slate-700">Fe & Trascendencia</span>
+                    </div>
+                    <div class="space-y-3 text-slate-200 text-sm sm:text-base leading-relaxed">
+                        <p class="font-medium text-purple-300">"Al igual que la legendaria capacidad de suspensión del Jumpman, la fe nos eleva por encima de las tormentas."</p>
+                        <p class="text-slate-300 text-xs sm:text-sm">
+                            Así como las ficciones o los símbolos deportivos representan la cúspide de la superación y el control corporal, en el plano espiritual toda potestad y dificultad terrenal halla su respuesta en la paz y la soberanía superior de la fe.
+                        </p>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+
+        <section class="bg-slate-900/50 border border-slate-800 rounded-2xl p-6 text-center space-y-4">
+            <h3 class="text-lg font-bold text-white">¿Deseas registrar tu propio pensamiento de paz?</h3>
+            <p class="text-slate-400 text-sm max-w-lg mx-auto">
+                Este espacio está diseñado bajo estrictos estándares de accesibilidad, navegación por teclado, alto contraste y absoluta privacidad.
+            </p>
+            <button id="openModalBtn" aria-label="Abrir mensaje de reflexión personal" class="px-6 py-2.5 rounded-xl bg-green-500 hover:bg-green-400 text-black font-bold text-sm transition focus:ring-4 focus:ring-green-300 shadow-lg">
+                Guardar Reflexión en Privado 🕊️
+            </button>
+        </section>
+
+    </main>
+
+    <div id="messageModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-8 max-w-md w-full space-y-4 shadow-2xl relative">
+            <h3 id="modalTitle" class="text-xl font-bold text-white">Espacio Seguro de Privacidad</h3>
+            <p class="text-slate-300 text-sm">
+                Tu silencio protege a quienes amas, pero plasmar tus pensamientos aquí te ayuda a sanar en paz. Escribe tu reflexión (respetando siempre la dignidad de todos):
+            </p>
+            <textarea id="userReflectionInput" rows="3" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-slate-200 text-sm focus:outline-none focus:border-green-500" placeholder="Escribe aquí tu sentir en paz..."></textarea>
+            <div class="flex justify-end gap-3 pt-2">
+                <button id="closeModalBtn" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold transition">
+                    Cerrar
+                </button>
+                <button id="submitReflectionBtn" class="px-4 py-2 rounded-xl bg-green-500 hover:bg-green-400 text-black text-xs font-bold transition">
+                    Guardar de Forma Segura
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="border-t border-slate-800 bg-slate-900/40 py-6 text-center text-xs text-slate-500">
+        <p>Crónicas de Sanación • Privacidad, Accesibilidad Total y Paz Interior</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // High Contrast Toggle
+            const toggleContrast = document.getElementById('toggleContrast');
+            let isHighContrast = false;
+            toggleContrast.addEventListener('click', () => {
+                isHighContrast = !isHighContrast;
+                if (isHighContrast) {
+                    document.body.classList.remove('bg-slate-950', 'text-slate-100');
+                    document.body.classList.add('bg-black', 'text-yellow-300');
+                    toggleContrast.classList.add('bg-yellow-400', 'text-black', 'font-bold');
+                } else {
+                    document.body.classList.remove('bg-black', 'text-yellow-300');
+                    document.body.classList.add('bg-slate-950', 'text-slate-100');
+                    toggleContrast.classList.remove('bg-yellow-400', 'text-black', 'font-bold');
+                }
+            });
+
+            // Text Size Toggle
+            const toggleTextSize = document.getElementById('toggleTextSize');
+            let isLargeText = false;
+            toggleTextSize.addEventListener('click', () => {
+                isLargeText = !isLargeText;
+                if (isLargeText) {
+                    document.body.style.fontSize = '1.15rem';
+                    toggleTextSize.classList.add('bg-green-500', 'text-black', 'font-bold');
+                } else {
+                    document.body.style.fontSize = '1rem';
+                    toggleTextSize.classList.remove('bg-green-500', 'text-black', 'font-bold');
+                }
+            });
+
+            // Interactive Jumpman Animation Trigger
+            const jordanContainer = document.getElementById('jordanContainer');
+            jordanContainer.addEventListener('click', () => {
+                const jordanEmoji = jordanContainer.querySelector('span');
+                jordanEmoji.style.animation = 'none';
+                void jordanEmoji.offsetHeight; // trigger reflow
+                jordanEmoji.style.animation = 'jumpmanFloat 0.8s ease-in-out 3';
+            });
+            jordanContainer.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    jordanContainer.click();
+                }
+            });
+
+            // Category Filtering
+            const buttons = document.querySelectorAll('[role="tablist"] button');
+            const cards = document.querySelectorAll('.story-card');
+
+            buttons.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    buttons.forEach(b => {
+                        b.setAttribute('aria-selected', 'false');
+                        b.classList.remove('bg-green-600', 'text-black');
+                        b.classList.add('bg-slate-900', 'text-slate-300');
+                    });
+                    btn.setAttribute('aria-selected', 'true');
+                    btn.classList.remove('bg-slate-900', 'text-slate-300');
+                    btn.classList.add('bg-green-600', 'text-black');
+
+                    const targetId = btn.id.replace('btn-', '');
+                    cards.forEach(card => {
+                        if (targetId === 'todos' || card.getAttribute('data-category') === targetId) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+
+            // Modal Controls
+            const modal = document.getElementById('messageModal');
+            const openModalBtn = document.getElementById('openModalBtn');
+            const closeModalBtn = document.getElementById('closeModalBtn');
+            const submitReflectionBtn = document.getElementById('submitReflectionBtn');
+            const userReflectionInput = document.getElementById('userReflectionInput');
+
+            openModalBtn.addEventListener('click', () => {
+                modal.classList.remove('hidden');
+                userReflectionInput.focus();
+            });
+
+            closeModalBtn.addEventListener('click', () => {
+                modal.classList.add('hidden');
+            });
+
+            submitReflectionBtn.addEventListener('click', () => {
+                const text = userReflectionInput.value.trim();
+                if (text) {
+                    // Safe local notification box replacement without alert()
+                    const notif = document.createElement('div');
+                    notif.className = 'fixed bottom-4 right-4 bg-green-500 text-black px-4 py-3 rounded-xl font-bold shadow-2xl z-50 transition transform duration-300';
+                    notif.textContent = '🕊️ Tu reflexión ha sido guardada en tu espacio privado de paz.';
+                    document.body.appendChild(notif);
+                    setTimeout(() => notif.remove(), 4000);
+
+                    userReflectionInput.value = '';
+                    modal.classList.add('hidden');
+                } else {
+                    const notif = document.createElement('div');
+                    notif.className = 'fixed bottom-4 right-4 bg-amber-500 text-black px-4 py-3 rounded-xl font-bold shadow-2xl z-50';
+                    notif.textContent = 'Por favor escribe algo antes de guardar.';
+                    document.body.appendChild(notif);
+                    setTimeout(() => notif.remove(), 3000);
+                }
+            });
+
+            // Close modal on outside click
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.add('hidden');
+                }
+            });
+        });
+    </script>
+</body>
+  </html>
