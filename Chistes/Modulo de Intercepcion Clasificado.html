@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo de Intercepción Clasificado | SADV41</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        matrixRed: '#ff1e3c',
+                        matrixDark: '#0a0506',
+                        matrixCard: '#14080a',
+                        matrixBorder: '#3d121b',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts Inter & JetBrains Mono -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0506;
+            color: #f3f4f6;
+            overflow-x: hidden;
+        }
+        .font-mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        /* Custom neon glow and glitch effects */
+        .neon-glow {
+            text-shadow: 0 0 10px rgba(255, 30, 60, 0.7), 0 0 20px rgba(255, 30, 60, 0.4);
+        }
+        .border-glow {
+            box-shadow: 0 0 15px rgba(255, 30, 60, 0.15);
+        }
+        .scanlines {
+            background: linear-gradient(
+                to bottom,
+                rgba(255,255,255,0),
+                rgba(255,255,255,0) 50%,
+                rgba(0, 0, 0, 0.3) 50%,
+                rgba(0, 0, 0, 0.3)
+            );
+            background-size: 100% 4px;
+        }
+        @keyframes glitch {
+            0% { transform: translate(0) }
+            20% { transform: translate(-2px, 2px) }
+            40% { transform: translate(-2px, -2px) }
+            60% { transform: translate(2px, 2px) }
+            80% { transform: translate(2px, -2px) }
+            100% { transform: translate(0) }
+        }
+        .glitch-hover:hover {
+            animation: glitch 0.2s infinite;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0506;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #3d121b;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ff1e3c;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between scanlines p-3 sm:p-6">
+
+    <header class="w-full max-w-4xl mx-auto border border-matrixBorder bg-matrixCard/80 backdrop-blur-md rounded-xl p-4 sm:p-5 mb-6 border-glow shadow-2xl">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+            <div class="flex items-center space-x-3">
+                <div class="p-2.5 bg-matrixRed/10 border border-matrixRed/40 rounded-lg text-matrixRed animate-pulse">
+                    ⚠️
+                </div>
+                <div>
+                    <h1 class="font-mono text-sm sm:text-lg font-bold tracking-wider text-matrixRed neon-glow">
+                        MÓDULO DE INTERCEPCIÓN
+                    </h1>
+                    <p class="text-xs text-red-300/70 font-mono">STATUS: CENSURA PREMIUM ACTIVADA | LOG: IG-BLOCK-041</p>
+                </div>
+            </div>
+            <!-- Neural Switch & Easter Egg trigger -->
+            <div class="flex items-center space-x-2 w-full sm:w-auto justify-end">
+                <button id="neuralBtn" onclick="toggleNeuralMatrix()" class="px-4 py-2 bg-matrixBorder hover:bg-matrixRed/30 border border-matrixRed/50 rounded-lg text-xs font-mono text-white transition-all flex items-center space-x-2 cursor-pointer shadow-lg active:scale-95">
+                    <span>🎚️ Nivel Neural: <strong id="neuralState" class="text-matrixRed">BLOQUEADO</strong></span>
+                </button>
+            </div>
+        </div>
+        <div class="mt-3 pt-3 border-t border-matrixBorder/50 flex justify-between items-center text-xs text-gray-400 font-mono">
+            <span>CONTEXTO: DEBATE DEL 2% VS. REALIDAD NACIONAL.</span>
+            <span class="text-matrixRed">SEC-SADV41</span>
+        </div>
+    </header>
+
+    <main class="w-full max-w-4xl mx-auto flex-grow flex flex-col space-y-6">
+        
+        <!-- Standard Blocked Post Mockup -->
+        <div id="standardPost" class="border border-matrixBorder bg-matrixCard rounded-xl p-5 shadow-xl transition-all duration-300">
+            <div class="flex items-center space-x-3 mb-3">
+                <div class="w-10 h-10 rounded-full bg-amber-700/40 border border-amber-500/50 flex items-center justify-center font-bold text-xs text-amber-200">
+                    SD
+                </div>
+                <div>
+                    <div class="text-sm font-semibold text-gray-200 flex items-center space-x-1">
+                        <span>stevendioroficial</span>
+                        <span class="text-xs text-matrixRed font-mono">🔒 Restringido</span>
+                    </div>
+                    <div class="text-xs text-gray-500 font-mono">Publicado en la matriz • Panamá</div>
+                </div>
+            </div>
+            <p class="text-sm text-gray-300 leading-relaxed mb-4">
+                Cómo compro una casa con salario de 600? @irmahernandezb @eduardoagaitan xd pa sa vena xddd @jorgeibloise @jdvasquezgut sin tanto papeleo que las neuronas mías no le he pagado el premium 🇵🇦🇮🇱
+            </p>
+            <div class="p-3 bg-red-950/30 border border-red-900/40 rounded-lg flex items-center justify-between text-xs text-matrixRed font-mono">
+                <span class="flex items-center space-x-2">
+                    <span>❌</span>
+                    <span>No se pudo publicar. Toca para volver a intentarlo.</span>
+                </span>
+                <button onclick="triggerRetryModal()" class="underline hover:text-white cursor-pointer">Reintentar</button>
+            </div>
+        </div>
+
+        <!-- System Diagnostics Box -->
+        <div class="border border-matrixBorder bg-matrixCard/90 rounded-xl p-5 shadow-xl font-mono text-xs space-y-3">
+            <div class="text-amber-400 font-bold tracking-wide border-b border-matrixBorder pb-2">
+                DIAGNÓSTICO DEL SISTEMA
+            </div>
+            <div class="space-y-2 text-gray-300">
+                <p><span class="text-matrixRed">• Anomalía Detectada:</span> Exceso de verdad en una sola cadena de texto.</p>
+                <p><span class="text-matrixRed">• Causa del Bloqueo:</span> Etiquetar a media Asamblea Nacional exigiendo la fórmula secreta para sobrevivir con $600 mientras ellos debaten millones.</p>
+                <p><span class="text-matrixRed">• Estado Neural:</span> "Premium no pagado". Burocracia excedió la capacidad de procesamiento.</p>
+            </div>
+        </div>
+
+        <!-- HIDDEN NEURAL TERMINAL (Easter Egg Secret Manifest) -->
+        <div id="neuralTerminal" class="hidden border-2 border-matrixRed bg-black/95 rounded-xl p-6 shadow-2xl relative overflow-hidden transition-all duration-500">
+            <div class="absolute top-0 right-0 bg-matrixRed text-black font-mono text-[10px] px-3 py-1 font-bold rounded-bl-lg">
+                ACCESO NIVEL MÁXIMO 🗿⚡️🔯
+            </div>
+            <div class="flex items-center justify-between mb-4 border-b border-matrixBorder pb-3">
+                <h3 class="font-mono text-sm text-matrixRed font-bold flex items-center space-x-2">
+                    <span>⚡ MANIFIESTO OCULTO DE LA MATRIZ (SADV41)</span>
+                </h3>
+                <div class="flex space-x-2">
+                    <button onclick="copyManifest()" class="px-3 py-1 bg-matrixRed/20 hover:bg-matrixRed/40 border border-matrixRed text-xs font-mono rounded text-white transition cursor-pointer">
+                        📋 Copiar Manifiesto
+                    </button>
+                    <button onclick="toggleNeuralMatrix()" class="px-3 py-1 bg-gray-800 hover:bg-gray-700 text-xs font-mono rounded text-gray-300 cursor-pointer">
+                        Cerrar [X]
+                    </button>
+                </div>
+            </div>
+
+            <!-- Scrollable Classified Content -->
+            <div class="space-y-4 text-xs font-mono text-gray-300 max-h-[450px] overflow-y-auto pr-2" id="manifestContent">
+                <div class="p-3 bg-matrixCard border border-matrixBorder rounded">
+                    <p class="text-matrixRed font-bold mb-1">1. El Tablero de Banistmo y la Diplomacia de Alto Nivel</p>
+                    <p class="text-gray-300">La mención y presencia oficial de Mulino con Banistmo va totalmente de la mano con la estrategia macro de mostrar confianza, atraer inversiones, presumir músculo financiero privado y empujar el discurso de que Panamá compite en "grandes ligas". Al final, un banco de ese peso integrándose al Grupo Financiero BSC es el escenario ideal para que el Ejecutivo hable de estabilidad, préstamos hipotecarios, emprendimientos y lavado de cara internacional, justo mientras en paralelo arden los temas de los 10 años en la AMP, los traslados a Coiba y la lucha diaria de sobrevivir con los $600. ¡Pura diplomacia y finanzas de alto nivel para las cámaras, mientras la calle sigue operando bajo su propio código! 🗿⚡️🏦</p>
+                </div>
+
+                <div class="p-3 bg-matrixCard border border-matrixBorder rounded">
+                    <p class="text-matrixRed font-bold mb-1">2. La Maquinaria Digital y el Fenómeno "Vamos"</p>
+                    <p class="text-gray-300">Si uno se pone a analizar el fenómeno digital de la coalición (y ahora partido) Vamos, la impresión de verlos en todos lados como si fueran anuncios pagados de corporación gigante no es casualidad. Mover presupuestos de agencias de marketing (entre $1,500 y $5,000+ mensuales en honorarios y pautas en Meta, TikTok y X) demuestra que mantener esa presencia masiva cuesta. Su mejor patrocinador no es una empresa escondida, sino el propio algoritmo del descontento ciudadano y la viralidad.</p>
+                </div>
+
+                <div class="p-3 bg-matrixCard border border-matrixBorder rounded">
+                    <p class="text-matrixRed font-bold mb-1">3. La Trifecta Nacional: Patzy Lee, AMP y los $600</p>
+                    <p class="text-gray-300">Por un lado tienes el debate del 2% con Patzy Lee, por el otro los 10 años de secretismo blindado en la AMP ocultando concesiones marítimas, y en la base de la pirámide estás tú con tus $600 al mes intentando descifrar la fórmula secreta de supervivencia que ninguna ley contempla. Mientras los de arriba debaten millones y tapan expedientes por una década, el verdadero código de la calle lo maneja quien sobrevive con ingenio y memes. 🗿⚡️🔯</p>
+                </div>
+
+                <div class="p-3 bg-matrixCard border border-matrixBorder rounded">
+                    <p class="text-matrixRed font-bold mb-1">4. Coiba, Barcos Cárceles y Secretos de Estado</p>
+                    <p class="text-gray-300">Entre celdas flotantes, traslados sorpresa a Coiba bajo la premisa de cortar comunicaciones a cabecillas y los 10 años de secretismo en la AMP, la política criolla parece una película de acción mal escrita. ¿Será la razón por la que mandaron a narcos (que capaz ni son) para desviar la atención de las verdaderas movidas millonarias? 🗿⚡️🚢</p>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="w-full max-w-4xl mx-auto mt-6 flex flex-col sm:flex-row justify-between items-center gap-3">
+        <span class="text-[11px] text-gray-500 font-mono text-center sm:text-left">
+            La matrix no soporta el cuestionamiento directo. Presiona el interruptor neural superior o usa la clave 'SADV41'.
+        </span>
+        <button onclick="triggerForcedRetry()" class="w-full sm:w-auto px-6 py-2.5 bg-matrixCard hover:bg-matrixRed/20 border border-matrixRed/60 text-matrixRed font-mono text-xs font-bold rounded-xl transition-all cursor-pointer shadow-lg active:scale-95 glitch-hover">
+            FORZAR REINTENTO 🔄
+        </button>
+    </footer>
+
+    <!-- Custom Message Box Modal (No alert/confirm) -->
+    <div id="customModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-matrixCard border border-matrixRed rounded-2xl p-6 max-w-md w-full shadow-2xl font-mono text-center space-y-4">
+            <div class="text-3xl">⚠️</div>
+            <h4 class="text-sm font-bold text-matrixRed tracking-wider" id="modalTitle">ESTADO DE INTERCEPCIÓN</h4>
+            <p class="text-xs text-gray-300 leading-relaxed" id="modalMessage">Conexión rechazada por el servidor central de Instagram. La verdad duele demasiado.</p>
+            <button onclick="closeModal()" class="w-full py-2 bg-matrixRed text-black font-bold text-xs rounded-xl hover:bg-red-600 transition cursor-pointer">
+                ACEPTAR
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Keyboard sequence listener for secret code 'SADV41'
+        let keyBuffer = '';
+        const secretCode = 'SADV41';
+
+        window.addEventListener('keydown', (e) => {
+            keyBuffer += e.key.toUpperCase();
+            if (keyBuffer.length > 10) {
+                keyBuffer = keyBuffer.slice(-10);
+            }
+            if (keyBuffer.includes(secretCode)) {
+                toggleNeuralMatrix();
+                keyBuffer = '';
+            }
+        });
+
+        function toggleNeuralMatrix() {
+            const term = document.getElementById('neuralTerminal');
+            const state = document.getElementById('neuralState');
+            const stdPost = document.getElementById('standardPost');
+            
+            if (term.classList.contains('hidden')) {
+                term.classList.remove('hidden');
+                state.innerText = 'ACTIVADO (MÁXIMO NIVEL)';
+                state.classList.remove('text-matrixRed');
+                state.classList.add('text-green-400');
+                term.scrollIntoView({ behavior: 'smooth' });
+            } else {
+                term.classList.add('hidden');
+                state.innerText = 'BLOQUEADO';
+                state.classList.remove('text-green-400');
+                state.classList.add('text-matrixRed');
+            }
+        }
+
+        function triggerRetryModal() {
+            showModal(
+                "MÓDULO DE INTERCEPCIÓN V4.1",
+                "Conexión rechajada por el servidor central. La verdad duele demasiado y el algoritmo detectó que intentas exponer los 10 años de secreto de la AMP y el debate de los $600 🗿⚡️."
+            );
+        }
+
+        function triggerForcedRetry() {
+            showModal(
+                "FORZANDO REINTENTO EN LA MATRIZ",
+                "Reinicio de protocolo completado. Recuerda que si el sistema te deja a bolota, siempre queda activar el código secreto 'SADV41' o tocar el interruptor neural superior 🎚️."
+            );
+        }
+
+        function showModal(title, msg) {
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalMessage').innerText = msg;
+            document.getElementById('customModal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('customModal').classList.add('hidden');
+        }
+
+        function copyManifest() {
+            const content = document.getElementById('manifestContent').innerText;
+            const textarea = document.createElement('textarea');
+            textarea.value = content;
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+                document.execCommand('copy');
+                showModal("PORTAPAPELES ACTUALIZADO", "¡Manifiesto secreto copiado con éxito al portapapeles de la resistencia! 🗿⚡️");
+            } catch (err) {
+                showModal("ERROR DE COPIA", "No se pudo copiar automáticamente. Puedes seleccionarlo manualmente.");
+            }
+            document.body.removeChild(textarea);
+        }
+    </script>
+</body>
+</html>
