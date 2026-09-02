@@ -1,1 +1,299 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Informativo - SADV41 | Modo Tormenta</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome para los íconos -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* --- EFECTO DE REALIDAD INMERSIVA: MODO TORMENTA EN BURUNGA --- */
+        
+        /* Relámpagos dinámicos simulando tormenta tropical sobre Burunga */
+        @keyframes relampago {
+            0%, 90%, 94%, 98%, 100% {
+                background-color: #0d1117;
+                box-shadow: inset 0 0 0 rgba(255, 255, 255, 0);
+            }
+            92% {
+                background-color: #1f2937;
+                box-shadow: inset 0 0 120px 40px rgba(186, 230, 253, 0.25);
+            }
+            96% {
+                background-color: #374151;
+                box-shadow: inset 0 0 180px 60px rgba(255, 255, 255, 0.4);
+            }
+        }
+
+        body.modo-tormenta {
+            animation: relampago 7s infinite;
+        }
+
+        /* Lluvia inmersiva con líneas dinámicas */
+        .lluvia-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 40;
+            overflow: hidden;
+        }
+
+        .gota {
+            position: absolute;
+            background: linear-gradient(transparent, rgba(147, 197, 253, 0.6));
+            width: 1px;
+            height: 25px;
+            opacity: 0.7;
+            animation: caer linear infinite;
+        }
+
+        @keyframes caer {
+            0% {
+                transform: translateY(-50px) rotate(10deg);
+            }
+            100% {
+                transform: translateY(105vh) rotate(10deg);
+            }
+        }
+
+        /* Animación de entrada de 1.6 segundos del protocolo */
+        #pantalla-carga {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #030712;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 5rem;
+            animation: desvanecer 0.5s ease-in-out 1.6s forwards;
+        }
+        
+        @keyframes desvanecer {
+            0% { opacity: 1; visibility: visible; }
+            100% { opacity: 0; visibility: hidden; }
+        }
+
+        #contenido-principal {
+            opacity: 0;
+            animation: aparecer 0.5s ease-in-out 1.6s forwards;
+        }
+
+        @keyframes aparecer {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+    </style>
+</head>
+<body class="modo-tormenta text-gray-100 min-h-screen selection:bg-cyan-500 selection:text-white">
+
+    <!-- Capa de Lluvia Inmersiva (Modo Tormenta Burunga) -->
+    <div class="lluvia-container" id="lluvia"></div>
+
+    <!-- Pantalla de Transición PAP -->
+    <div id="pantalla-carga">
+        <span class="animate-pulse">🗿🤙🏼🇵🇦</span>
+    </div>
+
+    <!-- Contenido Principal -->
+    <div id="contenido-principal" class="p-4 md:p-8 max-w-6xl mx-auto relative z-50">
+        
+        <!-- Encabezado con Logo de Burunga District Unificado -->
+        <header class="text-center mb-12 mt-4 flex flex-col items-center">
+            
+            <img src="https://thesteef21.github.io/Lapizasuli/assets/DISTRICT/BURUNGA/1788378657733.png" alt="Burunga District Logo" class="w-48 h-48 rounded-full mb-6 border-2 border-cyan-500/50 shadow-[0_0_35px_rgba(56,189,248,0.4)] transform transition-all duration-500 hover:scale-110 hover:shadow-[0_0_50px_rgba(56,189,248,0.8)]">
+            
+            <h1 class="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-500 tracking-tight mb-3">
+                Panel Informativo - Modo Tormenta
+            </h1>
+            <p class="text-lg text-cyan-300 font-light">Realidad Inmersiva • Burunga District ⚡️</p>
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+            <!-- Tarjeta 1: FIFA 2027 (Noticia Principal) -->
+            <div class="bg-gray-900/90 backdrop-blur-md rounded-2xl p-6 md:p-8 border-t-4 border-green-500 transform transition-all duration-300 hover:scale-[1.03] hover:-translate-y-2 hover:shadow-2xl hover:shadow-green-500/30 group cursor-default border border-gray-800">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-2xl font-bold text-white group-hover:text-green-400 transition-colors">Brasil 2027™</h2>
+                    <div class="bg-gray-800 p-3 rounded-full">
+                        <i class="fa-solid fa-trophy text-2xl text-green-500"></i>
+                    </div>
+                </div>
+                <h3 class="text-lg font-semibold text-gray-300 mb-3">Copa Mundial Femenina de la FIFA</h3>
+                <p class="text-gray-400 text-sm mb-5 leading-relaxed">
+                    La 10° edición del máximo certamen llegará a Sudamérica. Un torneo histórico que reunirá a la élite del fútbol femenino[span_0](start_span)[span_0](end_span).
+                </p>
+                <ul class="space-y-3 text-sm text-gray-300">
+                    <li class="flex items-start">
+                        <i class="fa-regular fa-calendar text-green-500 mt-1 mr-3 w-4"></i> 
+                        <span><strong>24 de junio al 25 de julio de 2027</strong>[span_1](start_span)[span_1](end_span)</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fa-solid fa-users text-green-500 mt-1 mr-3 w-4"></i> 
+                        <span><strong>32 selecciones</strong> compitiendo por la gloria[span_2](start_span)[span_2](end_span).</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fa-solid fa-map-location-dot text-green-500 mt-1 mr-3 w-4"></i> 
+                        <span><strong>8 ciudades sedes</strong> en Brasil[span_3](start_span)[span_3](end_span).</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fa-solid fa-stadium text-green-500 mt-1 mr-3 w-4"></i> 
+                        <span>La Gran Final se disputará en el mítico <strong>Estadio Maracaná</strong>[span_4](start_span)[span_4](end_span).</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Tarjeta 2: Caminata Cerro Cabra -->
+            <div class="bg-gray-900/90 backdrop-blur-md rounded-2xl p-6 md:p-8 border-t-4 border-yellow-500 transform transition-all duration-300 hover:scale-[1.03] hover:-translate-y-2 hover:shadow-2xl hover:shadow-yellow-500/30 flex flex-col justify-between group border border-gray-800">
+                <div>
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="text-2xl font-bold text-white group-hover:text-yellow-400 transition-colors">Caminata a Cerro Cabra</h2>
+                        <div class="bg-gray-800 p-3 rounded-full">
+                            <i class="fa-solid fa-mountain text-2xl text-yellow-500"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-5 leading-relaxed">
+                        Aventura al aire libre organizada por la <strong>Alcaldía de Arraiján</strong>[span_5](start_span)[span_5](end_span). ¡Únete para disfrutar de la naturaleza y el ejercicio!
+                    </p>
+                    <div class="bg-gray-800/80 rounded-xl p-4 mb-6 border border-gray-700">
+                        <div class="flex items-center text-sm text-gray-300 mb-2">
+                            <i class="fa-regular fa-calendar-check text-yellow-500 mr-3"></i>
+                            <span>Viernes, <strong>6 de Septiembre</strong>[span_6](start_span)[span_6](end_span)</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-300">
+                            <i class="fa-regular fa-clock text-yellow-500 mr-3"></i>
+                            <span><strong>6:00 AM</strong> (Hora de partida)[span_7](start_span)[span_7](end_span)</span>
+                        </div>
+                    </div>
+                </div>
+                <a href="https://maps.app.goo.gl/ZAUHbnPCTRahQCCV6?g_st=ac" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-full bg-yellow-600 hover:bg-yellow-500 text-white font-semibold py-3 px-4 rounded-xl transition-colors duration-200 shadow-lg shadow-yellow-900/30">
+                    <i class="fa-solid fa-location-dot mr-2"></i> Ver ubicación en Maps[span_8](start_span)[span_8](end_span)
+                </a>
+            </div>
+
+            <!-- Tarjeta 3: Donación Yappy -->
+            <div class="bg-gray-900/90 backdrop-blur-md rounded-2xl p-6 md:p-8 border-t-4 border-blue-500 transform transition-all duration-300 hover:scale-[1.03] hover:-translate-y-2 hover:shadow-2xl hover:shadow-blue-500/30 group border border-gray-800">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-2xl font-bold text-white group-hover:text-blue-400 transition-colors">Aporte Solidario</h2>
+                    <div class="bg-gray-800 p-3 rounded-full">
+                        <i class="fa-solid fa-hand-holding-dollar text-2xl text-blue-500"></i>
+                    </div>
+                </div>
+                <p class="text-gray-400 text-sm mb-6 leading-relaxed">
+                    Toda ayuda cuenta. Apoya a la comunidad realizando tu donación rápida y segura a través de Yappy.
+                </p>
+                <div class="bg-gradient-to-br from-blue-950/60 to-gray-900 p-6 rounded-xl border border-blue-800/50 flex flex-col items-center text-center">
+                    <span class="text-xs font-bold text-blue-400 uppercase tracking-widest mb-1">Monto Sugerido</span>
+                    <span class="text-5xl font-extrabold text-white mb-4 shadow-blue-500 drop-shadow-md">$5.00[span_9](start_span)[span_9](end_span)</span>
+                    <div class="bg-white/10 backdrop-blur-sm px-5 py-2 rounded-full border border-white/10">
+                        <span class="text-gray-300 font-medium">Yappy: <span class="text-white font-bold tracking-wide">@activo2030panamaoeste</span>[span_10](start_span)[span_10](end_span)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tarjeta 4: TikTok / Llamado a la acción -->
+            <div class="bg-gray-900/90 backdrop-blur-md rounded-2xl p-6 md:p-8 border-t-4 border-pink-500 transform transition-all duration-300 hover:scale-[1.03] hover:-translate-y-2 hover:shadow-2xl hover:shadow-pink-500/30 flex flex-col justify-between group border border-gray-800">
+                <div>
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="text-2xl font-bold text-white group-hover:text-pink-400 transition-colors">Apoyo en Redes</h2>
+                        <div class="bg-gray-800 p-3 rounded-full">
+                            <i class="fa-brands fa-tiktok text-2xl text-pink-500"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gray-800/80 p-5 rounded-xl border border-gray-700 mb-6 relative overflow-hidden">
+                        <div class="absolute -right-4 -top-4 w-16 h-16 bg-pink-500/10 rounded-full blur-xl"></div>
+                        
+                        <p class="text-gray-300 text-lg italic text-center relative z-10 leading-snug">
+                            "Díganle a Barcelo que apoye el en vivo de Fulo Fresh[span_11](start_span)"[span_11](end_span)
+                        </p>
+                        <div class="text-center mt-3 text-xl relative z-10">
+                            🗿🤙🏼 🇵🇦🇮🇱🇺🇸🔯☦️[span_12](start_span)[span_12](end_span)
+                        </div>
+                    </div>
+                </div>
+                
+                <a href="https://vt.tiktok.com/ZSq1Bggfv/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-full bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-500 hover:to-purple-500 text-white font-bold py-3 px-4 rounded-xl transition-all duration-300 shadow-lg shadow-pink-900/30">
+                    <i class="fa-solid fa-play mr-2"></i> Ir al Live en TikTok[span_13](start_span)[span_13](end_span)
+                </a>
+            </div>
+
+            <!-- Tarjeta 5: Noticia Radares / El Colmo -->
+            <div class="bg-gray-900/90 backdrop-blur-md rounded-2xl p-6 md:p-8 border-t-4 border-red-500 transform transition-all duration-300 hover:scale-[1.03] hover:-translate-y-2 hover:shadow-2xl hover:shadow-red-500/30 flex flex-col justify-between group md:col-span-2 border border-gray-800">
+                <div class="md:flex md:gap-8 md:items-center">
+                    <div class="flex-1">
+                        <div class="flex items-center justify-between mb-6">
+                            <h2 class="text-2xl font-bold text-white group-hover:text-red-400 transition-colors">Operación Radar</h2>
+                            <div class="bg-gray-800 p-3 rounded-full md:hidden">
+                                <i class="fa-solid fa-satellite-dish text-2xl text-red-500"></i>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-300 mb-3">Colombia y EE.UU. en Tumaco</h3>
+                        <p class="text-gray-400 text-sm mb-5 leading-relaxed">
+                            Evalúan instalación de radares para reforzar la ofensiva militar contra el narcotráfico en la región.
+                        </p>
+                    </div>
+                    
+                    <div class="flex-1">
+                        <!-- El Colmo -->
+                        <div class="bg-red-950/40 border border-red-800/50 p-5 rounded-xl mb-6 relative overflow-hidden">
+                            <div class="absolute -right-4 -top-4 w-16 h-16 bg-red-500/10 rounded-full blur-xl"></div>
+                            <p class="text-red-200 text-md font-medium italic relative z-10">
+                                <span class="font-bold text-red-400 block mb-1">El colmo:</span> 
+                                ¡Tanto radar satelital de última generación y terminan detectando hasta a los OVNIs, pero no encuentran las llaves del carro! 🗿🤙🏼🛸
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="hidden md:flex bg-gray-800 p-5 rounded-full items-center justify-center">
+                        <i class="fa-solid fa-satellite-dish text-4xl text-red-500"></i>
+                    </div>
+                </div>
+                
+                <a href="https://www.laestrella.com.pa/mundo/america/colombia-y-estados-unidos-evaluan-radares-en-tumaco-para-reforzar-ofensiva-militar-contra-el-narcotrafico-FD25377741" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-full bg-red-600 hover:bg-red-500 text-white font-semibold py-3 px-4 rounded-xl transition-colors duration-200 shadow-lg shadow-red-900/20 mt-4 md:mt-0">
+                    <i class="fa-solid fa-newspaper mr-2"></i> Leer noticia en La Estrella de Panamá
+                </a>
+            </div>
+
+        </div>
+
+        <footer class="mt-16 text-center pb-8">
+            <p class="text-gray-400 text-sm flex items-center justify-center gap-2">
+                Generado con propósito <i class="fa-solid fa-bolt text-yellow-400"></i> SADV41 • Modo Tormenta Burunga ⚡️🗿🤙🏼🇵🇦
+            </p>
+        </footer>
+
+    </div>
+
+    <!-- Script para generar la lluvia inmersiva de forma dinámica -->
+    <script>
+        const lluviaContainer = document.getElementById('lluvia');
+        const cantidadGotas = 60;
+
+        for (let i = 0; i < cantidadGotas; i++) {
+            const gota = document.createElement('div');
+            gota.classList.add('gota');
+            gota.style.left = `${Math.random() * 100}vw`;
+            gota.style.top = `${Math.random() * -100}px`;
+            gota.style.animationDuration = `${0.6 + Math.random() * 0.8}s`;
+            gota.style.animationDelay = `${Math.random() * 2}s`;
+            lluviaContainer.appendChild(gota);
+        }
+    </script>
+</body>
+</html>
 
