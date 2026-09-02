@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boletín Informativo</title>
+    <!-- Integración de Tailwind CSS para el diseño -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 text-gray-800 font-sans p-4 md:p-8">
+
+    <div class="max-w-5xl mx-auto">
+        
+        <!-- Encabezado -->
+        <header class="text-center mb-10">
+            <h1 class="text-4xl font-extrabold text-gray-900 tracking-tight mb-2">Panel Informativo</h1>
+            <p class="text-lg text-gray-600">Deportes, comunidad y eventos locales</p>
+        </header>
+
+        <!-- Contenedor de Tarjetas -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+            <!-- Tarjeta 1: FIFA 2027 -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 border-l-8 border-green-500 hover:shadow-xl transition-shadow">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-2xl font-bold text-gray-800">Copa Mundial Femenina 2027™</h2>
+                    <i class="fa-solid fa-futbol text-3xl text-green-500"></i>
+                </div>
+                <p class="text-gray-600 mb-4">La 10° edición del máximo certamen mundialista llegará a Sudamérica por primera vez, prometiendo hacer historia.</p>
+                <ul class="space-y-2 text-sm">
+                    <li><i class="fa-solid fa-calendar-days text-blue-500 mr-2"></i> <strong>Fechas:</strong> 24 de junio al 25 de julio de 2027</li>
+                    <li><i class="fa-solid fa-location-dot text-red-500 mr-2"></i> <strong>Sede:</strong> Brasil (8 ciudades anfitrionas)</li>
+                    <li><i class="fa-solid fa-trophy text-yellow-500 mr-2"></i> <strong>Maracaná:</strong> Sede del partido inaugural y la Gran Final.</li>
+                </ul>
+                <div class="mt-4 p-3 bg-green-50 rounded-lg">
+                    <p class="text-xs text-green-800">Brasil iniciará su andadura el 24 de junio en Río de Janeiro. ¡Prepárate para la acción!</p>
+                </div>
+            </div>
+
+            <!-- Tarjeta 2: Caminata Cerro Cabra -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 border-l-8 border-yellow-500 hover:shadow-xl transition-shadow">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-2xl font-bold text-gray-800">Caminata a Cerro Cabra</h2>
+                    <i class="fa-solid fa-mountain-sun text-3xl text-yellow-500"></i>
+                </div>
+                <p class="text-gray-600 mb-4">Organizada por la Alcaldía de Arraiján. ¡Únete a esta aventura al aire libre y conecta con la naturaleza!</p>
+                <ul class="space-y-2 text-sm mb-4">
+                    <li><i class="fa-solid fa-calendar-check text-indigo-500 mr-2"></i> <strong>Fecha:</strong> Viernes, 6 de septiembre de 2026</li>
+                    <li><i class="fa-solid fa-clock text-indigo-500 mr-2"></i> <strong>Hora:</strong> 6:00 AM</li>
+                </ul>
+                <a href="https://maps.app.goo.gl/ZAUHbnPCTRahQCCV6?g_st=ac" target="_blank" class="inline-block w-full text-center bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-lg transition-colors">
+                    <i class="fa-solid fa-map-location-dot mr-2"></i> Ver Ubicación en Maps
+                </a>
+            </div>
+
+            <!-- Tarjeta 3: Donación Yappy -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 border-l-8 border-blue-600 hover:shadow-xl transition-shadow">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-2xl font-bold text-gray-800">Aporte Solidario</h2>
+                    <i class="fa-solid fa-hand-holding-dollar text-3xl text-blue-600"></i>
+                </div>
+                <p class="text-gray-600 mb-4">Apoya a la comunidad con tu donación. Cada aporte suma para hacer la diferencia.</p>
+                <div class="bg-blue-50 p-4 rounded-xl flex flex-col items-center justify-center border border-blue-100">
+                    <span class="text-sm text-gray-500 uppercase tracking-wide font-semibold">Monto Sugerido</span>
+                    <span class="text-4xl font-extrabold text-blue-700 my-2">$5.00</span>
+                    <div class="flex items-center mt-2 text-lg font-medium text-gray-800 bg-white px-4 py-2 rounded-full shadow-sm">
+                        <span class="text-blue-600 font-bold mr-1">Yappy:</span> @activo2030panamaoeste
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tarjeta 4: Llamado a la Acción (TikTok) -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 border-l-8 border-pink-500 hover:shadow-xl transition-shadow flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-2xl font-bold text-gray-800">En Vivo: Fulo Fresh</h2>
+                        <i class="fa-brands fa-tiktok text-3xl text-pink-500"></i>
+                    </div>
+                    <p class="text-gray-600 mb-4">¡Atención <strong>Barcelo</strong>! Tienes un llamado especial para ir a apoyar el live de nuestro fren Fulo Fresh. ¡No faltes en el peregrinaje de TikTok!</p>
+                </div>
+                
+                <a href="https://vt.tiktok.com/ZSq1Bggfv/" target="_blank" class="inline-block w-full text-center bg-black hover:bg-gray-800 text-white font-bold py-3 px-4 rounded-lg transition-colors mt-4">
+                    <i class="fa-solid fa-play mr-2 text-pink-500"></i> Ir al Live en TikTok 🗿🤙🏼
+                </a>
+            </div>
+
+        </div>
+        
+        <!-- Pie de página -->
+        <footer class="mt-12 text-center text-sm text-gray-500">
+            <p>Generado con propósito y buena vibra 🇵🇦</p>
+        </footer>
+    </div>
+
+</body>
+</html>
