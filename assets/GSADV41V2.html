@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noticia de Combustible - SADV41</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        
+        /* Animación de entrada de 1.6 segundos del protocolo */
+        #pantalla-carga {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #111827; /* bg-gray-900 para que coincida con el fondo */
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 5rem;
+            /* La animación espera 1.6s y luego desaparece en 0.5s */
+            animation: desvanecer 0.5s ease-in-out 1.6s forwards;
+        }
+        
+        @keyframes desvanecer {
+            0% { opacity: 1; visibility: visible; }
+            100% { opacity: 0; visibility: hidden; }
+        }
+
+        /* Contenido principal oculto al inicio, se revela tras los 1.6s */
+        #contenido-principal {
+            opacity: 0;
+            animation: aparecer 0.5s ease-in-out 1.6s forwards;
+        }
+
+        @keyframes aparecer {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 min-h-screen selection:bg-cyan-500 selection:text-white">
+
+    <!-- Pantalla de Transición PAP -->
+    <div id="pantalla-carga">
+        <span class="animate-pulse">🗿🤙🏼🇵🇦</span>
+    </div>
+
+    <!-- Contenido Real -->
+    <div id="contenido-principal" class="p-4 md:p-8 max-w-3xl mx-auto">
+        <header class="text-center mb-10 mt-4">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-red-500 tracking-tight mb-3">
+                SADV41 News
+            </h1>
+            <p class="text-lg text-gray-400 font-light">Actualización de Precios</p>
+        </header>
+
+        <!-- Tarjeta de Combustible -->
+        <div class="bg-gray-800 rounded-2xl p-6 md:p-8 border-t-4 border-orange-500 transform transition-all duration-300 hover:scale-[1.03] hover:-translate-y-2 hover:shadow-2xl hover:shadow-orange-500/20 flex flex-col justify-between group">
+            <div>
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-2xl font-bold text-white group-hover:text-orange-400 transition-colors">Alza de Combustible</h2>
+                    <div class="bg-gray-900 p-3 rounded-full">
+                        <i class="fa-solid fa-gas-pump text-2xl text-orange-500"></i>
+                    </div>
+                </div>
+                
+                <h3 class="text-xl font-semibold text-gray-300 mb-3">Nuevos precios desde el 4 de septiembre de 2026</h3>
+                <p class="text-gray-400 text-sm mb-6 leading-relaxed">
+                    La Secretaría Nacional de Energía anunció los nuevos incrementos. A continuación, los precios máximos por litro fijados para el área de <strong>Arraiján y La Chorrera</strong>:
+                </p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+                    <div class="bg-gray-900/60 p-4 rounded-xl border border-gray-700 text-center">
+                        <div class="text-orange-400 font-bold mb-1 text-sm uppercase tracking-wider">95 Octanos</div>
+                        <div class="text-3xl font-extrabold text-white mb-1">B/. 1.281</div>
+                        <div class="text-xs text-red-400 font-medium bg-red-900/30 py-1 rounded-md">
+                            <i class="fa-solid fa-arrow-trend-up"></i> Sube +4.9¢
+                        </div>
+                    </div>
+                    <div class="bg-gray-900/60 p-4 rounded-xl border border-gray-700 text-center">
+                        <div class="text-green-400 font-bold mb-1 text-sm uppercase tracking-wider">91 Octanos</div>
+                        <div class="text-3xl font-extrabold text-white mb-1">B/. 1.197</div>
+                        <div class="text-xs text-red-400 font-medium bg-red-900/30 py-1 rounded-md">
+                            <i class="fa-solid fa-arrow-trend-up"></i> Sube +3.4¢
+                        </div>
+                    </div>
+                    <div class="bg-gray-900/60 p-4 rounded-xl border border-gray-700 text-center">
+                        <div class="text-yellow-400 font-bold mb-1 text-sm uppercase tracking-wider">Diésel ULS</div>
+                        <div class="text-3xl font-extrabold text-white mb-1">B/. 1.403</div>
+                        <div class="text-xs text-red-400 font-medium bg-red-900/30 py-1 rounded-md">
+                            <i class="fa-solid fa-arrow-trend-up"></i> Sube +5.0¢
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Botón de Lectura -->
+            <a href="https://www.laestrella.com.pa/panama/nacional/gasolina-y-diesel-subiran-de-precio-desde-este-viernes-4-de-septiembre-en-panama-AD25374037" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-full bg-gray-700 hover:bg-gray-600 border border-gray-600 text-gray-200 hover:text-white font-semibold py-4 px-4 rounded-xl transition-all duration-300 shadow-lg group-hover:border-orange-500/50">
+                <i class="fa-solid fa-glasses mr-3 text-orange-400 text-xl"></i> Lectura para esos que quieren perder la vista 🗿🤙🏼🇵🇦
+            </a>
+        </div>
+        
+    </div>
+</body>
+</html>
