@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ley SADV41 - Decreto Antivaguancia | Llantería Turbo Tire</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        industrial: '#121316',
+                        panel: '#1a1c23',
+                        neonGreen: '#00ff66',
+                        neonCyan: '#00f3ff',
+                        neonOrange: '#ff6600',
+                    },
+                    boxShadow: {
+                        'neon-green': '0 0 15px rgba(0, 255, 102, 0.4)',
+                        'neon-cyan': '0 0 15px rgba(0, 243, 255, 0.4)',
+                        'neon-orange': '0 0 15px rgba(255, 102, 0, 0.4)',
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background-color: #0b0c10;
+            color: #c5c6c7;
+        }
+        .title-font {
+            font-family: 'Orbitron', sans-serif;
+        }
+        .scanlines {
+            background: linear-gradient(
+                to bottom,
+                rgba(255,255,255,0),
+                rgba(255,255,255,0) 50%,
+                rgba(0, 0, 0, 0.3) 50%,
+                rgba(0, 0, 0, 0.3)
+            );
+            background-size: 100% 4px;
+        }
+        .hud-border {
+            clip-path: polygon(0 0, calc(100% - 15px) 0, 100% 15px, 100% 100%, 15px 100%, 0 calc(100% - 15px));
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-industrial text-gray-100 scanlines flex flex-col justify-between selection:bg-neonGreen selection:text-black">
+
+    <header class="w-full border-b border-gray-800 bg-panel/80 backdrop-blur sticky top-0 z-50">
+        <div class="max-w-4xl mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <span class="text-2xl animate-pulse">🛸</span>
+                <div>
+                    <h1 class="title-font text-sm font-bold text-neonCyan tracking-wider">LLANTERÍA TURBO TIRE</h1>
+                    <p class="text-xs text-gray-400">Burunga, Panamá Oeste 🗿🤙🏼</p>
+                </div>
+            </div>
+            <div class="hud-border bg-black/60 border border-neonGreen/40 px-3 py-1 text-xs text-neonGreen title-font font-bold">
+                ESTADO: VIGENTE
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-8 w-full flex-grow flex flex-col gap-6">
+
+        <!-- Hero Notice Card -->
+        <div class="hud-border bg-panel border-2 border-neonCyan p-6 sm:p-8 shadow-neon-cyan relative overflow-hidden">
+            <!-- Background glow decoration -->
+            <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-neonCyan/10 rounded-full blur-3xl pointer-events-none"></div>
+            
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6 border-b border-gray-700 pb-4">
+                <div>
+                    <span class="text-xs uppercase tracking-widest text-neonOrange title-font font-semibold">Decreto Oficial N° 41</span>
+                    <h2 class="title-font text-2xl sm:text-4xl font-black text-white tracking-wide mt-1">
+                        LEY SADV41
+                    </h2>
+                    <p class="text-neonCyan title-font font-semibold text-sm sm:text-base">SECCIÓN ESPECIAL: EL DECRETO ANTIVAGUANCIA</p>
+                </div>
+                <div class="bg-black/80 border border-neonOrange px-4 py-2 rounded text-center">
+                    <span class="block text-xs text-gray-400">Objetivo Principal</span>
+                    <span class="text-neonOrange title-font font-bold text-sm">EL CHIKI 🗿</span>
+                </div>
+            </div>
+
+            <p class="text-gray-300 text-sm sm:text-base leading-relaxed mb-6">
+                Decreto emitido de emergencia ante el desequilibrio operativo provocado por la importación masiva de artículos de Temu (licencias alienígenas, kits de barbería, pesca y tejido) mientras el socio operativo carga con el taller en solitario.
+            </p>
+
+            <!-- Interactive Counter Box -->
+            <div class="bg-black/70 border border-neonGreen/60 rounded-lg p-5 shadow-neon-green flex flex-col md:flex-row items-center justify-between gap-4">
+                <div class="text-center md:text-left">
+                    <span class="text-xs text-gray-400 title-font tracking-wider block">CONTADOR DE CONDENA LABORAL</span>
+                    <span class="text-lg font-bold text-white">Llantas pendientes por bajar del vago:</span>
+                </div>
+                <div class="flex items-center gap-4">
+                    <span id="tireCounter" class="title-font text-4xl sm:text-5xl font-black text-neonGreen animate-pulse">146</span>
+                    <div class="flex flex-col gap-1">
+                        <button onclick="decrementTire()" class="bg-neonGreen hover:bg-neonGreen/80 text-black font-bold title-font px-4 py-2 text-xs rounded transition transform active:scale-95 shadow-neon-green">
+                            Registrar Llanta Bajada (-1)
+                        </button>
+                        <button onclick="resetCounter()" class="bg-gray-800 hover:bg-gray-700 text-gray-300 font-semibold text-xs px-4 py-1 rounded transition">
+                            Reiniciar Cuenta
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div id="statusMessage" class="mt-3 text-center text-xs text-neonCyan title-font h-5"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            
+            <!-- Article 1 -->
+            <div class="hud-border bg-panel border border-gray-700 p-5 flex flex-col justify-between hover:border-neonCyan transition group">
+                <div>
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="title-font text-xs text-neonCyan font-bold">ARTÍCULO 1</span>
+                        <span class="text-lg">⚖️</span>
+                    </div>
+                    <h3 class="title-font font-bold text-white text-base mb-2 group-hover:text-neonCyan transition">Principio de Carga Pesada</h3>
+                    <p class="text-xs text-gray-400 leading-relaxed">
+                        Queda estrictamente prohibido que un miembro del equipo se dedique a importar mercancía intergaláctica, de barbería o de tejido por Temu mientras el socio operativo carga con el peso físico del taller.
+                    </p>
+                </div>
+                <div class="mt-4 pt-3 border-t border-gray-800 flex items-center justify-between text-[10px] text-gray-500">
+                    <span>SECCIÓN: OPERATIVA</span>
+                    <span class="text-neonGreen">SANCIONABLE</span>
+                </div>
+            </div>
+
+            <!-- Article 2 -->
+            <div class="hud-border bg-panel border border-gray-700 p-5 flex flex-col justify-between hover:border-neonGreen transition group">
+                <div>
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="title-font text-xs text-neonGreen font-bold">ARTÍCULO 2</span>
+                        <span class="text-lg">📦</span>
+                    </div>
+                    <h3 class="title-font font-bold text-white text-base mb-2 group-hover:text-neonGreen transition">El Impuesto de Arrastre</h3>
+                    <p class="text-xs text-gray-400 leading-relaxed">
+                        Todo paquete proveniente de China que llegue a la llantería será automáticamente gravado con una tasa estricta de 146 llantas bajadas, rodadas y acomodadas a pulso.
+                    </p>
+                </div>
+                <div class="mt-4 pt-3 border-t border-gray-800 flex items-center justify-between text-[10px] text-gray-500">
+                    <span>SECCIÓN: ADUANAS</span>
+                    <span class="text-neonOrange">OBLIGATORIO</span>
+                </div>
+            </div>
+
+            <!-- Article 3 -->
+            <div class="hud-border bg-panel border border-gray-700 p-5 flex flex-col justify-between hover:border-neonOrange transition group">
+                <div>
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="title-font text-xs text-neonOrange font-bold">ARTÍCULO 3</span>
+                        <span class="text-lg">👽</span>
+                    </div>
+                    <h3 class="title-font font-bold text-white text-base mb-2 group-hover:text-neonOrange transition">La Regla del Vago con Suerte</h3>
+                    <p class="text-xs text-gray-400 leading-relaxed">
+                        Estudiar mucho y tener suerte en los envíos no exime de la co-responsabilidad laboral. El título de empresario multifacético queda revocado hasta echar grasa y sudor en el foso.
+                    </p>
+                </div>
+                <div class="mt-4 pt-3 border-t border-gray-800 flex items-center justify-between text-[10px] text-gray-500">
+                    <span>SECCIÓN: PERSONAL</span>
+                    <span class="text-neonCyan">INAPELABLE</span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="bg-panel border border-gray-800 p-4 rounded-lg flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="text-center sm:text-left">
+                <p class="text-xs text-gray-400">¿El vago apareció por el taller a rendir cuentas?</p>
+                <p class="text-sm font-semibold text-white title-font">Notifica al comité de la llantería:</p>
+            </div>
+            <div class="flex gap-2">
+                <button onclick="cobrarCuota()" class="hud-border bg-neonOrange hover:bg-neonOrange/80 text-black font-bold title-font px-4 py-2 text-xs transition shadow-neon-orange">
+                    Cobrar Cuota al Vago 🗿🤙🏼
+                </button>
+                <button onclick="copiarLey()" class="bg-gray-800 hover:bg-gray-700 text-gray-200 text-xs px-3 py-2 rounded transition">
+                    Copiar Decreto
+                </button>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="w-full border-t border-gray-800 bg-industrial py-4 text-center text-xs text-gray-500">
+        <p>Ley SADV41 promulgada oficialmente para la justicia laboral en Burunga 🛸🗿 | Estilo HUD Industrial</p>
+    </footer>
+
+    <script>
+        let tiresLeft = 146;
+
+        function updateCounterDisplay() {
+            const counterEl = document.getElementById('tireCounter');
+            counterEl.textContent = tiresLeft;
+            
+            // Visual feedback based on remaining count
+            if (tiresLeft <= 0) {
+                counterEl.classList.remove('text-neonGreen');
+                counterEl.classList.add('text-neonCyan');
+                document.getElementById('statusMessage').textContent = "¡CONDENA CUMPLIDA! El Chiki ya puede volver a pedir por Temu.";
+            } else {
+                counterEl.classList.remove('text-neonCyan');
+                counterEl.classList.add('text-neonGreen');
+            }
+        }
+
+        function decrementTire() {
+            if (tiresLeft > 0) {
+                tiresLeft--;
+                updateCounterDisplay();
+                document.getElementById('statusMessage').textContent = `¡Llanta bajada! Faltan ${tiresLeft} por acomodar a pulso.`;
+            } else {
+                document.getElementById('statusMessage').textContent = "¡Ya no quedan llantas pendientes! Celebremos en la llantería 🗿.";
+            }
+        }
+
+        function resetCounter() {
+            tiresLeft = 146;
+            updateCounterDisplay();
+            document.getElementById('statusMessage').textContent = "Contador reiniciado a la cuota original de 146 llantas.";
+        }
+
+        function cobrarCuota() {
+            const messages = [
+                "¡Alerta! El Chiki intentó pagar con un paquete de Temu pero fue rechazado en la puerta.",
+                "¡Orden ejecutada! Se le asignaron 20 llantas extra por intentar evadir el impuesto.",
+                "¡Aviso! El vago fue visto estudiando bajo un árbol mientras tú bajas llantas solo.",
+                "¡Éxito! El comité de la llantería ha emitido una advertencia formal con sabor a grasa de motor."
+            ];
+            const randomMsg = messages[Math.floor(Math.random() * messages.length)];
+            document.getElementById('statusMessage').textContent = randomMsg;
+        }
+
+        function copiarLey() {
+            const textToCopy = "LEY SADV41 - DECRETO ANTIVAGUANCIA: 1. Prohibido importar por Temu mientras el socio carga el taller. 2. Todo paquete = 146 llantas bajadas a pulso. 3. Estudiar no exime de echar grasa. ¡Llantería Turbo Tire (Burunga)! 🗿🤙🏼";
+            
+            // Using safe document.execCommand fallback compliant with environment restrictions
+            const textarea = document.createElement('textarea');
+            textarea.value = textToCopy;
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+                document.execCommand('copy');
+                document.getElementById('statusMessage').textContent = "¡Decreto copiado al portapapeles con éxito! 📋";
+            } catch (err) {
+                document.getElementById('statusMessage').textContent = "No se pudo copiar automáticamente.";
+            }
+            document.body.removeChild(textarea);
+        }
+    </script>
+</body>
+</html>
