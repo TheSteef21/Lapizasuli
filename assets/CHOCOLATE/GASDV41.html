@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ecosistema Unificado - SADV41</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- React & ReactDOM CDN -->
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <!-- Babel para compilar JSX en el navegador -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body class="bg-[#0B0F19] text-slate-100 font-sans selection:bg-emerald-500 selection:text-white">
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState } = React;
+
+    const laminasData = [
+      {
+        id: 13,
+        isTrending: true,
+        lamina: "LÁMINA COLECCIONABLE #13 - SADV41",
+        category: "Sismo",
+        title: "Terremoto de magnitud 6.3 sacude Alaska y alerta a Rusia",
+        summary: "El USGS registró un sismo M 6.3 a 84 km de Nikolski, Islas Aleutianas. Sin probabilidad de pérdidas ni daños.",
+        url: "https://www.threads.com/share/BADRm6gRrt/",
+        type: "joke",
+        surprise: "6.3 en Alaska... ¡allá hace tanto frío que hasta las placas tectónicas tiemblan, pero de hielo!"
+      },
+      {
+        id: 14,
+        isTrending: false,
+        lamina: "LÁMINA COLECCIONABLE #14 - SADV41",
+        category: "Economía",
+        title: "Alza de Combustible: Nuevos precios",
+        summary: "95 Octanos a B/. 1.281, 91 Octanos a B/. 1.197 y Diésel a B/. 1.403 en Arraiján y La Chorrera",
+        url: "#",
+        type: "joke",
+        surprise: "Sube el combustible... ¡voy a tener que echarle agua al tanque y fe al motor!"
+      },
+      {
+        id: 15,
+        isTrending: false,
+        lamina: "LÁMINA COLECCIONABLE #15 - SADV41",
+        category: "Judicial",
+        title: "Operación Credenciales I: Diplomas Falsos",
+        summary: "Jueza ordena detención provisional para 10 imputados y casa por cárcel para otros 13",
+        url: "#",
+        type: "joke",
+        isMurder: true,
+        surprise: "Diplomas falsos... ¡con razón hay tanto experto que no sabe ni prender la computadora!"
+      },
+      {
+        id: 1,
+        isTrending: true,
+        lamina: "LÁMINA COLECCIONABLE #01 - SADV41",
+        category: "Historia",
+        title: "El Origen de la Logia Pluscuamperfecta",
+        summary: "Documentos desclasificados revelan las primeras reuniones en la zona de Burunga.",
+        url: "#",
+        type: "bible",
+        surprise: "Porque donde están dos o tres congregados en mi nombre, allí estoy yo en medio de ellos. Mateo 18:20"
+      }
+    ];
+
+    function LaminaCard({ lamina }) {
+      return (
+        <div className={`group bg-[#111827] rounded-2xl overflow-hidden shadow-xl flex flex-col relative transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 ${lamina.isTrending ? "border-2 border-red-500/60" : "border border-[#1F2937] hover:border-slate-700/80"}`}>
+          <div className="relative overflow-hidden bg-gradient-to-r from-amber-300 to-yellow-500 text-[#0B0F19] px-4 py-2.5 flex items-center justify-between shadow-[inset_0_1px_0_rgba(255,255,255,0.5),_inset_0_-1px_0_rgba(0,0,0,0.2),_0_2px_8px_rgba(0,0,0,0.3)] backdrop-saturate-125">
+            <span className="text-[10px] font-black tracking-widest uppercase truncate pr-2 z-10">{lamina.lamina}</span>
+            <span className="text-[10px] shrink-0 z-10">✨🍫</span>
+            {lamina.isTrending && (
+              <div className="absolute -top-2 -right-2 bg-red-600 text-white text-[9px] font-black px-2.5 py-1 rounded-full flex items-center gap-1">
+                #1 EN TENDENCIA
+              </div>
+            )}
+          </div>
+
+          <div className={`px-5 py-4 border-b flex flex-col items-center justify-center min-h-[92px] ${lamina.isMurder ? "bg-slate-900/80 border-slate-800" : "bg-slate-900/60 border-slate-800"}`}>
+            {lamina.type === "joke" ? (
+              <div className="text-center w-full">
+                <div className="text-[11px] font-bold tracking-widest uppercase text-amber-300/80 mb-2">😂 Chiste del día</div>
+                <p className="text-slate-100 italic text-[13px] leading-relaxed font-medium">"{lamina.surprise}"</p>
+              </div>
+            ) : (
+              <div className="text-center w-full">
+                <div className="text-[11px] font-bold tracking-widest uppercase text-emerald-300/80 mb-2">✝️ Versículo Bíblico</div>
+                <p className="text-slate-200 italic text-[12px] leading-relaxed">{lamina.surprise}</p>
+              </div>
+            )}
+          </div>
+
+          <div className="p-5 flex-grow flex flex-col">
+            <span className="text-[10px] font-bold tracking-widest uppercase text-slate-500 mb-2">{lamina.category}</span>
+            <a href={lamina.url} target="_blank" rel="noopener noreferrer" className="font-bold text-white text-[14px] leading-tight hover:text-amber-200 transition">
+              {lamina.title}
+            </a>
+            <p className="text-[12px] text-slate-400 mt-2 leading-relaxed">{lamina.summary}</p>
+
+            <div className="mt-4">
+              <a href={lamina.url} target="_blank" rel="noopener noreferrer" className={`w-full inline-flex items-center justify-center gap-2 font-bold py-3 px-4 rounded-xl text-[13px] transition shadow-lg ${lamina.isMurder ? "bg-slate-700 text-white" : lamina.isTrending ? "bg-gradient-to-r from-amber-400 to-yellow-500 text-[#0B0F19]" : "bg-gradient-to-r from-emerald-600 to-teal-500 text-white"}`}>
+                🍫 Destapar Chocolate → Leer Fuente
+              </a>
+            </div>
+
+            <div className="mt-4 pt-3 border-t border-slate-800/60 flex flex-col gap-2">
+              <p className="text-[11px] italic text-emerald-300/80">¿Pa'eso tú quieres andar leyendo y enterándote de todo? 🗿🔐</p>
+              <span className="text-[10px] font-bold text-amber-300/90 self-end">atte: SADV41 🗿🤙🏼🇵🇦🏁</span>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    function App() {
+      return (
+        <div className="min-h-screen bg-[#0B0F19] text-slate-100 font-sans flex flex-col">
+          <header className="border-b border-[#1F2937] bg-[#0B0F19]/80 sticky top-0 z-10">
+            <div className="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-500 to-teal-400 flex items-center justify-center shadow-lg shadow-emerald-500/20">
+                  <span className="text-lg">🗿</span>
+                </div>
+                <div>
+                  <span className="text-[18px] font-extrabold tracking-tight text-white block leading-none">Ecosistema Unificado</span>
+                  <span className="block text-[11px] text-emerald-400 font-medium tracking-widest uppercase mt-1">SpatiX • Steven Dior • Gnimport 🗿🤙🏼🇵🇦🏁</span>
+                </div>
+              </div>
+            </div>
+          </header>
+
+          <main className="flex-grow max-w-7xl mx-auto px-4 py-8 w-full">
+            <div className="text-center max-w-3xl mx-auto pt-2 mb-8">
+              <h1 className="text-3xl sm:text-4xl font-black tracking-tight text-white leading-tight">
+                🗿 Enmarcando a los #1 - Noticias del Día con Lámina de Chocolate SADV41 🏁
+              </h1>
+              <p className="text-slate-400 text-[14px] mt-3 leading-relaxed max-w-2xl mx-auto">
+                Cada noticia trae su lámina coleccionable como chocolates de plástico. Primero ríes o reflexionas, luego destapas y lees fuente. atte: SADV41 🗿🤙🏼🇵🇦🏁
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {laminasData.map(lamina => (
+                <LaminaCard key={lamina.id} lamina={lamina} />
+              ))}
+            </div>
+          </main>
+
+          <footer className="border-t border-[#1F2937] bg-[#0B0F19] py-8 mt-6 text-center">
+            <p className="text-emerald-400 font-bold text-[16px]">¿Pa'eso tú quieres andar leyendo y enterándote de todo? 🗿🔐</p>
+            <p className="text-[11px] text-slate-500 mt-2">© 2026 Steven Dior Oficial • SpatiX RTK • Gnimport. Todos los derechos reservados. atte: SADV41 🗿🤙🏼🇵🇦🏁</p>
+          </footer>
+        </div>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+  </script>
+</body>
+</html>
