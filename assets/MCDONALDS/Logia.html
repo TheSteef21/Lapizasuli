@@ -1,0 +1,56 @@
+        <!-- ==========================================
+             I. EL ATRIO (Autenticación e Identidad)
+             ========================================== -->
+        <section id="el-atrio" class="glass p-8 md:p-12 rounded-3xl border-t-4 border-t-cyanNeon cyan-glow">
+            <h2 class="text-2xl text-cyanNeon mb-6 border-l-4 border-cyanNeon pl-5 tracking-widest font-mason flex items-center gap-3">
+                <span>I.</span> EL ATRIO <span class="text-[10px] text-slate-400 font-mono tracking-normal ml-auto">(Identidad Oficial de la Logia)</span>
+            </h2>
+            
+            <!-- Modificado a grid-cols-3 para integrar el nuevo nodo -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                
+                <!-- Nodo 1: Verificación Divina -->
+                <div class="p-6 bg-black/50 border border-slate-700 rounded-xl hover:border-cyanNeon transition-colors duration-300">
+                    <h3 class="font-bold text-lg tracking-wide text-white mb-2 font-mason">📡 Verificación Divina</h3>
+                    <p class="text-xs text-slate-400 font-mono leading-relaxed mb-6">Conecta tu ser a la red SADV41 para garantizar tu acceso puro e incorruptible.</p>
+                    <div id="auth-container" class="flex justify-center w-full">
+                        <div id="g_id_onload" data-client_id="328306412185-lumsfeg3eclqq72blifegpog41rk5tl6.apps.googleusercontent.com" data-callback="handleCredentialResponse"></div>
+                        <div class="g_id_signin" data-type="standard" data-theme="filled_black" data-shape="rectangular" data-size="large"></div>
+                    </div>
+                </div>
+
+                <!-- Nodo 2: Enlace Web3 -->
+                <div class="p-6 bg-black/50 border border-slate-700 rounded-xl flex flex-col justify-between hover:border-oro transition-colors duration-300">
+                    <div>
+                        <h3 class="font-bold text-lg tracking-wide text-white mb-2 font-mason">🤖 Enlace Web3 & Red</h3>
+                        <p class="text-xs text-slate-400 font-mono leading-relaxed">Sincronización con la cadena de bloques y el flujo eterno de energía (BNB/ETH).</p>
+                    </div>
+                    <div id="walletStatus" class="hidden mt-4 p-4 bg-gray-900 border border-oro/50 rounded-xl font-mono text-xs shadow-inner">
+                        <p class="text-slate-300 break-all">Wallet: <br><span id="walletAddress" class="text-oro font-bold text-sm mt-1 inline-block"></span></p>
+                    </div>
+                    <button onclick="connectBinance()" class="mt-6 bg-transparent border-2 border-oro text-oro hover:bg-oro hover:text-black font-bold text-xs px-4 py-2 rounded-lg transition-all font-mono">
+                        Conectar Tesoro Web3
+                    </button>
+                </div>
+
+                <!-- Nodo 3: McID Físico-Digital (NUEVO) -->
+                <div class="p-6 bg-black/50 border border-slate-700 rounded-xl flex flex-col justify-between hover:border-redNeon transition-colors duration-300 relative overflow-hidden group">
+                    <div class="absolute inset-0 bg-gradient-to-b from-redNeon/5 to-transparent pointer-events-none group-hover:from-redNeon/10 transition-colors"></div>
+                    <div class="relative z-10">
+                        <h3 class="font-bold text-lg tracking-wide text-white mb-2 font-mason">🍔 Suministro Táctico</h3>
+                        <p class="text-xs text-slate-400 font-mono leading-relaxed mb-4">Interconexión física-digital del avatar. Suministro oficial validado por la Logia.</p>
+                        
+                        <div class="bg-black/80 p-3 rounded-lg border border-sunGold/30 mb-3 shadow-inner">
+                            <div class="text-[9px] text-sunGold/70 font-mono mb-1 uppercase tracking-widest">McID Central</div>
+                            <div class="font-mono text-lg text-sunGold tracking-widest font-bold">IY2TVM</div>
+                        </div>
+
+                        <div class="bg-black/80 p-3 rounded-lg border border-redNeon/30 shadow-inner">
+                            <div class="text-[9px] text-redNeon/70 font-mono mb-1 uppercase tracking-widest">Hash de Identidad</div>
+                            <div class="font-mono text-[9px] text-red-400 break-all">IY2TVMFF99Steven507oficialFF99</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
