@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Centro de Mando Naval - SADV41</title>
+  <style>
+    :root {
+      --bg-color: #0b0f19;
+      --panel-bg: #131b2f;
+      --border-color: #1f2d4a;
+      --text-main: #e2e8f0;
+      --text-muted: #94a3b8;
+      --accent-gold: #d4af37;
+      --accent-blue: #3b82f6;
+      --accent-red: #ef4444;
+      --glow-gold: rgba(212, 175, 55, 0.3);
+      --glow-blue: rgba(59, 130, 246, 0.3);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      background-image: 
+        linear-gradient(rgba(11, 15, 25, 0.9), rgba(11, 15, 25, 0.9)),
+        url('1788493135201.jpeg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 3rem;
+      width: 100%;
+      max-width: 1200px;
+      border-bottom: 2px solid var(--accent-gold);
+      padding-bottom: 1.5rem;
+      position: relative;
+    }
+
+    .emblem-container {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 1rem auto;
+      border-radius: 50%;
+      border: 3px solid var(--accent-gold);
+      box-shadow: 0 0 20px var(--glow-gold);
+      overflow: hidden;
+    }
+
+    .emblem-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      color: var(--accent-gold);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      text-shadow: 0 0 10px var(--glow-gold);
+    }
+
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      letter-spacing: 1px;
+      margin-top: 0.5rem;
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      width: 100%;
+      max-width: 1200px;
+    }
+
+    .sector {
+      background: var(--panel-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .sector:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
+      border-color: var(--accent-blue);
+    }
+
+    .sector h2 {
+      font-size: 1.2rem;
+      color: var(--accent-blue);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 0.5rem;
+    }
+
+    .sector.defensa h2 { color: var(--accent-red); border-color: rgba(239, 68, 68, 0.3); }
+    .sector.operaciones h2 { color: var(--accent-gold); border-color: rgba(212, 175, 55, 0.3); }
+
+    .module-link {
+      display: block;
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--text-main);
+      text-decoration: none;
+      padding: 0.8rem 1rem;
+      margin-bottom: 0.5rem;
+      border-radius: 4px;
+      border-left: 3px solid transparent;
+      transition: all 0.2s ease;
+      font-size: 0.95rem;
+    }
+
+    .module-link:last-child {
+      margin-bottom: 0;
+    }
+
+    .module-link:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-left-color: var(--accent-blue);
+      padding-left: 1.5rem;
+    }
+
+    .defensa .module-link:hover { border-left-color: var(--accent-red); }
+    .operaciones .module-link:hover { border-left-color: var(--accent-gold); }
+
+    footer {
+      margin-top: 3rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      border-top: 1px solid var(--border-color);
+      padding-top: 1rem;
+      width: 100%;
+      max-width: 1200px;
+    }
+
+    @media (max-width: 768px) {
+      h1 { font-size: 1.8rem; }
+      .grid-container { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="emblem-container">
+      <!-- Se utiliza la imagen solicitada como insignia central del mando -->
+      <img src="1788493135201.jpeg" alt="Strait of Hormuz Joint Task Force">
+    </div>
+    <h1>Módulo de Control SADV41</h1>
+    <div class="subtitle">Sistema Operativo Integrado • Comando Central 🎚</div>
+  </header>
+
+  <div class="grid-container">
+    
+    <!-- SECTOR NAVAL Y ESCUADRONES -->
+    <div class="sector">
+      <h2>División Naval & Táctica</h2>
+      <a href="https://thesteef21.github.io/Lapizasuli/assets/NAVAL/index.html" class="module-link" target="_blank">Comando Naval (Index)</a>
+      <a href="https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/index.html" class="module-link" target="_blank">Leviathan Squad</a>
+    </div>
+
+    <!-- SECTOR INTELIGENCIA Y DEFENSA -->
+    <div class="sector defensa">
+      <h2>Inteligencia & Defensa (US/FBI/CIA)</h2>
+      <a href="https://thesteef21.github.io/Lapizasuli/assets/USARMY/FEDERALRESERVE/COMMANDO/FBI/CIA/index.html" class="module-link" target="_blank">Directorio Central Inteligencia</a>
+      <a href="https://thesteef21.github.io/Lapizasuli/assets/USARMY/FEDERALRESERVE/COMMANDO/FBI/Hope.html" class="module-link" target="_blank">Proyecto HOPE</a>
+      <a href="https://thesteef21.github.io/Lapizasuli/assets/USARMY/PENTAGON/NIKE.html" class="module-link" target="_blank">Pentagon x NIKE Protocol</a>
+      <a href="https://thesteef21.github.io/Lapizasuli/Chistes/M%C3%B3dulo%20de%20Intercepci%C3%B3n%20Clasificado.html" class="module-link" target="_blank">Módulo de Intercepción Clasificado</a>
+    </div>
+
+    <!-- SECTOR OPERACIONES Y LOGIAS -->
+    <div class="sector operaciones">
+      <h2>Estructura del Imperio</h2>
+      <a href="https://thesteef21.github.io/Lapizasuli/IMPERIO.html" class="module-link" target="_blank">Base del Imperio</a>
+      <a href="https://thesteef21.github.io/Lapizasuli/Logia.html" class="module-link" target="_blank">Registro de Logia</a>
+      <a href="https://thesteef21.github.io/Lapizasuli/%F0%9F%A4%99%F0%9F%8F%BC%F0%9F%97%BF%F0%9F%87%B5%F0%9F%87%A6.html" class="module-link" target="_blank">Protocolo Emojis (Símbolos)</a>
+      <a href="https://thesteef21.github.io/Lapizasuli/assets/CONTACTOS/index.html" class="module-link" target="_blank">Red de Contactos</a>
+    </div>
+
+    <!-- SECTOR COMERCIO Y SUMINISTROS -->
+    <div class="sector">
+      <h2>Comercio & Economía</h2>
+      <a href="https://thesteef21.github.io/Lapizasuli/assets/MARKETPLACE/GSADV41.html" class="module-link" target="_blank">Marketplace GSADV41</a>
+      <a href="https://thesteef21.github.io/Lapizasuli/assets/CHOCOLATE/GASDV41.html" class="module-link" target="_blank">Módulo Chocolate</a>
+      <a href="https://thesteef21.github.io/Lapizasuli/assets/NOTICIAS/portal_x5f_v2_x5f_laminas_x5f_chocolate.html" class="module-link" target="_blank">Noticias: Láminas Chocolate</a>
+      <a href="https://thesteef21.github.io/Lapizasuli/assets/NIKE/index.html" class="module-link" target="_blank">Base NIKE</a>
+      <a href="https://thesteef21.github.io/Lapizasuli/NikexOnePiece/museo_x5f_v4_x5f_ultra_x5f_sadv41.html" class="module-link" target="_blank">Museo Ultra (Nike x One Piece)</a>
+    </div>
+
+    <!-- SECTOR SISTEMAS Y NUBE -->
+    <div class="sector operaciones">
+      <h2>Sistemas, IA & Nube</h2>
+      <a href="https://thesteef21.github.io/Lapizasuli/assets/AWS/index.html" class="module-link" target="_blank">Servidores AWS</a>
+      <a href="https://thesteef21.github.io/Lapizasuli/assets/AI/METO/EsUnMeme.html" class="module-link" target="_blank">AI METO</a>
+    </div>
+
+  </div>
+
+  <footer>
+    SISTEMA SADV41 | OPERACIÓN SEMP x ADEL FREEDOM | CRISTO ESTÁ POR VENIR 🎚
+  </footer>
+
+</body>
+</html>
