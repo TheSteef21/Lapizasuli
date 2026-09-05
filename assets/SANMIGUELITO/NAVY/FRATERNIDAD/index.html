@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SADV41 | FRATERNIDAD GEOPOLÍTICA 🇵🇦🇺🇸🇮🇱</title>
+    
+    <!-- Tipografías Sagradas -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=JetBrains+Mono:wght@300;400;700&family=Inter:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,700;1,700&family=Pirata+One&display=swap" rel="stylesheet">
+    
+    <!-- Configuración Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#020617',
+                        obsidiana: '#030305',
+                        oro: '#d4af37',
+                        sunGold: '#f59e0b',
+                        blanco: '#f8fafc',
+                        cyanNeon: '#00f3ff',
+                        violetNeon: '#9d4edd',
+                        redNeon: '#FB542B',
+                        tacticalOrange: '#FB542B',
+                        navalBlue: '#1e3a8a',
+                        israelBlue: '#0038b8',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                        mason: ['Cinzel', 'serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                        pirate: ['Pirata One', 'cursive'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root { 
+            --oro: #d4af37; --sun-gold: #f59e0b;
+            --obsidiana: #030305; --navy: #020617;
+            --cyan: #00f3ff; --violet: #9d4edd;
+            --red: #FB542B; --israel: #0038b8;
+        }
+
+        body {
+            background-color: var(--obsidiana);
+            color: #f8fafc;
+            font-family: 'Inter', system-ui, sans-serif;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* --- FONDOS & EFECTOS --- */
+        .grand-line-bg { position: fixed; inset: 0; z-index: 0; background: radial-gradient(circle at 50% 20%, rgba(212, 175, 55, 0.08) 0%, transparent 60%), radial-gradient(circle at 80% 80%, rgba(0, 56, 184, 0.1) 0%, transparent 50%), linear-gradient(to bottom, transparent, rgba(3, 3, 5, 0.95)); pointer-events: none; }
+        .grid-pattern { background-image: linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px); background-size: 32px 32px; opacity: 0.25; }
+        .scanline { width: 100%; height: 2px; background: linear-gradient(90deg, transparent, rgba(0,243,255,0.4), transparent); position: fixed; z-index: 60; top: 0; pointer-events: none; animation: scanline 8s linear infinite; }
+        @keyframes scanline { 0% { top: 0; } 100% { top: 100%; } }
+
+        /* --- CRISTALES & GLOWS --- */
+        .glass { background: rgba(8, 12, 28, 0.88); backdrop-filter: blur(18px); border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 16px; }
+        .glass-strong { background: rgba(3, 6, 15, 0.94); backdrop-filter: blur(22px); border: 1px solid rgba(0, 243, 255, 0.3); }
+        .logia-card { background: linear-gradient(145deg, rgba(10,10,10,0.88), rgba(20,20,20,0.88)); border: 1px solid rgba(212, 175, 55, 0.18); box-shadow: 0 15px 35px rgba(0,0,0,0.9), inset 0 0 20px rgba(212, 175, 55, 0.05); transition: all 0.5s ease; backdrop-filter: blur(12px); position: relative; overflow: hidden; }
+        .israel-glow { box-shadow: 0 0 30px rgba(0,56,184,.2), inset 0 0 15px rgba(0,56,184,.1); border-color: var(--israel); }
+        .cyan-glow { box-shadow: 0 0 28px rgba(0,243,255,.18), inset 0 0 18px rgba(0,243,255,.05); border-color: var(--cyan); }
+        
+        .table-geopolitica th { background-color: rgba(0, 243, 255, 0.1); border-bottom: 2px solid var(--cyan); color: var(--cyan); font-family: 'Cinzel', serif; letter-spacing: 0.1em; }
+        .table-geopolitica td { border-bottom: 1px solid rgba(255,255,255,0.05); color: #cbd5e1; }
+        .table-geopolitica tr:hover td { background-color: rgba(212, 175, 55, 0.05); color: #fff; }
+    </style>
+</head>
+<body class="antialiased selection:bg-cyanNeon selection:text-navy">
+
+    <div class="grand-line-bg"></div>
+    <div style="position:fixed;inset:0;pointer-events:none;z-index:1;" class="grid-pattern"></div>
+    <div class="scanline"></div>
+
+    <!-- HEADER -->
+    <header class="fixed top-0 left-0 w-full z-40 glass border-b border-oro/30 px-6 py-4 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+            <span class="text-3xl drop-shadow-[0_0_10px_rgba(212,175,55,0.8)]">🌐</span>
+            <div>
+                <h1 class="font-mason text-xl tracking-widest text-oro font-bold">NODO FRATERNIDAD & GEOPOLÍTICA</h1>
+                <p class="text-[9px] text-slate-400 font-mono tracking-widest uppercase">SADV41 // Directorio de Inteligencia Estratégica</p>
+            </div>
+        </div>
+        <a href="../../../index.html" class="px-4 py-2 bg-black/60 border border-cyanNeon text-cyanNeon rounded font-mono text-[10px] uppercase hover:bg-cyanNeon hover:text-black transition-all shadow-[0_0_15px_rgba(0,243,255,0.3)]">
+            ◀ Volver a Metatron
+        </a>
+    </header>
+
+    <main class="pt-28 pb-20 px-4 md:px-12 max-w-6xl mx-auto space-y-16 relative z-10">
+
+        <!-- ==========================================
+             SECCIÓN 1: EXPEDIENTE ANKARA VS TEL AVIV
+             ========================================== -->
+        <section class="logia-card israel-glow p-8 md:p-12 rounded-3xl border-t-4 border-t-israelBlue">
+            <div class="inline-block font-mono text-[10px] px-3 py-1 rounded-full border border-israelBlue text-blue-300 mb-6 uppercase tracking-widest bg-black/50">
+                EXPEDIENTE ACTIVO // MEDIO ORIENTE
+            </div>
+            
+            <h2 class="text-3xl md:text-4xl font-mason text-white mb-2 uppercase tracking-widest drop-shadow-md">
+                El Choque de Imperios: Ankara vs Tel Aviv
+            </h2>
+            <p class="text-sm text-slate-400 font-mono mb-8 border-l-2 border-israelBlue pl-4">
+                Análisis de tensiones diplomáticas, notificaciones rojas (Interpol) y la bendición del Dios viviente sobre Jacob.
+            </p>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+                <!-- Evidencia / Imagen -->
+                <div class="relative group rounded-xl overflow-hidden border border-white/10 shadow-[0_0_20px_rgba(0,0,0,0.8)]">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent z-10"></div>
+                    <img src="1788633498825.jpeg" alt="Expediente Meta AI - Israel vs Turquía" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-700">
+                    <div class="absolute bottom-4 left-4 z-20 font-mono text-[10px] text-white bg-black/70 px-3 py-1 rounded border border-white/20">
+                        FUENTE: INTERCEPTACIÓN META AI // SADV41
+                    </div>
+                </div>
+
+                <!-- Análisis Textual -->
+                <div class="space-y-6">
+                    <div class="bg-black/40 border border-white/10 p-5 rounded-xl">
+                        <h3 class="font-mason text-oro text-lg mb-3">EL CRUCE VERBAL</h3>
+                        <p class="text-sm text-slate-300 mb-3"><strong class="text-white">Netanyahu:</strong> "Israel no le teme a Turquía y ha sobrevivido al auge y caída de varios imperios."</p>
+                        <p class="text-sm text-slate-300"><strong class="text-white">Erdoğan:</strong> "¿De qué imperios hablas? Tu país es más joven que mi hermano." <em>(Refiriéndose a sus hermanos nacidos en 1928/1929, antes de la independencia de Israel en 1948).</em></p>
+                    </div>
+
+                    <div class="bg-black/60 border-l-4 border-israelBlue p-5 rounded-r-xl shadow-inner relative overflow-hidden">
+                        <div class="absolute top-0 right-0 p-4 opacity-5"><span class="text-6xl">✡️</span></div>
+                        <h3 class="font-mono text-[10px] text-israelBlue tracking-widest mb-2">POSICIÓN OFICIAL SADV41 (@stevendioroficial)</h3>
+                        <p class="font-sans font-bold text-white text-sm leading-relaxed relative z-10">
+                            "Porque el Dios viviente bendijo a Jacob. 🇵🇦🇺🇸🇮🇱🇰🇷🏴<br><br>
+                            Ya ver comentarios negativos en contra de Israel es innegociable en base a su ira. @secretservice @usarmy @usarmyreserve @usarmyeuraf @fbicbs @petehegseth @marcorubio @usnavycno.<br><br>
+                            <span class="text-oro">Poner a Satanás por delante es tu peor error y lo estoy viendo en imágenes el pecado ✡️✝️"</span>
+                        </p>
+                    </div>
+
+                    <div class="bg-red-900/10 border border-redNeon/30 p-5 rounded-xl">
+                        <h3 class="font-mono text-[10px] text-redNeon tracking-widest mb-2 flex items-center gap-2">
+                            <span class="animate-pulse">🔴</span> TRASFONDO GEOPOLÍTICO (SANTUARIO META AI)
+                        </h3>
+                        <p class="text-xs text-slate-300 leading-relaxed font-sans">
+                            El fondo real de esta escalada radica en que Turquía solicitó a <strong>Interpol una notificación roja contra Netanyahu</strong> por el incidente de la Flotilla Sumud a Gaza, movimiento que la oficina de Netanyahu ha catalogado como un intento de intimidación directa.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             SECCIÓN 2: LOGÍSTICA MARÍTIMA 6% VS 94%
+             ========================================== -->
+        <section class="glass p-8 md:p-12 rounded-3xl border-t-4 border-t-cyanNeon cyan-glow">
+            <div class="flex items-center justify-between mb-8 border-b border-white/10 pb-4">
+                <div>
+                    <div class="inline-block font-mono text-[10px] px-3 py-1 rounded-full border border-cyanNeon text-cyanNeon mb-2 uppercase tracking-widest bg-black/50">
+                        SISTEMA NAVAL GLOBAL // ANÁLISIS DE RUTAS
+                    </div>
+                    <h2 class="text-2xl md:text-3xl font-mason text-white uppercase tracking-widest">
+                        Comercio Marítimo: El 6% vs El 94%
+                    </h2>
+                </div>
+                <div class="hidden md:block text-5xl opacity-80 drop-shadow-[0_0_15px_rgba(0,243,255,0.5)]">🚢</div>
+            </div>
+
+            <!-- Tabla Comparativa -->
+            <div class="overflow-x-auto mb-10 rounded-xl border border-white/10 shadow-[0_0_20px_rgba(0,0,0,0.5)]">
+                <table class="w-full text-left border-collapse table-geopolitica text-sm">
+                    <thead>
+                        <tr>
+                            <th class="p-4 font-bold uppercase text-xs">Característica</th>
+                            <th class="p-4 font-bold uppercase text-xs">El 6% (Canal de Panamá)</th>
+                            <th class="p-4 font-bold uppercase text-xs">El 94% (Resto del Comercio Global)</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-black/40 font-sans text-xs md:text-sm">
+                        <tr>
+                            <td class="p-4 font-bold text-white border-r border-white/5">Naturaleza del tiempo</td>
+                            <td class="p-4 border-r border-white/5">Es un <strong class="text-oro">atajo estratégico</strong> que comprime distancias continentales.</td>
+                            <td class="p-4">Son trayectos de larga distancia o rutas alternas a mar abierto.</td>
+                        </tr>
+                        <tr>
+                            <td class="p-4 font-bold text-white border-r border-white/5">Tiempo de cruce del punto clave</td>
+                            <td class="p-4 border-r border-white/5">Cruzar las esclusas y el lago Gatún toma en promedio <strong>8 a 10 horas</strong>.</td>
+                            <td class="p-4">Navegar por canales equivalentes (como Suez) toma unas 12 a 16 horas; rodear continentes enteros toma semanas.</td>
+                        </tr>
+                        <tr>
+                            <td class="p-4 font-bold text-white border-r border-white/5">Tiempo total de viaje<br><span class="text-[9px] text-slate-500 font-mono">(Ej: Asia a la Costa Este de EE. UU.)</span></td>
+                            <td class="p-4 border-r border-white/5 text-cyanNeon font-bold">18 a 25 días <br><span class="text-xs font-normal text-slate-300">(utilizando el Canal).</span></td>
+                            <td class="p-4 text-red-400 font-bold">30 a 40+ días <br><span class="text-xs font-normal text-slate-300">(rodeando América por Cabo de Hornos o África).</span></td>
+                        </tr>
+                        <tr>
+                            <td class="p-4 font-bold text-white border-r border-white/5">Variabilidad por congestión</td>
+                            <td class="p-4 border-r border-white/5">Aumenta por restricciones de calado (sequía) o <em>waiting time</em> de 3 a 10 días en alta temporada.</td>
+                            <td class="p-4">Depende del clima en alta mar, tormentas o desvíos geopolíticos obligatorios (como evitar el Mar Rojo).</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Explicación Detallada -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="font-mason text-oro text-lg mb-4 border-l-2 border-oro pl-3">PUNTOS CLAVE DE LA DIFERENCIA</h3>
+                    <div class="space-y-4">
+                        <div class="bg-black/50 p-4 rounded-lg border border-white/5">
+                            <h4 class="font-bold text-sm text-white mb-1">1. La ventaja del 6% (Velocidad de conexión)</h4>
+                            <p class="text-xs text-slate-300 leading-relaxed">
+                                Aunque representa un porcentaje menor del volumen global, el Canal de Panamá ahorra entre <strong>7,000 y 13,000 km</strong> (10 a 20 días de navegación) frente a rodear Sudamérica. Su "tiempo" es sinónimo de máxima eficiencia y optimización de combustible.
+                            </p>
+                        </div>
+                        <div class="bg-black/50 p-4 rounded-lg border border-white/5">
+                            <h4 class="font-bold text-sm text-white mb-1">2. La realidad del 94% (Amplitud y duración)</h4>
+                            <p class="text-xs text-slate-300 leading-relaxed">
+                                Incluye desde ferris regionales de horas, hasta gigantes portacontenedores en rutas transpacíficas o euroasiáticas que tardan de <strong>12 a 40 días</strong> puerto a puerto, sin depender del istmo.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-black/30 p-5 rounded-xl border border-white/10">
+                    <h3 class="font-mason text-cyanNeon text-lg mb-4">¿POR DÓNDE SE MUEVE EL 94% RESTANTE?</h3>
+                    <p class="text-xs text-slate-300 mb-4 font-mono">No es una sola ruta, es una red masiva interconectada en los océanos:</p>
+                    <ul class="space-y-3 text-xs text-slate-300">
+                        <li class="flex gap-2">
+                            <span class="text-cyanNeon">▪</span>
+                            <span><strong>El Canal de Suez:</strong> Conecta el Mar Rojo con el Mediterráneo (Asia-Europa). Maneja ~12% del comercio global. <em>(Tiempo: 20-25 días).</em></span>
+                        </li>
+                        <li class="flex gap-2">
+                            <span class="text-cyanNeon">▪</span>
+                            <span><strong>Cabo de Buena Esperanza / Cabo de Hornos:</strong> Vías alternas por el sur de África/América usadas por desvíos de seguridad recientes. <em>(Tiempo: 30-40+ días).</em></span>
+                        </li>
+                        <li class="flex gap-2">
+                            <span class="text-cyanNeon">▪</span>
+                            <span><strong>Rutas Transpacíficas Directas:</strong> Cruzan el Pacífico abierto de Asia a la Costa Oeste de EE. UU. <em>(Tiempo: 12-16 días).</em></span>
+                        </li>
+                        <li class="flex gap-2">
+                            <span class="text-cyanNeon">▪</span>
+                            <span><strong>Puertos de Cabotaje:</strong> Trayectos regionales cortos (1 a 5 días) en Intra-Asia o Europa.</span>
+                        </li>
+                    </ul>
+                    <div class="mt-5 p-3 bg-cyanNeon/10 border-l-2 border-cyanNeon text-[10px] text-cyan-200 font-mono">
+                        NOTA: Mientras Panamá es un atajo estratégico de alta eficiencia, el resto del comercio depende de la navegación de altura y mega-puertos como Shanghái, Singapur y Róterdam.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="text-center p-8 border-t border-white/10 opacity-70 font-mono text-[10px] uppercase mt-12 bg-black">
+        <p class="mb-2 text-oro">SADV41 // FRATERNIDAD GEOPOLÍTICA © 2026</p>
+        <p class="text-[8px] text-slate-500 tracking-[0.2em]">EL DIOS VIVIENTE BENDIJO A JACOB | EL ORIGEN ES 0</p>
+    </footer>
+
+</body>
+</html>
