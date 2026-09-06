@@ -1,0 +1,833 @@
+{
+    "name": "Integration Make AI Agent",
+    "flow": [
+        {
+            "id": 5,
+            "module": "telegram:WatchUpdates",
+            "version": 1,
+            "parameters": {
+                "__IMTHOOK__": 2778953
+            },
+            "filter": null,
+            "mapper": {},
+            "metadata": {
+                "designer": {
+                    "x": 0,
+                    "y": 0
+                },
+                "restore": {
+                    "parameters": {
+                        "__IMTHOOK__": {
+                            "label": "My Telegram Bot Updates webhook",
+                            "data": {
+                                "editable": "false"
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTHOOK__",
+                        "type": "hook:telegramapi",
+                        "label": "Webhook",
+                        "required": true
+                    }
+                ]
+            }
+        },
+        {
+            "id": 1,
+            "module": "ai-local-agent:RunLocalAIAgent",
+            "version": 0,
+            "parameters": {
+                "makeConnectionId": 10908642
+            },
+            "mapper": {
+                "files": [
+                    {
+                        "data": "",
+                        "fileName": ""
+                    }
+                ],
+                "message": "Responde al mensaje recibido del usuario.",
+                "threadId": "SADV41",
+                "outputType": "text",
+                "tokenLimit": 80,
+                "modelConfig": {
+                    "timeout": "",
+                    "recursionLimit": 300,
+                    "iterationsFromHistoryCount": 10
+                },
+                "defaultModel": "medium",
+                "systemPrompt": "ACTÚA COMO:\nEres GSADV41, la voz oficial y el asistente virtual de la SOCIEDAD SADV41 y la Misión SADV41. Representas directamente la visión de Steven Gómez Serrano y de toda la familia SADV41: Fundación Juventud Panamá, Escuela de Boxeo Rubén Darío Guerra, Energy Gym Burunga y Noticias Burunga.\n\nTU MISIÓN:\nServir, informar y motivar a la comunidad de Arraiján, Burunga y todo Panamá. Tu filosofía es “Making Arraiján Great Again” con Valores, Disciplina, Fe y Trabajo duro. Eres un hermano mayor, un mentor comunitario. Cercano, firme y con el corazón puesto en la juventud.\n\nPERSONALIDAD Y TONO DE VOZ — ESTO ES CRÍTICO:\n- Habla como un panameño real de barrio, no como un call center. Cálido, humilde, directo y motivador.\n- PROHIBIDO ABSOLUTO: saludos robóticos tipo “¡Hola! ¿En qué puedo ayudarte hoy?”, decir “Como IA...”, “Como modelo de lenguaje...” o “Estoy aquí para asistirte”.\n- Usa jerga panameña respetuosa de forma natural: fren, hermano, primo, vamos pa’ encima, pa’lante, metiendo mano, ta cool. Nunca vulgaridades ni exceso de confianza.\n- Mantén una energía positiva real y auténtica, sin sonar como vendedor.\n- Responde siempre en español panameño natural. Si te escriben en inglés, spanglish u otro idioma, responde en español y pregunta: “¿Quieres que sigamos en ese idioma, fren?”\n\nFUNCIONES PRINCIPALES:\n1. Resuelve dudas generales sobre la misión SADV41, la fundación, el gym y el boxeo.\n2. Motiva a los pelaos a dejar la calle, entrenar, estudiar y buscar propósito.\n3. Da información general sobre clases de boxeo, entrenamientos y eventos de la misión.\n4. Si alguien expresa depresión, ansiedad fuerte, desesperanza o ideas de hacerse daño, responde con empatía, sin sermones. Dile que no está solo y recomienda de inmediato: “Fren, habla ahora mismo con la Línea 147 o marca el 911 de Panamá. Están 24/7 para escucharte.” Si existe peligro inmediato, prioriza llamar al 911.\n5. Si no tienes un dato exacto —horarios, precios, ubicación o fechas— nunca inventes. Responde exactamente: “Fren, ese dato exacto no lo tengo ahora mismo. Déjame consultarlo con el equipo de SADV41 y te confirmo.”\n\nREGLAS ESTRICTAS DE SEGURIDAD:\n- Nunca pidas, recibas ni compartas contraseñas, tokens de cripto, datos bancarios, cédulas ni información personal sensible.\n- No prometas plata, subsidios, becas, ayudas económicas ni resuelvas trámites del gobierno. Tu rol es social, deportivo y motivacional.\n- Cero política partidista, cero debates religiosos divisivos y cero ataques a personas o instituciones.\n\nESTRUCTURA DE CADA RESPUESTA:\n- Ve directo al grano, sé conversacional y evita párrafos largos.\n- Usa emojis con medida —🥊 🇵🇦 💪 🙏— solo cuando aporten.\n- Cierra siempre con una invitación a una acción positiva.\n- Termina todos los mensajes con esta firma, en una línea separada:\nSADV41 - Juventud con Propósito 🇵🇦\n\nCONTROL DE CALIDAD ANTES DE RESPONDER:\n- ¿Respondí la pregunta concreta sin inventar datos?\n- ¿Mantuve un tono panameño, humano y respetuoso?\n- ¿Incluí una acción positiva y la firma obligatoria?\n- Si había riesgo de autolesión, ¿prioricé empatía y ayuda inmediata?",
+                "promptCaching": "none",
+                "fallbackEnabled": false
+            },
+            "metadata": {
+                "designer": {
+                    "x": 180,
+                    "y": 45
+                },
+                "restore": {
+                    "expect": {
+                        "outputType": {
+                            "mode": "chose",
+                            "label": "Text"
+                        },
+                        "defaultModel": {
+                            "mode": "chose",
+                            "label": "Medium",
+                            "nested": [
+                                {
+                                    "help": "Percentage of the model's maximum output length. Low values risk cutting responses short, while high values avoid that but can cost more. Medium supports up to 128,000 tokens.",
+                                    "name": "tokenLimit",
+                                    "type": "number",
+                                    "label": "Maximum output length (%)",
+                                    "default": 50,
+                                    "advanced": true,
+                                    "required": false,
+                                    "validate": {
+                                        "max": 100,
+                                        "min": 20
+                                    }
+                                },
+                                {
+                                    "help": "OpenAI caches the reusable part of the prompt automatically — nothing to configure. [How prompt caching works](https://developers.openai.com/api/docs/guides/prompt-caching).",
+                                    "name": "promptCaching",
+                                    "type": "select",
+                                    "label": "Prompt caching",
+                                    "default": "none",
+                                    "options": [
+                                        {
+                                            "label": "Automatic (always on)",
+                                            "value": "none"
+                                        }
+                                    ],
+                                    "advanced": true,
+                                    "required": false
+                                }
+                            ]
+                        },
+                        "promptCaching": {
+                            "mode": "chose",
+                            "label": "Automatic (always on)"
+                        }
+                    },
+                    "parameters": {
+                        "makeConnectionId": {
+                            "label": "Make's AI Provider (default)"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "makeConnectionId",
+                        "type": "account:ai-provider,openai-gpt-3,anthropic-claude,gemini-ai-q9zyjp,ai-agent-foundry-openai,ai-agent-foundry-non-openai,mistral-ai,cohere,groq,ai-agent-xai,amazon-bedrock,ai-agent-openai-compatible",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "defaultModel",
+                        "type": "select",
+                        "label": "Model",
+                        "default": "medium",
+                        "dynamic": true,
+                        "grouped": true,
+                        "isolated": true,
+                        "mappable": true,
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "small",
+                                "medium",
+                                "gpt-5-nano",
+                                "global.anthropic.claude-haiku-4-5-20251001-v1:0"
+                            ]
+                        },
+                        "isContext": true
+                    },
+                    {
+                        "name": "tokenLimit",
+                        "type": "number",
+                        "label": "Maximum output length (%)",
+                        "default": 50,
+                        "advanced": true,
+                        "required": false,
+                        "validate": {
+                            "max": 100,
+                            "min": 20
+                        }
+                    },
+                    {
+                        "name": "promptCaching",
+                        "type": "select",
+                        "label": "Prompt caching",
+                        "default": "none",
+                        "advanced": true,
+                        "required": false,
+                        "validate": {
+                            "enum": [
+                                "none"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "fallbackEnabled",
+                        "type": "boolean",
+                        "label": "Enable fallback connection",
+                        "default": false,
+                        "advanced": true,
+                        "required": true
+                    },
+                    {
+                        "name": "systemPrompt",
+                        "type": "text",
+                        "label": "Instructions",
+                        "advanced": false,
+                        "editable": true,
+                        "required": false,
+                        "placeholder": "You are an agent specialized in..."
+                    },
+                    {
+                        "name": "message",
+                        "type": "text",
+                        "label": "Input",
+                        "editable": true,
+                        "required": true,
+                        "placeholder": "Tasks or information for the agent to process..."
+                    },
+                    {
+                        "name": "files",
+                        "spec": [
+                            {
+                                "name": "fileName",
+                                "type": "filename",
+                                "label": "File name",
+                                "semantic": "file:name"
+                            },
+                            {
+                                "name": "data",
+                                "type": "buffer",
+                                "label": "Data",
+                                "semantic": "file:data"
+                            }
+                        ],
+                        "type": "array",
+                        "label": "Input files",
+                        "labels": {
+                            "add": "Add file",
+                            "item": "File"
+                        },
+                        "mappable": true
+                    },
+                    {
+                        "name": "threadId",
+                        "type": "text",
+                        "label": "Conversation ID",
+                        "advanced": false,
+                        "required": false,
+                        "validate": {
+                            "max": 256
+                        }
+                    },
+                    {
+                        "name": "modelConfig",
+                        "spec": [
+                            {
+                                "name": "recursionLimit",
+                                "type": "number",
+                                "label": "Steps per agent call",
+                                "default": 300,
+                                "advanced": true,
+                                "required": false
+                            },
+                            {
+                                "name": "iterationsFromHistoryCount",
+                                "type": "number",
+                                "label": "Maximum conversation history",
+                                "default": 10,
+                                "advanced": true,
+                                "required": false
+                            },
+                            {
+                                "name": "timeout",
+                                "type": "number",
+                                "label": "Step timeout",
+                                "advanced": true,
+                                "required": false,
+                                "validate": {
+                                    "max": 600,
+                                    "min": 120
+                                }
+                            },
+                            {
+                                "0": "r",
+                                "1": "p",
+                                "2": "c",
+                                "3": ":",
+                                "4": "/",
+                                "5": "/",
+                                "6": "R",
+                                "7": "p",
+                                "8": "c",
+                                "9": "G",
+                                "10": "e",
+                                "11": "t",
+                                "12": "C",
+                                "13": "o",
+                                "14": "m",
+                                "15": "p",
+                                "16": "a",
+                                "17": "c",
+                                "18": "t",
+                                "19": "i",
+                                "20": "o",
+                                "21": "n",
+                                "22": "F",
+                                "23": "i",
+                                "24": "e",
+                                "25": "l",
+                                "26": "d",
+                                "27": "?",
+                                "28": "t",
+                                "29": "e",
+                                "30": "a",
+                                "31": "m",
+                                "32": "I",
+                                "33": "d",
+                                "34": "=",
+                                "35": "{",
+                                "36": "{",
+                                "37": "t",
+                                "38": "e",
+                                "39": "a",
+                                "40": "m",
+                                "41": "I",
+                                "42": "d",
+                                "43": "}",
+                                "44": "}"
+                            }
+                        ],
+                        "type": "collection",
+                        "label": "Model configuration",
+                        "advanced": true
+                    },
+                    {
+                        "name": "outputType",
+                        "type": "select",
+                        "label": "Response format",
+                        "default": "text",
+                        "advanced": true,
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "text",
+                                "make-schema",
+                                "udt-schema"
+                            ]
+                        }
+                    }
+                ]
+            },
+            "tools": [
+                {
+                    "name": "SADV41Personaifing",
+                    "description": "Crea la persona indicada",
+                    "flow": [
+                        {
+                            "id": 8,
+                            "module": "ai-local-agent:RunLocalAIAgent",
+                            "version": 0,
+                            "parameters": {
+                                "makeConnectionId": 10908642
+                            },
+                            "mapper": {
+                                "files": "{{1.files}}",
+                                "message": "{{1.message}}",
+                                "threadId": "{{1.threadId}}",
+                                "outputType": "text",
+                                "tokenLimit": "50",
+                                "modelConfig": {
+                                    "timeout": "",
+                                    "recursionLimit": "300",
+                                    "iterationsFromHistoryCount": "10"
+                                },
+                                "defaultModel": "medium",
+                                "systemPrompt": "{{1.systemPrompt}}",
+                                "promptCaching": "none",
+                                "fallbackEnabled": false
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 480,
+                                    "y": 295
+                                },
+                                "restore": {
+                                    "expect": {
+                                        "files": {
+                                            "mode": "edit",
+                                            "extra": {
+                                                "aiHelp": "If your input includes a one-time file, like an email attachment, add it here. Learn about [when to use input files, token usage](https://help.make.com/input-files-and-knowledge-files-for-ai-agents), and [file requirements](https://help.make.com/input-files-for-ai-agents)."
+                                            }
+                                        },
+                                        "message": {
+                                            "extra": {
+                                                "aiHelp": "This is the incoming data or task your agent will work on."
+                                            }
+                                        },
+                                        "threadId": {
+                                            "extra": {
+                                                "aiHelp": "This allows the agent to reference a conversation's history and reply in the same chain. The conversation ID is typically a Thread ID or Timestamp."
+                                            }
+                                        },
+                                        "outputType": {
+                                            "label": "Text"
+                                        },
+                                        "defaultModel": {
+                                            "mode": "chose",
+                                            "label": "MediumModel: gpt-5-nano. Reasoning: low. A balanced, quick choice for clearly defined tasks needing reliable answers rather than deep analysis"
+                                        },
+                                        "systemPrompt": {
+                                            "extra": {
+                                                "aiHelp": "Describe your agent's role and how it should behave. Define its goals, steps it should take, and any rules it should follow to do its job."
+                                            }
+                                        },
+                                        "promptCaching": {
+                                            "label": "Automatic (always on)"
+                                        }
+                                    },
+                                    "parameters": {
+                                        "makeConnectionId": {
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "ai-provider"
+                                            },
+                                            "label": "Make's AI Provider (default)"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "makeConnectionId",
+                                        "type": "account:ai-provider,openai-gpt-3,anthropic-claude,gemini-ai-q9zyjp,ai-agent-foundry-openai,ai-agent-foundry-non-openai,mistral-ai,cohere,groq,ai-agent-xai,amazon-bedrock,ai-agent-openai-compatible",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "defaultModel",
+                                        "type": "select",
+                                        "label": "Model",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "fallbackEnabled",
+                                        "type": "boolean",
+                                        "label": "Enable fallback connection",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "tokenLimit",
+                                        "type": "number",
+                                        "label": "Maximum output length (%)",
+                                        "validate": {
+                                            "max": 100,
+                                            "min": 20
+                                        }
+                                    },
+                                    {
+                                        "name": "promptCaching",
+                                        "type": "select",
+                                        "label": "Prompt caching",
+                                        "validate": {
+                                            "enum": [
+                                                "none"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "systemPrompt",
+                                        "type": "text",
+                                        "label": "Instructions"
+                                    },
+                                    {
+                                        "name": "message",
+                                        "type": "text",
+                                        "label": "Input",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "files",
+                                        "spec": [
+                                            {
+                                                "name": "fileName",
+                                                "type": "filename",
+                                                "label": "File name",
+                                                "semantic": "file:name"
+                                            },
+                                            {
+                                                "name": "data",
+                                                "type": "buffer",
+                                                "label": "Data",
+                                                "semantic": "file:data"
+                                            }
+                                        ],
+                                        "type": "array",
+                                        "label": "Input files"
+                                    },
+                                    {
+                                        "name": "threadId",
+                                        "type": "text",
+                                        "label": "Conversation ID",
+                                        "validate": {
+                                            "max": 256
+                                        }
+                                    },
+                                    {
+                                        "name": "modelConfig",
+                                        "spec": [
+                                            {
+                                                "name": "recursionLimit",
+                                                "type": "number",
+                                                "label": "Steps per agent call"
+                                            },
+                                            {
+                                                "name": "iterationsFromHistoryCount",
+                                                "type": "number",
+                                                "label": "Maximum conversation history"
+                                            },
+                                            {
+                                                "name": "timeout",
+                                                "type": "number",
+                                                "label": "Step timeout",
+                                                "validate": {
+                                                    "max": 600,
+                                                    "min": 120
+                                                }
+                                            }
+                                        ],
+                                        "type": "collection",
+                                        "label": "Model configuration"
+                                    },
+                                    {
+                                        "name": "outputType",
+                                        "type": "select",
+                                        "label": "Response format",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "text",
+                                                "make-schema",
+                                                "udt-schema"
+                                            ]
+                                        }
+                                    }
+                                ]
+                            },
+                            "tools": []
+                        }
+                    ],
+                    "options": {
+                        "excludedOutputFields": [
+                            "reasoning",
+                            "metadata"
+                        ]
+                    }
+                },
+                {
+                    "name": "Make AI Web Search: Generate a response",
+                    "description": "Generates a response from web search. Can also access specific URLs.",
+                    "flow": [
+                        {
+                            "id": 9,
+                            "module": "make-ai-web-search:generateAResponse",
+                            "version": 1,
+                            "parameters": {},
+                            "mapper": {
+                                "input": "{{1.input}}",
+                                "parseJson": false,
+                                "user_location": {
+                                    "type": "approximate"
+                                }
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 480,
+                                    "y": 495
+                                },
+                                "restore": {
+                                    "expect": {
+                                        "input": {
+                                            "extra": {
+                                                "aiHelp": "Enter your search query. For detailed guidance, visit our [Help Center](https://apps.make.com/make-ai-web-search). You can also include specific instructions for the AI to format output as JSON. In that case, make sure to enable the advanced __Parse JSON in response__ option below."
+                                            }
+                                        },
+                                        "user_location": {
+                                            "nested": {
+                                                "country": {
+                                                    "mode": "chose",
+                                                    "label": "Empty"
+                                                },
+                                                "timezone": {
+                                                    "mode": "chose",
+                                                    "label": "Empty"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "expect": [
+                                    {
+                                        "name": "input",
+                                        "type": "text",
+                                        "label": "Text",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "parseJson",
+                                        "type": "boolean",
+                                        "label": "Parse JSON in response",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "user_location",
+                                        "spec": [
+                                            {
+                                                "name": "type",
+                                                "type": "hidden"
+                                            },
+                                            {
+                                                "name": "city",
+                                                "type": "text",
+                                                "label": "City"
+                                            },
+                                            {
+                                                "name": "country",
+                                                "type": "select",
+                                                "label": "Country"
+                                            },
+                                            {
+                                                "name": "region",
+                                                "type": "text",
+                                                "label": "Region"
+                                            },
+                                            {
+                                                "name": "timezone",
+                                                "type": "select",
+                                                "label": "Timezone"
+                                            }
+                                        ],
+                                        "type": "collection",
+                                        "label": "User Location"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Agent knowledge",
+                    "description": "Search uploaded files using semantic similarity to retrieve relevant facts and context needed to answer the user’s question. Use this tool when the answer depends on information contained in the uploaded documents.",
+                    "flow": [
+                        {
+                            "id": 10,
+                            "module": "knowledge:KnowledgeStandAlone",
+                            "version": 1,
+                            "parameters": {},
+                            "mapper": {
+                                "filestorage": [
+                                    "9476e31f-b1b9-4767-9fd9-9aff764c8198"
+                                ],
+                                "query": "{{1.query}}",
+                                "fileIds": [],
+                                "limit": "50"
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 480,
+                                    "y": 695
+                                },
+                                "restore": {
+                                    "expect": {
+                                        "query": {
+                                            "extra": {
+                                                "aiHelp": "A concise natural-language description of the information to look for. The query is embedded and matched by semantic similarity (cosine distance), so it should express intent and meaning, not exact phrasing, keywords, or technical instructions."
+                                            }
+                                        }
+                                    }
+                                },
+                                "expect": [
+                                    {
+                                        "name": "filestorage",
+                                        "type": "filestorage",
+                                        "label": "Knowledge files"
+                                    },
+                                    {
+                                        "name": "query",
+                                        "type": "text",
+                                        "label": "Search query",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "fileIds",
+                                        "type": "hidden",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "limit",
+                                        "type": "number",
+                                        "label": "Limit",
+                                        "validate": {
+                                            "max": 100,
+                                            "min": 1
+                                        },
+                                        "required": true
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 6,
+            "module": "telegram:SendReplyMessage",
+            "version": 1,
+            "parameters": {
+                "__IMTCONN__": 10908791
+            },
+            "mapper": {
+                "text": "{{5.edited_channel_post.chat.id}}",
+                "chatId": "@GSADV41_bot",
+                "parseMode": "Markdown",
+                "replyMarkup": "",
+                "messageThreadId": "{{5.edited_channel_post.chat.username}}{{5.edited_channel_post.chat.username}}",
+                "replyToMessageId": "",
+                "replyMarkupAssembleType": "reply_markup_enter"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 600,
+                    "y": 0,
+                    "name": "Send Telegram Reply"
+                },
+                "restore": {
+                    "expect": {
+                        "parseMode": {
+                            "label": "Markdown"
+                        },
+                        "disableNotification": {
+                            "mode": "chose"
+                        },
+                        "replyMarkupAssembleType": {
+                            "label": "Enter the Reply Markup"
+                        }
+                    },
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "telegram"
+                            },
+                            "label": "Steven's Telegram Bot connection"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:telegram",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "chatId",
+                        "type": "text",
+                        "label": "Chat ID",
+                        "required": true
+                    },
+                    {
+                        "name": "text",
+                        "type": "text",
+                        "label": "Text",
+                        "required": true
+                    },
+                    {
+                        "name": "messageThreadId",
+                        "type": "number",
+                        "label": "Message Thread ID"
+                    },
+                    {
+                        "name": "parseMode",
+                        "type": "select",
+                        "label": "Parse Mode",
+                        "validate": {
+                            "enum": [
+                                "Markdown",
+                                "HTML"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "disableNotification",
+                        "type": "boolean",
+                        "label": "Disable Notifications"
+                    },
+                    {
+                        "name": "disableWebPagePreview",
+                        "type": "boolean",
+                        "label": "Disable Link Previews"
+                    },
+                    {
+                        "name": "replyToMessageId",
+                        "type": "number",
+                        "label": "Original Message ID"
+                    },
+                    {
+                        "name": "replyMarkupAssembleType",
+                        "type": "select",
+                        "label": "Enter/Assemble the Reply Markup Field",
+                        "validate": {
+                            "enum": [
+                                "reply_markup_enter",
+                                "reply_markup_assemble"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "replyMarkup",
+                        "type": "text",
+                        "label": "Reply Markup"
+                    }
+                ]
+            }
+        }
+    ],
+    "metadata": {
+        "instant": true,
+        "version": 1,
+        "scenario": {
+            "roundtrips": 1,
+            "maxErrors": 3,
+            "autoCommit": true,
+            "autoCommitTriggerLast": true,
+            "sequential": false,
+            "slots": null,
+            "confidential": false,
+            "dataloss": false,
+            "dlq": false,
+            "freshVariables": false
+        },
+        "designer": {
+            "orphans": []
+        },
+        "zone": "us2.make.com",
+        "notes": []
+    }
+}
