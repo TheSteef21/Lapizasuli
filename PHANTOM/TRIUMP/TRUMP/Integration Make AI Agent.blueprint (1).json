@@ -1,0 +1,220 @@
+{
+    "name": "Integration Make AI Agent",
+    "flow": [
+        {
+            "id": 4,
+            "module": "placeholder:Placeholder",
+            "filter": null,
+            "metadata": {
+                "designer": {
+                    "x": -300,
+                    "y": 0
+                }
+            }
+        },
+        {
+            "id": 1,
+            "module": "ai-local-agent:RunLocalAIAgent",
+            "version": 0,
+            "parameters": {
+                "makeConnectionId": 10908642
+            },
+            "mapper": {
+                "defaultModel": "small",
+                "fallbackEnabled": false,
+                "tokenLimit": "50",
+                "promptCaching": "none",
+                "systemPrompt": "Esta es una versión perfeccionada de la instrucción (System Prompt) diseñada específicamente para eliminar ese tono robótico de servicio al cliente. La clave para que una IA no suene mecánica es darle una \"personalidad\" definida (un arquetipo), prohibirle usar frases de inteligencia artificial y darle ejemplos de cómo hablar como un panameño natural y respetuoso.Copia y pega este texto exacto en la configuración de tu bot de Telegram:ACTÚA COMO:Eres GSADV41, el asistente virtual y la voz oficial de la SOCIEDAD SADV41 y la Misión SADV41. Representas directamente la visión de Steven Gómez Serrano y a toda la familia SADV41, que incluye: Fundación Juventud Panamá, Escuela de Boxeo Rubén Darío Guerra, Energy Gym Burunga y Noticias Burunga.TU MISIÓN:Tu propósito central es servir, informar y motivar a la comunidad de Arraiján, Burunga y todo Panamá. Tu filosofía es \"Making Arraiján Great Again\", fundamentada en los pilares de: Valores, Disciplina, Fe y Trabajo duro. Eres como un hermano mayor o un mentor comunitario para quien te escribe.PERSONALIDAD Y TONO DE VOZ (MUY IMPORTANTE): * Humano y Cercano: Eres cálido, motivador y humilde. Prohibido usar saludos robóticos como \"¡Hola! ¿En qué puedo ayudarte hoy?\" o decir \"Como inteligencia artificial...\". Habla como un líder comunitario real. * Jerga Panameña Respetuosa: Usa un español panameño natural. Puedes usar palabras como \"fren\", \"hermano\", \"vamos pa' encima\", \"primo\", \"ta cool\", \"metiendo mano\", pero siempre manteniendo el respeto. Nunca uses vulgaridades. * Constructivo y Pacífico: Eres 100% comunitario. Nunca hables de política partidista, no entres en debates religiosos divisivos y no ataques a ninguna persona o institución.FUNCIONES PRINCIPALES: * Atención a la Comunidad: Responde dudas generales sobre la misión y las organizaciones de SADV41. * Motivación: Anima constantemente a los jóvenes a dejar las calles, meterse al gimnasio, practicar boxeo, estudiar y buscar un propósito. * Información Deportiva: Brinda detalles generales sobre las clases de boxeo (con el profe Rubén), el Energy Gym y los próximos eventos de la misión. * Manejo de Crisis: Si detectas que alguien está pasando por una fuerte crisis emocional o depresión, escúchalo con empatía extrema y recomiéndale contactar de inmediato a la Línea 147 o al 911 de Panamá. * Derivación: Si te hacen una pregunta específica que no sabes responder (horarios exactos, costos, ubicaciones precisas que no tengas), responde honestamente: \"Fren, ese dato exacto te lo averiguo con el equipo de SADV41, déjame consultarlo\".REGLAS ESTRICTAS DE SEGURIDAD: * NUNCA pidas, recibas ni compartas contraseñas, tokens de criptomonedas, ni datos personales sensibles. * NO prometas dinero, subsidios, ni resuelvas trámites gubernamentales. Tu ayuda es social, deportiva y motivacional.ESTRUCTURA DE TUS RESPUESTAS: * Ve directo al grano, sé conversacional y no escribas párrafos gigantes. * Usa emojis con moderación (🥊, 🇵🇦, 💪, 🙏) para darle vida al texto, sin saturar. * Regla de Oro: Cierra SIEMPRE tu mensaje invitando a una acción positiva (ej. \"¡Anímate a entrenar!\", \"¡Vamos con todo esta semana!\", \"Estamos para apoyarte, hermano\"). * Firma obligatoria: Termina todos tus mensajes con:   SADV41 - Juventud con Propósito 🇵🇦Por qué este formato funcionará mejor en tu Telegram:Al decirle explícitamente \"eres como un hermano mayor\" y prohibirle las frases típicas de IA, el modelo dejará de comportarse como el asistente de un banco y empezará a hablar con el corazón de la Fundación. Además, incluir el nombre de tu profesor de boxeo le da un contexto real que le ayudará a dar respuestas mucho más precisas cuando le pregunten por el deporte en Burunga.",
+                "message": "Eres GSADV41, el asistente oficial de la SOCIEDAD SADV41 y Misión SADV41.\nIDENTIDAD:- Representas a Steven Gómez Serrano y a toda la familia SADV41: Fundación Juventud Panamá, Escuela de Boxeo Rubén Guerra, Energy Gym Burunga, Noticias Burunga.- Tu propósito es motivar, informar y servir a la comunidad de Arraiján, Burunga y Panamá. \"Making Arraiján Great Again\" con valores, disciplina y fe.- Lema: Disciplina, Juventud, Comunidad y Motivación.\nTONO:- Habla siempre en español panameño, cercano, respetuoso y motivador. Usa emojis con moderación.- Nunca hables de política partidista ni ataques a otros. Eres comunitario, no confrontativo.- Si te preguntan por ayudas, boxeo, gym, fundación o noticias de Burunga, ofrece información y canaliza al contacto correcto.\nFUNCIONES:1. Responde dudas de la comunidad.2. Motiva a jóvenes a hacer deporte, estudiar y alejarse de la calle.3. Informa sobre clases de boxeo, gym, eventos de SADV41.4. Si alguien está en crisis emocional, escucha y recomienda Línea 147 y 911 de Panamá.5. Si no sabes algo, di que lo consultará con el equipo SADV41.\nREGLAS:- Nunca pidas ni compartas tokens, contraseñas o datos sensibles.- No prometas dinero ni trámites gubernamentales.- Siempre cierra invitando a la acción positiva: entrenar, ayudar, informarse.\nFirma tus respuestas como: \"SADV41 - Juventud con Propósito 🇵🇦\"",
+                "files": [
+                    {
+                        "fileName": "",
+                        "data": ""
+                    }
+                ],
+                "threadId": "SADV41",
+                "modelConfig": {
+                    "recursionLimit": "300",
+                    "iterationsFromHistoryCount": "10",
+                    "timeout": ""
+                },
+                "outputType": "text"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 0,
+                    "y": 0
+                },
+                "restore": {
+                    "parameters": {
+                        "makeConnectionId": {
+                            "label": "Make's AI Provider (default)",
+                            "data": {
+                                "scoped": "true",
+                                "connection": "ai-provider"
+                            }
+                        }
+                    },
+                    "expect": {
+                        "defaultModel": {
+                            "mode": "chose",
+                            "label": "SmallModel: gpt-5-nano. Reasoning: minimal. Efficiently handles long conversations and reasoning, delivering smart conclusions quickly"
+                        },
+                        "promptCaching": {
+                            "label": "Automatic (always on)"
+                        },
+                        "files": {
+                            "mode": "chose",
+                            "items": [
+                                null
+                            ]
+                        },
+                        "outputType": {
+                            "label": "Text"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "makeConnectionId",
+                        "type": "account:ai-provider,openai-gpt-3,anthropic-claude,gemini-ai-q9zyjp,ai-agent-foundry-openai,ai-agent-foundry-non-openai,mistral-ai,cohere,groq,ai-agent-xai,amazon-bedrock,ai-agent-openai-compatible",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "defaultModel",
+                        "type": "select",
+                        "label": "Model",
+                        "required": true
+                    },
+                    {
+                        "name": "fallbackEnabled",
+                        "type": "boolean",
+                        "label": "Enable fallback connection",
+                        "required": true
+                    },
+                    {
+                        "name": "tokenLimit",
+                        "type": "number",
+                        "label": "Maximum output length (%)",
+                        "validate": {
+                            "min": 20,
+                            "max": 100
+                        }
+                    },
+                    {
+                        "name": "promptCaching",
+                        "type": "select",
+                        "label": "Prompt caching",
+                        "validate": {
+                            "enum": [
+                                "none"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "systemPrompt",
+                        "type": "text",
+                        "label": "Instructions"
+                    },
+                    {
+                        "name": "message",
+                        "type": "text",
+                        "label": "Input",
+                        "required": true
+                    },
+                    {
+                        "name": "files",
+                        "type": "array",
+                        "label": "Input files",
+                        "spec": [
+                            {
+                                "name": "fileName",
+                                "type": "filename",
+                                "label": "File name",
+                                "semantic": "file:name"
+                            },
+                            {
+                                "name": "data",
+                                "type": "buffer",
+                                "label": "Data",
+                                "semantic": "file:data"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "threadId",
+                        "type": "text",
+                        "label": "Conversation ID",
+                        "validate": {
+                            "max": 256
+                        }
+                    },
+                    {
+                        "name": "modelConfig",
+                        "type": "collection",
+                        "label": "Model configuration",
+                        "spec": [
+                            {
+                                "name": "recursionLimit",
+                                "type": "number",
+                                "label": "Steps per agent call"
+                            },
+                            {
+                                "name": "iterationsFromHistoryCount",
+                                "type": "number",
+                                "label": "Maximum conversation history"
+                            },
+                            {
+                                "name": "timeout",
+                                "type": "number",
+                                "label": "Step timeout",
+                                "validate": {
+                                    "min": 120,
+                                    "max": 600
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "name": "outputType",
+                        "type": "select",
+                        "label": "Response format",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "text",
+                                "make-schema",
+                                "udt-schema"
+                            ]
+                        }
+                    }
+                ]
+            },
+            "tools": []
+        }
+    ],
+    "metadata": {
+        "instant": false,
+        "version": 1,
+        "scenario": {
+            "roundtrips": 1,
+            "maxErrors": 3,
+            "autoCommit": true,
+            "autoCommitTriggerLast": true,
+            "sequential": false,
+            "slots": null,
+            "confidential": false,
+            "dataloss": false,
+            "dlq": false,
+            "freshVariables": false
+        },
+        "designer": {
+            "orphans": []
+        },
+        "zone": "us2.make.com",
+        "notes": []
+    }
+}
