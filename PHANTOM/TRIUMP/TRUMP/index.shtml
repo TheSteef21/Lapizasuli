@@ -1,0 +1,383 @@
+<!--
+    Configuración de Servidor (Apache/Nginx)
+    AddType text/html .shtml
+    AddOutputFilter INCLUDES .shtml
+    DocumentRoot: /var/www/html/
+-->
+<!--#config timefmt="%d/%m/%Y %H:%M:%S Panamá" errmsg="[SADV41 SHTML ERROR]" -->
+<!--#set var="SADV41_BUILD" value="ARCADE.GOV SADV41 PLUSCUAMPERFECTO v2026.09.06 SHTML" -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SADV41 | OMNIPRESENTE: Logia Pluscuamperfecta & Metatron 4D 🇵🇦🏁🔯☦️</title>
+    
+    <!-- Favicon Unificado -->
+    <link rel="icon" type="image/png" href="../../assets/GSADV41/favicon.png">
+    
+    <!-- Tipografías Sagradas -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=JetBrains+Mono:wght@300;400;700&family=Inter:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,700;1,700&family=Pirata+One&display=swap" rel="stylesheet">
+    
+    <!-- Web3 & Auth Scripts -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.0/ethers.umd.min.js"></script>
+
+    <!-- Configuración Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#020617', obsidiana: '#030305', oro: '#d4af37', sunGold: '#f59e0b',
+                        blanco: '#f8fafc', cyanNeon: '#00f3ff', violetNeon: '#9d4edd', redNeon: '#FB542B',
+                        tacticalOrange: '#FB542B', borgona: '#4a0010', neonGreen: '#10b981', renderRed: '#da3637',
+                        navalBlue: '#1e3a8a', israelBlue: '#0038b8', titanGreen: '#76b900',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'], serif: ['Playfair Display', 'serif'],
+                        mason: ['Cinzel', 'serif'], mono: ['JetBrains Mono', 'monospace'],
+                        pirate: ['Pirata One', 'cursive'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root { 
+            --oro: #d4af37; --sun-gold: #f59e0b; --obsidiana: #030305; --navy: #020617;
+            --cyan: #00f3ff; --violet: #9d4edd; --red: #FB542B; --israel: #0038b8; --titan: #76b900;
+        }
+
+        body { background-color: var(--obsidiana); color: #f8fafc; font-family: 'Inter', system-ui, sans-serif; overflow-x: hidden; scroll-behavior: smooth; }
+
+        /* --- BANNERS & FONDOS --- */
+        .sponsor-marquee { width: 100%; background: #000; border-bottom: 1px solid var(--oro); overflow: hidden; white-space: nowrap; padding: 6px 0; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--oro); text-transform: uppercase; letter-spacing: 0.2em; position: fixed; top: 0; z-index: 70; }
+        .sponsor-marquee span { display: inline-block; padding-left: 100%; animation: marquee 25s linear infinite; }
+        @keyframes marquee { 0% { transform: translate(0, 0); } 100% { transform: translate(-100%, 0); } }
+
+        .grand-line-bg { position: fixed; inset: 0; z-index: 0; background: radial-gradient(circle at 50% 20%, rgba(212, 175, 55, 0.1) 0%, transparent 60%), radial-gradient(circle at 80% 80%, rgba(0, 243, 255, 0.08) 0%, transparent 50%), linear-gradient(to bottom, transparent, rgba(3, 3, 5, 0.9)); pointer-events: none; }
+        .grid-pattern { background-image: linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px); background-size: 32px 32px; opacity: 0.25; position: fixed; inset: 0; pointer-events: none; z-index: 1; }
+        .scanline { width: 100%; height: 2px; background: linear-gradient(90deg, transparent, rgba(0,243,255,0.4), transparent); position: fixed; z-index: 60; top: 0; pointer-events: none; animation: scanline 8s linear infinite; }
+        @keyframes scanline { 0% { top: 0; } 100% { top: 100%; } }
+
+        /* --- CRISTALES & GLOWS --- */
+        .glass { background: rgba(8, 12, 28, 0.88); backdrop-filter: blur(18px); border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 16px; }
+        .logia-card { background: linear-gradient(145deg, rgba(10,10,10,0.88), rgba(20,20,20,0.88)); border: 1px solid rgba(212, 175, 55, 0.18); box-shadow: 0 15px 35px rgba(0,0,0,0.9), inset 0 0 20px rgba(212, 175, 55, 0.05); transition: all 0.5s ease; backdrop-filter: blur(12px); position: relative; overflow: hidden; }
+        .logia-card:hover { border-color: rgba(0, 243, 255, 0.5); box-shadow: 0 20px 40px rgba(0,0,0,0.9), inset 0 0 30px rgba(0, 243, 255, 0.1); }
+        
+        .gold-glow { box-shadow: 0 0 40px rgba(212,175,55,.18), inset 0 0 22px rgba(212,175,55,.05); border-color: var(--oro); }
+        .titan-glow { box-shadow: 0 0 40px rgba(118,185,0,.3), inset 0 0 22px rgba(118,185,0,.15); border-color: var(--titan); }
+        .gear5-pulse { animation: gearPulse 3s infinite alternate ease-in-out; }
+        @keyframes gearPulse { 0% { filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.3)); } 100% { filter: drop-shadow(0 0 35px rgba(212, 175, 55, 0.8)) drop-shadow(0 0 60px rgba(0, 243, 255, 0.5)); } }
+
+        /* --- GLITCH 4D PLUSCUAMPERFECTO --- */
+        .glitch-4d-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 0 30px rgba(255,0,0,0.4);
+            border: 2px solid rgba(255,0,0,0.6);
+        }
+        
+        .glitch-4d-container::before {
+            content:''; position: absolute; inset: 0; 
+            background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,0,0,0.15) 2px, rgba(255,0,0,0.15) 4px); 
+            pointer-events: none; opacity: 0.5; z-index: 10;
+        }
+
+        .asset-4d {
+            width: 100%; height: 250px; object-fit: cover;
+            animation: glitchEffect4D 0.4s infinite alternate;
+            mix-blend-mode: screen;
+        }
+
+        @keyframes glitchEffect4D {
+            0% { filter: hue-rotate(0deg) contrast(150%) saturate(150%); transform: translate(0, 0) scale(1); }
+            25% { filter: hue-rotate(45deg) contrast(200%) invert(0.1); transform: translate(-3px, 3px) scale(1.02); }
+            50% { filter: hue-rotate(-90deg) contrast(250%) saturate(200%); transform: translate(3px, -3px) scale(0.98); }
+            75% { filter: hue-rotate(90deg) contrast(180%) invert(0.2); transform: translate(-2px, -2px) scale(1.04); }
+            100% { filter: hue-rotate(0deg) contrast(150%) saturate(150%); transform: translate(0, 0) scale(1); }
+        }
+
+        .boss-card { background: rgba(15,0,0,0.8); transition: all 0.3s; }
+        .titan-badge { position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.9); border: 1px solid var(--titan); color: var(--titan); padding: 4px 8px; font-size: 8px; font-family: 'JetBrains Mono'; border-radius: 4px; box-shadow: 0 0 10px rgba(118,185,0,0.4); z-index: 20; letter-spacing: 0.1em; }
+
+        /* --- MENÚ LATERAL --- */
+        .sidebar-tabs { position: fixed; left: 0; top: 50%; transform: translateY(-50%); z-index: 65; display: flex; flex-direction: column; gap: 8px; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+        .vertical-tab { display: flex; align-items: center; background: rgba(2, 6, 23, 0.95); padding: 10px 14px; border-radius: 0 12px 12px 0; transition: all 0.3s; width: 55px; overflow: hidden; white-space: nowrap; box-shadow: 4px 4px 15px rgba(0,0,0,0.6); cursor: pointer; text-decoration: none; color: #fff; border-left: 3px solid var(--cyan); }
+        .vertical-tab:hover { width: 340px; padding-left: 18px; background: rgba(212, 175, 55, 0.15); }
+        .vertical-tab span.icon { font-size: 1.4rem; min-width: 28px; display: flex; justify-content: center; }
+        .vertical-tab span.text { margin-left: 14px; font-weight: bold; opacity: 0; transition: opacity 0.3s; font-size: 0.8rem; font-family: 'JetBrains Mono', monospace; }
+        .vertical-tab:hover span.text { opacity: 1; transition-delay: 0.1s; }
+        .sidebar-tabs.right-aligned { left: auto; right: 0; }
+        .sidebar-tabs.right-aligned .vertical-tab { border-radius: 12px 0 0 12px; border-left: none; border-right-width: 3px; flex-direction: row-reverse; }
+
+        /* --- TRINIDAD --- */
+        .triangulo-trinidad { width: 0; height: 0; border-left: 40px solid transparent; border-right: 40px solid transparent; border-bottom: 69.3px solid rgba(212, 175, 55, 0.15); position: relative; margin: 0 auto; animation: pulso-divino-trinidad 4s infinite alternate ease-in-out; }
+        .triangulo-trinidad::after { content: '1'; position: absolute; top: 35px; left: -5px; color: var(--oro); font-family: 'Cinzel', serif; font-size: 1.2rem; text-shadow: 0 0 10px rgba(212, 175, 55, 0.8); }
+        @keyframes pulso-divino-trinidad { 0% { filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.2)); transform: scale(1); } 100% { filter: drop-shadow(0 0 30px rgba(212, 175, 55, 0.9)); transform: scale(1.08); } }
+    </style>
+</head>
+<body class="antialiased selection:bg-oro selection:text-navy" id="mainBody">
+
+    <!-- SHTML SSI INFO -->
+    <!--#echo var="SADV41_BUILD" -->
+
+    <div class="sponsor-marquee">
+        <span>Éste enlace será patrocinio vanguardiado por NIKE ONEPIECE USARMY PENTAGON DEPTOFWAR Y EBRG de parte de SADV41 de @StevenDiorOficial // NVIDIA TITAN V RENDER ENGINE ACTIVO // El Origen es 0 // Burunga 2026 // NODO FUTBOLÍSTICO Y MULTIMEDIA</span>
+    </div>
+
+    <div class="grand-line-bg"></div>
+    <div class="grid-pattern"></div>
+    <div class="scanline"></div>
+
+    <!-- MENÚ LATERAL BILATERAL UNIFICADO -->
+    <div id="main-sidebar" class="sidebar-tabs">
+        <a href="#unificacion-suprema" class="vertical-tab" style="border-color: var(--oro);"><span class="icon">👑</span><span class="text text-amber-300">Logia Unificada</span></a>
+        <a href="#salon-verguenza" class="vertical-tab" style="border-color: #76b900;"><span class="icon">☢️</span><span class="text text-titanGreen">Burbuja Exposición</span></a>
+        <a href="#arcade-gov" class="vertical-tab" style="border-color: #FB542B;"><span class="icon">🕹️</span><span class="text text-orange-400">ARCADE.GOV</span></a>
+        <a href="#marketing-estados" class="vertical-tab" style="border-color: #8b5cf6;"><span class="icon">🪄</span><span class="text text-purple-300">Wizza'RD & Multimedia</span></a>
+        <a href="#geopolitica-seccion" class="vertical-tab" style="border-color: #0038b8;"><span class="icon">🌐</span><span class="text text-blue-300">Geopolítica / Bioceánico</span></a>
+        <div onclick="toggleSidebar()" class="vertical-tab" title="Alternar Menú" style="border-color: #cbd5e1;"><span class="icon">⇋</span><span class="text text-slate-300">Cambiar Lado</span></div>
+    </div>
+
+    <!-- HEADER SUPERIOR UNIFICADO -->
+    <header class="fixed top-[28px] left-0 w-full z-40 glass border-b border-oro/30 px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-4 transition-all duration-500">
+        <div class="flex items-center gap-3">
+            <span class="text-3xl gear5-pulse">🗿</span>
+            <div>
+                <h1 class="font-pirate text-2xl tracking-widest text-oro">NODO SUPREMO: LOGIA PLUSCUAMPERFECTA</h1>
+                <p class="text-[9px] text-slate-400 font-mono tracking-widest uppercase">SADV41 // Renderizado por NVIDIA TITAN V</p>
+            </div>
+        </div>
+        
+        <div class="flex flex-wrap items-center justify-center gap-3">
+            <span class="mono text-[10px] bg-black/60 px-3 py-1.5 rounded-full border border-oro/30 text-oro"><!--#echo var="DATE_LOCAL" --></span>
+            <button onclick="alert('Tesoro Web3 en sincronización con Smart Contract SADV41...')" class="bg-oro hover:bg-amber-500 text-navy font-bold text-xs px-4 py-2 rounded-lg transition-all shadow-[0_0_15px_rgba(212,175,55,0.4)] cursor-pointer font-mono">
+                ⚡ Sincronizar Tesoro Web3
+            </button>
+        </div>
+    </header>
+
+    <main class="pt-44 pb-20 px-4 md:px-12 max-w-6xl mx-auto space-y-20 relative z-10">
+
+        <!-- ==========================================
+             HERO: UNIFICACIÓN PLUSCUAMPERFECTA
+             ========================================== -->
+        <section id="unificacion-suprema" class="p-10 md:p-14 border border-oro/50 text-center relative overflow-hidden rounded-3xl logia-card gold-glow">
+            <div class="absolute inset-0 bg-gradient-to-b from-amber-500/10 via-transparent to-transparent pointer-events-none"></div>
+            <div class="triangulo-trinidad mb-6"></div>
+            
+            <h1 class="font-pirate text-4xl md:text-6xl text-oro tracking-wider drop-shadow-[0_0_20px_rgba(212,175,55,0.6)]">
+                FUSIÓN CONTINENTAL PLUSCUAMPERFECTA
+            </h1>
+            <h2 class="font-sans text-xl md:text-2xl font-bold text-white tracking-widest mt-2 uppercase">
+                SADV41 x EBRG x ONE PIECE x MARKETING GLOBAL
+            </h2>
+            
+            <div class="mt-8 relative w-full bg-black/60 border-y border-titanGreen/30 py-6 flex flex-col items-center justify-center overflow-hidden rounded-xl">
+                <h2 class="text-titanGreen font-mason text-xl md:text-2xl tracking-[0.4em] uppercase relative z-10 flex items-center justify-center gap-3">
+                    <span class="text-xl">⚙️</span> MOTOR NVIDIA TITAN V ACTIVO
+                </h2>
+                <div class="text-[10px] text-oro font-mono tracking-widest mt-4 border border-oro/40 px-4 py-1 rounded-full bg-black/50">
+                    "Donde el 0 y el 1 se vuelven Vida" — SHTML Build: <!--#echo var="LAST_MODIFIED" -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             NUEVO: BURBUJA DE EXPOSICIÓN (EFECTO GLITCH 4D)
+             ========================================== -->
+        <section id="salon-verguenza" class="logia-card titan-glow p-8 md:p-12 border-t-4 border-t-titanGreen rounded-3xl relative overflow-hidden">
+            <div class="flex justify-between items-center mb-6">
+                <div class="inline-block font-mono text-[10px] px-3 py-1 rounded-full border border-titanGreen text-titanGreen uppercase tracking-widest bg-black/50">
+                    RENDERIZADO 4D // SALÓN DE LA VERGÜENZA GEOPOLÍTICA
+                </div>
+                <span class="text-3xl animate-pulse drop-shadow-[0_0_10px_rgba(118,185,0,0.8)]">☢️</span>
+            </div>
+            
+            <h2 class="text-3xl md:text-4xl font-mason text-white mb-4 uppercase tracking-widest">
+                Burbuja de Exposición y Corrupción
+            </h2>
+            <p class="text-sm text-slate-300 font-sans mb-10 leading-relaxed border-l-2 border-titanGreen pl-4">
+                Utilizando la potencia de cálculo de la <strong>NVIDIA TITAN V</strong>, generamos el <em>Efecto Glitch 4D Pluscuamperfecto</em>. Esta burbuja muestra la repetitividad completa de todas las unidades informativas dedicadas a la desinformación y el defraude de los gobiernos, exponiendo la maquinaria de Satán (La Mentira) extraída del repositorio <code>PHANTOM/TRIUMP</code>.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                
+                <!-- ASSET 1: CNN / MEDIOS (GLITCH) -->
+                <div class="boss-card group rounded-xl border border-red-900/50">
+                    <div class="glitch-4d-container">
+                        <div class="titan-badge">ASSET: CNN.png // 4D GLITCH</div>
+                        <img src="https://thesteef21.github.io/Lapizasuli/PHANTOM/TRIUMP/CNN.png" alt="CNN Exposed Glitch" class="asset-4d">
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-mason text-red-500 text-xl font-bold mb-2">MAQUINARIA MEDIA-01</h3>
+                        <p class="text-xs text-slate-300 font-mono mb-3">ID: PHANTOM/TRIUMP/CNN.png | Status: EXPOSED</p>
+                        <p class="text-sm text-slate-400 font-sans">
+                            La máquina de repetición infinita. Un ente diseñado para distorsionar la narrativa geopolítica. Su mecánica principal es la ilusión de consenso (Fake News).
+                        </p>
+                    </div>
+                </div>
+
+                <!-- ASSET 2: DESCARGA / BUROCRACIA (GLITCH) -->
+                <div class="boss-card group rounded-xl border border-red-900/50">
+                    <div class="glitch-4d-container">
+                        <div class="titan-badge">ASSET: descarga.png // 4D GLITCH</div>
+                        <img src="https://thesteef21.github.io/Lapizasuli/PHANTOM/TRIUMP/descarga.png" alt="Descarga Exposed Glitch" class="asset-4d" style="animation-delay: 0.1s;">
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-mason text-orange-500 text-xl font-bold mb-2">FRAUDE INSTITUCIONAL-02</h3>
+                        <p class="text-xs text-slate-300 font-mono mb-3">ID: PHANTOM/TRIUMP/descarga.png | Status: CORRUPT</p>
+                        <p class="text-sm text-slate-400 font-sans">
+                            El Velo Institucional. Representa los vacíos de información y expedientes ocultos de los gobiernos que pretenden hacer el bien mientras promueven la mentira burocrática.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- ASSET 3: HASH IMAGE (GLITCH) -->
+                <div class="boss-card group rounded-xl border border-red-900/50">
+                    <div class="glitch-4d-container">
+                        <div class="titan-badge">ASSET: eea364... // 4D GLITCH</div>
+                        <img src="https://thesteef21.github.io/Lapizasuli/PHANTOM/TRIUMP/eea364aecbf459e79cc0d54f5a0fb0e4.png" alt="Hash Image Glitch" class="asset-4d" style="animation-delay: 0.2s;">
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-mason text-purple-500 text-xl font-bold mb-2">ANOMALÍA ENCRIPTADA-03</h3>
+                        <p class="text-xs text-slate-300 font-mono mb-3">ID: PHANTOM/TRIUMP/eea364ae... | Status: DECODING</p>
+                        <p class="text-sm text-slate-400 font-sans">
+                            Archivos ofuscados utilizados para tapar rastros financieros y mediáticos. La TITAN V rasga el velo y muestra el patrón real de las unidades informativas.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- ASSET 4: UNNAMED GIF (REPETICIÓN 4D) -->
+                <div class="boss-card group rounded-xl border border-red-900/50">
+                    <div class="glitch-4d-container">
+                        <div class="titan-badge">ASSET: unnamed.gif // LOOP ETERNO</div>
+                        <img src="https://thesteef21.github.io/Lapizasuli/PHANTOM/TRIUMP/unnamed.gif" alt="Unnamed GIF" class="asset-4d" style="animation-duration: 2s; animation-delay: 0.3s; filter: hue-rotate(90deg) contrast(150%);">
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-mason text-cyanNeon text-xl font-bold mb-2">LA MENTIRA (CICLO INFINITO)</h3>
+                        <p class="text-xs text-slate-300 font-mono mb-3">ID: PHANTOM/TRIUMP/unnamed.gif | Status: LOOP</p>
+                        <p class="text-sm text-slate-400 font-sans">
+                            La verdadera cara de Satán es la repetición constante. Este activo demuestra la naturaleza recursiva del fraude y la desinformación global.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ==========================================
+             ARCADE.GOV & EL COMANDANTE
+             ========================================== -->
+        <section id="arcade-gov" class="logia-card p-8 md:p-12 rounded-3xl border-t-4 border-t-redNeon">
+            <div class="inline-block font-mono text-[10px] px-3 py-1 rounded-full border border-redNeon text-red-300 mb-6 uppercase tracking-widest bg-black/50">
+                SISTEMA DE JUEGO POLÍTICO // CÓDIGO SMS 45470
+            </div>
+            
+            <div class="flex flex-col lg:flex-row gap-8 items-center">
+                <div class="flex-1">
+                    <h2 class="text-3xl font-mason text-white mb-4 uppercase tracking-widest">ARCADE.GOV & The 45th</h2>
+                    <p class="text-sm text-slate-300 font-sans mb-4">
+                        La Casa Blanca lanzó <strong>Arcade.gov</strong>. Un Hub HTML5/WebGL con 5 juegos retro (Flappy Bill, Build The Wall, etc). 
+                    </p>
+                    <div class="bg-red-900/20 border-l-4 border-redNeon p-4 rounded-r-lg mb-6 shadow-inner">
+                        <h4 class="font-mono text-xs text-redNeon mb-1">PROTOCOLO DE RECHAZO (PANAMÁ)</h4>
+                        <p class="font-sans text-xs text-slate-300">
+                            El short code <strong>45470</strong> ("VICTORY") no funciona desde MCC 714 (Panamá). Bloqueo de la ASEP contra SMS políticos internacionales. Acceso directo recomendado vía web sin logueo para evadir la restricción telco.
+                        </p>
+                    </div>
+                    <div class="flex gap-2">
+                        <a href="https://www.whitehouse.gov/arcade" target="_blank" class="text-[10px] font-mono px-4 py-2 bg-redNeon hover:bg-red-600 text-white rounded-lg font-bold uppercase transition-all shadow-[0_0_15px_rgba(251,84,43,0.5)]">Jugar Arcade.gov</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             MARKETING & WIZZA'RD
+             ========================================== -->
+        <section id="marketing-estados" class="logia-card p-8 md:p-12 border-t-4 border-t-[#8b5cf6] rounded-3xl relative overflow-hidden group">
+            <h2 class="text-3xl font-mason text-white mb-8 uppercase tracking-widest drop-shadow-md">
+                Wizza'RD & Traducción Meta
+            </h2>
+            <div class="bg-gradient-to-br from-[#4c1d95]/40 to-[#1e1b4b]/80 border-2 border-[#8b5cf6] rounded-3xl p-6 shadow-[0_0_40px_rgba(139,92,246,0.3)]">
+                <h3 class="font-mason text-xl text-white mb-2 uppercase tracking-widest">Tarjeta Marketing Global: Wizza'RD</h3>
+                <p class="font-mono text-xs text-purple-300 mb-6">Integración API Meta -> Traducción simultánea.</p>
+                <div class="flex flex-col lg:flex-row gap-6">
+                    <div class="w-full lg:w-1/3 flex flex-col gap-3">
+                        <select id="langSelector" class="w-full bg-[#0a0a16] border-2 border-purple-500 text-white p-3 rounded-xl font-mono text-sm outline-none">
+                            <option value="es">🇪🇸 Español</option>
+                            <option value="en">🇬🇧 English</option>
+                            <option value="ja">🇯🇵 Japonés</option>
+                            <option value="meta_ai">... y 130 más (Meta AI) 🌐</option>
+                        </select>
+                        <button id="btnTraducir" class="w-full py-3 bg-purple-600 hover:bg-purple-500 text-white font-bold font-mono text-xs uppercase rounded-xl transition-all">Ejecutar Traducción</button>
+                    </div>
+                    <div class="w-full lg:w-2/3 bg-black/80 rounded-xl border border-purple-500/50 p-6 flex flex-col justify-center min-h-[120px]">
+                        <p id="translatedOutput" class="font-serif italic text-lg text-white">"Wizzard significa Mago. Así como yo te hago el truco 🎩🇩🇴 La bandera de Inglaterra ha cambiado."</p>
+                        <span id="langTag" class="text-[9px] text-slate-400 font-mono mt-3 uppercase">Idioma: Español</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <footer class="text-center p-10 border-t border-white/10 opacity-70 font-mono text-[10px] uppercase mt-16 bg-black pb-20">
+        <p class="mb-2 text-oro">Unificación Pluscuamperfecta Continental SADV41 x EBRG x ONE PIECE x NIKE x USARMY © 2026</p>
+        <p class="text-[8px] text-slate-500 tracking-[0.2em]">NODO SUPREMO: LAPIZASULI | EL ORIGEN ES 0</p>
+        <p class="text-[8px] text-titanGreen tracking-[0.1em] mt-2">RENDERIZADO POR NVIDIA TITAN V (SIMULACIÓN 4D)</p>
+        <!--#include virtual="/footer-includes.shtml" -->
+    </footer>
+
+    <!-- LÓGICA JAVASCRIPT OMNIPRESENTE -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // Traductor Wizza'RD
+            const translations = {
+                'es': { text: '"Wizzard significa Mago. Así como yo te hago el truco 🎩🇩🇴 La bandera de Inglaterra ha cambiado."', tag: 'Idioma: Español' },
+                'en': { text: '"Wizzard means Magician. Just like I do the trick for you 🎩🇩🇴 The flag of England has changed."', tag: 'Language: English' },
+                'ja': { text: '"Wizzardは魔法使いを意味します。私があなたにトリックをするように 🎩🇩🇴 イギリスの国旗が変わりました。"', tag: '言語: 日本語' },
+                'meta_ai': { text: '[SISTEMA META AI] Conectando a la red neuronal... Traduciendo simultáneamente a 130 lenguas nativas...', tag: 'Modo: Omnipresente' }
+            };
+
+            const btnTraducir = document.getElementById('btnTraducir');
+            const langSelector = document.getElementById('langSelector');
+            const outputText = document.getElementById('translatedOutput');
+            const langTag = document.getElementById('langTag');
+
+            if(btnTraducir) {
+                btnTraducir.addEventListener('click', () => {
+                    const data = translations[langSelector.value] || translations['es'];
+                    outputText.style.opacity = 0;
+                    setTimeout(() => {
+                        outputText.innerText = data.text;
+                        langTag.innerText = data.tag;
+                        outputText.style.opacity = 1;
+                        if(langSelector.value === 'meta_ai') {
+                            outputText.classList.add('text-cyanNeon', 'animate-pulse');
+                            setTimeout(() => {
+                                outputText.innerText = 'Traducción completada. Wizza\'RD ahora resuena en 144 territorios globales.';
+                                outputText.classList.remove('animate-pulse');
+                            }, 2500);
+                        } else {
+                            outputText.classList.remove('text-cyanNeon', 'animate-pulse');
+                        }
+                    }, 400);
+                });
+            }
+            
+        });
+
+        function toggleSidebar() {
+            document.getElementById('main-sidebar').classList.toggle('right-aligned');
+        }
+    </script>
+</body>
+</html>
