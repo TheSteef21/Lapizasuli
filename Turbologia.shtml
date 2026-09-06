@@ -1,0 +1,33 @@
+<!-- Archivo: turbologia.shtml - NODO TURBOLOGIA SADV41 -->
+<!--#config timefmt="%d/%m/%Y %H:%M:%S" -->
+<div id="turbologia-include" class="logia-card border-2 border-[#FB542B] rounded-[24px] p-6 md:p-8 relative overflow-hidden bg-gradient-to-br from-[#1a0f0a]/90 via-[#0a0a0a]/95 to-black shadow-[0_0_40px_rgba(251,84,43,0.3)] my-8" style="font-family: 'Inter', sans-serif;">
+    <style>
+       .turbologia-pulse { animation: turboPulse 2s infinite; }
+        @keyframes turboPulse { 0%{box-shadow:0 0 0 0 rgba(251,84,43,0.7)} 70%{box-shadow:0 0 0 15px rgba(251,84,43,0)} 100%{box-shadow:0 0 0 0 rgba(251,84,43,0)} }
+    </style>
+
+    <div style="position:absolute; right:-20px; top:-20px; font-size:6rem; opacity:0.08; pointer-events:none;">⚡</div>
+
+    <div style="display:flex; flex-wrap:wrap; gap:24px; align-items:center; position:relative; z-index:2;">
+        <div style="flex:1; min-width:280px;">
+            <div style="display:inline-block; font-family:'JetBrains Mono',monospace; font-size:9px; padding:4px 12px; border-radius:999px; border:1px solid #FB542B; color:#ff8a65; background:rgba(0,0,0,0.6); text-transform:uppercase; letter-spacing:0.15em; margin-bottom:12px;">
+                NODO OFICIAL // INSTAGRAM GROUP // SSI: <!--#echo var="DATE_LOCAL" -->
+            </div>
+            <h2 style="font-family:'Pirata One',cursive; font-size:2.2rem; color:#fff; letter-spacing:0.05em; margin:0; line-height:1;">TURBOLOGIA SADV41</h2>
+            <p style="font-size:13px; color:#cbd5e1; margin-top:12px; line-height:1.5;">Escuadrón élite de <strong style="color:#fff;">@stevendioroficial</strong>. Misiones Burunga, drops, fútbol, multimedia y Logia Pluscuamperfecta. Acceso directo 24/7.</p>
+
+            <div style="margin-top:18px; display:flex; flex-wrap:wrap; gap:10px;">
+                <a href="https://ig.me/j/Abbcf6MyjQoo7oBf/" target="_blank" style="display:inline-block; background:#FB542B; color:#fff; font-family:'JetBrains Mono',monospace; font-weight:900; font-size:12px; padding:14px 22px; border-radius:12px; text-decoration:none; text-transform:uppercase; letter-spacing:0.08em;" class="turbologia-pulse">
+                    ⚡ UNIRME AHORA → ig.me/j/Abbcf6MyjQoo7oBf/
+                </a>
+            </div>
+            <div style="margin-top:10px; font-family:'JetBrains Mono',monospace; font-size:8px; color:#475569; text-transform:uppercase;">Last Sync: <!--#echo var="LAST_MODIFIED" --> | Server: <!--#echo var="DATE_LOCAL" --></div>
+        </div>
+
+        <div style="width:160px; background:rgba(0,0,0,0.7); border:1px solid rgba(251,84,43,0.4); border-radius:16px; padding:10px; text-align:center;">
+            <div style="font-family:'JetBrains Mono',monospace; font-size:8px; color:#d4af37; margin-bottom:6px; letter-spacing:0.1em;">QR INVITACIÓN</div>
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://ig.me/j/Abbcf6MyjQoo7oBf/" alt="QR Turbologia" style="width:100%; border-radius:10px; background:#fff; padding:4px;">
+            <div style="font-family:'JetBrains Mono',monospace; font-size:8px; color:#fff; margin-top:6px;">ESCANEA</div>
+        </div>
+    </div>
+</div>
