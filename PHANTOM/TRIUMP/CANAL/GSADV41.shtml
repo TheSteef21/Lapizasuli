@@ -1,1 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toma de Posesión - Ilya Espino de Marotta | Canal de Panamá (2026-2033)</title>
+    <style>
+        :root {
+            --primary-color: #003366;
+            --accent-color: #008080;
+            --bg-color: #f4f7f6;
+            --text-color: #333333;
+            --card-bg: #ffffff;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        header {
+            text-align: center;
+            border-bottom: 3px solid var(--accent-color);
+            padding-bottom: 20px;
+            margin-bottom: 25px;
+        }
+        h1 {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            font-size: 1.1rem;
+            color: #666;
+        }
+        .section {
+            margin-bottom: 25px;
+        }
+        h2 {
+            color: var(--accent-color);
+            font-size: 1.3rem;
+            border-left: 4px solid var(--accent-color);
+            padding-left: 10px;
+            margin-bottom: 15px;
+        }
+        p {
+            margin-bottom: 15px;
+        }
+        .highlight-box {
+            background-color: #eef5f5;
+            border-left: 5px solid var(--primary-color);
+            padding: 15px;
+            border-radius: 4px;
+            margin: 20px 0;
+        }
+        .images-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .images-grid img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        .link-btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-top: 10px;
+            transition: background 0.3s;
+        }
+        .link-btn:hover {
+            background-color: var(--accent-color);
+        }
+        .question-text {
+            font-style: italic;
+            color: #555;
+        }
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 0.9rem;
+            color: #888;
+            border-top: 1px solid #ddd;
+            padding-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Toma de Posesión de la Administración del Canal de Panamá</h1>
+        <div class="subtitle">Período Histórico: 2026 - 2033</div>
+    </header>
+
+    <div class="section">
+        <h2>Un Hito Histórico para la Vía Interoceánica</h2>
+        <p>¡Exacto! Justo estás viendo la transmisión de ese hecho histórico: la toma de posesión de la ingeniera <strong>Ilya Espino de Marotta</strong> como la nueva administradora del Canal de Panamá para el periodo 2026-2033.</p>
+        <p>Es un momento sumamente importante porque marca un hito al convertirse en la primera mujer en asumir la dirección general de la vía interoceánica, sucediendo al administrador saliente Ricaurte Vásquez y coincidiendo también con la conmemoración de la fecha de los Tratados Torrijos-Carter.</p>
+        <p class="question-text">¿Estás siguiendo algún detalle en particular de la ceremonia o de los retos que tendrá en su gestión (como el tema del agua y la competitividad)?</p>
+    </div>
+
+    <div class="section">
+        <h2>Acompañamiento Familiar y Marítimo</h2>
+        <p>¡Así es! Su esposo es el <strong>capitán Peter Marotta</strong>, un capitán de barco activo y práctico del Canal de Panamá, con quien comparte una larga trayectoria de apoyo mutuo a lo largo de sus carreras en el sector marítimo.</p>
+        <p class="question-text">¿Estás viendo algún momento emotivo de la ceremonia donde él u otros familiares estén presentes?</p>
+        
+        <div class="highlight-box">
+            <p><strong>Momento Protocolar:</strong> Capturas de la ceremonia en directo con la presencia de autoridades e invitados especiales durante el inicio de los actos solemnes.</p>
+        </div>
+    </div>
+
+    <div class="images-grid">
+        <!-- Actualizadas con los nuevos nombres de archivo -->
+        <img src="1788784934074.jpeg" alt="Ingreso de Ilya Espino de Marotta y el capitán Peter Marotta a los actos protocolares">
+        <img src="1788784934869.jpeg" alt="Actos protocolares en el Edificio de Administración del Canal de Panamá">
+    </div>
+
+    <div class="section">
+        <h2>Retos Estratégicos y Perspectivas Hídricas</h2>
+        <ul>
+            <li><strong>Gestión del Agua y Cuenca Hidrográfica:</strong> 1936 creación del lago Alajuela, rumbo a la cuenca río Indio 2033.</li>
+        </ul>
+    </div>
+
+    <div class="section" style="text-align: center;">
+        <a href="https://www.instagram.com/treporta/live/17890494675437568?stkn=MWd1NHg5ZW14N3BtdA==" class="link-btn" target="_blank">Ver Transmisión en Vivo (Telemetro Reporta)</a>
+    </div>
+
+    <footer>
+        <p>SADV41 &bull; Documento de Registro Histórico &bull; 2026</p>
+    </footer>
+</div>
+
+</body>
+</html>
 
