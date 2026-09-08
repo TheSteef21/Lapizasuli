@@ -1,0 +1,37 @@
+<!--#set var="title" value="Reporte Forense: Incongruencia Fiscal-Legal" -->
+<!--#include virtual="/includes/header.html" -->
+
+<main class="forensic-report">
+    <header>
+        <h1>Registro de Vulnerabilidad: Incongruencia Fiscal y Legal</h1>
+        <p><strong>Clasificación del Incidente:</strong> Cruce de datos empresariales y personales (Violación de Privacidad y Riesgo Fiscal).</p>
+    </header>
+
+    <section id="detalle-del-caso">
+        <h2>Descripción del Evento</h2>
+        <p>Se había detectado y documentado la recepción continuada de facturación de servicios corporativos y telecomunicaciones (pertenecientes a terceros y entidades comerciales) en casillas de correo electrónico estrictamente personales.</p>
+        <p>Esta situación había provocado un solapamiento de identidades, donde el perfil del ciudadano común quedaba erróneamente vinculado a los compromisos fiscales, planes contratados y estados de cuenta de una razón social independiente.</p>
+    </section>
+
+    <section id="trazabilidad">
+        <h2>Trazabilidad y Acciones Tomadas</h2>
+        <ul>
+            <li><strong>Notificación Temprana:</strong> Se había emitido un aviso formal al departamento de facturación del proveedor de servicios advirtiendo sobre la recepción anómala de estados de cuenta ajenos.</li>
+            <li><strong>Apertura de Ticket:</strong> El área de <em>Backoffice B2B</em> había confirmado la recepción de la solicitud de desvinculación, generando un número de reporte oficial para la investigación.</li>
+            <li><strong>Bloqueo de Envíos:</strong> Se registraron fallos de entrega <em>(Mail Delivery System)</em> al intentar reenviar la evidencia a ciertos canales internos del proveedor, lo que había dificultado la resolución ágil del problema.</li>
+        </ul>
+    </section>
+
+    <section id="impacto">
+        <h2>Impacto y Riesgos Potenciales</h2>
+        <p>El hecho de que los sistemas corporativos hubiesen entrelazado bases de datos de empleados o particulares con la titularidad de los negocios representa un riesgo grave. Quienes hayan sido víctimas de este fallo quedan expuestos a:</p>
+        <ul>
+            <li>Incongruencias ante la Dirección General de Ingresos o entidades tributarias por discrepancia entre gastos reportados y nivel de ingresos.</li>
+            <li>Exposición de datos sensibles y financieros de la empresa hacia terceros no autorizados.</li>
+            <li>Conflictos legales por cobros indebidos o responsabilidades comerciales adjudicadas a perfiles personales.</li>
+        </ul>
+    </section>
+</main>
+
+<!--#include virtual="/includes/footer.html" -->
+
