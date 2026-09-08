@@ -1,1 +1,86 @@
+<!--#set var="title" value="Reporte Consolidado: Incongruencia Fiscal e Incidencias de Seguridad" -->
+<!--#include virtual="/includes/header.html" -->
+
+<main class="consolidated-report">
+    
+    <!-- ==========================================
+         SECCIÓN 1: REPORTE FORENSE Y FISCAL
+         ========================================== -->
+    <article class="forensic-report">
+        <header>
+            <h1>Registro de Vulnerabilidad: Incongruencia Fiscal y Legal</h1>
+            <p><strong>Clasificación del Incidente:</strong> Cruce de datos empresariales y personales (Violación de Privacidad y Riesgo Fiscal).</p>
+        </header>
+
+        <section id="detalle-del-caso">
+            <h2>Descripción del Evento</h2>
+            <p>Se había detectado y documentado la recepción continuada de facturación de servicios corporativos y telecomunicaciones (pertenecientes a terceros y entidades comerciales) en casillas de correo electrónico estrictamente personales.</p>
+            <p>Esta situación había provocado un solapamiento de identidades, donde el perfil del ciudadano común quedaba erróneamente vinculado a los compromisos fiscales, planes contratados y estados de cuenta de una razón social independiente.</p>
+        </section>
+
+        <section id="trazabilidad">
+            <h2>Trazabilidad y Acciones Tomadas</h2>
+            <ul>
+                <li><strong>Notificación Temprana:</strong> Se había emitido un aviso formal al departamento de facturación del proveedor de servicios advirtiendo sobre la recepción anómala de estados de cuenta ajenos.</li>
+                <li><strong>Apertura de Ticket:</strong> El área de <em>Backoffice B2B</em> había confirmado la recepción de la solicitud de desvinculación, generando un número de reporte oficial para la investigación.</li>
+                <li><strong>Bloqueo de Envíos:</strong> Se registraron fallos de entrega <em>(Mail Delivery System)</em> al intentar reenviar la evidencia a ciertos canales internos del proveedor, lo que había dificultado la resolución ágil del problema.</li>
+            </ul>
+        </section>
+
+        <section id="impacto">
+            <h2>Impacto y Riesgos Potenciales</h2>
+            <p>El hecho de que los sistemas corporativos hubiesen entrelazado bases de datos de empleados o particulares con la titularidad de los negocios representa un riesgo grave. Quienes hayan sido víctimas de este fallo quedan expuestos a:</p>
+            <ul>
+                <li>Incongruencias ante la Dirección General de Ingresos o entidades tributarias por discrepancia entre gastos reportados y nivel de ingresos.</li>
+                <li>Exposición de datos sensibles y financieros de la empresa hacia terceros no autorizados.</li>
+                <li>Conflictos legales por cobros indebidos o responsabilidades comerciales adjudicadas a perfiles personales.</li>
+            </ul>
+        </section>
+    </article>
+
+    <hr>
+
+    <!-- ==========================================
+         SECCIÓN 2: BOLETÍN DE SEGURIDAD CIUDADANA
+         ========================================== -->
+    <article class="security-bulletin">
+        <header>
+            <h1>Boletín de Seguridad: Intento de asalto a camión blindado en Marbella</h1>
+            <p><strong>Fecha del Incidente:</strong> 7 de septiembre de 2026 | <strong>Ubicación:</strong> Ciudad de <a href="https://www.google.com/search?kgmid=/m/0fr_b" target="_blank" rel="noopener noreferrer">Panamá</a></p>
+        </header>
+
+        <section id="cronologia-asalto">
+            <h2>Cronología del Ataque</h2>
+            <p>Un intento de asalto a un camión blindado provocó una fuerte balacera la noche del lunes en el área financiera de Marbella. El incidente ocurrió aproximadamente a las 7:40 p. m. frente a una sucursal del Banco General y el comercio Felipe Motta, en la Calle 53 Este. El ataque comenzó cuando los delincuentes intentaron interceptar a los custodios de valores que retiraban bolsas con dinero en efectivo de un cajero automático. <sup>[1, 2, 3]</sup></p>
+            
+            <p>La rápida reacción y los disparos de los agentes de seguridad lograron frustrar el robo. El enfrentamiento armado desató el pánico entre los residentes y conductores que transitaban por la zona. En su desesperada huida, el vehículo de los asaltantes terminó volcado en mitad de la vía. Posteriormente, los cuatro sospechosos abandonaron dicho automóvil y continuaron su escape a bordo de un vehículo sedán utilizado como taxi. <sup>[1, 2, 4]</sup></p>
+        </section>
+
+        <section id="investigacion-operativos">
+            <h2>Estado de las Investigaciones</h2>
+            <p>Tanto la Policía Nacional de Panamá como el Ministerio Público abrieron investigaciones en la escena y mantuvieron diligencias operativas durante la jornada de este martes para dar con el paradero de los delincuentes. <sup>[2, 5]</sup></p>
+        </section>
+
+        <section id="seguimiento-fuentes">
+            <h2>Opciones de Seguimiento y Referencias</h2>
+            <p>Para profundizar en la actualización de este caso, se recomienda dar seguimiento a las siguientes líneas de investigación:</p>
+            <ul>
+                <li>El avance de los operativos de captura y si ya se logró identificar el taxi utilizado en la fuga.</li>
+                <li>Los reportes oficiales del Ministerio de Seguridad sobre el estado de salud de los custodios o posibles heridos en el área.</li>
+            </ul>
+
+            <h3>Fuentes Consultadas</h3>
+            <ul>
+                <li>[1] <a href="https://www.prensa.com/judiciales/intercambio-de-disparos-tras-intento-de-robo-a-camion-blindado-en-marbella/" target="_blank" rel="noopener noreferrer">La Prensa</a></li>
+                <li>[2] <a href="https://www.instagram.com/reel/DdBqGZFFQL7/" target="_blank" rel="noopener noreferrer">Reporte en Instagram (Reel 1)</a></li>
+                <li>[3] <a href="https://www.infobae.com/panama/2026/09/08/tiroteo-frustro-el-robo-de-un-camion-blindado-en-una-zona-financiera-de-panama/" target="_blank" rel="noopener noreferrer">Infobae</a></li>
+                <li>[4] <a href="https://www.instagram.com/reel/DdBsP9Wyvvt/" target="_blank" rel="noopener noreferrer">Reporte en Instagram (Reel 2)</a></li>
+                <li>[5] <a href="https://www.tvn-2.com/videos/video-diligencias-robo-camion-blindado-continuan_8_2259836.html" target="_blank" rel="noopener noreferrer">TVN-2</a></li>
+            </ul>
+        </section>
+    </article>
+
+</main>
+
+<!--#include virtual="/includes/footer.html" -->
 
