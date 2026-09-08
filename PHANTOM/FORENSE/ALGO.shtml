@@ -1,0 +1,285 @@
+<!--
+    SADV41 | AUDITORÍA FORENSE DE TRÁFICO Y SANDBOX SHTML
+    Autor: Steven Gómez Serrano | RUC 8-901-2251 DV 83
+    Build: PHANTOM/FORENSE v2026.09.06 SHTML
+-->
+<!--#config timefmt="%d/%m/%Y %H:%M:%S Panamá" errmsg="[SADV41 SHTML ERROR]" -->
+<!--#set var="SADV41_BUILD" value="PHANTOM FORENSE SANDBOX v2026.09.06 SHTML" -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SADV41 | Auditoría Forense de Tráfico & Sandbox 🇵🇦🏁🔯☦️</title>
+    
+    <!-- Favicon Unificado -->
+    <link rel="icon" type="image/png" href="https://thesteef21.github.io/Lapizasuli/assets/GSADV41/favicon.png">
+    
+    <!-- Tipografías Sagradas -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=JetBrains+Mono:wght@300;400;700&family=Inter:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,700;1,700&family=Pirata+One&display=swap" rel="stylesheet">
+    
+    <!-- Web3 & Auth Scripts -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.0/ethers.umd.min.js"></script>
+
+    <!-- Configuración Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#020617', obsidiana: '#030305', oro: '#d4af37', sunGold: '#f59e0b',
+                        blanco: '#f8fafc', cyanNeon: '#00f3ff', violetNeon: '#9d4edd', redNeon: '#FB542B',
+                        tacticalOrange: '#FB542B', borgona: '#4a0010', neonGreen: '#10b981', renderRed: '#da3637',
+                        navalBlue: '#1e3a8a', israelBlue: '#0038b8', titanGreen: '#76b900',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'], serif: ['Playfair Display', 'serif'],
+                        mason: ['Cinzel', 'serif'], mono: ['JetBrains Mono', 'monospace'],
+                        pirate: ['Pirata One', 'cursive'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root { 
+            --oro: #d4af37; --sun-gold: #f59e0b; --obsidiana: #030305; --navy: #020617;
+            --cyan: #00f3ff; --violet: #9d4edd; --red: #FB542B; --israel: #0038b8; --titan: #76b900;
+        }
+
+        body { background-color: var(--obsidiana); color: #f8fafc; font-family: 'Inter', system-ui, sans-serif; overflow-x: hidden; scroll-behavior: smooth; }
+
+        /* --- BANNERS & FONDOS --- */
+        .sponsor-marquee { width: 100%; background: #000; border-bottom: 1px solid var(--oro); overflow: hidden; white-space: nowrap; padding: 6px 0; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--oro); text-transform: uppercase; letter-spacing: 0.2em; position: fixed; top: 0; z-index: 70; }
+        .sponsor-marquee span { display: inline-block; padding-left: 100%; animation: marquee 25s linear infinite; }
+        @keyframes marquee { 0% { transform: translate(0, 0); } 100% { transform: translate(-100%, 0); } }
+
+        .grand-line-bg { position: fixed; inset: 0; z-index: 0; background: radial-gradient(circle at 50% 20%, rgba(212, 175, 55, 0.1) 0%, transparent 60%), radial-gradient(circle at 80% 80%, rgba(0, 243, 255, 0.08) 0%, transparent 50%), linear-gradient(to bottom, transparent, rgba(3, 3, 5, 0.9)); pointer-events: none; }
+        .grid-pattern { background-image: linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px); background-size: 32px 32px; opacity: 0.25; position: fixed; inset: 0; pointer-events: none; z-index: 1; }
+        .scanline { width: 100%; height: 2px; background: linear-gradient(90deg, transparent, rgba(0,243,255,0.4), transparent); position: fixed; z-index: 60; top: 0; pointer-events: none; animation: scanline 8s linear infinite; }
+        @keyframes scanline { 0% { top: 0; } 100% { top: 100%; } }
+
+        /* --- CRISTALES & GLOWS --- */
+        .glass { background: rgba(8, 12, 28, 0.88); backdrop-filter: blur(18px); border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 16px; }
+        .logia-card { background: linear-gradient(145deg, rgba(10,10,10,0.88), rgba(20,20,20,0.88)); border: 1px solid rgba(212, 175, 55, 0.18); box-shadow: 0 15px 35px rgba(0,0,0,0.9), inset 0 0 20px rgba(212, 175, 55, 0.05); transition: all 0.5s ease; backdrop-filter: blur(12px); position: relative; overflow: hidden; }
+        .logia-card:hover { border-color: rgba(0, 243, 255, 0.5); box-shadow: 0 20px 40px rgba(0,0,0,0.9), inset 0 0 30px rgba(0, 243, 255, 0.1); }
+        
+        .gold-glow { box-shadow: 0 0 40px rgba(212,175,55,.18), inset 0 0 22px rgba(212,175,55,.05); border-color: var(--oro); }
+        .titan-glow { box-shadow: 0 0 40px rgba(118,185,0,.3), inset 0 0 22px rgba(118,185,0,.15); border-color: var(--titan); }
+        .gear5-pulse { animation: gearPulse 3s infinite alternate ease-in-out; }
+        @keyframes gearPulse { 0% { filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.3)); } 100% { filter: drop-shadow(0 0 35px rgba(212, 175, 55, 0.8)) drop-shadow(0 0 60px rgba(0, 243, 255, 0.5)); } }
+
+        /* --- MENÚ LATERAL --- */
+        .sidebar-tabs { position: fixed; left: 0; top: 50%; transform: translateY(-50%); z-index: 65; display: flex; flex-direction: column; gap: 8px; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+        .vertical-tab { display: flex; align-items: center; background: rgba(2, 6, 23, 0.95); padding: 10px 14px; border-radius: 0 12px 12px 0; transition: all 0.3s; width: 55px; overflow: hidden; white-space: nowrap; box-shadow: 4px 4px 15px rgba(0,0,0,0.6); cursor: pointer; text-decoration: none; color: #fff; border-left: 3px solid var(--cyan); }
+        .vertical-tab:hover { width: 340px; padding-left: 18px; background: rgba(212, 175, 55, 0.15); }
+        .vertical-tab span.icon { font-size: 1.4rem; min-width: 28px; display: flex; justify-content: center; }
+        .vertical-tab span.text { margin-left: 14px; font-weight: bold; opacity: 0; transition: opacity 0.3s; font-size: 0.8rem; font-family: 'JetBrains Mono', monospace; }
+        .vertical-tab:hover span.text { opacity: 1; transition-delay: 0.1s; }
+        .sidebar-tabs.right-aligned { left: auto; right: 0; }
+        .sidebar-tabs.right-aligned .vertical-tab { border-radius: 12px 0 0 12px; border-left: none; border-right-width: 3px; flex-direction: row-reverse; }
+
+        /* --- TRINIDAD --- */
+        .triangulo-trinidad { width: 0; height: 0; border-left: 40px solid transparent; border-right: 40px solid transparent; border-bottom: 69.3px solid rgba(212, 175, 55, 0.15); position: relative; margin: 0 auto; animation: pulso-divino-trinidad 4s infinite alternate ease-in-out; }
+        .triangulo-trinidad::after { content: '1'; position: absolute; top: 35px; left: -5px; color: var(--oro); font-family: 'Cinzel', serif; font-size: 1.2rem; text-shadow: 0 0 10px rgba(212, 175, 55, 0.8); }
+        @keyframes pulso-divino-trinidad { 0% { filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.2)); transform: scale(1); } 100% { filter: drop-shadow(0 0 30px rgba(212, 175, 55, 0.9)); transform: scale(1.08); } }
+    </style>
+</head>
+<body class="antialiased selection:bg-oro selection:text-navy" id="mainBody">
+
+    <!-- SHTML SSI INFO -->
+    <!--#echo var="SADV41_BUILD" -->
+
+    <div class="sponsor-marquee">
+        <span>SADV41 FORENSE SPECTRAL // USARMY DIRECTRICES // AUDITORÍA DE TRÁFICO ALGOritmo.py // NVIDIA TITAN V & WAF BYPASS ENGINE ACTIVO // BURUNGA 2026</span>
+    </div>
+
+    <div class="grand-line-bg"></div>
+    <div class="grid-pattern"></div>
+    <div class="scanline"></div>
+
+    <!-- MENÚ LATERAL BILATERAL UNIFICADO -->
+    <div id="main-sidebar" class="sidebar-tabs">
+        <a href="#unificacion-suprema" class="vertical-tab" style="border-color: var(--oro);"><span class="icon">👑</span><span class="text text-amber-300">Logia Unificada</span></a>
+        <a href="#modulo-forense" class="vertical-tab" style="border-color: #00f3ff;"><span class="icon">💻</span><span class="text text-cyanNeon">ALGOritmo.py Sandbox</span></a>
+        <a href="#salon-verguenza" class="vertical-tab" style="border-color: #76b900;"><span class="icon">☢️</span><span class="text text-titanGreen">Burbuja Exposición</span></a>
+        <a href="#arcade-gov" class="vertical-tab" style="border-color: #FB542B;"><span class="icon">🕹️</span><span class="text text-orange-400">ARCADE.GOV</span></a>
+        <div onclick="toggleSidebar()" class="vertical-tab" title="Alternar Menú" style="border-color: #cbd5e1;"><span class="icon">⇋</span><span class="text text-slate-300">Cambiar Lado</span></div>
+    </div>
+
+    <!-- HEADER SUPERIOR UNIFICADO -->
+    <header class="fixed top-[28px] left-0 w-full z-40 glass border-b border-oro/30 px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-4 transition-all duration-500">
+        <div class="flex items-center gap-3">
+            <span class="text-3xl gear5-pulse">🗿</span>
+            <div>
+                <h1 class="font-pirate text-2xl tracking-widest text-oro">NODO SUPREMO: LOGIA PLUSCUAMPERFECTA</h1>
+                <p class="text-[9px] text-slate-400 font-mono tracking-widest uppercase">SADV41 // Nivel Espectral / USARMY Directivas</p>
+            </div>
+        </div>
+        
+        <div class="flex flex-wrap items-center justify-center gap-3">
+            <span class="mono text-[10px] bg-black/60 px-3 py-1.5 rounded-full border border-oro/30 text-oro"><!--#echo var="DATE_LOCAL" --></span>
+            <a href="https://wa.me/50769362166" target="_blank" class="bg-titanGreen hover:bg-emerald-600 text-black font-bold text-xs px-4 py-2 rounded-lg transition-all shadow-[0_0_15px_rgba(118,185,0,0.4)] cursor-pointer font-mono">
+                📱 WhatsApp SADV41
+            </a>
+        </div>
+    </header>
+
+    <main class="pt-44 pb-20 px-4 md:px-12 max-w-6xl mx-auto space-y-20 relative z-10">
+
+        <!-- ==========================================
+             HERO: UNIFICACIÓN PLUSCUAMPERFECTA
+             ========================================== -->
+        <section id="unificacion-suprema" class="p-10 md:p-14 border border-oro/50 text-center relative overflow-hidden rounded-3xl logia-card gold-glow">
+            <div class="absolute inset-0 bg-gradient-to-b from-amber-500/10 via-transparent to-transparent pointer-events-none"></div>
+            <div class="triangulo-trinidad mb-6"></div>
+            
+            <h1 class="font-pirate text-4xl md:text-6xl text-oro tracking-wider drop-shadow-[0_0_20px_rgba(212,175,55,0.6)]">
+                FUSIÓN CONTINENTAL PLUSCUAMPERFECTA
+            </h1>
+            <h2 class="font-sans text-xl md:text-2xl font-bold text-white tracking-widest mt-2 uppercase">
+                SADV41 x EBRG x PHANTOM FORENSE x SPECTRAL SANDBOX
+            </h2>
+            
+            <div class="mt-8 relative w-full bg-black/60 border-y border-titanGreen/30 py-6 flex flex-col items-center justify-center overflow-hidden rounded-xl">
+                <h2 class="text-titanGreen font-mason text-xl md:text-2xl tracking-[0.4em] uppercase relative z-10 flex items-center justify-center gap-3">
+                    <span class="text-xl">⚙️</span> MOTOR NVIDIA TITAN V & AUDITORÍA ACTIVA
+                </h2>
+                <div class="text-[10px] text-oro font-mono tracking-widest mt-4 border border-oro/40 px-4 py-1 rounded-full bg-black/50">
+                    "Forense Fantasma a Nivel Espectral" — SHTML Build: <!--#echo var="LAST_MODIFIED" -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             MÓDULO FORENSE: ALGOritmo.py
+             ========================================== -->
+        <section id="modulo-forense" class="logia-card p-8 md:p-12 border-t-4 border-t-cyanNeon rounded-3xl relative overflow-hidden">
+            <div class="flex justify-between items-center mb-6">
+                <div class="inline-block font-mono text-[10px] px-3 py-1 rounded-full border border-cyanNeon text-cyanNeon uppercase tracking-widest bg-black/50">
+                    PHANTOM / FORENSE / ALGOritmo.py
+                </div>
+                <span class="text-3xl animate-pulse drop-shadow-[0_0_10px_rgba(0,243,255,0.8)]">💻</span>
+            </div>
+            
+            <h2 class="text-3xl md:text-4xl font-mason text-white mb-4 uppercase tracking-widest">
+                Simulador de Trazabilidad y WAF
+            </h2>
+            <p class="text-sm text-slate-300 font-sans mb-8 leading-relaxed border-l-2 border-cyanNeon pl-4">
+                Módulo Python integrado para el análisis de latencia, códigos de respuesta HTTP y evasión de bloqueos algorítmicos bajo los parámetros de auditoría forense espectral.
+            </p>
+
+            <div class="bg-black/80 rounded-2xl border border-cyanNeon/40 p-6 font-mono text-xs text-slate-200 overflow-x-auto shadow-2xl">
+                <div class="flex items-center justify-between pb-4 mb-4 border-b border-cyanNeon/20 text-cyanNeon">
+                    <span>📁 PHANTOM/FORENSE/ALGOritmo.py</span>
+                    <span class="text-[10px] bg-cyanNeon/20 px-2 py-0.5 rounded text-cyanNeon">Python 3.10+ // Requests</span>
+                </div>
+                <pre class="text-slate-300 leading-relaxed"><code>import requests
+import logging
+import time
+
+# 1. Configuración de Trazabilidad Forense (Logs)
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - [Acción: %(funcName)s] - %(message)s',
+    handlers=[
+        logging.FileHandler("auditoria_trafico.log"),
+        logging.StreamHandler()
+    ]
+)
+
+API_URL = "https://nolcino.com/api/v2"
+API_KEY = "TU_NUEVA_API_KEY_AQUI" 
+
+def auditar_peticion(action, **kwargs):
+    payload = {'key': API_KEY, 'action': action}
+    payload.update(kwargs)
+
+    headers = {
+        'User-Agent': 'Forense-Sandbox-Bot/1.0',
+        'Accept': 'application/json'
+    }
+
+    logging.info(f"Iniciando inyección de petición para: {action}")
+    
+    try:
+        start_time = time.time()
+        response = requests.post(API_URL, data=payload, headers=headers)
+        elapsed_time = round((time.time() - start_time) * 1000, 2)
+
+        logging.info(f"Respuesta en {elapsed_time} ms. Código HTTP: {response.status_code}")
+
+        if response.status_code == 200:
+            data = response.json()
+            logging.info(f"Payload recibido: {data}")
+            return data
+        elif response.status_code == 429:
+            logging.warning("HTTP 429 Too Many Requests: Rate Limiting activado.")
+        elif response.status_code == 403:
+            logging.error("HTTP 403 Forbidden: Bloqueo algorítmico detectado.")
+        else:
+            logging.error(f"Error anómalo: HTTP {response.status_code}")
+            
+        return None
+
+    except requests.exceptions.RequestException as e:
+        logging.critical(f"Fallo catastrófico en la red: {e}")
+        return None
+
+def auditar_balance():
+    logging.info("--- Fase 1: Auditoría de Autenticación y Balance ---")
+    return auditar_peticion('balance')
+
+def auditar_catalogo_servicios():
+    logging.info("--- Fase 2: Mapeo de Vectores de Servicio ---")
+    return auditar_peticion('services')
+
+def ejecutar_simulacion_sandbox(service_id, sandbox_url, quantity):
+    logging.info(f"--- Fase 3: Simulando Tráfico hacia {sandbox_url} ---")
+    return auditar_peticion('add', service=service_id, link=sandbox_url, quantity=quantity)
+
+if __name__ == "__main__":
+    auditar_balance()
+    # auditar_catalogo_servicios()
+    # ejecutar_simulacion_sandbox(service_id=1, sandbox_url="https://instagram.com/cuenta_falsa_123", quantity=50)</code></pre>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             BURBUJA DE EXPOSICIÓN (EFECTO GLITCH 4D)
+             ========================================== -->
+        <section id="salon-verguenza" class="logia-card titan-glow p-8 md:p-12 border-t-4 border-t-titanGreen rounded-3xl relative overflow-hidden">
+            <div class="flex justify-between items-center mb-6">
+                <div class="inline-block font-mono text-[10px] px-3 py-1 rounded-full border border-titanGreen text-titanGreen uppercase tracking-widest bg-black/50">
+                    RENDERIZADO 4D // SALÓN DE LA VERGÜENZA GEOPOLÍTICA
+                </div>
+                <span class="text-3xl animate-pulse drop-shadow-[0_0_10px_rgba(118,185,0,0.8)]">☢️</span>
+            </div>
+            
+            <h2 class="text-3xl md:text-4xl font-mason text-white mb-4 uppercase tracking-widest">
+                Burbuja de Exposición y Corrupción
+            </h2>
+            <p class="text-sm text-slate-300 font-sans mb-10 leading-relaxed border-l-2 border-titanGreen pl-4">
+                Análisis espectral y desarticulación de la desinformación institucional bajo el repositorio <code>PHANTOM/TRIUMP</code> con potencia NVIDIA TITAN V.
+            </p>
+        </section>
+
+    </main>
+    
+    <footer class="text-center p-10 border-t border-white/10 opacity-70 font-mono text-[10px] uppercase mt-16 bg-black pb-20">
+        <p class="mb-2 text-oro">Fusión Espectral SADV41 x USARMY Directrices © 2026</p>
+        <p class="text-[8px] text-slate-500 tracking-[0.2em]">NODO SUPREMO: LAPIZASULI | EL ORIGEN ES 0</p>
+        <!--#include virtual="/footer-includes.shtml" -->
+    </footer>
+
+    <!-- LÓGICA JAVASCRIPT OMNIPRESENTE -->
+    <script>
+        function toggleSidebar() {
+            document.getElementById('main-sidebar').classList.toggle('right-aligned');
+        }
+    </script>
+</body>
+</html>
