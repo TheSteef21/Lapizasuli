@@ -1,0 +1,138 @@
+<!--#set var="TITLE" value="Bitácora de Defensa: Caso Píporo y Auditoría Forense" -->
+<!--#set var="MISSION" value="SADV41" -->
+<!--#set var="LOCATION" value="Burunga, Panamá" -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><!--#echo var="TITLE" --></title>
+    <style>
+        :root {
+            --bg-color: #0d1117;
+            --text-color: #c9d1d9;
+            --accent-color: #58a6ff;
+            --border-color: #30363d;
+            --alert-color: #f85149;
+        }
+        body { 
+            font-family: 'Courier New', Courier, monospace; 
+            background-color: var(--bg-color); 
+            color: var(--text-color); 
+            margin: 0; 
+            padding: 20px; 
+            line-height: 1.6;
+        }
+        .dossier-container { 
+            max-width: 900px; 
+            margin: auto; 
+            background: #161b22; 
+            padding: 30px; 
+            border: 1px solid var(--border-color); 
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5); 
+        }
+        h1, h2, h3 { 
+            color: var(--accent-color); 
+            border-bottom: 1px solid var(--border-color); 
+            padding-bottom: 5px; 
+        }
+        .metadata {
+            font-size: 0.9em;
+            color: #8b949e;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed var(--border-color);
+        }
+        .section { margin-bottom: 30px; }
+        .highlight-box { 
+            background-color: #010409; 
+            padding: 15px; 
+            border-left: 4px solid var(--accent-color); 
+            border-radius: 4px;
+        }
+        .risk-box {
+            background-color: rgba(248, 81, 73, 0.1);
+            border-left: 4px solid var(--alert-color);
+            padding: 15px;
+            border-radius: 4px;
+        }
+        table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            margin-top: 15px; 
+            background-color: #010409;
+        }
+        th, td { 
+            border: 1px solid var(--border-color); 
+            padding: 10px; 
+            text-align: left; 
+        }
+        th { color: var(--accent-color); }
+    </style>
+</head>
+<body>
+    <div class="dossier-container">
+        <h1>Archivo Chollywood - Expediente Forense y de Defensa</h1>
+        
+        <div class="metadata">
+            <strong>Misión:</strong> <!--#echo var="MISSION" --> | 
+            <strong>Ubicación:</strong> <!--#echo var="LOCATION" --> | 
+            <strong>Autor:</strong> Steven | 
+            <strong>Fecha de Servidor:</strong> <!--#echo var="DATE_LOCAL" -->
+        </div>
+
+        <div class="section">
+            <h2>I. Defensa Social: Expediente "Píporo"</h2>
+            <div class="highlight-box">
+                <p><strong>Perfil e Historia:</strong> Figura icónica (aprox. 58-60 años) y ex lavador de buses. Su popularidad se cimentó en los años 70 y 80 en la antigua terminal del Chorrillo, logrando reconocimiento nacional en Santiago, Colón, Chiriquí, Chitré y Las Tablas.</p>
+                <p><strong>Situación Económica y Familiar:</strong> Actualmente pensionado. Históricamente asumió la responsabilidad económica de sus hijas, quienes nacieron con buena salud y hoy residen en Santiago.</p>
+                <p><strong>Espíritu Laboral:</strong> Mantiene una férrea convicción de regresar a la operatividad en los buses, desafiando las recomendaciones de descanso por edad.</p>
+                <p><strong>Estatus Legal/Administrativo:</strong> Mantiene una orden de alejamiento vigente que restringe su acceso a la terminal actual. No obstante, la legitimidad social prevalece sobre la sanción administrativa: su sola presencia en los perímetros desata la ovación y el respeto del gremio bajo el cántico "¡Píporo, Píporo!".</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>II. Marco de Auditoría y Forense Informática</h2>
+            <p>De manera análoga a las restricciones físicas (órdenes de alejamiento), los ecosistemas digitales imponen penalizaciones unilaterales (baneos) que requieren defensa técnica documentada. La estructuración de pruebas se rige bajo los siguientes parámetros:</p>
+            
+            <h3>1. Fundamento Jurídico (Jurisdicción Panamá)</h3>
+            <ul>
+                <li><strong>Medios de Prueba Pericial (Código Judicial, Art. 974+):</strong> El código de validación opera como un dictamen pericial técnico para demostrar ante tribunales o entidades la mecánica de los hechos tecnológicos.</li>
+                <li><strong>Seguridad de la Información (Código Penal, Art. 289+):</strong> La ejecución es lícita por su naturaleza analítica y defensiva. El simulador no ataca infraestructuras de terceros, sino que emula comportamientos para entender respuestas del servidor.</li>
+                <li><strong>Legislación Contractual (ToS):</strong> Documentación de baneos aplicados como penalidad contractual mediante el análisis de huella digital y limitación de peticiones.</li>
+            </ul>
+
+            <h3>2. Estrategia de Ejecución Forense</h3>
+            <table>
+                <tr>
+                    <th>Fase Operativa</th>
+                    <th>Descripción Técnica</th>
+                </tr>
+                <tr>
+                    <td><strong>Sandbox (Aislamiento)</strong></td>
+                    <td>Uso de scripts aislados (similares a procesadores de webhooks) para peticiones HTTP. Prohibición estricta de dirigir pruebas hacia canales de difusión propios para evitar contaminación.</td>
+                </tr>
+                <tr>
+                    <td><strong>Trazabilidad (Logs)</strong></td>
+                    <td>Registro exhaustivo de variables detonantes: Rate Limiting (peticiones/ms), ausencia de cabeceras humanas y discrepancias de direcciones IP.</td>
+                </tr>
+                <tr>
+                    <td><strong>Análisis de Respuestas</strong></td>
+                    <td>Traducción de códigos de error (HTTP 403 Forbidden, HTTP 429 Too Many Requests) para documentar el instante exacto del bloqueo algorítmico o <em>shadowban</em>.</td>
+                </tr>
+            </table>
+
+            <h3>3. Balance de Riesgos y Oportunidades</h3>
+            <div class="risk-box">
+                <p><strong>Riesgos (Requiere Mitigación):</strong> Ejecutar simulaciones contra servidores en producción usando credenciales personales, tokens de acceso o la IP residencial detonará bloqueos preventivos, afectando los despliegues tecnológicos propios.</p>
+            </div>
+            <div class="highlight-box" style="margin-top: 15px; border-left-color: #2ea043;">
+                <p><strong>Oportunidades (Ventaja Procesal):</strong> Un simulador validado otorga la capacidad técnica para defender cuentas víctimas de sabotaje digital. Permite demostrar mediante logs auditables que las interacciones inauténticas (bots) fueron orquestadas por terceros, exonerando a la víctima de responsabilidad e intención.</p>
+            </div>
+        </div>
+
+        <!--#include virtual="/includes/sadv41-footer.html" -->
+    </div>
+</body>
+</html>
