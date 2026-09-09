@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<!-- GSADV41 MAXIMA DIRECTIVA SSI PLUSCUAMPERFECTA -->
+<!--#config timefmt="%A, %d de %B de %Y - %H:%M:%S %Z" -->
+<!--#config sizefmt="abbrev" -->
+<!--#config echomsg="[SSI OFF - GitHub Pages no ejecuta SSI, pero Apache si]" -->
+<!--#config errmsg="[Error SSI - Nodo no encontrado]" -->
+<!--#set var="PUB_OLVIDO" value="2026-09-08T18:42:00-05:00" -->
+<!--#set var="PUB_CHINA" value="2017-06-13T00:00:00-05:00" -->
+<!--#set var="PUB_ARCADE" value="2026-09-03T00:00:00-04:00" -->
+<!--#set var="VERSION" value="SADV41-MAXIMA-DIRECTIVA-2026.09.09" -->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spaceworld 1997 THE LEGEND OF ZELDA X 250 FREEDOM x AMERICAMAXXING x Trump Administration | GSADV41 MAXIMA DIRECTIVA SSI</title>
+<meta name="description" content="Síntesis maestra pluscuamperfecta: Ley 547 Olvido Oncológico, Panamá-China-Taiwán, Escudo de Silicio TSMC y red completa Lapizasuli 51 Nodos con protocolo SSI de tiempo vivo.">
+<style>
+:root{--ink:#0f172a;--muted:#64748b;--line:#e2e8f0;--blue:#2563eb;--blue-soft:#eff6ff;--amber:#f59e0b}
+*{box-sizing:border-box} html{scroll-behavior:smooth}
+body{margin:0;font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace, system-ui;color:#e2e8f0;background:#020617;line-height:1.7}
+a{color:#60a5fa;text-decoration:none} a:hover{text-decoration:underline}
+.wrap{max-width:1240px;margin:0 auto;padding:20px}
+.hero{border-radius:20px;background:radial-gradient(800px 400px at 10% -10%,#3b82f6 0%,transparent 60%),radial-gradient(600px 400px at 90% 0%,#8b5cf6 0%,transparent 60%),linear-gradient(135deg,#0f172a,#1e293b);border:1px solid rgba(255,255,255,.1);padding:34px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.badge{display:inline-flex;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);font-size:.75rem;font-weight:700;margin:4px}
+.grid{display:grid;grid-template-columns:1.2fr .8fr;gap:18px;margin-top:20px}
+@media(max-width:1000px){.grid{grid-template-columns:1fr}}
+.card{background:rgba(15,23,42,.8);border:1px solid #1e293b;border-radius:14px;padding:26px;backdrop-filter:blur(8px)}
+.card h2{margin:0 0 10px;color:#f8fafc;font-size:1.2rem;letter-spacing:-.02em}
+.kicker{color:#38bdf8;font-size:.72rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;margin-bottom:8px}
+table{width:100%;border-collapse:collapse;font-size:.85rem} th,td{padding:10px 12px;border-bottom:1px solid #1e293b;text-align:left} th{background:#0f172a;color:#fff}
+blockquote{border-left:3px solid #3b82f6;background:#0b1220;padding:12px 14px;border-radius:0 10px 10px 0;color:#93c5fd;margin:14px 0}
+.mono{font-family:ui-monospace,monospace;font-size:.82rem}
+.ssi-box{background:#020617;border:1px dashed #334155;border-radius:10px;padding:12px;margin:10px 0;color:#94a3b8}
+.live{color:#22c55e;font-weight:700}
+.footer{margin-top:30px;text-align:center;color:#475569;font-size:.78rem}
+</style>
+<script>
+// Paso del tiempo JS + SSI fallback
+function tiempoTranscurrido(desdeISO, id){
+  const desde = new Date(desdeISO);
+  function upd(){
+    const ahora = new Date();
+    const diff = ahora - desde;
+    const d = Math.floor(diff/86400000);
+    const h = Math.floor((diff%86400000)/3600000);
+    const m = Math.floor((diff%3600000)/60000);
+    const s = Math.floor((diff%60000)/1000);
+    const el = document.getElementById(id);
+    if(el) el.textContent = d+"d "+h+"h "+m+"m "+s+"s";
+  }
+  upd(); setInterval(upd,1000);
+}
+window.addEventListener('DOMContentLoaded', ()=>{
+  tiempoTranscurrido('2026-09-08T18:42:00-05:00','elapsed-olvido');
+  tiempoTranscurrido('2017-06-13T00:00:00-05:00','elapsed-china');
+  tiempoTranscurrido('2026-09-03T00:00:00-04:00','elapsed-arcade');
+  document.getElementById('js-now').textContent = new Date().toString();
+});
+</script>
+</head>
+<body>
+<div class="wrap">
+<header class="hero">
+<h1>Spaceworld 1997 LEGEND OF ZELDA X 250 FREEDOM x AMERICAMAXXING x Trump Administration</h1>
+<p class="mono" style="color:#94a3b8">SADV41 OMNIPRESENTE | Logia Pluscuamperfecta & Metatron 4D | 51 NODOS | Burunga - Panamá Oeste</p>
+
+<!-- PROTOCOLO DE TIEMPO MAXIMA DIRECTIVA SSI -->
+<div class="ssi-box mono">
+<!--#if expr="$DOCUMENT_URI = /.*\.shtml/" -->
+<div>⚡ SSI ACTIVO en servidor Apache/Nginx</div>
+<!--#else -->
+<div>⚠️ SSI INACTIVO en este host (GitHub Pages) - Simulación activa vía JS</div>
+<!--#endif -->
+<p>VERSION: <!--#echo var="VERSION" --></p>
+<p>SERVER SSI TIME LOCAL: <span class="live"><!--#echo var="DATE_LOCAL" --></span></p>
+<p>SERVER SSI TIME GMT: <!--#echo var="DATE_GMT" --></p>
+<p>LAST_MODIFIED (este archivo): <!--#echo var="LAST_MODIFIED" --></p>
+<p>DOCUMENT_NAME: <!--#echo var="DOCUMENT_NAME" --> | DOCUMENT_URI: <!--#echo var="DOCUMENT_URI" --></p>
+<p>JS NOW (cliente): <span id="js-now" class="live">cargando...</span></p>
+<p>CONFIG TIMEFMT: <!--#config timefmt="%d/%m/%Y %H:%M:%S" --> <!--#echo var="DATE_LOCAL" --> <!--#config timefmt="%A, %d de %B de %Y - %H:%M:%S %Z" --></p>
+</div>
+
+<div style="margin-top:12px">
+<span class="badge">📜 Ley 547: <span id="elapsed-olvido" class="live"></span> al aire</span>
+<span class="badge">🌐 China-Varela: <span id="elapsed-china" class="live"></span></span>
+<span class="badge">👾 ARCADE.GOV: <span id="elapsed-arcade" class="live"></span></span>
+<span class="badge">🕰️ SSI: DATE_LOCAL + LAST_MODIFIED + flastmod</span>
+</div>
+</header>
+
+<div class="grid">
+<div style="display:flex;flex-direction:column;gap:18px">
+
+<!-- LEY 547 -->
+<section class="card" id="olvido">
+<div class="kicker">Avance Derechos Financieros - Publicación SSI</div>
+<h2>Ley 547: Derecho al Olvido Oncológico</h2>
+<div class="ssi-box mono">
+Publicado: 08/09/2026 18:42 Panamá (TVN) | <!--#flastmod virtual="/Lapizasuli/PHANTOM/CHINA-VARELA.shtml" --> (último mod nodo base)<br>
+Tiempo en el aire: <span id="elapsed-olvido-dup" class="live"></span> | SSI LAST_MODIFIED: <!--#echo var="LAST_MODIFIED" --><br>
+<!--#set var="ELAPSED_TXT" value="5 años libres de recurrencia" -->
+Condición: <!--#echo var="ELAPSED_TXT" -->
+</div>
+<p>El <strong>8 de septiembre de 2026</strong>, Presidente <strong>José Raúl Mulino</strong> + Ministro <strong>Julio Moltó</strong> sancionan <strong>Ley 547</strong>. Prohíbe a bancos y aseguradoras aplicar cláusulas discriminatorias por cáncer previo tras 5 años sin recaída.</p>
+<blockquote>"Haber tenido cáncer no puede convertirse en una sentencia financiera para siempre" — Julio Moltó<br>
+"Panamá se suma con una visión que entiende que una persona no puede quedar condicionada para siempre"</blockquote>
+<p>Panamá se une a +30 países. Impacto: hipotecas, bienes, seguros vida/hospitalización, emprendimientos.</p>
+</section>
+
+<!-- ESCUDO SILICIO -->
+<section class="card" id="silicio">
+<div class="kicker">Geopolítica Tecnológica</div>
+<h2>Escudo de Silicio y TSMC</h2>
+<div class="ssi-box mono">
+Nodo: TSMC oblea [1788964847252.jpeg] | Revisión anual 2026 Nanjing<br>
+fsize nodo China-Varela: <!--#fsize virtual="/Lapizasuli/PHANTOM/CHINA-VARELA.shtml" -->
+</div>
+<table>
+<tr><th>Factor</th><th>Pekín</th><th>Taipéi</th></tr>
+<tr><td>Estatus</td><td>Reconocimiento oficial</td><td>Alianza fáctica profunda</td></tr>
+<tr><td>Comercio</td><td>Guerra comercial, bloqueo high-tech</td><td>Proveedor crítico US big tech</td></tr>
+<tr><td>Seguridad</td><td>Rival estratégico Indo-Pacífico</td><td>Armamento bajo Taiwan Relations Act</td></tr>
+<tr><td>Geopolítica</td><td>Una sola China</td><td>Ambigüedad estratégica</td></tr>
+</table>
+<ul>
+<li><strong>Monopolio TSMC:</strong> fabrica chips más avanzados por contrato</li>
+<li><strong>Estrangulamiento US:</strong> revisión anual estricta desde 2026</li>
+<li><strong>Dependencia China:</strong> ~28% autosuficiencia chips maduros</li>
+</ul>
+</section>
+
+<!-- TABLERO DIPLOMATICO -->
+<section class="card" id="diplomatico">
+<div class="kicker">Tablero Diplomático - Protocolo X</div>
+<h2>Panamá, China y Taiwán</h2>
+<div class="ssi-box mono">
+Mulino: "Los acercamientos... no significa que el Ejecutivo lo avale" | flastmod GSADV41: <!--#flastmod virtual="/Lapizasuli/GSADV41.shtml" --><br>
+Embajada China: comunicado refs 1788964832180.jpeg / 1788964833050.jpeg | 43 diputados Grupo Amistad Parlamentaria Panamá-Taiwán
+</div>
+<p><strong>Base:</strong> Relaciones con China desde 13/06/2017 bajo Varela.</p>
+<p><strong>Aclaración:</strong> Varela no huyó a China. En Panamá caso Odebrecht blanqueo, sanción US corrupción significativa.</p>
+<p class="mono">Fuente: La Estrella 08/09/2026 11:18 Darine Waked</p>
+</section>
+</div>
+
+<!-- COLUMNA DERECHA - NODOS -->
+<div style="display:flex;flex-direction:column;gap:18px">
+
+<section class="card" id="nodos">
+<div class="kicker">51 Nodos - Directiva SSI Máxima</div>
+<h2>Índice Maestro SADV41 - Tiempo Vivo por Nodo</h2>
+<p class="mono">Cada nodo muestra LAST_MODIFIED via SSI flastmod. En GitHub verás [SSI OFF] pero en Apache verás fecha real del archivo en disco.</p>
+
+<ul class="mono" style="list-style:none;padding:0">
+<li>📁 /GSADV41.shtml — mod: <!--#flastmod virtual="/Lapizasuli/GSADV41.shtml" --> — size: <!--#fsize virtual="/Lapizasuli/GSADV41.shtml" --> — <a href="https://thesteef21.github.io/Lapizasuli/GSADV41.shtml">abrir</a></li>
+<li>📁 /PANAMA/OESTE/BURUNGA/CRECE.shtml — mod: <!--#flastmod virtual="/Lapizasuli/Panamá/OESTE/BURUNGA/CRECE.shtml" --> — <a href="https://thesteef21.github.io/Lapizasuli/Panam%C3%A1/OESTE/BURUNGA/CRECE.shtml">abrir</a></li>
+<li>📁 RESILIENCIA.shtml — mod: <!--#flastmod virtual="/Lapizasuli/assets/BURUNGACRECE/CHOLLYWOOD/RESILIENCIA.shtml" --> — <a href="https://thesteef21.github.io/Lapizasuli/assets/BURUNGACRECE/CHOLLYWOOD/RESILIENCIA.shtml">abrir</a></li>
+<li>📁 ASTRONOMIA/index.shtml — mod: <!--#flastmod virtual="/Lapizasuli/assets/ASTRONOMIA/index.shtml" --> — <a href="https://thesteef21.github.io/Lapizasuli/assets/ASTRONOMIA/index.shtml">abrir</a></li>
+<li>📁 Greatness.shtml — mod: <!--#flastmod virtual="/Lapizasuli/PHANTOM/TRIUMP/CANAL/WOMEN/Greatness.shtml" --> — <a href="https://thesteef21.github.io/Lapizasuli/PHANTOM/TRIUMP/CANAL/WOMEN/Greatness.shtml">abrir</a></li>
+<li>📁 TRIUMP/CANAL/GSADV41.shtml — mod: <!--#flastmod virtual="/Lapizasuli/PHANTOM/TRIUMP/CANAL/GSADV41.shtml" --> — <a href="https://thesteef21.github.io/Lapizasuli/PHANTOM/TRIUMP/CANAL/GSADV41.shtml">abrir</a></li>
+<li>📁 USARMY/NAVY/GSADV41.shtml — mod: <!--#flastmod virtual="/Lapizasuli/assets/USARMY/NAVY/GSADV41.shtml" --> — <a href="https://thesteef21.github.io/Lapizasuli/assets/USARMY/NAVY/GSADV41.shtml">abrir</a></li>
+<li>📁 3DoritosDespués/Logia.html#doritos-f1 — <a href="https://thesteef21.github.io/Lapizasuli/assets/3DoritosDespu%C3%A9s/Logia.html#doritos-f1-seccion">abrir</a></li>
+<li>📁 Logia/Fraternidad/Hermandad/index.html — mod: <!--#flastmod virtual="/Lapizasuli/assets/Logia/Fraternidad/Hermandad/index.html" --> — <a href="https://thesteef21.github.io/Lapizasuli/assets/Logia/Fraternidad/Hermandad/index.html">abrir</a></li>
+<li>📁 AREA51/Ley SADV41 Flyer.html — <a href="https://thesteef21.github.io/Lapizasuli/PHANTOM/AREA51/Ley%20SADV41%20Flyer.html">abrir</a></li>
+<li>📁 NAVAL/PANAMA/CANAL/index.html — <a href="https://thesteef21.github.io/Lapizasuli/PHANTOM/NAVAL/PANAMA/CANAL/index.html">abrir</a></li>
+<li>📁 MCDONALDS/Logia.html — <a href="https://thesteef21.github.io/Lapizasuli/assets/MCDONALDS/Logia.html">abrir</a></li>
+<li>📁 LEVIATHANSQUAD/PANAMAUNIT.html — <a href="https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/PANAMAUNIT.html">abrir</a></li>
+<li>📁 🤙🏼🗿🇵🇦.html — <a href="https://thesteef21.github.io/Lapizasuli/%F0%9F%A4%99%F0%9F%8F%BC%F0%9F%97%BF%F0%9F%87%B5%F0%9F%87%A6.html">abrir</a></li>
+<li>📁 CONTACTOS/index.html — <a href="https://thesteef21.github.io/Lapizasuli/assets/CONTACTOS/index.html">abrir</a></li>
+<li>📁 centro_de_mando_virtual.html — <a href="https://thesteef21.github.io/Lapizasuli/assets/USARMY/FEDERALRESERVE/COMMANDO/FBI/CIA/NAVAL/centro_x5f_de_x5f_mando_x5f_virtual.html">abrir</a></li>
+<li>📁 NAVAL/index.html — <a href="https://thesteef21.github.io/Lapizasuli/PHANTOM/NAVAL/index.html">abrir</a></li>
+<li>📁 FBI/CIA/index.html — <a href="https://thesteef21.github.io/Lapizasuli/assets/USARMY/FEDERALRESERVE/COMMANDO/FBI/CIA/index.html">abrir</a></li>
+<li>📁 CHINA-VARELA.shtml — mod: <!--#flastmod virtual="/Lapizasuli/PHANTOM/CHINA-VARELA.shtml" --> size: <!--#fsize virtual="/Lapizasuli/PHANTOM/CHINA-VARELA.shtml" --> — <a href="https://thesteef21.github.io/Lapizasuli/PHANTOM/CHINA-VARELA.shtml">abrir</a></li>
+</ul>
+
+<div class="ssi-box mono">
+<!--#if expr="$DOCUMENT_URI = /.*GSADV41.*/" -->
+Nodo verificado: GSADV41 en URI — <!--#echo var="DOCUMENT_URI" -->
+<!--#elif expr="$DOCUMENT_URI = /.*CHINA.*/" -->
+Nodo China-Varela detectado
+<!--#else -->
+Nodo genérico SADV41
+<!--#endif -->
+</div>
+</section>
+
+<section class="card" id="includes">
+<div class="kicker">Includes Poderosos SSI</div>
+<h2>Directivas de Inclusión</h2>
+<div class="ssi-box mono">
+<p>Include virtual GSADV41:</p>
+<!--#include virtual="/Lapizasuli/GSADV41.shtml" -->
+<p style="color:#475569">[Si ves este texto sin contenido arriba, el include está bloqueado por GitHub - en Apache se renderizaría el nodo completo aquí]</p>
+<hr>
+<p>Include CHINA-VARELA:</p>
+<!--#include virtual="/Lapizasuli/PHANTOM/CHINA-VARELA.shtml" -->
+</div>
+</section>
+
+<section class="card" id="env">
+<div class="kicker">Printenv + Exec (solo Apache con Options +Includes)</div>
+<h2>Entorno Servidor</h2>
+<pre class="ssi-box mono" style="white-space:pre-wrap;max-height:220px;overflow:auto">
+<!--#printenv -->
+</pre>
+<div class="ssi-box mono">
+<!--#exec cmd="date && uptime && whoami" -->
+[exec cmd solo si Apache permite IncludesNOEXEC deshabilitado]
+</div>
+<p class="mono">WhiteHouse Media Bias ref: <a href="https://www.whitehouse.gov/mediabias/?query-47-media_bias_publication=msnbc">whitehouse.gov/mediabias?msnbc</a> | ARCADE.GOV 03 SEPT 2026: Build the Wall, Rio Run, Supply Line, Flappy Bill, Trump Savings Tycoon</p>
+</section>
+
+<section class="card" id="sintesis">
+<div class="kicker">Síntesis Unificada Pluscuamperfecta</div>
+<h2>Cómo encaja todo - Directiva Final</h2>
+<p><strong>1. Derechos:</strong> Ley 547 cierra brecha financiera perpetua.</p>
+<p><strong>2. Diplomacia:</strong> 43 diputados abren puerta trasera Taiwán, Ejecutivo sostiene Una sola China desde 13/06/2017.</p>
+<p><strong>3. Tecnología:</strong> TSMC escudo silicio, US bloqueo 2026, China 28% autosuficiencia.</p>
+<p><strong>4. Logia:</strong> 51 nodos SADV41, Metatron 4D, Turbologia, Leviathan Squad, Burunga Burunga.</p>
+<div class="ssi-box mono">
+Documento servido el: <!--#echo var="DATE_LOCAL" --> | Modificado: <!--#echo var="LAST_MODIFIED" --> | URI: <!--#echo var="DOCUMENT_URI" -->
+</div>
+</section>
+
+</div>
+</div>
+
+<footer class="footer">
+SADV41 | OMNIPRESENTE | Spaceworld 1997 LEGEND OF ZELDA X 250 FREEDOM x AMERICAMAXXING x Trump Administration<br>
+<!--#config timefmt="%Y-%m-%d %H:%M:%S %Z" -->
+Build: <!--#echo var="VERSION" --> | Servido: <!--#echo var="DATE_LOCAL" --> | Mod: <!--#echo var="LAST_MODIFIED" --> | Size: <!--#fsize virtual="/Lapizasuli/GSADV41.shtml" --> + <!--#fsize virtual="/Lapizasuli/PHANTOM/CHINA-VARELA.shtml" --><br>
+Burunga 2026 — Cristo está por venir! 🎚️ | Turbologia validado: <!--#echo var="DATE_LOCAL" -->
+<script>document.getElementById('elapsed-olvido-dup').textContent=document.getElementById('elapsed-olvido').textContent;</script>
+<!-- XBitHack full para que .html también parsee SSI en Apache: chmod +x -->
+</footer>
+</div>
+</body>
+</html>
