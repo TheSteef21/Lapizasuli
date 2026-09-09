@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Directiva SSI: Título dinámico o por defecto -->
+    <title><!--#echo var="DOCUMENT_NAME" default="SADV41 // NODO PONEGLYPH" --></title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background: #050507; color: #d4af37; font-family: 'JetBrains Mono', monospace; }
+        .glitch { text-shadow: 2px 0 #ff2a2a, -2px 0 #00f3ff; }
+        .hover-card:hover { border-color: #00f3ff; background: rgba(0, 243, 255, 0.05); }
+        .sidebar-link { transition: all 0.3s ease; }
+        .sidebar-link:hover { color: #00f3ff; padding-left: 0.5rem; border-color: #00f3ff; background: rgba(0, 243, 255, 0.05); }
+    </style>
+</head>
+<body class="flex flex-col md:flex-row min-h-screen">
+
+    <!-- 
+      DIRECTIVA SSI: Si deseas que esta barra lateral esté en un archivo separado llamado "sidebar.shtml",
+      borra el contenido de <aside> y usa: <!--#include virtual="sidebar.shtml" -->
+    -->
+    <aside class="w-full md:w-80 p-6 border-b md:border-b-0 md:border-r border-[#d4af37]/20 flex flex-col bg-[#050507]">
+        <div class="mb-8 text-center md:text-left">
+            <h2 class="text-xl font-bold glitch uppercase tracking-widest mb-1">DIRECTORIO</h2>
+            <p class="text-[9px] text-slate-500 uppercase tracking-[0.3em]">Red Unificada SADV41</p>
+        </div>
+
+        <nav class="flex flex-col gap-2 overflow-y-auto text-xs uppercase tracking-wider">
+            <div class="text-[10px] text-amber-400 mb-2 mt-4 font-bold border-b border-amber-400/30 pb-1">/ NODOS PRINCIPALES</div>
+            <a href="https://thesteef21.github.io/Lapizasuli/GSADV41.shtml" class="sidebar-link p-3 border border-slate-800">GSADV41.shtml</a>
+            <a href="https://thesteef21.github.io/Lapizasuli/GSADV41.html" class="sidebar-link p-3 border border-slate-800">GSADV41.html</a>
+            <a href="https://thesteef21.github.io/Lapizasuli/iSADV41.html" class="sidebar-link p-3 border border-slate-800">iSADV41.html</a>
+            <a href="https://thesteef21.github.io/Lapizasuli/Turbologia.shtml" class="sidebar-link p-3 border border-slate-800">Turbologia.shtml</a>
+            
+            <div class="text-[10px] text-amber-400 mb-2 mt-4 font-bold border-b border-amber-400/30 pb-1">/ USARMY HUB</div>
+            <a href="https://thesteef21.github.io/Lapizasuli/assets/USARMY/NUKE.html" class="sidebar-link p-3 border-l-4 border-amber-400 bg-amber-400/5">USARMY / NUKE HUB</a>
+            <a href="https://thesteef21.github.io/Lapizasuli/assets/USARMY/MOAB.html" class="sidebar-link p-3 border border-slate-800">USARMY / MOAB</a>
+            <a href="https://thesteef21.github.io/Lapizasuli/assets/USARMY/img/index.html" class="sidebar-link p-3 border border-slate-800">USARMY / IMÁGENES</a>
+
+            <div class="text-[10px] text-amber-400 mb-2 mt-4 font-bold border-b border-amber-400/30 pb-1">/ ACTIVOS & LOGIAS</div>
+            <a href="https://thesteef21.github.io/Lapizasuli/assets/NUKE/nuke.html" class="sidebar-link p-3 border border-slate-800">ACTIVO / NUKE</a>
+            <a href="https://thesteef21.github.io/Lapizasuli/assets/MUSIC/NUKE.html" class="sidebar-link p-3 border border-slate-800">MUSIC / NUKE</a>
+            <a href="https://thesteef21.github.io/Lapizasuli/assets/TRONO/Logia.html" class="sidebar-link p-3 border border-slate-800">TRONO / LOGIA</a>
+            <a href="https://thesteef21.github.io/Lapizasuli/assets/PRINCIPADO/index.html" class="sidebar-link p-3 border border-slate-800">PRINCIPADO / INDEX</a>
+            <a href="https://thesteef21.github.io/Lapizasuli/assets/AI/METO/EsUnMeme.html" class="sidebar-link p-3 border border-slate-800">AI / METO</a>
+
+            <div class="text-[10px] text-amber-400 mb-2 mt-4 font-bold border-b border-amber-400/30 pb-1">/ EXTERNOS</div>
+            <a href="https://youtu.be/LFA724f3MWA" class="sidebar-link p-3 border border-[#00f3ff]/30 text-[#00f3ff]">LIVE LINKIN PARK</a>
+        </nav>
+    </aside>
+
+    <!-- ÁREA PRINCIPAL -->
+    <main class="flex-1 flex flex-col items-center justify-start p-6 lg:p-12 relative overflow-hidden">
+        
+        <!-- Header NODO -->
+        <header class="mb-12 text-center relative z-10">
+            <h1 class="text-4xl font-bold glitch uppercase tracking-[0.2em] mb-2">PONEGLYPH</h1>
+            <p class="text-[10px] text-slate-500 uppercase tracking-[0.4em]">SADV41 // ORIGEN 0 // GITHUB APP</p>
+            
+            <!-- Directiva SSI: Muestra la fecha/hora local del servidor donde está hosteado -->
+            <div class="mt-4 inline-block px-3 py-1 border border-slate-800 bg-slate-900/50 rounded-sm">
+                <p class="text-[9px] text-[#00f3ff] uppercase tracking-widest font-semibold">SYS_DATE: <!--#echo var="DATE_LOCAL" --></p>
+            </div>
+        </header>
+
+        <!-- NOTICIA / TRIBUTO // ISMAEL LAGUNA -->
+        <section class="w-full max-w-2xl mb-10 p-6 border border-[#d4af37]/40 bg-[#d4af37]/5 rounded shadow-[0_0_20px_rgba(212,175,55,0.15)] relative z-10 transition-transform hover:scale-[1.01] duration-300">
+            <div class="text-center">
+                <span class="text-[11px] tracking-[0.3em] uppercase text-amber-400 font-semibold block mb-2">🕊️ HONOR Y GLORIA AL CAMPEÓN</span>
+                <h2 class="text-3xl font-bold text-white tracking-wide mb-3">ISMAEL LAGUNA</h2>
+                <div class="h-[1px] w-1/3 bg-amber-400/50 mx-auto mb-3"></div>
+                <p class="text-[12px] text-slate-300 mb-4 uppercase tracking-wider">
+                    Honras fúnebres:<br> 
+                    <span class="text-[#00f3ff]">Viernes 11 de septiembre, 2026 • 11:00 a.m.</span><br>
+                    Iglesia Santísima Trinidad
+                </p>
+                <p class="text-[10px] text-slate-400 italic">"Siempre en nuestros corazones... Un gran campeón, una gran persona."</p>
+            </div>
+        </section>
+
+        <!-- FOOTER TÁCTICO (Puede ser también un SSI si deseas modularizar) -->
+        <!-- <!--#include virtual="footer.shtml" --> -->
+        <footer class="mt-auto pt-16 text-[9px] text-slate-600 uppercase tracking-[0.3em] text-center w-full relative z-10">
+            Unificación Pluscuamperfecta 🗿⚡️🔐<br>
+            <span class="opacity-50 mt-1 block">SADV41 // USARMY PANAMÁ</span>
+            <!-- Directiva SSI para mostrar el correo del administrador si está configurado en el servidor -->
+            <span class="opacity-30 mt-2 block text-[7px]"><!--#echo var="SERVER_ADMIN" --></span>
+        </footer>
+    </main>
+
+</body>
+</html>
