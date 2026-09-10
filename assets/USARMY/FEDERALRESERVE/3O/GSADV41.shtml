@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informe Completo: Asamblea Nacional y Actualidad</title>
+    <style>
+        :root {
+            --primary: #1a365d;
+            --secondary: #3182ce;
+            --accent: #c53030;
+            --bg-main: #f4f7f6;
+            --bg-card: #ffffff;
+            --text-main: #333333;
+            --border-light: #e2e8f0;
+        }
+        
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            line-height: 1.6; 
+            color: var(--text-main); 
+            background-color: var(--bg-main); 
+            padding: 20px; 
+            margin: 0;
+        }
+        
+        .dashboard {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        @media (min-width: 992px) {
+            .dashboard {
+                grid-template-columns: 2fr 1fr;
+            }
+        }
+
+        .container { 
+            background: var(--bg-card); 
+            padding: 40px; 
+            border-radius: 12px; 
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08); 
+        }
+
+        h1 { 
+            color: var(--primary); 
+            text-align: center; 
+            border-bottom: 3px solid var(--border-light); 
+            padding-bottom: 15px; 
+            margin-top: 0;
+            margin-bottom: 30px;
+        }
+
+        h2.section-title {
+            color: var(--primary);
+            font-size: 1.5em;
+            margin-top: 0;
+            border-bottom: 2px solid var(--secondary);
+            padding-bottom: 10px;
+        }
+
+        /* Timeline Styles */
+        .timeline { 
+            position: relative; 
+            margin: 40px 0; 
+            padding-left: 35px; 
+            border-left: 4px solid var(--secondary); 
+        }
+        .timeline-item { 
+            position: relative; 
+            margin-bottom: 35px; 
+        }
+        .timeline-item::before { 
+            content: ''; 
+            position: absolute; 
+            left: -47px; 
+            top: 5px; 
+            width: 16px; 
+            height: 16px; 
+            border-radius: 50%; 
+            background: var(--bg-card); 
+            border: 4px solid var(--secondary); 
+        }
+        .timeline-date { 
+            font-weight: bold; 
+            color: var(--accent); 
+            font-size: 1.15em; 
+            margin-bottom: 8px; 
+        }
+        .timeline-content { 
+            background: #f8fafc; 
+            padding: 18px; 
+            border-radius: 6px; 
+            border: 1px solid var(--border-light); 
+        }
+
+        /* SSI Audit Styles */
+        .ssi-audit {
+            margin-top: 15px;
+            padding-top: 10px;
+            border-top: 1px dashed #cbd5e0;
+            font-size: 0.85em;
+            color: #4a5568;
+            background-color: #f1f5f9;
+            padding: 10px;
+            border-radius: 4px;
+        }
+
+        /* Key Points */
+        .key-points { 
+            background: #edf2f7; 
+            padding: 25px; 
+            border-radius: 8px; 
+            margin-top: 30px; 
+            border-left: 5px solid var(--secondary);
+        }
+        .key-points h3 { 
+            color: var(--secondary); 
+            margin-top: 0; 
+            margin-bottom: 15px;
+        }
+        .key-points ul { 
+            padding-left: 20px; 
+            margin: 0;
+        }
+        .key-points li { 
+            margin-bottom: 12px; 
+        }
+
+        /* News Widget Styles */
+        .news-widget {
+            background: var(--bg-card);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            height: fit-content;
+        }
+        
+        .news-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border-light);
+        }
+        
+        .news-item:last-child {
+            border-bottom: none;
+        }
+
+        .news-time {
+            font-size: 0.8em;
+            font-weight: bold;
+            color: #718096;
+            min-width: 70px;
+            margin-top: 3px;
+        }
+
+        .news-title {
+            font-size: 0.95em;
+            color: var(--text-main);
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        .news-title.highlight {
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        .weather-alert {
+            background-color: #feebc8;
+            border-left: 4px solid #ed8936;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .weather-alert strong {
+            color: #c05621;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Directiva SSI Global - Reserva Federal -->
+    <!--#set var="FED_AUDIT_ORG" value="Reserva Federal - Sistema de Rendición de Cuentas" -->
+
+    <div class="dashboard">
+        
+        <!-- Columna Principal: Línea de Tiempo -->
+        <main class="container">
+            <h1>Presupuesto de la Asamblea Nacional (2021-2027)</h1>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">2021 – 2025 (Ejecución Histórica)</div>
+                    <div class="timeline-content">
+                        Los presupuestos modificados de la Asamblea Nacional terminaron fluctuando entre <strong>$164 millones y $230 millones</strong> anuales. El gasto real siempre superó las recomendaciones iniciales del MEF.
+                        <div class="ssi-audit">
+                            <!--#include virtual="/api/fed_reserve/audit_log.cgi?period=2021-2025&monto_max=230M" -->
+                            <em>Registro de Control SSI: <!--#echo var="FED_AUDIT_ORG" --> - Fecha Servidor: <!--#echo var="DATE_LOCAL" --></em>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">Inicios de 2026 (Presupuesto Inicial)</div>
+                    <div class="timeline-content">
+                        Se aprueba un presupuesto de funcionamiento de <strong>$136 millones</strong>. Según la propia institución, estos fondos resultaron insuficientes y se agotaron antes de julio.
+                        <div class="ssi-audit">
+                            <!--#include virtual="/api/fed_reserve/audit_log.cgi?period=2026-start&monto=136M" -->
+                            <em>Registro de Control SSI: <!--#echo var="FED_AUDIT_ORG" --> - Fecha Servidor: <!--#echo var="DATE_LOCAL" --></em>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">1 de Julio de 2026 (Cambio de Presidencia)</div>
+                    <div class="timeline-content">
+                        Inicia la nueva gestión. A pesar de la falta de fondos, ingresan 456 nuevos funcionarios (420 de ellos eventuales). El personal transitorio existente (planilla 02) deja de cobrar.
+                        <div class="ssi-audit">
+                            <!--#include virtual="/api/fed_reserve/audit_log.cgi?event=nuevas_contrataciones&qty=456" -->
+                            <em>Registro de Control SSI: <!--#echo var="FED_AUDIT_ORG" --> - Fecha Servidor: <!--#echo var="DATE_LOCAL" --></em>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">Agosto de 2026 (Solicitud Adicional)</div>
+                    <div class="timeline-content">
+                        La Asamblea solicita <strong>$78 millones</strong> adicionales. Se argumenta la necesidad de al menos <strong>$68 millones</strong> para cerrar el año ($14 millones para la CSS y $12 millones para el décimo tercer mes).
+                        <div class="ssi-audit">
+                            <!--#include virtual="/api/fed_reserve/audit_log.cgi?event=solicitud_adicional&monto=78M" -->
+                            <em>Registro de Control SSI: <!--#echo var="FED_AUDIT_ORG" --> - Fecha Servidor: <!--#echo var="DATE_LOCAL" --></em>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">5 de Septiembre de 2026 (Silencio Administrativo)</div>
+                    <div class="timeline-content">
+                        Ingresan <strong>$25 millones</strong> extra aprobados automáticamente por "silencio administrativo" al no ser debatidos por la Comisión de Presupuesto. Esto elude el debate público y la sustentación de los renglones exactos del gasto.
+                        <div class="ssi-audit">
+                            <!--#include virtual="/api/fed_reserve/audit_log.cgi?event=silencio_administrativo_ingreso&monto=25M" -->
+                            <em>Registro de Control SSI: <!--#echo var="FED_AUDIT_ORG" --> - Fecha Servidor: <!--#echo var="DATE_LOCAL" --></em>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">2027 (Proyección y Discrepancia)</div>
+                    <div class="timeline-content">
+                        La Asamblea solicita un presupuesto de <strong>$176.6 millones</strong>. El MEF recomienda únicamente <strong>$97 millones</strong>, anticipando un fuerte conflicto presupuestario.
+                        <div class="ssi-audit">
+                            <!--#include virtual="/api/fed_reserve/audit_log.cgi?period=2027-proyeccion&solicitado=176.6M&recomendado=97M" -->
+                            <em>Registro de Control SSI: <!--#echo var="FED_AUDIT_ORG" --> - Fecha Servidor: <!--#echo var="DATE_LOCAL" --></em>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="key-points">
+                <h3>Puntos Clave de la Controversia</h3>
+                <ul>
+                    <li><strong>Opacidad en los Traslados:</strong> Ni el MEF ni la Asamblea han publicado la documentación detallada que explique en qué renglones específicos se gastarán los $25 millones ingresados por silencio administrativo.</li>
+                    <li><strong>Manejo Irregular de Planillas:</strong> Mientras el personal transitorio (planilla 2020) lleva meses sin cobrar, se autorizan nuevos ingresos eventuales y se otorgan entre 15 y 20 exoneraciones de marcación biométrica a favor de listas de asistencia manuales.</li>
+                    <li><strong>Antecedentes de "Botellas":</strong> La situación se enmarca en un contexto de desconfianza, tras el anuncio de la Contraloría el año anterior sobre la detección de cerca de 500 funcionarios que cobraban sin trabajar.</li>
+                </ul>
+            </div>
+        </main>
+
+        <!-- Columna Secundaria: Contexto y Noticias -->
+        <aside class="news-widget">
+            
+            <div class="weather-alert">
+                <span>🌩️</span>
+                <div>
+                    <strong>Alerta Local (Burunga)</strong><br>
+                    Posibles tormentas eléctricas en la próxima hora.
+                </div>
+            </div>
+
+            <h2 class="section-title">Última Hora - La Estrella</h2>
+            
+            <div class="news-item">
+                <div class="news-time">3:01 p.m.</div>
+                <p class="news-title">Aeronave de la NASA opera en Panamá para estudiar aerosoles, ozono y clima</p>
+            </div>
+
+            <div class="news-item">
+                <div class="news-time">3:00 p.m.</div>
+                <p class="news-title">Agroferias del IMA: estos son los únicos puntos habilitados este fin de semana</p>
+            </div>
+
+            <div class="news-item">
+                <div class="news-time">2:47 p.m.</div>
+                <p class="news-title highlight">Silencio total ante el traslado millonario de fondos para la Asamblea Nacional</p>
+            </div>
+
+            <div class="news-item">
+                <div class="news-time">2:17 p.m.</div>
+                <p class="news-title">Francia se suma a una creciente lista de federaciones que ya no respaldan la reelección del presidente de la FIFA</p>
+            </div>
+
+            <div class="news-item">
+                <div class="news-time">2:00 p.m.</div>
+                <p class="news-title">Cilia Flores solicita prisión domiciliaria en Nueva York por problemas cardíacos</p>
+            </div>
+
+            <div class="news-item">
+                <div class="news-time">12:03 p.m.</div>
+                <p class="news-title">Bancos no podrán cobrar varias comisiones a sus clientes desde enero de 2027</p>
+            </div>
+
+            <div class="news-item">
+                <div class="news-time">10:15 a.m.</div>
+                <p class="news-title">Panamá amplía el uso de Copernicus para el monitoreo del sector agropecuario</p>
+            </div>
+
+            <div class="news-item">
+                <div class="news-time">10:05 a.m.</div>
+                <p class="news-title">Mulino: Panamá abrirá la puerta a médicos extranjeros para cubrir déficit de especialistas</p>
+            </div>
+
+            <div class="news-item">
+                <div class="news-time">9:59 a.m.</div>
+                <p class="news-title">Juez ordena ocultar publicaciones de De la Espriella con cadáveres de presuntos integrantes de grupos armados</p>
+            </div>
+
+            <div class="news-item">
+                <div class="news-time">9:24 a.m.</div>
+                <p class="news-title">Millones sin mantenimiento definido: el otro problema de la piscina de Albrook</p>
+            </div>
+            
+        </aside>
+
+    </div>
+</body>
+</html>
