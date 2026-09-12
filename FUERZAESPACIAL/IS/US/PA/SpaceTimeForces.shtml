@@ -1,1 +1,313 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SADV5 // UNIDAD FANTASMA - CONVERGENCIA ESPACIO-TIEMPO 🇵🇦🇺🇸🇮🇱</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=JetBrains+Mono:wght@300;400;700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+<link rel="preload" as="image" href="https://thesteef21.github.io/Lapizasuli/FUERZAESPACIAL/IS/US/PA/img/1789231887979.png" type="image/png" fetchpriority="high">
+<link rel="preload" as="image" href="https://thesteef21.github.io/Lapizasuli/FUERZAESPACIAL/IS/US/PA/img/1789231600702.png" type="image/png">
+<link rel="preload" as="image" href="https://thesteef21.github.io/Lapizasuli/FUERZAESPACIAL/IS/US/PA/img/783727612_2366186827520797_564029208255039114_n-1 (1).webp" type="image/webp">
+
+<style>
+  :root {
+    --gold: #d4af37;
+    --cyan: #00f3ff;
+    --violet: #9d4edd;
+    --red: #FB542B;
+    --green: #1DB954;
+    --blue: #7AF6FF;
+    --spectral: #b084cc;
+    --bg: #030305;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; min-height: 100vh; background: var(--bg); color: #f1f5f9;
+    font-family: 'Inter', system-ui, sans-serif; overflow-x: hidden;
+  }
+  code, pre, .mono { font-family: 'JetBrains Mono', monospace !important; }
+  .cinzel { font-family: 'Cinzel', serif; }
+
+  /* FONDO CONVERGENTE - ESPECTRAL */
+  .chaos-bg-container {
+    position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; background: #000;
+  }
+  .chaos-layer {
+    position: absolute; inset: -20px; background-size: cover; background-position: center;
+    opacity: 0; mix-blend-mode: screen; filter: contrast(130%) brightness(90%) saturate(1.4);
+    transition: opacity 4s cubic-bezier(0.4, 0, 0.2, 1), transform 12s ease-out, filter 0.5s;
+    will-change: opacity, transform, filter;
+  }
+  .chaos-layer.active {
+    opacity: 0.75;
+    transform: scale(1.05) rotate(0.2deg);
+  }
+
+  /* GLITCH ARCÁNGEL 1027 */
+  @keyframes pageGlitch {
+    0% { transform: translate(0) skew(0deg); filter: hue-rotate(0deg); }
+    20% { transform: translate(-10px, 6px) skew(-5deg); filter: hue-rotate(180deg) contrast(200%) invert(0.1); }
+    40% { transform: translate(10px, -6px) skew(5deg); filter: hue-rotate(-90deg) invert(0.2); }
+    60% { transform: translate(-4px, 4px) skew(-3deg); filter: hue-rotate(90deg) drop-shadow(0 0 20px var(--cyan)); }
+    80% { transform: translate(4px, -4px) skew(3deg); filter: hue-rotate(-45deg); }
+    100% { transform: translate(0) skew(0deg); filter: hue-rotate(0deg); }
+  }
+  .glitch-active {
+    animation: pageGlitch 0.7s cubic-bezier(.25, .46, .45, .94) both;
+  }
+  .layer-glitch {
+    mix-blend-mode: color-dodge !important;
+    transform: scale(1.2) rotate(-2deg) !important;
+    filter: contrast(250%) saturate(400%) hue-rotate(270deg) drop-shadow(0 0 30px var(--violet)) !important;
+    opacity: 1 !important;
+  }
+
+  .scanline {
+    position: fixed; left: 0; width: 100%; height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(0, 243, 255, 0.5), transparent);
+    z-index: 60; pointer-events: none; animation: scan 6s linear infinite;
+  }
+  @keyframes scan { 0% { top: 0; } 100% { top: 100%; } }
+
+  .grid-pattern {
+    position: fixed; inset: 0; z-index: 1; pointer-events: none;
+    background-image: linear-gradient(rgba(0, 243, 255, 0.03) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(0, 243, 255, 0.03) 1px, transparent 1px);
+    background-size: 30px 30px; opacity: 0.5;
+  }
+
+  .glass {
+    background: rgba(5, 5, 8, 0.88); backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(0, 243, 255, 0.15);
+  }
+  .glass-strong {
+    background: rgba(8, 8, 12, 0.95); backdrop-filter: blur(25px);
+    border: 1px solid rgba(157, 78, 221, 0.3);
+  }
+  
+  .glow-cyan { box-shadow: 0 0 40px rgba(0,243,255,0.15), inset 0 0 20px rgba(0,243,255,0.05); border-color: rgba(0, 243, 255, 0.4); }
+  .glow-spectral { box-shadow: 0 0 50px rgba(157, 78, 221, 0.2), inset 0 0 25px rgba(157, 78, 221, 0.1); border-color: rgba(157, 78, 221, 0.5); }
+
+  main { position: relative; z-index: 10; max-width: 1450px; margin: 0 auto; padding: 2rem 1rem 4rem; }
+
+  header {
+    border-radius: 20px; padding: 1.5rem 2rem; margin-bottom: 2rem;
+    display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; align-items: center;
+  }
+
+  .btn {
+    font-size: 11px; padding: 10px 20px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.05); color: #fff; cursor: pointer; transition: 0.3s; text-decoration: none; display: inline-block; text-align: center; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700;
+  }
+  .btn:hover { background: rgba(255,255,255,0.15); transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+  .btn-gold { border-color: var(--gold); color: var(--gold); background: rgba(212,175,55,0.1); }
+  .btn-gold:hover { background: var(--gold); color: #000; box-shadow: 0 0 20px rgba(212,175,55,0.4); }
+  .btn-cyan { border-color: var(--cyan); color: var(--cyan); background: rgba(0,243,255,0.1); }
+  .btn-cyan:hover { background: var(--cyan); color: #000; box-shadow: 0 0 20px rgba(0,243,255,0.4); }
+  .btn-violet { border-color: var(--violet); color: var(--violet); background: rgba(157,78,221,0.1); }
+  .btn-spotify { border-color: var(--green); color: var(--green); background: rgba(29, 185, 84, 0.1); }
+  .btn-spotify:hover { background: var(--green); color: #000; box-shadow: 0 0 20px rgba(29, 185, 84, 0.4); }
+
+  .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
+  .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+  .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+
+  .card {
+    border-radius: 18px; padding: 1.2rem; background: rgba(10, 10, 16, 0.9);
+    border: 1px solid rgba(255,255,255,0.1); transition: all 0.3s ease; position: relative; overflow: hidden;
+  }
+  .card:hover { border-color: var(--cyan); transform: translateY(-4px); box-shadow: 0 8px 25px rgba(0,243,255,0.15); }
+  .card img, .card video { width: 100%; height: 200px; object-fit: cover; border-radius: 12px; margin-bottom: 12px; border: 1px solid rgba(255,255,255,0.05); }
+
+  .ability-log { border-radius: 16px; padding: 1.2rem; max-height: 220px; overflow-y: auto; font-size: 11px; color: #cbd5e1; }
+  .ability-log div { margin-bottom: 6px; padding-bottom: 6px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+
+</style>
+</head>
+<body id="mainBody">
+
+<div class="chaos-bg-container" id="chaosBg">
+  <div class="chaos-layer active" style="background-image: url('https://thesteef21.github.io/Lapizasuli/FUERZAESPACIAL/IS/US/PA/img/1789231887979.png')"></div>
+  <div class="chaos-layer" style="background-image: url('https://thesteef21.github.io/Lapizasuli/FUERZAESPACIAL/IS/US/PA/img/1789231600702.png')"></div>
+  <div class="chaos-layer" style="background-image: url('https://thesteef21.github.io/Lapizasuli/FUERZAESPACIAL/IS/US/PA/img/783727612_2366186827520797_564029208255039114_n-1%20(1).webp')"></div>
+  <div class="chaos-layer" style="background-image: url('https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/785282279_1341489208069876_1027745017510610652_n.webp')"></div>
+</div>
+
+<div class="grid-pattern"></div>
+<div class="scanline"></div>
+
+<main>
+  <header class="glass glow-spectral">
+    <div>
+      <div class="mono" style="font-size: 0.75rem; color: var(--cyan); letter-spacing: 0.25em;">SADV5 // UNIDAD FANTASMA // HYPERSEC</div>
+      <h1 class="cinzel" style="font-size: 1.8rem; font-weight: 900; margin: 8px 0; letter-spacing: 0.15em; text-shadow: 0 0 20px rgba(157, 78, 221, 0.8);">UNIDAD ESPACIO-TIEMPO PANAMEÑA</h1>
+      <p class="mono" style="font-size: 0.7rem; color: #e2e8f0; margin: 0;">🇵🇦🇺🇸🇮🇱⚛️🔯↗️ | ORIGEN 1027=10=1 | ID 69362166 | STACK: 5/5 COMPLETE</p>
+    </div>
+    <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
+      <button id="toggleChaos" class="btn mono btn-violet">MODO CAOS: ON</button>
+      <button id="gear7Btn" class="btn mono btn-cyan">⚛️ SINCRONIZAR AURA</button>
+      <a href="https://thesteef21.github.io/Lapizasuli/" target="_blank" class="btn mono">GH PAGES HUB</a>
+    </div>
+  </header>
+
+  <section class="grid-4">
+    <div class="glass card" style="border-bottom: 3px solid var(--cyan);">
+      <div class="mono" style="font-size: 9px; color: #94a3b8;">AURA CONVERGENTE</div>
+      <div style="font-size: 1.4rem; font-weight: 800; color: var(--cyan); margin-top: 4px;" class="mono">CYAN/GOLDEN 100%</div>
+      <div style="font-size: 9px; color: var(--green); margin-top: 4px;">SADV5 Synth Status: Stable</div>
+    </div>
+    <div class="glass card" style="border-bottom: 3px solid var(--gold);">
+      <div class="mono" style="font-size: 9px; color: #94a3b8;">NÚCLEOS DE ESENCIA</div>
+      <div style="font-size: 1.4rem; font-weight: 800; color: var(--gold); margin-top: 4px;" class="mono">5 EN 2 COMANDANTES</div>
+      <div style="font-size: 9px; color: var(--green); margin-top: 4px;">Transfiguración Exitosa</div>
+    </div>
+    <div class="glass card" style="border-bottom: 3px solid var(--violet);">
+      <div class="mono" style="font-size: 9px; color: #94a3b8;">NODOS METATRÓN / HUB</div>
+      <div style="font-size: 1.4rem; font-weight: 800; color: var(--violet); margin-top: 4px;" class="mono">SADV41_x5f_FINAL</div>
+      <div style="font-size: 9px; color: var(--cyan); margin-top: 4px;">Reality Layer: Spectral Activa</div>
+    </div>
+    <div class="glass card" style="border-bottom: 3px solid var(--red);">
+      <div class="mono" style="font-size: 9px; color: #94a3b8;">AMENAZA TÁCTICA</div>
+      <div style="font-size: 1.4rem; font-weight: 800; color: var(--red); margin-top: 4px;" class="cinzel">THREAT: NULL</div>
+      <div style="font-size: 9px; color: #fff; margin-top: 4px;">Defensa Provincial Panamá 100%</div>
+    </div>
+  </section>
+
+  <h2 class="cinzel" style="font-size: 16px; margin: 0 0 16px 0; color: var(--cyan); border-bottom: 1px solid rgba(0,243,255,0.2); padding-bottom: 8px;">📡 FEED PRIORITARIO & TRANSMISIONES EXCLUSIVAS</h2>
+  <section class="grid-3">
+    <a href="https://www.spotify.com/pa/referral/003988e58c5d863711ce35278c66785f53a04d248c0fd8b116a577/?si=jCXPxhBxTq-3RK3og7JEkA&utm_source=copy-link&locale=es&rv=2" target="_blank" class="card" style="border-color: var(--green); background: rgba(29, 185, 84, 0.05);">
+      <div class="mono" style="font-size: 10px; color: var(--green); margin-bottom: 8px;">SPOTIFY PREMIUM // RECOMPENSA SADV5</div>
+      <div class="mono" style="font-size: 13px; font-weight: 800; color: #fff; line-height: 1.4;">Spotify Gratis por 3 meses del artista @StevenDiorOficial 6936-2166</div>
+      <span class="btn btn-spotify mono" style="margin-top: 12px; width: 100%;">RECLAMAR ACCESO →</span>
+    </a>
+    <a href="https://share.gemini.google/8q0ZtErOAgDK" target="_blank" class="card" style="border-color: var(--blue);">
+      <div class="mono" style="font-size: 10px; color: var(--blue); margin-bottom: 8px;">GOOGLE DEV TEAM // COLABORACIÓN</div>
+      <div class="mono" style="font-size: 13px; font-weight: 800; color: #fff; line-height: 1.4;">Imagen creada de la unidad espacial para el equipo de desarrollo de Google.</div>
+      <span class="btn btn-cyan mono" style="margin-top: 12px; width: 100%;">VER ARCHIVO G-DEV →</span>
+    </a>
+    <a href="https://www.laestrella.com.pa/panama/nacional/sinaproc-alerta-por-lluvias-y-tormentas-electricas-en-panama-tras-ingreso-de-la-onda-tropical-n-37-HO25098834" target="_blank" class="card" style="border-color: var(--red);">
+      <div class="mono" style="font-size: 10px; color: var(--red); margin-bottom: 8px;">SINAPROC // DEFENSA CIVIL PANAMÁ</div>
+      <div class="mono" style="font-size: 13px; font-weight: 800; color: #fff; line-height: 1.4;">Alerta por lluvias y tormentas eléctricas tras ingreso de Onda Tropical N.° 37.</div>
+      <span class="btn btn-red mono" style="margin-top: 12px; width: 100%;">LEER REPORTE →</span>
+    </a>
+  </section>
+
+  <h2 class="cinzel" style="font-size: 16px; margin: 0 0 16px 0; color: var(--gold); border-bottom: 1px solid rgba(212,175,55,0.2); padding-bottom: 8px;">🌌 PORTALES DE LA UNIDAD PANAMAUNIT & SADV41</h2>
+  <section class="grid-3">
+    <a href="https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/PANAMAUNIT.html" target="_blank" class="card glass">
+      <div class="mono" style="font-size: 10px; color: var(--gold); margin-bottom: 8px;">MAIN BRANCH // PANAMAUNIT</div>
+      <div class="mono" style="font-size: 14px; font-weight: 800; color: #fff;">PANAMAUNIT.html</div>
+      <div class="mono" style="font-size: 10px; color: #94a3b8; margin-top: 6px;">Unidad Táctica Desplegada. Repositorio Oficial TheSteef21.</div>
+      <span class="btn btn-gold mono" style="margin-top: 12px; width: 100%;">EJECUTAR PANAMAUNIT →</span>
+    </a>
+    
+    <a href="https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/SADV41_x5f_PERSONAJE_x5f_HUB_x5f_FINAL.html" target="_blank" class="card glass">
+      <div class="mono" style="font-size: 10px; color: var(--cyan); margin-bottom: 8px;">NODO FINAL REESCRITO</div>
+      <div class="mono" style="font-size: 13px; font-weight: 800; color: #fff;">SADV41_x5f_PERSONAJE_x5f_HUB_x5f_FINAL.html</div>
+      <div class="mono" style="font-size: 10px; color: #94a3b8; margin-top: 6px;">Hub de personaje cifrado con los nuevos sufijos de ruta.</div>
+      <span class="btn btn-cyan mono" style="margin-top: 12px; width: 100%;">ACCEDER AL HUB →</span>
+    </a>
+
+    <a href="https://github.com/TheSteef21/Lapizasuli/blob/main/assets/LEVIATHANSQUAD/PANAMAUNIT.html" target="_blank" class="card glass" style="border-color: var(--violet);">
+      <div class="mono" style="font-size: 10px; color: var(--violet); margin-bottom: 8px;">GITHUB SOURCE CODE</div>
+      <div class="mono" style="font-size: 14px; font-weight: 800; color: #fff;">Repositorio Leviathan</div>
+      <div class="mono" style="font-size: 10px; color: #94a3b8; margin-top: 6px;">Inspeccionar código fuente y commits recientes de PANAMAUNIT.</div>
+      <span class="btn btn-violet mono" style="margin-top: 12px; width: 100%;">VER EN GITHUB →</span>
+    </a>
+  </section>
+
+  <section class="grid-2">
+    <div class="glass-strong card">
+      <h3 class="cinzel" style="font-size: 14px; letter-spacing: 0.1em; margin: 0 0 16px 0; color: var(--cyan);">CONSOLA TÁCTICA DE COMANDANTES</h3>
+      <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+        <button class="btn btn-gold" onclick="logAction('✨ INTEGRACIÓN DE ESENCIAS: Cyberpunk Hacker, Rey Dorado, US Army, Entidad Nuclear, Núcleo Digital integrados 100%.')">FUSIÓN DE 5 ESENCIAS</button>
+        <button class="btn btn-cyan" onclick="logAction('🛡️ HOLOGRAFÍA CÚBICA ACTIVADA: 2 Comandantes estabilizando la malla espacio-tiempo en Panamá.')">DESPLEGAR HOLOGRAFÍA</button>
+        <button class="btn btn-spotify" onclick="window.open('https://www.spotify.com/pa/referral/003988e58c5d863711ce35278c66785f53a04d248c0fd8b116a577/?si=jCXPxhBxTq-3RK3og7JEkA&utm_source=copy-link&locale=es&rv=2', '_blank'); logAction('🎵 Conectando a stream seguro de @StevenDiorOficial...')">PLAYLIST SADV5</button>
+      </div>
+      <div class="mono" style="font-size: 10px; color: #475569; margin-top: 16px; line-height: 1.6; padding: 10px; background: rgba(0,0,0,0.5); border-radius: 8px;">
+        <strong style="color: var(--violet)">ROOT VERSION PLUSCUAMPERFECTA v5.0:</strong><br>
+        - Estructura Espacio-Tiempo estabilizada.<br>
+        - Rutas <code>FUERZAESPACIAL/IS/US/PA</code> montadas.<br>
+        - Arcángel Protocol activado (SADV5 Unidad Fantasma).<br>
+        - Glitch Dinámico Inyectado en Backgrounds WebP y PNG.
+      </div>
+    </div>
+    
+    <div class="glass-strong ability-log" id="abilityLog">
+      <div class="mono" style="color: var(--cyan);">[SADV5_SYSTEM] Inicializando interfaz Hypersec Panamá...</div>
+      <div class="mono" style="color: var(--gold);">[AUTH] Identidad Híbrida Confirmada. Origen 1027=10=1.</div>
+      <div class="mono" style="color: var(--spectral);">[SYNC] Rutas de imagen de repositorio conectadas a la red Metatrón.</div>
+      <div class="mono" style="color: var(--green);">[COMM] Agente Hogan patrullando. Seguridad perimetral óptima.</div>
+    </div>
+  </section>
+</main>
+
+<script>
+  // Motor Transitorio de Caos - Ahora "Convergencia Espectral"
+  const layers = document.querySelectorAll('.chaos-layer');
+  const mainBody = document.getElementById('mainBody');
+  let currentIndex = 0;
+  let chaosActive = true;
+
+  function arcangelGlitchTransition() {
+    if (!chaosActive || layers.length === 0) return;
+    
+    layers.forEach(l => l.classList.remove('active', 'layer-glitch'));
+    currentIndex = (currentIndex + 1) % layers.length;
+
+    // Glitch aleatorio del sistema Arcángel
+    if (Math.random() > 0.65) {
+      layers[currentIndex].classList.add('active', 'layer-glitch');
+      mainBody.classList.add('glitch-active');
+      logAction('⚠️ ANOMALÍA ESPACIO-TIEMPO: Distorsión espectral interceptada.');
+      
+      setTimeout(() => {
+        mainBody.classList.remove('glitch-active');
+        layers[currentIndex].classList.remove('layer-glitch');
+      }, 700);
+    } else {
+      layers[currentIndex].classList.add('active');
+    }
+
+    // Intervalo cuántico (arritmia de 3 a 7 segundos)
+    const quantumDelay = Math.random() * 4000 + 3000;
+    setTimeout(arcangelGlitchTransition, quantumDelay);
+  }
+
+  // Inicio de secuencia
+  setTimeout(arcangelGlitchTransition, 2000);
+
+  document.getElementById('toggleChaos').onclick = (e) => {
+    chaosActive = !chaosActive;
+    e.target.textContent = `MODO CAOS: ${chaosActive ? 'ON' : 'OFF'}`;
+    logAction(`Motor Espacio-Tiempo alternado a: ${chaosActive ? 'CAÓTICO' : 'ESTABLE'}`);
+    if(chaosActive) arcangelGlitchTransition();
+  };
+
+  document.getElementById('gear7Btn').onclick = () => {
+    layers.forEach(l => l.classList.add('active', 'layer-glitch'));
+    mainBody.classList.add('glitch-active');
+    logAction('🔥 ¡SINCRONIZACIÓN SADV5 ALCANZADA! Aura Cyan/Golden al 100%.');
+    
+    setTimeout(() => {
+      mainBody.classList.remove('glitch-active');
+      layers.forEach((l, idx) => {
+        l.classList.remove('layer-glitch');
+        if(idx !== currentIndex) l.classList.remove('active');
+      });
+    }, 1200);
+  };
+
+  function logAction(text) {
+    const log = document.getElementById('abilityLog');
+    const entry = document.createElement('div');
+    entry.className = 'mono';
+    entry.innerHTML = `<span style="color: rgba(255,255,255,0.5)">[${new Date().toLocaleTimeString()}]</span> > ${text}`;
+    log.prepend(entry);
+  }
+</script>
+</body>
+</html>
 
