@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TTSECSADV41 — Bitácora Pluscuamperfecta</title>
+    <!-- Tailwind CSS CDN para renderizado rápido y scannable -->
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-slate-950 text-slate-100 font-sans min-h-screen p-4 md:p-8">
@@ -12,7 +13,7 @@
         <header class="border-b border-slate-800 pb-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
             <div>
                 <h1 class="text-2xl font-black tracking-wider text-amber-500">TTSECSADV41 // BITÁCORA OPERATIVA</h1>
-                <p class="text-xs text-slate-400">Control Pluscuamperfecto de Jornada y Trazabilidad — Rango y Evidencia (Canal 6936-2166)</p>
+                <p class="text-xs text-slate-400">Control Pluscuamperfecto de Jornada y Trazabilidad — Rango y Evidencia</p>
             </div>
             <div class="flex items-center gap-2 bg-slate-900 border border-slate-800 px-3 py-1.5 rounded-lg text-xs font-mono">
                 <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
@@ -27,19 +28,19 @@
                 <span class="text-amber-500 group-open:rotate-180 transition-transform">▼</span>
             </summary>
             <div class="mt-4 space-y-2 text-slate-400 border-t border-slate-800 pt-4">
-                <p><strong class="text-slate-200">Situación Jurídica:</strong> Acuse de recibo y registro operativo del canal de trazabilidad de minuta/apuntes (6936-2166) con marcaje de precisión temporal estricta (hora, minuto, segundo y milisegundo). Sin causa penal formal activa; protocolo de ingesta y sintonía procesal-técnica adoptado.</p>
+                <p><strong class="text-slate-200">Situación Jurídica:</strong> Acuse de recibo y registro operativo del canal de trazabilidad de minuta/apuntes con marcaje de precisión temporal estricta (hora, minuto, segundo y milisegundo)[span_1](start_span)[span_1](end_span). Sin causa penal formal activa; protocolo de ingesta y sintonía procesal-técnica adoptado[span_2](start_span)[span_2](end_span).</p>
                 <ul class="list-disc list-inside space-y-1 ml-2">
-                    <li><strong class="text-slate-200">Constitución Política de la República de Panamá, Art. 32:</strong> Garantía del debido proceso y derecho a la defensa técnica.</li>
-                    <li><strong class="text-slate-200">Código Procesal Penal:</strong> Principio de Lealtad y Buena Fe Procesal, vigencia de prueba preconstituida.</li>
+                    <li><strong class="text-slate-200">Constitución Política de la República de Panamá, Art. 32:</strong> Garantía del debido proceso y derecho a la defensa técnica[span_3](start_span)[span_3](end_span).</li>
+                    <li><strong class="text-slate-200">Código Procesal Penal:</strong> Principio de Lealtad y Buena Fe Procesal, vigencia de prueba preconstituida[span_4](start_span)[span_4](end_span).</li>
                 </ul>
-                <p class="text-amber-500/80 font-mono mt-2">OBJETIVO: Construir línea de tiempo forense inalterable y proteger el flujo de valor hacia stevendior.digital y RUC DGI.</p>
+                <p class="text-amber-500/80 font-mono mt-2">OBJETIVO: Construir línea de tiempo forense inalterable y proteger el flujo de valor hacia stevendior.digital y RUC DGI[span_5](start_span)[span_5](end_span).</p>
             </div>
         </details>
 
         <!-- Formulario de Registro por Canal / Bloque -->
         <section class="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-lg relative">
-            <div id="copyToast" class="absolute top-4 right-4 bg-emerald-500 text-slate-950 px-3 py-1 rounded text-xs font-bold opacity-0 transition-opacity duration-300 pointer-events-none">
-                ¡Copiado al portapapeles!
+            <div id="copyToast" class="absolute top-4 right-4 bg-emerald-500 text-slate-950 px-3 py-1 rounded text-xs font-bold opacity-0 transition-opacity duration-300 pointer-events-none z-10">
+                ¡Copiado para WhatsApp!
             </div>
             <h2 class="text-sm font-bold uppercase tracking-wider text-slate-300 mb-4">Ingreso de Movimiento / Canal</h2>
             <form id="logForm" class="grid grid-cols-1 md:grid-cols-4 gap-4 text-sm">
@@ -75,22 +76,21 @@
                     <input type="text" id="logNote" placeholder="Ej. Cliente Hilux, cotización retenida en caja..." class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-slate-200 focus:outline-none focus:border-amber-500" required>
                 </div>
                 
-                <!-- Controles de Envio y Trazabilidad -->
-                <div class="md:col-span-4 flex flex-wrap justify-between items-center gap-3 pt-2 border-t border-slate-800/80">
-                    <label class="flex items-center gap-2 text-xs text-slate-300 bg-slate-950 border border-slate-800 px-3 py-2 rounded-lg cursor-pointer">
-                        <input type="checkbox" id="verificationToggle" class="accent-amber-500 w-4 h-4">
-                        <span class="font-mono">Modo Verificación (wa.me/stevendioroficial)</span>
-                    </label>
-
-                    <div class="flex items-center gap-2">
-                        <a id="wppDirectBtn" href="https://wa.me/50769362166" target="_blank" rel="noopener noreferrer" class="bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-bold px-4 py-2 rounded-lg transition-all text-xs tracking-wide flex items-center gap-2">
-                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.75-5.77-5.964-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1 8.244z"/></svg>
-                            <span id="wppBtnLabel">ABRIR WHATSAPP (+50769362166)</span>
-                        </a>
-                        <button type="submit" class="bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold px-5 py-2 rounded-lg transition-all text-xs tracking-wide flex items-center gap-2">
-                            REGISTRAR Y COPIAR
-                        </button>
+                <!-- Controles de Envio y Trazabilidad con Enrutamiento -->
+                <div class="md:col-span-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pt-4 border-t border-slate-800/80 mt-2">
+                    <div class="flex items-center gap-3 w-full md:w-auto">
+                        <label class="text-xs text-slate-400 font-medium whitespace-nowrap">Destino:</label>
+                        <select id="wppDestination" class="w-full md:w-64 bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-slate-200 text-xs focus:outline-none focus:border-amber-500 font-mono">
+                            <option value="chat">Chat Central (+50769362166)</option>
+                            <option value="channel">Canal Oficial (0029Vb9s...)</option>
+                            <option value="verified">Verificación (stevendioroficial)</option>
+                        </select>
                     </div>
+
+                    <button type="submit" class="w-full md:w-auto bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold px-6 py-2.5 rounded-lg transition-all text-xs tracking-wide flex items-center justify-center gap-2">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.75-5.77-5.964-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1 8.244z"/></svg>
+                        REGISTRAR Y DISPARAR
+                    </button>
                 </div>
             </form>
         </section>
@@ -125,9 +125,6 @@
         const tbody = document.getElementById('logTableBody');
         const rowCount = document.getElementById('rowCount');
         const copyToast = document.getElementById('copyToast');
-        const verificationToggle = document.getElementById('verificationToggle');
-        const wppDirectBtn = document.getElementById('wppDirectBtn');
-        const wppBtnLabel = document.getElementById('wppBtnLabel');
         
         let logs = JSON.parse(localStorage.getItem('TTSECSADV41_logs') || '[]');
 
@@ -141,21 +138,6 @@
             });
             localStorage.setItem('TTSECSADV41_logs', JSON.stringify(logs));
         }
-
-        // Toggle Modo Verificación dinámico
-        verificationToggle.addEventListener('change', (e) => {
-            if (e.target.checked) {
-                wppDirectBtn.href = 'https://wa.me/stevendioroficial';
-                wppBtnLabel.textContent = 'ABRIR WHATSAPP (VERIFICACIÓN: stevendioroficial)';
-                wppDirectBtn.classList.replace('bg-emerald-600', 'bg-blue-600');
-                wppDirectBtn.classList.replace('hover:bg-emerald-500', 'hover:bg-blue-500');
-            } else {
-                wppDirectBtn.href = 'https://wa.me/50769362166';
-                wppBtnLabel.textContent = 'ABRIR WHATSAPP (+50769362166)';
-                wppDirectBtn.classList.replace('bg-blue-600', 'bg-emerald-600');
-                wppDirectBtn.classList.replace('hover:bg-blue-500', 'hover:bg-emerald-500');
-            }
-        });
 
         // Generador de Timestamp Estricto (ISO-like con milisegundos locales)
         function getStrictTimestamp() {
@@ -201,29 +183,41 @@
             const category = document.getElementById('taskCategory').value;
             const noteInput = document.getElementById('logNote').value;
             const note = noteInput.trim() || 'Sin novedad adicional';
+            const destination = document.getElementById('wppDestination').value;
             
             // Construir el string exacto para WhatsApp
             const wppString = `${timestamp} [${block} | ${category}] -> ${note}`;
             
-            // Copiar al portapapeles y opcionalmente adjuntar parámetro de texto al href si se requiere pre-cargar mensaje
+            // Copiar al portapapeles obligatoriamente
             navigator.clipboard.writeText(wppString).then(() => {
-                showToast();
+                showToast(); // Avisa que está en el portapapeles
+                
+                // Enrutamiento según selección
+                let targetUrl = '';
+                if (destination === 'chat') {
+                    targetUrl = `https://wa.me/50769362166?text=${encodeURIComponent(wppString)}`;
+                } else if (destination === 'verified') {
+                    targetUrl = `https://wa.me/stevendioroficial?text=${encodeURIComponent(wppString)}`;
+                } else if (destination === 'channel') {
+                    // El canal no acepta pre-llenado, se abre limpio para que el usuario pegue
+                    targetUrl = `https://whatsapp.com/channel/0029Vb9sKVaBfxoDytNgmy1m`;
+                }
+
+                // Disparar la apertura de WhatsApp
+                window.open(targetUrl, '_blank');
             }).catch(err => {
                 console.error('Error al copiar: ', err);
+                alert('Hubo un error copiando al portapapeles. Da permisos a tu navegador o copia manualmente desde la tabla.');
             });
 
-            // Actualizar URL de WhatsApp con texto prellenado si se desea opcional (opcional encodeURI)
-            const targetBase = verificationToggle.checked ? 'https://wa.me/stevendioroficial' : 'https://wa.me/50769362166';
-            wppDirectBtn.href = `${targetBase}?text=${encodeURIComponent(wppString)}`;
-
-            // Guardar en array y renderizar
+            // Guardar en array local y renderizar tabla
             logs.unshift({ timestamp, block, category, note });
             document.getElementById('logNote').value = '';
             renderLogs();
         });
 
         window.deleteLog = (index) => {
-            if(confirm('¿Eliminar este registro de la base local?')) {
+            if(confirm('¿Eliminar este registro de la base local? (La copia de WhatsApp permanecerá intacta)')) {
                 logs.splice(index, 1);
                 renderLogs();
             }
