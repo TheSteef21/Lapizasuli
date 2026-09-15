@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TTSECSADV41 — Bitácora Pluscuamperfecta</title>
+    <!-- Tailwind CSS CDN para renderizado rápido y scannable -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans min-h-screen p-4 md:p-8">
+    <div class="max-w-6xl mx-auto space-y-6">
+        <!-- Header de Control -->
+        <header class="border-b border-slate-800 pb-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+            <div>
+                <h1 class="text-2xl font-black tracking-wider text-amber-500">TTSECSADV41 // BITÁCORA OPERATIVA</h1>
+                <p class="text-xs text-slate-400">Control Pluscuamperfecto de Jornada y Trazabilidad — Rango y Evidencia</p>
+            </div>
+            <div class="flex items-center gap-2 bg-slate-900 border border-slate-800 px-3 py-1.5 rounded-lg text-xs font-mono">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span>ESTADO: ACTIVO / SINTONIZADO</span>
+            </div>
+        </header>
+
+        <!-- Formulario de Registro por Canal / Bloque -->
+        <section class="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-lg">
+            <h2 class="text-sm font-bold uppercase tracking-wider text-slate-300 mb-4">Ingreso de Movimiento / Canal</h2>
+            <form id="logForm" class="grid grid-cols-1 md:grid-cols-4 gap-4 text-sm">
+                <div>
+                    <label class="block text-xs font-medium text-slate-400 mb-1">Bloque Horario</label>
+                    <select id="timeBlock" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-slate-200 focus:outline-none focus:border-amber-500">
+                        <option value="08:30 AM">08:30 AM - Entrada</option>
+                        <option value="08:30-10:30">08:30 - 10:30 AM (Limpieza/Orden)</option>
+                        <option value="10:30-11:00">10:30 - 11:00 AM (Buffer)</option>
+                        <option value="11:00-01:00">11:00 - 01:00 PM (Trabajo/Directriz)</option>
+                        <option value="11:30-02:50">11:30 - 02:50 PM (Almuerzo Flexible)</option>
+                        <option value="02:50-05:30">02:50 - 05:30 PM (Vespertino/Ventas)</option>
+                        <option value="05:30-06:00">05:30 - 06:00 PM (Limpieza/Cierre)</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-medium text-slate-400 mb-1">Categoría / Tarea</label>
+                    <select id="taskCategory" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-slate-200 focus:outline-none focus:border-amber-500">
+                        <option value="Parche / Taco">Parche / Taco</option>
+                        <option value="Diagnóstico">Diagnóstico</option>
+                        <option value="Docencia Gratuita">Docencia Gratuita</option>
+                        <option value="Venta Nueva">Venta Llantas Nuevas</option>
+                        <option value="Venta Segunda">Venta Llantas Segunda (Términos)</option>
+                        <option value="Balanceo">Balanceo</option>
+                        <option value="Guianza / Seguridad">Guianza / Seguridad / Recomendación</option>
+                        <option value="Traslado / Búsqueda">Traslado Bodegas / Búsqueda</option>
+                        <option value="Arbitrariedad / Bloqueo">Arbitrariedad / Bloqueo Caja</option>
+                    </select>
+                </div>
+                <div class="md:col-span-2">
+                    <label class="block text-xs font-medium text-slate-400 mb-1">Evidencia / Nota de Trazabilidad</label>
+                    <input type="text" id="logNote" placeholder="Ej. Cliente Hilux, cotización retenida en caja por X motivo..." class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-slate-200 focus:outline-none focus:border-amber-500">
+                </div>
+                <div class="md:col-span-4 flex justify-end">
+                    <button type="submit" class="bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold px-5 py-2 rounded-lg transition-all text-xs tracking-wide">
+                        + REGISTRAR EN BITÁCORA
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        <!-- Tabla de Registros del Día -->
+        <section class="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden shadow-lg">
+            <div class="p-4 border-b border-slate-800 flex justify-between items-center">
+                <h3 class="text-xs font-bold uppercase tracking-wider text-slate-300">Flujo Consolidado del Día</h3>
+                <span id="rowCount" class="text-xs font-mono text-slate-400">0 registros</span>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-xs">
+                    <thead class="bg-slate-950 text-slate-400 uppercase font-mono">
+                        <tr>
+                            <th class="p-3">Hora / Bloque</th>
+                            <th class="p-3">Canal / Tarea</th>
+                            <th class="p-3">Evidencia / Nota</th>
+                            <th class="p-3 text-right">Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody id="logTableBody" class="divide-y divide-slate-800/60 font-mono">
+                        <!-- Inyección dinámica JS -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        const form = document.getElementById('logForm');
+        const tbody = document.getElementById('logTableBody');
+        const rowCount = document.getElementById('rowCount');
+        let logs = JSON.parse(localStorage.getItem('TTSECSADV41_logs') || '[]');
+
+        function renderLogs() {
+            tbody.innerHTML = '';
+            logs.forEach((item, index) => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td class="p-3 text-amber-400">${item.block}</td>
+                    <td class="p-3 text-slate-200 font-bold">${item.category}</td>
+                    <td class="p-3 text-slate-300">${item.note}</td>
+                    <td class="p-3 text-right">
+                        <button onclick="deleteLog(${index})" class="text-red-400 hover:text-red-300">DEL</button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+            rowCount.textContent = `${logs.length} registros`;
+            localStorage.setItem('TTSECSADV41_logs', JSON.stringify(logs));
+        }
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const block = document.getElementById('timeBlock').value;
+            const category = document.getElementById('taskCategory').value;
+            const note = document.getElementById('logNote').value || 'Sin novedad adicional';
+            logs.unshift({ block, category, note });
+            document.getElementById('logNote').value = '';
+            renderLogs();
+        });
+
+        window.deleteLog = (index) => {
+            logs.splice(index, 1);
+            renderLogs();
+        };
+
+        renderLogs();
+    </script>
+</body>
+</html>
