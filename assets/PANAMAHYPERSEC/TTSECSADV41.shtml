@@ -28,38 +28,38 @@
                 <span class="text-amber-500 group-open:rotate-180 transition-transform">▼</span>
             </summary>
             <div class="mt-4 space-y-2 text-slate-400 border-t border-slate-800 pt-4">
-                <p><strong class="text-slate-200">Situación Jurídica:</strong> Acuse de recibo y registro operativo del canal de trazabilidad de minuta/apuntes (6936-2166) con marcaje de precisión temporal estricta (hora, minuto, segundo y milisegundo)[span_1](start_span)[span_1](end_span). Sin causa penal formal activa; protocolo de ingesta y sintonía procesal-técnica adoptado[span_2](start_span)[span_2](end_span).</p>
+                <p><strong class="text-slate-200">Situación Jurídica:</strong> Acuse de recibo y registro operativo del canal de trazabilidad de minuta/apuntes (6936-2166) con marcaje de precisión temporal estricta (hora, minuto, segundo y milisegundo). Sin causa penal formal activa; protocolo de ingesta y sintonía procesal-técnica adoptado.</p>
                 <ul class="list-disc list-inside space-y-1 ml-2">
-                    <li><strong class="text-slate-200">Constitución Política de la República de Panamá, Art. 32:</strong> Garantía del debido proceso y derecho a la defensa técnica[span_3](start_span)[span_3](end_span).</li>
-                    <li><strong class="text-slate-200">Código Procesal Penal:</strong> Principio de Lealtad y Buena Fe Procesal, vigencia de prueba preconstituida[span_4](start_span)[span_4](end_span).</li>
+                    <li><strong class="text-slate-200">Constitución Política de la República de Panamá, Art. 32:</strong> Garantía del debido proceso y derecho a la defensa técnica.</li>
+                    <li><strong class="text-slate-200">Código Procesal Penal:</strong> Principio de Lealtad y Buena Fe Procesal, vigencia de prueba preconstituida.</li>
                 </ul>
-                <p class="text-amber-500/80 font-mono mt-2">OBJETIVO: Construir línea de tiempo forense inalterable y proteger el flujo de valor hacia stevendior.digital y RUC DGI[span_5](start_span)[span_5](end_span).</p>
+                <p class="text-amber-500/80 font-mono mt-2">OBJETIVO: Construir línea de tiempo forense inalterable y proteger el flujo de valor hacia stevendior.digital y RUC DGI.</p>
             </div>
         </details>
 
         <!-- Formulario de Registro por Canal / Bloque -->
         <section class="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-lg relative">
             <div id="copyToast" class="absolute top-4 right-4 bg-emerald-500 text-slate-950 px-3 py-1 rounded text-xs font-bold opacity-0 transition-opacity duration-300 pointer-events-none z-10">
-                ¡Copiado para WhatsApp!
+                ¡Copiado al Portapapeles!
             </div>
             <h2 class="text-sm font-bold uppercase tracking-wider text-slate-300 mb-4">Ingreso de Movimiento / Canal</h2>
             <form id="logForm" class="grid grid-cols-1 md:grid-cols-12 gap-4 text-sm">
                 
                 <div class="md:col-span-3">
-                    <label class="block text-xs font-medium text-slate-400 mb-1">Fase del Día</label>
+                    <label class="block text-xs font-medium text-amber-500 mb-1">Fase del Día (Auto-Sincronizada)</label>
                     <select id="timePhase" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-slate-200 focus:outline-none focus:border-amber-500">
-                        <option value="Entrada">Entrada</option>
-                        <option value="Limpieza/Orden">Limpieza / Orden</option>
-                        <option value="Buffer">Buffer (Tiempo Muerto)</option>
-                        <option value="Trabajo/Directriz">Trabajo / Directriz</option>
-                        <option value="Almuerzo Flexible">Almuerzo Flexible</option>
-                        <option value="Vespertino/Ventas">Vespertino / Ventas</option>
-                        <option value="Limpieza/Cierre">Limpieza / Cierre</option>
+                        <option value="Entrada">Entrada (< 08:30 AM)</option>
+                        <option value="Limpieza/Orden">Limpieza / Orden (08:30 - 10:30)</option>
+                        <option value="Buffer">Buffer/Tiempo Muerto (10:30 - 11:00)</option>
+                        <option value="Trabajo/Directriz">Trabajo / Directriz (11:00 - 14:50)</option>
+                        <option value="Almuerzo Flexible">Almuerzo Flexible (Manual)</option>
+                        <option value="Vespertino/Ventas">Vespertino / Ventas (14:50 - 17:30)</option>
+                        <option value="Limpieza/Cierre">Limpieza / Cierre (> 17:30)</option>
                     </select>
                 </div>
 
                 <div class="md:col-span-2">
-                    <label class="block text-xs font-medium text-amber-500 mb-1">Op / Responsable</label>
+                    <label class="block text-xs font-medium text-emerald-400 mb-1">Op / Responsable</label>
                     <select id="operator" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-slate-200 focus:outline-none focus:border-amber-500">
                         <option value="Steven">Steven (Yo)</option>
                         <option value="Alexander">Alexander</option>
@@ -110,7 +110,6 @@
                                 <input type="checkbox" id="feeExtra" class="accent-amber-500 w-3.5 h-3.5">
                                 <span class="font-mono">R.V. (Monto Extra)</span>
                             </label>
-                            <!-- Input furtivo que aparece solo al marcar R.V. -->
                             <input type="number" step="0.01" id="extraValue" placeholder="$0.00" class="hidden w-20 bg-slate-900 border border-slate-700 rounded px-2 py-1 text-emerald-400 text-xs focus:outline-none focus:border-amber-500">
                         </div>
                     </div>
@@ -131,9 +130,11 @@
                     <div class="flex items-center gap-3 w-full md:w-auto">
                         <label class="text-xs text-slate-400 font-medium whitespace-nowrap">Destino:</label>
                         <select id="wppDestination" class="w-full md:w-64 bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-slate-200 text-xs focus:outline-none focus:border-amber-500 font-mono">
-                            <option value="chat">Chat Central (+50769362166)</option>
                             <option value="channel">Canal Oficial (0029Vb9s...)</option>
-                            <option value="verified">Verificación (stevendioroficial)</option>
+                            <option value="chat">WhatsApp Personal (+50769362166)</option>
+                            <option value="verified">WA Verificación (stevendioroficial)</option>
+                            <option value="sms">SMS Directo (+50769362166)</option>
+                            <option value="ig">Instagram (stevendioroficial)</option>
                         </select>
                     </div>
 
@@ -183,6 +184,7 @@
         const feeExtraCheck = document.getElementById('feeExtra');
         const extraValueInput = document.getElementById('extraValue');
         const liveTotalDisplay = document.getElementById('liveTotal');
+        const timePhaseSelect = document.getElementById('timePhase');
 
         let logs = JSON.parse(localStorage.getItem('TTSECSADV41_logs') || '[]');
 
@@ -194,10 +196,35 @@
                 operator: "Steven",
                 finalTotal: "0.00",
                 modifiers: "",
-                note: "[6936-2166 / INGESTA INICIAL] -> Acuse de recibo procesal-técnico completado[span_6](start_span)[span_6](end_span)."
+                note: "[6936-2166 / INGESTA INICIAL] -> Acuse de recibo procesal-técnico completado."
             });
             localStorage.setItem('TTSECSADV41_logs', JSON.stringify(logs));
         }
+
+        // Lógica de Sintonía Horaria Automática (Fase del Día)
+        function autoSelectPhase() {
+            const now = new Date();
+            const hours = now.getHours();
+            const minutes = now.getMinutes();
+            const decimalTime = hours + (minutes / 60);
+
+            if (decimalTime < 8.5) { // Antes de 08:30 AM
+                timePhaseSelect.value = "Entrada";
+            } else if (decimalTime >= 8.5 && decimalTime < 10.5) { // 08:30 - 10:30 AM
+                timePhaseSelect.value = "Limpieza/Orden";
+            } else if (decimalTime >= 10.5 && decimalTime < 11.0) { // 10:30 - 11:00 AM
+                timePhaseSelect.value = "Buffer";
+            } else if (decimalTime >= 11.0 && decimalTime < 14.83) { // 11:00 AM - 02:50 PM
+                timePhaseSelect.value = "Trabajo/Directriz";
+            } else if (decimalTime >= 14.83 && decimalTime < 17.5) { // 02:50 PM - 05:30 PM
+                timePhaseSelect.value = "Vespertino/Ventas";
+            } else { // Después de las 05:30 PM
+                timePhaseSelect.value = "Limpieza/Cierre";
+            }
+        }
+        
+        // Ejecutar auto-selección al cargar
+        autoSelectPhase();
 
         // Lógica de cálculo en tiempo real
         function calculateTotal() {
@@ -220,7 +247,6 @@
             return total.toFixed(2);
         }
 
-        // Listeners para actualizar el total instantáneamente
         taskValueInput.addEventListener('input', calculateTotal);
         fee2Check.addEventListener('change', calculateTotal);
         fee7Check.addEventListener('change', calculateTotal);
@@ -269,24 +295,22 @@
 
         function showToast() {
             copyToast.classList.remove('opacity-0');
-            setTimeout(() => copyToast.classList.add('opacity-0'), 2000);
+            setTimeout(() => copyToast.classList.add('opacity-0'), 2500);
         }
 
         form.addEventListener('submit', (e) => {
             e.preventDefault();
             const timestamp = getStrictTimestamp();
-            const phase = document.getElementById('timePhase').value;
+            const phase = timePhaseSelect.value;
             const operator = document.getElementById('operator').value;
             const category = document.getElementById('taskCategory').value;
             const noteInput = document.getElementById('logNote').value;
             const note = noteInput.trim() || 'Sin novedad adicional';
             const destination = document.getElementById('wppDestination').value;
             
-            // Lógica de cálculo final para el registro
             const subtotal = parseFloat(taskValueInput.value) || 0;
             const finalTotal = calculateTotal();
             
-            // Recolección furtiva de modificadores para la trazabilidad
             let modsArray = [];
             if(fee2Check.checked) modsArray.push('+2% T.');
             if(fee7Check.checked) modsArray.push('+7% F.');
@@ -295,7 +319,6 @@
                 modsArray.push(`+Ext($${extra.toFixed(2)})`);
             }
             
-            // Si hay modificadores, agregamos el desglose. Si no, queda vacío.
             const modifiers = modsArray.length > 0 ? `[Base: $${subtotal.toFixed(2)} | ${modsArray.join(' ')}]` : '';
             
             // Construcción del String
@@ -306,12 +329,18 @@
                 showToast(); 
                 
                 let targetUrl = '';
+                const encodedString = encodeURIComponent(wppString);
+                
                 if (destination === 'chat') {
-                    targetUrl = `https://wa.me/50769362166?text=${encodeURIComponent(wppString)}`;
+                    targetUrl = `https://wa.me/50769362166?text=${encodedString}`;
                 } else if (destination === 'verified') {
-                    targetUrl = `https://wa.me/stevendioroficial?text=${encodeURIComponent(wppString)}`;
+                    targetUrl = `https://wa.me/stevendioroficial?text=${encodedString}`;
                 } else if (destination === 'channel') {
                     targetUrl = `https://whatsapp.com/channel/0029Vb9sKVaBfxoDytNgmy1m`;
+                } else if (destination === 'sms') {
+                    targetUrl = `sms:+50769362166?body=${encodedString}`;
+                } else if (destination === 'ig') {
+                    targetUrl = `http://instagram.com/stevendioroficial`;
                 }
 
                 window.open(targetUrl, '_blank');
@@ -330,6 +359,7 @@
             fee7Check.checked = false;
             feeExtraCheck.checked = false;
             calculateTotal(); // Reinicia el display a $0.00
+            autoSelectPhase(); // Re-sincroniza la hora actual tras el registro
             
             renderLogs();
         });
