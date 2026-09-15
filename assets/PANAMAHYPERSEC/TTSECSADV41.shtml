@@ -13,7 +13,7 @@
         <header class="border-b border-slate-800 pb-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
             <div>
                 <h1 class="text-2xl font-black tracking-wider text-amber-500">TTSECSADV41 // BITÁCORA OPERATIVA</h1>
-                <p class="text-xs text-slate-400">Control Pluscuamperfecto de Jornada y Trazabilidad — Rango y Evidencia</p>
+                <p class="text-xs text-slate-400">Control Pluscuamperfecto de Jornada y Trazabilidad Financiera — Rango y Evidencia</p>
             </div>
             <div class="flex items-center gap-2 bg-slate-900 border border-slate-800 px-3 py-1.5 rounded-lg text-xs font-mono">
                 <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
@@ -28,7 +28,7 @@
                 <span class="text-amber-500 group-open:rotate-180 transition-transform">▼</span>
             </summary>
             <div class="mt-4 space-y-2 text-slate-400 border-t border-slate-800 pt-4">
-                <p><strong class="text-slate-200">Situación Jurídica:</strong> Acuse de recibo y registro operativo del canal de trazabilidad de minuta/apuntes con marcaje de precisión temporal estricta (hora, minuto, segundo y milisegundo)[span_1](start_span)[span_1](end_span). Sin causa penal formal activa; protocolo de ingesta y sintonía procesal-técnica adoptado[span_2](start_span)[span_2](end_span).</p>
+                <p><strong class="text-slate-200">Situación Jurídica:</strong> Acuse de recibo y registro operativo del canal de trazabilidad de minuta/apuntes (6936-2166) con marcaje de precisión temporal estricta (hora, minuto, segundo y milisegundo)[span_1](start_span)[span_1](end_span). Sin causa penal formal activa; protocolo de ingesta y sintonía procesal-técnica adoptado[span_2](start_span)[span_2](end_span).</p>
                 <ul class="list-disc list-inside space-y-1 ml-2">
                     <li><strong class="text-slate-200">Constitución Política de la República de Panamá, Art. 32:</strong> Garantía del debido proceso y derecho a la defensa técnica[span_3](start_span)[span_3](end_span).</li>
                     <li><strong class="text-slate-200">Código Procesal Penal:</strong> Principio de Lealtad y Buena Fe Procesal, vigencia de prueba preconstituida[span_4](start_span)[span_4](end_span).</li>
@@ -43,20 +43,33 @@
                 ¡Copiado para WhatsApp!
             </div>
             <h2 class="text-sm font-bold uppercase tracking-wider text-slate-300 mb-4">Ingreso de Movimiento / Canal</h2>
-            <form id="logForm" class="grid grid-cols-1 md:grid-cols-4 gap-4 text-sm">
-                <div>
-                    <label class="block text-xs font-medium text-slate-400 mb-1">Bloque Horario</label>
-                    <select id="timeBlock" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-slate-200 focus:outline-none focus:border-amber-500">
-                        <option value="08:30 AM">08:30 AM - Entrada</option>
-                        <option value="08:30-10:30">08:30 - 10:30 AM (Limpieza/Orden)</option>
-                        <option value="10:30-11:00">10:30 - 11:00 AM (Buffer)</option>
-                        <option value="11:00-01:00">11:00 - 01:00 PM (Trabajo/Directriz)</option>
-                        <option value="11:30-02:50">11:30 - 02:50 PM (Almuerzo Flexible)</option>
-                        <option value="02:50-05:30">02:50 - 05:30 PM (Vespertino/Ventas)</option>
-                        <option value="05:30-06:00">05:30 - 06:00 PM (Limpieza/Cierre)</option>
+            <form id="logForm" class="grid grid-cols-1 md:grid-cols-12 gap-4 text-sm">
+                
+                <div class="md:col-span-3">
+                    <label class="block text-xs font-medium text-slate-400 mb-1">Fase del Día</label>
+                    <select id="timePhase" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-slate-200 focus:outline-none focus:border-amber-500">
+                        <option value="Entrada">Entrada</option>
+                        <option value="Limpieza/Orden">Limpieza / Orden</option>
+                        <option value="Buffer">Buffer (Tiempo Muerto)</option>
+                        <option value="Trabajo/Directriz">Trabajo / Directriz</option>
+                        <option value="Almuerzo Flexible">Almuerzo Flexible</option>
+                        <option value="Vespertino/Ventas">Vespertino / Ventas</option>
+                        <option value="Limpieza/Cierre">Limpieza / Cierre</option>
                     </select>
                 </div>
-                <div>
+
+                <div class="md:col-span-2">
+                    <label class="block text-xs font-medium text-amber-500 mb-1">Op / Responsable</label>
+                    <select id="operator" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-slate-200 focus:outline-none focus:border-amber-500">
+                        <option value="Steven">Steven (Yo)</option>
+                        <option value="Alexander">Alexander</option>
+                        <option value="Israel">Israel</option>
+                        <option value="Chejo">Chejo</option>
+                        <option value="Isaid">Isaid</option>
+                    </select>
+                </div>
+
+                <div class="md:col-span-4">
                     <label class="block text-xs font-medium text-slate-400 mb-1">Categoría / Tarea</label>
                     <select id="taskCategory" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-slate-200 focus:outline-none focus:border-amber-500">
                         <option value="Parche / Taco">Parche / Taco</option>
@@ -71,13 +84,50 @@
                         <option value="Administrativo / Legal">Administrativo / Legal</option>
                     </select>
                 </div>
-                <div class="md:col-span-2">
+
+                <div class="md:col-span-3">
+                    <label class="block text-xs font-medium text-slate-400 mb-1">Valor Base / Subtotal ($)</label>
+                    <input type="number" step="0.01" id="taskValue" placeholder="Ej. 15.00" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-emerald-400 focus:outline-none focus:border-emerald-500">
+                </div>
+
+                <!-- Calculadora Furtiva de Trazabilidad Financiera (Camuflada) -->
+                <div class="md:col-span-12 flex flex-col md:flex-row items-start md:items-center justify-between py-3 px-4 bg-slate-950/50 border border-slate-800/50 rounded-lg">
+                    <div class="flex flex-wrap items-center gap-4">
+                        <span class="text-xs text-slate-500 font-medium uppercase tracking-widest">Control C:</span>
+                        
+                        <label class="flex items-center gap-2 text-xs text-slate-400 cursor-pointer hover:text-amber-400 transition-colors">
+                            <input type="checkbox" id="fee2" class="accent-amber-500 w-3.5 h-3.5">
+                            <span class="font-mono">Margen T. (2%)</span>
+                        </label>
+                        
+                        <label class="flex items-center gap-2 text-xs text-slate-400 cursor-pointer hover:text-amber-400 transition-colors">
+                            <input type="checkbox" id="fee7" class="accent-amber-500 w-3.5 h-3.5">
+                            <span class="font-mono">Base F. (7%)</span>
+                        </label>
+                        
+                        <div class="flex items-center gap-2">
+                            <label class="flex items-center gap-2 text-xs text-slate-400 cursor-pointer hover:text-amber-400 transition-colors">
+                                <input type="checkbox" id="feeExtra" class="accent-amber-500 w-3.5 h-3.5">
+                                <span class="font-mono">R.V. (Monto Extra)</span>
+                            </label>
+                            <!-- Input furtivo que aparece solo al marcar R.V. -->
+                            <input type="number" step="0.01" id="extraValue" placeholder="$0.00" class="hidden w-20 bg-slate-900 border border-slate-700 rounded px-2 py-1 text-emerald-400 text-xs focus:outline-none focus:border-amber-500">
+                        </div>
+                    </div>
+                    
+                    <div class="mt-3 md:mt-0 flex items-center gap-2 bg-slate-900 px-3 py-1.5 rounded border border-slate-800">
+                        <span class="text-xs text-slate-500 font-medium uppercase tracking-widest">Total Final:</span>
+                        <span id="liveTotal" class="text-emerald-400 font-bold font-mono text-lg">$0.00</span>
+                    </div>
+                </div>
+
+                <div class="md:col-span-12">
                     <label class="block text-xs font-medium text-slate-400 mb-1">Evidencia / Nota de Trazabilidad</label>
-                    <input type="text" id="logNote" placeholder="Ej. Cliente Hilux, cotización retenida en caja..." class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-slate-200 focus:outline-none focus:border-amber-500" required>
+                    <input type="text" id="logNote" placeholder="Detalles de la llanta, cliente, vehículo o justificación..." class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-slate-200 focus:outline-none focus:border-amber-500" required>
                 </div>
                 
                 <!-- Controles de Envio y Trazabilidad con Enrutamiento -->
-                <div class="md:col-span-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pt-4 border-t border-slate-800/80 mt-2">
+                <div class="md:col-span-12 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pt-4 border-t border-slate-800/80 mt-2">
                     <div class="flex items-center gap-3 w-full md:w-auto">
                         <label class="text-xs text-slate-400 font-medium whitespace-nowrap">Destino:</label>
                         <select id="wppDestination" class="w-full md:w-64 bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-slate-200 text-xs focus:outline-none focus:border-amber-500 font-mono">
@@ -106,8 +156,8 @@
                     <thead class="bg-slate-950 text-slate-400 uppercase font-mono">
                         <tr>
                             <th class="p-3">Marca Temporal</th>
-                            <th class="p-3">Bloque</th>
-                            <th class="p-3">Canal / Tarea</th>
+                            <th class="p-3">Fase / Tarea</th>
+                            <th class="p-3">Operador / Total</th>
                             <th class="p-3">Evidencia / Nota</th>
                             <th class="p-3 text-right">Acción</th>
                         </tr>
@@ -126,20 +176,57 @@
         const rowCount = document.getElementById('rowCount');
         const copyToast = document.getElementById('copyToast');
         
+        // Elementos de la Calculadora Furtiva
+        const taskValueInput = document.getElementById('taskValue');
+        const fee2Check = document.getElementById('fee2');
+        const fee7Check = document.getElementById('fee7');
+        const feeExtraCheck = document.getElementById('feeExtra');
+        const extraValueInput = document.getElementById('extraValue');
+        const liveTotalDisplay = document.getElementById('liveTotal');
+
         let logs = JSON.parse(localStorage.getItem('TTSECSADV41_logs') || '[]');
 
-        // Ingesta inicial si la bitácora está vacía
         if (logs.length === 0) {
             logs.push({
                 timestamp: "[2026-09-14 23:50:05.844]",
-                block: "08:30 AM",
+                phase: "Entrada",
                 category: "Administrativo / Legal",
-                note: "[6936-2166 / INGESTA INICIAL] -> Acuse de recibo procesal-técnico completado. Bitácora operativa y unificada."
+                operator: "Steven",
+                finalTotal: "0.00",
+                modifiers: "",
+                note: "[6936-2166 / INGESTA INICIAL] -> Acuse de recibo procesal-técnico completado[span_6](start_span)[span_6](end_span)."
             });
             localStorage.setItem('TTSECSADV41_logs', JSON.stringify(logs));
         }
 
-        // Generador de Timestamp Estricto (ISO-like con milisegundos locales)
+        // Lógica de cálculo en tiempo real
+        function calculateTotal() {
+            let subtotal = parseFloat(taskValueInput.value) || 0;
+            let total = subtotal;
+
+            if (fee2Check.checked) total += (subtotal * 0.02);
+            if (fee7Check.checked) total += (subtotal * 0.07);
+            
+            if (feeExtraCheck.checked) {
+                extraValueInput.classList.remove('hidden');
+                let extra = parseFloat(extraValueInput.value) || 0;
+                total += extra;
+            } else {
+                extraValueInput.classList.add('hidden');
+                extraValueInput.value = '';
+            }
+
+            liveTotalDisplay.textContent = `$${total.toFixed(2)}`;
+            return total.toFixed(2);
+        }
+
+        // Listeners para actualizar el total instantáneamente
+        taskValueInput.addEventListener('input', calculateTotal);
+        fee2Check.addEventListener('change', calculateTotal);
+        fee7Check.addEventListener('change', calculateTotal);
+        feeExtraCheck.addEventListener('change', calculateTotal);
+        extraValueInput.addEventListener('input', calculateTotal);
+
         function getStrictTimestamp() {
             const now = new Date();
             const yyyy = now.getFullYear();
@@ -156,10 +243,19 @@
             tbody.innerHTML = '';
             logs.forEach((item, index) => {
                 const tr = document.createElement('tr');
+                const modsDisplay = item.modifiers ? `<div class="text-[10px] text-amber-500/80 font-mono mt-0.5 leading-tight">${item.modifiers}</div>` : '';
+                const displayValue = parseFloat(item.finalTotal) > 0 ? `<span class="text-emerald-400">$${item.finalTotal}</span>${modsDisplay}` : `<span class="text-slate-500">N/A</span>`;
+                
                 tr.innerHTML = `
                     <td class="p-3 text-emerald-400 whitespace-nowrap">${item.timestamp}</td>
-                    <td class="p-3 text-amber-400 whitespace-nowrap">${item.block}</td>
-                    <td class="p-3 text-slate-200 font-bold whitespace-nowrap">${item.category}</td>
+                    <td class="p-3 whitespace-nowrap">
+                        <div class="text-amber-400">${item.phase}</div>
+                        <div class="text-slate-200 font-bold">${item.category}</div>
+                    </td>
+                    <td class="p-3 whitespace-nowrap">
+                        <div class="text-amber-500 font-bold">OP: ${item.operator}</div>
+                        <div class="text-xs mt-1">Total: ${displayValue}</div>
+                    </td>
                     <td class="p-3 text-slate-300 min-w-[300px]">${item.note}</td>
                     <td class="p-3 text-right">
                         <button onclick="deleteLog(${index})" class="text-red-400 hover:text-red-300 transition-colors">DEL</button>
@@ -179,45 +275,67 @@
         form.addEventListener('submit', (e) => {
             e.preventDefault();
             const timestamp = getStrictTimestamp();
-            const block = document.getElementById('timeBlock').value;
+            const phase = document.getElementById('timePhase').value;
+            const operator = document.getElementById('operator').value;
             const category = document.getElementById('taskCategory').value;
             const noteInput = document.getElementById('logNote').value;
             const note = noteInput.trim() || 'Sin novedad adicional';
             const destination = document.getElementById('wppDestination').value;
             
-            // Construir el string exacto para WhatsApp
-            const wppString = `${timestamp} [${block} | ${category}] -> ${note}`;
+            // Lógica de cálculo final para el registro
+            const subtotal = parseFloat(taskValueInput.value) || 0;
+            const finalTotal = calculateTotal();
             
-            // Copiar al portapapeles obligatoriamente
+            // Recolección furtiva de modificadores para la trazabilidad
+            let modsArray = [];
+            if(fee2Check.checked) modsArray.push('+2% T.');
+            if(fee7Check.checked) modsArray.push('+7% F.');
+            if(feeExtraCheck.checked) {
+                let extra = parseFloat(extraValueInput.value) || 0;
+                modsArray.push(`+Ext($${extra.toFixed(2)})`);
+            }
+            
+            // Si hay modificadores, agregamos el desglose. Si no, queda vacío.
+            const modifiers = modsArray.length > 0 ? `[Base: $${subtotal.toFixed(2)} | ${modsArray.join(' ')}]` : '';
+            
+            // Construcción del String
+            const valString = parseFloat(finalTotal) > 0 ? ` | VALOR: $${finalTotal} ${modifiers}` : '';
+            const wppString = `${timestamp} [${phase} | ${category}] -> OP: ${operator}${valString} | EVIDENCIA: ${note}`;
+            
             navigator.clipboard.writeText(wppString).then(() => {
-                showToast(); // Avisa que está en el portapapeles
+                showToast(); 
                 
-                // Enrutamiento según selección
                 let targetUrl = '';
                 if (destination === 'chat') {
                     targetUrl = `https://wa.me/50769362166?text=${encodeURIComponent(wppString)}`;
                 } else if (destination === 'verified') {
                     targetUrl = `https://wa.me/stevendioroficial?text=${encodeURIComponent(wppString)}`;
                 } else if (destination === 'channel') {
-                    // El canal no acepta pre-llenado, se abre limpio para que el usuario pegue
                     targetUrl = `https://whatsapp.com/channel/0029Vb9sKVaBfxoDytNgmy1m`;
                 }
 
-                // Disparar la apertura de WhatsApp
                 window.open(targetUrl, '_blank');
             }).catch(err => {
                 console.error('Error al copiar: ', err);
-                alert('Hubo un error copiando al portapapeles. Da permisos a tu navegador o copia manualmente desde la tabla.');
+                alert('Error copiando al portapapeles. Da permisos a tu navegador.');
             });
 
-            // Guardar en array local y renderizar tabla
-            logs.unshift({ timestamp, block, category, note });
+            // Guardar en bitácora local
+            logs.unshift({ timestamp, phase, operator, category, finalTotal, modifiers, note });
+            
+            // Reset de campos operativos
             document.getElementById('logNote').value = '';
+            taskValueInput.value = '';
+            fee2Check.checked = false;
+            fee7Check.checked = false;
+            feeExtraCheck.checked = false;
+            calculateTotal(); // Reinicia el display a $0.00
+            
             renderLogs();
         });
 
         window.deleteLog = (index) => {
-            if(confirm('¿Eliminar este registro de la base local? (La copia de WhatsApp permanecerá intacta)')) {
+            if(confirm('¿Eliminar registro local?')) {
                 logs.splice(index, 1);
                 renderLogs();
             }
