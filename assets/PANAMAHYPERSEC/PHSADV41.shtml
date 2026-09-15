@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHSADV41 - Flash & Adaptive Engine</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen p-4 md:p-8 font-sans">
+    <div class="max-w-4xl mx-auto space-y-6">
+        <!-- Header -->
+        <header class="border-b border-slate-800 pb-4 flex justify-between items-center">
+            <div>
+                <h1 class="text-xl font-bold tracking-wider text-cyan-400">PHSADV41 // FLASH ENGINE</h1>
+                <p class="text-xs text-slate-400">Módulo Web Paramétrico & Adaptativo (Atrio)</p>
+            </div>
+            <span id="modeBadge" class="px-3 py-1 rounded-full text-xs font-semibold bg-cyan-950 text-cyan-400 border border-cyan-800">Manual (75%)</span>
+        </header>
+
+        <!-- Controls Panel -->
+        <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 space-y-4 shadow-xl">
+            <div class="flex flex-wrap items-center justify-between gap-4">
+                <label class="flex items-center space-x-2 cursor-pointer">
+                    <input type="file" id="imageInput" accept="image/*" class="hidden">
+                    <span class="bg-cyan-600 hover:bg-cyan-500 text-white text-sm font-medium px-4 py-2 rounded-lg transition">📁 Cargar Imagen</span>
+                </label>
+
+                <div class="flex items-center space-x-3 bg-slate-950 px-4 py-2 rounded-lg border border-slate-800">
+                    <span class="text-xs text-slate-400">Modo:</span>
+                    <button id="toggleModeBtn" class="text-xs font-bold text-cyan-400 hover:underline">Manual ⇄ Adaptativo</button>
+                </div>
+            </div>
+
+            <!-- Manual Slider Control -->
+            <div id="manualControlGroup" class="space-y-2">
+                <div class="flex justify-between text-xs text-slate-300">
+                    <span>Intensidad de destello (0 - 100):</span>
+                    <span id="intensityValue" class="font-mono text-cyan-400">75%</span>
+                </div>
+                <input type="range" id="intensitySlider" min="0" max="100" value="75" class="w-full accent-cyan-500 cursor-pointer">
+            </div>
+
+            <div class="flex justify-between items-center text-xs text-slate-500 pt-2 border-t border-slate-800">
+                <span id="adaptiveInfo">Luminancia estimada: --</span>
+                <button id="downloadBtn" class="bg-emerald-600 hover:bg-emerald-500 text-white font-medium px-4 py-1.5 rounded-lg transition disabled:opacity-50" disabled>💾 Descargar Resultado</button>
+            </div>
+        </div>
+
+        <!-- Canvas Preview Area -->
+        <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 flex items-center justify-center min-h-[400px] overflow-hidden shadow-inner">
+            <canvas id="outputCanvas" class="max-w-full max-h-[600px] object-contain rounded-lg hidden"></canvas>
+            <div id="placeholderText" class="text-slate-500 text-sm text-center">
+                Sube una imagen del Atrio para inicializar el motor óptico PHSADV41
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const imageInput = document.getElementById('imageInput');
+        const outputCanvas = document.getElementById('outputCanvas');
+        const placeholderText = document.getElementById('placeholderText');
+        const intensitySlider = document.getElementById('intensitySlider');
+        const intensityValue = document.getElementById('intensityValue');
+        const modeBadge = document.getElementById('modeBadge');
+        const toggleModeBtn = document.getElementById('toggleModeBtn');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const adaptiveInfo = document.getElementById('adaptiveInfo');
+
+        let originalImage = null;
+        let isAdaptiveMode = false;
+        let currentIntensity = 75;
+
+        imageInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                const img = new Image();
+                img.onload = () => {
+                    originalImage = img;
+                    outputCanvas.classList.remove('hidden');
+                    placeholderText.classList.add('hidden');
+                    downloadBtn.disabled = false;
+                    processImage();
+                };
+                img.src = event.target.result;
+            };
+            reader.readAsDataURL(file);
+        });
+
+        toggleModeBtn.addEventListener('click', () => {
+            isAdaptiveMode = !isAdaptiveMode;
+            document.getElementById('manualControlGroup').style.display = isAdaptiveMode ? 'none' : 'block';
+            modeBadge.textContent = isAdaptiveMode ? 'Modo Adaptativo (Auto)' : `Manual (${currentIntensity}%)`;
+            modeBadge.className = isAdaptiveMode 
+                ? 'px-3 py-1 rounded-full text-xs font-semibold bg-emerald-950 text-emerald-400 border border-emerald-800'
+                : 'px-3 py-1 rounded-full text-xs font-semibold bg-cyan-950 text-cyan-400 border border-cyan-800';
+            if (originalImage) processImage();
+        });
+
+        intensitySlider.addEventListener('input', (e) => {
+            currentIntensity = parseInt(e.target.value);
+            intensityValue.textContent = `${currentIntensity}%`;
+            modeBadge.textContent = `Manual (${currentIntensity}%)`;
+            if (originalImage && !isAdaptiveMode) processImage();
+        });
+
+        function calcularLuminanciaAdaptativa(data, w, h) {
+            let sumLum = 0;
+            const totalPixels = w * h;
+            for (let i = 0; i < data.length; i += 4) {
+                sumLum += 0.299 * data[i] + 0.587 * data[i+1] + 0.114 * data[i+2];
+            }
+            const meanLum = sumLum / totalPixels;
+            // Interp: [30, 150] -> [90, 20], clamp [15, 95]
+            let targetPct = 90.0 - ((meanLum - 30.0) / (150.0 - 30.0)) * (90.0 - 20.0);
+            targetPct = Math.max(15.0, Math.min(95.0, targetPct));
+            return { meanLum, targetPct };
+        }
+
+        function processImage() {
+            if (!originalImage) return;
+
+            // Cap resolution to max 3000px matching Python safety guard
+            let w = originalImage.width;
+            let h = originalImage.height;
+            const maxDim = 3000;
+            if (Math.max(w, h) > maxDim) {
+                const scale = maxDim / Math.max(w, h);
+                w = Math.round(w * scale);
+                h = Math.round(h * scale);
+            }
+
+            outputCanvas.width = w;
+            outputCanvas.height = h;
+            const ctx = outputCanvas.getContext('2d');
+            ctx.drawImage(originalImage, 0, 0, w, h);
+
+            const imgData = ctx.getImageData(0, 0, w, h);
+            const data = imgData.data;
+
+            let effectivePct = currentIntensity;
+            if (isAdaptiveMode) {
+                const res = calcularLuminanciaAdaptativa(data, w, h);
+                effectivePct = res.targetPct;
+                adaptiveInfo.textContent = `Lum. med: ${res.meanLum.toFixed(1)} | Din. 적용: ${effectivePct.toFixed(1)}%`;
+            } else {
+                adaptiveInfo.textContent = 'Modo manual activo';
+            }
+
+            const factor = Math.max(0, Math.min(1, effectivePct / 100.0));
+            const centerX = w / 2.0;
+            const centerY = h / 2.0;
+            const maxDist = Math.sqrt(centerX * centerX + centerY * centerY) + 1e-5;
+
+            const alphaVal = 1.0 + (0.25 * factor);
+            const betaVal = 30.0 * factor;
+
+            for (let y = 0; y < h; y++) {
+                for (let x = 0; x < w; x++) {
+                    const idx = (y * w + x) * 4;
+                    
+                    // Radial mask distance calculation
+                    const dx = x - centerX;
+                    const dy = y - centerY;
+                    const distFromCenter = Math.sqrt(dx*dx + dy*dy);
+                    let flashMask = Math.max(0, Math.min(1, 1.0 - (distFromCenter / (maxDist * 0.70))));
+                    flashMask = Math.pow(flashMask, 1.6);
+
+                    // Boosted base (convertScaleAbs equivalent)
+                    const rBoost = Math.min(255, Math.max(0, data[idx] * alphaVal + betaVal));
+                    const gBoost = Math.min(255, Math.max(0, data[idx+1] * alphaVal + betaVal));
+                    const bBoost = Math.min(255, Math.max(0, data[idx+2] * alphaVal + betaVal));
+
+                    // Flash layer (245, 250, 255)
+                    const m3 = flashMask;
+                    const blendedR = rBoost * (1.0 + m3 * 0.35 * factor) + 245.0 * (m3 * 0.30 * factor);
+                    const blendedG = gBoost * (1.0 + m3 * 0.35 * factor) + 250.0 * (m3 * 0.30 * factor);
+                    const blendedB = bBoost * (1.0 + m3 * 0.35 * factor) + 255.0 * (m3 * 0.30 * factor);
+
+                    data[idx]   = Math.min(255, Math.max(0, blendedR));
+                    data[idx+1] = Math.min(255, Math.max(0, blendedG));
+                    data[idx+2] = Math.min(255, Math.max(0, blendedB));
+                }
+            }
+
+            ctx.putImageData(imgData, 0, 0);
+        }
+
+        downloadBtn.addEventListener('click', () => {
+            const link = document.createElement('a');
+            link.download = `sadv41_flash_export_${Date.now()}.jpg`;
+            link.href = outputCanvas.toDataURL('image/jpeg', 0.92);
+            link.click();
+        });
+    </script>
+</body>
+</html>
