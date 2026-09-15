@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TTSECSADV41 — Bitácora Pluscuamperfecta</title>
-    <!-- Tailwind CSS CDN para renderizado rápido y scannable -->
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-slate-950 text-slate-100 font-sans min-h-screen p-4 md:p-8">
@@ -13,7 +12,7 @@
         <header class="border-b border-slate-800 pb-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
             <div>
                 <h1 class="text-2xl font-black tracking-wider text-amber-500">TTSECSADV41 // BITÁCORA OPERATIVA</h1>
-                <p class="text-xs text-slate-400">Control Pluscuamperfecto de Jornada y Trazabilidad — Rango y Evidencia</p>
+                <p class="text-xs text-slate-400">Control Pluscuamperfecto de Jornada y Trazabilidad — Rango y Evidencia (Canal 6936-2166)</p>
             </div>
             <div class="flex items-center gap-2 bg-slate-900 border border-slate-800 px-3 py-1.5 rounded-lg text-xs font-mono">
                 <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
@@ -40,7 +39,7 @@
         <!-- Formulario de Registro por Canal / Bloque -->
         <section class="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-lg relative">
             <div id="copyToast" class="absolute top-4 right-4 bg-emerald-500 text-slate-950 px-3 py-1 rounded text-xs font-bold opacity-0 transition-opacity duration-300 pointer-events-none">
-                ¡Copiado para WhatsApp!
+                ¡Copiado al portapapeles!
             </div>
             <h2 class="text-sm font-bold uppercase tracking-wider text-slate-300 mb-4">Ingreso de Movimiento / Canal</h2>
             <form id="logForm" class="grid grid-cols-1 md:grid-cols-4 gap-4 text-sm">
@@ -75,11 +74,23 @@
                     <label class="block text-xs font-medium text-slate-400 mb-1">Evidencia / Nota de Trazabilidad</label>
                     <input type="text" id="logNote" placeholder="Ej. Cliente Hilux, cotización retenida en caja..." class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-slate-200 focus:outline-none focus:border-amber-500" required>
                 </div>
-                <div class="md:col-span-4 flex justify-end">
-                    <button type="submit" class="bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold px-5 py-2 rounded-lg transition-all text-xs tracking-wide flex items-center gap-2">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
-                        REGISTRAR Y COPIAR
-                    </button>
+                
+                <!-- Controles de Envio y Trazabilidad -->
+                <div class="md:col-span-4 flex flex-wrap justify-between items-center gap-3 pt-2 border-t border-slate-800/80">
+                    <label class="flex items-center gap-2 text-xs text-slate-300 bg-slate-950 border border-slate-800 px-3 py-2 rounded-lg cursor-pointer">
+                        <input type="checkbox" id="verificationToggle" class="accent-amber-500 w-4 h-4">
+                        <span class="font-mono">Modo Verificación (wa.me/stevendioroficial)</span>
+                    </label>
+
+                    <div class="flex items-center gap-2">
+                        <a id="wppDirectBtn" href="https://wa.me/50769362166" target="_blank" rel="noopener noreferrer" class="bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-bold px-4 py-2 rounded-lg transition-all text-xs tracking-wide flex items-center gap-2">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.75-5.77-5.964-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1 8.244z"/></svg>
+                            <span id="wppBtnLabel">ABRIR WHATSAPP (+50769362166)</span>
+                        </a>
+                        <button type="submit" class="bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold px-5 py-2 rounded-lg transition-all text-xs tracking-wide flex items-center gap-2">
+                            REGISTRAR Y COPIAR
+                        </button>
+                    </div>
                 </div>
             </form>
         </section>
@@ -114,6 +125,9 @@
         const tbody = document.getElementById('logTableBody');
         const rowCount = document.getElementById('rowCount');
         const copyToast = document.getElementById('copyToast');
+        const verificationToggle = document.getElementById('verificationToggle');
+        const wppDirectBtn = document.getElementById('wppDirectBtn');
+        const wppBtnLabel = document.getElementById('wppBtnLabel');
         
         let logs = JSON.parse(localStorage.getItem('TTSECSADV41_logs') || '[]');
 
@@ -127,6 +141,21 @@
             });
             localStorage.setItem('TTSECSADV41_logs', JSON.stringify(logs));
         }
+
+        // Toggle Modo Verificación dinámico
+        verificationToggle.addEventListener('change', (e) => {
+            if (e.target.checked) {
+                wppDirectBtn.href = 'https://wa.me/stevendioroficial';
+                wppBtnLabel.textContent = 'ABRIR WHATSAPP (VERIFICACIÓN: stevendioroficial)';
+                wppDirectBtn.classList.replace('bg-emerald-600', 'bg-blue-600');
+                wppDirectBtn.classList.replace('hover:bg-emerald-500', 'hover:bg-blue-500');
+            } else {
+                wppDirectBtn.href = 'https://wa.me/50769362166';
+                wppBtnLabel.textContent = 'ABRIR WHATSAPP (+50769362166)';
+                wppDirectBtn.classList.replace('bg-blue-600', 'bg-emerald-600');
+                wppDirectBtn.classList.replace('hover:bg-blue-500', 'hover:bg-emerald-500');
+            }
+        });
 
         // Generador de Timestamp Estricto (ISO-like con milisegundos locales)
         function getStrictTimestamp() {
@@ -176,12 +205,16 @@
             // Construir el string exacto para WhatsApp
             const wppString = `${timestamp} [${block} | ${category}] -> ${note}`;
             
-            // Copiar al portapapeles
+            // Copiar al portapapeles y opcionalmente adjuntar parámetro de texto al href si se requiere pre-cargar mensaje
             navigator.clipboard.writeText(wppString).then(() => {
                 showToast();
             }).catch(err => {
                 console.error('Error al copiar: ', err);
             });
+
+            // Actualizar URL de WhatsApp con texto prellenado si se desea opcional (opcional encodeURI)
+            const targetBase = verificationToggle.checked ? 'https://wa.me/stevendioroficial' : 'https://wa.me/50769362166';
+            wppDirectBtn.href = `${targetBase}?text=${encodeURIComponent(wppString)}`;
 
             // Guardar en array y renderizar
             logs.unshift({ timestamp, block, category, note });
@@ -190,7 +223,7 @@
         });
 
         window.deleteLog = (index) => {
-            if(confirm('¿Eliminar este registro de la base local? (La copia de WhatsApp permanecerá intacta)')) {
+            if(confirm('¿Eliminar este registro de la base local?')) {
                 logs.splice(index, 1);
                 renderLogs();
             }
