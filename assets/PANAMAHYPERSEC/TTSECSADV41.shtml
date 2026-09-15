@@ -21,8 +21,27 @@
             </div>
         </header>
 
+        <!-- Escudo Legal / Situación Jurídica -->
+        <details class="bg-slate-900 border border-slate-800 rounded-xl p-4 shadow-lg text-xs group">
+            <summary class="font-bold uppercase tracking-wider text-slate-300 cursor-pointer flex justify-between items-center">
+                <span>Fundamento Legal y Situación Jurídica (SADV41TT)</span>
+                <span class="text-amber-500 group-open:rotate-180 transition-transform">▼</span>
+            </summary>
+            <div class="mt-4 space-y-2 text-slate-400 border-t border-slate-800 pt-4">
+                <p><strong class="text-slate-200">Situación Jurídica:</strong> Acuse de recibo y registro operativo del canal de trazabilidad de minuta/apuntes (6936-2166) con marcaje de precisión temporal estricta (hora, minuto, segundo y milisegundo). Sin causa penal formal activa; protocolo de ingesta y sintonía procesal-técnica adoptado.</p>
+                <ul class="list-disc list-inside space-y-1 ml-2">
+                    <li><strong class="text-slate-200">Constitución Política de la República de Panamá, Art. 32:</strong> Garantía del debido proceso y derecho a la defensa técnica.</li>
+                    <li><strong class="text-slate-200">Código Procesal Penal:</strong> Principio de Lealtad y Buena Fe Procesal, vigencia de prueba preconstituida.</li>
+                </ul>
+                <p class="text-amber-500/80 font-mono mt-2">OBJETIVO: Construir línea de tiempo forense inalterable y proteger el flujo de valor hacia stevendior.digital y RUC DGI.</p>
+            </div>
+        </details>
+
         <!-- Formulario de Registro por Canal / Bloque -->
-        <section class="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-lg">
+        <section class="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-lg relative">
+            <div id="copyToast" class="absolute top-4 right-4 bg-emerald-500 text-slate-950 px-3 py-1 rounded text-xs font-bold opacity-0 transition-opacity duration-300 pointer-events-none">
+                ¡Copiado para WhatsApp!
+            </div>
             <h2 class="text-sm font-bold uppercase tracking-wider text-slate-300 mb-4">Ingreso de Movimiento / Canal</h2>
             <form id="logForm" class="grid grid-cols-1 md:grid-cols-4 gap-4 text-sm">
                 <div>
@@ -49,15 +68,17 @@
                         <option value="Guianza / Seguridad">Guianza / Seguridad / Recomendación</option>
                         <option value="Traslado / Búsqueda">Traslado Bodegas / Búsqueda</option>
                         <option value="Arbitrariedad / Bloqueo">Arbitrariedad / Bloqueo Caja</option>
+                        <option value="Administrativo / Legal">Administrativo / Legal</option>
                     </select>
                 </div>
                 <div class="md:col-span-2">
                     <label class="block text-xs font-medium text-slate-400 mb-1">Evidencia / Nota de Trazabilidad</label>
-                    <input type="text" id="logNote" placeholder="Ej. Cliente Hilux, cotización retenida en caja por X motivo..." class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-slate-200 focus:outline-none focus:border-amber-500">
+                    <input type="text" id="logNote" placeholder="Ej. Cliente Hilux, cotización retenida en caja..." class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-slate-200 focus:outline-none focus:border-amber-500" required>
                 </div>
                 <div class="md:col-span-4 flex justify-end">
-                    <button type="submit" class="bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold px-5 py-2 rounded-lg transition-all text-xs tracking-wide">
-                        + REGISTRAR EN BITÁCORA
+                    <button type="submit" class="bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold px-5 py-2 rounded-lg transition-all text-xs tracking-wide flex items-center gap-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+                        REGISTRAR Y COPIAR
                     </button>
                 </div>
             </form>
@@ -73,7 +94,8 @@
                 <table class="w-full text-left text-xs">
                     <thead class="bg-slate-950 text-slate-400 uppercase font-mono">
                         <tr>
-                            <th class="p-3">Hora / Bloque</th>
+                            <th class="p-3">Marca Temporal</th>
+                            <th class="p-3">Bloque</th>
                             <th class="p-3">Canal / Tarea</th>
                             <th class="p-3">Evidencia / Nota</th>
                             <th class="p-3 text-right">Acción</th>
@@ -91,18 +113,45 @@
         const form = document.getElementById('logForm');
         const tbody = document.getElementById('logTableBody');
         const rowCount = document.getElementById('rowCount');
+        const copyToast = document.getElementById('copyToast');
+        
         let logs = JSON.parse(localStorage.getItem('TTSECSADV41_logs') || '[]');
+
+        // Ingesta inicial si la bitácora está vacía
+        if (logs.length === 0) {
+            logs.push({
+                timestamp: "[2026-09-14 23:50:05.844]",
+                block: "08:30 AM",
+                category: "Administrativo / Legal",
+                note: "[6936-2166 / INGESTA INICIAL] -> Acuse de recibo procesal-técnico completado. Bitácora operativa y unificada."
+            });
+            localStorage.setItem('TTSECSADV41_logs', JSON.stringify(logs));
+        }
+
+        // Generador de Timestamp Estricto (ISO-like con milisegundos locales)
+        function getStrictTimestamp() {
+            const now = new Date();
+            const yyyy = now.getFullYear();
+            const mm = String(now.getMonth() + 1).padStart(2, '0');
+            const dd = String(now.getDate()).padStart(2, '0');
+            const hh = String(now.getHours()).padStart(2, '0');
+            const min = String(now.getMinutes()).padStart(2, '0');
+            const ss = String(now.getSeconds()).padStart(2, '0');
+            const ms = String(now.getMilliseconds()).padStart(3, '0');
+            return `[${yyyy}-${mm}-${dd} ${hh}:${min}:${ss}.${ms}]`;
+        }
 
         function renderLogs() {
             tbody.innerHTML = '';
             logs.forEach((item, index) => {
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
-                    <td class="p-3 text-amber-400">${item.block}</td>
-                    <td class="p-3 text-slate-200 font-bold">${item.category}</td>
-                    <td class="p-3 text-slate-300">${item.note}</td>
+                    <td class="p-3 text-emerald-400 whitespace-nowrap">${item.timestamp}</td>
+                    <td class="p-3 text-amber-400 whitespace-nowrap">${item.block}</td>
+                    <td class="p-3 text-slate-200 font-bold whitespace-nowrap">${item.category}</td>
+                    <td class="p-3 text-slate-300 min-w-[300px]">${item.note}</td>
                     <td class="p-3 text-right">
-                        <button onclick="deleteLog(${index})" class="text-red-400 hover:text-red-300">DEL</button>
+                        <button onclick="deleteLog(${index})" class="text-red-400 hover:text-red-300 transition-colors">DEL</button>
                     </td>
                 `;
                 tbody.appendChild(tr);
@@ -111,19 +160,40 @@
             localStorage.setItem('TTSECSADV41_logs', JSON.stringify(logs));
         }
 
+        function showToast() {
+            copyToast.classList.remove('opacity-0');
+            setTimeout(() => copyToast.classList.add('opacity-0'), 2000);
+        }
+
         form.addEventListener('submit', (e) => {
             e.preventDefault();
+            const timestamp = getStrictTimestamp();
             const block = document.getElementById('timeBlock').value;
             const category = document.getElementById('taskCategory').value;
-            const note = document.getElementById('logNote').value || 'Sin novedad adicional';
-            logs.unshift({ block, category, note });
+            const noteInput = document.getElementById('logNote').value;
+            const note = noteInput.trim() || 'Sin novedad adicional';
+            
+            // Construir el string exacto para WhatsApp
+            const wppString = `${timestamp} [${block} | ${category}] -> ${note}`;
+            
+            // Copiar al portapapeles
+            navigator.clipboard.writeText(wppString).then(() => {
+                showToast();
+            }).catch(err => {
+                console.error('Error al copiar: ', err);
+            });
+
+            // Guardar en array y renderizar
+            logs.unshift({ timestamp, block, category, note });
             document.getElementById('logNote').value = '';
             renderLogs();
         });
 
         window.deleteLog = (index) => {
-            logs.splice(index, 1);
-            renderLogs();
+            if(confirm('¿Eliminar este registro de la base local? (La copia de WhatsApp permanecerá intacta)')) {
+                logs.splice(index, 1);
+                renderLogs();
+            }
         };
 
         renderLogs();
