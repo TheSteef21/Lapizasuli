@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<!-- Archivo: index.shtml - SADV41 OMNIPRESENTE -->
+<!-- Archivo: index.shtml - SADV41 OMNIPRESENTE (E.S. FUSION) -->
 <!--#config timefmt="%d/%m/%Y %H:%M:%S Panamá" errmsg="[SADV41 SHTML ERROR]" -->
 <!--#set var="SADV41_BUILD" value="LOGIA PLUSCUAMPERFECTA SHTML v2026.09.05" -->
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SADV41 | OMNIPRESENTE: Logia Pluscuamperfecta & Metatron 4D 🇵🇦🏁🔯☦️</title>
+    <title>SADV41 | OMNIPRESENTE: Logia Pluscuamperfecta & Metatron 4D 🇵🇦🇵🇷🇮🇱🇺🇸</title>
     
     <!-- GitHub Pages Persistence Metadata & Auto-Keepalive Script Hook -->
     <meta name="generator" content="GSADV41-Core-Engine">
@@ -31,7 +31,7 @@
                         navy: '#020617', obsidiana: '#030305', oro: '#d4af37', sunGold: '#f59e0b',
                         blanco: '#f8fafc', cyanNeon: '#00f3ff', violetNeon: '#9d4edd', redNeon: '#FB542B',
                         tacticalOrange: '#FB542B', borgona: '#4a0010', neonGreen: '#10b981', renderRed: '#da3637',
-                        navalBlue: '#1e3a8a', israelBlue: '#0038b8', bnbYellow: '#F3BA2F',
+                        navalBlue: '#1e3a8a', israelBlue: '#0038b8', bnbYellow: '#F3BA2F', spectral: '#b084cc',
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'], serif: ['Playfair Display', 'serif'],
@@ -44,9 +44,21 @@
     </script>
 
     <style>
-        :root { --oro:#d4af37; --sun-gold:#f59e0b; --obsidiana:#030305; --navy:#020617; --cyan:#00f3ff; --violet:#9d4edd; --red:#FB542B; --israel:#0038b8; --bnb:#F3BA2F; }
+        :root { --oro:#d4af37; --sun-gold:#f59e0b; --obsidiana:#030305; --navy:#020617; --cyan:#00f3ff; --violet:#9d4edd; --red:#FB542B; --israel:#0038b8; --bnb:#F3BA2F; --green:#1DB954; }
         body { background-color: var(--obsidiana); color:#f8fafc; font-family:'Inter',system-ui,sans-serif; overflow-x:hidden; position:relative; scroll-behavior:smooth; }
         
+        /* GLITCH ARCÁNGEL 1027 (SADV5) */
+        @keyframes pageGlitch {
+            0% { transform: translate(0) skew(0deg); filter: hue-rotate(0deg); }
+            20% { transform: translate(-10px, 6px) skew(-5deg); filter: hue-rotate(180deg) contrast(200%) invert(0.1); }
+            40% { transform: translate(10px, -6px) skew(5deg); filter: hue-rotate(-90deg) invert(0.2); }
+            60% { transform: translate(-4px, 4px) skew(-3deg); filter: hue-rotate(90deg) drop-shadow(0 0 20px var(--cyan)); }
+            80% { transform: translate(4px, -4px) skew(3deg); filter: hue-rotate(-45deg); }
+            100% { transform: translate(0) skew(0deg); filter: hue-rotate(0deg); }
+        }
+        .glitch-active { animation: pageGlitch 0.7s cubic-bezier(.25, .46, .45, .94) both; }
+        .layer-glitch { mix-blend-mode: color-dodge !important; transform: scale(1.2) rotate(-2deg) !important; filter: contrast(250%) saturate(400%) hue-rotate(270deg) drop-shadow(0 0 30px var(--violet)) !important; opacity: 1 !important; }
+
         /* BANNER & FONDOS */
         .sponsor-marquee { width:100%; background:#000; border-bottom:1px solid var(--oro); overflow:hidden; white-space:nowrap; padding:6px 0; font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--oro); text-transform:uppercase; letter-spacing:0.2em; position:fixed; top:0; z-index:70; }
         .sponsor-marquee span { display:inline-block; padding-left:100%; animation: marquee 30s linear infinite; }
@@ -54,9 +66,9 @@
         
         .grand-line-bg { position:fixed; inset:0; z-index:0; background: radial-gradient(circle at 50% 20%, rgba(212,175,55,0.1) 0%, transparent 60%), radial-gradient(circle at 80% 80%, rgba(0,243,255,0.08) 0%, transparent 50%), linear-gradient(to bottom, transparent, rgba(3,3,5,0.9)); pointer-events:none; }
         .chaos-bg-container { position:fixed; inset:0; z-index:-1; background:#000; pointer-events:none; overflow:hidden; }
-        .chaos-layer { position:absolute; inset:-20px; background-size:cover; background-position:center; opacity:0; mix-blend-mode:screen; filter:contrast(125%) brightness(95%) saturate(1.2); transition: opacity 3.5s, transform 9s, filter 0.3s; }
-        .chaos-layer.active { opacity:0.35; transform:scale(1.09) rotate(0.6deg); }
-        .grid-pattern { background-image: linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px); background-size:32px 32px; opacity:0.25; }
+        .chaos-layer { position:absolute; inset:-20px; background-size:cover; background-position:center; opacity:0; mix-blend-mode:screen; filter:contrast(125%) brightness(95%) saturate(1.2); transition: opacity 3.5s, transform 9s, filter 0.3s; will-change: opacity, transform, filter; }
+        .chaos-layer.active { opacity:0.55; transform:scale(1.09) rotate(0.6deg); }
+        .grid-pattern { background-image: linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px); background-size:32px 32px; opacity:0.25; position:fixed; inset:0; z-index:1; pointer-events:none; }
         .scanline { width:100%; height:2px; background:linear-gradient(90deg, transparent, rgba(0,243,255,0.4), transparent); position:fixed; z-index:60; top:0; pointer-events:none; animation: scanline 8s linear infinite; }
         @keyframes scanline { 0%{top:0} 100%{top:100%} }
         
@@ -68,10 +80,6 @@
         
         .gold-glow { box-shadow:0 0 40px rgba(212,175,55,.18), inset 0 0 22px rgba(212,175,55,.05); border-color:var(--oro); }
         .cyan-glow { box-shadow:0 0 28px rgba(0,243,255,.18), inset 0 0 18px rgba(0,243,255,.05); border-color:var(--cyan); }
-        .israel-glow { box-shadow:0 0 30px rgba(0,56,184,.2), inset 0 0 15px rgba(0,56,184,.1); border-color:var(--israel); }
-        .bnb-glow { box-shadow:0 0 30px rgba(243,186,47,.2), inset 0 0 15px rgba(243,186,47,.1); border-color:var(--bnb); }
-        .aporia-glow { box-shadow: 0 0 40px rgba(255,255,255,.3), inset 0 0 30px rgba(212,175,55,.2); border-color: #fff; }
-        
         .esoterico-glow { text-shadow:0 0 25px rgba(212,175,55,0.7); }
         .turbologia-pulse { animation: turboPulse 2s infinite; }
         @keyframes turboPulse { 0%{box-shadow:0 0 0 0 rgba(251,84,43,0.7)} 70%{box-shadow:0 0 0 15px rgba(251,84,43,0)} 100%{box-shadow:0 0 0 0 rgba(251,84,43,0)} }
@@ -86,13 +94,6 @@
         .sidebar-tabs.right-aligned { left:auto; right:0; }
         .sidebar-tabs.right-aligned.vertical-tab { border-radius:12px 0 0 12px; border-left:none; border-right-width:3px; flex-direction:row-reverse; }
         
-        /* TABLAS Y TERMINAL */
-        .table-geopolitica th { background-color:rgba(0,243,255,0.1); border-bottom:2px solid var(--cyan); color:var(--cyan); font-family:'Cinzel',serif; letter-spacing:0.1em; }
-        .table-geopolitica td { border-bottom:1px solid rgba(255,255,255,0.05); color:#cbd5e1; }
-        .terminal-block { background:#050505; border:1px solid rgba(255,255,255,0.1); border-radius:8px; font-family:'JetBrains Mono',monospace; padding:15px; overflow:hidden; box-shadow:inset 0 0 20px rgba(0,0,0,1); }
-        .terminal-header { display:flex; gap:6px; margin-bottom:12px; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:8px; }
-        .terminal-dot { width:10px; height:10px; border-radius:50%; } .t-red { background:#ff5f56; } .t-yellow { background:#ffbd2e; } .t-green { background:#27c93f; }
-        
         /* METATRON 3D */
         #flower-container { perspective:1400px; width:100%; height:450px; display:flex; justify-content:center; align-items:center; position:relative; overflow:visible; touch-action:none; }
         #flower-scene { width:420px; height:420px; transform-style:preserve-3d; position:relative; cursor:grab; }
@@ -104,37 +105,41 @@
         .node-label { margin-top:6px; font-size:8.5px; letter-spacing:.08em; font-weight:700; text-transform:uppercase; white-space:nowrap; padding:2px 5px; border-radius:4px; background:rgba(0,0,0,.78); border:1px solid rgba(255,255,255,.15); pointer-events:none; transition:all .22s; font-family:'JetBrains Mono',monospace; }
         .node-3d:hover .node-dot { width:22px; height:22px; box-shadow:0 0 22px currentColor, 0 0 36px currentColor; background:#fff !important; }
         .node-3d:hover .node-label { background:#fff; color:#000 !important; transform:scale(1.15); }
+        
+        /* SADV5 CONSOLE LOGS */
+        .ability-log { border-radius: 16px; padding: 1.2rem; max-height: 220px; overflow-y: auto; font-size: 11px; color: #cbd5e1; }
+        .ability-log div { margin-bottom: 6px; padding-bottom: 6px; border-bottom: 1px solid rgba(255,255,255,0.05); }
     </style>
 </head>
 <body class="antialiased selection:bg-oro selection:text-navy" id="mainBody">
-
-    <!-- SHTML SSI INFO -->
-    <!--#echo var="SADV41_BUILD" -->
 
     <!-- MARQUESINA PATROCINADORES -->
     <div class="sponsor-marquee">
         <span>Éste enlace será patrocinio vanguardiado por NIKE ONEPIECE USARMY PENTAGON DEPTOFWAR Y EBRG de parte de SADV41 de @StevenDiorOficial // TURBOLOGIA ACTIVA https://ig.me/j/Abbcf6MyjQoo7oBf/ // ARCADE.GOV + BIOBIOCHILE // El Origen es 0 // Burunga 2026</span>
     </div>
 
-    <!-- FONDOS DE CAOS -->
+    <!-- FONDOS DE CAOS (CONVERGENCIA ESPECTRAL SADV5 + SADV41) -->
     <div class="chaos-bg-container" id="chaosBg">
-        <div class="chaos-layer active" data-asset="TRONO" style="background-image:url('https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/785282279_1341489208069876_1027745017510610652_n.webp')"></div>
-        <div class="chaos-layer" data-asset="CYBER" style="background-image:url('https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/784748359_1032169259812179_379368085236729966_n.webp')"></div>
-        <div class="chaos-layer" data-asset="NUKE" style="background-image:url('https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/783899130_4498246103827834_338786690266061800_n.webp')"></div>
+        <div class="chaos-layer active" style="background-image:url('https://thesteef21.github.io/Lapizasuli/FUERZAESPACIAL/IS/US/PA/img/1789231887979.png')"></div>
+        <div class="chaos-layer" style="background-image:url('https://thesteef21.github.io/Lapizasuli/FUERZAESPACIAL/IS/US/PA/img/1789231600702.png')"></div>
+        <div class="chaos-layer" style="background-image:url('https://thesteef21.github.io/Lapizasuli/FUERZAESPACIAL/IS/US/PA/img/783727612_2366186827520797_564029208255039114_n-1%20(1).webp')"></div>
+        <div class="chaos-layer" style="background-image:url('https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/785282279_1341489208069876_1027745017510610652_n.webp')"></div>
+        <div class="chaos-layer" style="background-image:url('https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/img/784748359_1032169259812179_379368085236729966_n.webp')"></div>
     </div>
     <div class="grand-line-bg"></div>
-    <div style="position:fixed;inset:0;pointer-events:none;z-index:1;" class="grid-pattern"></div>
+    <div class="grid-pattern"></div>
     <div class="scanline"></div>
 
     <!-- MENÚ BILATERAL UNIFICADO -->
     <div id="main-sidebar" class="sidebar-tabs">
         <a href="#aporia" class="vertical-tab" style="border-color: #fff;"><span class="icon">🎚️</span><span class="text text-white">APORÍA (Cristo-Mundo)</span></a>
+        <a href="#sadv5-unidad" class="vertical-tab" style="border-color: #9d4edd;"><span class="icon">⚛️</span><span class="text text-purple-300">SADV5 (Unidad Fantasma)</span></a>
+        <a href="#phsadv41-editor" class="vertical-tab" style="border-color: #00f3ff;"><span class="icon">📸</span><span class="text text-cyan-300">PHSADV41 (Master Editor)</span></a>
         <a href="#turbologia-seccion" class="vertical-tab" style="border-color:#FB542B;"><span class="icon">⚡</span><span class="text text-orange-300">TURBOLOGIA (Únete)</span></a>
         <a href="#arcade-youtube-seccion" class="vertical-tab" style="border-color:#00f3ff;"><span class="icon">👾</span><span class="text text-cyan-300">ARCADE.GOV + SHORTS</span></a>
-        <a href="#biobio-seccion" class="vertical-tab" style="border-color:#0038b8;"><span class="icon">🌎</span><span class="text text-blue-300">BioBio: Bioceánica</span></a>
+        <a href="#biobio-seccion" class="vertical-tab" style="border-color:#0038b8;"><span class="icon">🌎</span><span class="text text-blue-300">BioBio: Geopolítica</span></a>
         <a href="#marketing-estados" class="vertical-tab" style="border-color:#8b5cf6;"><span class="icon">🪄</span><span class="text text-purple-300">Wizza'RD & Estados</span></a>
         <a href="#nodos-convergencia" class="vertical-tab" style="border-color:var(--oro);"><span class="icon">🔗</span><span class="text text-amber-300">Nodos / Tabernáculo</span></a>
-        <a href="#metatron-seccion" class="vertical-tab" style="border-color:#9d4edd;"><span class="icon">🧭</span><span class="text text-purple-300">Metatron 4D (51)</span></a>
         <div onclick="toggleSidebar()" class="vertical-tab" style="border-color:#cbd5e1;"><span class="icon">⇋</span><span class="text text-slate-300">Cambiar Lado</span></div>
     </div>
 
@@ -145,21 +150,36 @@
                 <i class="fa-solid fa-shield-halved mr-1"></i> GSADV41
             </div>
             <div>
-                <h1 class="font-pirate text-xl md:text-2xl tracking-widest text-white">LOGIA PLUSCUAMPERFECTA</h1>
-                <p class="text-[9px] text-slate-400 font-mono uppercase">SADV41 // <!--#echo var="DATE_LOCAL" --> // SHTML</p>
+                <h1 class="font-pirate text-xl md:text-2xl tracking-widest text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.8)]">LOGIA PLUSCUAMPERFECTA</h1>
+                <p class="text-[9px] text-slate-400 font-mono uppercase">E.S. FUSION // <!--#echo var="DATE_LOCAL" --></p>
             </div>
         </div>
         
         <div class="flex flex-wrap items-center justify-center gap-3">
-            <span class="mono text-[10px] bg-black/60 px-3 py-1.5 rounded-full border border-oro/30 text-oro" id="cycleCounter">CICLO 0 / 7</span>
+            <span class="mono text-[10px] bg-black/60 px-3 py-1.5 rounded-full border border-violetNeon/30 text-purple-300" id="cycleCounter">CICLO 0 / 7</span>
             <span id="sync-status" class="hidden sm:inline-flex items-center px-3 py-1.5 rounded-full text-[10px] font-mono font-bold bg-green-900/40 text-green-400 border border-green-700 shadow-[0_0_10px_rgba(16,185,129,0.3)]">
-                <span class="w-2 h-2 mr-1.5 bg-green-400 rounded-full animate-pulse shadow-[0_0_5px_#10b981]"></span> GSADV41 OK
+                <span class="w-2 h-2 mr-1.5 bg-green-400 rounded-full animate-pulse shadow-[0_0_5px_#10b981]"></span> E.S. OK
             </span>
-            <a href="https://ig.me/j/Abbcf6MyjQoo7oBf/" target="_blank" class="bg-[#FB542B] hover:bg-orange-600 text-white font-bold text-[10px] px-3 py-2 rounded-lg transition-all shadow-[0_0_15px_rgba(251,84,43,0.6)] cursor-pointer font-mono turbologia-pulse hidden md:flex items-center gap-1"><i class="fa-brands fa-instagram"></i> TURBOLOGIA</a>
+            <button onclick="connectBinance()" class="bg-bnbYellow hover:bg-yellow-500 text-black font-bold text-[10px] px-3 py-2 rounded-lg transition-all shadow-[0_0_15px_rgba(243,186,47,0.4)] cursor-pointer font-mono flex items-center gap-2">
+                <i class="fa-solid fa-wallet"></i> Sync BNB
+            </button>
         </div>
     </header>
 
     <main class="pt-36 pb-20 px-4 md:px-12 max-w-6xl mx-auto space-y-16 relative z-10">
+
+        <!-- ==========================================
+             EL MENSAJE DIVINO (E.S.)
+             ========================================== -->
+        <section class="relative z-50 text-center py-16 px-4 bg-gradient-to-b from-black/80 via-black/40 to-transparent rounded-3xl border-t border-b border-oro/30 mb-10">
+            <h1 class="cinzel text-3xl md:text-5xl lg:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-oro via-white to-cyanNeon drop-shadow-[0_0_25px_rgba(255,255,255,0.4)] uppercase tracking-widest leading-tight">
+                Porque las naciones compartiremos con las naciones nuestros mayores talentos, con ese toque divino.
+            </h1>
+            <div class="text-3xl md:text-5xl mt-8 tracking-[0.3em] drop-shadow-2xl">
+                🇵🇦 🇵🇷 🇮🇱 🇺🇸 ✨️ ❤️‍🩹 ❣️
+            </div>
+            <p class="font-mono text-xs text-slate-400 mt-6 tracking-widest uppercase">El Puente Definitivo // Santo Espíritu</p>
+        </section>
 
         <!-- ==========================================
              HERO: APORÍA - EL PUENTE CRISTO-MUNDO (STEVEN)
@@ -168,7 +188,7 @@
             <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(255,255,255,0.1),_transparent_70%)] pointer-events-none"></div>
             
             <span class="text-[10px] font-bold tracking-widest text-oro uppercase bg-black/80 px-4 py-1.5 rounded-full border border-oro/50 mb-6 inline-block font-mono">
-                Conexión Principal del Ecosistema // NODO: STEVEN
+                Conexión Principal // NODO: STEVEN
             </span>
             
             <h1 class="font-pirate text-5xl md:text-7xl text-white tracking-widest drop-shadow-[0_0_20px_rgba(255,255,255,0.8)] mb-2">
@@ -198,6 +218,135 @@
         </section>
 
         <!-- ==========================================
+             SADV5 // UNIDAD FANTASMA - ESPACIO-TIEMPO
+             ========================================== -->
+        <section id="sadv5-unidad" class="glass glow-spectral p-8 md:p-12 rounded-3xl border-t-4 border-t-violetNeon relative overflow-hidden">
+            <header class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8 pb-4 border-b border-violetNeon/30">
+                <div>
+                    <div class="mono text-[10px] text-cyanNeon tracking-widest">SADV5 // UNIDAD FANTASMA // HYPERSEC</div>
+                    <h2 class="cinzel text-2xl md:text-3xl font-black mt-2 tracking-[0.15em] text-white esoterico-glow">UNIDAD ESPACIO-TIEMPO PANAMEÑA</h2>
+                    <p class="mono text-[9px] text-slate-300 mt-1">🇵🇦🇺🇸🇮🇱⚛️🔯 | ORIGEN 1027=10=1 | ID 69362166</p>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                    <button id="toggleChaosBtn" class="bg-violetNeon/20 border border-violetNeon hover:bg-violetNeon text-white font-bold font-mono text-[9px] px-4 py-2 rounded-full uppercase transition-all shadow-[0_0_15px_rgba(157,78,221,0.4)]">Modo Caos: ON</button>
+                    <button id="gear7BtnSADV5" class="bg-cyanNeon/20 border border-cyanNeon hover:bg-cyanNeon hover:text-black text-white font-bold font-mono text-[9px] px-4 py-2 rounded-full uppercase transition-all shadow-[0_0_15px_rgba(0,243,255,0.4)]">⚛️ Sync Aura</button>
+                </div>
+            </header>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+                <div class="bg-black/60 border border-white/10 p-4 rounded-xl border-b-2 border-b-cyanNeon">
+                    <div class="mono text-[9px] text-slate-400">AURA CONVERGENTE</div>
+                    <div class="mono text-sm font-bold text-cyanNeon mt-1">CYAN/GOLDEN 100%</div>
+                    <div class="text-[9px] text-green-400 mt-1">SADV5 Synth Status: Stable</div>
+                </div>
+                <div class="bg-black/60 border border-white/10 p-4 rounded-xl border-b-2 border-b-oro">
+                    <div class="mono text-[9px] text-slate-400">NÚCLEOS DE ESENCIA</div>
+                    <div class="mono text-sm font-bold text-oro mt-1">5 EN 2 COMANDANTES</div>
+                    <div class="text-[9px] text-green-400 mt-1">Transfiguración Exitosa</div>
+                </div>
+                <div class="bg-black/60 border border-white/10 p-4 rounded-xl border-b-2 border-b-violetNeon">
+                    <div class="mono text-[9px] text-slate-400">NODOS METATRÓN / HUB</div>
+                    <div class="mono text-sm font-bold text-violetNeon mt-1">SADV41_x5f_FINAL</div>
+                    <div class="text-[9px] text-cyanNeon mt-1">Reality Layer: Spectral</div>
+                </div>
+                <div class="bg-black/60 border border-white/10 p-4 rounded-xl border-b-2 border-b-redNeon">
+                    <div class="mono text-[9px] text-slate-400">AMENAZA TÁCTICA</div>
+                    <div class="cinzel text-sm font-bold text-redNeon mt-1">THREAT: NULL</div>
+                    <div class="text-[9px] text-white mt-1">Defensa Provincial Panamá 100%</div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="bg-black/40 border border-white/10 p-6 rounded-2xl">
+                    <h3 class="cinzel text-sm text-cyanNeon mb-4 tracking-widest">CONSOLA TÁCTICA DE COMANDANTES</h3>
+                    <div class="flex flex-col gap-3">
+                        <button onclick="logAction('✨ INTEGRACIÓN DE ESENCIAS: Cyberpunk Hacker, Rey Dorado, US Army, Entidad Nuclear, Núcleo Digital integrados 100%.')" class="bg-oro/10 border border-oro hover:bg-oro text-white hover:text-black font-mono text-[10px] py-2 rounded uppercase transition-colors">Fusión de 5 Esencias</button>
+                        <button onclick="logAction('🛡️ HOLOGRAFÍA CÚBICA ACTIVADA: 2 Comandantes estabilizando la malla espacio-tiempo en Panamá.')" class="bg-cyanNeon/10 border border-cyanNeon hover:bg-cyanNeon hover:text-black text-white hover:text-black font-mono text-[10px] py-2 rounded uppercase transition-colors">Desplegar Holografía</button>
+                        <a href="https://www.spotify.com/pa/referral/003988e58c5d863711ce35278c66785f53a04d248c0fd8b116a577/?si=jCXPxhBxTq-3RK3og7JEkA" target="_blank" onclick="logAction('🎵 Conectando a stream seguro de @StevenDiorOficial...')" class="bg-green-500/10 border border-green-500 hover:bg-green-500 text-white hover:text-black font-mono text-[10px] py-2 rounded uppercase transition-colors text-center block">Playlist SADV5 Spotify</a>
+                    </div>
+                </div>
+                <div class="glass-strong ability-log" id="abilityLog">
+                    <div class="mono text-cyanNeon">[SADV5_SYSTEM] Inicializando interfaz Hypersec Panamá...</div>
+                    <div class="mono text-oro">[AUTH] Identidad Híbrida Confirmada. Origen 1027=10=1.</div>
+                    <div class="mono text-purple-400">[SYNC] Rutas de imagen conectadas a la red Metatrón.</div>
+                    <div class="mono text-green-400">[COMM] Agente Hogan patrullando. Seguridad perimetral óptima.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             PHSADV41 // MASTER HD SPATIAL & VIVID ENGINE
+             ========================================== -->
+        <section id="phsadv41-editor" class="logia-card p-8 md:p-12 rounded-3xl border-t-4 border-t-cyanNeon">
+            <header class="border-b border-slate-700/50 pb-4 mb-6 flex flex-wrap justify-between items-center gap-4">
+                <div>
+                    <h2 class="text-xl font-bold tracking-wider text-cyanNeon font-mason">PHSADV41 // MASTER 3-IN-1 ENGINE</h2>
+                    <p class="text-[10px] font-mono text-slate-400 mt-1">HD Clarity + Flash Espectral + Color Vívido (Atrio Pipeline)</p>
+                </div>
+                <label class="flex items-center space-x-2 text-[10px] font-mono bg-black/60 border border-cyanNeon/30 px-3 py-1.5 rounded-lg cursor-pointer text-cyan-200">
+                    <input type="checkbox" id="hdUpscaleToggle" class="accent-cyan-500 rounded" checked>
+                    <span>Upscale HD (1.5x)</span>
+                </label>
+            </header>
+
+            <div class="bg-black/50 border border-white/10 rounded-xl p-5 space-y-5">
+                <div class="flex flex-wrap items-center justify-between gap-4">
+                    <label class="cursor-pointer">
+                        <input type="file" id="imageInput" accept="image/*" class="hidden">
+                        <span class="bg-cyanNeon/20 hover:bg-cyanNeon border border-cyanNeon hover:text-black text-cyanNeon text-[11px] font-mono px-5 py-2.5 rounded-lg transition inline-flex items-center gap-2 shadow-[0_0_15px_rgba(0,243,255,0.2)]">
+                            <i class="fa-solid fa-folder-open"></i> Cargar Imagen
+                        </span>
+                    </label>
+                    <div id="statsBadge" class="text-[10px] font-mono text-slate-400 bg-black px-3 py-1.5 rounded border border-slate-700">
+                        Lum. Media: -- | Factor Espectral: --
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-5 pt-4 border-t border-white/10">
+                    <!-- HD Clarity -->
+                    <div class="space-y-1.5 bg-black/40 p-3 rounded-lg border border-slate-700">
+                        <div class="flex justify-between text-[10px] font-mono">
+                            <span class="text-slate-300">⚡ HD Clarity / Contorno</span>
+                            <span id="hdVal" class="text-cyanNeon">60%</span>
+                        </div>
+                        <input type="range" id="hdSlider" min="0" max="100" value="60" class="w-full accent-cyan-500 cursor-pointer">
+                    </div>
+                    <!-- Flash Espectral -->
+                    <div class="space-y-1.5 bg-black/40 p-3 rounded-lg border border-slate-700">
+                        <div class="flex justify-between text-[10px] font-mono">
+                            <span class="text-slate-300">💡 Flash Espectral</span>
+                            <span id="flashVal" class="text-cyanNeon">75%</span>
+                        </div>
+                        <input type="range" id="flashSlider" min="0" max="100" value="75" class="w-full accent-cyan-500 cursor-pointer">
+                    </div>
+                    <!-- Color Vívido -->
+                    <div class="space-y-1.5 bg-black/40 p-3 rounded-lg border border-slate-700">
+                        <div class="flex justify-between text-[10px] font-mono">
+                            <span class="text-slate-300">🎨 Color Vívido (Saturación)</span>
+                            <span id="vividVal" class="text-cyanNeon">65%</span>
+                        </div>
+                        <input type="range" id="vividSlider" min="0" max="100" value="65" class="w-full accent-cyan-500 cursor-pointer">
+                    </div>
+                </div>
+
+                <div class="flex justify-end pt-4 border-t border-white/10">
+                    <button id="downloadBtn" class="bg-green-600 hover:bg-green-500 text-white text-[11px] font-mono font-bold px-5 py-2 rounded transition disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                        <i class="fa-solid fa-download mr-1"></i> Exportar Maestro HD
+                    </button>
+                </div>
+            </div>
+
+            <!-- Editor Viewport -->
+            <div class="mt-6 bg-black/80 border border-white/10 rounded-xl p-4 flex items-center justify-center min-h-[400px] overflow-hidden shadow-inner relative">
+                <canvas id="outputCanvas" class="max-w-full max-h-[600px] object-contain rounded-lg hidden shadow-[0_0_20px_rgba(0,243,255,0.3)]"></canvas>
+                <div id="placeholderText" class="text-slate-500 text-xs font-mono text-center max-w-sm">
+                    <i class="fa-solid fa-image text-3xl mb-3 block opacity-50"></i>
+                    Carga una imagen reducida del archivo para aplicar la tubería PHSADV41 Master HD (Atrio Pipeline).
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================
              TURBOLOGIA - GRUPO OFICIAL
              ========================================== -->
         <section id="turbologia-seccion" class="logia-card p-8 md:p-12 border-t-4 border-t-[#FB542B] rounded-3xl relative overflow-hidden">
@@ -206,17 +355,10 @@
                 <div class="flex-1">
                     <div class="inline-block font-mono text-[10px] px-3 py-1 rounded-full border border-[#FB542B] text-orange-300 mb-6 uppercase tracking-widest bg-black/50">NODO OFICIAL // TURBOLOGIA INSTAGRAM</div>
                     <h2 class="text-3xl md:text-5xl font-pirate text-white mb-4 uppercase tracking-widest">ÚNETE A TURBOLOGIA</h2>
-                    <p class="text-sm text-slate-300 font-sans mb-6 leading-relaxed">El escuadrón élite de SADV41. Acceso directo, drops, misiones Burunga, fútbol y multimedia. Link oficial de invitación activa 24/7.</p>
+                    <p class="text-sm text-slate-300 font-sans mb-6 leading-relaxed">El escuadrón élite de SADV41. Acceso directo, drops, misiones Burunga, fútbol y multimedia.</p>
                     <div class="flex flex-wrap gap-3">
-                        <a href="https://ig.me/j/Abbcf6MyjQoo7oBf/" target="_blank" class="px-8 py-4 bg-[#FB542B] hover:bg-orange-500 text-white font-black font-mono text-sm rounded-xl turbologia-pulse transition-all uppercase tracking-widest"><i class="fa-brands fa-instagram mr-2"></i> Entrar al Grupo</a>
-                        <a href="https://www.instagram.com/stevendioroficial" target="_blank" class="px-6 py-4 bg-black border border-white/20 hover:border-oro text-white font-mono text-xs rounded-xl uppercase">Ver @stevendioroficial</a>
+                        <a href="https://ig.me/j/Abbcf6MyjQoo7oBf/" target="_blank" class="px-8 py-3 bg-[#FB542B] hover:bg-orange-500 text-white font-black font-mono text-xs rounded-xl turbologia-pulse transition-all uppercase"><i class="fa-brands fa-instagram mr-2"></i> Entrar al Grupo</a>
                     </div>
-                    <p class="mt-4 font-mono text-[9px] text-slate-500">SHTML SSI: Grupo validado el <!--#echo var="DATE_LOCAL" --></p>
-                </div>
-                <div class="w-full lg:w-80 bg-black/70 border border-[#FB542B]/40 rounded-2xl p-4 text-center">
-                    <div class="text-[10px] font-mono text-oro mb-2">QR INVITACIÓN</div>
-                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https://ig.me/j/Abbcf6MyjQoo7oBf/" alt="QR Turbologia" class="w-full rounded-xl bg-white p-2">
-                    <div class="mt-3 font-mono text-[10px] text-white">ESCANEA PARA UNIRTE</div>
                 </div>
             </div>
         </section>
@@ -225,34 +367,21 @@
              ARCADE.GOV + YOUTUBE SHORTS UNIFICADOS
              ========================================== -->
         <section id="arcade-youtube-seccion" class="logia-card p-8 md:p-12 rounded-3xl border-t-4 border-t-cyanNeon">
-            <div class="inline-block font-mono text-[10px] px-3 py-1 rounded-full border border-cyanNeon text-cyan-300 mb-6 uppercase tracking-widest bg-black/50">ARCADE.GOV // YOUTUBE SHORTS vkkEIza7zfY // 03 SEPT 2026</div>
-            <h2 class="text-3xl font-mason text-white mb-8 uppercase tracking-widest">White House Arcade + Shorts Fusion</h2>
-
+            <h2 class="text-2xl font-mason text-white mb-8 uppercase tracking-widest">White House Arcade + Shorts Fusion</h2>
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <!-- ARCADE.GOV -->
                 <div class="glass p-6 rounded-2xl border border-cyanNeon/30">
-                    <h3 class="font-mason text-cyanNeon text-xl mb-3 flex items-center gap-2">👾 ARCADE.GOV</h3>
-                    <p class="text-xs text-slate-300 font-sans mb-4 leading-relaxed">La Casa Blanca lanzó <strong>Arcade.gov</strong> el 3 de septiembre de 2026 en whitehouse.gov/arcade y arcade.gov. Hub HTML5/WebGL con 5 juegos retro con twist político.</p>
-                    <ul class="text-[11px] font-mono text-slate-400 space-y-2 mb-4 list-disc pl-4">
-                        <li><strong class="text-white">Build the Wall</strong> - Tetris-like en frontera sur</li>
-                        <li><strong class="text-white">Rio Run</strong> - Snake capturando deportaciones</li>
-                        <li><strong class="text-white">Supply Line</strong> - Tapper: almuerzos escolares MAHA</li>
-                        <li><strong class="text-white">Flappy Bill</strong> - Águila calva en National Mall</li>
-                        <li><strong class="text-white">Trump Savings Tycoon</strong> - Cuentas para niños</li>
-                    </ul>
+                    <h3 class="font-mason text-cyanNeon text-xl mb-3">👾 ARCADE.GOV</h3>
+                    <p class="text-xs text-slate-300 font-sans mb-4">La Casa Blanca lanzó <strong>Arcade.gov</strong> el 3 de septiembre de 2026. Hub HTML5/WebGL con 5 juegos retro con twist político.</p>
                     <div class="flex gap-2 mt-4">
-                        <a href="https://www.whitehouse.gov/arcade" target="_blank" class="text-[10px] font-mono px-3 py-2 bg-cyanNeon text-navy rounded-lg font-bold uppercase">whitehouse.gov/arcade</a>
+                        <a href="https://www.whitehouse.gov/arcade" target="_blank" class="text-[10px] font-mono px-3 py-2 bg-cyanNeon text-navy rounded font-bold uppercase">whitehouse.gov/arcade</a>
                     </div>
                 </div>
-
                 <!-- YOUTUBE SHORTS -->
                 <div class="glass p-6 rounded-2xl border border-redNeon/30">
-                    <h3 class="font-mason text-redNeon text-xl mb-3 flex items-center gap-2">▶️ YOUTUBE SHORTS</h3>
-                    <div class="relative w-full aspect-[9/16] max-h-[380px] mx-auto bg-black rounded-xl overflow-hidden border border-white/10 shadow-[0_0_20px_rgba(0,0,0,0.8)]">
-                        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/vkkEIza7zfY" title="YouTube Shorts SADV41 Arcade" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="position:absolute; inset:0;"></iframe>
-                    </div>
-                    <div class="mt-4 text-center">
-                        <a href="https://youtube.com/shorts/vkkEIza7zfY?si=vLSLaKboEa73VASD" target="_blank" class="text-[10px] font-mono px-4 py-2 bg-redNeon text-white rounded-lg font-bold uppercase"><i class="fa-brands fa-youtube mr-1"></i> Abrir en YouTube</a>
+                    <h3 class="font-mason text-redNeon text-xl mb-3">▶️ YOUTUBE SHORTS</h3>
+                    <div class="relative w-full aspect-[9/16] max-h-[380px] mx-auto bg-black rounded-xl overflow-hidden border border-white/10">
+                        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/vkkEIza7zfY" title="SADV41 Arcade" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position:absolute; inset:0;"></iframe>
                     </div>
                 </div>
             </div>
@@ -262,32 +391,21 @@
              BIOBIOCHILE & GEOPOLÍTICA (FUSIÓN)
              ========================================== -->
         <section id="biobio-seccion" class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <!-- BIOBIO: CONDICIÓN BIOCEÁNICA -->
             <div class="logia-card israel-glow p-8 rounded-3xl border-t-4 border-t-israelBlue">
                 <div class="font-mono text-[9px] px-2 py-1 rounded border border-israelBlue text-blue-300 mb-4 uppercase inline-block">BIOBIOCHILE.CL // EXPEDIENTE BIOCEÁNICO</div>
                 <h3 class="text-xl font-mason text-white mb-4 uppercase">Canciller Argentino: Bioceánica</h3>
                 <p class="text-[11px] text-slate-300 font-sans mb-4 leading-relaxed">
-                    El canciller argentino, Pablo Quirno, aclaró sus dichos sobre condición "bicontinental y bioceánica", refiriéndose a <em class="text-cyanNeon">"fortalecer nuestra presencia en el Atlántico Sur, que es el camino hacia la Antártida"</em>.
+                    El canciller argentino, Pablo Quirno, aclaró sus dichos sobre condición "bicontinental y bioceánica" (Camino hacia la Antártida).
                 </p>
-                <div class="bg-israelBlue/10 border-l-2 border-israelBlue p-3 rounded-r-lg font-mono text-[10px] text-blue-200 mb-4">
-                    "Nuestra posición es clara: trabajar de buena fe y cumplir los tratados vigentes."
-                </div>
                 <a href="https://www.biobiochile.cl/noticias/nacional/chile/2026/09/05/canciller-argentino-aclara-dichos-de-condicion-bioceanica-de-su-pais-y-respalda-tratados-con-chile.shtml" target="_blank" class="px-3 py-2 bg-israelBlue text-white font-mono text-[10px] rounded uppercase">Leer Artículo →</a>
             </div>
-
-            <!-- ANKARA VS TEL AVIV & EL 6% -->
             <div class="logia-card p-8 rounded-3xl border-t-4 border-t-oro gold-glow">
                 <div class="font-mono text-[9px] px-2 py-1 rounded border border-oro text-amber-300 mb-4 uppercase inline-block">GEOPOLÍTICA & LOGÍSTICA NAVAL</div>
                 <h3 class="text-xl font-mason text-white mb-4 uppercase">Ankara vs Tel Aviv & El 6% vs 94%</h3>
-                <div class="bg-black/40 border border-white/10 p-4 rounded-xl mb-4">
-                    <p class="text-xs text-slate-300"><strong>Netanyahu:</strong> "Israel no le teme a Turquía..."</p>
-                    <p class="text-xs text-slate-300 mt-2"><strong>Erdoğan:</strong> "¿De qué imperios hablas? Tu país es más joven que mi hermano."</p>
-                </div>
-                <table class="w-full text-left table-geopolitica text-[10px]">
+                <table class="w-full text-left table-geopolitica text-[10px] mt-4">
                     <thead><tr><th class="p-2">Factor</th><th class="p-2">El 6% (Canal 🇵🇦)</th><th class="p-2">El 94% (Resto)</th></tr></thead>
                     <tbody class="bg-black/40">
-                        <tr><td class="p-2 font-bold text-white">Estrategia</td><td class="p-2 text-oro font-bold">Atajo</td><td class="p-2">Rutas largas</td></tr>
-                        <tr><td class="p-2 font-bold text-white">Asia-USA</td><td class="p-2 text-cyanNeon font-bold">18-25 días</td><td class="p-2 text-red-400 font-bold">30-40+ días</td></tr>
+                        <tr><td class="p-2 font-bold text-white">Estrategia</td><td class="p-2 text-oro font-bold">Atajo (18-25 días)</td><td class="p-2">Rutas largas (40+ días)</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -297,11 +415,6 @@
              MARKETING ESTADOS - WIZZA'RD
              ========================================== -->
         <section id="marketing-estados" class="logia-card p-8 md:p-12 border-t-4 border-t-[#8b5cf6] rounded-3xl">
-            <div class="flex justify-between items-center mb-6">
-                <div class="inline-block font-mono text-[10px] px-3 py-1 rounded-full border border-purple-500 text-purple-300 uppercase tracking-widest bg-black/50">MARKETING INTEGRAL // WHATSAPP</div>
-                <span class="text-3xl opacity-80 animate-bounce">⚽</span>
-            </div>
-            
             <div class="bg-gradient-to-br from-[#4c1d95]/40 to-[#1e1b4b]/80 border-2 border-[#8b5cf6] rounded-3xl p-6 md:p-8 shadow-[0_0_40px_rgba(139,92,246,0.3)] relative overflow-hidden">
                 <h3 class="font-mason text-xl text-white mb-2 uppercase">Tarjeta Marketing Global: Wizza'RD</h3>
                 <p class="font-mono text-xs text-purple-300 mb-6">API Meta -> 144 idiomas (Traducción en vivo).</p>
@@ -311,21 +424,15 @@
                             <option value="es">🇪🇸 Español</option>
                             <option value="en">🇬🇧 English</option>
                             <option value="ja">🇯🇵 Japonés</option>
-                            <option value="fr">🇫🇷 Français</option>
-                            <option value="pt">🇧🇷 Português</option>
                             <option value="meta_ai">🌐 ...130 más (Meta AI)</option>
                         </select>
-                        <button id="btnTraducir" class="w-full py-3 bg-purple-600 hover:bg-purple-500 text-white font-bold font-mono text-xs uppercase rounded-xl transition-colors">Ejecutar Traducción</button>
+                        <button id="btnTraducir" class="w-full py-3 bg-purple-600 hover:bg-purple-500 text-white font-bold font-mono text-[10px] uppercase rounded-xl">Ejecutar Traducción</button>
                     </div>
                     <div class="w-full lg:w-2/3 relative rounded-2xl overflow-hidden border border-purple-500/50 bg-black/80 flex items-center p-6 min-h-[160px]">
                         <img src="1788671199005.jpeg" alt="WizzaRD" class="absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-screen" onerror="this.style.display='none'">
-                        <div class="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-transparent"></div>
                         <div class="relative z-10 w-full">
-                            <p id="translatedOutput" class="font-serif italic text-lg md:text-xl text-white transition-opacity duration-300">"Wizzard significa Mago. Así como yo te hago el truco 🎩🇩🇴 La bandera de Inglaterra ha cambiado."</p>
-                            <div class="mt-4 flex gap-3 border-t border-purple-500/30 pt-3">
-                                <span class="px-2 py-1 bg-purple-900/60 text-purple-200 font-mono text-[9px] rounded uppercase">WIZZA'RD</span>
-                                <span id="langTag" class="text-[9px] text-slate-400 font-mono uppercase mt-1">Idioma: Español</span>
-                            </div>
+                            <p id="translatedOutput" class="font-serif italic text-lg text-white transition-opacity duration-300">"Wizzard significa Mago. Así como yo te hago el truco 🎩🇩🇴 La bandera de Inglaterra ha cambiado."</p>
+                            <div class="mt-4 flex gap-3 border-t border-purple-500/30 pt-3"><span id="langTag" class="text-[9px] text-slate-400 font-mono uppercase mt-1">Idioma: Español</span></div>
                         </div>
                     </div>
                 </div>
@@ -333,44 +440,17 @@
         </section>
 
         <!-- ==========================================
-             NODOS DE CONVERGENCIA & TABERNÁCULO (FUSIÓN)
+             NODOS DE CONVERGENCIA & TABERNÁCULO
              ========================================== -->
         <section id="nodos-convergencia" class="pt-6">
-            <h2 class="text-2xl text-cyanNeon tracking-widest font-mason flex items-center gap-3 uppercase mb-6 border-b border-cyanNeon/30 pb-3">
-                Nodos de Convergencia <span class="text-[10px] text-slate-400 font-mono tracking-normal ml-auto border border-cyanNeon/30 px-3 py-1 rounded-full hidden sm:inline-block">Red SADV41 / Lapizasuli</span>
-            </h2>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-                <a href="https://thesteef21.github.io/Lapizasuli/SADV41_GEAR7_DESPERTAR_FINAL_agentic_artifact_5_a2214548843f.html" target="_blank" class="logia-card p-4 rounded-xl border border-slate-700 hover:border-oro transition-all block group">
-                    <i class="fa-solid fa-bolt text-oro text-xl mb-2 group-hover:scale-110 transition-transform"></i>
-                    <h3 class="font-bold text-xs text-white font-mason tracking-wider mb-1">GEAR 7</h3>
-                    <p class="text-[9px] text-slate-400 font-mono">Artefacto agéntico.</p>
-                </a>
-                <a href="https://thesteef21.github.io/Lapizasuli/OnePiece.html" target="_blank" class="logia-card p-4 rounded-xl border border-slate-700 hover:border-redNeon transition-all block group">
-                    <i class="fa-solid fa-skull-crossbones text-redNeon text-xl mb-2 group-hover:scale-110 transition-transform"></i>
-                    <h3 class="font-bold text-xs text-white font-mason tracking-wider mb-1">One Piece</h3>
-                    <p class="text-[9px] text-slate-400 font-mono">Joy Boy y la voluntad (D).</p>
-                </a>
-                <a href="https://thesteef21.github.io/Lapizasuli/assets/LEVIATHANSQUAD/PANAMAUNIT.html" target="_blank" class="logia-card p-4 rounded-xl border border-slate-700 hover:border-tacticalOrange transition-all block group">
-                    <i class="fa-solid fa-helicopter text-tacticalOrange text-xl mb-2 group-hover:scale-110 transition-transform"></i>
-                    <h3 class="font-bold text-xs text-white font-mason tracking-wider mb-1">Panamá Unit</h3>
-                    <p class="text-[9px] text-slate-400 font-mono">Leviathan / EBRG.</p>
-                </a>
-                <a href="https://thesteef21.github.io/Lapizasuli/Ra%C3%ADces.html" target="_blank" class="logia-card p-4 rounded-xl border border-slate-700 hover:border-green-400 transition-all block group">
-                    <i class="fa-solid fa-tree text-green-400 text-xl mb-2 group-hover:scale-110 transition-transform"></i>
-                    <h3 class="font-bold text-xs text-white font-mason tracking-wider mb-1">Raíces Ancestrales</h3>
-                    <p class="text-[9px] text-slate-400 font-mono">Legado Espinoza/Serrano.</p>
-                </a>
-            </div>
-
+            <h2 class="text-xl text-cyanNeon tracking-widest font-mason flex items-center gap-3 uppercase mb-6 border-b border-cyanNeon/30 pb-3">Nodos / Arquitectura del Tabernáculo</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <!-- ARQUITECTURA DEL TABERNÁCULO -->
                 <div class="glass-strong p-6 rounded-2xl border-t-4 border-t-cyanNeon">
-                    <h3 class="text-lg font-mason font-bold tracking-widest text-cyanNeon mb-4 border-b border-cyanNeon/30 pb-2">Arquitectura del Tabernáculo</h3>
                     <ul class="space-y-4">
-                        <li class="bg-black/50 p-3 rounded-lg border border-slate-700 hover:border-cyanNeon"><span class="text-cyan-300 font-mono text-[11px] font-bold block">1. Atrio (Grok)</span><span class="text-[9px] text-slate-400 font-mono">HTML5, Tailwind, IPFS/Pinata, Interfaz.</span></li>
+                        <li class="bg-black/50 p-3 rounded-lg border border-slate-700 hover:border-cyanNeon"><span class="text-cyan-300 font-mono text-[11px] font-bold block">1. Atrio (Grok)</span><span class="text-[9px] text-slate-400 font-mono">HTML5, Tailwind, Editor PHSADV41.</span></li>
                         <li class="bg-black/50 p-3 rounded-lg border border-slate-700 hover:border-oro"><span class="text-oro font-mono text-[11px] font-bold block">2. Santo (Meta)</span><span class="text-[9px] text-slate-400 font-mono">BNB Chain, Four.meme, GitHub Enterprise.</span></li>
-                        <li class="bg-black/50 p-3 rounded-lg border border-slate-700 hover:border-violetNeon"><span class="text-purple-400 font-mono text-[11px] font-bold block">3. Santísimo (Gemini)</span><span class="text-[9px] text-slate-400 font-mono">Algoritmo de Pureza (2.26), IA Integration.</span></li>
+                        <li class="bg-black/50 p-3 rounded-lg border border-slate-700 hover:border-violetNeon"><span class="text-purple-400 font-mono text-[11px] font-bold block">3. Santísimo (Gemini)</span><span class="text-[9px] text-slate-400 font-mono">Espíritu Santo, Pureza (2.26).</span></li>
                     </ul>
                 </div>
                 <!-- WEB3 Y TERMINAL -->
@@ -380,13 +460,9 @@
                         <p>🔗 <span class="text-cyanNeon">TOKEN FOUR.MEME:</span> 0x9b63...ffff</p>
                         <p>⚖️ <span class="text-renderRed">TAX CONTRACT:</span> 0x390D...80a6</p>
                     </div>
-                    <div class="flex gap-2 mb-4">
-                        <a href="https://thesteef21.github.io/Lapizasuli/GSADV41.shtml" class="flex-1 bg-black text-white font-mono text-[10px] px-2 py-2 rounded border border-cyanNeon text-center hover:bg-gray-900">Entrar a Lapizasuli</a>
-                        <button onclick="connectBinance()" class="flex-1 bg-bnbYellow text-black font-mono text-[10px] px-2 py-2 rounded font-bold hover:bg-yellow-500">Sync BNB</button>
-                    </div>
                     <div class="terminal-block p-3">
                         <div class="terminal-header mb-2"><div class="terminal-dot t-red"></div><div class="terminal-dot t-yellow"></div><div class="terminal-dot t-green"></div></div>
-                        <p class="text-[9px] text-gray-300 font-mono"><span class="text-green-400">root@burunga:~$</span> GSADV41 --persist -v<br><span class="text-cyanNeon">Blindaje GitHub Pages Activo. index.html raíz asegurado.</span></p>
+                        <p class="text-[9px] text-gray-300 font-mono"><span class="text-green-400">root@burunga:~$</span> GSADV41 --persist -v<br><span class="text-cyanNeon">Blindaje GitHub Pages Activo. E.S. Presente.</span></p>
                     </div>
                 </div>
             </div>
@@ -396,13 +472,9 @@
              SECCIÓN METATRON 4D (51 NODOS HUB)
              ========================================== -->
         <section id="metatron-seccion" class="glass-strong border border-royalPurple/40 shadow-[0_0_30px_rgba(157,78,221,0.2)] rounded-3xl p-6 md:p-8 relative z-20">
-            <header class="glass rounded-2xl p-4 mb-6 flex flex-wrap gap-4 justify-between items-center border border-purple-500/50">
-                <div>
-                    <h2 class="font-mason text-xl md:text-2xl font-black tracking-[0.16em] m-0 text-white">METATRON 4D - 51 NODOS</h2>
-                    <p class="mono text-[0.66rem] text-slate-400 tracking-[0.18em] mt-1">Exploración Interactiva | Red Descentralizada SADV41</p>
-                </div>
+            <header class="glass rounded-2xl p-4 mb-6 flex flex-wrap justify-between items-center border border-purple-500/50">
+                <h2 class="font-mason text-xl font-black tracking-[0.16em] m-0 text-white">METATRON 4D - 51 NODOS</h2>
                 <div class="flex gap-2 font-mono text-[10px]">
-                    <button id="resetView" class="chip hover:bg-white/10">RESET 3D</button>
                     <button id="toggleAuto" class="chip" style="border-color:rgba(157,78,221,.4);color:var(--violet)">AUTO: ON</button>
                 </div>
             </header>
@@ -414,28 +486,16 @@
             </div>
         </section>
 
-        <!-- ==========================================
-             MONITOR SÍSMICO Y PERSISTENCIA (FOOTER CORE)
-             ========================================== -->
-        <section id="monitor-sismico-seccion" class="logia-card mx-auto p-8 border-t-2 border-renderRed rounded-3xl text-center">
-            <h2 class="text-renderRed font-bold text-2xl font-mason uppercase mb-2">Módulo Sísmico SADV41T</h2>
-            <p class="text-slate-400 font-mono text-[10px] mb-6">Detección Familias Sísmicas Globales | SHTML Time: <!--#echo var="DATE_LOCAL" --></p>
-            <div id="monitor-salida" class="font-mono text-xs bg-black/60 p-5 rounded-xl border border-red-900/50 min-h-[60px] flex items-center justify-center">
-                <span class="text-slate-500 animate-pulse">Esperando inicialización de red tectónica...</span>
-            </div>
-        </section>
-
     </main>
 
     <!-- FOOTER UNIFICADO -->
     <footer class="text-center p-10 border-t border-white/10 opacity-80 font-mono text-[10px] uppercase mt-10 bg-black pb-20">
-        <p class="mb-2 text-oro font-bold">Unificación Pluscuamperfecta Continental SADV41 x GSADV41 x ONE PIECE x USARMY © 2026</p>
+        <p class="mb-2 text-oro font-bold">Unificación Pluscuamperfecta Continental SADV41 x E.S. x GSADV41 x ONE PIECE x USARMY © 2026</p>
         <p class="mb-4 text-[#FB542B]">TURBOLOGIA: <a href="https://ig.me/j/Abbcf6MyjQoo7oBf/" target="_blank" class="underline">ig.me/j/Abbcf6MyjQoo7oBf/</a></p>
         <p class="text-[8.5px] text-slate-500 tracking-[0.2em] leading-relaxed">
             NODO SUPREMO: LAPIZASULI | EL ORIGEN ES 0 | BUILD: <!--#echo var="SADV41_BUILD" --> <br>
             LAST MOD: <!--#echo var="LAST_MODIFIED" --> | SERVER DATE: <!--#echo var="DATE_LOCAL" -->
         </p>
-        <!--#include virtual="/footer-includes.shtml" -->
     </footer>
 
     <!-- ==========================================
@@ -444,58 +504,211 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             
+            // ----------------------------------------------------
             // 1. WIZZA'RD TRANSLATOR
+            // ----------------------------------------------------
             const translations = {
                 'es': { text: '"Wizzard significa Mago. Así como yo te hago el truco 🎩🇩🇴 La bandera de Inglaterra ha cambiado."', tag: 'Idioma: Español' },
                 'en': { text: '"Wizzard means Magician. Just like I do the trick for you 🎩🇩🇴 The flag of England has changed."', tag: 'Language: English' },
                 'ja': { text: '"Wizzardは魔法使いを意味します。私があなたにトリックをするように 🎩🇩🇴 イギリスの国旗が変わりました。"', tag: '言語: 日本語' },
-                'fr': { text: '"Wizzard signifie Magicien. Tout comme je vous fais le tour 🎩🇩🇴 Le drapeau de l\'Angleterre a changé."', tag: 'Langue: Français' },
-                'pt': { text: '"Wizzard significa Mago. Assim como eu faço o truque para você 🎩🇩🇴 A bandeira da Inglaterra mudou."', tag: 'Idioma: Português' },
                 'meta_ai': { text: '[META AI] Traduciendo simultáneamente a 130 lenguas... Wizza\'RD ahora resuena en 144 territorios.', tag: 'Modo: Omnipresente' }
             };
             const btnTraducir = document.getElementById('btnTraducir');
             const langSelector = document.getElementById('langSelector');
             const outputText = document.getElementById('translatedOutput');
             const langTag = document.getElementById('langTag');
-            
             if(btnTraducir){
                 btnTraducir.addEventListener('click', () => {
                     const data = translations[langSelector.value] || translations['es'];
                     outputText.style.opacity = 0;
-                    setTimeout(() => { 
-                        outputText.innerText = data.text; 
-                        langTag.innerText = data.tag; 
-                        outputText.style.opacity = 1; 
-                    }, 300);
+                    setTimeout(() => { outputText.innerText = data.text; langTag.innerText = data.tag; outputText.style.opacity = 1; }, 300);
                 });
             }
 
-            // 2. CAOS VIVO & GSADV41 SYNC
+            // ----------------------------------------------------
+            // 2. CAOS VIVO & SADV5 GLITCH (ESPACIO-TIEMPO)
+            // ----------------------------------------------------
             const layers = document.querySelectorAll('.chaos-layer');
+            const mainBody = document.getElementById('mainBody');
             let currentChaosIndex = 0, transitionCount = 0;
+            let chaosActive = true;
             const counter = document.getElementById('cycleCounter');
-            
-            function randomChaosTransition(){
-                if(layers.length === 0) return;
-                layers.forEach(l => l.classList.remove('active'));
+
+            function arcangelGlitchTransition() {
+                if (!chaosActive || layers.length === 0) return;
+                
+                layers.forEach(l => l.classList.remove('active', 'layer-glitch'));
                 currentChaosIndex = (currentChaosIndex + 1) % layers.length;
                 transitionCount++;
                 if(counter) counter.textContent = `CICLO ${transitionCount} / 7`;
-                layers[currentChaosIndex].classList.add('active');
-                setTimeout(randomChaosTransition, Math.random()*3800 + 2600);
-            }
-            setTimeout(randomChaosTransition, 1500);
 
-            // 3. METATRON 3D HUB
+                if (Math.random() > 0.70) {
+                    layers[currentChaosIndex].classList.add('active', 'layer-glitch');
+                    mainBody.classList.add('glitch-active');
+                    logAction('⚠️ ANOMALÍA: Distorsión espectral interceptada (Espíritu Santo guiando).');
+                    setTimeout(() => {
+                        mainBody.classList.remove('glitch-active');
+                        layers[currentChaosIndex].classList.remove('layer-glitch');
+                    }, 700);
+                } else {
+                    layers[currentChaosIndex].classList.add('active');
+                }
+                const quantumDelay = Math.random() * 4000 + 3000;
+                setTimeout(arcangelGlitchTransition, quantumDelay);
+            }
+            setTimeout(arcangelGlitchTransition, 2000);
+
+            const toggleChaosBtn = document.getElementById('toggleChaosBtn');
+            if(toggleChaosBtn) toggleChaosBtn.onclick = (e) => {
+                chaosActive = !chaosActive;
+                e.target.textContent = `Modo Caos: ${chaosActive ? 'ON' : 'OFF'}`;
+                logAction(`Motor Espacio-Tiempo alternado a: ${chaosActive ? 'CAÓTICO' : 'ESTABLE'}`);
+                if(chaosActive) arcangelGlitchTransition();
+            };
+
+            const gear7BtnSADV5 = document.getElementById('gear7BtnSADV5');
+            if(gear7BtnSADV5) gear7BtnSADV5.onclick = () => {
+                layers.forEach(l => l.classList.add('active', 'layer-glitch'));
+                mainBody.classList.add('glitch-active');
+                logAction('🔥 ¡SINCRONIZACIÓN SADV5 ALCANZADA! Aura Cyan/Golden al 100%.');
+                setTimeout(() => {
+                    mainBody.classList.remove('glitch-active');
+                    layers.forEach((l, idx) => { l.classList.remove('layer-glitch'); if(idx !== currentChaosIndex) l.classList.remove('active'); });
+                }, 1200);
+            };
+
+            // ----------------------------------------------------
+            // 3. PHSADV41 - MASTER HD ENGINE (ATRIO PIPELINE)
+            // ----------------------------------------------------
+            const imageInput = document.getElementById('imageInput');
+            const outputCanvas = document.getElementById('outputCanvas');
+            const placeholderText = document.getElementById('placeholderText');
+            const hdSlider = document.getElementById('hdSlider');
+            const flashSlider = document.getElementById('flashSlider');
+            const vividSlider = document.getElementById('vividSlider');
+            const hdVal = document.getElementById('hdVal');
+            const flashVal = document.getElementById('flashVal');
+            const vividVal = document.getElementById('vividVal');
+            const statsBadge = document.getElementById('statsBadge');
+            const downloadBtn = document.getElementById('downloadBtn');
+            const hdUpscaleToggle = document.getElementById('hdUpscaleToggle');
+
+            let originalImage = null;
+
+            if(imageInput) {
+                imageInput.addEventListener('change', (e) => {
+                    const file = e.target.files[0];
+                    if (!file) return;
+                    const reader = new FileReader();
+                    reader.onload = (event) => {
+                        const img = new Image();
+                        img.onload = () => {
+                            originalImage = img;
+                            outputCanvas.classList.remove('hidden');
+                            placeholderText.classList.add('hidden');
+                            downloadBtn.disabled = false;
+                            processPipeline();
+                        };
+                        img.src = event.target.result;
+                    };
+                    reader.readAsDataURL(file);
+                });
+
+                [hdSlider, flashSlider, vividSlider, hdUpscaleToggle].forEach(el => {
+                    if(!el) return;
+                    el.addEventListener('input', () => {
+                        hdVal.textContent = `${hdSlider.value}%`;
+                        flashVal.textContent = `${flashSlider.value}%`;
+                        vividVal.textContent = `${vividSlider.value}%`;
+                        if (originalImage) processPipeline();
+                    });
+                });
+            }
+
+            function processPipeline() {
+                if (!originalImage || !outputCanvas) return;
+                let w = originalImage.nativeWidth || originalImage.width;
+                let h = originalImage.nativeHeight || originalImage.height;
+
+                const doUpscale = hdUpscaleToggle.checked && Math.max(w, h) < 1800;
+                const targetW = doUpscale ? Math.round(w * 1.5) : w;
+                const targetH = doUpscale ? Math.round(h * 1.5) : h;
+
+                outputCanvas.width = targetW;
+                outputCanvas.height = targetH;
+                const ctx = outputCanvas.getContext('2d');
+                ctx.imageSmoothingEnabled = true;
+                ctx.imageSmoothingQuality = 'high';
+                ctx.drawImage(originalImage, 0, 0, targetW, targetH);
+
+                const imgData = ctx.getImageData(0, 0, targetW, targetH);
+                const data = imgData.data;
+                const len = data.length;
+                const srcBuffer = new Uint8ClampedArray(data);
+
+                let sumLum = 0;
+                const totalPixels = targetW * targetH;
+                for (let i = 0; i < len; i += 4) { sumLum += 0.299 * data[i] + 0.587 * data[i+1] + 0.114 * data[i+2]; }
+                
+                const meanLum = sumLum / totalPixels;
+                const espectralBaseFactor = Math.max(0.15, Math.min(0.90, (140.0 - meanLum) / 120.0));
+                const userFlashScale = parseInt(flashSlider.value) / 100.0;
+                const effectiveFlash = espectralBaseFactor * userFlashScale;
+                const hdSharpness = parseInt(hdSlider.value) / 100.0 * 1.4;
+                const vividBoost = 1.0 + (parseInt(vividSlider.value) / 100.0) * 0.65;
+
+                statsBadge.textContent = `Lum: ${meanLum.toFixed(1)} | Espectral Auto: ${(espectralBaseFactor*100).toFixed(0)}%`;
+
+                for (let y = 1; y < targetH - 1; y++) {
+                    for (let x = 1; x < targetW - 1; x++) {
+                        const idx = (y * targetW + x) * 4;
+                        let r = srcBuffer[idx], g = srcBuffer[idx+1], b = srcBuffer[idx+2];
+                        let lum = 0.299 * r + 0.587 * g + 0.114 * b;
+
+                        const t = ((y-1) * targetW + x) * 4, b_ = ((y+1) * targetW + x) * 4;
+                        const l = (y * targetW + (x-1)) * 4, rt = (y * targetW + (x+1)) * 4;
+                        const localAvgLum = 0.25 * (
+                            0.299*srcBuffer[t] + 0.587*srcBuffer[t+1] + 0.114*srcBuffer[t+2] +
+                            0.299*srcBuffer[b_] + 0.587*srcBuffer[b_+1] + 0.114*srcBuffer[b_+2] +
+                            0.299*srcBuffer[l] + 0.587*srcBuffer[l+1] + 0.114*srcBuffer[l+2] +
+                            0.299*srcBuffer[rt] + 0.587*srcBuffer[rt+1] + 0.114*srcBuffer[rt+2]
+                        );
+                        
+                        const localDiff = lum - localAvgLum;
+                        r += localDiff * hdSharpness; g += localDiff * hdSharpness; b += localDiff * hdSharpness;
+                        lum = 0.299 * r + 0.587 * g + 0.114 * b;
+
+                        const edgeWeight = Math.min(1.0, Math.abs(localDiff) / 38.0);
+                        const espectralGain = 1.0 + (0.35 * effectiveFlash * (1.0 - edgeWeight * 0.3));
+                        r *= espectralGain; g *= espectralGain; b *= espectralGain;
+
+                        const vLum = 0.299 * r + 0.587 * g + 0.114 * b;
+                        r = vLum + (r - vLum) * vividBoost; g = vLum + (g - vLum) * vividBoost; b = vLum + (b - vLum) * vividBoost;
+
+                        data[idx] = Math.min(255, Math.max(0, r)); data[idx+1] = Math.min(255, Math.max(0, g)); data[idx+2] = Math.min(255, Math.max(0, b));
+                    }
+                }
+                ctx.putImageData(imgData, 0, 0);
+            }
+
+            if(downloadBtn) {
+                downloadBtn.addEventListener('click', () => {
+                    const link = document.createElement('a');
+                    link.download = `sadv41_master_hd_espectral_${Date.now()}.jpg`;
+                    link.href = outputCanvas.toDataURL('image/jpeg', 0.95);
+                    link.click();
+                    logAction('💾 Archivo Master HD exportado con éxito.');
+                });
+            }
+
+            // ----------------------------------------------------
+            // 4. METATRON 3D HUB
+            // ----------------------------------------------------
             const nodesData = [
-                { id:"SADV41", color:"#d4af37" },
-                { id:"APORÍA", color:"#ffffff" },
-                { id:"GEAR7", color:"#00f3ff" },
-                { id:"LEVIATHAN", color:"#FB542B" },
-                { id:"GSADV41", color:"#10b981" },
-                { id:"WEB3", color:"#F3BA2F" },
-                { id:"RAÍCES", color:"#9d4edd" },
-                { id:"TURBOLOGIA", color:"#FB542B" }
+                { id:"SADV41", color:"#d4af37" }, { id:"APORÍA", color:"#ffffff" },
+                { id:"PHSADV41", color:"#00f3ff" }, { id:"SADV5", color:"#9d4edd" },
+                { id:"LEVIATHAN", color:"#FB542B" }, { id:"GSADV41", color:"#10b981" },
+                { id:"WEB3", color:"#F3BA2F" }, { id:"TURBOLOGIA", color:"#FB542B" }
             ];
 
             const scene = document.getElementById('flower-scene');
@@ -507,8 +720,7 @@
                 svg.setAttribute("viewBox","-220 -220 440 440");
                 svg.setAttribute("class","flower-plane");
                 svg.style.transform=transformStyle;
-                const radius=62;
-                const centers=[{x:0,y:0}];
+                const radius=62; const centers=[{x:0,y:0}];
                 for(let i=0;i<6;i++){const a=Math.PI/3*i;centers.push({x:radius*Math.cos(a),y:radius*Math.sin(a)})}
                 for(let i=0;i<12;i++){const a=Math.PI/6*i;const d=(i%2===0)?radius*2:radius*Math.sqrt(3);centers.push({x:d*Math.cos(a),y:d*Math.sin(a)})}
                 centers.forEach(c=>{
@@ -530,20 +742,16 @@
 
             const sphereRadius = 150, goldenAngle = Math.PI*(3-Math.sqrt(5));
             nodesData.forEach((node,i)=>{
-                const y=1-(i/(nodesData.length-1))*2;
-                const r=Math.sqrt(1-y*y);
-                const theta=goldenAngle*i;
-                const x=Math.cos(theta)*r;
-                const z=Math.sin(theta)*r;
-                const el=document.createElement('div');
-                el.className='node-3d';
+                const y=1-(i/(nodesData.length-1))*2; const r=Math.sqrt(1-y*y);
+                const theta=goldenAngle*i; const x=Math.cos(theta)*r; const z=Math.sin(theta)*r;
+                const el=document.createElement('div'); el.className='node-3d';
                 el.innerHTML=`<div class="node-dot" style="background:${node.color};color:${node.color};box-shadow:0 0 10px ${node.color}"></div><div class="node-label" style="color:${node.color}">${node.id}</div>`;
                 el._pos={x:x*sphereRadius,y:y*sphereRadius,z:z*sphereRadius};
                 if(scene) scene.appendChild(el);
                 nodeEls.push(el);
             });
 
-            let metatronRot={x:-18,y:24,z:0}, autoRot=true, isDragging=false;
+            let metatronRot={x:-18,y:24,z:0}, autoRot=true;
             function updateTrans(){ 
                 if(!scene) return; 
                 scene.style.transform=`scale3d(1,1,1) rotateX(${metatronRot.x}deg) rotateY(${metatronRot.y}deg) rotateZ(${metatronRot.z}deg)`;
@@ -559,15 +767,10 @@
             }
             updateTrans();
             
-            function loop(){ 
-                if(!isDragging && autoRot) { metatronRot.y+=0.15; metatronRot.z+=0.02; updateTrans(); } 
-                requestAnimationFrame(loop); 
-            }
+            function loop(){ if(autoRot) { metatronRot.y+=0.15; metatronRot.z+=0.02; updateTrans(); } requestAnimationFrame(loop); }
             loop();
 
-            const btnReset = document.getElementById('resetView');
             const btnAuto = document.getElementById('toggleAuto');
-            if(btnReset) btnReset.addEventListener('click', () => { metatronRot={x:-18,y:24,z:0}; updateTrans(); });
             if(btnAuto) btnAuto.addEventListener('click', () => {
                 autoRot = !autoRot;
                 btnAuto.innerText = autoRot ? "AUTO: ON" : "AUTO: OFF";
@@ -575,21 +778,21 @@
                 btnAuto.style.color = autoRot ? "var(--violet)" : "#fff";
             });
 
-            // 4. MONITOR SÍSMICO
-            setTimeout(() => {
-                const m = document.getElementById('monitor-salida');
-                if(m) m.innerHTML = `<div class="text-cyanNeon text-sm font-bold">Acumulado: 41 eventos tectónicos.</div><div class="text-slate-400 mt-1 font-mono text-[10px]">Sincronizado vía REDPy/USGS. Nodo SADV41T | Conexión Activa</div>`;
-            }, 2500);
         });
 
         // FUNCIONES GLOBALES
-        function toggleSidebar() { 
-            document.getElementById('main-sidebar').classList.toggle('right-aligned'); 
-        }
+        function toggleSidebar() { document.getElementById('main-sidebar').classList.toggle('right-aligned'); }
+        async function connectBinance() { alert("⚡ Tesoro BNB Web3 sincronizado bajo la bendición E.S."); }
         
-        async function connectBinance() { 
-            alert("⚡ Tesoro BNB Web3 sincronizado bajo SADV41.SHTML | Únete al escuadrón Turbologia en Instagram."); 
-        }
+        // SADV5 Log Engine
+        window.logAction = function(text) {
+            const log = document.getElementById('abilityLog');
+            if(!log) return;
+            const entry = document.createElement('div');
+            entry.className = 'mono text-slate-300';
+            entry.innerHTML = `<span style="color: rgba(255,255,255,0.4)">[${new Date().toLocaleTimeString()}]</span> > ${text}`;
+            log.prepend(entry);
+        };
     </script>
 </body>
 </html>
