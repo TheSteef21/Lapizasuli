@@ -1,1 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SADV41 | USARMY PANAMA CITIZEN SEC</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        panamaBlue: '#005293',
+                        oro: '#D4AF37',
+                        violetNeon: '#B026FF',
+                        armyGreen: '#2C3A27',
+                        armyDark: '#1A2416'
+                    },
+                    fontFamily: {
+                        mono: ['Courier New', 'monospace'],
+                        sans: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #0f172a; }
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .scanline {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to bottom, transparent, rgba(212, 175, 55, 0.1), transparent);
+            animation: scan 4s linear infinite;
+            pointer-events: none;
+            z-index: 50;
+        }
+        @keyframes scan {
+            0% { transform: translateY(-100px); }
+            100% { transform: translateY(100vh); }
+        }
+    </style>
+</head>
+<body class="text-slate-300 font-sans min-h-screen relative overflow-x-hidden selection:bg-oro selection:text-black">
+    <div class="scanline"></div>
+
+    <!-- Header / Nav -->
+    <header class="border-b border-armyGreen/50 bg-armyDark/90 sticky top-0 z-40 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center gap-4">
+                <!-- Referencia al asset alojado en GitHub -->
+                <img src="./1789656728957.png" alt="SADV41 Patch" class="h-12 w-12 rounded shadow-md border border-oro/30" onerror="this.src='https://via.placeholder.com/48?text=SEC'">
+                <div>
+                    <h1 class="text-oro font-bold tracking-widest text-lg leading-tight">SADV41 USARMY</h1>
+                    <p class="text-xs text-slate-400 font-mono tracking-wider">PANAMA CITIZEN SEC :: MÓDULO DE VERDAD</p>
+                </div>
+            </div>
+            <div class="hidden sm:block text-right font-mono text-[10px] text-green-400">
+                <p>SYS.ONLINE // NO CRAWL PHASE</p>
+                <p>JUEVES 17 SEPT 2026</p>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-12 gap-6">
+        
+        <!-- Columna Izquierda: Manifiesto y Música -->
+        <div class="lg:col-span-5 space-y-6">
+            
+            <!-- Declaración Principal -->
+            <section class="glass-panel p-6 rounded-2xl border-t-4 border-t-oro shadow-2xl relative overflow-hidden">
+                <div class="absolute -right-10 -top-10 text-oro/10">
+                    <svg class="w-40 h-40" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                </div>
+                <h2 class="text-2xl font-bold text-white mb-2 uppercase tracking-wide">La Picardía de la Verdad</h2>
+                <div class="w-12 h-1 bg-oro mb-4"></div>
+                <p class="text-sm leading-relaxed text-slate-300 mb-4 font-mono">
+                    Mientras se destinan 12 millones de dólares a la seguridad estatal —bajo la excusa técnica de que "no son fondos nuevos y tendrán una duración de 3 años"— la verdadera libertad se ve comprometida. Hay que pagar por una seguridad estructural prolongada, mientras los hombres enfrentamos el irrespeto sistemático en silencio. Hoy, esa misma noción de "libertad" se ha torcido hasta convertirse en un irrespeto para Panamá. La verdad duele, pero es pluscuamperfecta.
+                </p>
+                
+                <!-- Reproductor Spotify -->
+                <div class="mt-6 bg-black/50 p-4 rounded-xl border border-slate-700">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-xs font-bold text-green-400 uppercase tracking-widest flex items-center gap-2">
+                            <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span> Audio Desclasificado
+                        </span>
+                    </div>
+                    <iframe style="border-radius:12px" src="https://open.spotify.com/embed/album/5H36vElHuOEqLhjlm8KlvZ?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                </div>
+            </section>
+
+            <!-- Inteligencia Nacional -->
+            <section class="logia-card p-6 rounded-2xl border-t-4 border-t-panamaBlue glass-panel">
+                <div class="text-xs font-bold text-panamaBlue mb-4 uppercase tracking-widest font-mono">FUENTES OFICIALES // PANAMÁ</div>
+                <div class="space-y-3 font-mono text-[11px]">
+                    
+                    <a href="https://www.laestrella.com.pa/panama/nacional/canal-de-panama-aclara-fondos-de-seguridad-no-son-nuevos-y-tendran-una-duracion-de-3-anos-NE25740287" target="_blank" rel="noopener noreferrer" class="block bg-black/40 p-3 rounded-lg border border-slate-700 hover:border-oro transition-colors">
+                        <span class="text-orange-400 font-bold">🚢 SEGURIDAD • La Estrella</span>
+                        <p class="text-white mt-1">Canal de Panamá aclara: ‘Fondos de seguridad no son nuevos y tendrán una duración de 3 años’</p>
+                        <p class="text-slate-400 text-[9px]">Justificación de la partida de los 12 millones de dólares.</p>
+                    </a>
+
+                    <a href="https://www.laestrella.com.pa/panama/informacion-util/clima-en-panama-pronostico-para-este-jueves-17-de-septiembre-AG25760572" target="_blank" rel="noopener noreferrer" class="block bg-black/40 p-3 rounded-lg border border-slate-700 hover:border-oro transition-colors">
+                        <span class="text-cyan-300 font-bold">🌧️ CLIMA • La Estrella</span>
+                        <p class="text-white mt-1">Clima en Panamá: Pronóstico para este jueves 17 de septiembre — IMHPA</p>
+                        <p class="text-slate-400 text-[9px]">ZCIT + bajas presiones, aviso de vigilancia hasta 18 sept.</p>
+                    </a>
+                    
+                    <a href="https://www.laestrella.com.pa/" target="_blank" rel="noopener noreferrer" class="block bg-black/40 p-3 rounded-lg border border-slate-700 hover:border-oro transition-colors">
+                        <span class="text-oro font-bold">📰 PORTADA • La Estrella</span>
+                        <p class="text-white mt-1">La Estrella de Panamá — La Decana, fundada 1849</p>
+                        <p class="text-slate-400 text-[9px]">¡Buenos días estimados lectores! - Mensaje diario</p>
+                    </a>
+                    
+                    <a href="https://www.laestrella.com.pa/panama/politica/panama-hoy-de-radio-panama-de-este-jueves-17-de-septiembre-CG25760376" target="_blank" rel="noopener noreferrer" class="block bg-black/40 p-3 rounded-lg border border-slate-700 hover:border-oro transition-colors">
+                        <span class="text-red-300 font-bold">🎙️ POLÍTICA • Radio Panamá</span>
+                        <p class="text-white mt-1">Panamá hoy de ‘Radio Panamá’ de este jueves 17 de septiembre</p>
+                        <p class="text-slate-400 text-[9px]">Resumen informativo diario</p>
+                    </a>
+
+                    <a href="https://www.threads.com/share/_0KAcyzvS/" target="_blank" rel="noopener noreferrer" class="block bg-black/40 p-3 rounded-lg border border-violetNeon/50 hover:border-violetNeon transition-colors">
+                        <span class="text-purple-300 font-bold">🧵 THREADS • SADV41</span>
+                        <p class="text-white mt-1">Interconexión de pensamiento y enlaces descentralizados.</p>
+                    </a>
+                </div>
+            </section>
+        </div>
+
+        <!-- Columna Derecha: Reportes U.S. Army -->
+        <div class="lg:col-span-7 space-y-6">
+            <section class="glass-panel p-6 rounded-2xl border-t-4 border-t-armyGreen">
+                <div class="flex justify-between items-end mb-6 border-b border-slate-700 pb-2">
+                    <h2 class="text-xl font-bold text-white font-mono uppercase">INTEL: U.S. Army Operations</h2>
+                    <span class="text-[10px] text-armyGreen font-mono px-2 py-1 bg-green-900/30 rounded">UNCLASSIFIED</span>
+                </div>
+
+                <div class="space-y-6">
+                    <!-- Reporte 1: CTCs y Drones -->
+                    <article class="bg-black/30 p-4 rounded-xl border-l-2 border-l-oro">
+                        <h3 class="text-sm font-bold text-white uppercase">Balancing innovation and readiness: NTC Modernization</h3>
+                        <p class="text-xs text-slate-400 mt-1 mb-2 font-mono">By Lt. Col. Orlandon Howard | Sept 15, 2026</p>
+                        <p class="text-sm text-slate-300">
+                            El National Training Center (NTC) y el Joint Readiness Training Center (JRTC) se adaptan a las operaciones de combate a gran escala (LSCO). Se ha implementado la regla de los 180 días para la integración tecnológica, asegurando que las tropas eviten la "fatiga tecnológica". El espacio aéreo ya no es indiscutible; las formaciones ahora se enfrentan a vigilancia de drones omnipresentes y ataques aéreos simulados, obligando a re-aprender la dispersión y el camuflaje táctico.
+                        </p>
+                        <a href="https://www.army.mil/article/295359" target="_blank" class="text-oro text-xs hover:underline mt-2 inline-block font-mono">Ver Reporte Original &rarr;</a>
+                    </article>
+
+                    <!-- Reporte 2: Vanguardia Sur Perú -->
+                    <article class="bg-black/30 p-4 rounded-xl border-l-2 border-l-panamaBlue">
+                        <h3 class="text-sm font-bold text-white uppercase">Southern Vanguard 2026: Peruvian jungle classroom</h3>
+                        <p class="text-xs text-slate-400 mt-1 mb-2 font-mono">By Staff Sgt. Mickey Miller | Sept 15, 2026</p>
+                        <p class="text-sm text-slate-300">
+                            Soldados estadounidenses se entrenan junto a fuerzas de Perú, Chile y Argentina en Sauce, Perú. El terreno de la jungla exige tácticas de supervivencia y movimientos anfibios a nivel de escuadrón. Con la humedad, elevación y densa vegetación, la fatiga se multiplica por 10. Las tropas aprenden técnicas directas de instructores peruanos sin fase de "gateo" (crawl phase), fortaleciendo la interoperabilidad real antes de que las circunstancias lo exijan.
+                        </p>
+                        <a href="https://www.army.mil/article/295379" target="_blank" class="text-panamaBlue text-xs hover:underline mt-2 inline-block font-mono">Ver Reporte Original &rarr;</a>
+                    </article>
+
+                    <!-- Reporte 3: Hawaii Lowell -->
+                    <article class="bg-black/30 p-4 rounded-xl border-l-2 border-l-green-600">
+                        <h3 class="text-sm font-bold text-white uppercase">Hawaii Guardsmen support after Hurricane Lowell</h3>
+                        <p class="text-xs text-slate-400 mt-1 mb-2 font-mono">By Staff Sgt. John Schoebel | Sept 15, 2026</p>
+                        <p class="text-sm text-slate-300">
+                            La Guardia Nacional de Hawaii apoyó en la distribución masiva de alimentos en Eleele, Kauai, tras los daños y cortes en la cadena de suministro causados por el huracán Lowell. Se distribuyó agua y raciones (MREs) a más de 225 vehículos, integrando esfuerzos entre militares estatales, personal activo y voluntarios de la comunidad.
+                        </p>
+                        <a href="https://www.army.mil/article/295380" target="_blank" class="text-green-500 text-xs hover:underline mt-2 inline-block font-mono">Ver Reporte Original &rarr;</a>
+                    </article>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-armyGreen/30 mt-12 py-6 text-center font-mono text-xs text-slate-500 bg-black/50">
+        <p>SADV41 COMMAND SEC // INITIATIVE XSSADV41</p>
+        <p class="mt-1 opacity-50">"En esto se basa la perfección en la que fuiste hecha y en la que yo vivo para ti."</p>
+    </footer>
+</body>
+</html>
 
