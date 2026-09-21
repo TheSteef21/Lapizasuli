@@ -32,11 +32,6 @@
                         blanco: '#f8fafc', cyanNeon: '#00f3ff', violetNeon: '#9d4edd', redNeon: '#FB542B',
                         tacticalOrange: '#FB542B', borgona: '#4a0010', neonGreen: '#10b981', renderRed: '#da3637',
                         navalBlue: '#1e3a8a', israelBlue: '#0038b8', bnbYellow: '#F3BA2F', spectral: '#b084cc',
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'], serif: ['Playfair Display', 'serif'],
-                        mason: ['Cinzel', 'serif'], mono: ['JetBrains Mono', 'monospace'],
-                        pirate: ['Pirata One', 'cursive'],
                     }
                 }
             }
@@ -138,6 +133,9 @@
     <!-- MENÚ BILATERAL -->
     <div id="main-sidebar" class="sidebar-tabs">
         <a href="#aporia" class="vertical-tab" style="border-color: #fff;"><span class="icon">🎚️</span><span class="text text-white">APORÍA (Cristo-Mundo)</span></a>
+        <!-- ENLACE TIENDA OFICIAL EN SIDEBAR -->
+        <a href="https://stevendior-shop.fourthwall.com/" target="_blank" class="vertical-tab" style="border-color: #9d4edd;"><span class="icon">🛍️</span><span class="text text-purple-300">TIENDA SADV41</span></a>
+        
         <a href="#sadv5-unidad" class="vertical-tab" style="border-color: #9d4edd;"><span class="icon">⚛️</span><span class="text text-purple-300">SADV5 (Unidad Fantasma)</span></a>
         <a href="#phsadv41-editor" class="vertical-tab" style="border-color: #00f3ff;"><span class="icon">📸</span><span class="text text-cyan-300">PHSADV41 (Master Editor)</span></a>
         <a href="#turbologia-seccion" class="vertical-tab" style="border-color:#FB542B;"><span class="icon">⚡</span><span class="text text-orange-300">TURBOLOGIA (Únete)</span></a>
@@ -148,7 +146,7 @@
         <div onclick="toggleSidebar()" class="vertical-tab" style="border-color:#cbd5e1;"><span class="icon">⇋</span><span class="text text-slate-300">Cambiar Lado</span></div>
     </div>
 
-    <!-- HEADER FLOTANTE (ACTUALIZADO CON BOTONES COMPRAR/VENDER) -->
+    <!-- HEADER FLOTANTE -->
     <header class="fixed top-[28px] left-0 w-full z-40 glass border-b border-cyanNeon/30 px-4 sm:px-6 py-3 flex flex-col md:flex-row items-center justify-between gap-4 transition-all duration-500">
         <div class="flex items-center gap-3">
             <div class="bg-black/50 border border-oro p-2 rounded-lg text-oro font-bold tracking-wider text-sm shadow-[0_0_10px_rgba(212,175,55,0.3)]">
@@ -176,10 +174,23 @@
             <button onclick="focusWeb3('sell')" class="bg-renderRed hover:bg-red-500 text-white font-bold text-[10px] px-3 py-2 rounded-lg transition-all shadow-[0_0_15px_rgba(218,54,55,0.4)] cursor-pointer font-mono flex items-center gap-1">
                 <i class="fa-solid fa-arrow-trend-down"></i> Vender
             </button>
+            
+            <!-- BOTÓN TIENDA (HEADER) -->
+            <a href="https://stevendior-shop.fourthwall.com/" target="_blank" class="bg-violetNeon hover:bg-purple-500 text-white font-bold text-[10px] px-3 py-2 rounded-lg transition-all shadow-[0_0_15px_rgba(157,78,221,0.4)] cursor-pointer font-mono flex items-center gap-1">
+                <i class="fa-solid fa-store"></i> Tienda
+            </a>
         </div>
     </header>
 
     <main class="pt-36 pb-20 px-4 md:px-12 max-w-6xl mx-auto space-y-16 relative z-10">
+
+        <!-- BANNER PROMOCIONAL SADV41 (PRINCIPIO) -->
+        <section class="relative z-50 w-full mb-[-2rem]">
+            <a href="https://stevendior-shop.fourthwall.com/" target="_blank" class="block w-full bg-gradient-to-r from-violetNeon/20 via-purple-900/40 to-violetNeon/20 border border-violetNeon/50 rounded-xl p-4 md:p-6 text-center hover:bg-violetNeon/30 transition-all shadow-[0_0_20px_rgba(157,78,221,0.3)] hover:shadow-[0_0_30px_rgba(157,78,221,0.6)] group">
+                <h2 class="font-mason text-xl md:text-3xl text-white tracking-widest mb-1 group-hover:text-cyanNeon transition-colors drop-shadow-lg"><i class="fa-solid fa-cart-shopping mr-3 text-violetNeon group-hover:text-cyanNeon"></i>TIENDA OFICIAL SADV41</h2>
+                <p class="font-mono text-[10px] md:text-xs text-purple-200 uppercase tracking-wider mt-2">Explora los productos promocionales de la Misión Nacional e Internacional <span class="inline-block ml-2 bg-violetNeon text-white px-2 py-0.5 rounded text-[9px] group-hover:bg-cyanNeon group-hover:text-black">ENTRAR ➔</span></p>
+            </a>
+        </section>
 
         <!-- EL MENSAJE DIVINO -->
         <section class="relative z-50 text-center py-16 px-4 bg-gradient-to-b from-black/80 via-black/40 to-transparent rounded-3xl border-t border-b border-oro/30 mb-10">
@@ -476,6 +487,17 @@
 
     <!-- FOOTER -->
     <footer class="text-center p-10 border-t border-white/10 opacity-80 font-mono text-[10px] uppercase mt-10 bg-black pb-20">
+        
+        <!-- BANNER PROMOCIONAL SADV41 (FINAL) -->
+        <div class="max-w-3xl mx-auto mb-10 border border-violetNeon/40 bg-black/60 p-6 rounded-2xl shadow-[0_0_25px_rgba(157,78,221,0.15)] relative overflow-hidden">
+            <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(157,78,221,0.15),_transparent_70%)] pointer-events-none"></div>
+            <h3 class="text-xl font-mason text-white mb-2 tracking-[0.15em] relative z-10"><i class="fa-solid fa-cart-shopping text-violetNeon mr-2"></i>TIENDA PROMOCIONAL SADV41</h3>
+            <p class="text-slate-300 text-[11px] normal-case tracking-wide mb-5 relative z-10">Adquiere los productos oficiales de la misión SADV41 Nacional e Internacional.</p>
+            <a href="https://stevendior-shop.fourthwall.com/" target="_blank" class="inline-block px-8 py-3 bg-violetNeon hover:bg-purple-600 text-white font-bold rounded-xl transition-all shadow-[0_0_15px_rgba(157,78,221,0.4)] relative z-10">
+                VISITAR STEVENDIOR-SHOP
+            </a>
+        </div>
+
         <p class="mb-2 text-oro font-bold">Unificación Pluscuamperfecta Continental SADV41 x E.S. x GSADV41 x ONE PIECE x USARMY © 2026</p>
         <p class="mb-4 text-[#FB542B]">TURBOLOGIA: <a href="https://ig.me/j/Abbcf6MyjQoo7oBf/" target="_blank" class="underline">ig.me/j/Abbcf6MyjQoo7oBf/</a></p>
         <p class="text-[8.5px] text-slate-500 tracking-[0.2em] leading-relaxed">
