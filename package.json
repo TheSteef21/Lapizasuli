@@ -1,13 +1,22 @@
 {
-  "name": "whatsapp-binance-render-api",
+  "name": "lapizasuli",
   "version": "1.0.0",
   "type": "module",
+  "description": "SADV41 - Sistema Probatorio + API WhatsApp Burunga + Binance Render + Worker Cloudflare IA",
+  "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "dev": "node server.js",
+    "dev:worker": "wrangler dev src/index.js",
+    "deploy": "wrangler deploy",
+    "deploy:worker": "wrangler deploy"
   },
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.19.2",
     "node-fetch": "^3.3.2"
+  },
+  "devDependencies": {
+    "wrangler": "^3.90.2"
   }
 }
