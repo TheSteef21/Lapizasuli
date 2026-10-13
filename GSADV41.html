@@ -39,6 +39,22 @@
     </script>
 
     <style>
+        /* Tipografías Optimistic (Módulo USGS) */
+        @font-face {
+            font-family: "Optimistic";
+            font-style: normal;
+            font-weight: 400 600;
+            font-display: swap;
+            src: url("/fonts/OptimisticAI_VF_Optimized.woff2") format("woff2");
+        }
+        @font-face {
+            font-family: "Optimistic Mono";
+            font-style: normal;
+            font-weight: 400;
+            font-display: swap;
+            src: url("/fonts/OptimisticMono_W_TextRegular.woff2") format("woff2");
+        }
+
         :root { --oro:#d4af37; --sun-gold:#f59e0b; --obsidiana:#030305; --navy:#020617; --cyan:#00f3ff; --violet:#9d4edd; --red:#FB542B; --israel:#0038b8; --bnb:#F3BA2F; --green:#1DB954; }
         body { background-color: var(--obsidiana); color:#f8fafc; font-family:'Inter',system-ui,sans-serif; overflow-x:hidden; position:relative; scroll-behavior:smooth; }
         
@@ -101,7 +117,7 @@
         .node-3d:hover .node-dot { width:22px; height:22px; box-shadow:0 0 22px currentColor, 0 0 36px currentColor; background:#fff !important; }
         .node-3d:hover .node-label { background:#fff; color:#000 !important; transform:scale(1.15); }
         
-        /* SADV5 CONSOLE LOGS */
+        /* SADV5 CONSOLE LOGS & CODE VIEWER (USGS) */
         .ability-log { border-radius: 16px; padding: 1.2rem; max-height: 220px; overflow-y: auto; font-size: 11px; color: #cbd5e1; }
         .ability-log div { margin-bottom: 6px; padding-bottom: 6px; border-bottom: 1px solid rgba(255,255,255,0.05); }
 
@@ -109,6 +125,13 @@
         .terminal-header { display: flex; gap: 4px; }
         .terminal-dot { width: 8px; height: 8px; border-radius: 50%; }
         .t-red { background: #ff5f56; } .t-yellow { background: #ffbd2e; } .t-green { background: #27c93f; }
+
+        .code-viewer { background: rgba(10,10,10,0.8); border: 1px solid rgba(0,243,255,0.3); border-radius: 16px; padding: 20px; overflow-x: auto; backdrop-filter: blur(12px); box-shadow:0 15px 35px rgba(0,0,0,0.9); }
+        .code-container { display: flex; align-items: flex-start; font-size: 12px; line-height: 1.6; font-family: "Optimistic Mono", "JetBrains Mono", monospace; color: #e8e8e8; }
+        .line-numbers { color: #555; border-right: 1px solid rgba(255,255,255,0.1); padding-right: 12px; margin-right: 12px; text-align: right; user-select: none; min-width: 25px; }
+        .shiki span { color: var(--shiki-dark); }
+        
+        @keyframes spin { to { transform: rotate(360deg); } }
     </style>
 </head>
 <body class="antialiased selection:bg-oro selection:text-navy" id="mainBody">
@@ -133,20 +156,15 @@
     <!-- MENÚ BILATERAL -->
     <div id="main-sidebar" class="sidebar-tabs">
         <a href="#aporia" class="vertical-tab" style="border-color: #fff;"><span class="icon">🎚️</span><span class="text text-white">APORÍA (Cristo-Mundo)</span></a>
-        
         <a href="#directorios-unificados" class="vertical-tab" style="border-color: #f59e0b;"><span class="icon">🌐</span><span class="text text-amber-300">DIRECTORIOS M.I.A.</span></a>
-        
-        <!-- NUEVO: NODO MUSICAL & GSADV41 -->
         <a href="#steven-dior-musica" class="vertical-tab" style="border-color: #1DB954;"><span class="icon">🎵</span><span class="text text-green-300">MÚSICA OFICIAL</span></a>
-        
-        <!-- ENLACE TIENDA OFICIAL EN SIDEBAR -->
         <a href="https://stevendior-shop.fourthwall.com/" target="_blank" class="vertical-tab" style="border-color: #9d4edd;"><span class="icon">🛍️</span><span class="text text-purple-300">TIENDA SADV41</span></a>
-        
         <a href="#sadv5-unidad" class="vertical-tab" style="border-color: #9d4edd;"><span class="icon">⚛️</span><span class="text text-purple-300">SADV5 (Unidad Fantasma)</span></a>
         <a href="#phsadv41-editor" class="vertical-tab" style="border-color: #00f3ff;"><span class="icon">📸</span><span class="text text-cyan-300">PHSADV41 (Master Editor)</span></a>
         <a href="#turbologia-seccion" class="vertical-tab" style="border-color:#FB542B;"><span class="icon">⚡</span><span class="text text-orange-300">TURBOLOGIA (Únete)</span></a>
         <a href="#arcade-youtube-seccion" class="vertical-tab" style="border-color:#00f3ff;"><span class="icon">👾</span><span class="text text-cyan-300">ARCADE.GOV + SHORTS</span></a>
         <a href="#biobio-seccion" class="vertical-tab" style="border-color:#0038b8;"><span class="icon">🌎</span><span class="text text-blue-300">BioBio: Geopolítica</span></a>
+        <a href="#sismos-sadv41" class="vertical-tab" style="border-color:#00e5ff;"><span class="icon">🌍</span><span class="text text-cyan-300">SISMOS USGS LIVE</span></a>
         <a href="#marketing-estados" class="vertical-tab" style="border-color:#8b5cf6;"><span class="icon">🪄</span><span class="text text-purple-300">Wizza'RD & Estados</span></a>
         <a href="#nodos-convergencia" class="vertical-tab" style="border-color:var(--oro);"><span class="icon">🔗</span><span class="text text-amber-300">Nodos / Tabernáculo</span></a>
         <div onclick="toggleSidebar()" class="vertical-tab" style="border-color:#cbd5e1;"><span class="icon">⇋</span><span class="text text-slate-300">Cambiar Lado</span></div>
@@ -170,7 +188,6 @@
                 <span class="w-2 h-2 mr-1.5 bg-green-400 rounded-full animate-pulse shadow-[0_0_5px_#10b981]"></span> E.S. OK
             </span>
             
-            <!-- WALLET Y BOTONES DE MERCADO -->
             <button onclick="connectBinance()" class="bg-bnbYellow hover:bg-yellow-500 text-black font-bold text-[10px] px-3 py-2 rounded-lg transition-all shadow-[0_0_15px_rgba(243,186,47,0.4)] cursor-pointer font-mono flex items-center gap-2">
                 <i class="fa-solid fa-wallet"></i> Sync BNB
             </button>
@@ -181,7 +198,6 @@
                 <i class="fa-solid fa-arrow-trend-down"></i> Vender
             </button>
             
-            <!-- BOTÓN TIENDA (HEADER) -->
             <a href="https://stevendior-shop.fourthwall.com/" target="_blank" class="bg-violetNeon hover:bg-purple-500 text-white font-bold text-[10px] px-3 py-2 rounded-lg transition-all shadow-[0_0_15px_rgba(157,78,221,0.4)] cursor-pointer font-mono flex items-center gap-1">
                 <i class="fa-solid fa-store"></i> Tienda
             </a>
@@ -190,7 +206,7 @@
 
     <main class="pt-36 pb-20 px-4 md:px-12 max-w-6xl mx-auto space-y-16 relative z-10">
 
-        <!-- BANNER PROMOCIONAL SADV41 (PRINCIPIO) -->
+        <!-- BANNER PROMOCIONAL SADV41 -->
         <section class="relative z-50 w-full mb-[-2rem]">
             <a href="https://stevendior-shop.fourthwall.com/" target="_blank" class="block w-full bg-gradient-to-r from-violetNeon/20 via-purple-900/40 to-violetNeon/20 border border-violetNeon/50 rounded-xl p-4 md:p-6 text-center hover:bg-violetNeon/30 transition-all shadow-[0_0_20px_rgba(157,78,221,0.3)] hover:shadow-[0_0_30px_rgba(157,78,221,0.6)] group">
                 <h2 class="font-mason text-xl md:text-3xl text-white tracking-widest mb-1 group-hover:text-cyanNeon transition-colors drop-shadow-lg"><i class="fa-solid fa-cart-shopping mr-3 text-violetNeon group-hover:text-cyanNeon"></i>TIENDA OFICIAL SADV41</h2>
@@ -239,7 +255,7 @@
             </div>
         </section>
 
-        <!-- ENLACES UNIFICADOS SADV41 (DIRECTORIO OMNIPRESENTE M.I.A.) -->
+        <!-- DIRECTORIOS UNIFICADOS -->
         <section id="directorios-unificados" class="logia-card p-8 md:p-12 rounded-3xl border-t-4 border-t-sunGold relative overflow-hidden">
             <div class="absolute inset-0 bg-gradient-to-tr from-amber-900/20 to-black/80 pointer-events-none"></div>
             <div class="relative z-10">
@@ -247,55 +263,38 @@
                 <h2 class="text-2xl md:text-4xl font-mason text-white mb-8 uppercase tracking-widest esoterico-glow">DIRECTORIO UNIFICADO M.I.A.</h2>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-                    <!-- WEB3 M.I.A -->
                     <a href="https://jade-tricky-pig-245.mypinata.cloud/ipfs/bafkreiaq6h2ll2lj6fzu26mdbd2swn6zs4zxk6xiaj52djgkx2zfrro54m" target="_blank" class="bg-black/60 p-5 rounded-2xl border border-white/10 hover:border-cyanNeon hover:shadow-[0_0_20px_rgba(0,243,255,0.3)] transition-all group relative overflow-hidden">
                         <div class="text-[10px] text-cyanNeon font-mono mb-2">WEB3 / IPFS</div>
                         <div class="font-bold text-white text-sm uppercase tracking-wider group-hover:text-cyan-300 transition-colors"><i class="fa-brands fa-ethereum mr-2"></i>Protocolo 131 M.I.A.</div>
                     </a>
-                    
-                    <!-- P131 GITHUB -->
                     <a href="https://thesteef21.github.io/SADV41/MIA.html" target="_blank" class="bg-black/60 p-5 rounded-2xl border border-white/10 hover:border-oro hover:shadow-[0_0_20px_rgba(212,175,55,0.3)] transition-all group relative overflow-hidden">
                         <div class="text-[10px] text-oro font-mono mb-2">GITHUB PORTAL</div>
                         <div class="font-bold text-white text-sm uppercase tracking-wider group-hover:text-yellow-300 transition-colors"><i class="fa-solid fa-microchip mr-2"></i>P131 GITHUB.IO</div>
                     </a>
-                    
-                    <!-- TELEGRAM BOT -->
                     <a href="https://t.me/GSADV41_bot" target="_blank" class="bg-black/60 p-5 rounded-2xl border border-white/10 hover:border-blue-400 hover:shadow-[0_0_20px_rgba(96,165,250,0.3)] transition-all group relative overflow-hidden">
                         <div class="text-[10px] text-blue-400 font-mono mb-2">COMUNICACIONES</div>
                         <div class="font-bold text-white text-sm uppercase tracking-wider group-hover:text-blue-300 transition-colors"><i class="fa-brands fa-telegram mr-2"></i>GSADV41 Bot (Telegram)</div>
                     </a>
-                    
-                    <!-- GSADV41 HOME -->
                     <a href="https://thesteef21.github.io/Lapizasuli/GSADV41.html" target="_blank" class="bg-black/60 p-5 rounded-2xl border border-white/10 hover:border-violetNeon hover:shadow-[0_0_20px_rgba(157,78,221,0.3)] transition-all group relative overflow-hidden">
                         <div class="text-[10px] text-purple-400 font-mono mb-2">LAPIZASULI HUB</div>
                         <div class="font-bold text-white text-sm uppercase tracking-wider group-hover:text-purple-300 transition-colors"><i class="fa-solid fa-house-user mr-2"></i>GSADV41 HOME</div>
                     </a>
-                    
-                    <!-- DEPORTE VOLEIBOL -->
                     <a href="https://thesteef21.github.io/SADV41/CURSOS/DEPORTE/VOLEIBOL/MOTIVACIONAL.html" target="_blank" class="bg-black/60 p-5 rounded-2xl border border-white/10 hover:border-green-400 hover:shadow-[0_0_20px_rgba(74,222,128,0.3)] transition-all group relative overflow-hidden">
                         <div class="text-[10px] text-green-400 font-mono mb-2">DEPORTES 🇵🇦</div>
                         <div class="font-bold text-white text-sm uppercase tracking-wider group-hover:text-green-300 transition-colors"><i class="fa-solid fa-volleyball mr-2"></i>Motivación Voleibol</div>
                     </a>
-                    
-                    <!-- STEVEN DIOR LANZAMIENTOS -->
                     <a href="https://thesteef21.github.io/Lapizasuli/StevenDiorOficial/2026/QU%C3%89%20BELLEZA%20CUANDO%20VIVO%20AS%C3%8D/index.html" target="_blank" class="bg-black/60 p-5 rounded-2xl border border-white/10 hover:border-pink-500 hover:shadow-[0_0_20px_rgba(236,72,153,0.3)] transition-all group relative overflow-hidden">
                         <div class="text-[10px] text-pink-400 font-mono mb-2">ARTISTA OFICIAL</div>
                         <div class="font-bold text-white text-sm uppercase tracking-wider group-hover:text-pink-300 transition-colors"><i class="fa-solid fa-music mr-2"></i>Steven Dior: Lanzamientos</div>
                     </a>
-                    
-                    <!-- JACKET PREMIUM -->
                     <a href="https://thesteef21.github.io/SADV41/source_1789966102551.html" target="_blank" class="bg-black/60 p-5 rounded-2xl border border-white/10 hover:border-orange-500 hover:shadow-[0_0_20px_rgba(249,115,22,0.3)] transition-all group relative overflow-hidden">
                         <div class="text-[10px] text-orange-400 font-mono mb-2">MERCHANDISE OMNIPRESENTE</div>
                         <div class="font-bold text-white text-sm uppercase tracking-wider group-hover:text-orange-300 transition-colors"><i class="fa-solid fa-shirt mr-2"></i>Jacket Premium SADV41</div>
                     </a>
-                    
-                    <!-- VOTA ESTADOS UNIDOS -->
                     <a href="https://vote.gov/" target="_blank" class="bg-black/60 p-5 rounded-2xl border border-white/10 hover:border-red-500 hover:shadow-[0_0_20px_rgba(239,68,68,0.3)] transition-all group relative overflow-hidden">
                         <div class="text-[10px] text-red-400 font-mono mb-2">GEOPOLÍTICA 🇺🇸</div>
                         <div class="font-bold text-white text-sm uppercase tracking-wider group-hover:text-red-300 transition-colors"><i class="fa-solid fa-check-to-slot mr-2"></i>Vota éste 3 de Noviembre</div>
                     </a>
-                    
-                    <!-- CINE LINKIN PARK -->
                     <a href="https://unshattermovie.com/" target="_blank" class="bg-black/60 p-5 rounded-2xl border border-white/10 hover:border-gray-300 hover:shadow-[0_0_20px_rgba(209,213,219,0.3)] transition-all group relative overflow-hidden">
                         <div class="text-[10px] text-gray-400 font-mono mb-2">CINE / MULTIMEDIA</div>
                         <div class="font-bold text-white text-sm uppercase tracking-wider group-hover:text-white transition-colors"><i class="fa-solid fa-film mr-2"></i>Película Linkin Park</div>
@@ -304,7 +303,7 @@
             </div>
         </section>
         
-        <!-- STEVEN DIOR OFICIAL & GSADV41 HOME -->
+        <!-- STEVEN DIOR OFICIAL -->
         <section id="steven-dior-musica" class="logia-card p-8 md:p-12 rounded-3xl border-t-4 border-t-[#1DB954] relative overflow-hidden">
             <div class="absolute inset-0 bg-gradient-to-br from-green-900/20 to-black/80 pointer-events-none"></div>
             <div class="relative z-10 flex flex-col lg:flex-row gap-8 items-center">
@@ -489,8 +488,134 @@
             </div>
         </section>
 
+        <!-- SISMOS SADV41 (MÓDULO USGS FUSIONADO) -->
+        <section id="sismos-sadv41" class="logia-card p-8 md:p-12 rounded-3xl border-t-4 border-t-cyanNeon relative overflow-hidden box-border w-full">
+            <div class="absolute top-[-50%] left-[-50%] w-[200%] h-[200%] bg-[radial-gradient(circle_at_center,_rgba(0,229,255,0.07)_0%,_transparent_40%)] pointer-events-none"></div>
+            
+            <div class="relative z-10">
+                <div class="flex justify-between items-center flex-wrap gap-2 mb-4">
+                    <h2 class="text-cyanNeon tracking-widest text-lg font-mason m-0">SADV41 // SISMOS Y TERREMOTOS // USGS LIVE</h2>
+                    <span id="sadv41-sismos-status" class="text-[10px] text-slate-400 border border-slate-800 px-3 py-1 rounded-full font-mono">● STANDBY - CARGANDO EN SCROLL</span>
+                </div>
+                <p class="text-slate-400 text-xs font-mono mb-6">Feed oficial USGS • Protocolo Berión A217 • Vigilancia Panamá 7.0-9.8N / -83 a -77W • Auto-refresh 60s</p>
+                
+                <!-- Loader Placeholder -->
+                <div id="sismos-loader" class="w-full h-[620px] rounded-xl bg-black/60 flex flex-col items-center justify-center gap-3 border border-dashed border-cyanNeon/30">
+                    <div class="w-10 h-10 border-2 border-cyanNeon border-t-transparent rounded-full animate-[spin_1s_linear_infinite]"></div>
+                    <span class="text-xs text-cyanNeon/70 tracking-widest font-mono">SADV41 VIGILANCIA ACTIVA - SCROLL PARA ACTIVAR MAPA</span>
+                </div>
+
+                <div id="sismos-iframe-wrap" class="hidden w-full h-[620px] rounded-xl overflow-hidden bg-[#111] relative border border-white/10 shadow-[0_0_20px_rgba(0,243,255,0.15)]">
+                    <!-- El iframe se inyecta por JS solo cuando entra en viewport -->
+                </div>
+
+                <div class="mt-6 flex gap-3 flex-wrap">
+                    <a href="./SISMOS/index.html" target="_blank" class="px-5 py-2.5 bg-cyanNeon text-navy rounded-lg no-underline font-bold text-xs tracking-wider font-mono hover:bg-cyan-300 transition-colors">ABRIR MAPA COMPLETO ↗</a>
+                    <a href="https://github.com/TheSteef21/usgs" target="_blank" class="px-5 py-2.5 border border-slate-700 text-slate-300 rounded-lg no-underline text-xs font-mono hover:bg-slate-800 transition-colors">VER CÓDIGO / API</a>
+                    <span class="px-5 py-2.5 border border-slate-800 text-slate-500 rounded-lg text-[10px] font-mono">@sismosyterremotos • AUTO IG</span>
+                </div>
+            </div>
+            
+            <script>
+                (function(){
+                    const section = document.getElementById('sismos-sadv41');
+                    const loader = document.getElementById('sismos-loader');
+                    const wrap = document.getElementById('sismos-iframe-wrap');
+                    const status = document.getElementById('sadv41-sismos-status');
+                    let loaded = false;
+
+                    function loadMap(){
+                        if(loaded) return;
+                        loaded = true;
+                        status.textContent = '● LIVE - USGS CONECTADO';
+                        status.classList.remove('text-slate-400', 'border-slate-800');
+                        status.classList.add('text-cyanNeon', 'border-cyanNeon', 'shadow-[0_0_10px_rgba(0,243,255,0.4)]');
+                        
+                        const iframe = document.createElement('iframe');
+                        iframe.src = './SISMOS/index.html';
+                        iframe.style.width = '100%';
+                        iframe.style.height = '100%';
+                        iframe.style.border = '0';
+                        iframe.loading = 'lazy';
+                        iframe.setAttribute('allowfullscreen','');
+                        iframe.setAttribute('title','SADV41 USGS Live Map');
+                        
+                        loader.classList.add('hidden');
+                        loader.style.display = 'none';
+                        wrap.classList.remove('hidden');
+                        wrap.style.display = 'block';
+                        wrap.appendChild(iframe);
+                        
+                        if(window.logAction) window.logAction('🌍 Módulo USGS Sismos activado y conectado.');
+                    }
+
+                    if('IntersectionObserver' in window){
+                        const io = new IntersectionObserver((entries)=>{
+                            entries.forEach(e=>{
+                                if(e.isIntersecting){
+                                    loadMap();
+                                    io.disconnect();
+                                }
+                            });
+                        }, { rootMargin: '300px' }); 
+                        io.observe(section);
+                    } else {
+                        setTimeout(loadMap, 2000);
+                    }
+                })();
+            </script>
+        </section>
+
+        <!-- WORKFLOW YAML VIEWER -->
+        <section class="logia-card code-viewer">
+            <h2 class="text-cyanNeon tracking-widest text-sm font-mason mb-4 mt-0 border-b border-cyanNeon/30 pb-2">SADV41 // GITHUB ACTIONS WORKFLOW</h2>
+            <div class="code-container">
+                <div class="line-numbers" aria-hidden="true">
+                    <div>1</div><div>2</div><div>3</div><div>4</div><div>5</div><div>6</div><div>7</div><div>8</div><div>9</div><div>10</div>
+                    <div>11</div><div>12</div><div>13</div><div>14</div><div>15</div><div>16</div><div>17</div><div>18</div><div>19</div><div>20</div>
+                    <div>21</div><div>22</div><div>23</div><div>24</div><div>25</div><div>26</div><div>27</div><div>28</div><div>29</div><div>30</div>
+                    <div>31</div><div>32</div><div>33</div>
+                </div>
+                <code style="min-width:0; flex:1; white-space:pre;">
+                    <pre class="shiki" style="--shiki-dark:#e1e4e8; margin:0; background:transparent;" tabindex="0"><code><span class="line"><span style="--shiki-dark:#85E89D">name</span><span style="--shiki-dark:#E1E4E8">: </span><span style="--shiki-dark:#9ECBFF">SADV41 Sismos Watch</span></span>
+<span class="line"><span style="--shiki-dark:#79B8FF">on</span><span style="--shiki-dark:#E1E4E8">:</span></span>
+<span class="line"><span style="--shiki-dark:#85E89D">  schedule</span><span style="--shiki-dark:#E1E4E8">:</span></span>
+<span class="line"><span style="--shiki-dark:#E1E4E8">    - </span><span style="--shiki-dark:#85E89D">cron</span><span style="--shiki-dark:#E1E4E8">: </span><span style="--shiki-dark:#9ECBFF">'*/15 * * * *'</span></span>
+<span class="line"><span style="--shiki-dark:#85E89D">  workflow_dispatch</span><span style="--shiki-dark:#E1E4E8">:</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-dark:#85E89D">jobs</span><span style="--shiki-dark:#E1E4E8">:</span></span>
+<span class="line"><span style="--shiki-dark:#85E89D">  check</span><span style="--shiki-dark:#E1E4E8">:</span></span>
+<span class="line"><span style="--shiki-dark:#85E89D">    runs-on</span><span style="--shiki-dark:#E1E4E8">: </span><span style="--shiki-dark:#9ECBFF">ubuntu-latest</span></span>
+<span class="line"><span style="--shiki-dark:#85E89D">    permissions</span><span style="--shiki-dark:#E1E4E8">:</span></span>
+<span class="line"><span style="--shiki-dark:#85E89D">      contents</span><span style="--shiki-dark:#E1E4E8">: </span><span style="--shiki-dark:#9ECBFF">write</span></span>
+<span class="line"><span style="--shiki-dark:#85E89D">    steps</span><span style="--shiki-dark:#E1E4E8">:</span></span>
+<span class="line"><span style="--shiki-dark:#E1E4E8">      - </span><span style="--shiki-dark:#85E89D">uses</span><span style="--shiki-dark:#E1E4E8">: </span><span style="--shiki-dark:#9ECBFF">actions/checkout@v4</span></span>
+<span class="line"><span style="--shiki-dark:#E1E4E8">      - </span><span style="--shiki-dark:#85E89D">uses</span><span style="--shiki-dark:#E1E4E8">: </span><span style="--shiki-dark:#9ECBFF">actions/setup-python@v5</span></span>
+<span class="line"><span style="--shiki-dark:#85E89D">        with</span><span style="--shiki-dark:#E1E4E8">: { </span><span style="--shiki-dark:#85E89D">python-version</span><span style="--shiki-dark:#E1E4E8">: </span><span style="--shiki-dark:#9ECBFF">'3.11'</span><span style="--shiki-dark:#E1E4E8"> }</span></span>
+<span class="line"><span style="--shiki-dark:#E1E4E8">      - </span><span style="--shiki-dark:#85E89D">run</span><span style="--shiki-dark:#E1E4E8">: </span><span style="--shiki-dark:#9ECBFF">pip install requests Pillow</span></span>
+<span class="line"><span style="--shiki-dark:#E1E4E8">      - </span><span style="--shiki-dark:#85E89D">name</span><span style="--shiki-dark:#E1E4E8">: </span><span style="--shiki-dark:#9ECBFF">Check USGS Panama</span></span>
+<span class="line"><span style="--shiki-dark:#85E89D">        run</span><span style="--shiki-dark:#E1E4E8">: </span><span style="--shiki-dark:#9ECBFF">python instagram_bot.py --check-panama --min-mag 4.5</span></span>
+<span class="line"><span style="--shiki-dark:#85E89D">        env</span><span style="--shiki-dark:#E1E4E8">:</span></span>
+<span class="line"><span style="--shiki-dark:#85E89D">          FB_PAGE_ID</span><span style="--shiki-dark:#E1E4E8">: </span><span style="--shiki-dark:#9ECBFF">${{ secrets.FB_PAGE_ID }}</span></span>
+<span class="line"><span style="--shiki-dark:#85E89D">          IG_USER_ID</span><span style="--shiki-dark:#E1E4E8">: </span><span style="--shiki-dark:#9ECBFF">${{ secrets.IG_USER_ID }}</span></span>
+<span class="line"><span style="--shiki-dark:#85E89D">          ACCESS_TOKEN</span><span style="--shiki-dark:#E1E4E8">: </span><span style="--shiki-dark:#9ECBFF">${{ secrets.ACCESS_TOKEN }}</span></span>
+<span class="line"><span style="--shiki-dark:#85E89D">          IMAGE_PUBLIC_URL</span><span style="--shiki-dark:#E1E4E8">: </span><span style="--shiki-dark:#9ECBFF">https://thesteef21.github.io/usgs/latest.jpg</span></span>
+<span class="line"><span style="--shiki-dark:#E1E4E8">      - </span><span style="--shiki-dark:#85E89D">name</span><span style="--shiki-dark:#E1E4E8">: </span><span style="--shiki-dark:#9ECBFF">Commit latest image for Pages</span></span>
+<span class="line"><span style="--shiki-dark:#85E89D">        run</span><span style="--shiki-dark:#E1E4E8">: </span><span style="--shiki-dark:#F97583">|</span></span>
+<span class="line"><span style="--shiki-dark:#9ECBFF">          if [ -f latest.jpg ]; then</span></span>
+<span class="line"><span style="--shiki-dark:#9ECBFF">            git config user.name "SADV41-BOT"</span></span>
+<span class="line"><span style="--shiki-dark:#9ECBFF">            git config user.email "bot@sadv41.io"</span></span>
+<span class="line"><span style="--shiki-dark:#9ECBFF">            git add latest.jpg || true</span></span>
+<span class="line"><span style="--shiki-dark:#9ECBFF">            git commit -m "auto: update latest sismo image [skip ci]" || true</span></span>
+<span class="line"><span style="--shiki-dark:#9ECBFF">            git push || true</span></span>
+<span class="line"><span style="--shiki-dark:#9ECBFF">          fi</span></span>
+<span class="line"></span></code></pre>
+                </code>
+            </div>
+        </section>
+
         <!-- MARKETING WIZZA'RD -->
-        <section id="marketing-estados" class="logia-card p-8 md:p-12 border-t-4 border-t-[#8b5cf6] rounded-3xl">
+        <section id="marketing-estados" class="logia-card p-8 md:p-12 border-t-4 border-t-[#8b5cf6] rounded-3xl mt-16">
             <div class="bg-gradient-to-br from-[#4c1d95]/40 to-[#1e1b4b]/80 border-2 border-[#8b5cf6] rounded-3xl p-6 md:p-8 shadow-[0_0_40px_rgba(139,92,246,0.3)] relative overflow-hidden">
                 <h3 class="font-mason text-xl text-white mb-2 uppercase">Tarjeta Marketing Global: Wizza'RD</h3>
                 <p class="font-mono text-xs text-purple-300 mb-6">API Meta -> 144 idiomas (Traducción en vivo).</p>
@@ -968,7 +1093,6 @@
                 
                 if(tradeMode === 'buy') {
                     logAction(`⏳ Iniciando protocolo de COMPRA por ${amount} BNB a través de la IA Four.meme...`);
-                    // Transacción de envío de BNB (Interacción nativa Ethers)
                     const tx = await web3Signer.sendTransaction({
                         to: targetAddress,
                         value: ethers.parseEther(amount.toString())
@@ -982,7 +1106,6 @@
                     logAction(`⏳ Iniciando protocolo de VENTA de ${amount} Tokens (Enlace Four.meme)...`);
                     logAction(`🔐 Firmando autorización de contrato inteligente (Approve)...`);
                     
-                    // Simulación visual estricta para la Venta (requeriría ABI de Router en prod)
                     setTimeout(() => {
                         logAction(`🚀 Transacción de VENTA ejecutada hacia la Pool de Liquidez.`);
                         setTimeout(() => {
